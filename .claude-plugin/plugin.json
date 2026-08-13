@@ -1,0 +1,9 @@
+{
+  "name": "second-brain-skills",
+  "description": "101 battle-tested Claude Code skills from a live second-brain + assistant operation. Quality gates, retrospectives, CRM, vault ingest, multi-model review panels, fleet coordination. Method, not data.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Anton Dziatkovskii / Palo Alto AI Research Lab",
+    "url": "https://github.com/tonydzi"
+  }
+}
