@@ -9,35 +9,36 @@ description: >
 license: MIT
 ---
 
-# /chat-search — Книга чатов (поиск внутри старых чатов)
+# /chat-search — the book of chats (search inside old sessions)
 
-Тонкая обёртка над `$IMPORTS_ROOT/chat_search.py`. НЕ переписывай логику — просто вызови движок и покажи результат.
+A thin wrapper over `$IMPORTS_ROOT/chat_search.py`. Do NOT reimplement the logic — call the engine and show the result.
 
-## Когда
-- «в каком чате мы обсуждали X?», «искали ли мы уже это?», «найди прошлый разговор про X».
-- Перед новой темой — проверить, не копали ли уже (пара к RECALL).
+## When
+- "which chat did we discuss X in?", "have we already looked into this?", "find the old conversation about X".
+- Before starting a new topic — check whether it was already dug into (the twin of RECALL).
 
-## Что это (и чем НЕ является)
-- Ищет по **отдельному** индексу сессий `_brain_sessions.npy` (21k+ чанков из `_session-md\<машина>\<cli>.md`), построенному `brain_sessions_index.py`.
-- **НЕ** essence `/ask`: сырые чаты намеренно исключены из острого «ума» (решение essence/evidence 2026-06-26). Это evidence-слой — «где дословно обсуждали», а `/ask` — «что я думаю».
-- Только HUMAN-чаты: служебные/роботные сессии отфильтрованы на экспорте (классификатор + Sonnet-судья).
+## What it is (and what it is NOT)
+- It searches a **separate** session index `_brain_sessions.npy` (21k+ chunks from `_session-md\<machine>\<cli>.md`), built by `brain_sessions_index.py`.
+- It is **NOT** the essence index behind `/ask`: raw chats are deliberately excluded from the sharp "mind" (the essence/evidence decision, 2026-06-26). This is the evidence layer — "where exactly it was discussed" — while `/ask` answers "what I think".
+- HUMAN chats only: service/robot sessions are filtered out at export time (a classifier + a cheap-model judge).
 
-## Как запускать
+## How to run
 ```
-python "$IMPORTS_ROOT/chat_search.py" "запрос своими словами"
-python "$IMPORTS_ROOT/chat_search.py" --machine LAPTOP-1 "запрос"   # только одна машина
-python "$IMPORTS_ROOT/chat_search.py" -n 8 "запрос"                    # top-N (дефолт 10)
+python "$IMPORTS_ROOT/chat_search.py" "query in your own words"
+python "$IMPORTS_ROOT/chat_search.py" --machine LAPTOP-1 "query"   # one machine only
+python "$IMPORTS_ROOT/chat_search.py" -n 8 "query"                    # top-N (default 10)
 ```
-Каждый хит: `[rr=score] дата · машина · тема` + сниппет + строка `▶ продолжить: python continue_session.py <cli>`.
+Every hit: `[rr=score] date · machine · topic` + a snippet + the line `▶ continue: python continue_session.py <cli>`.
 
-## Продолжить найденный чат
-Скопируй команду из хита (или используй `/resume-last` для самого свежего). `continue_session.py <cli>` собирает seed прошлого чата в буфер обмена — вставь в новую сессию.
+## Continue a chat you found
+Copy the command from the hit (or use `/resume-last` for the most recent one). `continue_session.py <cli>` assembles a seed of the old chat into the clipboard — paste it into a new session.
 
-## Оговорки (AK-47)
-- Индекс строится ночью (`run_session_archive.local.cmd` → `brain_sessions_index.py`, инкрементально). Свежий чат появится после ночного прогона; форсировать: `python brain_sessions_index.py`.
-- Индекс не построен / пуст → движок сам скажет `Запусти: python brain_sessions_index.py --full`.
-- Скоры reranker бывают отрицательными — важен ПОРЯДОК (top-1 = релевантнее), не знак.
-- Родня: `/ask` (смысл по волту), `/search` (слова в Telegram/FB/ChatGPT), `/resume-last` (продолжить последний).
+## Caveats (AK-47)
+- The index is built at night (`run_session_archive.local.cmd` → `brain_sessions_index.py`, incrementally). A fresh chat shows up after the nightly run; to force it: `python brain_sessions_index.py`.
+- Index missing / empty → the engine itself tells you `Run: python brain_sessions_index.py --full`.
+- Reranker scores can be negative — what matters is the ORDER (top-1 = most relevant), not the sign.
+- Siblings: `/ask` (meaning across the vault), `/search` (exact words in Telegram/FB/ChatGPT), `/resume-last` (continue the latest).
+
 
 ---
 

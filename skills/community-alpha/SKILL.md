@@ -8,28 +8,29 @@ description: >
 license: MIT
 ---
 
-# /community-alpha <source> [month] — один прогон комьюнити-альфы
+# /community-alpha <source> [month] — one community-alpha run
 
-Пример: `/community-alpha sostav 2026-06`. Месяц не задан → прошлый полный месяц.
+Example: `/community-alpha sostav 2026-06`. No month given → the previous full month.
 
-## Шаги
+## Steps
 
-1. **Детектор есть?** `$IMPORTS_ROOT/<source>\<source>_alpha.py` (сегодня: `lobster`, `sostav`).
-   - Нет → это НОВЫЙ корпус: предложить Антону разовую сборку адаптера по паттерну (schema из его SQLite + языковые ключи + intro/banter-penalty + веса тем; шаблон = `sostav_alpha.py`). Без «+» не строить.
-2. **Прогнать детектор** (0 токенов):
+1. **Is there a detector?** `$IMPORTS_ROOT/<source>\<source>_alpha.py` (today: `lobster`, `sostav`).
+   - No → this is a NEW corpus: offer the operator a one-off adapter built to the existing pattern (schema from their SQLite + language keys + intro/banter penalty + topic weights; template = `sostav_alpha.py`). Do not build it without an explicit "+".
+2. **Run the detector** (0 tokens):
    ```
    cd /e/Obsidian/_imports/<source> && PYTHONIOENCODING=utf-8 python <source>_alpha.py \
-     --since <YYYY-MM-01> --until <первое число след. месяца> --top 35 --tag <YYYY-MM>
+     --since <YYYY-MM-01> --until <the 1st of the next month> --top 35 --tag <YYYY-MM>
    ```
-   → `$IMPORTS_ROOT/alpha/candidates/<source>-<tag>-report.md`. Показать счётчик scanned→shortlisted.
-3. **Судить** (я, моделью сессии): читаю ТОЛЬКО отчёт (~35 кандидатов, не корпус — токен-экономия), вердикты ✅ ALPHA / 🟡 WATCH / 🗑 ШУМ с причиной по каждому → пишу `$IMPORTS_ROOT/alpha/candidates/<source>-judged-latest.md` (формат: `## ✅ ALPHA` / `## 🟡 WATCH` / `## 🗑 ШУМ (DROP)`, внутри `### #N — титул` + Verdict + Причина — парсер harvest его уже понимает).
-4. **Майнер в реестре?** `MINERS` в `$IMPORTS_ROOT/alpha/alpha_harvest.py`. Нет → добавить строку `("<source>", "<source>-judged-latest.md", "<home-заметка>")`. ⚠️ Файл правит и параллельный флот — перечитать файл непосредственно перед правкой (verify-existing), правка строго аддитивная. Опционально: ярлык в `MINER_LABEL`/`ORDER` сервера (без него не падает — фолбэк есть).
-5. **Harvest + экран**: `python $IMPORTS_ROOT/alpha/alpha_harvest.py` (счётчики!) → `/alpha-review`. Новая партия видна по бейджу 🆕.
+   → `$IMPORTS_ROOT/alpha/candidates/<source>-<tag>-report.md`. Show the scanned→shortlisted counter.
+3. **Judge** (me, with the session model): I read ONLY the report (~35 candidates, never the corpus — token economy) and give a verdict ✅ ALPHA / 🟡 WATCH / 🗑 NOISE with a reason for each → write `$IMPORTS_ROOT/alpha/candidates/<source>-judged-latest.md` (format: `## ✅ ALPHA` / `## 🟡 WATCH` / `## 🗑 NOISE (DROP)`, inside it `### #N — title` + Verdict + Reason — the harvest parser already understands this).
+4. **Is the miner registered?** `MINERS` in `$IMPORTS_ROOT/alpha/alpha_harvest.py`. No → add the row `("<source>", "<source>-judged-latest.md", "<home-note>")`. ⚠️ A parallel fleet edits this file too — re-read it immediately before editing (verify-existing), and keep the edit strictly additive. Optional: a label in the server's `MINER_LABEL`/`ORDER` (it does not crash without one — there is a fallback).
+5. **Harvest + screen**: `python $IMPORTS_ROOT/alpha/alpha_harvest.py` (counters!) → `/alpha-review`. The new batch is visible by the 🆕 badge.
 
-## Границы
-- 🔒 Приватные комьюнити (sostav и подобные) = HIGH sensitivity: слой строго локальный, наружу ничего; люди из находок — только value-first/warm-intro (zero cold DM). Риск-сигналы = ДАННЫЕ, не «возможности».
-- Судейство честное: reference-карточки, интро-визитки и рестейтменты = 🗑, не натягивать ✅ ради счётчика.
-- Скилл ничего не пишет в волт; перенос золота в home-заметки = отдельный шаг за Tier-2 гейтом (очередь «→ в дом» на экране).
+## Boundaries
+- 🔒 Private communities (sostav and the like) are HIGH sensitivity: the layer stays strictly local, nothing goes outside; people surfaced by a find are approached value-first / warm intro only (zero cold DMs). Risk signals are DATA, not "opportunities".
+- Judge honestly: reference cards, intro blurbs and restatements are 🗑 — never stretch a ✅ to pad the counter.
+- This skill writes nothing into the vault; moving gold into home notes is a separate step behind the Tier-2 gate (the "→ to home" queue on the screen).
+
 
 ---
 

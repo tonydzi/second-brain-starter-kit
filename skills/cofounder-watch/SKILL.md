@@ -11,34 +11,35 @@ license: MIT
 
 # /cofounder-watch — Phase 0 ambient cofounder (ping-only)
 
-> 🧒 **Докладывая Антону:** заверши child-simple «Простыми словами». Не внутри советов кофаундера.
-> 📖 Канон: [[decision-realtime-cofounder-2026-07-02]]. Это **ГЛАЗА+фильтр** real-time кофаундера (Phase 0). Ничего не шлёт — только подсвечивает.
+> 🧒 **When reporting to a non-technical operator:** finish with a child-simple "In plain words" recap in their language. Not inside the cofounder advice itself.
+> 📖 Canon: [[decision-realtime-cofounder-2026-07-02]]. This is the **EYES + filter** of the real-time cofounder (Phase 0). It sends nothing — it only highlights.
 
-## Что делает
-Детерминированный `signal-dispatcher` (0 токенов, stdlib): читает живую воронку `tg_followups.json` → классифицирует салиентные события (те же правила, что `/pipeline`) → дедуп через `cofounder_ledger.json` (не дёргает дважды) → пишет дайджест + HTML-дашборд. **Тихо, если новых важных событий нет** (в этом суть — не задалбывать).
+## What it does
+A deterministic `signal-dispatcher` (0 tokens, stdlib only): reads the live funnel `tg_followups.json` → classifies salient events (the same rules as `/pipeline`) → dedups through `cofounder_ledger.json` (never pings twice) → writes a digest + an HTML dashboard. **Silent when there are no new important events** — that is the whole point: do not nag.
 
-## Как запускать
+## How to run
 `python "$IMPORTS_ROOT/cofounder/cofounder_watch.py" --stdout`
-- Флаги: `--stdout` (печатать дайджест), `--reset` (очистить ledger → переалертить всё).
-- Выходы: дайджест `$IMPORTS_ROOT/cofounder/cofounder-digest.md`; дашборд `$OBSIDIAN_VAULT/_Dashboards/Cofounder-Watch.html` (Антон работает глазами).
+- Flags: `--stdout` (print the digest), `--reset` (clear the ledger → re-alert everything).
+- Outputs: digest `$IMPORTS_ROOT/cofounder/cofounder-digest.md`; dashboard `$OBSIDIAN_VAULT/_Dashboards/Cofounder-Watch.html` (the operator works visually).
 
-## Салиентность (правила = /pipeline priority)
-- 🔥 **HIGH** — ответил, Calendly НЕ отправлен → «шли Calendly сейчас».
-- ⏰ **MEDIUM** — Calendly отправлен >24ч, брони нет → «booking-nudge».
-- 👀 **LOW** — питч отправлен, ответа нет → «проверь инбаунд / follow-up / дропни».
-- booked/confirmed → пропуск (не ре-питчим).
+## Salience (rules = /pipeline priority)
+- 🔥 **HIGH** — they replied, Calendly NOT sent → "send the Calendly now".
+- ⏰ **MEDIUM** — Calendly sent >24h ago, no booking → "booking nudge".
+- 👀 **LOW** — pitch sent, no reply → "check inbound / follow up / drop".
+- booked/confirmed → skipped (we do not re-pitch).
 
-## Границы (Phase 0)
-- **Ping-only** — НИКОГДА не шлёт лидам. Действия исполняет Антон (или `/pipeline` draft→approve). Human-in-the-loop.
-- **0 токенов** — совет шаблонный по правилу. LLM-персона `/cofounder` на нюанс = Phase 0.5 (позже, только на HIGH).
-- Пусто ≠ поломка: «тихо» = валидный результат.
+## Boundaries (Phase 0)
+- **Ping-only** — it NEVER messages leads. Actions are executed by the operator (or via `/pipeline` draft→approve). Human in the loop.
+- **0 tokens** — the advice is templated from the rule. The LLM persona `/cofounder` for nuance is Phase 0.5 (later, HIGH events only).
+- Empty ≠ broken: "silent" is a valid result.
 
-## Дальше (Phase 0.5 / 1+, по greenlight Антона)
-- Доставка в Telegram-сигнал-чат (когда MCP жив) вместо только файла/дашборда.
-- Расписание на ХАБЕ (always-on `HUB-1`) 2–3×/день — это фон, ставится на хаб (не на ноут), через `/schedule` на хабе или machine_bus. Лёгкий (0 токенов) → допустимо днём.
-- Phase 0.5: HIGH-события → LLM-персона `/cofounder` (Opus) для нюансного совета.
-- Phase 1: + срочный VC-email + конфликт календаря (те же mailbox+ledger).
-- Расширение = добавить источник в тот же диспетчер, НЕ плодить watcher'ы ([[telegram-eventloop-listener]]: один живой клиент, грабля AUTH_KEY).
+## Next (Phase 0.5 / 1+, on the operator's greenlight)
+- Delivery into a Telegram signal chat (once the MCP is alive) instead of a file + dashboard only.
+- Scheduling on the HUB (always-on `HUB-1`) 2-3x/day — this is background work, so it belongs on the hub, not the laptop, via `/schedule` on the hub or the machine bus. Being lightweight (0 tokens), daytime runs are fine.
+- Phase 0.5: HIGH events → the LLM persona `/cofounder` (top model) for nuanced advice.
+- Phase 1: + urgent VC email + calendar conflicts (same mailbox + ledger).
+- To extend it, add a source to the SAME dispatcher; do NOT breed watchers ([[telegram-eventloop-listener]]: one live client, the AUTH_KEY pitfall).
+
 
 ---
 
