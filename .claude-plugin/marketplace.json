@@ -1,5 +1,6 @@
 {
   "name": "second-brain",
+  "description": "Battle-tested Claude Code skills from a live second-brain and AI-cofounder operation at Palo Alto AI Research Lab: quality gates, retrospectives, memory and recall, fleet coordination. Method, not data.",
   "owner": {
     "name": "Anton Dziatkovskii / Palo Alto AI Research Lab",
     "url": "https://github.com/tonydzi"
