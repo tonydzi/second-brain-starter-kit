@@ -8,11 +8,11 @@ description: >
 license: MIT
 ---
 
-OBJECTIVE: Pull fresh FAAA follow-up call notes from Anton's Telegram group and incrementally ingest them into the Obsidian Platinum-CRM, on demand. Fully idempotent (dedup by Telegram message id) — safe to re-run, never creates duplicates. Identical pipeline to the weekly task `faaa-weekly-sync`; the only difference is that this fires when Anton asks.
+OBJECTIVE: Pull fresh FAAA follow-up call notes from the operator's Telegram group and incrementally ingest them into the Obsidian Platinum-CRM, on demand. Fully idempotent (dedup by Telegram message id) — safe to re-run, never creates duplicates. Identical pipeline to the weekly task `faaa-weekly-sync`; the only difference is that this fires when the operator asks.
 
 CONTEXT:
-- Source: Telegram supergroup "CALLS 889 MAIN FA FAAAA follow up MAIN (ТОЛЬКО итоги звонков и НИЧЕГО БОЛЬШЕ)", chat_id = <YOUR_CHAT_ID> (read via the Telegram MCP; logged-in account @work_acct_a).
-- Each substantive message is a call follow-up summary (RU or EN): starts with "Follow-up of our call 👣" / "Фоллоуап нашего звонка 👣" / "Follow-Up 👣", has a "Participants:" / "Meeting participants:" / "Участники" line with the lead's @handle, bullets, and "Agreements 🤝" / "Договоренности 🤝". Spam/promos + voice-note ops messages also appear — the scripts' triage filters them out (only real follow-ups become lead cards).
+- Source: Telegram supergroup "CALLS — FOLLOW-UPS MAIN (call summaries ONLY and NOTHING ELSE)", chat_id = <YOUR_CHAT_ID> (read via the Telegram MCP; logged-in account @work_acct_a).
+- Each substantive message is a call follow-up summary (in any language): starts with "Follow-up of our call 👣" / "Follow-Up 👣", has a "Participants:" / "Meeting participants:" line with the lead's @handle, bullets, and "Agreements 🤝". Spam/promos + voice-note ops messages also appear — the scripts' triage filters them out (only real follow-ups become lead cards).
 - CRM vault: $OBSIDIAN_VAULT/04-Projects/crypto/Platinum-CRM/leads/. Scripts + checkpoints: $IMPORTS_ROOT/.
 - Watermark (last imported msg id) = max integer id in $IMPORTS_ROOT/faaa-archive.jsonl.
 
@@ -26,7 +26,7 @@ STEPS:
    {"chat_id":<YOUR_CHAT_ID>,"watermark":WM,"results":[{"id":<int>,"sender":<from>,"date":<iso8601>,"text":<FULL verbatim text>,"media":<media type if any>}]}
    Include the COMPLETE verbatim text of each message — never truncate or paraphrase (faithful raw import).
 7. Run: python $IMPORTS_ROOT/ingest_faaa_live.py
-   (classifies follow-ups, regex-extracts the lead @handle from the Participants/Участники line, team-filters, dedups vs existing leads by handle → writes faaa\live_bundles.json [NEW leads] and faaa\live_appends.json [calls for EXISTING leads]; prints a summary).
+   (classifies follow-ups, regex-extracts the lead @handle from the Participants line, team-filters, dedups vs existing leads by handle → writes faaa\live_bundles.json [NEW leads] and faaa\live_appends.json [calls for EXISTING leads]; prints a summary).
 8. Read $IMPORTS_ROOT/faaa/live_bundles.json. For EACH new lead, synthesize a CRM record GROUNDED ONLY in that lead's call text (never invent), an object with EXACTLY these keys: lead_key (echo unchanged), name, company, role, country, category (one of investor/fund/vc/advisor/project/founder/exchange/service/media/kol/dev/other), status (one of new/negotiating/interested/partner/advisor/stale/declined), what_they_do, what_they_want, what_we_offered, agreements, outcome, summary (2-4 sentences), tags (3-7 kebab-case), lang (ru/en). Use "" for unknown fields. Write the array to $IMPORTS_ROOT/faaa/live_synth.json via the Write tool (UTF-8, real Cyrillic, NO byte-order-mark). If live_bundles.json is an empty array, write [] there.
 9. Run: python $IMPORTS_ROOT/render_live.py
    (creates lead cards in leads\<year>\ + person overlays in 07-People\ + day-ledger entries for NEW leads; APPENDS fresh calls to existing leads' cards; appends rows to faaa-archive.jsonl to advance the watermark; tags everything #top-lead).
@@ -39,7 +39,7 @@ CONSTRAINTS:
 - Provenance on everything: origin: mixed, authored_by: hybrid — NEVER tag #anton-original (these are records of other people's pitches).
 - Team handles (@work_acct_a, @personal_acct, @corp_acct*, @owner_alt*, @Madina*) are NOT leads — the scripts already exclude them.
 
-OUTPUT / SUCCESS CRITERIA: Report: number of new lead cards created, calls appended to existing leads, the new watermark (max id in faaa-archive.jsonl), and confirm 0 broken links. If nothing was new, just report that. End every reply to Anton with a 🧒 Простыми словами recap.
+OUTPUT / SUCCESS CRITERIA: Report: number of new lead cards created, calls appended to existing leads, the new watermark (max id in faaa-archive.jsonl), and confirm 0 broken links. If nothing was new, just report that. End every reply to the operator with a 🧒 In plain words recap.
 
 RELATION TO OTHER ENTRIES (do not duplicate):
 - Scheduled twin: $USERPROFILE/.claude/scheduled-tasks/faaa-weekly-sync/SKILL.md (Mondays 09:09) — same scripts.

@@ -10,7 +10,7 @@ license: MIT
 
 # /notpeople-wave — next NotPeople investor outreach wave
 
-> 🧒 **When reporting to the operator** (status/summaries — NEVER inside the pitches themselves): end with a child-simple "Простыми словами" recap in their language. Standing request, memory `eli5-always`.
+> 🧒 **When reporting to the operator** (status/summaries — NEVER inside the pitches themselves): end with a child-simple "In plain words" recap in their language. Standing request, memory `eli5-always`.
 
 > 📖 **Operates under `telegram-lead-outreach`** (the general Telegram outreach playbook) and the `bible` outreach domain. This skill only adds the NotPeople-specific sequencing + the dedup-ledger discipline. Don't duplicate guardrails — they live there; newer rule beats older.
 
@@ -30,7 +30,7 @@ The fix is baked into steps 2 and 5 below: **read each lead's live thread before
 - Confirm which machine you're on. **Follower (Nina, vault on D:, receive-only):** local CSV/dashboard edits may be reverted by Syncthing → you MUST also relay the pitched-record to the hub (step 6). **Hub (`HUB-1`):** you are the source of truth, no relay needed.
 
 ### 1. Select the next N truly-new investors
-- Default N = 10 (operator may say a number). The operator may name leads to **skip** (e.g. "Karim пропусти") → drop them, pull the next-ranked to refill N.
+- Default N = 10 (operator may say a number). The operator may name leads to **skip** (e.g. "skip Karim") → drop them, pull the next-ranked to refill N.
 - Run the selector: `python "D:\OBSIDIAN\_imports\notpeople\select_next_investors.py"` (reads the scored pool, excludes anyone already in `NotPeople-Pitched.csv`).
 - ⚠️ **The ranked queue is contaminated** — its top was already pitched 22 Jun. Do NOT trust queue position alone. Treat the selector output as *candidates*, then verify each in step 2. If the top is all already-contacted, scan deeper (positions 23+ were clean on 25 Jun).
 
@@ -44,15 +44,15 @@ For every candidate, before composing anything:
 - Assemble the final N truly-new, name-correct leads. **Report the list to the operator and WAIT for "+"** before sending (outbound = Tier-2, ask-first).
 
 ### 3. Compose + send (Opus voice, per lead) — only after "+"
-- Pitches come from `build_pitch_drafts.py` (50 personalized, ranked) — `python "D:\OBSIDIAN\_imports\notpeople\build_pitch_drafts.py"` writes `pitch_queue.json` + a drafts note. Top-N = the batch. Personalize per lead; **@work_acct_a = Anton's personal voice → Opus**, no copy-paste blast, pace the sends ([[telegram-lead-outreach]] guardrails).
+- Pitches come from `build_pitch_drafts.py` (50 personalized, ranked) — `python "D:\OBSIDIAN\_imports\notpeople\build_pitch_drafts.py"` writes `pitch_queue.json` + a drafts note. Top-N = the batch. Personalize per lead; **@work_acct_a = the operator's personal voice → Opus**, no copy-paste blast, pace the sends ([[telegram-lead-outreach]] guardrails).
 - The standing pitch BODY (NotPeople, $600K pre-seed SAFE, Calendly close) lives in `build_pitch_drafts.py` — reuse it, don't rewrite the offer.
 - `send_message(<chat>, <text>, account="work_acct_a")` per lead.
 
 ### 4. Verify delivery per-lead (don't assume)
-- After the batch, `get_history(<chat>, account="work_acct_a", limit=1)` for each → confirm the outbound msg landed (capture msg_id + timestamp). Report "N/N delivered" with the ids. This is the "ты уверен, что отправка ушла?" check — do it without being asked.
+- After the batch, `get_history(<chat>, account="work_acct_a", limit=1)` for each → confirm the outbound msg landed (capture msg_id + timestamp). Report "N/N delivered" with the ids. This is the "are you sure it actually went out?" check — do it without being asked.
 
 ### 5. Record the wave IMMEDIATELY (the dedup ledger — never skip)
-- Append every sent lead to `NotPeople-Pitched.csv` (in `_Dashboards`), columns `Имя лида,Юзернейм,Компания`.
+- Append every sent lead to `NotPeople-Pitched.csv` (in `_Dashboards`), columns `Lead name,Username,Company`.
 - **Also backfill** any lead you found in step 2 that was clearly pitched earlier but missing from the CSV (this is exactly the 22 Jun gap). The CSV is the single dedup source `select_next_investors.py` reads — if it's stale, the next wave re-pitches people.
 
 ### 6. Refresh the tracker snapshot + (follower only) relay to hub
