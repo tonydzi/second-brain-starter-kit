@@ -8,47 +8,48 @@ description: >
 license: MIT
 ---
 
-# /comments — комменты под нашим контентом (показать · ответить · вырастить в личку)
+# /comments — comments under our content (show · reply · grow into a DM)
 
-> 🧒 Отчёт Антону заканчивай простым «Простыми словами». (память `eli5-always`)
+> 🧒 End the report to a non-technical owner with a short "In plain words" recap. (memory `eli5-always`)
 
-Один заход: показать комменты и **точечно** ответить там, где ответ ждут. Собирает и показывает; **отправляет ответы только по «+» Антона**. Тонкая надстройка (AK-47) над движками в `$IMPORTS_ROOT/content-factory\registry\`.
+One pass: show the comments and reply **surgically** where a reply is actually expected. It collects and displays; it **sends replies only on the owner's explicit "+"**. A thin layer (AK-47) over the engines in `$IMPORTS_ROOT/content-factory\registry\`.
 
-> 🔴 **УРОК БОЯ 15.07.2026** (память `bulk-replies-cringe-one-offer-converts`). Цель «ни одного неотвеченного» **ОТМЕНЕНА**: пачка из 16 ответов на старые комменты была удалена Антоном целиком («мой код разошелся… самому неловко»), автопостинг комментов выключен, аккаунт @work_acct_b потерял доступ к чужой группе. В ту же ночь ОДИН публичный пост-зов дал партнёра за 30 часов.
-> → **Дефолт = молчать.** Отвечаем, только если: адресовано нам ИЛИ тред живой (моложе ~недели) ИЛИ человек ждёт ответа лично. Старше — skip, и это НЕ долг.
-> → **Потолок ≤3 ответа за заход**, никогда серией подряд в чужой группе: темп и объём читаются как бот независимо от качества текста.
-> → Ценность меряем людьми, которые сдвинулись, а не счётчиком unanswered.
+> 🔴 **BATTLE LESSON 2026-07-15** (memory `bulk-replies-cringe-one-offer-converts`). The goal "zero unanswered" is **CANCELLED**: a batch of 16 replies to old comments was deleted by the owner in full ("my batch went out… I'm embarrassed myself"), comment auto-posting was turned off, and one of our accounts lost access to a third-party group.
+> In the same night ONE public call-to-action post landed a partner within 30 hours.
+> → **Default = stay silent.** Reply only if: it is addressed to us OR the thread is alive (younger than ~a week) OR a person is personally waiting for an answer. Older than that — skip, and that is NOT a debt.
+> → **Ceiling ≤3 replies per pass**, never as a back-to-back series inside someone else's group: pace and volume read as a bot regardless of how good the text is.
+> → Value is measured in people who moved, not in the unanswered counter.
 
-**Границы:** это про комменты к НАШИМ опубликованным постам (pubmetrics.db). Клуб «СОСТАВ» = `/sostav-comments` (другой корпус). FB-комменты подтянутся после Graph-токена — сейчас источник = TG.
+**Boundaries:** this is about comments under OUR published posts (pubmetrics.db). The separate club corpus has its own skill (`/sostav-comments`). Facebook comments will be pulled in once the Graph token is live — for now the source is Telegram.
 
-## 1. Свежий сбор (0 токенов)
-Сначала обнови базу, чтобы не отвечать на устаревшее:
-- `python tg_comments_collect.py` (идемпотентно; exit 3 = рельса @work_acct_a занята → скажи «повтори позже», не падай).
+## 1. Fresh collection (0 tokens)
+First refresh the database so you don't reply to stale material:
+- `python tg_comments_collect.py` (idempotent; exit 3 = the sending rail is busy → say "retry later", don't crash).
 
-## 2. Показать состояние
-- `python pub_metrics.py status` — сколько неотвеченных всего.
-- `python pub_comments_report.py` — дайджест неотвеченных (спам-боты из `spam_authors.txt` уже помечены 🤖 и отсеяны).
-- `python pub_metrics.py top-commenters --n 15` — кто комментит чаще всех.
+## 2. Show the state
+- `python pub_metrics.py status` — how many unanswered in total.
+- `python pub_comments_report.py` — digest of the unanswered ones (spam bots from `spam_authors.txt` are already flagged 🤖 and filtered out).
+- `python pub_metrics.py top-commenters --n 15` — who comments most often.
 
-Покажи Антону компактно: N неотвеченных по площадкам · топ-5 комментаторов · ссылка на дашборд `_Dashboards\Pub-Registry-Metrics.html`.
+Show it to the owner compactly: N unanswered per platform · top-5 commenters · link to the dashboard `_Dashboards\Pub-Registry-Metrics.html`.
 
-## 3. Если Антон просит ответить («ответь на комменты» / «+»)
-Draft-first, отправка руками/по «+»:
-1. **RECALL по автору** перед каждым ответом человеку: `/find <имя>` (namesearch) + grep волта + tg-профиль (`get_full_user` по author_id из comments). Знать, кому пишешь.
-2. **Тон по каналу** ([[short-text-when-unreviewed]]): TG = осмысленный ответ по теме, с контекстом (НЕ FB-шутка на 5 слов). Голос Антона = Opus+.
-3. **Что пропустить:** спам-боты 🤖 (не отвечаем); старые треды, где ответ уже неуместен (решить явно).
-4. Покажи пачку таблицей «коммент → черновик → от какого аккаунта» и жди «+». После отправки — `pub_metrics.py mark-replied --cid <id>` (или следующий `tg_comments_collect.py` сам проставит `replied`).
+## 3. If the owner asks for replies ("answer the comments" / "+")
+Draft-first, sending by hand or on "+":
+1. **RECALL the author** before every reply to a human: `/find <name>` (namesearch) + grep the vault + the Telegram profile (`get_full_user` by author_id from comments). Know who you are writing to.
+2. **Tone per channel** ([[short-text-when-unreviewed]]): Telegram = a meaningful on-topic reply with context (NOT a 5-word Facebook joke). The owner's voice = the top-tier model.
+3. **What to skip:** spam bots 🤖 (no reply); old threads where a reply is no longer appropriate (decide explicitly).
+4. Show the batch as a table "comment → draft → which account sends it" and wait for "+". After sending — `pub_metrics.py mark-replied --cid <id>` (or the next `tg_comments_collect.py` will set `replied` by itself).
 
-## 4. Топ-комментаторы → публичный зов в группе, личка вдобавок
-Активный без CRM-карточки = кандидат. Заведи карточку (Platinum-CRM), сделай RECALL. ⭐ Оффер (тестеры/звонок/ранний доступ) по правилу anton 14.07 идёт **публично в группе**, не личкой — личка только как персональный пинг после публичного зова (канон: Библия `reglament-offer-aktivnym-publichno-v-gruppe-ne-v-lichke`, память `public-offer-in-group`). Личку без «+» не слать ([[telegram-account-identities]]). Клан (напр. Artem Arsyonov) — не лид.
+## 4. Top commenters → a public call in the group, a DM on top
+An active commenter with no CRM card = a candidate. Create the card (CRM), run a RECALL. ⭐ The offer (testers/a call/early access) goes **publicly into the group**, not by DM — a DM only as a personal nudge AFTER the public call (canon: the house rulebook `offer-to-active-people-publicly-not-by-dm`, memory `public-offer-in-group`). Don't send a DM without a "+" ([[telegram-account-identities]]). Clan members are not leads.
 
-## Границы / безопасность
-- READ по умолчанию. Массовый ответ задним числом = **hard-stop**: только пачкой, с «+».
-- Спам-фильтр: новую волну ботов добавляй в `spam_authors.txt` (`author_id  # причина`).
-- Ничего приватного из комментов не утекает в другие каналы.
+## Boundaries / safety
+- READ by default. Mass back-dated replying = a **hard stop**: batch only, and only with a "+".
+- Spam filter: add a new bot wave to `spam_authors.txt` (`author_id  # reason`).
+- Nothing private from the comments leaks into other channels.
 
-## Связано
-Утренний автопинг неотвеченных в чат 03 (05:35, задача «Pub-Comments-Morning-03») и ночной сбор (03:40, `collect_pub_metrics.cmd`) — это ручной, on-demand двойник тех рутин. Канон: `00-System\Pub-Metrics-Registry.md`, память `content-pub-registry`.
+## Related
+The morning auto-ping of unanswered items into the fleet log chat (05:35, task "Pub-Comments-Morning") and the nightly collection (03:40, `collect_pub_metrics.cmd`) — this skill is the manual, on-demand twin of those routines. Canon: `00-System\Pub-Metrics-Registry.md`, memory `content-pub-registry`.
 
 ---
 

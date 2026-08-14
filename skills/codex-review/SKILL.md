@@ -9,42 +9,42 @@ description: >
 license: MIT
 ---
 
-# codex-review — «Claude проверяет Codex»
+# codex-review — "Claude checks Codex"
 
-Тонкий брокер ревью-пары. Codex пишет код; Claude независимо ревьюит его дифф. (Старая заметка «`codex exec` headless на Windows виснет» устарела: на codex-cli 0.141+ headless работает нативно — проверено 07.07 на ноуте и 14.07 на хабе.) Файловый хэндофф, без общих кредов, подписка (не платный API).
+A thin broker for the review pair. Codex writes the code; Claude reviews its diff independently. (The old note "`codex exec` headless hangs on Windows" is obsolete: on codex-cli 0.141+ headless works natively — verified 2026-07-07 on the laptop and 2026-07-14 on the hub.) File handoff, no shared credentials, subscription (not a paid API).
 
-## Когда запускать
-Антон сделал изменение через Codex (или просто есть дифф/правка в репозитории) и хочет независимую проверку «второй парой глаз». Триггеры см. в `description`.
+## When to run it
+The owner made a change through Codex (or there is simply a diff/edit in a repository) and wants an independent "second pair of eyes" check. Triggers: see `description`.
 
-## Что делаю
-1. **Определяю цель.** Спрашиваю/беру путь к репозиторию, где Codex внёс изменение (или путь к патч-файлу). По умолчанию — рабочий репозиторий, который Антон назвал.
-2. **Запускаю движок** (детерминированно, 0 моих токенов на сам прогон — ревью делает headless `claude -p`):
+## What I do
+1. **Identify the target.** Ask for / take the path to the repository where Codex made the change (or the path to a patch file). Default — the working repository the owner named.
+2. **Run the engine** (deterministic, 0 of my tokens for the run itself — the review is done by headless `claude -p`):
    ```
-   python "%USERPROFILE%\.claude\scripts\cc-review\cc_review.py" --repo "<путь к репо>" --model sonnet
+   python "%USERPROFILE%\.claude\scripts\cc-review\cc_review.py" --repo "<path to repo>" --model sonnet
    ```
-   - модель: **Sonnet по умолчанию** (бесплатный бак подписки, на тесте поймал оба бага за 25с); **Opus** для трудных/safety-critical изменений (`--model opus`) — гейт качества.
-   - другие режимы: `--range "HEAD~1 HEAD"` (конкретный коммит), `--diff "<патч.diff>"` (готовый патч), `--task "<task.md>"` (что Codex просили сделать — даёт ревьюеру контекст).
-3. **Подаю результат Антону:** вердикт (`APPROVE` / `REQUEST_CHANGES`), список находок (file:line · severity · что не так · фикс), и путь к `review-<ts>.md`. Если REQUEST_CHANGES — предлагаю починить корень (а не симптом).
+   - model: **Sonnet by default** (the free subscription bucket; in the test it caught both bugs in 25s); **Opus** for hard/safety-critical changes (`--model opus`) — the quality gate.
+   - other modes: `--range "HEAD~1 HEAD"` (a specific commit), `--diff "<patch.diff>"` (a ready patch), `--task "<task.md>"` (what Codex was asked to do — gives the reviewer context).
+3. **Report to the owner:** the verdict (`APPROVE` / `REQUEST_CHANGES`), the list of findings (file:line · severity · what is wrong · the fix), and the path to `review-<ts>.md`. If REQUEST_CHANGES — propose fixing the root cause (not the symptom).
 
-## Границы
-- Движок принудительно гасит `ANTHROPIC_API_KEY` → ревью идёт по подписке, не по платному ключу.
-- Гигантский дифф обрезается до 120k символов (с пометкой) — если упёрлись, ревьюить по частям/по файлам.
-- Это РЕВЬЮ, не авто-правка: фиксы предлагаю/делаю отдельно по AK-47 (легко-обратимое — сам; развилка — спрашиваю).
-- Полную авто-пару (Codex headless тоже) можно достроить позже под WSL2/Docker — отдельный шаг (сейчас не нужно).
+## Boundaries
+- The engine forcibly unsets `ANTHROPIC_API_KEY` → the review runs on the subscription, not on a paid key.
+- A giant diff is truncated to 120k characters (with a note) — if you hit that, review it in parts / per file.
+- This is a REVIEW, not an auto-fix: fixes are proposed/made separately per AK-47 (easy and reversible — do it yourself; a fork — ask).
+- The full auto-pair (Codex headless as well) can be built later under WSL2/Docker — a separate step (not needed now).
 
-> **2026-06-28 (хаб HUB-1):** движок `cc_review.py` был утрачен (нет в git/`.stversions`/на дисках) → **пересобран** как простой Windows-нативный «обычный режим» (вызов выше). Прогнан вживую (`/tt`): баги→`REQUEST_CHANGES`, чистый→`APPROVE`, пустой/не-репо→graceful. Артефакты вне волта (`reviews/`), счётчик `reviews/_log.jsonl`. ⚠️ Канон-обновление в [[decision-hermes-multivendor-arbitrage-rejected]] (аддендум 28.06).
+> **2026-06-28 (hub):** the engine `cc_review.py` was lost (not in git / `.stversions` / on any disk) → **rebuilt** as a simple Windows-native "normal mode" (the call above). Run live (`/tt`): bugs → `REQUEST_CHANGES`, clean → `APPROVE`, empty/not-a-repo → graceful. Artifacts live outside the vault (`reviews/`), counter `reviews/_log.jsonl`. ⚠️ Canon update in [[decision-hermes-multivendor-arbitrage-rejected]] (addendum 06-28).
 
-## ⭐ Двусторонняя гетеро-пара (обе стороны работают на хабе)
-Полная симметрия: обе стороны ревьюят друг друга, финальную проверку всегда делает ДРУГОЙ вендор.
-- **Claude → ревьюит Codex** (прямой) — РАБОТАЕТ: `python "%USERPROFILE%\.claude\scripts\cc-review\cc_review.py" --repo "<репо>" --model sonnet` (см. выше).
-- **Codex → ревьюит Claude** (обратный, зеркало) — РАБОТАЕТ И НА ХАБЕ: `python "%USERPROFILE%\.claude\scripts\cc-review\codex_review.py" --repo "<репо>"` — движок /tt-проверен 2026-07-07 (ноут, codex-cli 0.141.0) и 2026-07-14 (хаб `HUB-1`, codex-cli 0.144.4: `npm i -g @openai/codex`, логин ChatGPT-подписка уже был в `~/.codex/auth.json`; smoke: подложенные баги→REQUEST_CHANGES с точными file:line за 16с · чистый дифф→APPROVE · пустой дифф→graceful без вызова Codex). Нативный `codex exec -s read-only` на Windows без WSL2. Флаги: `--range "HEAD~1 HEAD"`, `--diff <патч>`, `--task <task.md>`, `--timeout 300`. Read-only песочница: Codex только рассуждает над диффом. Вывод: `review-codex-<ts>.md` + `VERDICT: APPROVE|REQUEST_CHANGES`.
+## ⭐ The two-way hetero pair (both sides run on the hub)
+Full symmetry: both sides review each other, and the final check is always done by the OTHER vendor.
+- **Claude → reviews Codex** (forward) — WORKS: `python "%USERPROFILE%\.claude\scripts\cc-review\cc_review.py" --repo "<repo>" --model sonnet` (see above).
+- **Codex → reviews Claude** (reverse, the mirror) — WORKS ON THE HUB TOO: `python "%USERPROFILE%\.claude\scripts\cc-review\codex_review.py" --repo "<repo>"` — the engine was /tt-verified 2026-07-07 (laptop, codex-cli 0.141.0) and 2026-07-14 (hub, codex-cli 0.144.4: `npm i -g @openai/codex`, the ChatGPT-subscription login was already in `~/.codex/auth.json`; smoke: planted bugs → REQUEST_CHANGES with exact file:line in 16s · clean diff → APPROVE · empty diff → graceful without calling Codex). Native `codex exec -s read-only` on Windows without WSL2. Flags: `--range "HEAD~1 HEAD"`, `--diff <patch>`, `--task <task.md>`, `--timeout 300`. Read-only sandbox: Codex only reasons over the diff. Output: `review-codex-<ts>.md` + `VERDICT: APPROVE|REQUEST_CHANGES`.
 
-## Полный авто-режим WSL2 (архивный путь — НЕ развёрнут на хабе)
-⚠️ Оркестратор `codex_pair.py` на хабе `HUB-1` отсутствует в живом дереве (уцелел лишь в снапшоте `_config-backup\snapshot-2026-07-04`), WSL2 тут не установлен → режим не запускается. Чтобы поднять: восстановить `codex_pair.py` из снапшота + поставить WSL2/Codex, затем `/tt`.
-Исторический контекст (машина, где строили 2026-06-22): WSL2 Ubuntu-24.04 + Node22 + Codex 0.142.3 (залогинен ChatGPT), `codex exec --full-auto` headless. Что делал: Codex реализует задачу headless в WSL → берёт git-дифф → Claude ревьюит (`cc_review.py`) → вердикт + `codex-change-*.diff` + `review-*.md`. Репо в Linux-fs WSL (`/root/...`); нормализатор путей выправлял искажение Git-Bash `/root/...`.
+## Full auto mode under WSL2 (archived path — NOT deployed on the hub)
+⚠️ The orchestrator `codex_pair.py` is missing from the hub's live tree (it survived only in the snapshot `_config-backup\snapshot-2026-07-04`), and WSL2 is not installed there → the mode does not start. To bring it up: restore `codex_pair.py` from the snapshot + install WSL2/Codex, then `/tt`.
+Historical context (the machine where it was built, 2026-06-22): WSL2 Ubuntu-24.04 + Node22 + Codex 0.142.3 (logged into ChatGPT), `codex exec --full-auto` headless. What it did: Codex implements the task headless inside WSL → takes the git diff → Claude reviews it (`cc_review.py`) → verdict + `codex-change-*.diff` + `review-*.md`. The repo lived in the WSL Linux filesystem (`/root/...`); a path normalizer fixed the Git-Bash `/root/...` mangling.
 
-## Расширение — обратная сторона ГОТОВА (хаб полностью двусторонний с 2026-07-14)
-Обратная сторона (Codex ревьюит Claude) построена = `codex_review.py` (см. блок «Двусторонняя гетеро-пара»), нативный `codex exec` на Windows. Codex CLI установлен на хаб `HUB-1` 2026-07-14 (`npm i -g @openai/codex`, v0.144.4, логин по ChatGPT-подписке) и smoke-тест пройден — гетеро-пара работает в обе стороны. Тем же днём развёрнут и на **Якорье** (ANCHOR-1, headless: `auth.json` переносим scp'ом, browser-OAuth не нужен; оба движка + smoke ✅) — Якорь = дополнительный узел, живые тесты дуэта только в чате 04 с хаба.
+## Extension — the reverse side is READY (the hub has been fully two-way since 2026-07-14)
+The reverse side (Codex reviews Claude) is built = `codex_review.py` (see the "two-way hetero pair" block), native `codex exec` on Windows. The Codex CLI was installed on the hub 2026-07-14 (`npm i -g @openai/codex`, v0.144.4, login via the ChatGPT subscription) and the smoke test passed — the hetero pair works in both directions. The same day it was also deployed to the anchor VPS (headless: `auth.json` is copied over with scp, no browser OAuth needed; both engines + smoke ✅) — the anchor is an extra node, and live duo tests still run from the hub in the review chat.
 
 ---
 
