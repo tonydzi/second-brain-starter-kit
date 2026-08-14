@@ -9,48 +9,48 @@ description: >
 license: MIT
 ---
 
-EPISODE_ADAPTER (S5 контент-фабрики v2 — контракт [[decision-content-pipeline-reality-show]] §7.2)
+EPISODE_ADAPTER (stage S5 of content factory v2 — the contract [[decision-content-pipeline-reality-show]] §7.2)
 
-ЦЕЛЬ: ОДИН пост-материал → «эпизод» = по одному черновику НА (тир × площадку) из §7.2, кросс-ссылки вниз + canonical→GitHub зашиты. Draft-first: пишем черновики, НИЧЕГО не публикуем.
+GOAL: ONE source post → an "episode" = one draft PER (tier × platform) from §7.2, with cross-links downward and canonical→GitHub baked in. Draft-first: we write drafts and publish NOTHING.
 
-КОНТРАКТ §7.2 (реализован 1:1):
+THE §7.2 CONTRACT (implemented 1:1):
 ```
-тир       длина          площадки (фаза 1)                      язык     голос/модель
-teaser    240–370 (HARD) @ClawRus(RU) · X(EN)                   RU TG/EN X  авторский · Opus
-medium    800–2500       FB(RU)                                 RU          авторский дневник · Opus · ССЫЛКА В 1-М КОММЕНТЕ (не в теле) + вопрос
-longread  4000+ нарратив @ClawRus·VC.ru·Хабр(RU) · GitHub(EN)   RU и EN    авторский reality-show · Opus
-dev-log   сухой лог      GitHub(EN, канон)                      EN          технический безличный · Sonnet-скаффолд + Opus-связность
+tier      length          platforms (phase 1)                    language   voice/model
+teaser    240-370 (HARD)  RU channel · X (EN)                    RU TG/EN X  authorial · Opus
+medium    800-2500        Facebook (RU)                          RU          authorial diary · Opus · LINK IN THE 1ST COMMENT (not in the body) + a question
+longread  4000+ narrative RU channel·VC.ru·Habr(RU) · GitHub(EN) RU and EN  authorial reality-show · Opus
+dev-log   a dry log       GitHub (EN, canonical)                 EN          technical, impersonal · Sonnet scaffold + Opus for cohesion
 ```
-- Голос Антона (`авторский`) = **ТОЛЬКО Opus**. dev-log НЕ авторский — Sonnet собирает, Opus сшивает.
-- **canonical = GitHub-markdown** на каждой площадке (один источник истины для AI). Репо: `github.com/Palo-Alto-AI-Research-Lab/clawrush`.
-- **НИКАКОГО copy-paste** — каждый файл = НАТИВНЫЙ рерайт под площадку.
-- Кросс-ссылки вниз: teaser→longread; medium→longread (в 1-м комменте); longread ←teaser →dev-log; dev-log→longread + anchor на наши Deep Research.
-- ЯЗЫК РЕШАЕТ ПЛОЩАДКА (нет билингва на каждом тире).
-- Нарратив S3 ([[style-reality-show]]) по тирам: teaser=cold open+клиффхэнгер; medium=полный эпизод-дуга; longread=расширенная серия+recap; dev-log=сырьё, без драмы.
-- CTA co-founder (medium+longread, правило Антона, память [[cofounder-cta-public-contact]]): WhatsApp **+1 341 222 9178** = авторизованный ПУБЛИЧНЫЙ контакт (карв-аут приватности), не вырезать.
-- **VC.ru + Хабр (RU GEO longread)** = фаза 1 с 2026-07-04 (style-файлы `_STYLE-vcru.md`/`_STYLE-habr.md` собраны, лежат в `content-factory\`; писатель подгружает по пойнтеру в плейсхолдере). **ФАЗА 2** (отложено): только `Reddit` (EN GEO дев-лог) — скаффолдится флагом `--with-phase2`.
+- The owner's voice (`authorial`) = **Opus ONLY**. The dev-log is not authorial — Sonnet assembles it, Opus stitches it together.
+- **canonical = the GitHub markdown** on every platform (a single source of truth for AI). Repo: `github.com/tonydzi/clawrush`.
+- **NO copy-paste** — every file is a NATIVE rewrite for its platform.
+- Cross-links downward: teaser→longread; medium→longread (in the 1st comment); longread ←teaser →dev-log; dev-log→longread + an anchor to our Deep Research.
+- THE PLATFORM DECIDES THE LANGUAGE (there is no bilingual pair on every tier).
+- The S3 narrative ([[style-reality-show]]) by tier: teaser=cold open+cliffhanger; medium=a full episode arc; longread=an extended episode+recap; dev-log=raw material, no drama.
+- The cofounder CTA (medium+longread, the owner's rule, memory [[cofounder-cta-public-contact]]): WhatsApp **+1 341 222 9178** = an authorized PUBLIC contact (a privacy carve-out), never strip it.
+- **VC.ru + Habr (the RU geo longread)** = phase 1 since 2026-07-04 (the style files `_STYLE-vcru.md`/`_STYLE-habr.md` are written and live in `content-factory\`; the writer loads them by the pointer in the placeholder). **PHASE 2** (deferred): only `Reddit` (the EN geo dev-log) — scaffolded with the `--with-phase2` flag.
 
-ПУТИ:
-- ⭐ ФАКТЫ И НЕПРЕРЫВНОСТЬ (v2, 2026-07-10) = ЕДИНЫЙ КАНОН `$OBSIDIAN_VAULT/04-Projects\show-canon\`: перед сборкой эпизода прочитать бит-опору (`beats\`) + его арки/петли — «ранее в сериале», клиффхэнгер и вопрос сезона берутся ОТТУДА (не из памяти, не из SHOW-STATE — тот заморожен). Ось `reveal` бита уважать: live_hold/spoiler_until не палить. Выбор хода = `/reality-show next`. После публикации — последствия в бит (consequences) + `canon_render.py`.
-- Источник пост-материала: `$IMPORTS_ROOT/content-factory/triage/posts.md` (📝) — или тема Антона.
-- Скаффолдер (детерминированный, 0 токенов): `$IMPORTS_ROOT/content-factory/episode_adapter.py`.
-- Бандлы: `episodes\<slug>\` (8 .md фаза-1 / 9 с `--with-phase2` + meta.json; все поля §7.2 зашиты в плейсхолдеры).
-- Стиль: [[style-reality-show]] (`08-Templates\style-reality-show.md`) + `04-Projects\personal\facebook-diary-auto\_STYLE.md` + [[style-Mei-influence]] + золотой корпус ≤2023.
+PATHS:
+- ⭐ FACTS AND CONTINUITY (v2, 2026-07-10) = THE SINGLE CANON `$OBSIDIAN_VAULT/04-Projects\show-canon\`: before assembling an episode, read the anchor beat (`beats\`) plus its arcs/loops — "previously on the show", the cliffhanger and the season question come FROM THERE (not from memory, not from SHOW-STATE, which is frozen). Respect the beat's `reveal` axis: don't burn live_hold/spoiler_until. Pick the next move with `/reality-show next`. After publishing — write the consequences back into the beat + run `canon_render.py`.
+- Source material: `$IMPORTS_ROOT/content-factory/triage/posts.md` (📝) — or a topic the owner names.
+- The scaffolder (deterministic, 0 tokens): `$IMPORTS_ROOT/content-factory/episode_adapter.py`.
+- Bundles: `episodes\<slug>\` (8 .md files in phase 1 / 9 with `--with-phase2` + meta.json; every §7.2 field is baked into the placeholders).
+- Style: [[style-reality-show]] (`08-Templates\style-reality-show.md`) + `04-Projects\personal\facebook-diary-auto\_STYLE.md` + [[style-Mei-influence]] + the golden corpus up to 2023.
 
-ШАГИ:
-1. ВЫБОР темы: назвал Антон — её; иначе покажи 📝 из `posts.md`, возьми сильнейшую связку. `list` перед `new`.
-2. СКАФФОЛД: `python episode_adapter.py new --slug <kebab> --title "<title>" --source "hub:<id>"` (+`--with-phase2` для VC.ru/Хабр/Reddit) → бандл с пустыми черновиками + meta.json.
-3. НАПИСАНИЕ (модель по полю в плейсхолдере): teaser-ru/en, medium-fb (тело БЕЗ ссылки + блок «1-Й КОММЕНТАРИЙ»), longread-ru/en, devlog. Замени стабы, комментарии-подсказки оставь. Приватность жёстко (карв-аут — только WhatsApp co-founder).
-4. ПРОВЕРКА (слой видимости): `python episode_adapter.py check --slug <slug>` — длины (тизер 240–370 = HARD-FAIL вне диапазона; medium/longread = WARN), наличие CTA, пустые. ТОЛЬКО FAIL=0 → шаг 5 (WARN на неполных лонгридах допустим до дописывания).
-5. РЕВЬЮ (draft-first): `set-status --slug <slug> --status review`; в Telegram Saved (chat_id 226258979, account "work_acct_a", без parse_mode): «🎬 Эпизод „<title>“ — черновики по тирам готовы (check ✅). episodes\<slug>\. Сказать „публикуем“ — разложу». НИЧЕГО наружу.
-6. ЭКСПОРТ В ПУБЛИКАЦИЮ — по явному «публикуем/+» Антона (Tier-2): `python episode_adapter.py export --slug <slug>` → `drafts\episode-<slug>.md` (формат `type: content-factory-draft` + регистры `## -> TG/X/FB`). Дальше СУЩЕСТВУЮЩИЙ путь: `content_approve.py --serve` → `content_publish.py` (→ Saved; реальные каналы = Phase 2b/Tier-2). GitHub/Reddit/VC.ru/Хабр — публикуются ВРУЧНУЮ (gh/нативно), не через content_publish. Второй публикатор НЕ плодим.
+STEPS:
+1. PICK the topic: if the owner named one, use it; otherwise show the 📝 items from `posts.md` and take the strongest thread. Run `list` before `new`.
+2. SCAFFOLD: `python episode_adapter.py new --slug <kebab> --title "<title>" --source "hub:<id>"` (+`--with-phase2` for VC.ru/Habr/Reddit) → a bundle of empty drafts + meta.json.
+3. WRITE (the model is named in each placeholder): teaser-ru/en, medium-fb (the body WITHOUT the link + a "1ST COMMENT" block), longread-ru/en, devlog. Replace the stubs, leave the hint comments in place. Privacy is strict (the only carve-out is the cofounder's WhatsApp).
+4. CHECK (the visibility layer): `python episode_adapter.py check --slug <slug>` — lengths (a teaser outside 240-370 = HARD FAIL; medium/longread = WARN), CTA present, empty files. Only FAIL=0 → step 5 (a WARN on an unfinished longread is acceptable until it is written out).
+5. REVIEW (draft-first): `set-status --slug <slug> --status review`; into Telegram Saved (chat_id `<YOUR_CHAT_ID>`, account "work_acct_a", no parse_mode): "🎬 Episode '<title>' — the per-tier drafts are ready (check ✅). episodes\<slug>\. Say 'publish' and I'll lay them out." NOTHING goes outward.
+6. EXPORT TO PUBLISHING — only on the owner's explicit "publish"/"+" (Tier-2): `python episode_adapter.py export --slug <slug>` → `drafts\episode-<slug>.md` (format `type: content-factory-draft` + the registers `## -> TG/X/FB`). From there the EXISTING path: `content_approve.py --serve` → `content_publish.py` (→ Saved; the real channels are Phase 2b/Tier-2). GitHub/Reddit/VC.ru/Habr are published MANUALLY (gh / natively), not through content_publish. We do NOT breed a second publisher.
 
-ОГРАНИЧЕНИЯ:
-- Draft-first НАРУЖУ: каналы/X/GitHub не трогаем без явного «публикуем».
-- МОДЕЛЬ: авторский голос = ТОЛЬКО Opus; dev-log = Sonnet+Opus; скаффолд/check/export = детерминированно, 0 токенов.
-- Один пост = один эпизод. Windows cp1252: скрипт сам форсит UTF-8 stdout.
-- Не выдумывай факты — пиши из реального пост-материала.
-- Старые бандлы (4-файловые / интерим) читаются `list/show/check/export` через meta (обратная совместимость).
+LIMITS:
+- Draft-first OUTWARD: channels/X/GitHub are untouched without an explicit "publish".
+- MODEL: the authorial voice = Opus ONLY; dev-log = Sonnet+Opus; scaffold/check/export = deterministic, 0 tokens.
+- One post = one episode. Windows cp1252: the script forces UTF-8 stdout itself.
+- Don't invent facts — write from the real source material.
+- Old bundles (4-file / interim) are still read by `list/show/check/export` through meta (backward compatibility).
 
 ---
 

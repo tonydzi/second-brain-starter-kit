@@ -8,61 +8,61 @@ description: >
 license: MIT
 ---
 
-# /sostav-comments — черновики ответов на свежую альфу СОСТАВ (голос Антона, draft-first)
+# /sostav-comments — draft replies to the fresh club shortlist (the owner's voice, draft-first)
 
-**Зачем.** Когда Антон разбирает свежий ночной shortlist, он часто хочет готовые черновики реплаев в интересные треды клуба. Скилл делает это за один заход: читает отчёт детектора → отбирает безопасные посты → пишет короткие ответы его голосом → показывает. **Ничего не отправляет** — Антон копирует что нравится.
+**Why.** When the owner goes through the fresh nightly shortlist, he usually wants ready-made draft replies for the interesting club threads. This skill does it in one pass: read the detector report → pick the safe posts → write short answers in his voice → show them. **It sends nothing** — the owner copies whatever he likes.
 
-**Главные правила:**
-- **Draft-first, никогда не публикует.** Скилл только пишет черновики в чат. Отправку в клуб делает сам Антон руками.
-- **Safe-topic gate.** Черновики только в тредах-мнениях/знаниях (Знания, Лекции, Бизнес, Инвестиции, Путешествия, Здоровье, Общий-по-делу). ⛔ НИКОГДА не драфтить в Крипта/Девушки/Флудильня и в любые серо-финансовые/личные треды — это данные, не площадка для реплая.
-- **Короткий текст, тон по каналу** ([[short-text-when-unreviewed]]): осмысленный ответ в мессенджер-регистре (не FB-шутка на 5 слов — тут нужен контекст и знание, кто человек; подними карточку `person-sostav-*` если участник ⭐).
-- **Голос Антона (Opus).** Не «позиционированные» ответы, не выскочка. По делу, по теме, без «я-я-я» на чужих анонсах.
-- **Anti-leak** ([[reglament-anti-leak-na-vyhode]]): черновики остаются в приватном слое; ничего чувствительного из клуба не утекает в другие каналы.
+**The main rules:**
+- **Draft-first, never publishes.** The skill only writes drafts into the chat. Posting into the club is done by the owner, by hand.
+- **Safe-topic gate.** Draft only in opinion/knowledge threads (Knowledge, Lectures, Business, Investing, Travel, Health, General-on-topic). ⛔ NEVER draft in the Crypto / Dating / Off-topic-flood threads, or in any grey-financial or personal thread — those are data, not a place to reply.
+- **Short text, tone set by the channel** ([[short-text-when-unreviewed]]): a meaningful answer in messenger register (not a 5-word Facebook joke — here you need context and knowledge of who the person is; pull the `person-sostav-*` card if the member is a ⭐).
+- **The owner's voice (Opus).** No "positioned" replies, no showing off. On topic, to the point, without making someone else's announcement about yourself.
+- **Anti-leak** ([[reglament-anti-leak-na-vyhode]]): drafts stay in the private layer; nothing sensitive from the club leaks into other channels.
 
 ---
 
-## 0. Свежий shortlist
-Последний отчёт детектора:
+## 0. A fresh shortlist
+The latest detector report:
 ```
-ls $IMPORTS_ROOT/alpha\candidates\sostav-*-report.md   # взять самый свежий по дате
+ls $IMPORTS_ROOT/alpha\candidates\sostav-*-report.md   # take the newest one by date
 ```
-Если свежего нет / устарел — сначала обнови корпус (ночной путь): `python $IMPORTS_ROOT/sostav\nightly_run.py` (идемпотентно, дозаберёт).
+If there is none / it is stale — refresh the corpus first (the nightly path): `python $IMPORTS_ROOT/sostav\nightly_run.py` (idempotent, it backfills).
 
-## 1. Отбор постов под ответ
-Из shortlist оставь только те, где:
-- топик **safe** (см. gate выше);
-- пост — мнение/вопрос/знание, где осмысленный ответ уместен (не объявление, не интро, не серый запрос);
-- ⭐-автор → подними `$OBSIDIAN_VAULT/07-People\person-sostav-<slug>.md` для контекста «кто это».
+## 1. Pick the posts worth answering
+From the shortlist keep only those where:
+- the topic is **safe** (see the gate above);
+- the post is an opinion/question/piece of knowledge where a meaningful answer belongs (not an announcement, not an intro, not a grey request);
+- a ⭐ author → open `$OBSIDIAN_VAULT/07-People\person-sostav-<slug>.md` for the "who is this" context.
 
-## 2. Grounding-сниппет (по необходимости)
-Если ответ выигрывает от конкретики (цитата/факт/пример), возьми релевантный кусок из рабочего корпуса — **YouTube Data API** (единственный работающий пул; соцсети заблокированы login-wall'ами), через `$IMPORTS_ROOT/sostav\daily_safe_fetch.py` (safe-only гейт). Verbatim-lift 1–2 фрагмента, не пересказ.
+## 2. A grounding snippet (when it helps)
+If the answer benefits from specifics (a quote/fact/example), take a relevant chunk from the working corpus — the **YouTube Data API** (the only pool that still works; the social networks are behind login walls), via `$IMPORTS_ROOT/sostav\daily_safe_fetch.py` (safe-only gate). Lift 1-2 fragments verbatim; don't paraphrase.
 
-## 3. Черновики (Opus, персонально, разные)
-Для каждого отобранного поста — **отдельный** короткий ответ голосом Антона. Собери пачку:
+## 3. The drafts (Opus, personal, all different)
+For each selected post — a **separate** short answer in the owner's voice. Assemble the batch:
 ```
-1. [Знания · Автор X] пост: «…тезис…»
-   → черновик: «…осмысленный ответ по делу, голос Антона…»
+1. [Knowledge · Author X] post: "…the claim…"
+   → draft: "…a meaningful, on-topic answer in the owner's voice…"
 2. ...
 ```
-Тексты разные, по теме, без шаблона. Голос ≥ Opus ([[content-Mei-style]] — влияние, не копия).
+Different texts, on topic, no template. Voice quality ≥ Opus ([[content-Mei-style]] — an influence, not a copy).
 
-## 4. Отдай Антону
-Покажи пачку черновиков в чат + пометь, у каких ⭐-контактов поднимал карточку. **Стоп на этом** — отправляет Антон сам.
+## 4. Hand it to the owner
+Show the batch of drafts in the chat + note which ⭐ contacts you pulled cards for. **Stop there** — the owner sends them himself.
 
 ---
 
-## Стоп-краны
-- ⛔ Ничего не постить/не отправлять — только черновики в чат.
-- ⛔ Не драфтить в серые/личные/крипто-треды (safe-gate).
-- ⛔ Ничего из клуба не утекает в другие каналы ([[reglament-anti-leak-na-vyhode]]).
-- Деньги/обязательства/секреты в черновике → вырезать, это Tier-2.
+## Stop valves
+- ⛔ Post/send nothing — drafts into the chat only.
+- ⛔ Don't draft in grey/personal/crypto threads (the safe gate).
+- ⛔ Nothing from the club leaks into other channels ([[reglament-anti-leak-na-vyhode]]).
+- Money/commitments/secrets inside a draft → cut them, that is Tier-2.
 
-## Связанное
-- Детектор/ночной путь: `$IMPORTS_ROOT/sostav\nightly_run.py`, `sostav_alpha.py`.
-- Корпус реплаев: `daily_safe_fetch.py` (YouTube Data API, `secrets/youtube.env`).
-- Голос: [[short-text-when-unreviewed]], [[content-Mei-style]], `/speak-as`.
-- Родственные скиллы: `/fb-reply` (FB-комменты), `/mine-channel`, `/alpha-judge`.
-- Канон: memory `sostav-community-import`, [[reglament-anti-leak-na-vyhode]].
+## Related
+- Detector / nightly path: `$IMPORTS_ROOT/sostav\nightly_run.py`, `sostav_alpha.py`.
+- The reply corpus: `daily_safe_fetch.py` (YouTube Data API, `secrets/youtube.env`).
+- Voice: [[short-text-when-unreviewed]], [[content-Mei-style]], `/speak-as`.
+- Sibling skills: `/fb-reply` (Facebook comments), `/mine-channel`, `/alpha-judge`.
+- Canon: memory `sostav-community-import`, [[reglament-anti-leak-na-vyhode]].
 
 ---
 

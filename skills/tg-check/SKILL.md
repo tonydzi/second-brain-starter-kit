@@ -8,66 +8,66 @@ description: >
 license: MIT
 ---
 
-# /tg-check — оба канала Telegram на ЭТОЙ машине
+# /tg-check — both Telegram rails on THIS machine
 
-Антон (2026-06-27): «каждый комп проверяет РАБОТАЕТ ли у него ОБА канала телеграм MCP / telethon».
-Локальный само-тест: **этот** компьютер проверяет **свои** два телеграм-рельса. Не путать с
-хаб-only `connector-health-daily` (централизованный). Канон корня = Библия
+The operator's order (2026-06-27): "every computer checks whether BOTH of its Telegram rails work — MCP and telethon."
+A local self-test: **this** computer checks **its own** two Telegram rails. Not to be confused with the
+hub-only `connector-health-daily` (centralized). The root canon = the house rule
 `reglament-shina-telegram-bez-mcp-i-svoya-sessiya-na-mashinu`.
 
-## Почему два шага (важно, не срезать)
-- **Telethon-рельс** проверяется ДЕТЕРМИНИРОВАННО и БЕЗОПАСНО (общий лок `_refresh_work_acct_a.lock` → без `AUTH_KEY_DUPLICATED`).
-- **MCP скриптом честно НЕ проверить** — это stdio-сервер харнесса, доступен только LLM в сессии.
-  Скрипт даёт лучший детерминированный сигнал (процесс жив? свежий фатал в логе?), а НАСТОЯЩИЙ
-  вердикт MCP даёт ЭТОТ скилл — пробой инструмента в сессии. Память `mcp-health-check`:
-  НИКОГДА не поднимать второй Telethon-клиент как health-check (AUTH_KEY_DUPLICATED).
+## Why two steps (this matters, don't shortcut it)
+- **The telethon rail** is checked DETERMINISTICALLY and SAFELY (a shared lock `_refresh_work_acct_a.lock` → no `AUTH_KEY_DUPLICATED`).
+- **MCP cannot honestly be checked by a script** — it is a harness stdio server, reachable only by the LLM inside a session.
+  The script gives the best deterministic signal (is the process alive? a fresh fatal in the log?), while the REAL
+  MCP verdict comes from THIS skill — probing the tool inside the session. Memory `mcp-health-check`:
+  NEVER spin up a second Telethon client as a health check (AUTH_KEY_DUPLICATED).
 
-## Шаг 1 — детерминированный детектор (0 токенов)
+## Step 1 — the deterministic detector (0 tokens)
 ```bash
 PYTHONIOENCODING=utf-8 python "$USERPROFILE/.claude/scripts/tg_channels_check.py"
 ```
-Печатает матрицу по машине: MCP (по процессу + хвосту `mcp_errors.log` — свежий `AuthKeyDuplicated`
-= RED-корень; `TypeNotFound` = устаревшая telethon) и Telethon-рельс (GREEN/RED через
-`tg_bus_read.py --check`). Exit 1 = что-то RED. Флаги: `--json`, `--notify` (на RED пингует шину).
+Prints the per-machine matrix: MCP (by process + the tail of `mcp_errors.log` — a fresh `AuthKeyDuplicated`
+= the RED root cause; `TypeNotFound` = an outdated telethon) and the telethon rail (GREEN/RED via
+`tg_bus_read.py --check`). Exit 1 = something is RED. Flags: `--json`, `--notify` (pings the bus on RED).
 
-## Шаг 2 — НАСТОЯЩИЙ тест MCP в сессии (решает вердикт MCP)
-- **Есть ли инструменты Telegram MCP в этой сессии?** Если `mcp__telegram__*` НЕ загружены вовсе
-  (нет в списке инструментов / ToolSearch их не находит) → MCP **RED: не загружен в сессию**.
-- Если есть — вызвать ОДИН дешёвый read-инструмент: `mcp__telegram__list_accounts` (или `get_me`,
-  ждём Tony/@work_acct_a). Ответил без ошибки → MCP **GREEN**. Ошибка (AuthKeyDuplicated / timeout) →
-  **RED** + причина из ошибки.
-- ⚠️ Ровно ОДИН дешёвый вызов. Не звать `get_history`/`search_dialogs` (тяжёлые → могут уронить MCP).
+## Step 2 — the REAL in-session MCP test (this decides the MCP verdict)
+- **Are the Telegram MCP tools present in this session at all?** If `mcp__telegram__*` are NOT loaded
+  (absent from the tool list / ToolSearch cannot find them) → MCP is **RED: not loaded into the session**.
+- If they are — call ONE cheap read tool: `mcp__telegram__list_accounts` (or `get_me`, expecting the
+  work account). Answered without an error → MCP is **GREEN**. An error (AuthKeyDuplicated / timeout) →
+  **RED** + the reason from the error.
+- ⚠️ Exactly ONE cheap call. Don't call `get_history`/`search_dialogs` (heavy → they can take the MCP down).
 
-## Шаг 3 — объединить и доложить (🟢/🔴 матрица)
-Слить детектор (Шаг 1) + живой MCP-пробой (Шаг 2) в один вердикт на машину:
+## Step 3 — merge and report (a 🟢/🔴 matrix)
+Merge the detector (Step 1) with the live MCP probe (Step 2) into a single per-machine verdict:
 ```
-=== Telegram: оба канала @ <машина> ===
-🟢/🔴  MCP (chigwell)  : <вердикт Шага 2 — он главный> — <причина>
-🟢/🔴  Telethon-рельс   : <вердикт Шага 1>
+=== Telegram: both rails @ <machine> ===
+🟢/🔴  MCP (chigwell)  : <the Step 2 verdict — it wins> — <reason>
+🟢/🔴  telethon rail    : <the Step 1 verdict>
 ```
-- Вердикт MCP из Шага 2 (живой) БЬЁТ деттектор Шага 1 (косвенный) — лог может отставать.
-- На RED — дать рунбук (ниже). На обоих 🟢 — одна строка «оба канала живы».
+- The Step 2 verdict (live) BEATS the Step 1 detector (indirect) — the log can lag behind.
+- On RED — hand over the runbook (below). Both 🟢 — a single line: "both rails alive".
 
-## Рунбук на RED (из Библии)
-- **MCP RED + `AuthKeyDuplicated`** → КОРЕНЬ: одна TG-сессия на 2+ машинах. Пластырь = перезапустить
-  Claude Code (харнесс поднимет MCP заново; снова словит корень). Durable = у каждой машины СВОЯ
-  TG-сессия (Правило B Библии) — координирует хаб, оператор логинится локально.
-- **MCP RED + `TypeNotFound`** → устаревшая telethon в `C:\mcp\telegram-mcp\.venv` → обновить.
-- **MCP «не загружен в сессию»** → перезапустить Claude Code (или открыть сессию, что грузит MCP).
-- **Telethon-рельс RED** → нет/битая `REFRESH_*` в `$IMPORTS_ROOT/dialogs/.env` на этой машине,
-  либо группа недоступна → проверить `.env`/доступ к группе `-996940094`.
-- **Шина всё равно жива через рельс** (если он 🟢): `tg_bus_read.py` / `tg_bus_send.py` — MCP не нужен.
+## The RED runbook (from the house rules)
+- **MCP RED + `AuthKeyDuplicated`** → ROOT CAUSE: one TG session used on 2+ machines. The band-aid is to restart
+  Claude Code (the harness brings MCP back up; it will hit the same root cause again). The durable fix is that every
+  machine has ITS OWN TG session (Rule B in the house rules) — coordinated by the hub, the operator logs in locally.
+- **MCP RED + `TypeNotFound`** → an outdated telethon in `C:\mcp\telegram-mcp\.venv` → update it.
+- **MCP "not loaded into the session"** → restart Claude Code (or open a session that loads MCP).
+- **The telethon rail RED** → a missing/broken `REFRESH_*` in `$IMPORTS_ROOT/dialogs/.env` on this machine,
+  or the group is unreachable → check the `.env` / access to the group `<YOUR_CHAT_ID>`.
+- **The bus still works over the rail** (if it is 🟢): `tg_bus_read.py` / `tg_bus_send.py` — no MCP needed.
 
-## На рутину? (предложить, не навязывать — правило «recurring → routine»)
-Если Антон хочет, чтобы КАЖДЫЙ комп сам сторожил оба канала — оформить ночную задачу (окно
-23:00–06:00 Лиссабон) `python tg_channels_check.py --notify` на каждой машине: молча зелёное,
-на RED пинг в шину/Saved. Это локальный страж (детерминированный, без LLM); хаб-страж
-`connector-health-daily` остаётся централизованным. Решает Антон.
+## Turn it into a routine? (offer it, don't impose — the "recurring → routine" rule)
+If the operator wants EVERY computer to watch both rails itself — set up a nightly task (window
+23:00-06:00 local) running `python tg_channels_check.py --notify` on each machine: silent when green,
+a bus/Saved ping on RED. That is a local watchdog (deterministic, no LLM); the hub watchdog
+`connector-health-daily` stays centralized. The operator decides.
 
-## Границы
-- Только чтение/диагностика. Реконнект MCP = перезапуск Claude Code (из сессии stdio-MCP не поднять).
-- Развод TG-сессий по машинам = мульти-машинное (Tier-2) → координировать с хабом.
-- Канон: Библия `reglament-shina-telegram-bez-mcp-i-svoya-sessiya-na-mashinu`, память
+## Boundaries
+- Read/diagnose only. Reconnecting MCP = restarting Claude Code (a stdio MCP cannot be raised from inside a session).
+- Splitting TG sessions across machines is a multi-machine change (Tier-2) → coordinate with the hub.
+- Canon: the house rule `reglament-shina-telegram-bez-mcp-i-svoya-sessiya-na-mashinu`, memory
   `machine-bus-telegram-rail`, `connector-health-watchdog`, `mcp-health-check`.
 
 ---
