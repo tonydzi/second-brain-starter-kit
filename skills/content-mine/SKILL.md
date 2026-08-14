@@ -9,32 +9,32 @@ description: >
 license: MIT
 ---
 
-CONTENT_MINE — sessions → funnel drafts (draft-first, вкус за мной)
+CONTENT_MINE — sessions → funnel drafts (draft-first, taste delegated to me)
 
-ЦЕЛЬ: намайнить из наших сессий Claude Code контентно-достойные МОМЕНТЫ и сложить их ЧЕРНОВИКАМИ в воронку контент-фабрики. Публикация — только «+» Антона через /episode. Ничего наружу.
+GOAL: mine our Claude Code sessions for content-worthy MOMENTS and drop them as DRAFTS into the content-factory funnel. Publishing happens only on the operator's explicit "+" through /episode. Nothing goes out.
 
-Антон делегировал вкус «что достойно контента» мне (2026-07-08). Не переспрашиваю, что добавить — решаю сам.
+The operator delegated the taste call — "what deserves to be content" — to me (2026-07-08). I don't ask what to add; I decide.
 
-ПУТИ:
-- Движок: `$IMPORTS_ROOT/content-factory\content_miner.py` (семья alpha-extraction / intention_mine; читает живой пул `vault_sessions`).
-- Воронка (интейк): `content-factory\triage\posts.jsonl` (+ `posts.md`), `source_kind: session`. Пишет через `voice_triage.py append` (дедуп/upsert).
-- Дайджест: `content-factory\miner\candidates\cand-latest.md`. Леджер: `miner\captured.jsonl`.
+PATHS:
+- Engine: `$IMPORTS_ROOT/content-factory\content_miner.py` (same family as alpha-extraction / intention_mine; reads the live `vault_sessions` pool).
+- Funnel (intake): `content-factory\triage\posts.jsonl` (+ `posts.md`), `source_kind: session`. Writes through `voice_triage.py append` (dedup/upsert).
+- Digest: `content-factory\miner\candidates\cand-latest.md`. Ledger: `miner\captured.jsonl`.
 
-ШАГИ:
-1. СКАН (детерминированно, 0 токенов). По умолчанию свежее: `python content_miner.py mine --days 7`. Долг/весь архив: `mine --all --operator Anton --cap 150`. Флаги: `--day YYYY-MM-DD`, `--operator all`, `--cap N`. Запомни `OVER_THRESHOLD` и `OUT`.
-2. Пусто (SESSIONS=0 / OVER_THRESHOLD=0) → скажи «свежих достойных моментов нет» и стоп.
-3. ЧИТАЙ дайджест `cand-latest.md` (или `OUT`). Каждый ### = сессия `src | дата | машина | оператор [PRIV] {score · tags}` + заголовок + сниппеты ([U]=Антон, [A]=Claude). Смотри верхние (HOT→WARM); при большом объёме — фан-аут Sonnet-судей по слайсам (см. `miner\slices\`), они возвращают JSON-вердикты, ты дедупишь и захватываешь.
-4. СУДИ ВКУСОМ: оставь по-настоящему достойные РАЗНЫЕ истории (собрал/зашипил · война с багом/root-cause · human+AI/мультимашинный/консенсус приём · острый инсайт · «вау»). Отбрось рутину, тонкое, форки-дубли (похожий заголовок → одна история), чисто приватное. Позиционирование: не-кодер+AI = козырь, цель — оффер от LLM-компании + аудитория билдеров.
-5. ЗАХВАТИ достойные: `python content_miner.py capture --src <cc:xxxxxxxx> --title "<хук>" --note "<суть>" --tier teaser|medium|longread|dev-log --angle "<угол>" --visibility public|personal|private`. Тир: teaser=хук; medium=дневник FB; longread=нарратив; dev-log=сухой технический. [PRIV]/неочищаемое → `--visibility personal`. Движок блокирует секрет-токены и дедупит по src.
-6. МОСТ В КАНОН (закон «событие → сначала бит → потом пост», [[show-canon-single-source]]): для 1–2 самых сильных public-моментов создай черновик БИТА в `04-Projects\show-canon\beats-inbox\` по шаблону `beats\_TEMPLATE-beat.md` (+`authored_by: content-miner`); в `beats\` напрямую НЕ писать — переносит писатель канона. Прошлые (pre-canon, до 08.07) события — backfill-бит только при реальной сборке эпизода из них.
-7. ОТЧЁТ Антону (ELI5): сколько сессий просканил → сколько черновиков в воронку (с тирами) → сколько бит-кандидатов в инбокс канона; что дальше = /episode по «+», очередь наружу = `registry\pub_registry.py` (queue → next → posted, лимиты в limits.json). Показать `python content_miner.py captured --limit N`.
+STEPS:
+1. SCAN (deterministic, 0 tokens). Recent by default: `python content_miner.py mine --days 7`. Backlog / the whole archive: `mine --all --operator Anton --cap 150`. Flags: `--day YYYY-MM-DD`, `--operator all`, `--cap N`. Note `OVER_THRESHOLD` and `OUT`.
+2. Empty (SESSIONS=0 / OVER_THRESHOLD=0) → say "no fresh moments worth capturing" and stop.
+3. READ the digest `cand-latest.md` (or `OUT`). Each ### = a session `src | date | machine | operator [PRIV] {score · tags}` + a headline + snippets ([U]=the operator, [A]=Claude). Look at the top ones (HOT→WARM); on large volumes, fan out Sonnet judges over slices (see `miner\slices\`), they return JSON verdicts, you dedup and capture.
+4. JUDGE BY TASTE: keep the genuinely worthy and DIFFERENT stories (built/shipped it · a war with a bug / a root cause · a human+AI, multi-machine or consensus technique · a sharp insight · a "wow"). Drop routine, thin, forked duplicates (similar headline → one story), purely private material. Positioning: non-coder + AI is the trump card; the goal is an offer from an LLM company plus an audience of builders.
+5. CAPTURE the worthy ones: `python content_miner.py capture --src <cc:xxxxxxxx> --title "<hook>" --note "<the gist>" --tier teaser|medium|longread|dev-log --angle "<angle>" --visibility public|personal|private`. Tier: teaser=a hook; medium=the public diary post; longread=a narrative; dev-log=dry and technical. [PRIV] / anything that can't be scrubbed → `--visibility personal`. The engine blocks secret-looking tokens and dedups by src.
+6. BRIDGE INTO THE CANON (the law "an event → first a beat → then a post", [[show-canon-single-source]]): for the 1-2 strongest public moments create a draft BEAT in `04-Projects\show-canon\beats-inbox\` using the template `beats\_TEMPLATE-beat.md` (+`authored_by: content-miner`); never write into `beats\` directly — the canon writer moves them. Older (pre-canon, before 2026-07-08) events get a backfill beat only when an episode is actually being assembled from them.
+7. REPORT to the operator (ELI5): how many sessions were scanned → how many drafts went into the funnel (with tiers) → how many beat candidates landed in the canon inbox; what's next = /episode on a "+", the outbound queue = `registry\pub_registry.py` (queue → next → posted, limits in limits.json). Show `python content_miner.py captured --limit N`.
 
-ГРАНИЦЫ (AK-47):
-- Draft-first ЖЕЛЕЗНО: только черновики; авто-паблиша нет; наружу ничего.
-- Секреты/приватное/CRM/лиды не в контент (гейт движка + [[credential-store]]).
-- Не строй параллельный монолит — переиспользуй content_miner + voice_triage + /episode.
-- Грунт (детект/классификация) = Sonnet; авторский текст поста = Opus (это делает уже /episode, не тут).
-- Ручной аналог ночного `content-miner-nightly`; долг по архиву закрыт разово 2026-07-09 (`miner\debt-log.md`).
+BOUNDARIES (keep it simple and repairable):
+- Draft-first, HARD: drafts only; no auto-publish; nothing goes out.
+- Secrets/private material/CRM/leads never become content (engine gate + [[credential-store]]).
+- Don't build a parallel monolith — reuse content_miner + voice_triage + /episode.
+- Grunt work (detection/classification) = Sonnet; the authored post text = Opus (and that happens in /episode, not here).
+- This is the manual twin of the nightly `content-miner-nightly`; the archive backlog was closed in one pass on 2026-07-09 (`miner\debt-log.md`).
 
 ---
 

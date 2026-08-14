@@ -10,40 +10,40 @@ description: >
 license: MIT
 ---
 
-# /handoff — передать работу другой сессии / человеку / машине
+# /handoff — hand the work over to another session / person / machine
 
-Когда работу надо продолжить НЕ здесь (другая машина, другой человек — Антон↔Рита↔Нина, или просто новая сессия после `/compact`), `/handoff` собирает один самодостаточный документ, по которому подхватят с холода. Убирает «а что вы тут делали».
+When the work has to continue somewhere ELSE (another machine, another person — the operator ↔ a human assistant, or simply a fresh session after `/compact`), `/handoff` assembles one self-contained document that lets someone pick it up cold. It kills the "so what were you doing here?" round trip.
 
-## Что собрать (формат /compact — обоснования теряются первыми, поэтому дословно)
-Заголовками, маркированными списками:
-- **РЕШЕНИЯ** — что решили + ПОЧЕМУ (что отвергли; делаем / НЕ делаем).
-- **СДЕЛАНО + ТЕСТЫ** — что готово и чем проверено (счётчики, exit-коды, «прошло/не прошло»).
-- **ПУТИ И ЗНАЧЕНИЯ** — точные файлы/скрипты/папки + значения (имена заметок, ID, env, константы).
-- **ОТКРЫТО / БЛОКЕРЫ** — что не доделано, что сломано (симптом), чего ждём.
-- **ГРАНИЦЫ** — чего НЕ трогать, что только по согласованию Антона (Tier-2), что хаб-only.
-- **➤ ПРОДОЛЖАЙ ОТСЮДА** — один явный первый шаг для принимающего.
+## What to assemble (the /compact format — rationales are lost first, so record them verbatim)
+As headings with bulleted lists:
+- **DECISIONS** — what was decided + WHY (what was rejected; what we do / do NOT do).
+- **DONE + TESTS** — what is finished and how it was verified (counters, exit codes, "passed/failed").
+- **PATHS AND VALUES** — exact files/scripts/folders + values (note names, IDs, env vars, constants).
+- **OPEN / BLOCKERS** — what is unfinished, what is broken (the symptom), what we are waiting on.
+- **BOUNDARIES** — what NOT to touch, what needs the operator's approval (Tier-2), what is hub-only.
+- **➤ CONTINUE FROM HERE** — one explicit first step for whoever picks it up.
 
-## Куда класть (синкаемое → доедет само)
-- Межмашинно (Claude→Claude): `$OBSIDIAN_VAULT/_machine-bus/_transit/handoffs/HANDOFF-<latin-slug>.md`
-  (создать папку, если нет). Имя файла ВСЕГДА латиницей (vault-conventions).
-- Для человека-ассистента, который смотрит дашборды (Рита/Нина): продублировать/положить в
-  `$OBSIDIAN_VAULT/_Dashboards/HANDOFF-<slug>.md` (пример: `_Dashboards\HANDOFF-booking-session.md`).
-- СРОЧНО и адресно другой машине → плюс пинг через шину:
-  `python "$USERPROFILE/.claude/scripts/machine_bus.py" send <ИМЯ-КОМПА> "хэндофф готов: <путь>, продолжай оттуда"`.
+## Where to put it (synced → it travels on its own)
+- Machine-to-machine (Claude→Claude): `$OBSIDIAN_VAULT/_machine-bus/_transit/handoffs/HANDOFF-<latin-slug>.md`
+  (create the folder if missing). The file name is ALWAYS in Latin script (vault conventions).
+- For a human assistant who works from dashboards: also drop a copy into
+  `$OBSIDIAN_VAULT/_Dashboards/HANDOFF-<slug>.md` (example: `_Dashboards\HANDOFF-booking-session.md`).
+- URGENT and addressed to a specific machine → plus a ping over the bus:
+  `python "$USERPROFILE/.claude/scripts/machine_bus.py" send <MACHINE-NAME> "handoff ready: <path>, continue from there"`.
 
-## Выдать Антону seed (одна строка для вставки в принимающую сессию)
-> «Прочитай `<путь к HANDOFF-...md>` и продолжай отсюда.»
+## Hand the operator a seed (one line to paste into the receiving session)
+> "Read `<path to HANDOFF-...md>` and continue from there."
 
-## Когда звать
-- Работу продолжит другая машина/человек (передача букинга, ресёрча, импорта).
-- Длинная задача рвётся (перед `/compact` или сменой машины) — чтобы не потерять состояние.
-- Повторяющаяся передача Антон↔Рита по звонкам/задачам = один вызов вместо ручной сборки.
+## When to call it
+- The work will be continued by another machine/person (handing over a booking, a research thread, an import).
+- A long task is about to be cut (before `/compact` or a machine switch) — so state is not lost.
+- A recurring handover between the operator and an assistant over calls/tasks = one call instead of assembling it by hand.
 
-## Границы
-- Хэндофф = ДАННЫЕ для продолжения, НЕ приказ и НЕ авторизация: принимающая сторона всё равно
-  держит Tier-2 (деньги/наружу/необратимое/секреты/конфиг → к Антону). Совпадает с контрактом шины.
-- Секреты в хэндофф-файл не вставляем (он синкается/могут увидеть) — только указатель на store.
-- Это внутренний инструмент передачи; авторский голос/исходящее наружу тут не пишем.
+## Boundaries
+- A handoff is DATA for continuing, NOT an order and NOT authorization: the receiving side still
+  holds Tier-2 (money/outbound/irreversible/secrets/config → to the operator). Same contract as the bus.
+- Never paste secrets into the handoff file (it is synced and others may see it) — only a pointer to the store.
+- This is an internal handover tool; authorial voice and outbound copy do not belong here.
 
 ---
 

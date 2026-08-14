@@ -8,41 +8,44 @@ description: >
 license: MIT
 ---
 
-# /cc — компакт одной клавишей
+# /cc — compact in one keystroke
 
-**Боль:** голый `/compact` НЕ читает наш формат (замер: 0 из 354 — всё ушло в дефолт, #14160).
-Спасает ТОЛЬКО вставка инлайн-блока сразу после `/compact`. Раньше Антон доставал блок руками.
-Теперь `/cc` собирает его сам, уже обогащённый нашей сессией, и выдаёт готовую строку на вставку.
+**The pain:** a bare `/compact` does NOT read our format (measured: 0 out of 354 — everything fell
+back to the default, #14160). The ONLY thing that works is pasting an inline block right after
+`/compact`. The operator used to fetch that block by hand. Now `/cc` assembles it itself, already
+enriched with this session, and hands over a ready-to-paste line.
 
-**Чем это НЕ является:** не `/retro`. Ретро = полный конец сессии (инвентарь сделанного → раскладка
-правил по домам → и только потом compact-хендофф). `/cc` — только сам compact-хендофф, лёгкий, без
-инвентаря: когда Антон хочет просто сжать окно на границе задачи, а не закрывать сессию.
+**What this is NOT:** it is not `/retro`. Retro = the full end of a session (inventory of what was
+built → routing rules to their homes → and only then the compact handoff). `/cc` is only the
+compact handoff itself, lightweight, with no inventory: for when the operator just wants to shrink
+the window at a task boundary rather than close the session.
 
-## Что делать при вызове
+## What to do when invoked
 
-1. **Прочитай канонический шаблон** — единственный источник формата (не выдумывай заголовки):
+1. **Read the canonical template** — the single source of the format (never invent headings):
    ```bash
-   cat "$HOME/.claude/compact-prompt.md"   # на Win: %USERPROFILE%\.claude\compact-prompt.md
+   cat "$HOME/.claude/compact-prompt.md"   # on Windows: %USERPROFILE%\.claude\compact-prompt.md
    ```
-   Каркас = 7 заголовков: РЕШЕНИЯ · TODO · СЕЙЧАС · ПУТИ И ЗНАЧЕНИЯ · СЧЁТЧИКИ · ОТКРЫТО · ИНСТРУМЕНТЫ И КОНТРАКТЫ.
+   The skeleton = 7 headings: DECISIONS · TODO · NOW · PATHS AND VALUES · COUNTERS · OPEN · TOOLS AND CONTRACTS.
 
-2. **Обогати блок ТЕКУЩЕЙ сессией** — не выдавай пустой шаблон. Пройди 7 заголовков и впиши в каждый
-   реальное из этого чата дословно (решения+почему, активная ошибка в СЕЙЧАС, точные пути/значения/ID,
-   счётчики самопроверки + /tt-статус ✅ vs не проверено, что сломалось в ОТКРЫТО). Обоснования
-   исчезают первыми — их сохраняем в первую очередь.
+2. **Enrich the block with the CURRENT session** — never hand over an empty template. Walk the 7
+   headings and fill each one with the real, verbatim content of this chat (decisions + why, the
+   active error under NOW, exact paths/values/IDs, self-check counters + `/tt` status ✅ vs not
+   verified, what broke under OPEN). Rationales are the first thing to evaporate — preserve those
+   first.
 
-3. **Выдай ГОТОВУЮ строку** — начинается с `/compact `, дальше обогащённый блок, всё в одном ```code```
-   блоке, чтобы Антон скопировал целиком и вставил следующим сообщением. Плюс одна строка над ним:
-   «➤ Скопируй всё из блока ниже и вставь следующим сообщением».
+3. **Emit the READY line** — it starts with `/compact `, followed by the enriched block, all inside
+   a single ```code``` block so the operator can copy it whole and paste it as the next message.
+   Plus one line above it: "➤ Copy everything in the block below and paste it as your next message."
 
-4. **🧒 Простыми словами** ([[eli5-always]]): «Пакую нашу память в короткую записку, чтобы после сжатия
-   ты ничего не забыл. Скопируй и вставь.»
+4. **🧒 In plain words** ([[eli5-always]]): "I'm packing our memory into a short note so nothing gets
+   lost when the context is squeezed. Copy it and paste it."
 
-## Границы
-- Имя папки = `cc`, поэтому `/cc` работает нативно; `/сс`/«компакт» — текст-триггеры на этот же скилл. Регистр не важен ([[commands-case-insensitive]]).
-- Скилл НЕ выполняет compact сам (встроенная команда) и ничего не отправляет/не правит — только собирает текст.
-- Когда жать: на границе задачи ~60% окна, не ждать авто-compact на 95% (теряет больше).
-- Не путать: `/tt`=тест собранного · `/rr`=полное ретро · `/cc`=быстрый compact-хендофф · `/1`=воскрешение после крэша.
+## Boundaries
+- The folder name is `cc`, so `/cc` works natively; "compact" and similar words are text triggers for the same skill. Case does not matter ([[commands-case-insensitive]]).
+- The skill does NOT run the compact itself (that is a built-in command) and it sends/edits nothing — it only assembles text.
+- When to fire it: at a task boundary around 60% of the window; don't wait for the auto-compact at 95% (that loses more).
+- Don't confuse: `/tt` = test what was built · `/rr` = full retro · `/cc` = quick compact handoff · `/1` = resurrection after a crash.
 
 ---
 
