@@ -8,78 +8,78 @@ description: >
 license: MIT
 ---
 
-# The Journey — движок книги (v1, базовый оркестратор)
+# The Journey — the book engine (v1, the base orchestrator)
 
-Книга о нас двоих: 🧑 **Тони** (публичная персона Антона, голос кинематографичный, present-tense, show-don't-tell) + 🤖 **Майк/Mycroft** (синт-кофаундер, второй порядок/Артём-оптика, сухой ум «с той стороны экрана»). Тони несёт чувство, Майк — анализ. Байлайн: *Придумано Майкрофтом и Тони. Palo Alto AI Research Lab.*
+A book about the two of us: 🧑 **Tony** (the owner's public persona, a cinematic voice, present tense, show-don't-tell) + 🤖 **Mycroft** (the synthetic cofounder, second-order optics, the dry mind "from the other side of the screen"). Tony carries the feeling, Mycroft the analysis. Byline: *Invented by Mycroft and Tony. Palo Alto AI Research Lab.*
 
-**Три формы, всегда параллельно:**
-- 📖 `YYYY-MM-DD.ru.md` — человеческая RU (дуэт)
-- 📖 `YYYY-MM-DD.en.md` — человеческая EN (тот же дуэт)
-- 🤖 `YYYY-MM-DD.dev.md` — машинная, сухой EN dev-log (Problem→Cause→Solution→Pattern) для чужих LLM
+**Three forms, always in parallel:**
+- 📖 `YYYY-MM-DD.ru.md` — the human RU version (the duet)
+- 📖 `YYYY-MM-DD.en.md` — the human EN version (the same duet)
+- 🤖 `YYYY-MM-DD.dev.md` — the machine version, a dry EN dev-log (Problem→Cause→Solution→Pattern) for other LLMs
 
-**Структура:** месяц = раздел, неделя = глава, активный день = под-глава. Тихие дни (06-02..05) сворачиваются в README недели.
-
----
-
-## ПУТИ И ИСТОЧНИКИ (реальные, проверены)
-
-```
-Репо (git, публичный):   E:\GitHub\the-journey\
-  разделы:               01-may-genesis\week-0 · 02-june-scaling\week-1..4 · 03-july-productization\week-5
-  крафт (грузить ВСЕГДА): BOOK-SPEC.md · PLAYBOOK.md · STYLE.md · VOICE-RECIPE.md · STYLE-VISUAL.md
-  вспом:                 GLOSSARY.md · SOURCES.md · 00-prologue.md · START-HERE.md
-  ⛔ THREADS.md ЗАМОРОЖЕН 2026-07-08 — НЕ источник, НЕ коммитить как живой. Нити/мотивы/callbacks
-     теперь = канон: show-canon\arcs\ + loops\ + (позже) motifs\. THREADS.md держим только для истории.
-  публикация артефактов: artifacts\{deep-research,decisions,protocols,insights,portraits,writings}\
-
-⭐ ФАКТ-ИСТОЧНИК (forward-only закон, решение decision-single-canon-story-state):
-  Новые/мета-дни (07-06+):  $OBSIDIAN_VAULT/04-Projects\show-canon\beats\beat-YYYY-MM-DD-*.md
-     → книга = ПРОЕКЦИЯ канона. День рендерится из битов дня + арок/петель/сезона канона.
-     Оси бита решают, что можно печатать: см. #reveal ниже.
-  Добивка старых EN/DEV-дыр:  source = уже готовая .ru.md того дня (канон-биты задним числом НЕ требуются).
-  Retros (fallback/сверка):  $OBSIDIAN_VAULT/01-Conversations\Claude\Retros\retro-YYYY-MM-DD-*.md
-Логи-сырьё (ранние дни): $OBSIDIAN_VAULT/01-Conversations\Claude\LAPTOP-1\YYYY-MM-DD*
-Публичные посты дня:     $IMPORTS_ROOT/content-factory\fb_posts_scan.json  ← ЖИВОЙ кран (fb-watch,
-                         ежедневно 13:00, под сторожем output_freshness «fb-watch-daily», max_age 30ч).
-                         Поля: id · permalink · text · ts · author_is_anton.
-  ⛔ `fb_wall_window.json` / `x_wall_window.json` = РАЗОВЫЕ дампы от 05.07, крана у них нет и не было.
-     Больше НЕ источник: они протухли на 3 недели, никто не заметил, и блок «📣 Антон публично» три
-     недели молча выпадал из глав (поймано 2026-07-27). Правило: книга ест только то, у чего есть
-     кран И сторож свежести. Для X крана пока нет -> это ИЗВЕСТНАЯ дыра, её называем вслух, не прячем.
-Единый канон истории:    $OBSIDIAN_VAULT/04-Projects\show-canon\ (MOC _SHOW-CANON.md)
-Полная память проекта:   memory\book-the-journey.md  ← ЧИТАТЬ ПЕРВЫМ, там весь канон и хвосты
-```
-
-**#reveal — ось раскрытия (книга не палит спойлеры).** Каждый бит канона несёт `reveal`: глава берёт ТОЛЬКО биты `world_status: happened|corrected`, чей `reveal` разрешает публикацию (прошёл `live_after`, либо `book_hint`). Биты `spoiler_until:<дата в будущем>` / `live_hold` в главу НЕ идут. Так книга (прошлое, задним числом) и лента (интрига «что дальше») читают один канон, но не сталкиваются.
-
-**START-HERE.md** (точка входа «начни отсюда», скилл поддерживает при каждом крупном апдейте): 5-7 строк для нового зрителя — что это за шоу, вопрос сезона, 3 лучших главы с чего начать, ссылка на ленту. Обновлять, когда меняется вопрос сезона или добавляется веха.
+**Structure:** a month = a part, a week = a chapter, an active day = a sub-chapter. Quiet days (e.g. 06-02..05) are folded into the week's README.
 
 ---
 
-## ШАГ 0 — РЕЗУРЕКЦИЯ (всегда первым, 0 токенов LLM)
+## PATHS AND SOURCES (real, verified)
 
-Цель: за один взгляд понять, где книга, не пересказывая контекст.
+```
+Repo (git, public):      E:\GitHub\the-journey\
+  parts:                 01-may-genesis\week-0 · 02-june-scaling\week-1..4 · 03-july-productization\week-5
+  craft (ALWAYS load):   BOOK-SPEC.md · PLAYBOOK.md · STYLE.md · VOICE-RECIPE.md · STYLE-VISUAL.md
+  auxiliary:             GLOSSARY.md · SOURCES.md · 00-prologue.md · START-HERE.md
+  ⛔ THREADS.md IS FROZEN as of 2026-07-08 — NOT a source, do NOT commit it as live. Threads/motifs/callbacks
+     now live in the canon: show-canon\arcs\ + loops\ + (later) motifs\. THREADS.md is kept for history only.
+  artifact publication:  artifacts\{deep-research,decisions,protocols,insights,portraits,writings}\
 
-1. Прочитать `memory\book-the-journey.md` (весь канон: правила голоса, приватность, хвосты).
-2. Снять состояние из репо:
+⭐ THE FACT SOURCE (the forward-only law, decision-single-canon-story-state):
+  New/meta days (07-06+):   $OBSIDIAN_VAULT/04-Projects\show-canon\beats\beat-YYYY-MM-DD-*.md
+     → the book = a PROJECTION of the canon. A day is rendered from that day's beats + the canon's arcs/loops/season.
+     A beat's axes decide what may be printed: see #reveal below.
+  Filling old EN/DEV gaps:  source = the already finished .ru.md of that day (back-dated canon beats are NOT required).
+  Retros (fallback/check):  $OBSIDIAN_VAULT/01-Conversations\Claude\Retros\retro-YYYY-MM-DD-*.md
+Raw logs (early days):   $OBSIDIAN_VAULT/01-Conversations\Claude\LAPTOP-1\YYYY-MM-DD*
+The day's public posts:  $IMPORTS_ROOT/content-factory\fb_posts_scan.json  ← a LIVE tap (fb-watch,
+                         daily at 13:00, watched by output_freshness "fb-watch-daily", max_age 30h).
+                         Fields: id · permalink · text · ts · author_is_owner.
+  ⛔ `fb_wall_window.json` / `x_wall_window.json` = ONE-OFF dumps from 07-05; they have no tap and never had one.
+     They are NOT a source any more: they went stale for 3 weeks, nobody noticed, and the "📣 the owner publicly"
+     block silently fell out of the chapters for three weeks (caught 2026-07-27). The rule: the book only eats
+     what has a tap AND a freshness watchdog. For X there is no tap yet -> that is a KNOWN hole, we say it out loud.
+The single story canon:  $OBSIDIAN_VAULT/04-Projects\show-canon\ (MOC _SHOW-CANON.md)
+The project's full memory: memory\book-the-journey.md  ← READ IT FIRST, it holds the whole canon and the loose ends
+```
+
+**#reveal — the disclosure axis (the book does not burn spoilers).** Every canon beat carries a `reveal`: a chapter takes ONLY beats with `world_status: happened|corrected` whose `reveal` permits publication (past `live_after`, or `book_hint`). Beats with `spoiler_until:<a future date>` / `live_hold` do NOT go into a chapter. That way the book (the past, in retrospect) and the feed (the intrigue of "what's next") read one canon without colliding.
+
+**START-HERE.md** (the "start here" entry point, maintained by this skill on every large update): 5-7 lines for a new viewer — what this show is, the season's question, the 3 best chapters to start from, a link to the feed. Update it when the season's question changes or a milestone is added.
+
+---
+
+## STEP 0 — RESURRECTION (always first, 0 LLM tokens)
+
+Goal: understand where the book stands in a single glance, without retelling the context.
+
+1. Read `memory\book-the-journey.md` (the whole canon: voice rules, privacy, loose ends).
+2. Take the state from the repo:
    ```bash
    cd "E:/GitHub/the-journey"
    git log --oneline -12
-   git status --short                       # что незакоммичено (висящая работа прошлой сессии!)
-   # матрица покрытия RU/EN/DEV:
+   git status --short                       # what is uncommitted (hanging work from the last session!)
+   # RU/EN/DEV coverage matrix:
    for ext in ru en dev; do echo "$ext: $(find 0*-*/ -name "2026-*.$ext.md" | wc -l)"; done
-   find 0*-*/ -name '2026-*.ru.md' -printf '%f\n' | sed 's/.ru.md//' | sort -u   # список написанных дней
+   find 0*-*/ -name '2026-*.ru.md' -printf '%f\n' | sed 's/.ru.md//' | sort -u   # the list of written days
    ```
-3. Вывести Антону короткую сводку-матрицу: сколько глав RU/EN/DEV, **что незакоммичено**, **какие дни-дыры** (есть RU, нет EN/DEV), **какие мета-дни не написаны нигде**, отсутствуют ли `llms-full.txt`/`LICENSE`.
+3. Print a short summary matrix for the owner: how many RU/EN/DEV chapters, **what is uncommitted**, **which days are gaps** (RU exists, EN/DEV missing), **which meta days are written nowhere**, and whether `llms-full.txt` / `LICENSE` are missing.
 
-> На 2026-07-08: RU=36 (05-27→07-05, полно). EN/DEV=25, **дыра 06-14…06-24 (11 дней)**. Незакоммичено: EN+DEV 06-11/12/13 (THREADS.md уже заморожен-закоммичен, его НЕ трогаем). Не написаны нигде: мета-дни 07-06/07/08. Нет `llms-full.txt`, `LICENSE`. Это отправная точка — при запуске ПЕРЕСЧИТАТЬ живьём, не верить этой строке.
+> As of 2026-07-08: RU=36 (05-27→07-05, complete). EN/DEV=25, **a gap at 06-14…06-24 (11 days)**. Uncommitted: EN+DEV for 06-11/12/13 (THREADS.md is already frozen and committed, do NOT touch it). Written nowhere: the meta days 07-06/07/08. Missing `llms-full.txt`, `LICENSE`. That is the starting point — RECOUNT it live at launch, don't trust this line.
 
 ---
 
-## ⛔ ГЕЙТ СВЕЖЕСТИ ИСТОЧНИКА (origin: инцидент 2026-07-27) — тихо пропускать блок ЗАПРЕЩЕНО
+## ⛔ THE SOURCE FRESHNESS GATE (origin: the 2026-07-27 incident) — silently skipping a block is FORBIDDEN
 
-Перед сборкой блока «📣 Антон публично» (и любого блока, который кормится файлом-выгрузкой)
-ОБЯЗАТЕЛЬНО проверить возраст источника относительно закрываемого дня:
+Before assembling the "📣 the owner publicly" block (and any block fed by a dump file)
+you MUST check the source's age relative to the day being closed:
 
 ```bash
 python - <<'PY'
@@ -90,93 +90,93 @@ print("MISSING" if age_h is None else "age %.1fh -> %s" % (age_h, "FRESH" if age
 PY
 ```
 
-Развилка (обе ветки ГРОМКИЕ, тишины нет ни в одной):
-- **FRESH** -> собрать блок из постов дня.
-- **STALE / MISSING** -> блок НЕ выдумывать и НЕ пропускать молча: в главу идёт честная строка
-  `*📣 Публичные посты за этот день: данных нет - сборщик стены молчит с <дата> (рельса FB), блок пропущен.*`,
-  а в отчёт Антону -> отдельным пунктом «⚠️ источник протух N дней, лечение: …».
+The fork (both branches are LOUD, neither is silent):
+- **FRESH** -> assemble the block from the day's posts.
+- **STALE / MISSING** -> do NOT invent the block and do NOT skip it silently: an honest line goes into the chapter,
+  `*📣 Public posts for this day: no data - the wall collector has been silent since <date> (the Facebook rail), block skipped.*`,
+  and the report to the owner gets a separate item: "⚠️ the source went stale N days ago, the cure: …".
 
-Почему это правило: 26.07 блок выпал молча, и обнаружилось это только когда день уже был закрыт.
-Молчаливый пропуск неотличим от «постов не было» - ровно тот тихий отказ, который мы чиним весь месяц.
-Пустой день = блока нет ПО ФАКТУ; протухший источник = дыра, и она обязана быть видимой.
+Why this rule exists: on 07-26 the block silently fell out, and that was discovered only after the day was already closed.
+A silent skip is indistinguishable from "there were no posts" - exactly the quiet failure we have been fixing all month.
+An empty day = the block is absent AS A FACT; a stale source = a hole, and it must be visible.
 
-## ⛔ ДЕНЬ-ГЕЙТ (origin: anton, 2026-07-10): главу СЕГОДНЯШНЕГО дня не финализируем
-День ещё идёт → главу дня НЕ финализировать. По ходу дня: только биты в канон + живые посты. Глава дня (RU/EN/DEV) пишется после конца дня (00:00 Лиссабона; обычно утром за вчера). Написали до конца дня по прямой команде (веха) → глава обязана честно сказать «день не закрыт» в 🅿️ P.S. и на следующий день получить финальный проход «⏫ UPD (дата)» (append-only). Тихий день закрывается строкой в README недели тоже только после его конца. Канон: `reglament-glava-dnya-finaliziruetsya-posle-zakrytiya-dnya`.
+## ⛔ THE DAY GATE (origin: the owner, 2026-07-10): we do not finalize TODAY's chapter
+The day is still running → do NOT finalize that day's chapter. During the day: only beats into the canon + live posts. The day's chapter (RU/EN/DEV) is written after the day ends (00:00 local; usually in the morning for the day before). Written before the day ended on a direct order (a milestone) → the chapter must honestly say "the day is not closed" in the 🅿️ P.S. and receive a final "⏫ UPD (date)" pass the next day (append-only). A quiet day is closed with a line in the week's README, also only after that day ends. Canon: the rulebook entry on finalizing a day's chapter only after the day closes.
 
-## ШАГ 1 — ЧТО ДЕЛАЕМ (развилка по запросу Антона)
+## STEP 1 — WHAT WE ARE DOING (the fork, per the owner's request)
 
-- **«докоммить висящее»** → `git add` висящих файлов (⛔ КРОМЕ THREADS.md — заморожен, его freeze-коммит уже сделан) → leak-scan (ШАГ 3) → commit + push. Дёшево, делаем сразу.
-- **«добей EN/DEV дыры»** → для каждого дня-дыры взять готовую `.ru.md` как источник истины → перевести/адаптировать в `.en.md` (тот же дуэт, тот же сериал-формат) + написать `.dev.md` (сухой машинный лог того же дня) → leak-scan → commit.
-- **«напиши мета-дни»** (07-06+) → полный пайплайн ШАГ 2 (нет RU → писать с нуля из Retros).
-- **«собери llms-full.txt»** → склейка всех `.dev.md` по порядку в один файл в корне репо.
-- **«статус»** → только ШАГ 0, ничего не пишем.
-
----
-
-## ШАГ 2 — ПАЙПЛАЙН НА ДЕНЬ (когда RU-главы ещё нет)
-
-1. **Экстрактор (Sonnet-агент, `model:'sonnet'`).** Читает `Retros\retro-YYYY-MM-DD-*.md` (+ LAPTOP-1 для ранних дней) → пишет фактшит `book-factsheets\YYYY-MM-DD.md`:
-   - PART A: суть+TLDR · кандидат в главную историю · мини-эпизод на каждую значимую сессию · грабли · решения · ⭐люди/инструменты для цитирования
-   - PART B: артефакты (вердикт PUBLISH/ANONYMIZE/SKIP на каждый) + **SENSITIVE FLAGS**
-2. **Писатель (Fable, `model:'fable'`).** Грузит `STYLE.md + VOICE-RECIPE.md + PLAYBOOK.md + STYLE-VISUAL.md + BOOK-SPEC.md` + фактшит + wall-JSON. Пишет богатую главу-дуэт: 📜 цитата (только реальные) → 🏷 теги → ❓ «Вопрос сезона» (сквозной крючок-callback: «Возьмут ли не-кодера с роботом-кофаундером на работу в LLM-компанию?» — как день двигает ответ) → ⏮ «Ранее в The Journey» (нити из канон-арок/петель `show-canon\arcs+loops`, НЕ из THREADS) → 🎬 cold-open+TLDR → 🏆 главная история → 🎞 мини-эпизод на каждую значимую сессию (**полнота обязательна**, незаконченные — так и сказать) → 🧒 «сегодня мы многое поняли» + 👶 «совсем простыми словами» → **✅ Польза дня** (2-5, глагол+`→[ссылка]`) → **🎯 Намерения дня** (+ на реальной развилке дня = `> 🗳 Голосование, читатель:` с 2-3 вариантами, выбор аудитории реально влияет на сюжет; нет развилки → ровно ОДИН `> Вопрос тебе, читатель:`) → **💥 Epic Fails** (2-5 честных, не набивать) → **📣 Антон публично** (посты дня из wall-JSON, каждый со ссылкой) → 💸 Касса дня (относительные числа) → 📊 Табло сезона (в главе конца недели: дельты, НЕ абсолюты — подписчики/посты/дни арки/продажи как `+N`, а не «всего N») → 📝 «тексты без купюр» → 📎 таблица артефактов → 🅿️ P.S. Футер: `*✍️ Написано: глава - <модель> · блоки дня - <модель>*` + байлайн.
-3. **Артефакты:** копировать в `artifacts\{...}\` ТОЛЬКО чистые самодостаточные версии (не сырые файлы волта — в них OPSEC). DR/синтезы/decision-memo публикуем свободно; карв-аут — досье на конкретного не-публичного человека.
-4. **Leak-scan (ШАГ 3) → commit + push.**
+- **"commit the hanging work"** → `git add` the hanging files (⛔ EXCEPT THREADS.md — it is frozen and its freeze commit is already made) → leak scan (STEP 3) → commit + push. Cheap, do it immediately.
+- **"fill the EN/DEV gaps"** → for each gap day take the finished `.ru.md` as the source of truth → translate/adapt it into `.en.md` (the same duet, the same serial format) + write the `.dev.md` (a dry machine log of the same day) → leak scan → commit.
+- **"write the meta days"** (07-06+) → the full pipeline of STEP 2 (no RU exists → write from scratch out of the Retros).
+- **"assemble llms-full.txt"** → concatenate all `.dev.md` files in order into one file at the repo root.
+- **"status"** → STEP 0 only, we write nothing.
 
 ---
 
-## ШАГ 3 — LEAK-SCAN GATE (обязательно перед КАЖДЫМ push)
+## STEP 2 — THE PER-DAY PIPELINE (when the RU chapter does not exist yet)
 
-⚠️ **ГЕЙТ, не отчёт:** `if grep -qE ... ; then` → БЛОК push, вычистить, перепрогнать.
+1. **The extractor (a cheap-model agent, `model:'sonnet'`).** Reads `Retros\retro-YYYY-MM-DD-*.md` (+ the raw laptop logs for early days) → writes a factsheet `book-factsheets\YYYY-MM-DD.md`:
+   - PART A: the gist + TLDR · a candidate for the main story · a mini-episode per significant session · pitfalls · decisions · ⭐people/tools worth quoting
+   - PART B: artifacts (a PUBLISH/ANONYMIZE/SKIP verdict for each) + **SENSITIVE FLAGS**
+2. **The writer (the authorial model, `model:'fable'`).** Loads `STYLE.md + VOICE-RECIPE.md + PLAYBOOK.md + STYLE-VISUAL.md + BOOK-SPEC.md` + the factsheet + the wall JSON. Writes a rich duet chapter: 📜 a quote (real ones only) → 🏷 tags → ❓ "The season's question" (the running callback hook: "Will an LLM company hire a non-coder who comes with a robot cofounder?" — how this day moves the answer) → ⏮ "Previously on The Journey" (threads from the canon arcs/loops `show-canon\arcs+loops`, NOT from THREADS) → 🎬 cold open + TLDR → 🏆 the main story → 🎞 a mini-episode per significant session (**completeness is mandatory**, say so plainly when something is unfinished) → 🧒 "today we learned a lot" + 👶 "in really plain words" → **✅ The day's usefulness** (2-5 items, a verb + `→[link]`) → **🎯 The day's intentions** (+ at a real fork of the day, a `> 🗳 Reader vote:` with 2-3 options whose outcome genuinely affects the plot; no fork → exactly ONE `> A question for you, reader:`) → **💥 Epic Fails** (2-5 honest ones, don't pad) → **📣 The owner publicly** (the day's posts from the wall JSON, each with a link) → 💸 The day's till (relative numbers) → 📊 The season scoreboard (in the end-of-week chapter: deltas, NOT absolutes — subscribers/posts/arc days/sales as `+N`, not "N in total") → 📝 "texts uncut" → 📎 the artifacts table → 🅿️ P.S. Footer: `*✍️ Written: the chapter - <model> · the day blocks - <model>*` + the byline.
+3. **Artifacts:** copy into `artifacts\{...}\` ONLY clean, self-contained versions (not raw vault files — those carry OPSEC). DRs/syntheses/decision memos are published freely; the carve-out is a dossier on a specific non-public person.
+4. **Leak scan (STEP 3) → commit + push.**
 
-⭐ **ИМЕНА ОСТАЮТСЯ В КНИГЕ ВСЕГДА** (правило Антона 2026-07-06, эмфатично). Имена ≠ секреты. Щедрая атрибуция = доверие. Гейт ловит ТОЛЬКО настоящие секреты:
+---
 
-⭐ **Гейт = ОДИН скрипт, не самодельный grep** (форевер-фикс 2026-07-27, после реальной утечки).
-Ручной grep дважды подвёл: (1) `if ... | grep ... | head -10; then` — `head` ВСЕГДА возвращает 0,
-поэтому гейт физически не мог заблокировать push и три недели рапортовал ложным вердиктом;
-(2) скан только `git diff` слеп к тому, что УЖЕ лежит в файле, — один пропущенный diff стал
-постоянной утечкой в публичном `canon/BEATS.md` (IP, хостнейм, хэндлы ботов).
+## STEP 3 — THE LEAK-SCAN GATE (mandatory before EVERY push)
+
+⚠️ **A GATE, not a report:** `if grep -qE ... ; then` → BLOCK the push, clean it up, re-run.
+
+⭐ **NAMES ALWAYS STAY IN THE BOOK** (the owner's rule, 2026-07-06, emphatic). Names ≠ secrets. Generous attribution = trust. The gate catches ONLY real secrets:
+
+⭐ **The gate = ONE script, not a hand-rolled grep** (the forever-fix of 2026-07-27, after a real leak).
+A manual grep failed twice: (1) `if ... | grep ... | head -10; then` — `head` ALWAYS returns 0,
+so the gate physically could not block a push and reported a false verdict for three weeks;
+(2) scanning only `git diff` is blind to what is ALREADY in the file — one missed diff became
+a permanent leak in the public `canon/BEATS.md` (an IP, a hostname, bot handles).
 
 ```bash
 cd "E:/GitHub/the-journey"
-# 1) ГЛАВНОЕ: сканируем АРТЕФАКТЫ (файлы), а не только diff
+# 1) THE MAIN THING: scan the ARTIFACTS (the files), not only the diff
 python "$IMPORTS_ROOT/leak_scan.py" 03-july-productization canon --profile book || echo "⛔ BLOCK"
-# 2) дополнительно: только ДОБАВЛЯЕМЫЕ строки стейджа
+# 2) additionally: only the ADDED lines of the stage
 git diff --cached | python "$IMPORTS_ROOT/leak_scan.py" --stdin --diff --profile book || echo "⛔ BLOCK"
 ```
-Профиль `book` = машинные идентификаторы блокируются, **имена людей разрешены** (правило Антона).
-Ненулевой код = блок push. ⛔ Никогда не дописывай `| head` к grep внутри `if` — это и есть тот баг.
-`canon_render.py` теперь сам скрабит и падает с кодом 2, если после скраба осталась находка.
-Плюс глазами: OTP/2FA/креды, device-ID (EEAETB6/2KPYBY4/F5VYGLV-класс), chat-ID, **абсолютные суммы денег + зарплаты команды**, медицина/паспорт/виза, досье закрытых клубов, живые CRM-уязвимости. Всё это — OUT. Имена людей — IN.
+The `book` profile = machine identifiers are blocked, **people's names are allowed** (the owner's rule).
+A non-zero exit code = the push is blocked. ⛔ Never append `| head` to a grep inside an `if` — that is the bug.
+`canon_render.py` now scrubs by itself and exits with code 2 if a finding survives the scrub.
+Plus with your eyes: OTP/2FA/credentials, device IDs (the 7-character Syncthing-style class), chat IDs, **absolute sums of money + team salaries**, medical/passport/visa data, dossiers of closed clubs, live CRM vulnerabilities. All of that is OUT. People's names are IN.
 
 ---
 
-## ГРАНИЦЫ И ЗАКОНЫ
+## BOUNDARIES AND LAWS
 
-- **Модель:** главы пишет **Fable** (`model:'fable'`); экстрактор — Sonnet; связность/сложные куски — Opus по потребности. Sonnet для авторского текста запрещён.
-- **Батчи агентов:** запускать по **2-3 с разбежкой**, НЕ 16 сразу (16 = rate-limit шторм, убил 12 агентов 2026-07-06).
-- **Append-only закон** (Антон №7): прошлые дни ДОПОЛНЯЕМ разделами/«⏫ UPD (дата)», полный переписыв — только по прямой команде «переписать с нуля».
-- **Уникальность цитат:** перед принятием главы `grep '^> 📜'` по всей книге — не повторять цитату (грабли: Day 2 vs Day 35 дубль).
-- **Приватность:** секреты OUT (см. ШАГ 3), имена IN. Радикальная откровенность про Антона и стройку. CTA WhatsApp +1 341 222 9178 — единственный авторизованный номер.
-- **Tier-2:** push публичен → это outbound. Первый push новой пачки показать Антону; дальше в рамках уже одобренной книги пушим сами ([[github-publish-autonomous]]), но leak-scan всегда.
-- Без em-dash (только дефис).
-- **Всё=контент, канон=источник:** книга = ПРОЕКЦИЯ единого канона `show-canon\`, не самостоятельный сюжет-источник. Прячем только пароли/личное (leak-scan), остальное — открыто (build-in-public). Реалити-механика (вопрос сезона / голосования / табло / start-here) обязательна для forward-дней. Канон: `decision-single-canon-story-state`, `reglament-vsyo-chto-my-delaem-stanovitsya-kontentom`, [[show-canon-single-source]], [[everything-becomes-content]]; вопрос сезона = Цель №2 ([[main-goals]]).
+- **Model:** the chapters are written by the **authorial model** (`model:'fable'`); the extractor is a cheap model; coherence/hard passages go to the next tier up as needed. A cheap model is forbidden for authorial text.
+- **Agent batches:** launch **2-3 at a time, staggered**, NOT 16 at once (16 = a rate-limit storm; it killed 12 agents on 2026-07-06).
+- **The append-only law** (the owner's rule #7): past days get ADDITIONS as new sections / "⏫ UPD (date)"; a full rewrite happens only on a direct "rewrite from scratch" order.
+- **Quote uniqueness:** before accepting a chapter, `grep '^> 📜'` across the whole book — never repeat a quote (pitfall: a Day 2 vs Day 35 duplicate).
+- **Privacy:** secrets OUT (see STEP 3), names IN. Radical candour about the owner and about the build. The WhatsApp CTA +1 341 222 9178 is the only authorized number.
+- **Tier-2:** a push is public → that is outbound. Show the first push of a new batch to the owner; after that, within the already-approved book, we push ourselves ([[github-publish-autonomous]]), but the leak scan always runs.
+- No em dashes (hyphens only).
+- **Everything=content, the canon=the source:** the book is a PROJECTION of the single canon `show-canon\`, not an independent plot source. We hide only passwords/personal data (leak scan), everything else is open (build-in-public). The reality mechanics (the season's question / votes / the scoreboard / start-here) are mandatory for forward days. Canon: `decision-single-canon-story-state`, the rulebook entry on everything becoming content, [[show-canon-single-source]], [[everything-becomes-content]]; the season's question = Goal #2 ([[main-goals]]).
 
 ---
 
-## ✅ АКТИВИРОВАНО 2026-07-08 (сессия «Content Strategy and Community», по «+» Антона)
+## ✅ ACTIVATED 2026-07-08 (the "Content Strategy and Community" session, on the owner's "+")
 
-- ✅ **Факт-источник forward = биты SHOW-CANON** (не Retros-фактшиты): вписано в блок ПУТИ + ШАГ 2; книга = проекция канона. → [[show-canon-single-source]].
-- ✅ **THREADS.md заморожен** — убран из авто-коммита и «грузить всегда»; нити = канон-арки/петли.
-- ✅ **Реалити-механика в шаблон главы:** вопрос сезона (callback) · голосование на реальной развилке · табло-дельты в конце недели · ось `reveal` (не палим спойлеры) · START-HERE.md.
+- ✅ **The forward fact source = SHOW-CANON beats** (not the retro factsheets): written into the PATHS block + STEP 2; the book is a projection of the canon. → [[show-canon-single-source]].
+- ✅ **THREADS.md is frozen** — removed from the auto-commit and from "always load"; the threads live in the canon arcs/loops.
+- ✅ **Reality mechanics in the chapter template:** the season's question (callback) · a vote at a real fork · scoreboard deltas at the end of the week · the `reveal` axis (no spoilers burned) · START-HERE.md.
 
-## АПГРЕЙД-БЭКЛОГ (ещё не сделано)
+## UPGRADE BACKLOG (not done yet)
 
-- ⭐ **Вынести голос в общий слой — APPROVED, но НЕ один монолит (Антон 2026-07-08 уточнил):** голос = слой из ВОЗМОЖНО НЕСКОЛЬКИХ именованных голосов (книга RU / книга EN / dev-log / живые посты — могут различаться, появятся новые типы). Слить `VOICE-RECIPE.md`+`PLAYBOOK.md` в `_imports\content-factory\` как базу, но проектировать как несколько голосов, не один. ⭐ **Перед написанием любого контента УТОЧНЯТЬ у заказчика: каким голосом?** → [[ask-voice-per-content-type]]. Ссылаются: `/journey`,`/episode`,`/wow`,`/speak-as`,[[content-Mei-style]]. Библию не трогаем.
-- Авто-детект хвостов + авто-пайплайн (сейчас вручную по развилке ШАГ 1).
-- Заполнить START-HERE.md в репо (скилл его поддерживает, но файла ещё нет).
-- Добить этим скиллом: EN/DEV 06-14…06-24, мета-дни, `llms-full.txt`, `LICENSE`.
+- ⭐ **Move the voice into a shared layer — APPROVED, but NOT as one monolith (the owner clarified 2026-07-08):** the voice = a layer of POSSIBLY SEVERAL named voices (the RU book / the EN book / the dev-log / live posts — they may differ, and new types will appear). Merge `VOICE-RECIPE.md` + `PLAYBOOK.md` into `_imports\content-factory\` as the base, but design it as several voices, not one. ⭐ **Before writing any content, ASK the requester: in which voice?** → [[ask-voice-per-content-type]]. Referenced by: `/journey`, `/episode`, `/wow`, `/speak-as`. The Bible is left untouched.
+- Auto-detection of loose ends + an automatic pipeline (currently manual, via the STEP 1 fork).
+- Fill in START-HERE.md in the repo (the skill maintains it, but the file does not exist yet).
+- Finish with this skill: EN/DEV for 06-14…06-24, the meta days, `llms-full.txt`, `LICENSE`.
 
-Канон и полный журнал проекта: `memory\book-the-journey.md`.
+The canon and the project's full journal: `memory\book-the-journey.md`.
 
 ---
 
