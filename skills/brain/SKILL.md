@@ -8,31 +8,31 @@ description: >
 license: MIT
 ---
 
-# /brain — здоровье «второго мозга» одним взглядом
+# /brain — second-brain health at one glance
 
-> 🧒 В конце ответа Антону — простой recap «Простыми словами» (memory `eli5-always`).
+> 🧒 When reporting to a non-technical operator, end with a short plain-words recap (rule `eli5-always`).
 
-Ловит ТИХИЕ поломки memory/RAG-стека (то, что в этом месяце ломалось снова и снова: реиндекс, сервер :8770, пилот памяти). Read-only, 0 токенов.
+Catches SILENT breakage of the memory/RAG stack (the things that kept breaking month after month: the reindex, the local search server, the memory pilot). Read-only, 0 tokens.
 
-## Что делает (один скрипт)
+## What it does (one script)
 `python $IMPORTS_ROOT/brain_health.py`
 
-Проверяет 5 вещей и красит 🟢/🟡/🔴:
-1. **Поисковый сервер** :8770 — жив ли (если лёг → авто-recall молча пропадает); показывает, включена ли Ассоциативная (граф).
-2. **Индекс** `_brain_e5.npy` — насколько свежий (🟡 если реиндекс отстал >48ч).
-3. **TurnState-леджер** — сколько ходов записано (Phase 1 памяти), последний когда.
-4. **Ночной сон** — кандидаты в карантине + когда последний прогон.
-5. **A/B Прямая↔Ассоциативная** — сколько прогонов + твои вердикты (👍/👎).
+Checks 5 things and colors them 🟢/🟡/🔴:
+1. **Search server** on its local port — alive or not (if it's down, auto-recall silently disappears); also shows whether the graph-assisted mode is on.
+2. **Index** `_brain_e5.npy` — how fresh (🟡 if the reindex lags >48h).
+3. **TurnState ledger** — how many turns recorded (memory Phase 1), when the last one was.
+4. **Nightly distillation** — candidates in quarantine + when the last run happened.
+5. **A/B direct-vs-graph recall** — how many runs + the operator's verdicts (👍/👎).
 
-Пишет дашборд `$OBSIDIAN_VAULT/_Dashboards/Brain-Health.html` (Антон смотрит глазами, [[prefer-visual-dashboards]]). Exit-код 0/1/2 = ok/warn/red (для скриптов).
+Writes a dashboard `$OBSIDIAN_VAULT/_Dashboards/Brain-Health.html` (the operator reads with their eyes, [[prefer-visual-dashboards]]). Exit code 0/1/2 = ok/warn/red (for scripts).
 
-## Когда чинить (если 🔴/🟡)
-- **🔴 сервер :8770** → `restart_brain_server.cmd` (от админа, см. [[always-on-memory-pilot]]); или ребут (AtLogon поднимет).
-- **🟡 индекс отстал** → `gpu_check.py [--kill]` затем `brain_embed_update.py [--wait-gpu 10]` ([[reindex-routine]]).
-- **🟡 леджер пуст** → норм, если Phase 1 только включился (заполнится со следующих сессий).
+## When to fix (on 🔴/🟡)
+- **🔴 search server down** → run the restart script (as admin, see [[always-on-memory-pilot]]); or reboot (the at-logon task brings it up).
+- **🟡 index lagging** → `gpu_check.py [--kill]`, then `brain_embed_update.py [--wait-gpu 10]` ([[reindex-routine]]).
+- **🟡 ledger empty** → fine if memory Phase 1 was just enabled (it fills from the next sessions on).
 
-## Что НЕ делает
-Не чинит сам и не пишет в волт. Это диагностика. Чинит — отдельный явный шаг (правило «прочитай перед починкой» [[verify-existing-before-proposing]]).
+## What it does NOT do
+It doesn't fix anything and doesn't write to the vault. It's a diagnostic. Fixing is a separate explicit step (the "read before you fix" rule, [[verify-existing-before-proposing]]).
 
 ---
 

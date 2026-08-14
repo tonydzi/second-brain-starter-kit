@@ -8,22 +8,22 @@ description: >
 license: MIT
 ---
 
-# /rr — алиас для /retro
+# /rr — alias for /retro
 
-**Что это:** просто короткая горячая клавиша. `/rr` = `/retro`, буква-в-букву одно и то же.
-Антону быстрее набрать `rr`, чем `retro`. Никакой отдельной логики здесь НЕТ и быть не должно.
+**What it is:** just a short hotkey. `/rr` = `/retro`, letter-for-letter the same thing.
+Typing `rr` is faster than `retro`. There is NO separate logic here and there must never be any.
 
-**Что делать при вызове:** сразу вызови скилл `retro` через инструмент Skill и выполняй его как обычно.
-Не копируй сюда шаги ретро — единственный источник = скилл `retro` (правило «один источник, без дублей», AK-47).
+**What to do on trigger:** immediately invoke the `retro` skill via the Skill tool and follow it as usual.
+Do not copy the retro steps here — the single source is the `retro` skill (the "one source, no duplicates" rule; simplicity-first).
 
-**Семья дуплет-алиасов** (одна логика на каждый):
-- `/tt` == `/test` — тест собранного
-- `/rr` == `/retro` — ретро-завершение сессии
-- `/cc` — печать готовой строки `/compact` под нашу сессию
-- `/1` == `/!` — воскрешение после крэша
+**The double-letter alias family** (one logic per pair):
+- `/tt` == `/test` — test what was just built
+- `/rr` == `/retro` — end-of-session retrospective
+- `/cc` — print a ready-made `/compact` line for this session
+- `/1` == `/!` — resurrect after a crash
 
-**Границы:** имя папки = `rr`, поэтому `/rr` работает нативно; `/рр`/`/кк` (неверная раскладка) —
-текст-триггеры, узнав их, запускай этот же скилл. Регистр не важен ([[commands-case-insensitive]]).
+**Boundaries:** the folder name is `rr`, so `/rr` works natively; wrong-keyboard-layout variants are
+text triggers — on recognizing them, run this same skill. Case-insensitive ([[commands-case-insensitive]]).
 
 ---
 

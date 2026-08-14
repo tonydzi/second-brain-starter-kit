@@ -11,11 +11,11 @@ origin: MAC-1
 license: MIT
 ---
 
-# tt-probe — маркер end-to-end промоушена
+# tt-probe — an end-to-end promotion marker
 
-Единственная задача файла: пройти путь local-скилл → гейт → писатель (Якорь) → общий набор → синк на все машины.
-Если ты читаешь это в `skills/tt-probe/` на любой машине флота — конвейер автономии скиллов РАБОТАЕТ.
-Проба: PROBE-41ac669a-20260716.
+The file's only job: travel the path local skill → gate → writer node → shared set → sync to every machine.
+If you are reading this in `skills/tt-probe/` on any fleet machine — the skill-autonomy pipeline WORKS.
+Probe id: PROBE-41ac669a-20260716.
 
 ---
 

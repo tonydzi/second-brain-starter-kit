@@ -8,33 +8,33 @@ description: >
 license: MIT
 ---
 
-# /defuddle — чистый web→markdown
+# /defuddle — clean web→markdown
 
-CLI `defuddle` (kepano, MIT, v0.19.1) установлен глобально через npm. Node — единственная зависимость.
+The `defuddle` CLI (by kepano, MIT, v0.19.1) is installed globally via npm. Node is the only dependency.
 
-## Команды
+## Commands
 ```bash
-# статья → чистый markdown в stdout
+# article → clean markdown on stdout
 defuddle parse <url> --markdown
 
-# с frontmatter (title/author/published/domain) — для волта
+# with frontmatter (title/author/published/domain) — for the vault
 defuddle parse <url> --markdown --frontmatter
 
-# сразу в файл
+# straight to a file
 defuddle parse <url> --markdown --frontmatter --output "<path>.md"
 ```
 
-## Флоу «статью в волт»
-1. `defuddle parse <url> --markdown --frontmatter` → черновик.
-2. Дальше стандартный ingest: заметка в волт (provenance `origin: external`!), реиндекс, перелинковка ≥1 (правила `always-archive-artifacts-to-vault`, `no-orphan-notes-rule`).
+## The "article into the vault" flow
+1. `defuddle parse <url> --markdown --frontmatter` → draft.
+2. Then the standard ingest: a vault note (provenance `origin: external`!), reindex, ≥1 inbound link (rules `always-archive-artifacts-to-vault`, `no-orphan-notes-rule`).
 
-## ⚠️ Гадости (проверено /tt 2026-07-04)
-- **exit-код = 0 даже при ошибке** («Error: fetch failed» печатается, но код успеха). В скриптах проверять stdout на `^Error:`, НЕ exit-код.
-- Пустой ввод → невнятная ошибка destructure (тоже exit 0).
-- CLI machine-local: на другой машине сначала `npm install -g defuddle` (node нужен). Скилл синкается кластером, бинарь — нет.
+## ⚠️ Gotchas (verified by a live /tt run, 2026-07-04)
+- **exit code = 0 even on failure** ("Error: fetch failed" is printed, but the code says success). In scripts, check stdout for `^Error:`, NOT the exit code.
+- Empty input → a cryptic destructure error (also exit 0).
+- The CLI is machine-local: on another machine run `npm install -g defuddle` first (node required). The skill syncs across the cluster; the binary does not.
 
-## Когда НЕ defuddle
-`.md`-URL → WebFetch напрямую; JS-тяжёлые SPA, пейволы, логины → WebFetch или Claude-in-Chrome.
+## When NOT to use defuddle
+A `.md` URL → fetch it directly; JS-heavy SPAs, paywalls, logins → a regular web fetch or live-browser automation.
 
 ---
 
