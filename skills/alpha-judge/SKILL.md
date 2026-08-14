@@ -12,6 +12,7 @@ description: >-
   command when Opus near limit); nightly unattended = Sonnet (free bucket). Token-cheap: reads ONLY
   the small candidate digest + the home note, NEVER the corpus. Canon: decision-alpha-extraction-engine-variant-a;
   memory alpha-extraction-engine.
+license: MIT
 ---
 
 # 🅰️⚖️ /alpha-judge — the reusable LLM-judge for every alpha miner

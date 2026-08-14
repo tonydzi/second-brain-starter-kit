@@ -1,6 +1,7 @@
 ---
 name: fireflies-sync
 description: On-demand подтягивание свежих звонков из Fireflies.ai (автозапись-бот, реальные имена спикеров) в Obsidian-волт через официальный GraphQL API (ключ в secrets\fireflies.env) + прогон дистилляции (alpha/commitments) + реиндекс. Инкрементально + идемпотентно (state.json по transcript id) — безопасно гонять повторно. Trigger on "/fireflies-sync", "подтяни fireflies", "забери звонки из fireflies", "sync fireflies", "обнови файрфлайз", "планёрки в волт". Ночной двойник живёт на ЯкорьЕ (cron ~03:00; задача хаба "Fireflies Nightly Pull" = Disabled by migration, НЕ чинить). Sibling: [[granola-sync]]. Канон: память [[hub-connectors]] (Fireflies bullet) + [[vps-anchor-node]].
+license: MIT
 ---
 
 OBJECTIVE: Инкрементально втянуть свежие звонки из Fireflies в волт (заметка с диаризованными ИМЕНАМИ спикеров + саммари + action items), догнать дистилляцию (alpha/commitments/facts) и убедиться, что попадёт в индекс.

@@ -10,6 +10,7 @@ description: >-
   "fundraise mode", "разнеси мой бизнес-план", "что скажет кофаундер". Grounded in the live Platinum CRM +
   lead funnel + company metrics + business concepts. INTERNAL-facing (talks to Anton about HIS business) —
   NOT the Bible (acting FOR Anton outward), and DISTINCT from /coach (mirrors Anton about himself).
+license: MIT
 ---
 
 # /cofounder — синтетический ко-фаундер (бизнес-спарринг)

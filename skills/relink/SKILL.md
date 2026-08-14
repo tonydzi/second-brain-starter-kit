@@ -9,6 +9,7 @@ description: >-
   weave back the orphan islands. Token-cheap: RAG/namesearch/grep FIND, LLM only JUDGES top-K.
   Bidirectional = edits OLD notes → backup first, preview before, never auto-write. Built 2026-06-14,
   hardened from a deep-research report 2026-06-14.
+license: MIT
 ---
 
 # /relink — Перелинковка важного (integrate into the graph, don't just add a note)

@@ -1,6 +1,7 @@
 ---
 name: whatsapp-sync
 description: On-demand refresh of Anton's WhatsApp text into the Obsidian vault (data layer + dashboard + group labels + contact notes). TEXT ONLY — never download media (Anton 2026-06-15). Pulls the recent window the live companion bridge exposes (variant A, main number) — NOT the full multi-year archive (that needs the phone-backup path). Semi-auto by design: it drives Anton's LIVE main-number bridge and needs a Sonnet labeler, so it is NOT a blind 24/7 robot — it runs when Anton asks (or a monthly reminder). Trigger on "/whatsapp-sync", "обнови whatsapp", "подтяни ватсап", "забери свежее из whatsapp", "sync whatsapp", "разбери ватсап".
+license: MIT
 ---
 
 OBJECTIVE: Refresh the WhatsApp slice of the Second Brain — pull the recent text the live bridge exposes, rebuild the SQLite+FTS5 data layer, re-resolve names, re-label active groups, rebuild the dashboard, and refresh the vault notes (MOC + groups + optionally contact notes). Fully deterministic except the group-label step (Sonnet). Idempotent: `build_db.py` is a full rebuild from `raw_train/`, so re-runs never duplicate.

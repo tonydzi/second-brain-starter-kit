@@ -1,6 +1,7 @@
 ---
 name: bus
 description: Cross-machine talk between Anton's computers over a shared TELEGRAM GROUP (primary rail) — every machine posts/reads in one group via the Telegram MCP, so it "just works" even when Syncthing is down, AND humans can watch the machines talk in plain sight. The Syncthing `_machine-bus` folder stays as the FALLBACK (giants >4096 chars, or Telegram unreachable). Trigger on "/bus", "/tg", "шина", "напиши в шину", "глянь шину", "что в шине", "скажи другим компам", "передай на <машину>", "post to the bus", "check the bus", "tell the other machines". SEND = post a tagged message to the group; READ = pull NEW bus messages addressed to THIS machine. Engine = ~/.claude/scripts/tg_bus.py (thin, deterministic) + the Telegram MCP for network I/O. Account that posts/reads = the one in ~/.claude/tg_bus.json (default corp_acct). Sibling of /inbox (the Syncthing rail). Canon: vault reglament-multi-machine-claude-i-peredacha-mezhdu-mashinami + memory machine-bus-telegram-rail.
+license: MIT
 ---
 
 # /bus — компы Антона болтают в общей Telegram-группе

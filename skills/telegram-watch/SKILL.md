@@ -12,6 +12,7 @@ description: >-
   "watch my telegram". Send-direct (2026-06-16 — Anton edits after); hard gates (money/commitments/secrets) defer to the
   telegram-assistant skill + bible. Requires the corp_acct account connected
   in the telegram MCP and the events.py group-mention patch live.
+license: MIT
 ---
 
 # telegram-watch — вахта (@corp_acct)
@@ -68,9 +69,9 @@ live 2026-06-13) + 226258979 (@work_acct_a) fallback — so the watcher sleeps f
 until he actually gives a task (no LLM spend while idle).
 
 Whitelisted chats (match by ID; titles are keyword-soup):
-- **Покупки** = `-1000151746607` — CONFIRMED
-- **ASSISTANCE** = `-1003891661741` ("All Assistant's tasks") — CONFIRMED by Anton 2026-06-11
-- (siblings, only if Anton opts in: Denis `-1004816078277`, Travel `-1006549566534`, Events `-6402512099`)
+- **Покупки** = `<YOUR_CHAT_ID>` — CONFIRMED
+- **ASSISTANCE** = `<YOUR_CHAT_ID>` ("All Assistant's tasks") — CONFIRMED by Anton 2026-06-11
+- (siblings, only if Anton opts in: Denis `<YOUR_CHAT_ID>`, Travel `<YOUR_CHAT_ID>`, Events `-6402512099`)
 
 Procedure on a `kind=task` settled burst:
 1. **Get the task text.** `get_history(chat_id, limit=8, account="corp_acct")`.

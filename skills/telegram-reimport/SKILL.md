@@ -12,6 +12,7 @@ description: >-
   (concept-mapping, rule-extraction) for the new items. For a FIRST-TIME import of a brand-new
   source, use the obsidian-ingest skill instead — this skill is specifically for re-running an
   import that already exists.
+license: MIT
 ---
 
 # Telegram re-import (incremental)

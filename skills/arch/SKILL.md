@@ -1,6 +1,7 @@
 ---
 name: arch
 description: Read Anton's "System Architect" map — the deterministic catalog of EVERYTHING the system is made of (vault + _imports scripts + scheduled tasks + MCP + SQLite DBs + hooks + skills + dashboards), what's healthy, and what fell off. Trigger on "/arch", "/arch broken", "/arch scan", "/arch dead", "проверь систему", "что сломалось в системе", "карта системы", "статус системы", "arch status", "system health", "what's broken". READ-ONLY by default (`/arch scan` re-catalogs). The STANDING rule: consult /arch BEFORE changing shared infrastructure, run /arch scan AFTER. Wraps $IMPORTS_ROOT/arch/ (sys_scan.py → system.db → arch_status.py). Canon = memory system-architect + decision-architect-system-platform + Bible reglament-pered-izmeneniem-sistemy-sverstis-s-kartoy-arch.
+license: MIT
 ---
 
 <!-- RECONSTRUCTED 2026-06-24 on hub HUB-1 from the live engine ($IMPORTS_ROOT/arch) + memory system-architect, because the authoritative SKILL.md lives only on laptop LAPTOP-1 (~/.claude/skills/arch, not synced). When the laptop's copy arrives via _machine-bus, RECONCILE and replace if it differs. -->

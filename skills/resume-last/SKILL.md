@@ -9,6 +9,7 @@ description: >
   "resume my last chat". По умолчанию = последняя НЕ-служебная сессия этой машины; можно дать
   конкретный cliSessionId. Служебные/роботские сессии исключаются. Тонкая обёртка над
   continue_session.py (--last). Канон: память claude-desktop-sessions-per-account.
+license: MIT
 ---
 
 # /resume-last — продолжить прошлый чат в один присест

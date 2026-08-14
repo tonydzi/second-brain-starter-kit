@@ -10,6 +10,7 @@ description: >-
   outputs a vault note + a visual HTML argument-map dashboard. Embodies the epistemic-neutrality
   protocol (consensus ≠ truth; investigate, don't judge) and pairs with Alpha Protocol (R+DR).
   Built 2026-06-14.
+license: MIT
 ---
 
 # /research-swarm — карта аргументов по любой гипотезе (рой исследовательских агентов)

@@ -1,6 +1,7 @@
 ---
 name: notebooklm
 description: Drive Anton's NotebookLM (the AUDIO/artifact layer over his Second Brain) via the notebooklm-py CLI (programmatic, no browser) — turn a vault slice into an Audio Overview / study guide / mind map, and fold the artifacts back into the vault. Chrome-autonomy is the FALLBACK if the CLI auth/endpoint breaks. Trigger on "/notebooklm", "/notebooklm digest", "сделай аудио по мозгу", "подкаст из волта про <X>", "audio overview <тема>", "notebooklm digest", "озвучь мои заметки про <X>". Canon = memory [[notebooklm-integration]].
+license: MIT
 ---
 
 # /notebooklm — audio/artifact layer over the Second Brain

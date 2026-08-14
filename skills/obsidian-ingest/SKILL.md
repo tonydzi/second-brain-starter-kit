@@ -11,6 +11,7 @@ description: >-
   any raw dump handed over, any batch import (100+ items), any follow-up curation
   (dedup, concept mapping, MOC building, integration of new corpus).
   Per-source parsing specs are in references/source-adapters.md.
+license: MIT
 ---
 
 # Obsidian Ingest

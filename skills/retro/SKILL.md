@@ -18,6 +18,7 @@ description: >-
   "это повторяется — сделай скилл", "заверши веху", "milestone done", or any
   end-of-session wrap-up. This is a BUILD-inventory + reuse-decision — DISTINCT from facebook-diary-daily
   (public narrative) and preference-sweep-daily (recurring preference rules); don't duplicate them.
+license: MIT
 ---
 
 # /retro — session retrospective (what we built · what we keep)

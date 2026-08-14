@@ -15,6 +15,7 @@ description: >
   (RECALL до письма), [[model-routing-fable-smart]] (голос = Fable 5), [[short-text-when-unreviewed]],
   [[standing-outbound-mandate]], [[remote-approval-qqq]]; родня [[telegram-account-identities]],
   [[always-archive-artifacts-to-vault]].
+license: MIT
 ---
 
 # /fa — фоллоуап после звонка голосом Антона
@@ -29,7 +30,7 @@ description: >
 
 ## §1. Голос Антона — выведено из 17 его реальных сообщений (июнь–июль 2026)
 
-Источник: личка `personal_acct`/`default` + 🤝-группы «<Имя>: 1-on-1 with Tony», архив `CALLS 889 MAIN FA` (`-1006070720018`).
+Источник: личка `personal_acct`/`default` + 🤝-группы «<Имя>: 1-on-1 with Tony», архив `CALLS 889 MAIN FA` (`<YOUR_CHAT_ID>`).
 
 **Как он пишет своей рукой** (Игорь 27.07, Ki 02.07, Alex 26.06, Elif 26.06):
 - строчными, с первой строки, без «Здравствуйте» и без «Уважаемый»;

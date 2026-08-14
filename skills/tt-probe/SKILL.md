@@ -6,6 +6,7 @@ risk_level: inert
 processes_untrusted_data: false
 disable-model-invocation: true
 origin: MAC-1
+license: MIT
 ---
 
 # tt-probe — маркер end-to-end промоушена

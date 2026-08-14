@@ -124,7 +124,7 @@
 | [`/granola-sync`](granola-sync/SKILL.md) | On-demand подтягивание свежих звонков/встреч Антона из Granola (саммари + транскрипты + участники) в Obsidian-волт через ОФИЦИАЛЬНЫЙ Granola API (ключ… |
 | [`/chatgpt-sync`](chatgpt-sync/SKILL.md) | On-demand pull of FRESH ChatGPT chats into Anton's Obsidian vault - the MANUAL twin of the scheduled `ChatGPT Nightly Sync` task. Incremental + idempo… |
 | [`/claudeai-sync`](claudeai-sync/SKILL.md) | One-command incremental sync of Anton's claude.ai WEB account into the Obsidian vault — pull only the new/changed chats, fold them in as notes (idempo… |
-| [`/faaa-sync`](faaa-sync/SKILL.md) | On-demand pull of FRESH FAAA follow-up call notes from Anton's Telegram group "CALLS 889 MAIN FA FAAAA follow up" (chat -1006938423189) into the Obsid… |
+| [`/faaa-sync`](faaa-sync/SKILL.md) | On-demand pull of FRESH FAAA follow-up call notes from Anton's Telegram group "CALLS 889 MAIN FA FAAAA follow up" (chat <YOUR_CHAT_ID>) into the Obsid… |
 | [`/whatsapp-sync`](whatsapp-sync/SKILL.md) | On-demand refresh of Anton's WhatsApp text into the Obsidian vault (data layer + dashboard + group labels + contact notes). TEXT ONLY — never download… |
 | [`/gmail`](gmail/SKILL.md) | Check / search / digest Anton's Gmail on demand across his 3 mailboxes (a = owner.personal personal, a2 = owner.work assistants, bb = owner.calendar w… |
 | [`/takeout-pull`](takeout-pull/SKILL.md) | Never let a Google Takeout export expire un-downloaded again. Detects "ready to download" Takeout emails in Anton's a@ mailbox (0-token deterministic … |

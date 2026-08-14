@@ -5,6 +5,7 @@ description: >-
   3-5 durable-уроков в заметку недели в 03-Insights. Trigger on "/wisdom-distill",
   "выжми мудрость недели", "что я понял за неделю", "weekly wisdom", "distill my week".
   Часть активного брейна (D из карты A-E). LLM читает только дайджест сборщика.
+license: MIT
 ---
 
 # /wisdom-distill — мудрость недели

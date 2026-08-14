@@ -1,6 +1,7 @@
 ---
 name: inbox
 description: Check this machine's cross-machine mailbox — messages Claude on Anton's OTHER computer left for Claude here (via the Syncthing-synced `_machine-bus` folder, no Telegram, no courier). Trigger on "/inbox", "глянь инбокс", "что мне пришло", "проверь инбокс", "сообщения от другого компа", "что в инбоксе", "check inbox", "messages from the other machine". Also how to SEND a message to Claude on another machine. The SessionStart hook already auto-shows new messages at session start; this is the on-demand re-check mid-session. Engine = ~/.claude/scripts/machine_bus.py (one source of truth, synced via claude-config). Canon: vault reglament-multi-machine-claude-i-peredacha-mezhdu-mashinami + memory machine-migration.
+license: MIT
 ---
 
 # /inbox — почта между моими машинами

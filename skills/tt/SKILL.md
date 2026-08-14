@@ -17,6 +17,7 @@ description: >
   Тонкий оркестратор (skill-design-three-layer), markdown-only, без сервера/БД (AK-47).
   Канон: память [[test-after-build-skill]], [[verify-existing-before-proposing]], [[fix-root-cause-not-symptoms]],
   [[long-task-healthcheck]], [[deterministic-script-gotchas]]; родня [[crash-recovery-command]] (/1), [[retro]].
+license: MIT
 ---
 
 # /tt — ворота качества сразу после сборки

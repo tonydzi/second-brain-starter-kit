@@ -1,6 +1,7 @@
 ---
 name: quarantine
 description: Показать, что сейчас в КАРАНТИНЕ входящих посылок — фиксы/скрипты/задачи, прилетевшие по синку (_deploy-манифест) из НЕПРОВЕРЕННОГО источника или без подписи, задержанные и НЕ применённые до решения Антона. Trigger on "/quarantine", "карантин", "что в карантине", "покажи карантин", "какие посылки задержаны", "непроверенные посылки", "what's quarantined", "quarantine", а также САМ когда deploy_check на старте сессии сказал «⛔ N в карантине». Дефолт — визуальный дашборд (_Dashboards/Quarantine.html). Две линзы одного механизма: тут БЕЗОПАСНОСТЬ/происхождение, в /alpha-review — ЦЕННОСТЬ. Release/discard = Tier-2 (применить = запустить установочный шаг) → только после явного «+» Антона. Тонкая обёртка над quarantine.py / quarantine_lib.py. Канон: память quarantine-provenance-gate, apply-deliverables-immediately, alert-ownership-routing; decision-2026-07-14-injection-defense-and-quarantine.
+license: MIT
 ---
 
 # /quarantine — что задержано на входе

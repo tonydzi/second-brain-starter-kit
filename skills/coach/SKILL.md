@@ -10,6 +10,7 @@ description: >-
   INTERNAL-facing (coach talks TO Anton about himself) — NOT the Bible (which governs acting FOR him).
   Distinct from /ask (search), /retro (session wrap), facebook-diary (public). Delivered 3 ways: this
   skill (live), the _Coach.html dashboard, and a scheduled Telegram push.
+license: MIT
 ---
 
 # /coach — Anton's daily coach

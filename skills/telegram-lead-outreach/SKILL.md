@@ -9,6 +9,7 @@ description: >-
   "собери лидов по теме", "напиши этим лидам", or wants to turn Telegram conversations into CRM cards.
   Outbound: send DIRECTLY (Anton 2026-06-16 — no text pre-approval; he edits the sent message after if off); write from the WARMEST-thread account per lead; hard-stops (money/commitments/secrets/mass-flood) remain.
   Requires the send-enabled Telegram MCP (see telegram-mcp-connector).
+license: MIT
 ---
 
 # Telegram lead outreach

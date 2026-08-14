@@ -1,6 +1,7 @@
 ---
 name: codex-review
 description: "Двусторонняя гетеро-пара ревью кода: Claude ревьюит дифф Codex И Codex ревьюит дифф Claude — финальную проверку делает ДРУГОЙ вендор (исследование `tap`: 69.8% против 53.1% у однородной пары). Оба движка собраны и /tt'd (cc_review.py 07.07 + codex_review.py, нативный codex exec без WSL2). ✅ На хабе HUB-1 обе стороны РАБОТАЮТ: Codex CLI 0.144.4 установлен и smoke-тест прогнан 14.07 (баги→REQUEST_CHANGES за 16с, чистый→APPROVE, пустой→graceful). Вердикт APPROVE / REQUEST_CHANGES + review-*.md. Триггеры: «/codex-review», «проверь кодекс», «claude проверь codex», «codex проверь claude», «отревьюй дифф», «двусторонняя пара», «review the diff», «review codex», «вторая пара глаз». Движки: ~/.claude/scripts/cc-review/cc_review.py (Claude→Codex) + codex_review.py (Codex→Claude). Канон: decision-hermes-multivendor-arbitrage-rejected (вариант B), [[any-llm-vault-actor]] Phase 3."
+license: MIT
 ---
 
 # codex-review — «Claude проверяет Codex»

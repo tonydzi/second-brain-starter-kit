@@ -13,6 +13,7 @@ description: >-
   recall is necessary but NOT sufficient for strategic work. Pairs with /ask (recall) and extends the
   RECALL-before-activity rule. Canon: vault protocol-alpha-protocol-recall-plus-deep-research; always-on lift
   in CLAUDE.md § "Alpha Protocol".
+license: MIT
 ---
 
 # 🅰️ Alpha Protocol — Recall + Deep Research before deciding

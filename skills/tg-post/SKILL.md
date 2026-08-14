@@ -1,6 +1,7 @@
 ---
 name: tg-post
 description: Publish a VETTED post to one of OUR OWN Telegram channels/supergroups via Telegram MCP (not Chrome), channel resolved STRICTLY by id from the Channels Registry, rate-guarded and draft-first. Trigger on "/tg-post", "запости в телеграм", "опубликуй в ClawRus", "выложи в тг-канал", "пост в телегу", "publish to telegram channel". Text = Anton's authorial voice (Opus), reuse content-factory / episode drafts. Publishing = OUTBOUND + PUBLIC (Tier-2) → show final draft + destination + account, wait for Anton's explicit "+". Guard = social_guard.py (tg ≤10/day + anti-dup). Sibling of /fb-post (Chrome rail) and /x-post. Canon: vault 00-System\Channels-Registry.md (single source of channel truth), memory openclaw-telegram-channels + telegram-account-identities.
+license: MIT
 ---
 
 # /tg-post — пост в НАШ Telegram-канал (по реестру, draft-first)
@@ -15,10 +16,10 @@ python "$USERPROFILE/.claude/scripts/_shared/social_guard.py" check tg --text "<
 
 ## 1. Канал — строго из реестра
 Истина = волт `00-System\Channels-Registry.md` (verified live, id + статус админки). Кратко (на 2026-07-14):
-- **@ClawRus** `-1006847702008` — RU teaser+longread ✅
-- **@ClawEng** `-1006751373534` — EN teaser ✅
+- **@ClawRus** `<YOUR_CHAT_ID>` — RU teaser+longread ✅
+- **@ClawEng** `<YOUR_CHAT_ID>` — EN teaser ✅
 - @openclaw_lab / @openclaw_hub — ⏳ нет админки, НЕ постить до выдачи прав
-- ⛔ **@clawrush** `-1003897257611` — ЧУЖОЙ, никогда
+- ⛔ **@clawrush** `<YOUR_CHAT_ID>` — ЧУЖОЙ, никогда
 Runtime-проверка: `get_chat` по id → username в ответе совпал с реестром → ок. Канала нет в реестре → блок, спроси Антона (и внеси в реестр после ответа).
 
 ## 2. Аккаунт — по машине и каналу

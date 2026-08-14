@@ -1,6 +1,7 @@
 ---
 name: intro
 description: Make a warm INTRODUCTION between two (or more) people from Anton's Telegram, the "познакомь X с Y" operation that is his core product (a warm intro is his currency of exchange). Trigger on "/intro", "познакомь X с Y", "познакомь X и Y", "сделай интро X и Y", "сведи X и Y", "introduce X and Y", "intro X to Y". DEFAULT flow REQUIRES Anton's approval first: resolve and confirm BOTH identities, show the plan, then on his "+" create the group, post the intro blurb, DM each side, and log to the CRM. Skip the approval gate ONLY when Anton explicitly says so ("без апрува"). Creates a 3-way Telegram group titled `Name1 <> Name2 <> Palo Alto Research Lab`. Requires the send-enabled Telegram MCP. Pairs with telegram-lead-outreach; the intro itself is grounded in vault concept-investor-taxonomy and protocol-endorsement-intro-funnel.
+license: MIT
 ---
 
 # /intro: warm-introduction automation

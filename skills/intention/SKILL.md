@@ -1,6 +1,7 @@
 ---
 name: intention
 description: "Лейн НАМЕРЕНИЙ контент-фабрики. Одна команда: намайнить намерения Антона из ВСЕХ сессий дня → кластеризовать в отдельные намерения → копилка (intentions.db) → написать 2-3+ подробных поста-намерения с явной ПРОСЬБОЙ (голос Антона=Opus) по каналам X/Telegram/Indie Hackers/Ask HN → черновики + в Telegram (draft-first). Плюс петля альфы: кто откликнулся → responders. Триггеры: /intention, намерения дня, собери намерения, посты-намерения, intention posts, что мы сегодня хотим запостить. НЕ путать с /episode (тир-адаптер) и facebook-diary (дневник назад). Канон: decision-intention-lane-content-factory-2026-07-02, память intention-lane."
+license: MIT
 ---
 
 INTENTION_LANE_RUN

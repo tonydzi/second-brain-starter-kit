@@ -1,6 +1,7 @@
 ---
 name: brain
 description: One-glance health of Anton's "second brain" so failures aren't SILENT — is the :8770 search server alive, is the RAG index fresh (reindex running), is the TurnState memory ledger filling, did the nightly dream run, what's the A/B (Прямая↔Ассоциативная) status. Trigger on "/brain", "/memory", "здоровье мозга", "мозг жив?", "проверь память", "реиндекс жив?", "сервер поиска жив", "brain health", "is my brain ok", "memory health". READ-ONLY (no writes, 0 LLM tokens). Built 2026-06-25 because "чиним реиндекс / сервер 8770 лёг" recurred ~5× — silent failures. Sibling of /arch (system map) but focused on the memory/RAG stack. Canon: memory always-on-memory-pilot, reindex-routine.
+license: MIT
 ---
 
 # /brain — здоровье «второго мозга» одним взглядом

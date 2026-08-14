@@ -1,6 +1,7 @@
 ---
 name: community-alpha
 description: Run ONE full community-alpha pass over an imported community chat corpus — deterministic detector (0 tokens) → LLM-judge (session model / Opus) → harvest → review screen. Trigger on "/community-alpha <source> [month]", "прогони альфу по <чату>", "альфа по лобстерам/составу за <месяц>", "community alpha", "намайни альфу из <комьюнити>". Sources today: lobster (LobsterDAO, DeFi-EN), sostav (закрытый RU-клуб, 🔒 PRIVATE); the miner list grows by CORPORA not miner-types (decision-alpha-engine-grow-by-corpora-not-miners). New source = one-off adapter work (offered, not silently built). Judging model: session model (Opus+); detectors are free. Canon: memory alpha-extraction-engine; siblings /alpha-judge (personal miners' judge), /alpha-review (screen).
+license: MIT
 ---
 
 # /community-alpha <source> [month] — один прогон комьюнити-альфы

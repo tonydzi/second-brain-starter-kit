@@ -1,6 +1,7 @@
 ---
 name: search
 description: Keyword/full-text search INSIDE all of Anton's conversations at once — Telegram, Facebook, ChatGPT, Claude, Apple-Notes, transcripts (~99k notes) — via the local BM25/FTS5 catalog `search_catalog.db`. 0 tokens, 0 GPU, 0 MCP, instant, with snippets + chat-title hits from dialogs.db. Trigger on "/search <words>", "найди в чатах <слова>", "поищи по перепискам", "search my chats", "где я писал про <X> в чатах", "в каком чате обсуждали <X>". This is the LEXICAL (exact-words) lane of the unified search layer (decision-unified-search-layer). DISTINCT from /ask (semantic MEANING over curated vault), /find (exact PERSON names over names.db), and brain_ask. Use /ask when the question is conceptual; use /search when looking for specific words/phrases that appear in chat text. Visual UI at http://127.0.0.1:8771 (search_server.py).
+license: MIT
 ---
 
 OBJECTIVE: Find specific words/phrases inside Anton's entire conversation corpus (~99k notes in `01-Conversations/**`) instantly and token-free, returning ranked snippets + which chats match by title. The lexical (BM25) lane of the unified search layer; the semantic (sqlite-vec + RRF) lane is added per the decision memo.

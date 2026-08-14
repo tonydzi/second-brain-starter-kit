@@ -1,6 +1,7 @@
 ---
 name: last30days
 description: Deterministic "what's NEW in the last 30 days on topic X" trend-watch to run BEFORE any strategic decision — the fresh-signal feeder for the GAP phase of Anton's Alpha Protocol. Trigger on "/last30days <topic>", "что нового за 30 дней по <теме>", "тренды за месяц по X", "свежак за 30 дней", "what changed last 30 days on X", "trendwatch <topic>". Slices Anton's 8 nightly channel DBs (0-token, no re-scrape) by date-window × topic keywords, reuses the mine_channel scorer, dedups, then Sonnet clusters the top signals into «что нового / что изменилось / за чем следить». THIN wrapper over $IMPORTS_ROOT/watchers/last30days.py — does NOT re-scrape (watch_run.py already keeps DBs fresh nightly). Pairs with /alfa (feeds its GAP step) and /mine-channel. Canon: memory skill-design-three-layer, alpha-extraction-engine; H17.
+license: MIT
 ---
 
 # /last30days — что нового за 30 дней по теме X

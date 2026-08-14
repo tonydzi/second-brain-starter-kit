@@ -1,6 +1,7 @@
 ---
 name: mine-channel
 description: Mine ANY Telegram channel/chat for alpha in one command — scrape (0-token Telethon) → deterministic detector shortlist → Sonnet judge (real alpha FOR Anton) → well-linked vault notes + db + MOC + reindex. Trigger on "/mine-channel <@channel|id>", "затащи канал <X>", "отожми альфу из <канал>", "намайни <канал>", "разбери канал <X>", "mine this channel", "alpha from <channel>". The generalised version of the proven Fox / prompt_design / Силиконовый Мешок / Состав / Lobster runs (done manually 5×). THIN wrapper over $IMPORTS_ROOT/alpha/mine_channel.py + the alpha-judge skill + obsidian-ingest — does NOT re-implement them. Canon: memory alpha-extraction-engine, sostav-community-import, promptdesign-mine, foxpod-mine.
+license: MIT
 ---
 
 # /mine-channel — затащить канал и отжать альфу одной командой
@@ -13,7 +14,7 @@ description: Mine ANY Telegram channel/chat for alpha in one command — scrape 
 
 **0. RECALL (не дублируй).** Канал уже майнили? Проверь `$IMPORTS_ROOT/alpha/<slug>\` и память (`*-mine`, `sostav-community-import`). Если да — это ДОЗАБОР: тот же slug, инкремент.
 
-**1. Резолв канала.** Юзернейм (`@prompt_design` / `prompt_design`) или числовой id (`-1000800842092`). Если не знаешь id — `mcp__telegram__search_dialogs` или `/chat <имя>`. Выбери короткий латинский **slug** (напр. `silmeshok`).
+**1. Резолв канала.** Юзернейм (`@prompt_design` / `prompt_design`) или числовой id (`<YOUR_CHAT_ID>`). Если не знаешь id — `mcp__telegram__search_dialogs` или `/chat <имя>`. Выбери короткий латинский **slug** (напр. `silmeshok`).
 
 **2. Скрейп + детектор (0 токенов, 0 GPU):**
 ```

@@ -9,6 +9,7 @@ description: >-
   dashboard). The recurring/ambient version of the /cofounder persona; distinct from /pipeline (that DRAFTS
   outreach to act) — this only ALERTS. Canon = vault decision-realtime-cofounder-2026-07-02 + memory
   synthetic-cofounder.
+license: MIT
 ---
 
 # /cofounder-watch — Phase 0 ambient cofounder (ping-only)

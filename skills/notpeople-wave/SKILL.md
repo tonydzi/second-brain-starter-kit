@@ -9,6 +9,7 @@ description: >-
   because the prior wave was never recorded, (b) sending blind from a stale queue. It is a THIN wrapper
   over the existing scripts in `_imports\notpeople\` + the general `telegram-lead-outreach` playbook —
   it does NOT re-implement send/guardrail logic, it sequences it for this one campaign.
+license: MIT
 ---
 
 # /notpeople-wave — next NotPeople investor outreach wave

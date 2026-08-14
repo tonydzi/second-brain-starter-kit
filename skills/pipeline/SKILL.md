@@ -7,6 +7,7 @@ description: >-
   "разбери пайплайн", "кого пинговать", "что по лидам", "work my leads", "кто завис в воронке",
   "follow-up due". Reads live state in tg_followups.json + the Platinum CRM; executes via
   telegram-lead-outreach (send-direct per 2026-06-16 — Anton edits after; still NO mass auto-blast). This is TRIAGE (what to work); telegram-lead-outreach is EXECUTION.
+license: MIT
 ---
 
 # /pipeline — work the leads (today's actions)

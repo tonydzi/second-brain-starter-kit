@@ -1,6 +1,7 @@
 ---
 name: mcp
 description: Health-check Anton's connected MCP servers and discover/suggest new ones — the safe pre-flight before any integration work, plus a connector scout. Trigger on "/mcp", "/mcp health", "/mcp discover <need>", "проверь mcp", "какие mcp живы", "найди mcp для <X>", "подключить mcp", "health-check connectors", "what mcp servers do I have". READ-ONLY by default. Canon = memory [[mcp-health-check]]; standing rule: verify MCP health BEFORE starting integration work.
+license: MIT
 ---
 
 # /mcp — connector health-check & discovery

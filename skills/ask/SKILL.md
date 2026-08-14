@@ -5,6 +5,7 @@ description: >-
   reranker), not a full-corpus dump. Trigger on "/ask <question>", "спроси мозг", "что у меня по <теме>",
   "что я думаю про X", "найди в волте", "вспомни что я писал о…". Token-cheap: RAG retrieves the smallest
   relevant slice, the LLM only synthesizes the top hits. Wraps brain_ask.py.
+license: MIT
 ---
 
 # /ask — query the Second Brain

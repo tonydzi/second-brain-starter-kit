@@ -6,6 +6,7 @@ description: >-
   позицию. Не дать assumptions окаменеть. Trigger on "/five-hard", "5 hard", "пять трудных",
   "задай мне трудные вопросы", "challenge my beliefs", "pressure-test my views".
   Часть «активного брейна» (B из карты A–E). DISTINCT from /coach (день) — тут ДАВНИЕ позиции.
+license: MIT
 ---
 
 # /five-hard — пять трудных вопросов

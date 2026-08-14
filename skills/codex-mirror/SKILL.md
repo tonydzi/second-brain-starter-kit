@@ -1,6 +1,7 @@
 ---
 name: codex-mirror
 description: "Пересобрать зеркало канона для Codex (~/.codex/AGENTS.md) после bump'а CLAUDE.md: движок показывает дельту из CLAUDE.CHANGELOG.md, я вписываю только новые правила, скрипт сам держит кап 32 КиБ, штамп версии, 17 структурных якорей, копию в codex-canon шару и прогон ночного сторожа. Триггеры: /codex-mirror, «обнови зеркало кодексу», «AGENTS.md устарел», RED от lint_agents_mirror в /arch, а также САМ после MINOR/MAJOR bump CLAUDE.md (канон-ревизия, новое правило через /intake). Корень, который закрывает: 25.07 нашлось, что Codex МЕСЯЦ работал по июньскому канону. Не для правки самого CLAUDE.md (это /intake и /canon-revision)."
+license: MIT
 ---
 
 # codex-mirror — зеркало общего канона для Codex

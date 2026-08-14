@@ -1,6 +1,7 @@
 ---
 name: chatgpt-sync
 description: On-demand pull of FRESH ChatGPT chats into Anton's Obsidian vault - the MANUAL twin of the scheduled `ChatGPT Nightly Sync` task. Incremental + idempotent (keyed by conversation_id; never clobbers concept-enriched notes, never duplicates). Both call the SAME orchestrator $IMPORTS_ROOT/chatgpt/nightly_sync.py (single source of truth). Trigger on "/chatgpt-sync", "синкани chatgpt", "подтяни chatgpt", "обнови chatgpt", "забери свежие чаты из chatgpt", "sync chatgpt", "что нового в chatgpt в волт". ChatGPT sibling of [[health-sync]] / [[faaa-sync]] / [[claudeai-sync]] / [[whatsapp-sync]].
+license: MIT
 ---
 
 OBJECTIVE: Pull ChatGPT conversations updated since the vault's newest note and fold them into the Obsidian vault (notes + MOC + SQLite), on demand. Idempotent. IDENTICAL pipeline to the scheduled `ChatGPT Nightly Sync`; the only difference is this fires when Anton asks.

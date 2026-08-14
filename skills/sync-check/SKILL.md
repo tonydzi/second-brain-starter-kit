@@ -10,6 +10,7 @@ description: >
   "машины синкаются?", "sync status", "did the vault sync". 0 токенов, ничего не меняет.
   Канон: память syncthing-desktop-laptop-sync, decision-vault-sync-architecture; грабли nested-folder
   (D2) — память deterministic-script-gotchas.
+license: MIT
 ---
 
 # /sync-check — здоров ли синк между моими машинами

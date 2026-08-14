@@ -1,6 +1,7 @@
 ---
 name: gemini
 description: "Gemini = ТРЕТЬЯ внешняя пара глаз, по образу и подобию Codex и Grok: ревью диффа (VERDICT: APPROVE | REQUEST_CHANGES) и QA-ломатель для Шага 2.5 ритуала /tt (первая строка = ACCEPT/COUNTER/BLOCK, вердикт сам пишется в secondop usage.jsonl). Headless, без браузера: движок `~/.claude/scripts/cc-review/gemini_review.py` -> REST generativelanguage (дефолт, ~10 c) либо `gemini -p` (@google/gemini-cli, `--engine cli`, медленнее). Авторизация = API-ключ из secrets store (`gemini.env`, бесплатный тир, биллинга нет -> превышение = 429, не счёт); ⚠️ OAuth-логин CLI для физлиц Google отключил (IneligibleTierError -> Antigravity), чинить его бесполезно. Триггеры: «/gemini», «/gem», «спроси джемини», «прогони через gemini», «пусть gemini проверит», «gemini сломай», «третье мнение», «третий вендор», «gemini review». Канон: память [[gemini-third-reviewer-rail]], скиллы `tt` (Шаг 2.5), `secondop`, `codex-review`."
+license: MIT
 ---
 
 # gemini — третий вендор во «второй паре глаз»

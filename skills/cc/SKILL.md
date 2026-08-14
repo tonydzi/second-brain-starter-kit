@@ -10,6 +10,7 @@ description: >
   вставлял бы руками. Легковесный сосед `/retro` (retro делает то же в Шаге 6, но после полного
   инвентаря). Единственный источник формата блока = ~/.claude/compact-prompt.md. Канон: CLAUDE.md
   §10.4, память [[compact-format-delivery-gotcha]], [[test-after-build-skill]].
+license: MIT
 ---
 
 # /cc — компакт одной клавишей

@@ -9,6 +9,7 @@ description: >
   НЕ путать: /1 = воскрешение ПОСЛЕ обрыва (этот — управляемый ребут ДО); /retro = конец сессии.
   Канон: память [[reboot-protocol]], [[hub-boot-selfreport]], [[claude-desktop-autostart-race]],
   [[machine-bus-telegram-rail]], [[syncthing-desktop-laptop-sync]].
+license: MIT
 ---
 
 # /reboot — управляемая перезагрузка узла флота

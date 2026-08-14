@@ -1,6 +1,7 @@
 ---
 name: crm-sync
 description: Keep the CRM-Engine knowledge layer in Anton's vault in sync with the live CRM code on GitLab. Pull the latest of the 16 read-only repos at E:\CRM-app, detect which changed, and refresh ONLY the affected CRM-Engine notes (the 9 reverse-engineering notes + the KEEP/DROP/DECIDE decision). Trigger on "/crm-sync", "обнови знания по CRM", "пересними CRM", "что изменилось в CRM коде", "re-decompose the CRM", "sync crm knowledge", "resync crm". THIN ORCHESTRATOR over E:\CRM-app + the vault notes - it never re-invents the decomposition, it refreshes it. Read-only by default; any vault write is backup-first. Canon = memory crm-gitlab + the CRM-Engine MOC.
+license: MIT
 ---
 
 # /crm-sync - keep the CRM knowledge layer fresh

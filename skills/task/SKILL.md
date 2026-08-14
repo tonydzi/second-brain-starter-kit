@@ -9,6 +9,7 @@ description: >
   Движок = scripts/_shared/delegate.py (0 токенов, сиды в vault 10-Tasks\_seeds, синк везде);
   человеческая лента = TG-чат «04 TASKS» (все аккаунты семьи + AI). Канон: память
   [[delegation-chat-04-tasks]], [[task-assignment-by-machine]], [[connect-rule-pipeline-ownership]].
+license: MIT
 ---
 
 # /task — делегирование задач людям с сидом для их Клода

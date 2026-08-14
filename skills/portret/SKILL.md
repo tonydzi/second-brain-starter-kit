@@ -9,6 +9,7 @@ description: >-
   Anton wants to understand deeply. Distinct from /find (exact-name lookup, 0 tokens) and /ask (semantic
   vault search) — /портрет ORCHESTRATES recall + web + DR-prompt + a dossier note. Codified 2026-06-17
   from the Dana Lind dossier build.
+license: MIT
 ---
 
 # /портрет — глубокое досье на человека

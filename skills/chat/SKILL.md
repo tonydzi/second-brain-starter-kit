@@ -8,6 +8,7 @@ description: >
   компанией>" (common_groups). This is the CHAT lane — distinct from /find (people via
   names.db) and /search (words inside chat messages) and /ask (semantic vault). When a
   chat isn't in the index, fall back to the live MCP search_dialogs / get_common_chats.
+license: MIT
 ---
 
 # /chat — instant Telegram chat lookup

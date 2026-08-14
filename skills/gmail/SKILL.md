@@ -1,6 +1,7 @@
 ---
 name: gmail
 description: Check / search / digest Anton's Gmail on demand across his 3 mailboxes (a = owner.personal personal, a2 = owner.work assistants, bb = owner.calendar work) via his own OAuth connector — no browser needed, ~0 tokens for the raw pull. Trigger on "/gmail", "проверь почту", "что нового в почте", "есть важные письма", "найди письмо про <X>", "что в bb / в личной / в a2", "сделай дайджест почты", "check my email", "search my gmail for <X>". READ by default; SEND/ARCHIVE only on Anton's explicit per-message "yes" (Tier-2 outbound). The scheduled morning version is `gmail-digest-morning`; this is the manual counterpart over the SAME scripts (single source of truth).
+license: MIT
 ---
 
 Anton's own Gmail connector — read/search/send across 3 mailboxes. Full project notes: memory [[gmail-connector]]. Reply to Anton in Russian; end with the 🧒 «Простыми словами» recap ([[eli5-always]]).

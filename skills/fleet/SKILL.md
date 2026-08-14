@@ -6,6 +6,7 @@ description: >-
   anything is stuck or burning tokens. READ-ONLY diagnostic. Trigger on "/fleet", "что делают агенты",
   "что там флот", "кто копается в волте", "what are my agents doing", "сколько агентов крутится".
   Built 2026-06-08 from the live investigation; pairs with retro_inventory.py.
+license: MIT
 ---
 
 # /fleet — what are my background agents doing?

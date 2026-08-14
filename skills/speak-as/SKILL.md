@@ -11,6 +11,7 @@ description: >-
   the model's text is origin:external; the post stays Anton's (origin:anton). Anton's authorial voice = Opus ONLY.
   Distinct from /портрет (builds a person dossier + can synthesize a new palette) and content-factory (daily
   auto pipeline). Codified 2026-06-18, generalized from speak-Mei.
+license: MIT
 ---
 
 # /говори-как <образец> — пост голосом Антона × оптикой выбранного мыслителя

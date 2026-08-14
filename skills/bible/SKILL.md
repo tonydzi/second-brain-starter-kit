@@ -9,6 +9,7 @@ description: >-
   boundary. Trigger whenever you are about to act on Anton's behalf, or he says "по библии", "что говорит
   библия", "запиши правило в библию", "действуй как договорились". Single source of truth = the vault;
   this skill is the contract + loader and never duplicates the rules.
+license: MIT
 ---
 
 # Bible — Anton's behavioral codex (mega-skill)

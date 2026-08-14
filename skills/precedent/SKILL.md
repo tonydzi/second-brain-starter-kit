@@ -10,6 +10,7 @@ description: >
   "проверь решения по", "не отклоняли ли мы", "prior decision", "did we decide this".
   0 токенов на поиске (grep/SQL первым), LLM только на суждении. Канон: память declined-decisions,
   operating-agreement (decision hygiene), capture-rules-into-bible (RECALL-before-work).
+license: MIT
 ---
 
 # /precedent — мы это уже решали? (поиск прецедента перед решением)

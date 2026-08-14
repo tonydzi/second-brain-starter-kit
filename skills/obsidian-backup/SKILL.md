@@ -12,6 +12,7 @@ description: >-
   task and the weekly health-check routine. The standing RULES live in memory
   ([[preserve-originals-rule]], [[vault-offsite-backup]]); this skill is the
   runbook + loader and never duplicates them.
+license: MIT
 ---
 
 # Obsidian backup & restore (data-safety runbook)

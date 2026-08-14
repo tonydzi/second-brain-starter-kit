@@ -1,6 +1,7 @@
 ---
 name: skill-gap
 description: Audit Anton's Claude Code work to find which NEW skills are worth building — scan recent sessions for recurring MANUAL patterns that have no skill yet, cross-check against the installed skills, and propose the top 2-3 as ДО→ПОСЛЕ. Trigger on "/skill-gap", "какие скиллы сделать", "чего не хватает из скиллов", "анализ скиллов", "skill gap", "what skills should I build", "audit my skills". Read-only analysis → a ranked proposal + the Skill-Gap-Audit.html dashboard. The DAILY scheduled twin is `skill-gap-daily`; both share this logic (single source of truth).
+license: MIT
 ---
 
 # /skill-gap — what skill should we build next?

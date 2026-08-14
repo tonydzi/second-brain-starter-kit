@@ -5,6 +5,7 @@ description: >-
   leads) using a deterministic scanner + the proven supersede-NOT-delete merge policy. Trigger on
   "/dedup", "почисти дубли", "склей дубли", "найди повторы", "убери дубликаты", "dedupe <folder>".
   Codified 2026-06-08 from the Bible dedup (4 batches, 14 rules merged). Deterministic-first; review before merge; nothing is ever deleted.
+license: MIT
 ---
 
 # /dedup — find & merge duplicates (supersede, never delete)

@@ -1,6 +1,7 @@
 ---
 name: n8n
 description: Health-check, audit and (on approval) fix Anton's self-hosted n8n automation stack (n8n.example.com, 89 workflows). Trigger on "/n8n", "/n8n health", "/n8n fix <id>", "/n8n dashboard", "проверь n8n", "что сломалось в n8n", "какие воркфлоу падают", "почини воркфлоу", "n8n health", "audit n8n". THIN WRAPPER over $IMPORTS_ROOT/n8n/ scripts + the live n8n MCP — health is READ-ONLY; any workflow edit is backup-first + Anton's explicit "+". Canon = memory [[n8n-stack]].
+license: MIT
 ---
 
 # /n8n — automation-stack health & repair

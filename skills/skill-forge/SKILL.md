@@ -7,6 +7,7 @@ processes_untrusted_data: false
 disable-model-invocation: false
 origin: MAC-1
 related: decision-2026-07-14-fleet-skill-autonomy-local-namespace
+license: MIT
 ---
 
 # skill-forge — кузница скиллов пира (Ось А + гейт промоушена)

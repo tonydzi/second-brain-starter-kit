@@ -14,6 +14,7 @@ description: >
   ([[decompose-into-parallel-sessions]]) — это межМАШИННЫЙ консенсус.
   Канон: память [[multi-machine-auto-consensus]], [[remote-approval-qqq]],
   [[machine-governance-leader-follower]]; Библия `reglament-trigger-03-avtonomnyy-konsensus-mashin`.
+license: MIT
 ---
 
 # /03 — машины сами находят консенсус

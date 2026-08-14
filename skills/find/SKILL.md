@@ -6,6 +6,7 @@ description: >-
   (висктор). Trigger on "/find <name>", "найди <имя>", "найди компанию <X>", "все Викторы", "кто такой
   <имя>", "find <name>", "покажи всех <имя>". This is SPELLING/exact-name search (0 tokens, NOT RAG) —
   distinct from /ask which is semantic/meaning search. Wraps namesearch\find_name.py over names.db.
+license: MIT
 ---
 
 # /find — умный поиск имени/компании по написанию
