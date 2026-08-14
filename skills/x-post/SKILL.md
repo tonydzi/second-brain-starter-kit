@@ -8,44 +8,45 @@ description: >
 license: MIT
 ---
 
-# /x-post — пост в X с аккаунта Антона (Chrome, draft-first)
+# /x-post — post to X from the owner's account (Chrome, draft-first)
 
-**Зачем.** EN-тизеры (/episode) до сих пор оседали черновиками — не было постера в X. Тот же безопасный паттерн, что /fb-post: живая залогиненная вкладка, никакого headless.
+**Why.** EN teasers (from /episode) kept piling up as drafts — there was no poster for X. Same safe pattern as /fb-post: a live logged-in tab, never headless.
 
-## 0. Предохранитель (обязательно)
+## 0. Safety catch (mandatory)
 ```bash
-python "$USERPROFILE/.claude/scripts/_shared/social_guard.py" check x --text "<финальный текст>"
+python "$USERPROFILE/.claude/scripts/_shared/social_guard.py" check x --text "<final text>"
 ```
-`BLOCKED` (exit 3) → СТОП, доложи (лимит 6/день или дубль). Не обходи.
+`BLOCKED` (exit 3) → STOP and report (the 6/day limit, or a duplicate). Do not work around it.
 
-## 1. Текст (голос Антона, Opus)
-Бери готовый черновик (episode teaser EN / intention-lane) или пиши на Opus. Один твит ≤280 символов — посчитай ДО браузера; длиннее → тред (каждый твит ≤280, нить через reply) или предложи Антону сократить.
+## 1. The text (the owner's voice, top model)
+Take a ready draft (an /episode EN teaser or an intention-lane text) or write it with the top model. A single tweet is ≤280 characters — count BEFORE opening the browser; longer → a thread (each tweet ≤280, chained by reply) or offer the operator a shorter version.
 
 ## 2. Tier-2 gate (draft-first)
-Покажи финальный текст (+ разбивку треда, если тред) → жди явного `+`. Без «+» ничего не публикуется.
+Show the final text (+ the thread split, if it is a thread) → wait for an explicit `+`. Nothing is published without it.
 
-## 3. Браузер (Claude-in-Chrome, живая вкладка)
-> Браузерная работа — локально на этой машине; окно вперёд не тащить.
-> ⛔ IP-гейт (anton 16.07): постинг в X/соцсети с бан-риском — ТОЛЬКО с хаба `HUB-1` (постоянный IP). На другой машине НЕ постить — задачу текстом на хаб. Канон: `reglament-ip-sensitive-deystviya-tolko-s-haba`.
-1. `list_connected_browsers` → нет расширения → блок, скажи Антону (не падать в Playwright).
-2. Вкладка `x.com`. **Сверь залогиненный handle** (аватар/меню профиля) = **@Tony_Stef_** из реестра. Другой аккаунт → СТОП, спроси. Не залогинен → блок (логин/2FA не трогаем в X — checkpoint-риск).
-3. Композер: `find` «post composer / What's happening». Введи текст (`form_input`). **Кнопку Post не жми** до выполненного гейта §2.
-4. После `+` — Post. Тред: после первого твита кнопка «+» в композере / reply на свой твит.
-5. Скриншот опубликованного + URL твита (клик по timestamp → адресная строка) = доказательство.
+## 3. The browser (Claude-in-Chrome, a live tab)
+> Browser work stays local on this machine; never drag the window to the foreground elsewhere.
+> ⛔ IP gate (2026-07-16): posting to X and other ban-sensitive social platforms happens ONLY from the hub `HUB-1` (a stable IP). Do NOT post from another machine — send the task to the hub as text. Canon: the "IP-sensitive actions from the hub only" rule.
+1. `list_connected_browsers` → no extension → block and tell the operator (do not fall back to Playwright).
+2. Open the `x.com` tab. **Verify the logged-in handle** (avatar / profile menu) against the registry. A different account → STOP and ask. Not logged in → block (we never touch login/2FA on X — checkpoint risk).
+3. Composer: `find` "post composer / What's happening". Enter the text (`form_input`). **Do not press Post** until the gate in §2 is satisfied.
+4. After the `+` — press Post. For a thread: use the "+" button in the composer after the first tweet, or reply to your own tweet.
+5. A screenshot of the published post + the tweet URL (click the timestamp → address bar) is the proof.
 
-## 4. Зафиксируй (ПОСЛЕ успешной публикации)
+## 4. Record it (AFTER a successful publication)
 ```bash
-python "$USERPROFILE/.claude/scripts/_shared/social_guard.py" record x --text "<текст>"
+python "$USERPROFILE/.claude/scripts/_shared/social_guard.py" record x --text "<text>"
 ```
-Доклад: ссылка + скрин + «сегодня x N/6».
+Report: the link + the screenshot + "x today N/6".
 
-## Стоп-краны
-- Любой checkpoint/captcha/«unusual activity» X → немедленно СТОП, доложи, ноль ретраев.
-- Не публиковать идентичный текст повторно; не постить чужими аккаунтами.
-- Ссылки в тексте — только живые и наши (link-safety).
+## Stop switches
+- Any checkpoint / captcha / "unusual activity" from X → STOP immediately, report, zero retries.
+- Never republish identical text; never post from someone else's account.
+- Links in the text must be live and ours (link-safety).
 
-## Связанное
-`/fb-post` (образец паттерна) · `/tg-post` · `/episode` (тиры: teaser EN → X) · гейт `scripts\_shared\social_guard.py` · реестр `00-System\Channels-Registry.md`.
+## Related
+`/fb-post` (the pattern this follows) · `/tg-post` · `/episode` (tiers: EN teaser → X) · the gate `scripts\_shared\social_guard.py` · the registry `00-System\Channels-Registry.md`.
+
 
 ---
 

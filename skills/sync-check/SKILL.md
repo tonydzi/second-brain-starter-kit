@@ -9,37 +9,38 @@ description: >
 license: MIT
 ---
 
-# /sync-check — здоров ли синк между моими машинами
+# /sync-check — is the sync between my machines healthy
 
-Одна команда отвечает на вопрос «доехало ли / синкаемся ли мы сейчас» по ВСЕМ Syncthing-папкам этой машины, без ручного дёрганья REST. READ-ONLY, 0 токенов, портативно (ключ API берётся из локального конфига → работает на любой машине клана).
+One command answers "did it arrive / are we syncing right now" across ALL Syncthing folders of this machine, without poking the REST API by hand. READ-ONLY, 0 tokens, portable (the API key is read from the local config → it works on any machine of the fleet).
 
-**Движок:** `$IMPORTS_ROOT/sync_check/sync_check.ps1` (git-бэкап в `_imports`, синкается через claude-imports). Теперь включает **детект дрейфа Device ID** (live `myID` vs `machines.json` → RED при расхождении — поймал бы инцидент 25.06).
+**Engine:** `$IMPORTS_ROOT/sync_check/sync_check.ps1` (git-backed in `_imports`, synced through claude-imports). It now also includes **Device ID drift detection** (live `myID` vs `machines.json` → RED on a mismatch — it would have caught the 2026-06-25 incident).
 
-**Уборка sync-conflict файлов** (когда отчёт показал «WARN sync-conflict files: N»): `python $IMPORTS_ROOT/sync_check/resolve_conflicts.py` (dry-run) → для каждого конфликта сравнивает с живым: `--quarantine` БЕЗОПАСНО переносит конфликты живого дерева в `_sync-conflict-archive\<дата>\` (move, не delete → восстановимо; orphans без живого двойника НЕ трогает), `--apply` удаляет только доказанные подмножества. Исключает уже-архивные/`.stversions`. Канон: [[reglament-chp-poterya-sinka-mezhdu-mashinami]] §6.
+**Cleaning up sync-conflict files** (when the report says "WARN sync-conflict files: N"): `python $IMPORTS_ROOT/sync_check/resolve_conflicts.py` (dry-run) → for each conflict it compares against the live file: `--quarantine` SAFELY moves conflicts of the live tree into `_sync-conflict-archive\<date>\` (a move, not a delete → recoverable; orphans with no live twin are left alone), `--apply` deletes only proven subsets. Already-archived files and `.stversions` are excluded. Canon: the sync-loss incident runbook, §6.
 
-## Запуск
+## Run
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File "$IMPORTS_ROOT/sync_check\sync_check.ps1"
 ```
 
-## Как читать вывод
-- **PEERS** — сколько пиров подключено. `0 connected` = синк МЁРТВ (машина спала / Syncthing застрял) → запустить сторож `syncthing_watchdog.ps1` (см. реглумент миграции, on-wake задача `SyncthingWatchdogOnWake`).
-- **по каждой папке** `OK / WARN / RED`:
-  - `OK` + `NEED=0` = папка в синке, всё доехало.
-  - `WARN` + `NEED>0` = ещё качается (норм, если ненадолго; зависло — смотреть пиров).
-  - `RED` = `state=error` или есть ошибки папки → разобраться (права/диск/конфликт).
-- **sync-conflict файлы** — отдельный WARN (не валит в RED). Их рост = две машины правят один файл (например `settings.json`) → нужно решить «свежее бьёт старое» (Антон) и почистить `*.sync-conflict-*`.
-- **EXIT 0** = всё зелёное; **EXIT 2** = есть RED.
+## How to read the output
+- **PEERS** — how many peers are connected. `0 connected` = sync is DEAD (the machine slept / Syncthing is stuck) → start the watchdog `syncthing_watchdog.ps1` (see the migration runbook, the on-wake task `SyncthingWatchdogOnWake`).
+- **per folder** `OK / WARN / RED`:
+  - `OK` + `NEED=0` = the folder is in sync, everything arrived.
+  - `WARN` + `NEED>0` = still downloading (fine briefly; if it is stuck, look at the peers).
+  - `RED` = `state=error` or folder errors → investigate (permissions / disk / conflict).
+- **sync-conflict files** — a separate WARN (it does not turn the report RED). Their growth means two machines are editing the same file (e.g. `settings.json`) → decide "fresher beats older" (the operator decides) and clean up `*.sync-conflict-*`.
+- **EXIT 0** = all green; **EXIT 2** = something is RED.
 
-## Когда звать
-- Антон спрашивает «доехало ли на хаб / Mac», «синк жив?».
-- ПЕРЕД тем как полагаться на свежий файл с другой машины («не найдено» ≠ «нет файла» — может ещё ехать; память deterministic-script-gotchas).
-- ПОСЛЕ инцидента синка (как nested-folder D2 24-25.06) — подтвердить, что мост восстановлен.
-- На КАЖДОЙ машине свой прогон (отчёт локальный); чтобы сверить весь клан — спросить каждую машину через `/inbox`/шину.
+## When to call it
+- The operator asks "did it reach the hub / the Mac?", "is sync alive?".
+- BEFORE relying on a fresh file from another machine ("not found" ≠ "does not exist" — it may still be in transit; memory deterministic-script-gotchas).
+- AFTER a sync incident (like the nested-folder D2 case of 2026-06-24/25) — to confirm the bridge is back.
+- Each machine runs its own check (the report is local); to compare the whole fleet, ask every machine via `/inbox` or the bus.
 
-## Границы
-- Read-only: ничего не чинит и не двигает. Лечение застрявшего синка = сторож (отдельно).
-- Видит только то, что знает локальный Syncthing-демон; если демон не запущен — так и скажет (RED).
+## Boundaries
+- Read-only: it fixes nothing and moves nothing. Healing a stuck sync is the watchdog's job (separate).
+- It only sees what the local Syncthing daemon knows; if the daemon is not running it says so (RED).
+
 
 ---
 
