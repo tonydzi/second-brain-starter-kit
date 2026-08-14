@@ -9,37 +9,37 @@ description: >
 license: MIT
 ---
 
-# /last30days — что нового за 30 дней по теме X
+# /last30days — what's new on topic X over the last 30 days
 
-> 🧒 В конце ответа Антону — короткий recap «Простыми словами» (memory `eli5-always`).
+> 🧒 End the reply to the operator with a short "In plain words" recap (memory `eli5-always`).
 
-Быстрый **трендвотч ДО стратегии**: прежде чем планировать/запускать Deep Research, за 10 секунд снять свежий срез «что реально двигалось по теме за последние 30 дней». Это **вход в GAP-фазу Alpha Protocol** (`/alfa`): recall знает прошлое Антона, `/last30days` добавляет свежак снаружи → вместе они очерчивают дырку, которую закрывает DR.
+A fast **trend-watch BEFORE strategy**: before planning or launching a Deep Research, take a 10-second slice of "what actually moved on this topic in the last 30 days". This is the **entry into the GAP phase of the Alpha Protocol** (`/alfa`): recall knows the operator's past, `/last30days` adds fresh signal from outside → together they outline the hole a DR has to fill.
 
-Трёхслойный дизайн ([[skill-design-three-layer]]): тонкий скилл (UX) → детерминированный движок (0 токенов) → существующий стор (8 канальных БД). Лестница стоимости [[vault-data-architecture]]: SQL-срез отвечает дёшево, LLM только синтезирует топ.
+Three-layer design ([[skill-design-three-layer]]): a thin skill (UX) → a deterministic engine (0 tokens) → an existing store (8 channel databases). The cost ladder [[vault-data-architecture]]: a SQL slice answers cheaply, the LLM only synthesizes the top hits.
 
-## Шаги
+## Steps
 
-**0. RECALL (не дублируй).** По этой теме уже есть свежий срез? Глянь `$IMPORTS_ROOT/alpha\candidates\_last30days-<topicslug>.md` и память/волт (`/ask <тема>`). Если срез свежий (сегодня) — переиспользуй, не гоняй заново.
+**0. RECALL (don't duplicate).** Is there already a fresh slice on this topic? Check `$IMPORTS_ROOT/alpha\candidates\_last30days-<topicslug>.md` plus memory/the vault (`/ask <topic>`). If the slice is fresh (from today) — reuse it, don't re-run.
 
-**1. Детерминированный срез (0 токенов, 0 сети).** Раскрой тему в RU+EN синонимы (модель судит, что важно): напр. тема «саб-агенты» → `mcp, sub-agent, субагент, агент, orchestr, рой`.
+**1. Deterministic slice (0 tokens, 0 network).** Expand the topic into synonyms in both languages you collect in (the model judges what matters): e.g. the topic "sub-agents" → `mcp, sub-agent, subagent, agent, orchestr, swarm`.
 ```
 set PYTHONIOENCODING=utf-8
 python $IMPORTS_ROOT/watchers\last30days.py --topic "<term1, term2, …>" --days 30 --top 25 --json
 ```
-→ режет 8 канальных БД (`_imports\alpha\<slug>\<slug>.db`, ночью свежие) по окну × ключам, скорит через `mine_channel.score`, дедупит, пишет дайджест `_imports\alpha\candidates\_last30days-<topicslug>.md` и печатает JSON топа. **Не рескрейпит** — БД обновляет ночной `watch_run.py`. Нужна гарантия свежести прямо сейчас → добавь `--refresh` (сходит в сеть подписочной сессией). Пусто → расширь синонимы / подними `--days`.
+→ slices the 8 channel databases (`_imports\alpha\<slug>\<slug>.db`, refreshed nightly) by window × keys, scores through `mine_channel.score`, dedups, writes the digest `_imports\alpha\candidates\_last30days-<topicslug>.md` and prints the top as JSON. **It does not re-scrape** — the databases are updated by the nightly `watch_run.py`. Need a guarantee of freshness right now → add `--refresh` (goes to the network on the subscription session). Empty result → widen the synonyms / raise `--days`.
 
-**2. (опц.) Внешний свежак — WebSearch.** Если тема выходит за Telegram-каналы Антона (рынок/релизы/конкуренты) — 1–2 запроса `WebSearch` с окном последних 30 дней на те же ключи. Дополняет TG-срез, не заменяет. Пропусти для узко-«внутренних» тем.
+**2. (optional) Outside freshness — WebSearch.** If the topic reaches beyond the operator's Telegram channels (market/releases/competitors) — 1-2 `WebSearch` queries over the same keys, windowed to the last 30 days. It complements the channel slice, it does not replace it. Skip it for narrowly internal topics.
 
-**3. Синтез (LLM, только по топу — Sonnet).** Грунт → Sonnet ([[model-routing-sonnet-grunt]]; субагент `model:'sonnet'`). Прочитай ТОЛЬКО дайджест-файл + WebSearch, семантически дедупни (кросс-канальные репосты одного и того же), собери в **тугой** дайджест по темам:
-- **🆕 Что нового** — конкретные релизы/инструменты/сделки/техники за окно (с t.me/URL-ссылкой и датой).
-- **🔀 Что изменилось** — сдвиг консенсуса/направления против того, что Антон знал (сверь с recall).
-- **👀 За чем следить** — ранние сигналы, ещё не мейнстрим.
-Каждый пункт — одна строка + ссылка. Без воды. Помечай уверенность где уместно.
+**3. Synthesis (LLM, top hits only — Sonnet).** Grunt work → Sonnet ([[model-routing-sonnet-grunt]]; subagent `model:'sonnet'`). Read ONLY the digest file + the WebSearch results, dedup semantically (cross-channel reposts of the same item), and assemble a **tight** digest by theme:
+- **🆕 What's new** — concrete releases/tools/deals/techniques within the window (with a link and a date).
+- **🔀 What changed** — a shift in consensus or direction versus what the operator already knew (compare against recall).
+- **👀 What to watch** — early signals, not yet mainstream.
+Each item is one line + a link. No filler. Mark confidence where it matters.
 
-**4. Вход в стратегию.** Отдай дайджест в GAP-фазу `/alfa` (или прямо в Decision Memo / DR-промпт как «свежий контекст за 30 дней»). Ценный срез стоит сохранить → заметка в волт через [[obsidian-ingest]] (провенанс: канальные БД + дата окна).
+**4. Feed it into strategy.** Hand the digest to the GAP phase of `/alfa` (or straight into a Decision Memo / DR prompt as "fresh 30-day context"). A valuable slice is worth keeping → a vault note via [[obsidian-ingest]] (provenance: the channel databases + the window dates).
 
-## Границы
-Read-only и **PRIVATE** (Second-Brain слой) — движок только читает БД и пишет дайджест-файл, наружу ничего не шлёт. Скоринг = движковый детектор (engagement + ключи), не «умный» — умную фильтрацию делает шаг 3. Свежесть = ночная (`watch_run.py`); подозреваешь застой → `--refresh`. Тема вне 8 каналов → опирайся на шаг 2 (WebSearch), не выдумывай.
+## Boundaries
+Read-only and **PRIVATE** (Second-Brain layer) — the engine only reads the databases and writes a digest file; nothing goes outward. The scoring is a mechanical detector (engagement + keywords), not "smart" — the smart filtering is step 3. Freshness comes from the nightly `watch_run.py`; suspect it's stale → `--refresh`. Topic outside those 8 channels → lean on step 2 (WebSearch), don't invent.
 
 ---
 

@@ -10,55 +10,55 @@ description: >
 license: MIT
 ---
 
-# /1 — воскрешение после крэша («где мы были + всё ли работает»)
+# /1 — resurrection after a crash ("where were we + is everything working")
 
-**Боль Антона:** сессия умерла посреди работы (крэш / комп выключился) → новая сессия пустая. Раньше: руками вспоминай, потом отдельно дёргай `/arch`, `/sync-check`, `/mcp`, потом думай «на чём остановились». Теперь — одно слово `/1` (или `/!`).
+**The operator's pain:** the session died mid-work (a crash / the computer went off) → the new session is empty. Before: remember by hand, then separately fire `/arch`, `/sync-check`, `/mcp`, then work out "where did we stop". Now it is one word: `/1` (or `/!`).
 
-**Чем это НЕ является:** `/retro` — для ЧИСТОГО конца сессии (инвентарь сделанного → раскладка по домам → /compact). После внезапного крэша упаковывать нечего, контекст уже потерян → нужен НЕ `/retro`, а воскрешение. Это разные инструменты.
+**What this is NOT:** `/retro` is for a CLEAN end of session (inventory of what was built → routing to homes → /compact). After a sudden crash there is nothing left to package, the context is already gone → you need resurrection, NOT `/retro`. Two different tools.
 
-## 3 шага (выполняй по порядку, отчитайся одной плашкой)
+## 3 steps (run them in order, report as one panel)
 
-### Шаг 1 — RECALL: где мы были (0 токенов, детерминированно)
-TurnState-чёрный-ящик пишет КАЖДЫЙ ход в SQLite (Stop-хук), переживает любой крэш. Прочитай последние ходы:
+### Step 1 — RECALL: where we were (0 tokens, deterministic)
+The TurnState black box writes EVERY turn into SQLite (a Stop hook), and it survives any crash. Read the last turns:
 ```bash
 python "$IMPORTS_ROOT/turnstate/turnstate_show.py" --n 12
 ```
-Из вывода вытяни: что Антон просил последним · какие файлы трогали · какие РЕШЕНИЯ приняли · следующий шаг. Это и есть «на чём оборвались». (Флаги: `--stats`, `--session <id>`, `--n N`.)
+From the output pull out: what the operator asked for last · which files were touched · which DECISIONS were made · the next step. That is "where we were cut off". (Flags: `--stats`, `--session <id>`, `--n N`.)
 
-**⚠️ Фолбэк, если ящик ПУСТ** (`turnstate_show.py --stats` показывает `turns: 0` — бывает, если Stop-хук ещё не активировался после рестарта Claude Code; см. [[crash-recovery-command]]): НЕ говори «данных нет». Деривируй «где мы были» из ПОСЛЕДНЕЙ сессии — её полный seed уже собран в шаге 3 (`_Dashboards/sessions-md/_continue/<cli>.seed.md`): прочитай ХВОСТ этого файла (последние 1–2 обмена «человек→ассистент») и вытяни из них задачу + последний шаг. То есть шаг 1 при пустом ящике опирается на результат шага 3.
+**⚠️ Fallback if the box is EMPTY** (`turnstate_show.py --stats` shows `turns: 0` — it happens when the Stop hook hasn't fired yet after a Claude Code restart; see [[crash-recovery-command]]): do NOT say "there is no data". Derive "where we were" from the LAST session — its full seed is already assembled in step 3 (`_Dashboards/sessions-md/_continue/<cli>.seed.md`): read the TAIL of that file (the last 1-2 human→assistant exchanges) and pull the task plus the last step out of them. So with an empty box, step 1 leans on the result of step 3.
 
-### Шаг 2 — ПИНГ здоровья: всё ли живо (зелёный/красный)
-Три быстрых детерминированных проверки:
+### Step 2 — HEALTH PING: is everything alive (green/red)
+Three fast deterministic checks:
 ```bash
 python "$IMPORTS_ROOT/arch/arch_status.py"
 powershell -NoProfile -ExecutionPolicy Bypass -File "$IMPORTS_ROOT/sync_check\sync_check.ps1"
 ```
-**MCP — ТОЛЬКО внутрисессионно** (⚠️ НЕ `claude mcp list` и НЕ второй Telethon-клиент → `AUTH_KEY_DUPLICATED` разлогинит аккаунт; память [[mcp-health-check]]): дёрни по одному дешёвому read-вызову у живых серверов — Telegram `mcp__telegram__get_me` (ждём Tony/@work_acct_a), WhatsApp `mcp__whatsapp__get_my_profile`, n8n `mcp__n8n__n8n_health_check`. Если инструментов сервера нет в сессии — он не загрузился (диагностика — в `/mcp`).
+**MCP — IN-SESSION ONLY** (⚠️ NOT `claude mcp list` and NOT a second Telethon client → `AUTH_KEY_DUPLICATED` logs the account out; memory [[mcp-health-check]]): fire one cheap read call per live server — Telegram `mcp__telegram__get_me` (expect the work account), WhatsApp `mcp__whatsapp__get_my_profile`, n8n `mcp__n8n__n8n_health_check`. If a server's tools are missing from the session, it never loaded (diagnostics live in `/mcp`).
 
-### Шаг 3 — ПОЛНЫЙ ПОДХВАТ: вся история в буфер
-Собери прошлую человеческую сессию этой машины в seed → буфер (движок `/resume-last`):
+### Step 3 — FULL PICKUP: the whole history into the clipboard
+Assemble this machine's previous human session into a seed → the clipboard (the `/resume-last` engine):
 ```bash
 python "$IMPORTS_ROOT/claude_sessions/continue_session.py" --last
 ```
-Скажи Антону: **«Открой New session и нажми Ctrl+V — вернёшь весь разговор целиком».** Если `clipboard: FAILED` — seed лежит файлом `_Dashboards/sessions-md/_continue/<cli>.seed.md`.
+Tell the operator: **"Open a New session and hit Ctrl+V — you get the whole conversation back."** If it prints `clipboard: FAILED`, the seed is on disk at `_Dashboards/sessions-md/_continue/<cli>.seed.md`.
 
-## Что ответить (одна плашка + 🧒)
+## What to reply with (one panel + 🧒)
 ```
-🔄 Воскрешение
-📍 Где были: <1-2 строки из TurnState — задача, последний файл/решение, следующий шаг>
-💚 Система: arch <✅/⚠️/🔴> · sync <✅/⚠️/🔴> · mcp <tg ✅ / wa ✅ / n8n ✅>
-📋 Полная история прошлой сессии — в буфере (New session → Ctrl+V).
-➤ Продолжаем с: <следующий шаг>?
+🔄 Resurrection
+📍 Where we were: <1-2 lines from TurnState — the task, the last file/decision, the next step>
+💚 System: arch <✅/⚠️/🔴> · sync <✅/⚠️/🔴> · mcp <tg ✅ / wa ✅ / n8n ✅>
+📋 The previous session's full history is in the clipboard (New session → Ctrl+V).
+➤ Continue from: <the next step>?
 ```
-Затем 🧒 «Простыми словами» (память [[eli5-always]]).
+Then a 🧒 "In plain words" line (memory [[eli5-always]]).
 
-## Границы
-- **READ-ONLY.** Ничего не отправляет, не правит живые данные и не чинит синк/MCP — только ЧИТАЕТ чёрный ящик, статус-скрипты и пишет seed-файл + буфер. Лечение красного — это уже `/arch` / `/sync-check` / `/mcp` отдельно.
-- Имя скилла = `1`, поэтому `/1` работает нативно; `/!` — алиас-триггер (спецсимвол нельзя сделать именем папки): увидев `/!`, запускай этот же скилл.
-- На Маках: `python3`; при нестандартном пути волта — env `CLAUDE_VAULT_ROOT=<...>`.
+## Boundaries
+- **READ-ONLY.** It sends nothing, edits no live data, and does not repair sync/MCP — it only READS the black box and the status scripts, and writes a seed file + the clipboard. Fixing a red light is `/arch` / `/sync-check` / `/mcp` separately.
+- The skill's name is `1`, so `/1` works natively; `/!` is an alias trigger (a special character can't be a folder name): when you see `/!`, run this same skill.
+- On Macs: `python3`; with a non-standard vault path — env `CLAUDE_VAULT_ROOT=<...>`.
 
-## Канон
-Память [[crash-recovery-command]]. Кирпичи: [[turnstate-ledger]] (чёрный ящик), [[claude-desktop-sessions-per-account]] (continue_session), [[system-architect]] (/arch), `syncthing-desktop-laptop-sync` (/sync-check), [[mcp-health-check]] (/mcp). Пара к SessionStart-хуку `session_resume_hook` (тот показывает прошлую сессию сам на старте — этот собирает recall+здоровье+полную историю по команде).
+## Canon
+Memory [[crash-recovery-command]]. Building blocks: [[turnstate-ledger]] (the black box), [[claude-desktop-sessions-per-account]] (continue_session), [[system-architect]] (/arch), `syncthing-desktop-laptop-sync` (/sync-check), [[mcp-health-check]] (/mcp). Paired with the SessionStart hook `session_resume_hook` (that one shows the previous session at startup on its own — this one gathers recall + health + full history on command).
 
 ---
 

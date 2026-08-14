@@ -8,58 +8,58 @@ description: >
 license: MIT
 ---
 
-# claudeai-sync — подтянуть новое из claude.ai в волт
+# claudeai-sync — pull what's new from claude.ai into the vault
 
-Аккаунт **owner.work@example.com** (Claude Max). Чаты claude.ai НЕ лежат на диске — тянутся живьём через залогиненную сессию (Claude-in-Chrome). Полуавтомат: **PULL** (шаг 1) делаю я при открытой сессии; всё остальное — детерминированно и идемпотентно.
+Account **owner.work@example.com** (Claude Max). claude.ai chats do NOT live on disk — they are pulled live through the logged-in session (Claude-in-Chrome). Semi-automatic: **PULL** (step 1) is done by me while the session is open; everything after that is deterministic and idempotent.
 
-Скрипты: `$IMPORTS_ROOT/claude-ai/` · оригиналы → `$OBSIDIAN_ROOT/_originals/claude-ai-export/` · живой слой → `01-Conversations/Claude-AI/`.
+Scripts: `$IMPORTS_ROOT/claude-ai/` · originals → `$OBSIDIAN_ROOT/_originals/claude-ai-export/` · live layer → `01-Conversations/Claude-AI/`.
 
-## ⚠️ Главный landmine
-Артефакты видны API **ТОЛЬКО** при `rendering_mode=messages`. `raw`/`default` молча отдают 0 артефактов. Всегда messages + verify счётчик артефактов.
+## ⚠️ The main landmine
+The API exposes artifacts **ONLY** with `rendering_mode=messages`. `raw`/`default` silently return 0 artifacts. Always use messages + verify the artifact counter.
 
-## ⚠️ Anti-recents (ручной поиск конкретного чата)
-Ищешь ОДИН конкретный чат руками (не полный PULL) — НИКОГДА не заключай «чата нет» из беглого списка recents: (1) встроенный ПОИСК «Search chats…» по ключам; (2) Projects/архив/pinned; (3) подтверди активный АККАУНТ по email в меню профиля (a2 = `owner.work@example.com`, в UI = «Artem & Anton»). Ещё надёжнее — полный API-список `chat_conversations?limit=1000` (шаг PULL) вместо чтения /recents глазами. Канон: память [[web-ui-search-not-recents]] (инцидент Woom 2026-07-23).
+## ⚠️ Anti-recents (hunting for one specific chat by hand)
+When looking for ONE specific chat by hand (not a full PULL) — NEVER conclude "the chat isn't there" from a glance at the recents list: (1) use the built-in "Search chats…" with keywords; (2) check Projects/archive/pinned; (3) confirm the active ACCOUNT by the email in the profile menu. More reliable still — the full API listing `chat_conversations?limit=1000` (the PULL step) instead of reading /recents with your eyes. Canon: memory [[web-ui-search-not-recents]] (incident 2026-07-23).
 
-## Шаги
+## Steps
 
-### 1. PULL (в сессии, ~30 сек)
+### 1. PULL (in-session, ~30 sec)
 - Claude-in-Chrome → `navigate https://claude.ai/recents`.
-- `javascript_tool` (same-origin authed fetch), org = `a673590f-762e-401d-a6a3-60272fa7e738` (роли chat+claude_max; вторая орг «DeFi Analytics LLC» = API-only, 403, игнор):
-  - список: `/api/organizations/{ORG}/chat_conversations?limit=1000&offset=0`
-  - каждый чат: `/api/organizations/{ORG}/chat_conversations/{uuid}?tree=True&rendering_mode=messages` → cache в `window.__convs`
-  - проекты: `/api/organizations/{ORG}/projects` + `/{uuid}` (descr + prompt_template) + `/{uuid}/docs` (контент инлайн)
-  - Blob-download ОДНИМ файлом `claude-ai-export-YYYY-MM-DD.json` (schema `claude-ai-export/v1`: {conversations, projects, filesManifest}).
-    - ⚠️ `conversations` ДОЛЖЕН быть ОБЪЕКТОМ `{uuid: conv}`, НЕ списком — конвертер `claudeai_export_to_vault.py:120` делает `convs.items()` (список → `AttributeError: 'list' object has no attribute 'items'`). `filesManifest` — список `{conv, msg, kind, meta}`. Артефакты в `rendering_mode=messages` приходят как `<antArtifact …>` ВНУТРИ text-айтемов (НЕ `tool_use`-блоки) — это норма, конвертер их парсит.
-- Перенести из Downloads в `raw\` + архив `_originals\claude-ai-export\` (sha256). Полный JS — в журнале сессии 2026-06-12 / памяти [[claude-ai-export-to-vault]].
-- (Дельта не обязательна — конвертер идемпотентен по uuid; full-pull добавит только новое.)
+- `javascript_tool` (same-origin authed fetch), org = `<YOUR_ORG_UUID>` (roles chat+claude_max; a second org on the account is API-only, returns 403, ignore it):
+  - the list: `/api/organizations/{ORG}/chat_conversations?limit=1000&offset=0`
+  - each chat: `/api/organizations/{ORG}/chat_conversations/{uuid}?tree=True&rendering_mode=messages` → cache into `window.__convs`
+  - projects: `/api/organizations/{ORG}/projects` + `/{uuid}` (descr + prompt_template) + `/{uuid}/docs` (content inline)
+  - Blob-download it as ONE file `claude-ai-export-YYYY-MM-DD.json` (schema `claude-ai-export/v1`: {conversations, projects, filesManifest}).
+    - ⚠️ `conversations` MUST be an OBJECT `{uuid: conv}`, NOT a list — the converter `claudeai_export_to_vault.py:120` calls `convs.items()` (a list → `AttributeError: 'list' object has no attribute 'items'`). `filesManifest` is a list of `{conv, msg, kind, meta}`. Under `rendering_mode=messages` artifacts arrive as `<antArtifact …>` INSIDE text items (NOT as `tool_use` blocks) — that is normal, the converter parses them.
+- Move it out of Downloads into `raw\` + archive into `_originals\claude-ai-export\` (sha256). The full JS lives in the session journal of 2026-06-12 / memory [[claude-ai-export-to-vault]].
+- (A delta pull is optional — the converter is idempotent by uuid; a full pull only adds what's new.)
 
-### 2. SYNC (детерминированно)
+### 2. SYNC (deterministic)
 ```
 python $IMPORTS_ROOT/claude-ai/claudeai_sync.py
 ```
-Конвертит во временный staging → копирует в живой слой **только НОВЫЕ** заметки (существующие, в т.ч. связанные, НЕ трогает) → рефрешит MOC + дашборд → пишет пути новых артефактов в `_new_artifacts.txt`. Печатает `new_conversations / new_artifacts / new_projects`.
+Converts into a temporary staging area → copies into the live layer **only the NEW** notes (existing ones, including linked ones, are left untouched) → refreshes the MOC + dashboard → writes the paths of new artifacts into `_new_artifacts.txt`. Prints `new_conversations / new_artifacts / new_projects`.
 
-### 3. CONCEPT-LINK новых артефактов (ОБЯЗАТЕЛЬНО — `concept-creation-rules.md` §1)
-Если `_new_artifacts.txt` не пуст:
-- Workflow `claudeai-artifact-curation` (sonnet, по одному агенту на артефакт; ⚠️ если >40 — серверный rate-limit, добивай `resume`-ом) → предложения концептов.
-- `python apply_curation.py --result <workflow .output>` — валидирует слаги против реального `06-Concepts`/`09-Bridges`, пишет ссылки идемпотентно (`<!-- curation -->` блок + `related_concepts`/`summary`/`value_score`/tags).
-- **Повторяющиеся темы без концепта → создай новые концепты** (порог §1 ≥3), покажи Антону, затем перезапусти apply (новые подхватятся). Единичные — не плодить.
+### 3. CONCEPT-LINK the new artifacts (MANDATORY — `concept-creation-rules.md` §1)
+If `_new_artifacts.txt` is not empty:
+- Workflow `claudeai-artifact-curation` (sonnet, one agent per artifact; ⚠️ above ~40 you hit a server-side rate limit, finish with `resume`) → concept proposals.
+- `python apply_curation.py --result <workflow .output>` — validates slugs against the real `06-Concepts`/`09-Bridges`, writes links idempotently (a `<!-- curation -->` block + `related_concepts`/`summary`/`value_score`/tags).
+- **Recurring themes with no concept → create new concepts** (threshold §1 ≥3), show them to the operator, then re-run apply (the new ones get picked up). One-offs — don't breed concepts for those.
 
 ### 4. RAG + commit
 ```
-python $IMPORTS_ROOT/brain_embed_update.py        # или дождись ночной @04:00
+python $IMPORTS_ROOT/brain_embed_update.py        # or wait for the nightly run at 04:00
 python $IMPORTS_ROOT/vault_backup.py
 ```
-(`claudeai_sync.py --reindex --commit` делает 4 одним вызовом; reindex rc=3 = занят замок, ночная задача догонит.)
+(`claudeai_sync.py --reindex --commit` does step 4 in one call; reindex rc=3 = the lock is busy, the nightly task will catch up.)
 
 ### 5. PING
-Короткий итог Антону (можно в Telegram Saved 226258979): «claude.ai: +N чатов, +M артефактов, связано».
+A short summary to the operator (Telegram Saved Messages works fine): "claude.ai: +N chats, +M artifacts, linked."
 
-## Заметки
-- **Идемпотентно**: повторный прогон без новых данных = «nothing new», связки не теряются.
-- **Провенанс**: артефакты `origin: claude-ai, authored_by: claude` (НЕ #anton-original); инструкции проектов `origin: anton`.
-- **Бинарники** (картинки/доки, 524 в манифесте) Антон просил НЕ тянуть (2026-06-12).
-- **Авто-режим**: ночная Windows-задача `Claude-AI Sync Daily` гоняет back-half на любом свежем экспорте; PULL остаётся в сессии. Полный headless («выкачка сама») = переход на отдельный Chrome-профиль + Playwright + детерминированный RAG-линкер — отложено (Антон выбрал безопасный полуавто).
+## Notes
+- **Idempotent**: a repeat run with no new data = "nothing new", and existing links are never lost.
+- **Provenance**: artifacts get `origin: claude-ai, authored_by: claude` (NOT #anton-original); project instructions get `origin: anton`.
+- **Binaries** (images/docs, 524 of them in the manifest) — the operator asked NOT to pull those (2026-06-12).
+- **Auto mode**: the nightly Windows task `Claude-AI Sync Daily` runs the back half over any fresh export; the PULL stays in-session. Full headless ("it downloads itself") = moving to a dedicated Chrome profile + Playwright + a deterministic RAG linker — deferred (the operator chose the safe semi-automatic path).
 
 ---
 

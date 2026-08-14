@@ -8,71 +8,72 @@ description: >
 license: MIT
 ---
 
-# /reboot — управляемая перезагрузка узла флота
+# /reboot — a controlled restart of a fleet node
 
-**Боль:** ребут вслепую = потерянный несинканный файл (sync-conflict), ложная SEV1-тревога от
-пир-сторожей («узел умер!»), не оживший после старта робот, и — как с HP Wolf 24.07 — «перезагрузил,
-а драйвер всё равно в памяти», потому что Fast Startup не очищает RAM при обычном выключении.
+**The pain:** rebooting blind = a lost unsynced file (sync-conflict), a false SEV1 alarm from the
+peer watchdogs ("the node is dead!"), a robot that never came back after boot, and — as with the
+HP Wolf driver on 2026-07-24 — "I rebooted and the driver is still in memory", because Fast Startup
+does not clear RAM on an ordinary shutdown.
 
-Ребут делаем ТОЛЬКО когда: (а) есть причина (выгнать хуки/драйвер из RAM, применить обновление,
-починить залипшее), и (б) автозапуск армирован → машина вернётся сама.
+Reboot ONLY when: (a) there is a reason (evict a hook/driver from RAM, apply an update, unstick
+something), and (b) autostart is armed → the machine will come back on its own.
 
-## ШАГ 1 — PRE-FLIGHT (перед ребутом, по порядку)
+## STEP 1 — PRE-FLIGHT (before the reboot, in order)
 
-1. **Причина + подтверждение.** Одна строка: зачем ребут и что он починит. Если рискованно
-   (away-mode, машина без автологина, FileVault/BitLocker с ручным паролем на буте) → сперва спрос Антона.
-2. **Сохранить состояние.** TurnState-чёрный-ящик пишет каждый ход сам (переживает ребут → /1 поднимет).
-   Активная незакоммиченная работа в коде/волте → закоммить/сохранить сейчас.
-3. **Досинхронить Syncthing** (иначе потеря/конфликт). Дождись `need=0` по всем шарам:
+1. **Reason + confirmation.** One line: why the reboot and what it fixes. If it is risky
+   (away-mode, a machine without auto-login, FileVault/BitLocker with a manual password at boot) → ask the operator first.
+2. **Save state.** The TurnState black box writes on every turn by itself (it survives the reboot → /1 will bring it back).
+   Any active uncommitted work in code or the vault → commit/save it now.
+3. **Finish the Syncthing sync** (otherwise: loss/conflict). Wait for `need=0` on every share:
    ```bash
    powershell -NoProfile -ExecutionPolicy Bypass -File "$IMPORTS_ROOT/sync_check/sync_check.ps1"
    ```
-   need>0 → подожди синк / подними его (`/raise-sync`), НЕ ребути с висящим need.
-4. **Предупредить пиров** (иначе observer-offline ложная SEV1) — в шину + 03, ДО ребута:
+   need>0 → wait for the sync / raise it (`/raise-sync`); do NOT reboot with a pending need.
+4. **Warn the peers** (otherwise the observers raise a false offline SEV1) — into the bus + the fleet log chat, BEFORE the reboot:
    ```bash
-   python "$HOME/.claude/scripts/bus_send.py" --text "🔁 <host> уходит в ребут (~N мин), причина: <...>. Вернусь сам."
+   python "$HOME/.claude/scripts/bus_send.py" --text "🔁 <host> going down for a reboot (~N min), reason: <...>. I'll come back on my own."
    ```
-5. **Проверить, что автозапуск армирован** (машина оживёт БЕЗ рук):
-   - **ПК:** Claude Desktop = один лаунчер `%APPDATA%\...\Startup\Claude-Autostart.lnk`
-     (`shell:AppsFolder\Claude_pzs8sxrjxfjjc!Claude`), НЕ битый HKCU\Run на старую версию
-     ([[claude-desktop-autostart-race]]); Syncthing = `start-syncthing.vbs` в Startup; watchdog-задачи на месте.
-     Хаб — вдобавок автологин + `hub_boot_report.py` ([[hub-boot-selfreport]]).
-   - **Mac:** Login Items / launchd-агенты Syncthing + Claude; FileVault-пароль на буте = ручной
-     (без него безлюдный ребут не оживёт — только при человеке).
+5. **Verify autostart is armed** (the machine must come back WITHOUT hands):
+   - **PC:** Claude Desktop = a single launcher `%APPDATA%\...\Startup\Claude-Autostart.lnk`
+     (`shell:AppsFolder\Claude_pzs8sxrjxfjjc!Claude`), NOT a broken HKCU\Run pointing at an old version
+     ([[claude-desktop-autostart-race]]); Syncthing = `start-syncthing.vbs` in Startup; the watchdog tasks in place.
+     On the hub, also auto-login + `hub_boot_report.py` ([[hub-boot-selfreport]]).
+   - **Mac:** Login Items / launchd agents for Syncthing + Claude; a FileVault password at boot is manual
+     (without it an unattended reboot will not come back — only do it with a human present).
 
-## ШАГ 2 — РЕБУТ (правильной командой)
+## STEP 2 — THE REBOOT (with the right command)
 
-⚠️ **ПОЛНЫЙ Restart, а не Shutdown** — Fast Startup (hiberboot) на Windows НЕ очищает ядро/драйверы/RAM
-при `shutdown /s`; `Restart` (`/r`) всегда делает полный цикл и очищает. Для «выгнать драйвер/хук из
-памяти» (HP Wolf, антивирус, залипший драйвер) годится ТОЛЬКО полный Restart.
+⚠️ **A FULL Restart, not a Shutdown** — Fast Startup (hiberboot) on Windows does NOT clear the
+kernel/drivers/RAM on `shutdown /s`; `Restart` (`/r`) always does a full cycle and clears them. To
+"evict a driver/hook from memory" (HP Wolf, an antivirus, a stuck driver) ONLY a full Restart works.
 
-- **ПК (Windows):**
+- **PC (Windows):**
   ```bash
   shutdown /r /t 0
   ```
-  (гарантированно чистый выход даже при Fast Startup ON; при этом сессия Claude Code завершится).
+  (a guaranteed clean exit even with Fast Startup ON; the Claude Code session ends with it).
 - **Mac:**
   ```bash
-  osascript -e 'tell app "System Events" to restart'   # или: sudo shutdown -r now
+  osascript -e 'tell app "System Events" to restart'   # or: sudo shutdown -r now
   ```
 
-## ШАГ 3 — POST-REBOOT (после подъёма — через /1)
+## STEP 3 — POST-REBOOT (once it's up — through /1)
 
-Машина поднялась → в новой сессии запусти **`/1`** (воскрешение): RECALL из чёрного ящика + пинг
-здоровья (arch/sync/mcp) + полная история прошлой сессии в буфер. Затем:
-- Убедись, что автозапуск сработал: Syncthing подключён, Claude Desktop = один инстанс (нет гонки),
-  коннекторы зелёные.
-- **Проверь, что причина ребута достигнута** (напр. чёрные окна ушли / драйвер не в памяти) —
-  глазами/замером, не на слово ([[prichina-kak-claim]]).
-- Boot self-report в шину (хаб делает сам; на пире — короткий «✅ <host> вернулся, всё зелёное»).
+The machine is back → in a new session run **`/1`** (resurrection): RECALL from the black box + a
+health ping (arch/sync/mcp) + the previous session's full history into the buffer. Then:
+- Confirm autostart fired: Syncthing connected, Claude Desktop = a single instance (no race),
+  connectors green.
+- **Check that the reason for the reboot was actually achieved** (e.g. the black windows are gone /
+  the driver is no longer in memory) — by looking or measuring, not on faith ([[prichina-kak-claim]]).
+- A boot self-report into the bus (the hub does it itself; on a peer — a short "✅ <host> is back, all green").
 
-## Границы
-- READ-only до самого ребута; сам ребут — управляемое действие с причиной.
-- ⛔ Away-mode / нет автологина / ручной FileVault-BitLocker на буте → ребут только со спросом Антона
-  (риск не подняться без рук).
-- Пир ребутит СЕБЯ сам ([[peers-own-outbound-local-full-member]]); хаб-ребут в away — осторожно
-  ([[away-mode-45-days]], BIOS «Restore on AC Power Loss»).
-- Имя папки = `reboot`; `/restart` — текст-триггер на этот же скилл (регистр не важен).
+## Boundaries
+- READ-only right up to the reboot itself; the reboot is a deliberate action with a stated reason.
+- ⛔ Away-mode / no auto-login / a manual FileVault-BitLocker prompt at boot → reboot only with the operator's approval
+  (risk: it never comes back without hands).
+- A peer reboots ITSELF ([[peers-own-outbound-local-full-member]]); rebooting the hub while away — carefully
+  ([[away-mode-45-days]], BIOS "Restore on AC Power Loss").
+- The folder name is `reboot`; `/restart` is a text trigger for the same skill (case does not matter).
 
 ---
 
