@@ -1,14 +1,10 @@
 ---
 name: reboot
 description: >
-  Безопасная ПЕРЕЗАГРУЗКА узла флота (Mac или ПК) по единому протоколу — не «просто shutdown»,
-  а pre-flight (сохранить состояние, досинхронить Syncthing, предупредить пиров, убедиться что
-  автозапуск армирован) → правильная команда ребута (⚠️ ПОЛНЫЙ Restart, чтобы выгнать драйверы/хуки
-  из RAM, а не Fast-Startup-гибрид) → post-reboot проверка через /1. Триггеры: "/reboot", "/restart",
-  "перезагрузи", "перезагрузка", "ребутни", "ребут этой машины", "reboot", "restart this machine".
-  НЕ путать: /1 = воскрешение ПОСЛЕ обрыва (этот — управляемый ребут ДО); /retro = конец сессии.
-  Канон: память [[reboot-protocol]], [[hub-boot-selfreport]], [[claude-desktop-autostart-race]],
-  [[machine-bus-telegram-rail]], [[syncthing-desktop-laptop-sync]].
+  Safe REBOOT of a fleet node (Mac or PC) by a single protocol — not just shutdown: pre-flight
+  (save state, finish syncing, warn peers, verify autostart is armed) → the correct reboot
+  command (FULL restart, not the fast-startup hybrid) → post-reboot check via the crash-recovery
+  skill. Trigger on "/reboot", "restart this machine".
 license: MIT
 ---
 

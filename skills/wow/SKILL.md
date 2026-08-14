@@ -1,6 +1,11 @@
 ---
 name: wow
-description: "«Сессия-ВЕХА → эпизод → публикация ВНЕ ОЧЕРЕДИ» — Антон в конце крутой сессии даёт одну команду, и из ГОРЯЧЕГО контекста этой сессии собирается полный эпизод (все тиры) с приоритетом milestone, минуя ночные расписания фабрики: тизеры в чаты сразу после одного «+», остальное по топологии. Триггеры: /wow, /вау, /veha, «это веха», «запушь эту сессию», «эта сессия крутая, расскажи всем», «session is a milestone», «push this session». Опциональный угол: «/wow угол: <о чём именно пост>». НЕ путать с /episode (обычный материал без приоритета) и ежедневным дневником (тот сам упоминает рядовые сессии). Голос Антона = Opus или сильнее (модель текущей сессии); Sonnet для авторского текста запрещён."
+description: >
+  "Milestone session → episode → publish OUT OF BAND" — at the end of a great session, one
+  command assembles a full content episode (all tiers) from the session's HOT context with
+  milestone priority, bypassing the factory's nightly schedule: teasers to chats right after one
+  approval, the rest by topology. Trigger on "/wow", "this is a milestone", "this session is
+  great — tell everyone".
 license: MIT
 ---
 

@@ -1,6 +1,10 @@
 ---
 name: sostav-comments
-description: Draft short, in-voice reply candidates for Anton to a fresh СОСТАВ alpha shortlist — read the nightly detector report, pick posts in SAFE/opinion topics, pull a relevant grounding snippet from the YouTube-Data-API corpus (the only working comment corpus — all socials are login-walled), and write draft replies in Anton's voice (Opus). Trigger on "/sostav-comments", "черновики ответов по составу", "ответь на альфу состава", "draft sostav replies". DRAFT-FIRST — never sends/posts anything; Anton copies what he likes. SAFE-topic gate only (never draft into Крипта/Девушки/Флудильня grey threads). Thin wrapper over the existing detector report + daily_safe_fetch.py; AK-47 = one SKILL.md. Canon: memory sostav-community-import, short-text-when-unreviewed, content-Mei-style; reglament-anti-leak-na-vyhode.
+description: >
+  Draft short, in-voice reply candidates to a fresh community-alpha shortlist — read the nightly
+  detector report, pick posts in safe/opinion topics, pull a relevant grounding snippet from the
+  local corpus, and write draft replies in the owner's voice. Trigger on "/sostav-comments",
+  "draft replies to the shortlist". Drafts only; the owner posts.
 license: MIT
 ---
 

@@ -1,18 +1,13 @@
 ---
 name: alfa-search-recall-deepresearch
-description: >-
-  Anton's mandatory decision protocol ("Alpha Protocol") for any new STRATEGIC work — never jump to
-  implementation on local recall alone. Run RECALL (own Second Brain) → GAP analysis → emit a DEEP RESEARCH
-  PROMPT for Anton to run in an EXTERNAL deep-research tool (Claude Code does NOT do the deep DR itself) →
-  SYNTHESIS + Decision Memo when he brings results back. Trigger on "/alfa-search-recall-deepresearch",
-  "alpha protocol", "alfa", "альфа", "R+DR", "RDR", "РДР", "R + DR", "recall + deep research", "recall + dr", or whenever
-  starting a strategic decision. Anton's shorthand for Deep Research: "DR" = "ДР" = "Резеч" = "Deep Research"
-  are synonyms — bare DR/ДР/Резеч = the Deep-Research step (emit the DR prompt), R+DR = the full protocol
-  (context disambiguates; "ДР" can also mean birthday — ask if unclear). (new product/feature/AI-functionality/tokenomics/GTM/market/business-module/
-  investment-hypothesis/architecture). This is "Recall + Deep Research":
-  recall is necessary but NOT sufficient for strategic work. Pairs with /ask (recall) and extends the
-  RECALL-before-activity rule. Canon: vault protocol-alpha-protocol-recall-plus-deep-research; always-on lift
-  in CLAUDE.md § "Alpha Protocol".
+description: >
+  Mandatory decision protocol ("Alpha Protocol") for any new STRATEGIC work — never jump to
+  implementation on local recall alone. Run RECALL over the knowledge vault → GAP analysis →
+  emit a DEEP RESEARCH PROMPT to run in external deep-research tools → SYNTHESIS + Decision Memo
+  when results come back. Trigger on "/alfa-search-recall-deepresearch", "alpha protocol",
+  "R+DR", or automatically when starting a strategic decision (new product/feature, tokenomics,
+  GTM, market, investment hypothesis, architecture). Recall is necessary but NOT sufficient for
+  strategic work.
 license: MIT
 ---
 

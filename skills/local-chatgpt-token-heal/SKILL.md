@@ -1,6 +1,10 @@
 ---
 name: local-chatgpt-token-heal
-description: Refresh the ChatGPT bearer token when the nightly sync dies with exit=7 (token expired). Root-cause fix — the bearer lives ~5-9 days but the NextAuth SESSION cookie lives ~3 months and re-mints a fresh bearer deterministically (0 LLM, 0 browser). Trigger on "/chatgpt-token-heal", "почини chatgpt токен", "chatgpt exit 7", "обнови bearer chatgpt", "chatgpt token dead", "heal chatgpt token", or when nightly_sync/incremental_pull reports AUTH FAILED / exit 7. Fleet-local skill (hub HUB-1 — where the nightly runs + a logged-in chatgpt.com Chrome lives). Engine = $IMPORTS_ROOT/chatgpt/token_heal.py. Pairs with /chatgpt-sync + memory [[chatgpt-export-pipeline]].
+description: >
+  Refresh the ChatGPT bearer token when the nightly sync dies with a token-expired exit code.
+  Root-cause fix: the bearer lives days but the session cookie lives months and re-mints a fresh
+  bearer deterministically (0 LLM, 0 browser). Trigger on "/chatgpt-token-heal", "chatgpt token
+  dead", "heal chatgpt token", or when the sync exits with the token error.
 license: MIT
 ---
 

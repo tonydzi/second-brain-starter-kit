@@ -1,12 +1,10 @@
 ---
 name: pipeline
-description: >-
-  Work Anton's lead pipeline — CRM/outreach triage: who needs action TODAY (replied→send Calendly;
-  Calendly sent 24h+ but not booked→booking nudge; awaiting-reply→check for new inbound; going cold→
-  follow-up; booked→close out), ranked and ready to send (Anton edits after if off). Trigger on "/pipeline",
-  "разбери пайплайн", "кого пинговать", "что по лидам", "work my leads", "кто завис в воронке",
-  "follow-up due". Reads live state in tg_followups.json + the Platinum CRM; executes via
-  telegram-lead-outreach (send-direct per 2026-06-16 — Anton edits after; still NO mass auto-blast). This is TRIAGE (what to work); telegram-lead-outreach is EXECUTION.
+description: >
+  Work the lead pipeline — CRM/outreach triage: who needs action TODAY (replied → send
+  scheduling link; link sent 24h+ but not booked → nudge; awaiting-reply → check inbound; going
+  cold → follow-up; booked → close out), ranked and ready to send. Trigger on "/pipeline", "work
+  my leads", "who's stuck in the funnel". Draft-first; the owner edits before anything goes out.
 license: MIT
 ---
 

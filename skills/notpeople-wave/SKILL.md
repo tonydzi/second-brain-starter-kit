@@ -1,14 +1,10 @@
 ---
 name: notpeople-wave
-description: >-
-  One command to run the next NotPeople investor-outreach wave end-to-end, the verified way.
-  NotPeople = $600K pre-seed SAFE pitch, sent from Telegram @work_acct_a (Tony SF / Bay Area), Nina
-  = live operator. Use when the operator says "продолжаем рассылку NotPeople", "возьми следующих N
-  инвесторов", "следующая партия", "/notpeople-wave", "новая волна NotPeople". The skill walks the
-  exact checklist that prevents the two bugs we hit on 25 Jun: (a) re-pitching already-contacted leads
-  because the prior wave was never recorded, (b) sending blind from a stale queue. It is a THIN wrapper
-  over the existing scripts in `_imports\notpeople\` + the general `telegram-lead-outreach` playbook —
-  it does NOT re-implement send/guardrail logic, it sequences it for this one campaign.
+description: >
+  Run the next investor-outreach wave end-to-end, the verified way: batch of targets →
+  personalized pitches from real templates → send via the designated account → log every touch
+  in the CRM. Trigger on "/notpeople-wave", "next outreach batch". The skill walks the exact
+  checklist with rate limits and dedup against everyone already contacted.
 license: MIT
 ---
 

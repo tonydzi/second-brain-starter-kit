@@ -1,6 +1,10 @@
 ---
 name: tg-post
-description: Publish a VETTED post to one of OUR OWN Telegram channels/supergroups via Telegram MCP (not Chrome), channel resolved STRICTLY by id from the Channels Registry, rate-guarded and draft-first. Trigger on "/tg-post", "запости в телеграм", "опубликуй в ClawRus", "выложи в тг-канал", "пост в телегу", "publish to telegram channel". Text = Anton's authorial voice (Opus), reuse content-factory / episode drafts. Publishing = OUTBOUND + PUBLIC (Tier-2) → show final draft + destination + account, wait for Anton's explicit "+". Guard = social_guard.py (tg ≤10/day + anti-dup). Sibling of /fb-post (Chrome rail) and /x-post. Canon: vault 00-System\Channels-Registry.md (single source of channel truth), memory openclaw-telegram-channels + telegram-account-identities.
+description: >
+  Publish a VETTED post to one of YOUR OWN Telegram channels/supergroups via the Telegram MCP
+  (not a browser), channel resolved STRICTLY by id from a channels registry, rate-guarded and
+  draft-first. Trigger on "/tg-post", "publish to the telegram channel". Never posts to a chat
+  found by name-similarity — registry id only.
 license: MIT
 ---
 

@@ -1,6 +1,10 @@
 ---
 name: journey
-description: "Резуректит и продолжает КНИГУ «The Journey / 相棒 AIBŌ · The Partner» — build-in-public историю двух кофаундеров (🧑 Тони + 🤖 Майк) о ~60-дневном пути с Claude Code. Одна команда: подхватить состояние (какие дни написаны в RU/EN/DEV, что незакоммичено, где дыры, какие мета-дни не написаны), потом по отлаженному пайплайну дописать нужное. Триггеры: /journey, «книга», «the journey», «дописать книгу», «продолжи книгу», «наша история кофаундеров», «статус книги», «resurrect the book», «continue the journey». v2 (2026-07-08) — книга = ПРОЕКЦИЯ единого канона show-canon; реалити-стиль активен (вопрос сезона, голосования, табло, reveal). Остаток апгрейда (голос-в-общий-слой, авто-хвосты) — в бэклоге. НЕ путать с /episode /wow (разовый контент фабрики) и ежедневным дневником. Голос глав = Fable (все первые главы делает Fable); дуэт Тони(кинематограф)+Майк(кофаундер-аналитик). Канон: память [[book-the-journey]]."
+description: >
+  Resurrect and continue a build-in-public BOOK — the serialized story of a founder + AI-
+  cofounder journey. One command: pick up state (which days are written in which languages,
+  what's uncommitted, where the gaps are), then continue writing via the established pipeline.
+  Trigger on "/journey", "the book", "continue the journey".
 license: MIT
 ---
 

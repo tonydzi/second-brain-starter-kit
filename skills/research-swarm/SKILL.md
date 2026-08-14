@@ -1,15 +1,11 @@
 ---
 name: research-swarm
-description: >-
-  Research swarm — turn ANY hypothesis (however wild/fringe) into an ARGUMENT MAP, never a verdict.
-  Fans out 5 independent lenses — Consensus, Skeptic, Frontier, Historian, Experimental-Design — over
-  the idea, then synthesizes for/against + evidence quality + confidence tier (established/emerging/
-  speculative/fringe) + the cheapest decisive experiment. Trigger on "/research-swarm <hypothesis>",
-  "рой агентов", "запусти рой по <X>", "построй карту аргументов по <X>", "разбери гипотезу <X>",
-  "за и против <X>", "steelman both sides of <X>", "argument map for <X>". RECALL-first (brain_ask),
-  outputs a vault note + a visual HTML argument-map dashboard. Embodies the epistemic-neutrality
-  protocol (consensus ≠ truth; investigate, don't judge) and pairs with Alpha Protocol (R+DR).
-  Built 2026-06-14.
+description: >
+  Research swarm — turn ANY hypothesis (however wild or fringe) into an ARGUMENT MAP, never a
+  verdict. Fans out 5 independent lenses — Consensus, Skeptic, Frontier, Historian,
+  Experimental-Design — then synthesizes for/against + evidence quality + confidence tier
+  (established/emerging/speculative/fringe) + the cheapest decisive experiment. Trigger on
+  "/research-swarm <hypothesis>", "map the arguments on X".
 license: MIT
 ---
 

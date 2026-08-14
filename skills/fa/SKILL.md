@@ -1,20 +1,12 @@
 ---
 name: fa
 description: >
-  Фоллоуап после звонка — в ГОЛОСЕ Антона, а не протоколом бота. Триггеры: "/fa", "фоллоуап",
-  "фолоуап", "follow-up", "напиши ФА", "напиши после звонка", "что написать <имя> после созвона",
-  а также САМ сразу после того, как в волт приехал транскрипт 1-on-1 (fireflies/granola) и звонок
-  ещё тёплый. Делает 5 шагов: (0) RECALL — транскрипт + карточка человека + вся история переписки,
-  до единой буквы черновика; (1) ВЫТАЩИТЬ договорённости с владельцем и сроком + то, что осталось
-  БЕЗ решения; (2) СОБРАТЬ черновик в голосе Антона на Fable 5 (короткий, строчными, один крючок,
-  один вопрос в конце); (3) ДО→ПОСЛЕ — показать Антону старый шаблонный вариант против нового;
-  (4) ГЕЙТ отправки: тёплый 1-on-1 после звонка = класс C (шлю сам, докладываю); холодное /
-  чувствительное / деньги / обязательства = жду «+»; (5) ЗАФАЙЛИТЬ — отправленное в карточку
-  человека и в задачу. Заменяет старый авто-шаблон «🙌 Thank you for the call! / Short follow-up 👣»
-  (разбор почему он плох — в §2 ниже). Канон: память [[fa-anton-voice]], [[capture-rules-into-bible]]
-  (RECALL до письма), [[model-routing-fable-smart]] (голос = Fable 5), [[short-text-when-unreviewed]],
-  [[standing-outbound-mandate]], [[remote-approval-qqq]]; родня [[telegram-account-identities]],
-  [[always-archive-artifacts-to-vault]].
+  Follow-up after a call — written in the owner's authentic VOICE, not a bot template. Trigger
+  on "/fa", "follow-up", "what should I write to <name> after the call", or automatically when a
+  fresh 1-on-1 call transcript lands in the vault. Five steps: RECALL (transcript + person card
+  + full correspondence history) → extract agreements with owner and due date → draft in the
+  owner's voice (short, lowercase, one hook, one closing question) → show before/after vs the
+  old template → send via the approval gate and file the result to the person card.
 license: MIT
 ---
 

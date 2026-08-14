@@ -1,23 +1,13 @@
 ---
 name: retro
-description: >-
-  End-of-session retrospective for Anton — "today we learned a lot" (South Park's Stan). Run at the end
-  of a work/build session to: (0) RECALL & RECONCILE this session against the WHOLE collaboration first
-  (neighboring chats + vault + peers + everything agreed since — esp. across a days/weeks time-gap),
-  (1) INVENTORY what was actually built (git log + recently-touched files
-  across the vault, ~/.claude/skills, and _imports), (2) SUMMARIZE the session's arc, (3) CLASSIFY each
-  artifact Keep-&-reuse / one-off / promote-to-permanent, and (4) ROUTE the durable ones to their right
-  home (memory, global CLAUDE.md, the Bible, a skill, a hook) per operating-agreement — INCLUDING the
-  milestone→skill reflex: spin any action that repeated this session/milestone into its own skill via
-  skill-creator (Step 4★) — then (5) AUTO-SAVE
-  the retro as a clean note to the vault and hand Anton the enriched /compact block so he squeezes the
-  working memory WITHOUT losing the thread (compact, NOT clear). PLUS the drift-audit (Step 3⛳): if the
-  session drifted off its MAIN goal, retro ITSELF spawns child-session chips (spawn_task) for the
-  drifted-but-valuable topics — no nudge from Anton needed. Trigger on
-  "/retro", "/rr" (short alias = same as /retro), "подытожь сессию", "сделай ретро", "что оставляем из сделанного", "итоги сессии",
-  "это повторяется — сделай скилл", "заверши веху", "milestone done", or any
-  end-of-session wrap-up. This is a BUILD-inventory + reuse-decision — DISTINCT from facebook-diary-daily
-  (public narrative) and preference-sweep-daily (recurring preference rules); don't duplicate them.
+description: >
+  End-of-session retrospective: (0) RECALL & reconcile this session against the whole
+  collaboration first, (1) INVENTORY what was actually built (git log + recently-touched files),
+  (2) summarize the session's arc, (3) classify each artifact keep-&-reuse / one-off / promote-
+  to-permanent, (4) route durable ones to their right home (memory, canon, codex, a skill, a
+  hook) — including spinning repeated actions into new skills, (5) auto-save the retro as a
+  vault note and hand back an enriched /compact block so working memory shrinks WITHOUT losing
+  the thread. Trigger on "/retro", "/rr", "wrap up the session".
 license: MIT
 ---
 

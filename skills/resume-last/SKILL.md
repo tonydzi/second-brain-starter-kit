@@ -1,14 +1,11 @@
 ---
 name: resume-last
 description: >
-  "Продолжить прошлый чат в один присест" — собирает твою ПОСЛЕДНЮЮ человеческую сессию
-  (или конкретную по id) в seed и кладёт в буфер обмена: открываешь New session, Ctrl+V —
-  и разговор продолжается с того места, где оборвался (даже после вылета/на другой машине,
-  где нативный --resume не работает). Trigger on "/resume-last", "/resume", "продолжи прошлый
-  чат", "продолжи последнюю сессию", "подхвати прошлый разговор", "continue last session",
-  "resume my last chat". По умолчанию = последняя НЕ-служебная сессия этой машины; можно дать
-  конкретный cliSessionId. Служебные/роботские сессии исключаются. Тонкая обёртка над
-  continue_session.py (--last). Канон: память claude-desktop-sessions-per-account.
+  "Continue the previous chat in one motion" — collects the LAST human session (or a specific
+  one by id) into a seed and puts it on the clipboard: open a new session, paste, and the
+  conversation continues where it broke off (even after a crash or on another machine where
+  native resume doesn't work). Trigger on "/resume-last", "/resume", "continue the last
+  session".
 license: MIT
 ---
 

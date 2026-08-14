@@ -1,6 +1,11 @@
 ---
 name: dr-fanout
-description: "Одна команда — разнести Deep Research промпт сразу по нескольким внешним LLM (ChatGPT / Gemini / Grok) через залогиненный браузер Антона (гибрид: Grok=живой Chrome-MCP, Gemini/ChatGPT=Chrome сейчас / выделенный Firefox-профиль для безлюдного расписания — фундамент Firefox-first, Decision Memo 2026-07-16), потом самому забрать отчёты, сохранить в _originals и сделать синтез-консенсус. Автоматизация финала Alpha Protocol (R+DR): раньше Антон руками вставлял промпт в 3 сайта и руками приносил результаты. Триггеры: /dr-fanout, «разнеси ДР», «разошли дипресёрч», «запусти DR в трёх», «fan out the DR», «раздай промпт по LLM», а также САМ после шага 3 Альфа-протокола (мандат Антона 2026-07-14: любое количество DR без спроса — квоты не экономим, деградация ChatGPT мягкая, 3-вендорный веер компенсирует; дубли ловит дедуп Шага 0). Подписки Антона (не платные API), браузер строго локально на этой машине."
+description: >
+  One command to fan a Deep Research prompt out to several external LLMs at once (ChatGPT /
+  Gemini / Grok / others) through the operator's logged-in browser, then collect the reports,
+  archive the originals, and synthesize a consensus. Trigger on "/dr-fanout", "fan out the DR",
+  "distribute the research prompt". Automates the final stage of the Alpha Protocol: no more
+  hand-pasting one prompt into N sites.
 license: MIT
 ---
 

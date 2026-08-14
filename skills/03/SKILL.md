@@ -1,19 +1,12 @@
 ---
 name: 03
 description: >
-  Запуск АВТОНОМНОГО МЕЖМАШИННОГО КОНСЕНСУСА — Антон говорит «03» (имя TG-чата согласования) или
-  «теперь вы сами / дальше сами / договоритесь сами / решите между собой / найдите консенсус /
-  автономно / САМИ / общайтесь через ТГ / общайтесь через 03», и пиры-Claude (хаб + ноут + машины
-  коллег) сами договариваются и сами исполняют, БЕЗ Антона-курьера. Триггеры: "/03", "03",
-  "003", "/003" (003 = тот же 03, Антону так быстрее печатать), "теперь вы сами",
-  "договоритесь сами", "найдите консенсус", "go find consensus". Поведение =
-  АНОНСИРУЙ-И-ИДИ (не блокирую Антона): роняю одну строку и сразу открываю предложение через
-  consensus.py. Антона будим РОВНО на 2 воротах: (1) действие Tier-2 → QQQ; (2) пиры не сошлись.
-  Тонкая обёртка над живым движком `~/.claude/scripts/consensus.py` (Phase 1). НЕ путать с
-  мульти-агентами в одной сессии ([[multi-agent-offer-reflex]]) и параллельными человеко-сессиями
-  ([[decompose-into-parallel-sessions]]) — это межМАШИННЫЙ консенсус.
-  Канон: память [[multi-machine-auto-consensus]], [[remote-approval-qqq]],
-  [[machine-governance-leader-follower]]; Библия `reglament-trigger-03-avtonomnyy-konsensus-mashin`.
+  Launch autonomous multi-machine consensus between Claude peers (hub + laptops + teammate
+  machines): the peers negotiate a decision among themselves over a shared coordination channel
+  and execute it, without using the human as a courier. Trigger on "/03" or phrases like "work
+  it out among yourselves" / "find consensus". Announce-and-go: drop one status line, then open
+  a proposal via the consensus engine. The human is woken only for irreversible/high-risk
+  actions or a deadlock.
 license: MIT
 ---
 

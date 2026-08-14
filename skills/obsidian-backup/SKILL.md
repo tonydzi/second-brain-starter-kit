@@ -1,17 +1,10 @@
 ---
 name: obsidian-backup
-description: >-
-  Anton's Obsidian data-safety runbook: the 3-2-1 backup of the vault
-  ($OBSIDIAN_VAULT), the never-deleted originals archive, the two
-  schedulers that keep it running, and the restore / new-PC migration procedure.
-  Use whenever Anton wants to back up, verify, restore, or migrate his vault, or
-  when a backup looks broken — "сделай бэкап", "проверь бэкап", "бэкап сломался",
-  "восстанови vault", "восстанови заметку из бэкапа", "перенеси Obsidian на новый
-  компьютер", "migrate my vault", "is my backup healthy", "back up now",
-  "the nightly backup didn't run". Also the home for managing the nightly Windows
-  task and the weekly health-check routine. The standing RULES live in memory
-  ([[preserve-originals-rule]], [[vault-offsite-backup]]); this skill is the
-  runbook + loader and never duplicates them.
+description: >
+  The Obsidian data-safety runbook: 3-2-1 backup of the vault, the never-deleted originals
+  archive, the schedulers that keep it running, and the restore / new-PC migration procedure.
+  Trigger on "make a backup", "verify the backup", "the backup looks broken", "restore the
+  vault". Verifies by reading state, not by trusting exit codes.
 license: MIT
 ---
 

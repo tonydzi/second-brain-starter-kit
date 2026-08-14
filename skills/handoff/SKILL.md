@@ -1,14 +1,12 @@
 ---
 name: handoff
 description: >
-  Собрать курированную "точку с запятой" — самодостаточный хэндофф-документ, по которому ДРУГАЯ
-  сессия / другой человек / другая машина продолжит работу с того места, где оборвалось, без
-  контекста этой сессии. В формате /compact: решения+почему · что сделано+тесты · точные пути и
-  значения · открытые блокеры · границы · и явный финальный шаг "➤ ПРОДОЛЖАЙ ОТСЮДА". Кладётся в
-  синкаемую папку → доезжает на нужную машину; плюс выдаётся короткий seed-промпт "Прочитай X и
-  продолжай". Триггеры: "/handoff", "приготовь хэндофф", "передай это <кому/на какую машину>",
-  "точка с запятой", "передай сессию", "hand this off", "prepare a handoff". Канон: память
-  session-machine-tagging (межмашинная передача), retro (compact-слой).
+  Build a curated "semicolon" — a self-contained handoff document that lets ANOTHER session /
+  person / machine continue the work exactly where this one stopped, without this session's
+  context. Format: decisions+why · what's done+tests · exact paths and values · open blockers ·
+  boundaries · an explicit "➤ CONTINUE FROM HERE" step. Lands in a synced folder plus a short
+  seed prompt ("Read X and continue"). Trigger on "/handoff", "prepare a handoff", "hand this
+  off".
 license: MIT
 ---
 

@@ -1,6 +1,11 @@
 ---
 name: content-mine
-description: "Ручной прогон КОНТЕНТ-МАЙНЕРА — вычитать наши сессии Claude Code и положить контентно-достойные моменты ЧЕРНОВИКАМИ в воронку (draft-first). Триггеры: /content-mine, «намайни контент», «прочеши сессии на контент», «что достойно поста из сессий», «mine sessions for content». Тонкая обёртка над content_miner.py (детектор 0 токенов → судья-вкус → capture в posts.jsonl source_kind session). Ручной аналог ночного backstop content-miner-nightly. НЕ путать с /episode (сборка эпизода из готового пост-материала), /wow (веха вне очереди), voice-triage (голос чата 00). Канон: память [[content-miner-reflex]], [[everything-becomes-content]]; движок $IMPORTS_ROOT/content-factory/content_miner.py."
+description: >
+  Manual run of the CONTENT MINER — read through recent Claude Code sessions and capture
+  content-worthy moments as DRAFTS into the publishing funnel (draft-first, nothing goes out).
+  Trigger on "/content-mine", "mine sessions for content", "what in our sessions deserves a
+  post". Thin wrapper over the miner engine: 0-token detector → taste judge → capture into the
+  drafts queue.
 license: MIT
 ---
 

@@ -1,16 +1,10 @@
 ---
 name: speak-as
-description: >-
-  Write a PUBLIC post in Anton's own voice with a ROLE MODEL's STYLE and idea-palette layered on top —
-  a generalized engine: it reads a style-palette file `08-Templates\style-<slug>-influence.md` for ANY
-  thinker Anton has profiled, so the same machine works for any role model, not just one. Trigger on
-  "/говори-как <имя>", "/speak-as <name>", "говори как <X>", "напиши в стиле <X>", "пост в стиле <X> про <тема>",
-  "запости как <X>", "сделай пост в стиле <X>", "write in <X>'s style", "<X>-style post about <topic>".
-  Default / first palette = Dana Lind (also fires on "говори как Артём", "/говори-как-Артём",
-  "Артём-пост"). For ONE-SHOT on-demand posts (FB diary / X / Telegram content). INFLUENCE, never copying —
-  the model's text is origin:external; the post stays Anton's (origin:anton). Anton's authorial voice = Opus ONLY.
-  Distinct from /портрет (builds a person dossier + can synthesize a new palette) and content-factory (daily
-  auto pipeline). Codified 2026-06-18, generalized from speak-Mei.
+description: >
+  Write a PUBLIC post in the owner's own voice with a ROLE MODEL's style and idea-palette
+  layered on top — a generalized engine that reads a style-palette file for ANY thinker the
+  owner has profiled, so the same machine works for any role model. Trigger on "/speak-as
+  <name>", "write in the style of <X>". Draft-first.
 license: MIT
 ---
 

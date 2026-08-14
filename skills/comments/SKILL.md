@@ -1,6 +1,10 @@
 ---
 name: comments
-description: Комментарии под НАШИМ опубликованным контентом одним заходом — показать неотвеченные (⛔ цель «ни одного неотвеченного» ОТМЕНЕНА 15.07: дефолт = молчать, отвечаем только где ждут, ≤3 за заход), топ-комментаторов (кандидаты в тёплую личку), и по «+» Антона подготовить пачку черновиков ответов (draft-first, тон по каналу). Trigger on "/comments", "комменты", "неотвеченные комменты", "кто комментит", "ответь на комменты", "покажи комментаторов", "our comments", "unanswered comments". Тонкая обёртка над pub_metrics.py / pub_comments_report.py / tg_comments_collect.py (pubmetrics.db). READ по умолчанию; отправка ответов — ТОЛЬКО по явному «+» Антона (масс-флуд = hard-stop). НЕ путать с /sostav-comments (реплаи в клуб СОСТАВ по YouTube-корпусу) — этот про комменты к нашим постам в наших каналах. Канон: волт 00-System\Pub-Metrics-Registry.md § Комменты; память content-pub-registry, short-text-when-unreviewed.
+description: >
+  Handle comments under OUR published content in one pass — show unanswered ones (default = stay
+  silent; reply only where a reply is genuinely expected, max 3 per pass), list top commenters
+  (candidates for a warm DM), and on approval prepare a batch of reply drafts (draft-first, tone
+  per channel). Trigger on "/comments", "unanswered comments", "who is commenting".
 license: MIT
 ---
 

@@ -1,13 +1,11 @@
 ---
 name: intake
-description: >-
-  "/intake" — приёмник правил: один проход раскладывает новое правило/регламент/предпочтение/правку
-  CLAUDE.md/Библии/скилла по ВСЕМ нужным домам и оставляет след в always-loaded слое, чтобы
-  параллельные процессы увидели его сами. Trigger on "/intake", "запиши правило", "прими правило",
-  "разложи это по домам", "новое правило в библию". Flow: RECALL-дедуп → классификация по форме →
-  запись во все дома (CLAUDE.md + память + MEMORY.md + если человеко-исполнимо Библия-реглумент +
-  MOC-wire) → бэкап + выборочный commit → отчёт постфактум. Тонкий оркестратор (skill-design-three-layer),
-  маршрут всё равно показываю Антону. Built 2026-06-19 (повторился ~10× за rules-intake-сессию).
+description: >
+  Rule intake: one pass routes a new rule/preference/policy edit into ALL the right homes
+  (always-loaded canon, memory, the behavioral Bible, a skill, a hook) and leaves a trace in the
+  always-loaded layer so parallel processes see it on their own. Trigger on "/intake", "record
+  this rule", "route this to its homes". Flow: RECALL-dedup → classify by form → write to all
+  homes → backup + selective commit → report.
 license: MIT
 ---
 

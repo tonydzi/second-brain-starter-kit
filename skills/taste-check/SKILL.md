@@ -1,6 +1,11 @@
 ---
 name: taste-check
-description: "Авто-ревьюер КАЧЕСТВА КОНТЕНТА (заметки волта / черновики исходящего / дедуп-мерджи / служебные файлы) — явный вердикт ✅ pass / ❌ fail / ⚠️ manual-review ДО показа Антону. Как /tt, но для контента: /tt проверяет «работает ли то, что собрали», /taste-check — «не стыдно ли показать/отправить то, что написали». Trigger on \"/taste-check <путь|текст>\", \"/taste\", \"проверь вкус\", \"проверь заметку перед показом\", \"taste check\", \"прогони через вкус\", а также САМ перед выдачей Антону свежесозданной заметки/черновика/мерджа. Первый фильтр, не финальный судья (судья = Антон). READ-ONLY: ревьюер НЕ пишет в волт и НЕ правит контент — только вердикт + список нарушенных принципов. Образец: taste-skill Артём Арсёнова (сигнал → принцип → проверка; гейт = рубильник с владельцем). Принципы выведены ТОЛЬКО из реальных сигналов Антона (rule_scan digests + memory с цитатами), не выдуманы."
+description: >
+  Auto-reviewer of CONTENT QUALITY (vault notes / outgoing drafts / dedup merges / service
+  files) — an explicit verdict ✅ pass / ❌ fail / ⚠️ manual-review BEFORE anything is shown or
+  sent. Like a post-build test gate, but for content: the test gate checks "does what we built
+  work", this checks "is what we wrote fit to show". Trigger on "/taste-check <path|text>",
+  "/taste", "check this note".
 license: MIT
 ---
 

@@ -1,6 +1,10 @@
 ---
 name: tg-check
-description: Per-machine self-test of BOTH Telegram channels (MCP + Telethon rail) — does THIS computer's Telegram work on both rails? Trigger on "/tg-check", "/tgcheck", "проверь телеграм каналы", "оба канала телеги работают?", "проверь mcp и telethon", "телега жива на этом компе?", "check telegram channels", "are both tg rails up". Runs the deterministic detector (0 tokens) AND the TRUE in-session MCP probe (a script can't test the MCP — only an in-session tool call can). Reports a 🟢/🔴 matrix per channel + the runbook on RED. Local per-machine twin of the hub-only connector-health-daily watchdog.
+description: >
+  Per-machine self-test of BOTH Telegram rails (MCP + userbot library) — does THIS computer's
+  Telegram work on both? Trigger on "/tg-check", "are both tg rails up", "check telegram
+  channels". Runs the deterministic detector (0 tokens) AND a true in-session MCP probe, prints
+  a per-rail verdict with the exact fix for whichever is down.
 license: MIT
 ---
 

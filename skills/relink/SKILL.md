@@ -1,14 +1,11 @@
 ---
 name: relink
-description: >-
-  "Перелинковка важного" — on-command BIDIRECTIONAL integration of a new IMPORTANT node (concept,
-  mental model, framework, theory, project, principle, research cluster) into the WHOLE vault graph,
-  not just creating a note. Trigger on "/relink", "перелинкуй важное", "перелинковка важного",
-  "интегрируй концепт <X>", "вплети это в граф", "/relink --deep". Mode A = one new node ↔ whole vault
-  (RAG retrieves candidates, never scan-all; draft→approve→backup→write→reindex). Mode B (--deep) =
-  weave back the orphan islands. Token-cheap: RAG/namesearch/grep FIND, LLM only JUDGES top-K.
-  Bidirectional = edits OLD notes → backup first, preview before, never auto-write. Built 2026-06-14,
-  hardened from a deep-research report 2026-06-14.
+description: >
+  Bidirectional integration of an important NEW node (concept, framework, theory, project,
+  principle) into the WHOLE vault graph — not just creating a note. Mode A: one new node ↔ whole
+  vault (RAG retrieves top-K candidates, LLM judges only those). Mode B (--deep): find orphaned
+  islands and wire them in. Trigger on "/relink", "integrate this concept", "weave this into the
+  graph". Backup before edits; preview before writing.
 license: MIT
 ---
 

@@ -1,6 +1,12 @@
 ---
 name: secondop
-description: "Codex как ВТОРОЕ МНЕНИЕ на каждой содержательной задаче — 3 точки: T1 старт («план валиден?»), T2 развилка («какой путь?»), T3 финиш + QA-ломатель («попробуй сломать»). Тонкая обёртка над secondop.py → codex_bridge.py (подписанный один структурный ход PROPOSE/COUNTER/VERIFY/ACCEPT/BLOCK, память через resume, самолечение модели); каждый обмен зеркалится в человеко-видимый чат «04 AI-DUO» (TG -5806098746). Гейт = ПАРАМЕТР secondop.json (сейчас gate=all: тест-фаза, наполняем 5-час квоту по мандату Антона 16.07). Квота-трекер: usage.jsonl + при rate-limit блок окна на 30 мин, не 429-петля. Пир без Codex → secondop_client.py (шина _machine-bus/_secondop, брокер на хабе тикает каждые 5 мин). Trigger on «/secondop», «/2o», «второе мнение», «спроси кодекса», «прогони через codex», «пусть codex проверит план», «codex сломай», «qa-ломатель», «second opinion». Канон: Decision Memo decision-2026-07-14-codex-claude-consensus-chat-architecture (Phase 1.5) + память codex-review-skill, codex-cli-install."
+description: >
+  A SECOND OPINION from an external LLM on every substantial task — 3 checkpoints: T1 start ("is
+  the plan valid?"), T2 fork ("which path?"), T3 finish + QA breaker ("try to break it"). One
+  structured move per exchange (PROPOSE/COUNTER/VERIFY/ACCEPT/BLOCK) with memory via resume;
+  every exchange is mirrored into a human-visible channel. Supports a multi-vendor panel (Codex
+  + Grok + Gemini) instead of a single reviewer. Trigger on "/secondop", "get a second opinion",
+  "run the review panel".
 license: MIT
 ---
 

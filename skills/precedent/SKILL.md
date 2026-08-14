@@ -1,15 +1,11 @@
 ---
 name: precedent
 description: >
-  Перед тем как решать/предлагать что-то структурное — поднять, РЕШАЛИ ли мы это уже:
-  ищет прошлые вердикты в журнале решений (02-Decisions / decision-*), в журнале отклонённого
-  (память declined-decisions) и в Библии (reglament-* / protocol-*), плюс семантический поиск
-  через /ask. Возвращает: что уже решено + почему + что отклоняли и при каком условии пересматривать.
-  Это RECALL-страховка к Alpha Protocol и к правилу "не пере-предлагать отклонённое".
-  Триггеры: "/precedent", "мы это уже решали?", "был ли прецедент", "что мы решили по",
-  "проверь решения по", "не отклоняли ли мы", "prior decision", "did we decide this".
-  0 токенов на поиске (grep/SQL первым), LLM только на суждении. Канон: память declined-decisions,
-  operating-agreement (decision hygiene), capture-rules-into-bible (RECALL-before-work).
+  Before deciding/proposing anything structural — look up whether it was ALREADY decided:
+  searches past verdicts in the decisions journal, the declined-decisions registry, and the
+  rules codex, plus semantic search. Returns: what was decided + why + what was rejected and
+  under what condition to revisit. Trigger on "/precedent <topic>", "did we already decide
+  this". The RECALL insurance for the Alpha Protocol.
 license: MIT
 ---
 

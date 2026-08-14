@@ -1,6 +1,11 @@
 ---
 name: telegram-howto
-description: Operating manual for Anton's Telegram via the connected MCP (chigwell/telegram-mcp, ~115 tools). How to find a chat by title with search_dialogs (a tool we added), the full tool inventory grouped by job, resolved chat ids Anton uses, the auto-transcribe bot in his content hub, the connector's gotchas (pinned-first ordering, big-page crash, reload-after-reconnect, untrusted fields), and the local source modifications + how to re-apply them. Load whenever working in Anton's Telegram so we don't re-learn the moves each session. Built with Anton 2026-06-08.
+description: >
+  Operating manual for Telegram via the connected MCP (~115 tools). How to find a chat by title,
+  the full tool inventory grouped by job, resolving chat ids, auto-transcription of voice notes,
+  and the connector's gotchas (pinned-first ordering, big-page crash, reload-after-reconnect,
+  untrusted fields, always pass an explicit account). Load whenever non-trivial Telegram work
+  starts.
 license: MIT
 ---
 

@@ -1,6 +1,11 @@
 ---
 name: reality-show
-description: "Континьюити-движок сезона (v2, 2026-07-10): читает ЕДИНЫЙ КАНОН show-canon (season/arcs/beats/loops) и подсказывает, какой нарративный бит двигать дальше, чтобы серии сцеплялись в СЕРИАЛ. Триггеры: /reality-show, /сериал, «покажи сезон», «какие арки открыты», «какой следующий эпизод», «свяжи в сериал», «ранее в сериале», «season state», «what arcs are open». Работает в паре с /episode (тот пишет серию, этот помнит сезон). ⛔ Прежний собственный стор season-state.json ЗАМОРОЖЕН (был третьим позвоночником) — источник истины теперь ТОЛЬКО канон. Голос Антона = Opus/Fable; read-only по дефолту; draft-first. НЕ путать с /episode (тир-адаптер) и /wow (веха вне очереди)."
+description: >
+  Season-continuity engine for serialized build-in-public content: reads a single canon file
+  (season/arcs/beats/loops) and suggests which narrative beat to advance next so episodes chain
+  into a SERIES. Trigger on "/reality-show", "season state", "what arcs are open", "previously
+  on". Works in a pair with the episode-adapter skill (that one writes; this one keeps
+  continuity).
 license: MIT
 ---
 

@@ -1,16 +1,11 @@
 ---
 name: tg-slot
 description: >
-  Освободить СЛОТ в Telegram под новую группу и сразу в неё войти. У аккаунта жёсткий потолок
-  каналов+супергрупп (500 обычный / 1000 Premium); упёршись в него, аккаунт физически не может
-  ни СОЗДАТЬ группу (`GEN-ERR-085`), ни ВОЙТИ по инвайту («Cannot join this chat - it has reached
-  maximum number of participants» — сообщение врёт, дело не в участниках чата, а в НАШЕМ лимите).
-  Триггеры: "/tg-slot", "нужен слот", "освободи слот", "почисти группы в телеграме", "не могу
-  создать группу", "не могу войти в группу", "GEN-ERR-085", "maximum number of participants",
-  "потолок групп", "telegram group limit". Ритуал: ЗАМЕРИТЬ → ранжировать наименее релевантные →
-  ПОКАЗАТЬ Антону → его «+» → выйти → пере-замерить → войти в новую. Выход НЕОБРАТИМ, поэтому
-  без явного «+» на КОНКРЕТНЫЙ список не выходим никогда. Канон: задача
-  task-2026-07-26-telegram-group-limit-cleanup, память telegram-account-identities.
+  Free a SLOT in Telegram for a new group and join it immediately. Accounts have a hard ceiling
+  of channels+supergroups; at the ceiling the account can neither CREATE a group nor JOIN by
+  invite (the error message misleadingly blames the target chat). The skill finds the least-
+  valuable current memberships, proposes what to leave, and retries the join. Trigger on "/tg-
+  slot", "can't join the group", "free a telegram slot".
 license: MIT
 ---
 

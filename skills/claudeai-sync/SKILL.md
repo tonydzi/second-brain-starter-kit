@@ -1,6 +1,10 @@
 ---
 name: claudeai-sync
-description: One-command incremental sync of Anton's claude.ai WEB account into the Obsidian vault — pull only the new/changed chats, fold them in as notes (idempotent, never overwrites curated ones), extract artifacts as first-class notes, concept-link the NEW artifacts (mandatory per concept-creation-rules), refresh the RAG index + dashboard. Trigger on "/claudeai-sync", "обнови claude.ai", "забери новые чаты из клода", "подтяни клод", "sync claude.ai", "что нового в claude.ai в волт". This is the WEB sibling of telegram-reimport (incremental re-import of an already-imported source). First-time setup + full design is in memory [[claude-ai-export-to-vault]]. Requires the Claude-in-Chrome MCP connected + Anton logged into claude.ai.
+description: >
+  One-command incremental sync of a claude.ai WEB account into the Obsidian vault — pull only
+  new/changed chats, fold them in as notes (idempotent, never overwrites curated ones), extract
+  artifacts as first-class notes, concept-link the new artifacts, refresh the RAG index +
+  dashboard. Trigger on "/claudeai-sync", "pull claude.ai", "grab new claude.ai chats".
 license: MIT
 ---
 

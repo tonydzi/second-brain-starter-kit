@@ -1,6 +1,10 @@
 ---
 name: x-post
-description: Publish a VETTED post/tweet to Anton's X (Twitter) account @Tony_Stef_ through his real logged-in Chrome (Claude-in-Chrome MCP, live tab — low-ban-risk path), rate-guarded and draft-first. Trigger on "/x-post", "запости в X", "твитни", "опубликуй в твиттер", "выложи в X", "post to X", "tweet this". Text = Anton's authorial voice (Opus), EN teaser per /episode canon (≤280 chars for a single post). Publishing = OUTBOUND + PUBLIC (Tier-2) → show final draft, wait for explicit "+". Guard = social_guard.py (x ≤6/day + anti-dup). Sibling of /fb-post (same Chrome pattern) and /tg-post. Handle truth = vault 00-System\Channels-Registry.md; ALWAYS verify the logged-in handle in the live tab before posting.
+description: >
+  Publish a VETTED post/tweet to an X (Twitter) account through the owner's real logged-in
+  Chrome (live-tab, low-ban-risk path), rate-guarded and draft-first. Trigger on "/x-post",
+  "tweet this", "post to X". Counts length the way X does (every link = 23 chars) and refuses
+  over-limit texts instead of silently truncating.
 license: MIT
 ---
 

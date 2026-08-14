@@ -1,15 +1,11 @@
 ---
 name: sync-check
 description: >
-  READ-ONLY зелёный/красный отчёт о Syncthing-синхронизации ЭТОЙ машины со всем кланом —
-  одна команда вместо ручного дёрганья REST по каждой папке. Показывает: подключены ли пиры,
-  по КАЖДОЙ шаре (Owner-Knowledge / claude-home / claude-skills / claude-config / claude-memory /
-  claude-secrets / claude-imports) state + сколько файлов ещё нужно (need=0 = в синке) + ошибки
-  папки, и сколько sync-conflict файлов накопилось (тихий признак, что две машины дерутся за файл).
-  Триггеры: "/sync-check", "проверь синк", "синк жив?", "syncthing ok?", "статус синхронизации",
-  "машины синкаются?", "sync status", "did the vault sync". 0 токенов, ничего не меняет.
-  Канон: память syncthing-desktop-laptop-sync, decision-vault-sync-architecture; грабли nested-folder
-  (D2) — память deterministic-script-gotchas.
+  READ-ONLY green/red report on THIS machine's file synchronization with the whole fleet — one
+  command instead of polling the sync REST API by hand. Shows: peers connected, per-share state
+  + files still needed (need=0 = in sync) + folder errors, and how many sync-conflict files
+  accumulated (the silent sign two machines are fighting over a file). Trigger on "/sync-check",
+  "is sync alive", "sync status". 0 tokens, changes nothing.
 license: MIT
 ---
 

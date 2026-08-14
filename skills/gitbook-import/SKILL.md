@@ -1,6 +1,10 @@
 ---
 name: gitbook-import
-description: Import a GitBook space (company docs / whitepaper) into Anton's Obsidian vault as well-linked atomic notes + MOC + concept links + RAG reindex — the proven Palo-Alto pipeline as one command. Trigger on "/gitbook-import <url>", "импортни гитбук <url>", "затащи gitbook в волт", "обнови гитбук в волте", "import this gitbook", "gitbook to vault". THIN WRAPPER over $IMPORTS_ROOT/gitbook/live/ — the GitBook sibling of obsidian-ingest (use obsidian-ingest for non-GitBook sources). Canon = memory [[palo-alto-gitbook-import]].
+description: >
+  Import a GitBook space (company docs / whitepaper) into the Obsidian vault as well-linked
+  atomic notes + MOC + concept links + RAG reindex — a proven pipeline as one command. Trigger
+  on "/gitbook-import <url>", "import this gitbook", "gitbook to vault". Thin wrapper over the
+  import engine; idempotent re-import supported.
 license: MIT
 ---
 

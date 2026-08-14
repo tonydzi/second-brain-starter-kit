@@ -1,6 +1,11 @@
 ---
 name: raise-sync
-description: ACTIVE recovery when machines can't see each other over Syncthing — the "raise the sync" runbook as one command. Establishes ground truth AT THE HUB (live Syncthing API, NOT memory or one peer's claim), publishes the hub's VERIFIED Device ID to the Telegram bus, and guides each disconnected peer to re-pair. Trigger on "/raise-sync", "подними синк", "синк лёг", "компы не видят друг друга", "восстанови связь машин", "raise the sync", "sync down", "fix the sync", "re-pair the hub". DISTINCT from /sync-check (that is READ-ONLY status); this one drives the RECOVERY. Read-only on the machines themselves (I can't reconfigure a peer's Syncthing) + one coordination post to the bus. Canon: vault reglament-chp-poterya-sinka-mezhdu-mashinami (§4 runbook) + memory sync-loss-incident-and-monitor.
+description: >
+  ACTIVE recovery when machines can't see each other over the file-sync network — the "raise the
+  sync" runbook as one command. Establishes ground truth at the hub (live sync API, NOT memory
+  or one peer's claim), publishes the hub's verified device ID over the messaging rail, and
+  guides each disconnected peer to re-pair. Trigger on "/raise-sync", "sync is down", "machines
+  can't see each other".
 license: MIT
 ---
 

@@ -1,15 +1,12 @@
 ---
 name: 1
 description: >
-  Восстановление после ЖЁСТКОГО обрыва сессии (крэш / комп вырубился / контекст потерян посреди работы) —
-  ОДНА сверхкороткая команда «где мы были + всё ли живо + верни историю». Триггеры: "/1", "/!",
-  "восстановись", "продолжаем", "я вернулся", "где мы остановились", "проверь что всё работает",
-  "сделай recall и проверь систему", "resume after crash", "wake". Делает 3 шага: (1) RECALL из
-  TurnState-чёрного-ящика (что просили / файлы / решения последних ходов, 0 токенов); (2) ПИНГ здоровья
-  зелёный/красный — arch (система) · sync (Syncthing) · mcp (коннекторы, внутрисессионно); (3) собирает
-  ВСЮ историю прошлой сессии в буфер (как /resume-last) для полного подхвата. НЕ путать с /retro (это
-  ЧИСТОЕ завершение сессии, упаковка+compact — после крэша упаковывать нечего). Тонкая обёртка над уже
-  готовыми движками. Канон: память [[crash-recovery-command]], [[turnstate-ledger]], [[claude-desktop-sessions-per-account]].
+  Recover after a HARD session crash (app died, computer rebooted, context lost mid-work) with
+  one ultra-short command: where were we + is everything alive + restore history. Trigger on
+  "/1", "/!", "resume after crash", "wake". Three steps: (1) RECALL from the TurnState black-box
+  ledger (last requests, files, decisions — 0 tokens); (2) green/red health ping: system map,
+  file sync, MCP connectors; (3) collect the full previous-session history for seamless pickup.
+  Distinct from a retrospective: after a crash there is nothing to wrap up, only to recover.
 license: MIT
 ---
 

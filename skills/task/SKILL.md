@@ -1,14 +1,10 @@
 ---
 name: task
 description: >
-  Лента делегирования «04 TASKS» — Антон делегирует задачу Нина/Рита/себе, а её Клод
-  разворачивает короткую КОДОВУЮ ФРАЗУ («задача НАТ-1») в полный сид и сразу начинает работу.
-  Trigger on "/task", "задача НАТ-<n>", "задача РУСЛ-<n>", "задача ANT-<n>", "мои задачи",
-  "задачи для меня", "что мне делегировано", "делегируй Нина/Рита <задачу>",
-  "это задача для Нина", "передай Нина задачу", "my delegated tasks". Любой регистр.
-  Движок = scripts/_shared/delegate.py (0 токенов, сиды в vault 10-Tasks\_seeds, синк везде);
-  человеческая лента = TG-чат «04 TASKS» (все аккаунты семьи + AI). Канон: память
-  [[delegation-chat-04-tasks]], [[task-assignment-by-machine]], [[connect-rule-pipeline-ownership]].
+  A delegation lane over a shared task chat: a task is assigned by a short CODE PHRASE ("task
+  <PERSON>-<n>"), and the assignee's Claude expands it into a full seed and starts work
+  immediately. Trigger on "/task", "task <ID>", "my delegated tasks", "delegate <task> to
+  <person>". Includes state tracking so no delegated task silently dies.
 license: MIT
 ---
 

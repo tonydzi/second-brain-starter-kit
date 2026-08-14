@@ -1,14 +1,10 @@
 ---
 name: portret
-description: >-
-  Build a deep DOSSIER on a person — recall everything Anton already has on them, map ALL their public
-  social profiles via web research, emit an Alpha-Protocol Deep-Research prompt, and persist a well-linked
-  person-card in the vault. Trigger on "/портрет <имя>", "/portret <name>", "портрет <имя>", "досье на
-  <имя>", "собери досье <имя>", "профиль человека <имя>", "изучи <имя> как личность", "profile <name>",
-  "dossier on <name>", "research this person <name>". For a PERSON (role model, lead, partner, thinker)
-  Anton wants to understand deeply. Distinct from /find (exact-name lookup, 0 tokens) and /ask (semantic
-  vault search) — /портрет ORCHESTRATES recall + web + DR-prompt + a dossier note. Codified 2026-06-17
-  from the Dana Lind dossier build.
+description: >
+  Build a deep DOSSIER on a person — recall everything already known about them from the vault,
+  map their public profiles via web research, emit a Deep-Research prompt for external tools,
+  and persist a well-linked person-card in the vault. Trigger on "/portret <name>", "dossier on
+  <name>", "profile <name>".
 license: MIT
 ---
 

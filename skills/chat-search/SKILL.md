@@ -1,6 +1,11 @@
 ---
 name: chat-search
-description: Поиск ВНУТРИ старых чатов Claude Code ("Книга чатов" / episodic-индекс) — найти, в каком прошлом чате обсуждали тему, и одной командой продолжить его. Ищет по ОТДЕЛЬНОМУ индексу сессий (_brain_sessions.*), НЕ по острому essence /ask, так что сырая болтовня чатов не засоряет "ум". Триггеры "/chat-search", "/книга", "в каком чате обсуждали X", "найди чат про X", "искали ли мы уже X", "search old chats", "which chat discussed X". Каждый хит = дата·машина·тема·сниппет + готовая команда resume. Только HUMAN-чаты (служебные/роботы уже отфильтрованы экспортом). Канон: память [[claude-desktop-sessions-per-account]], [[essence-index-live]] (Этап 2 эссенс/эвиденс).
+description: >
+  Search INSIDE past Claude Code sessions (the episodic "book of chats" index) — find which
+  previous session discussed a topic, and continue it with one command. Uses a SEPARATE session
+  index, NOT the curated-knowledge RAG, so raw chat noise never pollutes the distilled brain.
+  Trigger on "/chat-search", "which chat discussed X", "did we already research X", "search old
+  chats".
 license: MIT
 ---
 

@@ -1,11 +1,10 @@
 ---
 name: five-hard
-description: >-
-  Five Hard Questions — раз в месяц (или по запросу) брейн САМ задаёт Антону 5 трудных вопросов
-  по его же убеждениям и кодексу (belief-* + concept-bible-*), где он давно НЕ пересматривал
-  позицию. Не дать assumptions окаменеть. Trigger on "/five-hard", "5 hard", "пять трудных",
-  "задай мне трудные вопросы", "challenge my beliefs", "pressure-test my views".
-  Часть «активного брейна» (B из карты A–E). DISTINCT from /coach (день) — тут ДАВНИЕ позиции.
+description: >
+  Five Hard Questions — monthly (or on demand) the second brain ITSELF asks the owner 5 hard
+  questions about their own long-held beliefs and codex entries that haven't been revisited in a
+  while. Prevents assumptions from fossilizing. Trigger on "/five-hard", "challenge my beliefs",
+  "pressure-test my views". Part of the active-brain question loop.
 license: MIT
 ---
 

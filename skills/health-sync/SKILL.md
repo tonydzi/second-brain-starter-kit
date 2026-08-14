@@ -1,6 +1,10 @@
 ---
 name: health-sync
-description: On-demand pull of FRESH messages from Anton's 7 Telegram HEALTH chats (medicine, blood/pressure, vitamins/БАДы, nootropics/mind, healing-head, longevity/weight-loss, fasting-community) into the Obsidian vault. Incremental + idempotent (dedup by Telegram message id) — safe to re-run, never makes duplicates. MANUAL counterpart of the weekly scheduled task `health-weekly-sync`; both call the SAME scripts in $IMPORTS_ROOT/health/ (single source of truth). Trigger on "/health-sync", "подтяни здоровье", "обнови health", "забери свежее из health-чатов", "sync health chats", "что нового по здоровью в телеграме".
+description: >
+  On-demand pull of fresh messages from a set of health-related Telegram chats (medicine,
+  supplements, longevity, fasting, etc.) into the Obsidian vault. Incremental + idempotent
+  (dedup by message id) — safe to re-run. Manual counterpart of the weekly scheduled sync; both
+  call the same scripts. Trigger on "/health-sync", "pull the health chats".
 license: MIT
 ---
 

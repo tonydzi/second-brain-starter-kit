@@ -1,6 +1,11 @@
 ---
 name: follower-onboard
-description: Onboard a NEW family/clan machine as a FOLLOWER-CONSUMER (v1 data-only) joining Anton's multi-machine Claude+vault network (Nina + Rita done; Artem / future next). A follower READS the Second Brain vault + canon (CLAUDE.md) + skills + memory as RECEIVE-ONLY data, runs NOTHING heavy locally (no RAG/reindex/torch), and the hub NEVER pushes executable hooks to it (a follower's stock Claude correctly refuses that as a backdoor). NOT a full hub migration (that = /migrate). Trigger on "/follower-onboard <name>", "подключи <имя> как ведомого", "собери пакет ведомого для <имя>", "onboard <name> as follower", "новый ноут коллеги/семьи как потребитель". Canon = memory [[machine-migration]] + Bible reglament-vozhak-vedomyy-canon-governance + reglament-multi-machine-claude-i-peredacha-mezhdu-mashinami §3f.
+description: >
+  Onboard a NEW family/team machine as a FOLLOWER-CONSUMER joining the multi-machine
+  Claude+vault network. A follower READS the shared vault + canon + skills + memory as RECEIVE-
+  ONLY data, runs nothing heavy locally (no RAG/reindex/GPU), and the hub never pushes
+  executable hooks to it. Trigger on "/follower-onboard <machine>", "onboard a new machine as
+  follower". Checklist-driven with verify steps at each stage.
 license: MIT
 ---
 

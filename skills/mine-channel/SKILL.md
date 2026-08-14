@@ -1,6 +1,10 @@
 ---
 name: mine-channel
-description: Mine ANY Telegram channel/chat for alpha in one command — scrape (0-token Telethon) → deterministic detector shortlist → Sonnet judge (real alpha FOR Anton) → well-linked vault notes + db + MOC + reindex. Trigger on "/mine-channel <@channel|id>", "затащи канал <X>", "отожми альфу из <канал>", "намайни <канал>", "разбери канал <X>", "mine this channel", "alpha from <channel>". The generalised version of the proven Fox / prompt_design / Силиконовый Мешок / Состав / Lobster runs (done manually 5×). THIN wrapper over $IMPORTS_ROOT/alpha/mine_channel.py + the alpha-judge skill + obsidian-ingest — does NOT re-implement them. Canon: memory alpha-extraction-engine, sostav-community-import, promptdesign-mine, foxpod-mine.
+description: >
+  Mine ANY Telegram channel/chat for alpha in one command — scrape (0-token, incremental) →
+  deterministic detector shortlist → LLM judge (what's genuinely valuable FOR this owner) →
+  well-linked vault notes + database + MOC + reindex. Trigger on "/mine-channel <@channel|id>",
+  "mine this channel", "alpha from <channel>". Generalized: any channel, one config.
 license: MIT
 ---
 

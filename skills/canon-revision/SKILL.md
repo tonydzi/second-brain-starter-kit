@@ -1,6 +1,11 @@
 ---
 name: canon-revision
-description: "Полная структурная РЕВИЗИЯ always-loaded файла правил (CLAUDE.md / MEMORY.md): ТОП-блок самых важных правил + категории §0-§N, тела правил переезжают verbatim (скрипт двигает байты и доказывает 0 потерь, LLM решает только маппинг), жирная механика фолдится в триггер+суть+указатель, потом стражи → канон-рельса → 3-дневный датчик «не стало хуже» → раскат на флот. Триггеры: /canon-revision, «ревизия claude.md», «переструктурируй клод мд / memory md», «наведи порядок в правилах», «пересобери код мд», а также САМ, когда guard входит в жёлтую зону (100KB) и накопились устаревшие секции. Обкатано вживую 22.07.2026 (CLAUDE.md v2: ТОП-20 + §0-§10, md5 49f8df4b). Цикл Антона: файл свободно растёт до ~110-120KB → раз в несколько недель полная ревизия. НЕ пере-сжатие слов (declined) — только структура."
+description: >
+  Full structural REVISION of an always-loaded rules file (CLAUDE.md / MEMORY.md): build a TOP
+  block of the most important rules + numbered categories, move rule bodies verbatim (a script
+  moves bytes and proves 0 losses; the LLM decides only the mapping), fold heavy mechanics into
+  trigger+gist+pointer form, then guards → canary window → fleet rollout. Trigger on "/canon-
+  revision", "revise the canon". For scheduled maintenance, not ad-hoc trimming.
 license: MIT
 ---
 

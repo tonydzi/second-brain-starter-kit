@@ -1,6 +1,10 @@
 ---
 name: release-slice
-description: "Ритуал «порция наружу» движения «бесплатная школа»: взять кусок нашей системы → санитизировать → leak-scan (hard gate) → опубликовать на GitHub (мандат Антона 03.07: автономно) → changelog/roadmap/тег по каденсу пн+чт → контент-волна через /wow. Триггеры: /release-slice <кусок|боль №N>, «выпусти порцию», «релизни боль N», «следующая порция роадмапа», «ship slice». НЕ путать с /wow (тот делает только контент-волну; этот - весь конвейер от куска до волны). Канон: decision-open-second-brain-free-education-go-2026-07-02."
+description: >
+  The "ship a slice" ritual for open-sourcing pieces of a private system: take a component →
+  sanitize → leak-scan (hard gate) → publish to GitHub → changelog/roadmap/tag on cadence →
+  content wave. Trigger on "/release-slice <piece>", "ship the next slice", "release pain #N".
+  Publishing without the leak-scan gate is forbidden.
 license: MIT
 ---
 

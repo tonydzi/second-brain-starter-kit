@@ -1,6 +1,10 @@
 ---
 name: takeout-pull
-description: Never let a Google Takeout export expire un-downloaded again. Detects "ready to download" Takeout emails in Anton's a@ mailbox (0-token deterministic scan), reports LIVE links with days-left, and drives the download + vault import. Trigger on "/takeout-pull", "проверь takeout", "takeout готов?", "забери takeout", "скачай экспорт google", "is my takeout ready", "pull my takeout". The forever-fix for the 2026-06 dropped-handoff (a passive calendar reminder let a scoped YouTube history export die). READ/detect is autonomous; DOWNLOAD of Anton's OWN Takeout is pre-authorized; passkey/2FA on the Google login = hard-stop, escalate to Anton.
+description: >
+  Never let a Google Takeout export expire un-downloaded again. Detects "ready to download"
+  Takeout emails in the mailbox (0-token deterministic scan), reports LIVE links with days-left,
+  and drives the download + vault import. Trigger on "/takeout-pull", "is my takeout ready",
+  "pull my takeout".
 license: MIT
 ---
 

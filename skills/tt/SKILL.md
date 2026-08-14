@@ -1,22 +1,12 @@
 ---
 name: tt
 description: >
-  Ворота КАЧЕСТВА сразу после сборки — «докажи, что то, что мы ТОЛЬКО ЧТО собрали, реально работает»,
-  пока контекст ещё горячий. Триггеры: "/tt", "/test", "протестируй", "докажи что работает",
-  "проверь качество", "оттестируй", "test what we built", "prove it works". (`/tt` = `/test` — одно и
-  то же, как `/1`+`/!` и `/rr`+`/retro`.) Делает 6 шагов: (a) ОБЛАСТЬ — что именно изменили в этой
-  задаче (файлы/скиллы/скрипты/рутины/заметки); (b) ПРОГНАТЬ вживую на РЕАЛЬНЫХ данных, не в теории;
-  (c) ПОЛОМАТЬ нарочно (пустой ввод, нет зависимости, грабли путей C:/E:, graceful degrade) + ВТОРОЕ
-  МНЕНИЕ внешнего ломателя на каждый изменённый ИСПОЛНЯЕМЫЙ артефакт: Codex — дефолт (secondop.py t3
-  --ritual tt), Grok — вторая рельса (⭐26.07 хаб: локальный CLI headless — secondop.py t3 --engine grok; браузер grok.com = фолбэк через grok-prompt → log-ext); скип
-  только явный через log-skip → тогда вердикт максимум ⚠️, не ✅);
-  (d) СЛОЙ ВИДИМОСТИ — видно ли вообще, что сработало (счётчики/логи — именно это ловит «тихий» успех);
-  (e) КОРЕНЬ сбоя → починить → перепрогнать; (f) ВЕРДИКТ ✅/⚠️/❌ С ДОКАЗАТЕЛЬСТВОМ. Только ✅ = «готово».
-  Тест ≠ ретро и идёт ДО него: BUILD → /tt (на каждую задачу, горячий контекст) → … → конец сессии → /retro
-  (ретро лишь АУДИТит строку «протестировано? ✅/❌», саму проверку не делает — поздно/холодно).
-  Тонкий оркестратор (skill-design-three-layer), markdown-only, без сервера/БД (AK-47).
-  Канон: память [[test-after-build-skill]], [[verify-existing-before-proposing]], [[fix-root-cause-not-symptoms]],
-  [[long-task-healthcheck]], [[deterministic-script-gotchas]]; родня [[crash-recovery-command]] (/1), [[retro]].
+  QUALITY GATE right after building — "prove that what we JUST built actually works" while the
+  context is still hot. Trigger on "/tt", "/test", "prove it works", "test what we built". Six
+  steps: (a) scope — what exactly changed; (b) live run on real data; (c) break it on purpose;
+  (d) visibility layer — a counter/log proves it ran; (e) root-cause any failure and re-run; (f)
+  verdict ✅/⚠️/❌ with evidence. Only ✅ earns the word "done". Supports an external multi-vendor
+  review panel as step 2.5.
 license: MIT
 ---
 

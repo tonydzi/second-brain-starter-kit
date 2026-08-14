@@ -1,13 +1,10 @@
 ---
 name: chat
 description: >
-  Find a Telegram CHAT/group/channel by name instantly — returns its telegram_id +
-  t.me link from the local chats.db index (0 tokens, no live crawl). Trigger on
-  "/chat <query>", "найди чат <X>", "id чата <X>", "дай ссылку на чат <X>", "в каком
-  чате <...>", "find the <X> chat". Also answers "есть ли общие группы с <человеком/
-  компанией>" (common_groups). This is the CHAT lane — distinct from /find (people via
-  names.db) and /search (words inside chat messages) and /ask (semantic vault). When a
-  chat isn't in the index, fall back to the live MCP search_dialogs / get_common_chats.
+  Find a Telegram CHAT/group/channel by name instantly — returns its telegram_id + t.me link
+  from a local chats.db index (0 tokens, no live crawl). Trigger on "/chat <query>", "find the
+  <X> chat", "chat id for <X>". Also answers "do we share any groups with <person/company>" via
+  common-groups lookup. Distinct from person-search: this is the CHAT lane.
 license: MIT
 ---
 

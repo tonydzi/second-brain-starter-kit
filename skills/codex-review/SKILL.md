@@ -1,6 +1,11 @@
 ---
 name: codex-review
-description: "Двусторонняя гетеро-пара ревью кода: Claude ревьюит дифф Codex И Codex ревьюит дифф Claude — финальную проверку делает ДРУГОЙ вендор (исследование `tap`: 69.8% против 53.1% у однородной пары). Оба движка собраны и /tt'd (cc_review.py 07.07 + codex_review.py, нативный codex exec без WSL2). ✅ На хабе HUB-1 обе стороны РАБОТАЮТ: Codex CLI 0.144.4 установлен и smoke-тест прогнан 14.07 (баги→REQUEST_CHANGES за 16с, чистый→APPROVE, пустой→graceful). Вердикт APPROVE / REQUEST_CHANGES + review-*.md. Триггеры: «/codex-review», «проверь кодекс», «claude проверь codex», «codex проверь claude», «отревьюй дифф», «двусторонняя пара», «review the diff», «review codex», «вторая пара глаз». Движки: ~/.claude/scripts/cc-review/cc_review.py (Claude→Codex) + codex_review.py (Codex→Claude). Канон: decision-hermes-multivendor-arbitrage-rejected (вариант B), [[any-llm-vault-actor]] Phase 3."
+description: >
+  Two-way heterogeneous code-review pair: Claude reviews Codex's diff AND Codex reviews Claude's
+  diff — the final check is done by the OTHER vendor (research shows a hetero pair catches
+  significantly more than a homogeneous one). Verdicts: APPROVE / REQUEST_CHANGES with file:line
+  references. Trigger on "/codex-review", "cross-review this diff", "have the other vendor check
+  this".
 license: MIT
 ---
 

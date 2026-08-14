@@ -1,14 +1,10 @@
 ---
 name: telegram-lead-outreach
-description: >-
-  How Anton works leads in Telegram — find prospects by topic, keep only the ones who SELF-mentioned
-  it, resolve their @handle (incl. the common-groups trick), pitch them personalized + grounded in his
-  real templates (Palo Alto AI Research Lab / Silicon Valley VC), run his 2-step Calendly close, auto-
-  follow-up triage via /pipeline, and capture them in the Platinum CRM. Use whenever Anton says "find leads
-  who mentioned X", "pitch these leads", "follow up the <topic> leads", "work the Canton leads",
-  "собери лидов по теме", "напиши этим лидам", or wants to turn Telegram conversations into CRM cards.
-  Outbound: send DIRECTLY (Anton 2026-06-16 — no text pre-approval; he edits the sent message after if off); write from the WARMEST-thread account per lead; hard-stops (money/commitments/secrets/mass-flood) remain.
-  Requires the send-enabled Telegram MCP (see telegram-mcp-connector).
+description: >
+  How to work leads in Telegram — find prospects by topic, keep only those who SELF-mentioned
+  it, resolve their @handle (incl. the common-groups trick), pitch personalized + grounded in
+  real templates, run a 2-step scheduling close, follow-up triage, and capture everyone in the
+  CRM. Trigger on "find leads for <topic>", "pitch this prospect", "run outreach".
 license: MIT
 ---
 

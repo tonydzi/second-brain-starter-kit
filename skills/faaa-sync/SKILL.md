@@ -1,6 +1,10 @@
 ---
 name: faaa-sync
-description: On-demand pull of FRESH FAAA follow-up call notes from Anton's Telegram group "CALLS 889 MAIN FA FAAAA follow up" (chat <YOUR_CHAT_ID>) into the Obsidian Platinum-CRM. Incremental + idempotent (dedup by Telegram message id) — safe to re-run, never makes duplicates. This is the MANUAL counterpart of the weekly scheduled task `faaa-weekly-sync`; both call the SAME scripts in $IMPORTS_ROOT/ (single source of truth, no logic duplication). Trigger on "/faaa-sync", "подтяни свежие FAAA", "забери свежие звонки", "обнови FAAA", "sync FAAA calls", or whenever Anton wants the latest call follow-ups in the vault without waiting for Monday's auto-run.
+description: >
+  On-demand pull of FRESH follow-up call notes from a dedicated Telegram group into the CRM
+  layer of the vault. Incremental + idempotent (dedup by Telegram message id) — safe to re-run,
+  never makes duplicates. Manual counterpart of the weekly scheduled sync; both call the SAME
+  scripts (single source of truth). Trigger on "/faaa-sync", "pull the follow-up notes".
 license: MIT
 ---
 

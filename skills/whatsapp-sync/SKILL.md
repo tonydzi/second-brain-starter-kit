@@ -1,6 +1,11 @@
 ---
 name: whatsapp-sync
-description: On-demand refresh of Anton's WhatsApp text into the Obsidian vault (data layer + dashboard + group labels + contact notes). TEXT ONLY — never download media (Anton 2026-06-15). Pulls the recent window the live companion bridge exposes (variant A, main number) — NOT the full multi-year archive (that needs the phone-backup path). Semi-auto by design: it drives Anton's LIVE main-number bridge and needs a Sonnet labeler, so it is NOT a blind 24/7 robot — it runs when Anton asks (or a monthly reminder). Trigger on "/whatsapp-sync", "обнови whatsapp", "подтяни ватсап", "забери свежее из whatsapp", "sync whatsapp", "разбери ватсап".
+description: >
+  On-demand refresh of WhatsApp text into the Obsidian vault (data layer + dashboard + group
+  labels + contact notes). TEXT ONLY — never downloads media. Pulls the recent window the live
+  companion bridge exposes, not the full multi-year archive. Semi-auto by design: it drives the
+  live main-number bridge and needs the phone nearby. Trigger on "/whatsapp-sync", "pull
+  whatsapp".
 license: MIT
 ---
 

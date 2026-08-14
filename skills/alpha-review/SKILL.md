@@ -1,6 +1,10 @@
 ---
 name: alpha-review
-description: Open Anton's ALPHA REVIEW screen (the ONE place to mark judge keepers «золото/мимо» and see per-miner precision) + print the eval state. Trigger on "/alpha-review", "открой экран альфы", "экран отбора", "экран золота", "поднять экран разметки", "alpha screen", "открой разметку альфы", "покажи eval альфы". Thin launcher over the existing engine (alpha_harvest.py + alpha_review_server.py @8772) — builds nothing, judges nothing (judging = /alpha-judge or /community-alpha). READ/label-local only; «→ в дом» on the screen queues a DRAFT, vault writes stay behind backup→ДО→ПОСЛЕ→approve (Tier-2). Canon: memory alpha-extraction-engine + decision-alpha-extraction-engine-variant-a (c).
+description: >
+  Open the ALPHA REVIEW screen — the one place to mark judge keepers as gold/miss and see per-
+  miner precision — and print the eval state. Trigger on "/alpha-review", "alpha screen", "open
+  the review screen". Thin launcher over the existing harvest engine and local review server;
+  builds nothing new.
 license: MIT
 ---
 

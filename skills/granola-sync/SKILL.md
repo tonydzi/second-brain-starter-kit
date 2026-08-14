@@ -1,6 +1,10 @@
 ---
 name: granola-sync
-description: On-demand подтягивание свежих звонков/встреч Антона из Granola (саммари + транскрипты + участники) в Obsidian-волт через ОФИЦИАЛЬНЫЙ Granola API (ключ в secrets\granola.env). Инкрементально + идемпотентно (дедуп по note id + updated_at) — безопасно гонять повторно, дублей не делает. Trigger on "/granola-sync", "подтяни granola", "забери звонки из granola", "обнови встречи", "sync granola", "что нового по звонкам в волт". Ночной двойник = OS-задача "Granola Nightly Pull" (03:40, тот же скрипт — single source of truth). Канон: память [[granola-mcp-integration]] + волт 02-Decisions\decision-granola-extraction-official-api.md.
+description: >
+  On-demand pull of fresh calls/meetings from Granola (summaries + transcripts + participants)
+  into the Obsidian vault via the official API. Incremental + idempotent (dedup by note id +
+  updated_at) — safe to re-run, no duplicates. Trigger on "/granola-sync", "pull granola",
+  "refresh meetings".
 license: MIT
 ---
 

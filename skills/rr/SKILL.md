@@ -1,12 +1,10 @@
 ---
 name: rr
 description: >
-  Горячая клавиша-алиас для /retro — Антону лень печатать слово «ретро», короткий дуплет
-  /rr удобнее. ТОЖЕ САМОЕ, что /retro, ноль отличий (как /1 == /! и /tt == /test).
-  Триггеры: "/rr", "rr", "/рр", "/кк" (r-клавиша на RU-раскладке = к), "ретро", "заверши сессию".
-  Никакой своей логики: увидев любой из них — НЕМЕДЛЕННО запусти скилл `retro` (единственный
-  источник ретро-логики, дублировать запрещено — AK-47 §5.1). Канон: память [[test-after-build-skill]]
-  (семья дуплет-алиасов /tt /rr /cc), скилл `retro`.
+  Hotkey alias for /retro — the short double-letter is faster to type. IDENTICAL to /retro, zero
+  differences (like /1 == /! and /tt == /test). On any trigger ("/rr", "rr", "retro")
+  immediately run the `retro` skill — the single source of retro logic; duplicating it is
+  forbidden.
 license: MIT
 ---
 

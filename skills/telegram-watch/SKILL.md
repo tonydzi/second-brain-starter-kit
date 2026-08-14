@@ -1,17 +1,10 @@
 ---
 name: telegram-watch
-description: >-
-  Run the always-on "вахта" loop over Anton's Telegram using the MCP push tools
-  (wait_for_settled_message) — the assistant identity is the SEPARATE account
-  @corp_acct. Mode 1: when @corp_acct is mentioned in the team chats
-  (Покупки / Assistance), comment on Anton's last 3-5 directives above with
-  actionable advice for his team, grounded in the Obsidian vault (Bible
-  reglaments + concepts). Mode 2: answer Anton's own DMs to @corp_acct with
-  the FULL Claude Code + Obsidian knowledge about him. Trigger on
-  "/telegram-watch", "запусти вахту", "запусти помощника в телеграме",
-  "watch my telegram". Send-direct (2026-06-16 — Anton edits after); hard gates (money/commitments/secrets) defer to the
-  telegram-assistant skill + bible. Requires the corp_acct account connected
-  in the telegram MCP and the events.py group-mention patch live.
+description: >
+  An always-on watch loop over Telegram using MCP push tools, run under a SEPARATE assistant
+  account. Mode 1: when the assistant account is mentioned in team chats, comment on the last
+  few directives with actionable, vault-grounded advice. Mode 2: ambient watch of designated
+  chats with salient-event pings. Trigger on "/telegram-watch", "start the telegram watch".
 license: MIT
 ---
 

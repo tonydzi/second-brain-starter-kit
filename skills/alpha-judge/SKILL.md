@@ -1,17 +1,12 @@
 ---
 name: alpha-judge
-description: >-
-  The LLM-JUDGE stage of Anton's alpha-extraction engine — the reusable "expensive judge"
-  half of the "cheap detector → expensive judge" pattern, shared by ALL 10 miners. Given a
-  miner's deterministic candidates (0-token prefilter), it keeps only the REAL signal (Anton's
-  own X of the right type) and drops noise, then proposes additions to that miner's pre-existing
-  curated HOME note. Trigger on "/alpha-judge", "/alpha-judge <miner>", "суди кандидатов",
-  "отсуди <майнер>", "прогони судью", "judge the candidates", "просуди майнер". Miners: bets,
-  contradictions (stance, bridge, recurring, novelty, identity, openq as they ship; leadsignal+orphan RETIRED 2026-07-16 per etalon).
-  Model: Opus in-session by default (Anton's 2026-06-14 session override — switch to Sonnet on his
-  command when Opus near limit); nightly unattended = Sonnet (free bucket). Token-cheap: reads ONLY
-  the small candidate digest + the home note, NEVER the corpus. Canon: decision-alpha-extraction-engine-variant-a;
-  memory alpha-extraction-engine.
+description: >
+  The LLM-JUDGE stage of an alpha-extraction engine — the reusable "expensive judge" half of the
+  "cheap detector → expensive judge" pattern, shared by all miners. Given a miner's
+  deterministic candidate list (0-token prefilter), it keeps only the REAL signal and drops
+  noise, then proposes additions to that miner's curated home note. Trigger on "/alpha-judge
+  <miner>", "judge the candidates". Token-cheap: reads ONLY the small candidate digest + the
+  home note, never the corpus.
 license: MIT
 ---
 

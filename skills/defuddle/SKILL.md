@@ -1,6 +1,10 @@
 ---
 name: defuddle
-description: Clean web→markdown extraction via kepano's defuddle CLI (engine of Obsidian Web Clipper) — turn any article URL into a vault-ready markdown note WITHOUT ads/nav/comments, saving 40-60% tokens vs WebFetch. Trigger on "/defuddle <url>", "вытащи статью <url>", "статью в волт", "чистый импорт страницы", "clean import this page", or PREFER it over WebFetch whenever the task is "read/ingest a normal web article/blog/docs page". NOT for .md URLs (WebFetch direct), not for JS-heavy apps/paywalls (fallback WebFetch/Chrome). Installed 2026-07-04 per Anton's "+" (2026-06-28). Canon: dr-friends-starter-kit-2026-07-02 (vault), memory always-archive-artifacts-to-vault.
+description: >
+  Clean web→markdown extraction via the defuddle CLI (the engine behind Obsidian Web Clipper) —
+  turn any article URL into a vault-ready markdown note WITHOUT ads/nav/comments, saving 40-60%
+  tokens vs raw fetching. Trigger on "/defuddle <url>", "clean import this page", or PREFER it
+  over a raw web fetch whenever the task is "read/ingest a normal web article".
 license: MIT
 ---
 

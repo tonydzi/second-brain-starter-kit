@@ -1,6 +1,9 @@
 ---
 name: skill-forge
-description: Пир-локальная кузница скиллов — создать local-<skill> на СВОЁМ узле (Ось А автономии) и подготовить промоушен в общий набор через гейт. Используй когда придумал новый скилл на follower-машине и не хочешь ждать хаб.
+description: >
+  Peer-local skill forge — create a local-<skill> on THIS node (local autonomy lane) and prepare
+  its promotion into the shared skill set through a gate. Use when a new skill idea appears on a
+  follower machine and shouldn't wait for the hub. Trigger on "/skill-forge <idea>".
 permissions: [filesystem]
 risk_level: shell-local
 processes_untrusted_data: false

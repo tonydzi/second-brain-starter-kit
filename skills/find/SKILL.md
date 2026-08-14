@@ -1,11 +1,10 @@
 ---
 name: find
-description: >-
-  Find a person, lead, contact or company by name in ANY spelling — deterministic name search that
-  catches transliteration (Vlad/Viktor/виктор), wrong keyboard layout (dbrnjh = виктор), and typos
-  (висктор). Trigger on "/find <name>", "найди <имя>", "найди компанию <X>", "все Викторы", "кто такой
-  <имя>", "find <name>", "покажи всех <имя>". This is SPELLING/exact-name search (0 tokens, NOT RAG) —
-  distinct from /ask which is semantic/meaning search. Wraps namesearch\find_name.py over names.db.
+description: >
+  Find a person, lead, contact or company by name in ANY spelling — deterministic name search
+  that catches transliteration (Viktor/Victor across alphabets), wrong-keyboard-layout typing,
+  and typos. Trigger on "/find <name>", "find <name>", "show everyone named <X>". This is
+  SPELLING/exact-name search (0 tokens, NOT RAG) — the complement to semantic vault search.
 license: MIT
 ---
 

@@ -1,10 +1,10 @@
 ---
 name: wisdom-distill
-description: >-
-  Weekly Wisdom Distill - раз в неделю выжать из собственных слов Антона за 7 дней (origin: anton)
-  3-5 durable-уроков в заметку недели в 03-Insights. Trigger on "/wisdom-distill",
-  "выжми мудрость недели", "что я понял за неделю", "weekly wisdom", "distill my week".
-  Часть активного брейна (D из карты A-E). LLM читает только дайджест сборщика.
+description: >
+  Weekly Wisdom Distill — once a week, squeeze 3-5 durable lessons from the owner's OWN words of
+  the last 7 days into a week-note in the insights folder. Trigger on "/wisdom-distill",
+  "distill my week", "weekly wisdom". The LLM reads only a collector's digest, never the raw
+  corpus.
 license: MIT
 ---
 

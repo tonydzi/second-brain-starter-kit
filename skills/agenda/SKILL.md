@@ -1,6 +1,10 @@
 ---
 name: agenda
-description: Anton's day at a glance, on demand — today's calendar + what needs HIM personally (leads due, real humans awaiting a reply, deadlines) pulled from Calendar + Telegram, ranked. The manual twin of the scheduled "Tg calendar agenda" task. Trigger on "/agenda", "что у меня сегодня", "повестка дня", "план на день", "что на сегодня", "what's on today", "my agenda", "какие встречи сегодня". READ-ONLY summary — it never sends or commits anything. Pairs with /pipeline (leads) and /coach (accountability).
+description: >
+  The operator's day at a glance, on demand — today's calendar plus what needs THEM personally
+  (leads due, real humans awaiting a reply, deadlines) pulled from Calendar + Telegram, ranked.
+  Trigger on "/agenda", "what's on today", "my agenda". READ-ONLY summary — it never sends or
+  commits anything. Pairs with a lead-pipeline skill and an accountability-coach skill.
 license: MIT
 ---
 

@@ -1,16 +1,11 @@
 ---
 name: obsidian-ingest
-description: >-
-  Universal import pipeline for Anton's Obsidian vault ($OBSIDIAN_VAULT).
-  Handles ANY source: Facebook posts, Telegram HTML, ChatGPT JSON, voice-note
-  transcripts, WhatsApp exports, Apple Notes, Notion dumps, pasted text, articles,
-  nexus distilled corpora, podcast transcript splits — anything that needs to
-  become well-linked atomic notes in perfectionist data-science mode (structure,
-  frontmatter, provenance, concept-mapping, cross-linking, MOC).
-  Trigger on: "add this to my vault", "process these notes", "разложи по обсидиану",
-  any raw dump handed over, any batch import (100+ items), any follow-up curation
-  (dedup, concept mapping, MOC building, integration of new corpus).
-  Per-source parsing specs are in references/source-adapters.md.
+description: >
+  Universal import pipeline for an Obsidian vault. Handles ANY source: social-media posts,
+  Telegram HTML exports, ChatGPT JSON, voice-note transcripts, WhatsApp exports, Apple Notes,
+  Notion dumps, pasted text, articles — anything that needs to become well-linked atomic notes
+  with proper structure, frontmatter, provenance, dedup against existing notes, and a RAG
+  reindex at the end. Trigger on "/obsidian-ingest", "import this into the vault", "file this".
 license: MIT
 ---
 

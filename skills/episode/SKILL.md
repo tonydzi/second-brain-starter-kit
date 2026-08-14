@@ -1,6 +1,11 @@
 ---
 name: episode
-description: "Адаптеры публикации по ТИРАМ (контент-фабрика v2, S5) — контракт §7.2 решения reality-show 1:1: взять один пост-материал и разложить его на черновики teaser(240–370, @ClawRus RU / X EN) · medium(FB RU, ссылка в 1-м комменте) · longread(4000+, @ClawRus RU / GitHub EN) · dev-log(GitHub EN, технический), кросс-ссылки вниз + canonical→GitHub, draft-first. Триггеры: /episode, /adapt, «собери эпизод <тема>», «разложи пост по тирам/площадкам», «сделай тизеры и лонгрид», «adapt this post», «make an episode». Голос Антона = ТОЛЬКО Opus; dev-log = Sonnet-скаффолд + Opus-связность. Ничего наружу не публикуется."
+description: >
+  Tier-based publication adapters for a content factory: take one source post and split it into
+  drafts — teaser (short, chat-sized) · medium (main social post) · longread (4000+ chars) ·
+  dev-log (technical) — with cross-links downward and a canonical link to the repository. Draft-
+  first: nothing is published by the skill itself. Trigger on "/episode", "/adapt", "adapt this
+  post", "make an episode".
 license: MIT
 ---
 

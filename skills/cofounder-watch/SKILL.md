@@ -1,14 +1,11 @@
 ---
 name: cofounder-watch
-description: >-
-  Phase 0 of Anton's real-time / ambient cofounder — a 0-token, PING-ONLY dispatcher that watches the LIVE
-  lead funnel (tg_followups.json) and surfaces salient events as short cofounder-voice advice (🔥 replied-no-
-  Calendly · ⏰ Calendly-sent-no-booking-24h · 👀 awaiting-reply), deduped so it never nags twice. Trigger on
-  "/cofounder-watch", "что видит кофаундер", "кофаундер-вахта", "сигналы кофаундера", "прогони наблюдателя",
-  "cofounder watch", "what does my cofounder see". READ-ONLY — sends nothing (outputs a digest + HTML
-  dashboard). The recurring/ambient version of the /cofounder persona; distinct from /pipeline (that DRAFTS
-  outreach to act) — this only ALERTS. Canon = vault decision-realtime-cofounder-2026-07-02 + memory
-  synthetic-cofounder.
+description: >
+  Phase 0 of an ambient synthetic cofounder — a 0-token, PING-ONLY dispatcher that watches the
+  LIVE lead funnel and surfaces salient events as short cofounder-voice advice (replied-but-no-
+  scheduling-link · link-sent-but-no-booking-24h · awaiting-reply), deduped so it never nags
+  twice. Trigger on "/cofounder-watch", "what does the cofounder see", "funnel signals". Read-
+  only; acts on nothing by itself.
 license: MIT
 ---
 

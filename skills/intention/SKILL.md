@@ -1,6 +1,11 @@
 ---
 name: intention
-description: "Лейн НАМЕРЕНИЙ контент-фабрики. Одна команда: намайнить намерения Антона из ВСЕХ сессий дня → кластеризовать в отдельные намерения → копилка (intentions.db) → написать 2-3+ подробных поста-намерения с явной ПРОСЬБОЙ (голос Антона=Opus) по каналам X/Telegram/Indie Hackers/Ask HN → черновики + в Telegram (draft-first). Плюс петля альфы: кто откликнулся → responders. Триггеры: /intention, намерения дня, собери намерения, посты-намерения, intention posts, что мы сегодня хотим запостить. НЕ путать с /episode (тир-адаптер) и facebook-diary (дневник назад). Канон: decision-intention-lane-content-factory-2026-07-02, память intention-lane."
+description: >
+  The INTENTIONS lane of a content factory. One command: mine the owner's intentions from all of
+  the day's sessions → cluster into distinct intentions → store → write 2-3 detailed intention-
+  posts with an explicit ASK, per channel (X/Telegram/forums) → drafts only. Plus a response
+  loop: who answered the ask → responders list. Trigger on "/intention", "mine today's
+  intentions", "intention posts".
 license: MIT
 ---
 

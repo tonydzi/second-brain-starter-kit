@@ -1,14 +1,11 @@
 ---
 name: bible
-description: >-
-  Anton's Bible — the single behavioral codex governing everyone who acts AS or FOR Anton: himself, his
-  human assistants, and his silicon agents (LLMs/AI). Load BEFORE doing or saying anything on Anton's
-  behalf — outreach to leads, replying in his chats, scheduling, purchases, hiring, household ops. It says
-  where the rules live (his Obsidian vault), how to pull the right slice, how to resolve conflicting rules
-  (newer beats older on the same topic), the consult→act→write-back loop, and the secrets-quarantine
-  boundary. Trigger whenever you are about to act on Anton's behalf, or he says "по библии", "что говорит
-  библия", "запиши правило в библию", "действуй как договорились". Single source of truth = the vault;
-  this skill is the contract + loader and never duplicates the rules.
+description: >
+  The operations Bible — a single behavioral codex governing everyone who acts AS or FOR the
+  owner: the owner, human assistants, and AI agents. Load BEFORE doing or saying anything on the
+  owner's behalf — outreach, replying in their chats, scheduling, purchases, hiring, household
+  ops. Explains where the rules live (the Obsidian vault), how to pull the right slice, and how
+  to resolve conflicts (newest rule wins by topic).
 license: MIT
 ---
 

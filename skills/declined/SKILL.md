@@ -1,6 +1,10 @@
 ---
 name: declined
-description: Быстрый доступ к реестру ОТКЛОНЁННЫХ/отложенных решений Антона — «что мы уже отвергали и почему», чтобы не пере-предлагать одно и то же. Trigger on "/declined", "что мы отвергали", "это уже отклоняли?", "покажи отклонённые решения", "реестр отказов", "проверь declined", "we rejected this before?", "show declined decisions". READ-ONLY обзор; опционально гоняет детектор новых отказов. Канон: память [[declined-decisions]]; ночной скан = `declined_scan.py`.
+description: >
+  Fast access to the registry of DECLINED/deferred decisions — "what we already rejected and
+  why", so the agent never re-pitches the same idea. Trigger on "/declined", "did we reject this
+  before?", "show declined decisions". READ-ONLY overview; optionally runs the detector for new
+  rejections in recent sessions.
 license: MIT
 ---
 

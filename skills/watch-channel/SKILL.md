@@ -1,6 +1,10 @@
 ---
 name: watch-channel
-description: Put a NIGHTLY alpha watcher on ANY Telegram channel/chat in one command - the "make /mine-channel a routine" button. Registers the channel and a single nightly job on the HUB that does incremental fetch (0-token Telethon, min_id) + the shared detector -> a PRIVATE shortlist report. Trigger on "/watch-channel <@channel|id>", "следи за каналом <X>", "поставь ночной watcher на <канал>", "мониторь канал <X>", "watch this channel nightly", "ночной майнер на <канал>". DISTINCT from /mine-channel (one-shot mine) - this is the recurring version. Engine = $IMPORTS_ROOT/watchers/watch_run.py (reuses mine_channel.detect). Canon: memory alpha-extraction-engine, evaluate-recurring-into-routine, deterministic-script-gotchas (AuthKey).
+description: >
+  Put a NIGHTLY alpha watcher on ANY Telegram channel/chat in one command — the "make channel-
+  mining a routine" button. Registers the channel and a single nightly job that does incremental
+  fetch (0 tokens) + the shared detector → a private shortlist report. Trigger on "/watch-
+  channel <@channel|id>", "watch this channel", "monitor <channel> nightly".
 license: MIT
 ---
 

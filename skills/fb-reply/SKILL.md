@@ -1,6 +1,10 @@
 ---
 name: fb-reply
-description: Read who commented on Anton's recent Facebook posts and post PERSONALIZED replies through his real logged-in Chrome (Claude-in-Chrome MCP = low-ban-risk live-tab path), draft-first and rate-limit-guarded. Trigger on "/fb-reply", "ответь на комменты", "ответь комментаторам", "разбери комментарии под постами", "reply to my facebook comments", "ответь в фейсбуке на комменты". Replying on your OWN posts is the LOW-risk task (B), but FB still bans on tempo: every reply is gated by fb_guard.py (<=40/day, >=5 min apart, no bursts). Replies are written in Anton's voice (Opus), each one varied & specific to the comment (identical text = spam flag). NEVER click "View more comments" on shared/reposted posts (it navigates away -- account-safety). Draft-first: show Anton the batch, post only on his "+". Phase-1 sibling of /fb-post; engine guard = ~/.claude/scripts/fb_guard.py. Canon: Decision Memo 2026-06-28 (FB skill set) + memory chrome-autonomy-self-drive.
+description: >
+  Read who commented on the owner's recent Facebook posts and post PERSONALIZED replies through
+  their real logged-in Chrome (live-tab, low-ban-risk), draft-first and rate-limit-guarded.
+  Trigger on "/fb-reply", "reply to my facebook comments". Replying on your OWN posts is
+  expected behavior; the guard enforces a daily cap and minimum gap between replies.
 license: MIT
 ---
 

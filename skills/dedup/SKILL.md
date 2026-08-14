@@ -1,10 +1,10 @@
 ---
 name: dedup
-description: >-
-  Find and merge DUPLICATE / near-duplicate notes anywhere in Anton's vault (rules, concepts, people,
-  leads) using a deterministic scanner + the proven supersede-NOT-delete merge policy. Trigger on
-  "/dedup", "почисти дубли", "склей дубли", "найди повторы", "убери дубликаты", "dedupe <folder>".
-  Codified 2026-06-08 from the Bible dedup (4 batches, 14 rules merged). Deterministic-first; review before merge; nothing is ever deleted.
+description: >
+  Find and merge DUPLICATE / near-duplicate notes anywhere in the vault (rules, concepts,
+  people, leads) using a deterministic scanner + a proven supersede-NOT-delete merge policy.
+  Trigger on "/dedup", "clean up duplicates", "dedupe <folder>". Deterministic-first; human
+  review before any merge is written.
 license: MIT
 ---
 

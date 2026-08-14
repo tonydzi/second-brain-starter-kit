@@ -1,6 +1,11 @@
 ---
 name: fb-post
-description: Publish a VETTED post to Anton's personal Facebook wall through his real logged-in Chrome (Claude-in-Chrome MCP = the low-ban-risk "act in the live tab" path), rate-limit-guarded and draft-first. Trigger on "/fb-post", "запости в фб", "опубликуй пост в facebook", "выложи на стену", "publish to facebook", "post this to my wall". The TEXT is written in Anton's author voice (Opus) -- reuse content-factory / fb-diary / episode drafts, never invent a fresh voice. Publishing is OUTBOUND + PUBLIC (Tier-2): show the final draft and get Anton's explicit "+" (or let him click Post) before anything goes live. Every post is gated by fb_guard.py (<=8/day). Phase-1 sibling of /fb-reply; the engine guard is ~/.claude/scripts/fb_guard.py. Canon: Decision Memo 2026-06-28 (FB skill set), memory facebook-diary-auto + content-factory + chrome-autonomy-self-drive.
+description: >
+  Publish a VETTED post to a personal Facebook wall through the owner's real logged-in Chrome
+  (live-tab automation = low-ban-risk path), rate-limit-guarded and draft-first. Trigger on
+  "/fb-post", "publish to facebook", "post this to my wall". The text comes from the content-
+  factory drafts in the owner's authorial voice; the skill handles the mechanics: paste, verify
+  what's actually in the composer, confirm after reload.
 license: MIT
 ---
 

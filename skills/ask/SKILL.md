@@ -1,10 +1,10 @@
 ---
 name: ask
-description: >-
-  Ask Anton's Second Brain in plain words — semantic search over the curated vault (e5 embeddings +
-  reranker), not a full-corpus dump. Trigger on "/ask <question>", "спроси мозг", "что у меня по <теме>",
-  "что я думаю про X", "найди в волте", "вспомни что я писал о…". Token-cheap: RAG retrieves the smallest
-  relevant slice, the LLM only synthesizes the top hits. Wraps brain_ask.py.
+description: >
+  Ask the second brain in plain words — semantic search over the curated knowledge vault
+  (embeddings + reranker), not a full-corpus dump. Trigger on "/ask <question>", "what do I have
+  on <topic>", "what did I write about X". Token-cheap: RAG retrieves the smallest relevant
+  slice, the LLM only synthesizes the top hits.
 license: MIT
 ---
 

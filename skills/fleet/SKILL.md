@@ -1,11 +1,9 @@
 ---
 name: fleet
-description: >-
-  Snapshot of Anton's autonomous Claude fleet — what his background agents (the Claude Desktop "Cowork"
-  app and its headless Claude Code agents) are doing right now, what they've built/committed, and whether
-  anything is stuck or burning tokens. READ-ONLY diagnostic. Trigger on "/fleet", "что делают агенты",
-  "что там флот", "кто копается в волте", "what are my agents doing", "сколько агентов крутится".
-  Built 2026-06-08 from the live investigation; pairs with retro_inventory.py.
+description: >
+  Snapshot of the autonomous Claude fleet — what the background agents across machines are doing
+  right now, what they've built/committed, and whether anything is stuck or burning tokens.
+  READ-ONLY diagnostic. Trigger on "/fleet", "what are my agents doing", "is anything stuck".
 license: MIT
 ---
 

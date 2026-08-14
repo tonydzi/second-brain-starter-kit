@@ -1,17 +1,10 @@
 ---
 name: telegram-reimport
-description: >-
-  One-command incremental RE-IMPORT of a Telegram chat that already lives in Anton's
-  Obsidian vault (Покупки/purchases, Assistants-Ops/household-rules, Arhiv-Golosa/content-team,
-  FAAA/CRM-calls). Use this whenever Anton exports a FRESH/updated copy of an already-imported
-  Telegram chat and wants only the new messages folded in — "переимпортируй покупки",
-  "обнови телеграм импорт", "re-import the assistants chat", "I re-exported the покупки chat,
-  pull the new messages", "refresh the vault from the new export". It detects which chat the
-  export is, re-runs that source's deterministic pipeline pointed at the new export, regenerates
-  only new day-ledgers + new posts (idempotent), validates links, and hands off the LLM curation
-  (concept-mapping, rule-extraction) for the new items. For a FIRST-TIME import of a brand-new
-  source, use the obsidian-ingest skill instead — this skill is specifically for re-running an
-  import that already exists.
+description: >
+  One-command incremental RE-IMPORT of a Telegram chat that already lives in the vault. Use
+  whenever a fresh/updated export of an already-imported chat appears and only the new messages
+  should be folded in — "re-import <chat>", "update the telegram import". Idempotent by message
+  id; never duplicates.
 license: MIT
 ---
 

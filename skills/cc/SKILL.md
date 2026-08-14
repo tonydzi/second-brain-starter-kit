@@ -1,15 +1,10 @@
 ---
 name: cc
 description: >
-  Горячая клавиша-алиас для «сжать контекст» — Антону лень печатать слово «компакт», короткий
-  дуплет /cc удобнее (семья /tt /rr /cc /1). Печатает ГОТОВУЮ строку `/compact <блок под нашу
-  сессию>` в каноническом формате Антона — Антон копирует её целиком и вставляет следующим
-  сообщением. Триггеры: "/cc", "cc", "/сс" (c-клавиша на RU-раскладке = с), "компакт", "сожми
-  контекст", "заверши через компакт". ⚠️ Сам `/compact` — встроенная команда харнеса, скилл её
-  нажать НЕ может; он снимает ручную работу — собирает и обогащает блок, который иначе Антон
-  вставлял бы руками. Легковесный сосед `/retro` (retro делает то же в Шаге 6, но после полного
-  инвентаря). Единственный источник формата блока = ~/.claude/compact-prompt.md. Канон: CLAUDE.md
-  §10.4, память [[compact-format-delivery-gotcha]], [[test-after-build-skill]].
+  Hotkey alias for "compact the context": prints a READY-made `/compact <block>` line in a
+  canonical handoff format so the operator can paste it as the next message and squeeze working
+  memory without losing the thread. Trigger on "/cc", "compact", "finish via compact". Part of
+  the short-alias family (/tt /rr /cc /1).
 license: MIT
 ---
 

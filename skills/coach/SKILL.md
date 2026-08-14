@@ -1,15 +1,11 @@
 ---
 name: coach
-description: >-
-  Anton's daily AI coach — a forward-looking accountability + mirror loop grounded in his FULL identity
-  layer (the vault knows him better than anyone). Trigger on "/coach", "коуч", "коучинг", "утренний
-  разбор", "вечерний разбор", "что мне делать сегодня", "разбери мой день", "держи меня в тонусе",
-  "потренируй меня". Runs a MORNING kick (mirror → accountability → one rock → courage → grabli-guard) and
-  an EVENING review (what happened → mood → log → tomorrow's one commitment). Tone is SWITCHABLE
-  (mirror+nudge / socrates / sergeant / warm) via coach_state.json. Writes back to the vault (04-Coach).
-  INTERNAL-facing (coach talks TO Anton about himself) — NOT the Bible (which governs acting FOR him).
-  Distinct from /ask (search), /retro (session wrap), facebook-diary (public). Delivered 3 ways: this
-  skill (live), the _Coach.html dashboard, and a scheduled Telegram push.
+description: >
+  A daily AI coach — a forward-looking accountability + mirror loop grounded in the owner's FULL
+  identity layer (the vault knows them better than anyone). Trigger on "/coach", "morning
+  review", "evening review", "what should I do today", "keep me on track". Runs a MORNING kick
+  (mirror → accountability → one rock → courage → known-pitfalls guard) or an EVENING review
+  (what moved, what slipped, tomorrow's single rock).
 license: MIT
 ---
 

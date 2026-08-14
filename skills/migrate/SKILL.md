@@ -1,6 +1,10 @@
 ---
 name: migrate
-description: One command surface over Anton's already-built machine-migration machinery — move/sync the Claude+vault HUB across his computers (always-on desktop = HUB; this laptop + 2 Macs = satellites). Trigger on "/migrate", "/migrate check", "/migrate pack", "/migrate bootstrap", "перенеси на другой комп", "что синхронизировать", "собери чемодан", "распакуйся по бутстрапу", "статус миграции", "migrate to desktop", "sync my machines". This is a THIN WRAPPER over the scripts in $USERPROFILE/!CLAUDE-HP17 May26\migration-prep\ — it never re-invents the migration, it drives the proven runbook. Canon = memory [[machine-migration]].
+description: >
+  One command surface over the machine-migration machinery — move/sync the Claude+vault HUB role
+  across computers (always-on desktop = hub; laptops = satellites). Trigger on "/migrate",
+  "/migrate check", "/migrate pack", "/migrate bootstrap", "migration status". Checklist with
+  counters verified before==after; never migrates silently.
 license: MIT
 ---
 

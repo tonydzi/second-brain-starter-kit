@@ -1,6 +1,8 @@
 ---
 name: tt-probe
-description: E2E-проба конвейера fleet-skill-autonomy (создан на MAC-1 2026-07-16 для verify #41ac669a). Не вызывать - это тестовый маркер, после верификации писатель может удалить.
+description: >
+  E2E probe marker for the fleet-skill-autonomy pipeline (created for a one-off verification).
+  Do not invoke — it's a test marker; the writer may delete it after verification.
 permissions: [filesystem]
 risk_level: inert
 processes_untrusted_data: false

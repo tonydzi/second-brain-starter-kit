@@ -1,13 +1,10 @@
 ---
 name: fb-watch
 description: >
-  Мониторит стену Facebook Антона на АВТОРСКИЕ посты, к которым ещё НЕТ тизера, и сразу пишет
-  тизеры (RU→@ClawRus, EN→X) — draft-first, пока не взведён авто-постинг. Конкретный FB-механизм
-  под стоячее правило teaser-crosspost-clawrus. Trigger on "/fb-watch", "проверь фейсбук на тизеры",
-  "посты без тизера", "добей тизеры", "fb watch", "check facebook for un-teased posts". Запуск 1×/день
-  днём (рутина) или по требованию. Читает стену через Claude-in-Chrome (живая вкладка, локально на хабе);
-  детектор/леджер/кап = ~/.claude/scripts/fb_teaser_watch.py (0 токенов). Голос Антона = только Opus.
-  Канон: память teaser-crosspost-clawrus, fb-skill-set; reglament-tizery-krosspost-v-clawrus-i-tg.
+  Monitor the owner's Facebook wall for AUTHORED posts that don't yet have a teaser, and
+  immediately draft the teasers for the short-form channels (draft-first until auto-posting is
+  armed). Trigger on "/fb-watch", "check facebook for un-teased posts", "catch up on teasers".
+  Designed to run once a day as a routine plus on demand.
 license: MIT
 ---
 
