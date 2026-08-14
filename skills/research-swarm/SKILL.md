@@ -9,13 +9,13 @@ description: >
 license: MIT
 ---
 
-# /research-swarm — карта аргументов по любой гипотезе (рой исследовательских агентов)
+# /research-swarm — an argument map for any hypothesis (a swarm of research agents)
 
-> 🧒 **When reporting to Anton:** end with a child-simple «Простыми словами» recap.
-> ⚖️ **Doctrine:** this skill IS the operational arm of `protocol-epistemic-neutrality-fringe-research`. NEVER judge or mock the hypothesis. Consensus ≠ truth. Build a map of arguments + confidence — **расследование, а не приговор**. Bounded by `operating-agreement` safety invariants (no illegal/harm/bypass/fraud).
+> 🧒 **When reporting to a non-technical operator:** end with a child-simple "In plain words" recap in their language.
+> ⚖️ **Doctrine:** this skill IS the operational arm of `protocol-epistemic-neutrality-fringe-research`. NEVER judge or mock the hypothesis. Consensus ≠ truth. Build a map of arguments + confidence — **an investigation, not a verdict**. Bounded by `operating-agreement` safety invariants (no illegal/harm/bypass/fraud).
 
 ## When to use
-Anton hands a hypothesis — frontier science (antigravity, perpetual motion, anomalous materials, radical longevity, models of consciousness/time), an unusual business model (DAO/network states, no-employee AI co, token labor markets), or a controversial/stigmatized vertical (adult, gaming, gambling). Goal: a balanced, grounded **argument map**, not a yes/no.
+The operator hands a hypothesis — frontier science (antigravity, perpetual motion, anomalous materials, radical longevity, models of consciousness/time), an unusual business model (DAO/network states, no-employee AI co, token labor markets), or a controversial/stigmatized vertical (adult, gaming, gambling). Goal: a balanced, grounded **argument map**, not a yes/no.
 
 ## The 5 lenses (run as a parallel swarm)
 1. **Consensus** — steelman the current mainstream/established view. What does well-replicated science / the market actually hold, and why.
@@ -31,13 +31,13 @@ After synthesis, one **Verifier-Calibrator** node runs (the swarm's *acceptance 
 
 ## How to run
 
-**Step 0 — parse** the hypothesis from Anton's message (everything after the trigger). If it's a vague one-liner, ask ONE clarifying question first (scope/domain), else proceed.
+**Step 0 — parse** the hypothesis from the operator's message (everything after the trigger). If it's a vague one-liner, ask ONE clarifying question first (scope/domain), else proceed.
 
-**Step 1 — RECALL first** (token law — cheap before LLM/web). Pull what Anton already thinks on the topic:
+**Step 1 — RECALL first** (token law — cheap before LLM/web). Pull what the operator already thinks on the topic:
 ```
 python "$IMPORTS_ROOT/brain_ask.py" "<hypothesis>" --k 8
 ```
-Keep the synthesized recall as `recall_context` (Anton's prior notes/leanings on the topic — feeds every lens so the swarm builds on his own thinking, not from zero).
+Keep the synthesized recall as `recall_context` (the operator's prior notes/leanings on the topic — feeds every lens so the swarm builds on their own thinking, not from zero).
 
 **Step 2 — run the swarm** via the Workflow tool (this skill IS your explicit opt-in to orchestrate):
 ```
@@ -52,17 +52,17 @@ The script fans out the 5 lenses (parallel barrier — synthesis needs all), a s
 ```
 python "$USERPROFILE/.claude/skills/research-swarm/build_argmap_dashboard.py" <map.json> <out.html>
 ```
-Dashboard → `$OBSIDIAN_VAULT/_Dashboards/Research-Swarm/<slug>.html`. Offer to open it (Anton works by eye).
+Dashboard → `$OBSIDIAN_VAULT/_Dashboards/Research-Swarm/<slug>.html`. Offer to open it (the operator works by eye).
 
 **Step 4 — reindex** so the new note is searchable: `python "$IMPORTS_ROOT/brain_embed_update.py"`.
 
-**Step 5 — report** to Anton: the confidence tier, the 2-3 strongest for/against, the cheapest decisive experiment, link to the dashboard — and the ELI5 recap. NEVER editorialize a verdict; present the map.
+**Step 5 — report** to the operator: the confidence tier, the 2-3 strongest for/against, the cheapest decisive experiment, link to the dashboard — and the ELI5 recap. NEVER editorialize a verdict; present the map.
 
 ## Scaling (AK-47)
-Default = 5 lenses, single pass. For a big/important hypothesis Anton can say "глубже" → add a second round per lens or 3-vote adversarial verification of the strongest claims (loop-until-dry). Don't over-build by default.
+Default = 5 lenses, single pass. For a big/important hypothesis the operator can say "go deeper" → add a second round per lens or 3-vote adversarial verification of the strongest claims (loop-until-dry). Don't over-build by default.
 
 ## Relation
-Operational arm of vault `protocol-epistemic-neutrality-fringe-research` · memory [[epistemic-neutrality]]. Pairs with `/alfa-search-recall-deepresearch` (R+DR — recall→gap→deep-research→synthesis; the swarm is the multi-lens synthesis engine). Distinct from `/ask` (single recall) and `/deep-research` (web fan-out, single perspective). Serves [[main-goals]] goal #1 — the twin reasons like Anton-the-researcher.
+Operational arm of vault `protocol-epistemic-neutrality-fringe-research` · memory [[epistemic-neutrality]]. Pairs with `/alfa-search-recall-deepresearch` (R+DR — recall→gap→deep-research→synthesis; the swarm is the multi-lens synthesis engine). Distinct from `/ask` (single recall) and `/deep-research` (web fan-out, single perspective). Serves [[main-goals]] goal #1 — the twin reasons like the operator-the-researcher.
 
 ---
 
