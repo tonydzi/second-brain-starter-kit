@@ -8,24 +8,25 @@ description: >
 license: MIT
 ---
 
-OBJECTIVE: Показать реестр отклонённых/отложенных решений (что · почему · revisit-if) перед тем как (пере)предлагать идею — anti-«хождение по граблям». READ-ONLY: ничего не пишет в реестр (туда пишет ночной скан + человек вручную).
+OBJECTIVE: Show the registry of declined/deferred decisions (what · why · revisit-if) BEFORE (re-)pitching an idea — the anti "step on the same rake twice" guard. READ-ONLY: it writes nothing into the registry (the nightly scan and the human do that).
 
 CONTEXT:
-- Канонический реестр (этот хаб): `%USERPROFILE%\.claude\projects\E---CLAUDE-HUB-1-June26\memory\declined-decisions.md` (есть и копия в проекте ноута — читать хабовую).
-- Ночной детектор: `$IMPORTS_ROOT/declined-scan/declined_scan.py` (scheduled "Declined-Decisions Nightly Scan" ~03:45) — сам ловит новые отказы из свежих сессий и кладёт на полку AUTO-CAPTURED.
-- Правило (кросс-акторное): отверг/отложил предложение → занеси в реестр. Канон для людей-ассистентов = Библия `reglament-otvergnutoe-reshenie-v-reestr-declined`.
+- The canonical registry (this hub): `%USERPROFILE%\.claude\projects\<hub-project>\memory\declined-decisions.md` (a copy exists in the laptop project — always read the hub one).
+- The nightly detector: `$IMPORTS_ROOT/declined-scan/declined_scan.py` (scheduled task "Declined-Decisions Nightly Scan", ~03:45) — it catches new refusals from fresh sessions and parks them on the AUTO-CAPTURED shelf.
+- The rule (cross-actor): rejected or deferred a proposal → record it in the registry. The canon for human assistants lives in the Bible as the "record a rejected decision" rule.
 
 STEPS:
-1. Прочитать `declined-decisions.md` (хабовый путь выше).
-1b. **Dead-man check сторожа** (added 2026-07-04; ловит класс «задачу молча выключили», как 06-22→06-27): прочитать `$IMPORTS_ROOT/declined-scan/highwater.json` → если `updated` старше 2 дней, ночной сторож НЕ бегает → проверить `(Get-ScheduledTask -TaskName 'Declined-Decisions Nightly Scan').State`, включить (`Enable-ScheduledTask`), доложить одной строкой. Свежий → молча дальше.
-2. Если Антон спросил про КОНКРЕТНУЮ тему — grep реестр по теме, показать совпадения (что отвергли · почему · при каком условии вернуться).
-3. Иначе — краткая сводка: сколько записей, последние добавленные, и полка AUTO-CAPTURED (ждут промоушена).
-4. (Опц., по просьбе «прогони скан») запустить `python $IMPORTS_ROOT/declined-scan/declined_scan.py` и показать новые пойманные отказы.
-5. Если предлагаемая сейчас идея УЖЕ в реестре — явно предупредить Антона («это отклоняли <дата>, причина X, вернуться если Y») перед тем как продолжать.
+1. Read `declined-decisions.md` (the hub path above).
+1b. **Dead-man check on the watchdog** (added 2026-07-04; catches the class "the task was silently disabled", as happened 06-22→06-27): read `$IMPORTS_ROOT/declined-scan/highwater.json` → if `updated` is older than 2 days the nightly watchdog is NOT running → check `(Get-ScheduledTask -TaskName 'Declined-Decisions Nightly Scan').State`, enable it (`Enable-ScheduledTask`), and report in one line. Fresh → move on silently.
+2. If the operator asked about a SPECIFIC topic — grep the registry for it and show the matches (what was rejected · why · under what condition to revisit).
+3. Otherwise — a short summary: how many entries, the most recent additions, and the AUTO-CAPTURED shelf (waiting for promotion).
+4. (Optional, on "run the scan") execute `python $IMPORTS_ROOT/declined-scan/declined_scan.py` and show the newly caught refusals.
+5. If the idea being pitched right now is ALREADY in the registry — warn the operator explicitly ("this was declined on <date>, reason X, revisit if Y") before going further.
 
-OUTPUT: краткий список релевантных отказов или сводка реестра. НИЧЕГО не пишет (кроме шага 4 — скан пишет сам). Заверши ответ Антону 🧒 «Простыми словами».
+OUTPUT: a short list of relevant refusals, or a registry summary. It writes NOTHING (except step 4, where the scan writes for itself). Finish the reply to a non-technical operator with an "In plain words" recap.
 
-RELATION (не дублировать): реестр-источник = память [[declined-decisions]]; ночной скан = `declined_scan.py`; правило-для-людей = Библия `reglament-otvergnutoe-reshenie-v-reestr-declined`.
+RELATION (do not duplicate): the source registry = memory [[declined-decisions]]; the nightly scan = `declined_scan.py`; the rule for humans = the Bible entry on recording rejected decisions.
+
 
 ---
 

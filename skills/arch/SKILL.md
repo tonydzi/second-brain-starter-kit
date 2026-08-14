@@ -11,46 +11,47 @@ license: MIT
 
 <!-- RECONSTRUCTED 2026-06-24 on hub HUB-1 from the live engine ($IMPORTS_ROOT/arch) + memory system-architect, because the authoritative SKILL.md lives only on laptop LAPTOP-1 (~/.claude/skills/arch, not synced). When the laptop's copy arrives via _machine-bus, RECONCILE and replace if it differs. -->
 
-# /arch — System Architect (карта и здоровье всей системы)
+# /arch — System Architect (the map and health of the whole system)
 
-Одно место, которое знает: из чего система состоит, что здорово, что отвалилось — и тестирует это. Детерминированно, 0 токенов, READ-ONLY. Это **RECALL для инфра-слоя**: смотреть ДО изменения общей инфраструктуры, пересканировать ПОСЛЕ.
+One place that knows what the system is made of, what is healthy, what fell over — and tests it. Deterministic, 0 tokens, READ-ONLY. This is **RECALL for the infrastructure layer**: look BEFORE changing shared infrastructure, rescan AFTER.
 
-**Движок:** `$IMPORTS_ROOT/arch/` (git-бэкап в `_imports`). Источник истины — `system.db` (строит ночной скан 05:45). Дашборд `_Dashboards\System-Health.html`, MOC `00-System\_System-MOC.md`, авто-инвентарь `00-System\System-Automations.md` (заменяет ручной [[automation-inventory]]).
+**Engine:** `$IMPORTS_ROOT/arch/` (git-backed in `_imports`). The source of truth is `system.db` (built by the nightly scan at 05:45). Dashboard `_Dashboards\System-Health.html`, MOC `00-System\_System-MOC.md`, auto-inventory `00-System\System-Automations.md` (replaces the manual [[automation-inventory]]).
 
-## Команды
+## Commands
 
 ```bash
-# статус (по умолчанию) — сводка здоровья + score
+# status (default) — health summary + score
 python "$IMPORTS_ROOT/arch/arch_status.py"
 
-# только сломанное / красное
+# only what is broken / red
 python "$IMPORTS_ROOT/arch/arch_status.py" broken
 
-# мёртвый код — скрипты, ни к чему не подключённые
+# dead code — scripts wired to nothing
 python "$IMPORTS_ROOT/arch/arch_status.py" dead
 ```
 
-- **`/arch`** → `arch_status.py` (статус).
+- **`/arch`** → `arch_status.py` (status).
 - **`/arch broken`** → `arch_status.py broken`.
 - **`/arch dead`** → `arch_status.py dead`.
-- **`/arch scan`** (форс свежий скан, ПОСЛЕ изменения инфраструктуры) → перекатать каталог:
+- **`/arch scan`** (force a fresh scan, AFTER an infrastructure change) → rebuild the catalog:
   ```bash
   cd /d $IMPORTS_ROOT/arch
   python sys_scan.py && python sys_coverage.py && python build_system_docs.py && python build_arch_map.py && python sys_check.py
   ```
-  (Это и есть пайплайн `run_architect.cmd` без финального `vault_backup.py`. Полный ночной прогон = `run_architect.cmd`, задача «System Architect Nightly» 05:45.)
+  (That is the `run_architect.cmd` pipeline minus the final `vault_backup.py`. The full nightly run = `run_architect.cmd`, scheduled task "System Architect Nightly" at 05:45.)
 
-## Когда применять (STANDING — always-loaded правило)
-- **ПЕРЕД** добавлением/удалением/изменением общей инфраструктуры (scheduled-задача, скрипт `_imports`, MCP, БД, хук, скилл, пайплайн) → `/arch` / `/arch broken`: что есть и что от этого зависит — не сломаю ли смежное.
-- **ПОСЛЕ** изменения → `/arch scan`, чтобы карта не отстала от реальности.
-- **RED** → сперва разберись с красным; `result!=0` у задачи ≠ всегда «сломано» (бывает доброкачественная lock-коллизия — проверь источник). Не удаляй `active`/`critical`-актив, не разобравшись в зависимостях.
+## When to use it (STANDING — an always-loaded rule)
+- **BEFORE** adding/removing/changing shared infrastructure (a scheduled task, an `_imports` script, an MCP, a DB, a hook, a skill, a pipeline) → `/arch` / `/arch broken`: what exists and what depends on it — will I break a neighbour?
+- **AFTER** the change → `/arch scan`, so the map does not fall behind reality.
+- **RED** → deal with the red first; `result!=0` on a task does not always mean "broken" (a benign lock collision happens — check the source). Never delete an `active`/`critical` asset before understanding its dependencies.
 
-## Грабли (из памяти)
-- Метрика покрытия должна ИЗМЕРЯТЬ артефакт, а не хардкодить вердикт (ложная тревога backup-строки, 2026-06-22).
-- `RED.flag` пишется только на critical/daily-fail (SRE: алертим на симптом). Phase-5 routine `system-architect-red-alert` (06:21) пингует Telegram Saved 226258979 при красном, молчит при зелёном.
+## Pitfalls (from memory)
+- A coverage metric must MEASURE the artifact, not hardcode a verdict (the false backup-line alarm, 2026-06-22).
+- `RED.flag` is written only on critical/daily failures (SRE style: alert on the symptom). The phase-5 routine `system-architect-red-alert` (06:21) pings Telegram Saved Messages when red and stays silent when green.
 
-## Канон
-Память [[system-architect]] · решение `decision-architect-system-platform` · Библия `reglament-pered-izmeneniem-sistemy-sverstis-s-kartoy-arch` (для людей-ассистентов и LLM тоже). Связано: [[verify-existing-before-proposing]], [[automation-inventory]], [[vault-data-architecture]].
+## Canon
+Memory [[system-architect]] · decision `decision-architect-system-platform` · the Bible rule "check the map before changing the system" (for human assistants and LLMs alike). Related: [[verify-existing-before-proposing]], [[automation-inventory]], [[vault-data-architecture]].
+
 
 ---
 

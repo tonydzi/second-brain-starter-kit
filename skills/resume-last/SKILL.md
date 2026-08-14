@@ -9,48 +9,49 @@ description: >
 license: MIT
 ---
 
-# /resume-last — продолжить прошлый чат в один присест
+# /resume-last — pick up the previous chat in one move
 
-**Боль Антона:** сессия вылетела / потерялась в интерфейсе → раньше надо было лезть в каталог,
-искать, копировать руками. Нативный `claude --resume` чужой/межмашинной сессии **не работает**
-(после v2.1.9 Claude отвергает «чужую» сессию). Поэтому надёжный способ — стартовать НОВУЮ
-сессию, предзаряженную полной историей старой.
+**The pain:** a session crashed or got lost in the interface → you used to have to dig through the
+catalog, find it and copy it by hand. The native `claude --resume` does **not** work for a foreign or
+cross-machine session (since v2.1.9 Claude rejects a "foreign" session). So the reliable way is to start a
+NEW session pre-loaded with the full history of the old one.
 
-## Что делает
+## What it does
 
-1. Находит твою **последнюю человеческую** сессию (служебные/роботские отсекаются
-   классификатором `session_author`) — или берёт конкретный `cliSessionId`, если он передан.
-2. Собирает seed: вся история + «продолжай отсюда», кладёт в **буфер обмена** (+ файл
-   `_Dashboards/sessions-md/_continue/<cli>.seed.md`).
-3. Ты открываешь **New session** и жмёшь **Ctrl+V** — разговор продолжается.
+1. Finds your **latest human** session (service/robot ones are filtered out by the
+   `session_author` classifier) — or takes a specific `cliSessionId` if you pass one.
+2. Builds the seed: the whole history + "continue from here", and puts it on the **clipboard**
+   (plus a file `_Dashboards/sessions-md/_continue/<cli>.seed.md`).
+3. You open a **New session** and press **Ctrl+V** — the conversation continues.
 
-## Как запускать
+## How to run
 
-Последняя сессия этой машины:
+The latest session on this machine:
 ```
 python "$IMPORTS_ROOT/claude_sessions/continue_session.py" --last
 ```
-Конкретная сессия (id из каталога `Sessions-Catalog.html` или из шапки `/resume-last`):
+A specific session (id from `Sessions-Catalog.html` or from the `/resume-last` header):
 ```
 python "$IMPORTS_ROOT/claude_sessions/continue_session.py" <cliSessionId>
 ```
 
-(Маки: `python3`, и при нестандартном пути волта — env `CLAUDE_VAULT_ROOT=<...>`.)
+(On Macs: `python3`, and for a non-standard vault path set env `CLAUDE_VAULT_ROOT=<...>`.)
 
-## Что ответить Антону
+## What to tell the operator
 
-- Скажи, КАКАЯ сессия подхвачена (заголовок + дата + cli), и что seed уже в буфере.
-- Дай ровно одну инструкцию: **«Открой New session и нажми Ctrl+V — продолжишь с того места».**
-- Если `clipboard: FAILED` — скажи, что seed лежит файлом `<cli>.seed.md`, открой и скопируй вручную.
-- Если у Антона на экране уже видна нужная прошлая сессия в Recents той же машины — напомни,
-  что там работает и обычный нативный `claude --resume <cli>` (быстрее, без вставки).
+- Say WHICH session was picked up (title + date + cli) and that the seed is already on the clipboard.
+- Give exactly one instruction: **"Open a New session and press Ctrl+V — you will continue where you left off."**
+- If `clipboard: FAILED` — say the seed is in the file `<cli>.seed.md`, open it and copy manually.
+- If the operator can already see the wanted session in Recents on the same machine — remind them the
+  native `claude --resume <cli>` works there too (faster, no pasting).
 
-## Границы
+## Boundaries
 
-- READ-only по волту/сессиям: только ЧИТАЕТ транскрипты и пишет seed-файл + буфер. Ничего не
-  отправляет и не меняет в живых данных.
-- Это пара к SessionStart-хуку `session_resume_hook` (тот ПОКАЗЫВАЕТ прошлую сессию на старте;
-  этот — ПОДХВАТЫВАЕТ её одной командой).
+- READ-only against the vault/sessions: it only READS transcripts and writes the seed file + clipboard.
+  It sends nothing and changes nothing in live data.
+- It is the twin of the SessionStart hook `session_resume_hook` (that one SHOWS the previous session at
+  startup; this one PICKS IT UP with a single command).
+
 
 ---
 

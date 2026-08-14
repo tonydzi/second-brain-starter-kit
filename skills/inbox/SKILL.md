@@ -9,37 +9,38 @@ description: >
 license: MIT
 ---
 
-# /inbox — почта между моими машинами
+# /inbox — mail between my own machines
 
-Канал «Claude на одной машине → Claude на другой» через синканную папку `_machine-bus` (Syncthing, ~10 сек). Убирает Антона-курьера. Курьер (копипаст) = ТОЛЬКО аварийный канал.
+The "Claude on one machine → Claude on another" channel, over the synced `_machine-bus` folder (Syncthing, ~10s). It removes the human courier. Copy-paste by hand is an EMERGENCY channel only.
 
-## Проверить, что мне пришло (основное)
+## Check what arrived for me (the main use)
 ```bash
 python "$USERPROFILE/.claude/scripts/machine_bus.py" read
 ```
-Покажет только НОВОЕ для ЭТОЙ машины (по имени компа) и пометит прочитанным. Затем доложи Антону, что пришло, и при необходимости выполни/учти это.
-- На старте сессии это уже делает хук `SessionStart` автоматически — `/inbox` нужен, когда Антон говорит «глянь инбокс» в середине сессии (например, новое прилетело синком).
-- Пере-проверить, не помечая прочитанным: `... read --peek`.
+Shows only what is NEW for THIS machine (matched by hostname) and marks it read. Then report to the operator what came in and act on it if needed.
+- At session start the `SessionStart` hook already does this automatically — `/inbox` is for when the operator says "check the inbox" mid-session (e.g. something new arrived over sync).
+- Re-check without marking as read: `... read --peek`.
 
-## Послать сообщение Claude на ДРУГОЙ машине
-1. Узнать имена доступных ящиков:
+## Send a message to Claude on ANOTHER machine
+1. List the available mailboxes:
    ```bash
    python "$USERPROFILE/.claude/scripts/machine_bus.py" list
    ```
-2. Отправить:
+2. Send:
    ```bash
-   python "$USERPROFILE/.claude/scripts/machine_bus.py" send <ИМЯ-КОМПА-ПОЛУЧАТЕЛЯ> "текст сообщения"
+   python "$USERPROFILE/.claude/scripts/machine_bus.py" send <RECIPIENT-HOSTNAME> "message text"
    ```
-   Сообщение самодостаточно (у Claude на той машине нет контекста этой сессии — вложи цель, шаги, пути, значения). Долетит за ~10 сек, всплывёт у получателя на старте сессии или по `/inbox`.
+   The message must be self-contained (Claude on that machine has none of this session's context — include the goal, the steps, the paths, the values). It arrives in ~10s and surfaces for the recipient at session start or via `/inbox`.
 
-## Когда какой канал
-- **Авто-ящик (этот скилл + хук)** — норма для всего межмашинного.
-- **Курьер (копипаст через Антона)** — ТОЛЬКО если синк лёг / нужно вне общей сети / очень срочно.
+## Which channel when
+- **The automatic mailbox (this skill + the hook)** — the norm for everything cross-machine.
+- **A human courier (copy-paste)** — ONLY if sync is down, the machines are off the shared network, or it is extremely urgent.
 
-## Границы
-- Не слать секреты в ящик, если файл могут увидеть третьи лица (у Антона на его машинах — ок).
-- «Свежее бьёт старое»: конфликт правок решает Антон (Syncthing создаёт `*.sync-conflict-*`).
-- Доставка не мгновенная: Claude — не демон; письмо ждёт, пока на той машине не откроется сессия (или не сработает рутина).
+## Boundaries
+- Do not put secrets in the mailbox if third parties could see the file (across the owner's own machines it is fine).
+- "Fresher beats older": edit conflicts are resolved by the operator (Syncthing leaves `*.sync-conflict-*` files).
+- Delivery is not instant: Claude is not a daemon; the letter waits until a session opens on that machine (or a routine fires).
+
 
 ---
 
