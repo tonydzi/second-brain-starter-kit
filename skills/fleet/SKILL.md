@@ -9,12 +9,12 @@ license: MIT
 
 # /fleet — what are my background agents doing?
 
-> 🧒 **When reporting to Anton:** end with a child-simple "Простыми словами" recap. (memory `eli5-always`)
+> 🧒 **When reporting to a non-technical operator:** end with a child-simple "In plain words" recap in their language. (memory `eli5-always`)
 
-Anton runs an autonomous fleet (Claude Desktop "Cowork" app → many headless `claude.exe` Code agents) building his Second Brain in the background. This answers: how many, what they're building, anything stuck/looping/burning. **READ-ONLY — never kill a process without Anton's explicit go** (killing mid-write loses uncommitted work; git holds only committed state).
+The operator runs an autonomous fleet (Claude Desktop "Cowork" app → many headless `claude.exe` Code agents) building their Second Brain in the background. This answers: how many, what they're building, anything stuck/looping/burning. **READ-ONLY — never kill a process without the operator's explicit go** (killing mid-write loses uncommitted work; git holds only committed state).
 
-## 🖥️ Визуальный дашборд первым (Антон работает глазами)
-`python "$IMPORTS_ROOT/build_fleet_dashboard.py"` → открой `$OBSIDIAN_VAULT/_Dashboards/Fleet-Dashboard.html`: KPI (агенты / мастера / файлов в работе / рабочих коммитов / MCP) + флаг здоровья 🟢/🟡/🔴 + лента коммитов (работа vs авто-бэкапы) + что пишется прямо сейчас. READ-ONLY. Текст ниже — если нужно копнуть руками.
+## 🖥️ Dashboard first (the operator works visually)
+`python "$IMPORTS_ROOT/build_fleet_dashboard.py"` → open `$OBSIDIAN_VAULT/_Dashboards/Fleet-Dashboard.html`: KPIs (agents / masters / files in flight / work commits / MCP) + a health flag 🟢/🟡/🔴 + a commit feed (real work vs auto-backups) + what is being written right now. READ-ONLY. The text below is for digging by hand.
 
 ## Recipe (all read-only)
 1. **Who's running + the master:**
@@ -23,7 +23,7 @@ Anton runs an autonomous fleet (Claude Desktop "Cowork" app → many headless `c
    "claude agents: $($cl.Count)"
    $cl.ParentProcessId | Sort-Object -Unique | ForEach-Object { $p = Get-CimInstance Win32_Process -Filter ("ProcessId="+$_) -EA SilentlyContinue; if ($p) { "parent $_ = $($p.Name) | $($p.CommandLine.Substring(0,[Math]::Min(80,$p.CommandLine.Length)))" } }
    ```
-   Many children sharing ONE `Claude.exe` parent = the Desktop "Cowork" master; an `explorer.exe` grandparent = Anton launched it from the GUI.
+   Many children sharing ONE `Claude.exe` parent = the Desktop "Cowork" master; an `explorer.exe` grandparent = the operator launched it from the GUI.
 2. **What they built (committed):** `git -C "$OBSIDIAN_VAULT" log -20 --pretty="%cr | %s"` — DESCRIPTIVE messages are the fleet's work; terse `pre-intervention` are auto-backups. Group by theme.
 3. **Writing right now:** `git -C "$OBSIDIAN_VAULT" status --short` → count = files in flight this second (re-run after ~30s; growing = actively writing).
 4. **New reusable artifacts:** `python "$IMPORTS_ROOT/retro_inventory.py" 1` → read its digest (new skills/scripts/notes).
@@ -33,7 +33,7 @@ Anton runs an autonomous fleet (Claude Desktop "Cowork" app → many headless `c
 ## Flags to surface
 - 🟢 healthy = commits advancing through DIFFERENT real themes over time.
 - 🟡 stuck/looping = many agents but no NEW descriptive commits for a long stretch, or the same commit message repeating.
-- 🔴 burn = dozens of lingering agents / MCP procs with no progress → tell Anton; HE decides whether to stop the Desktop app (you don't kill it).
+- 🔴 burn = dozens of lingering agents / MCP procs with no progress → tell the operator; HE decides whether to stop the Desktop app (you don't kill it).
 
 ## Output
 Tight one-liner + detail: "N agents (master PID …) · building: <themes> · writing now: <k> files · flags: 🟢/🟡/🔴 …". Then 🧒 recap. If you spotted something durable they built that isn't captured, mention it (or note `/retro` / the daily sweep will catch it).

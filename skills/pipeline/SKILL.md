@@ -10,11 +10,11 @@ license: MIT
 
 # /pipeline — work the leads (today's actions)
 
-> 🧒 **When reporting to Anton:** end with a child-simple "Простыми словами" recap. NEVER inside lead messages.
-> 📖 Operates under the `bible` skill — outreach codex `_Bible-Outreach-MOC`. Outbound = **send-direct (Anton 2026-06-16 — he edits the sent message after)**; NO mass auto-blast (pace + personalize per lead). Money / commitments / credentials → escalate.
+> 🧒 **When reporting to a non-technical operator:** end with a child-simple "In plain words" recap in their language. NEVER inside lead messages.
+> 📖 Operates under the `bible` skill — outreach codex `_Bible-Outreach-MOC`. Outbound = **send-direct (the operator 2026-06-16 — they edit the sent message after)**; NO mass auto-blast (pace + personalize per lead). Money / commitments / credentials → escalate.
 
-## 🖥️ Визуальный дашборд первым (Антон работает глазами)
-`python "$IMPORTS_ROOT/build_pipeline_dashboard.py"` → открой `$OBSIDIAN_VAULT/_Dashboards/Pipeline-Dashboard.html`: канбан по стадиям (🔥 ответили → ⏰ напомнить → ⏳ бронь → 👀 ждём → ✅ готово) + готовые черновики (клик = копировать). Только просмотр, ничего не шлёт. Текстовый разбор ниже — для самих действий (send-direct, Антон правит постфактум).
+## 🖥️ Dashboard first (the operator works visually)
+`python "$IMPORTS_ROOT/build_pipeline_dashboard.py"` → open `$OBSIDIAN_VAULT/_Dashboards/Pipeline-Dashboard.html`: a kanban by stage (🔥 replied → ⏰ nudge → ⏳ booked → 👀 waiting → ✅ done) + ready drafts (click = copy). View only, it sends nothing. The text walkthrough below is for the actions themselves (send-direct, the operator edits after the fact).
 
 ## Step 1 — Load live pipeline state (deterministic, ~free)
 Read `$IMPORTS_ROOT/tg_followups.json` (the watcher's live state). Each `pending[]` lead: `lead`, `chat_id`, `username`, `pitch_sent`, `calendly_sent`, `replied`, `booked`, `booking_confirmed`, + a `check` instruction. Plus `calendly_sent_at` (for the 24h nudge) and `booking_nudge_rule`.
@@ -27,15 +27,15 @@ Deeper history per lead: `04-Projects\crypto\Platinum-CRM\_Platinum-CRM-MOC.md` 
 4. ❄️ **Going cold** (pitched long ago, no reply, no nudge) → propose ONE soft follow-up, or mark to drop.
 5. ✅ **Booked/confirmed** → close out; suggest removing from `pending`. Never re-pitch.
 
-## Step 3 — Output the worklist, then act on Anton's go
+## Step 3 — Output the worklist, then act on the operator's go
 - Show a ranked table: **lead · state · proposed action · exact draft text**.
-- Send each directly (Anton edits the sent message if something's off); NO mass auto-blast — pace + personalize per lead.
+- Send each directly (the operator edits the sent message if something's off); NO mass auto-blast — pace + personalize per lead.
 - After sending, **UPDATE `tg_followups.json`** (`calendly_sent`, `booking_confirmed`, `booking_nudge_sent`…) so state stays true.
 - Refresh the lead's CRM card (telegram-lead-outreach capture step).
 - End with 🧒 recap.
 
 ## Guardrails
-- Voice = Anton's words **verbatim** (his rule); concise, без воды.
+- Voice = the operator's words **verbatim** (their rule); concise, no filler.
 - Money / commitments / credentials → escalate, never autonomous.
 - If `tg_followups.json` is empty/stale → say so; offer to rebuild from recent Telegram via telegram-lead-outreach ("find + capture").
 
