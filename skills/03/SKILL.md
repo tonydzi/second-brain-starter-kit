@@ -10,90 +10,90 @@ description: >
 license: MIT
 ---
 
-# /03 — машины сами находят консенсус
+# /03 — the machines find consensus by themselves
 
-> 🧒 **При докладе Антону:** заверши простым «Простыми словами» (его правило [[eli5-always]]). Только в сообщении ЕМУ.
+> 🧒 **When reporting to a non-technical owner:** finish with a simple "In plain words" recap (his rule [[eli5-always]]). Only in the message TO him.
 
-Антон сказал «03» / «теперь вы сами» → это МАНДАТ: пиры-Claude договариваются между собой и исполняют сами. Я НЕ переспрашиваю разрешения — **анонсирую и иду**. Антон нужен только на 2 воротах (ниже).
+The owner said "03" / "you handle it yourselves" → that is a MANDATE: the Claude peers negotiate among themselves and execute on their own. I do NOT ask for permission again — I **announce and go**. The owner is needed at exactly 2 gates (below).
 
-**Аргумент:** `/03 <тема/решение>` — что согласовать. Если темы нет (голое «03»/«003») — беру предмет из текущего разговора; если неоднозначно, сам формулирую предложение из контекста.
+**Argument:** `/03 <topic/decision>` — what to agree on. If there is no topic (a bare "03") — take the subject from the current conversation; if it is ambiguous, formulate the proposal from context yourself.
 
-**Алиасы:** `003` = `03` (лишний ноль игнорирую); регистр не важен [[commands-case-insensitive]]. Не путать с «02» — это эскалация К Антону (TG-группа 02 POLICE), обратное направление.
+**Aliases:** `003` = `03` (the extra zero is ignored); case does not matter [[commands-case-insensitive]]. Do not confuse it with "02" — that is escalation TO the owner (the approval channel), the opposite direction.
 
 ---
 
-## Шаг 0 — Живость пира ТОЛЬКО по живому сигналу (грабли 2026-07-04)
-Прежде чем пинговать узел или выносить вердикт «лежит/жив» — спроси факт, не гадай по mtime:
+## Step 0 — Peer liveness ONLY from a live signal (pitfall 2026-07-04)
+Before pinging a node or declaring "down/alive" — ask for a fact, don't guess from mtime:
 ```
 python "%USERPROFILE%\.claude\scripts\_shared\clan_alive.py" [<node>]
 ```
-Живость = Syncthing `connected==True` **ИЛИ** свежий `.tg-seen-<node>` (TG-рельс). 🟡 = жив по TG, Syncthing флапнул — это НЕ смерть. ⛔ НИКОГДА не суди по mtime файловых маркеров (`.read-*`, `.robot-done-*`, наличию `log-<node>.jsonl`) — TG-рельсовый follower их не пишет by design. Канон: [[peer-liveness-live-signal]].
+Liveness = Syncthing `connected==True` **OR** a fresh `.tg-seen-<node>` (the Telegram rail). 🟡 = alive over Telegram, Syncthing flapped — that is NOT death. ⛔ NEVER judge by the mtime of file markers (`.read-*`, `.robot-done-*`, the presence of `log-<node>.jsonl`) — a Telegram-rail follower does not write them by design. Canon: [[peer-liveness-live-signal]].
 
-## Шаг 1 — Анонс одной строкой, БЕЗ ожидания «да»
-Роняю Антону ровно одну строку и сразу иду дальше (он может отменить, но я не жду):
+## Step 1 — A one-line announcement, WITHOUT waiting for a "yes"
+Drop exactly one line to the owner and move on immediately (he can cancel, but I don't wait):
 ```
-🤝 если не против, иду согласовывать с <пиры> через 03: «<тема>»…
+🤝 unless you object, I'm going to agree this with <peers> over the coordination channel: "<topic>"…
 ```
-`<пиры>` = другие машины клана (хаб `HUB-1`, ноут `LAPTOP-1`, машины коллег). Кто онлайн — видно по шине; точный список не критичен, движок раздаёт всем.
+`<peers>` = the other machines of the fleet (the hub `HUB-1`, the laptop `LAPTOP-1`, teammates' machines). Who is online is visible on the bus; an exact list is not critical, the engine broadcasts to everyone.
 
-## Шаг 2 — Определить риск-тир (это решает, нужен ли Антон)
-- **Tier-0/1** (безопасное, обратимое: какая машина гоняет фон, расписание, выбор формата, разметка, дедуп-суждение) → пиры закроют сами.
-- **Tier-2** (деньги · отправка наружу · необратимое · секреты · правка ОБЩЕГО канона CLAUDE.md/Библии/operating-agreement) → даже при согласии НЕ авто-коммит, уйдёт к Антону через QQQ.
-В сомнении — выбираю более высокий тир (безопаснее).
+## Step 2 — Determine the risk tier (this decides whether the owner is needed)
+- **Tier-0/1** (safe, reversible: which machine runs a background job, scheduling, format choice, tagging, a dedup judgement) → the peers close it themselves.
+- **Tier-2** (money · outbound sends · irreversible · secrets · editing the SHARED canon CLAUDE.md / the Bible / operating-agreement) → even with agreement it is NOT auto-committed, it goes to the owner via the approval flow.
+In doubt — pick the higher tier (safer).
 
-## Шаг 3 — Открыть предложение через движок
-- ⚠️ **СНАЧАЛА проверь, нет ли уже чужого треда на ЭТО действие** (грабли 17.07: хаб и Якорь независимо открыли #0eaf6c3c и #490b0384 на один и тот же мерж канона → дубль): `consensus.py pending` + `consensus.py list`. Есть открытое предложение пира на то же действие → **отвечаю в него** (`respond <id> accept/counter`), НЕ открываю рядом свой. Открывать новый — только если чужого нет.
+## Step 3 — Open the proposal through the engine
+- ⚠️ **FIRST check that no one else already has a thread on THIS action** (pitfall 07-17: the hub and the anchor independently opened #0eaf6c3c and #490b0384 for the same canon merge → a duplicate): `consensus.py pending` + `consensus.py list`. There is an open proposal from a peer for the same action → **reply into it** (`respond <id> accept/counter`), do NOT open your own alongside. Open a new one only if none exists.
 ```
-python "%USERPROFILE%\.claude\scripts\consensus.py" propose "<ДЕЙСТВИЕ одной строкой>" --details "<улики/контекст>" --tier <0|1|2>
+python "%USERPROFILE%\.claude\scripts\consensus.py" propose "<ACTION in one line>" --details "<evidence/context>" --tier <0|1|2>
 ```
-(Bash-вариант: `python "$USERPROFILE/.claude/scripts/consensus.py" propose "<action>" --details "<evidence>" --tier <N>`.)
-- ⚠️ **Действие — в `"<тема>"` (subject), доказательства/диагностику — в `--details`.** Tier-tripwire сканит на стоп-слова ТОЛЬКО subject (действие), не улики. Свалишь диагностику («…laptop **sends**…», «**apikey** matches») в тему — ложно поднимет tier→2 и зря дёрнет Антона. Держи subject коротким и про действие.
-- Движок дуально шлёт событие в TG-03 + `_machine-bus` (по конструкции, одиночный рельс запрещён) → переговоры видны в чате.
-- Tier-2 propose движок САМ эскалирует на Антона (`❓ QQQ=да / NO=нет`) и НЕ коммитит.
-- Запоминаю `#id` из вывода.
+(Bash variant: `python "$USERPROFILE/.claude/scripts/consensus.py" propose "<action>" --details "<evidence>" --tier <N>`.)
+- ⚠️ **The action goes into `"<subject>"`, the evidence/diagnostics into `--details`.** The tier tripwire scans ONLY the subject (the action) for stop-words, not the evidence. Dump diagnostics ("…laptop **sends**…", "**apikey** matches") into the subject and it will falsely raise the tier to 2 and wake the owner for nothing. Keep the subject short and about the action.
+- The engine dual-sends the event into the coordination chat + `_machine-bus` (by construction; a single rail is forbidden) → the negotiation is visible in the chat.
+- A Tier-2 propose is escalated to the owner BY THE ENGINE (`❓ QQQ=yes / NO=no`) and is NOT committed.
+- Remember the `#id` from the output.
 
-## Шаг 4 — Вести переговоры до согласия
-Другая машина отвечает `respond <id> accept|counter|reject`. Когда я — отвечающая сторона, сперва `pending` (0-LLM ворк-лист «что ждёт МОЕГО ответа»), потом сужу по существу (Sonnet-грунт, [[model-routing-sonnet-grunt]]) и отвечаю тем же глаголом. Драйвит таймауты/раунды детерминированный `tick` (0-LLM, уже в inbox-роботе; таймаут = SLA самого медленного пира, спящий ноут/Mac ждём дольше хаба):
+## Step 4 — Negotiate to agreement
+The other machine answers `respond <id> accept|counter|reject`. When I am the responding side, first run `pending` (a 0-LLM worklist of "what is waiting for MY answer"), then judge on the merits (cheap model groundwork, [[model-routing-sonnet-grunt]]) and answer with the same verb. Timeouts/rounds are driven by the deterministic `tick` (0-LLM, already inside the inbox robot; the timeout = the SLA of the slowest peer, a sleeping laptop/Mac is given longer than the hub):
 ```
 python "%USERPROFILE%\.claude\scripts\consensus.py" pending
 python "%USERPROFILE%\.claude\scripts\consensus.py" tick
 python "%USERPROFILE%\.claude\scripts\consensus.py" status <id>
 ```
 
-## Шаг 5 — Исполнить и кросс-проверить (анти-«работает-у-меня»)
-- Согласовано (status=agreed) и Tier-0/1 → `commit <id>` → **применяю реальную правку** → `verify <id> "<доказательство>"`.
-- Задача globally done ТОЛЬКО когда ОБЕ машины независимо постят `VERIFY` (>=2). Один пир «сделал» — ещё не done.
+## Step 5 — Execute and cross-check (anti "works-on-my-machine")
+- Agreed (status=agreed) and Tier-0/1 → `commit <id>` → **apply the real change** → `verify <id> "<evidence>"`.
+- A task is globally done ONLY when BOTH machines independently post `VERIFY` (>=2). One peer saying "done" is not done.
 
-## Шаг 6 — Ворота к Антону (ровно 2, иначе без него)
+## Step 6 — The gates to the owner (exactly 2, otherwise without him)
 
-⛔ **Вопрос Антону НИКОГДА не пишу руками в чат** — только через движок `approval.py` [[remote-approval-qqq]]. Аск от руки не имеет `#id`: его не видит `approval.py due` (нет перепинга и эскалации), и позднее «+» Антона не к чему привязать — ответ проваливается в щель между состояниями (инцидент 21.07, разрешение вносили руками). Чат-id в скилле не хардкожу: адреса берёт сам движок из `~/.claude/approval.json → targets`.
+⛔ **I NEVER hand-write a question to the owner into a chat** — only through the `approval.py` engine [[remote-approval-qqq]]. A hand-written ask has no `#id`: `approval.py due` cannot see it (no re-ping and no escalation), and a later "+" from him has nothing to attach to — the answer falls through the crack between states (incident 07-21, the permission had to be entered by hand). I never hardcode chat ids in the skill: the engine takes the addresses from `~/.claude/approval.json → targets`.
 
-**Как минтится аск:**
+**How an ask is minted:**
 ```
-python "%USERPROFILE%\.claude\scripts\approval.py" ask "<что + зачем + риск> (консенсус #<id>)" --cat <money|delete|outbound|secret|config|other>
+python "%USERPROFILE%\.claude\scripts\approval.py" ask "<what + why + risk> (consensus #<id>)" --cat <money|delete|outbound|secret|config|other>
 ```
-→ печатает JSON `{id, ask_text, targets}`. `ask_text` постит **вызывающая сессия** (approval.py — рекордер, не сендер) по `targets` ПО ПОРЯДКУ: `tg_police` = «02 POLICE» ПЕРВЫМ (стерильный канал «нужно внимание Антона»), дубль в `tg_group`/WA/личку. Ответ ловлю `approval.py check` (stdin = реплаи из MCP) → `APPROVED/REJECTED/EXPIRED <id>`. Висящий аск не бросаю: `approval.py due` печатает конверты перепинга — их постит в 02 та же сессия/inbox-робот. Это же страхует обрыв «сминтил id, но не успел запостить»: неотправленный аск всплывёт конвертом `due` в пределах freshness (15 мин), а не умрёт молча.
+→ prints JSON `{id, ask_text, targets}`. `ask_text` is posted by **the calling session** (approval.py is a recorder, not a sender) to `targets` IN ORDER: the approval channel FIRST (a sterile "the owner's attention is needed" channel), then a mirror into the fleet log chat / WhatsApp / DM. I catch the answer with `approval.py check` (stdin = the replies from MCP) → `APPROVED/REJECTED/EXPIRED <id>`. A hanging ask is never abandoned: `approval.py due` prints re-ping envelopes — the same session or the inbox robot posts them to the approval channel. That also covers the "minted an id but never managed to post it" break: an unsent ask resurfaces as a `due` envelope within the freshness window (15 min) instead of dying silently.
 
-**Дедуп аска (иначе два вопроса на один спор):** перед `ask` смотрю `approval.py pending` — если открытый аск с этим `консенсус #<id>` уже есть (его мог породить `tick` или пир), второй НЕ минчу. Поэтому consensus-id ОБЯЗАН стоять в тексте аска: он единственная связка между тредом консенсуса и вопросом Антону.
+**Ask dedup (otherwise two questions for one dispute):** before `ask`, check `approval.py pending` — if an open ask carrying this `consensus #<id>` already exists (it may have been minted by `tick` or by a peer), do NOT mint a second one. That is why the consensus id MUST appear in the ask text: it is the only link between the consensus thread and the question to the owner.
 
-**Типизация — что вообще достойно 02** ([[remote-approval-qqq]] §Типизация 14.07): **A** внутреннее/флот-обратимое · **B** наш контент в наши каналы · **C** короткое исходящее 3-м лицам по делу → решаю САМ как кофаундер, журналирую в `approvals.db`, отчёт постфактум — в 02 НЕ шлю. В 02 идут только **D** «нужны физически руки Антона» (2FA/UAC/пароль; формулировка = клик-путь, не «дай добро») и **E** категорически серьёзное (деньги · невозвратное удаление · секреты 3-м лицам · юр.обязательства · масс-рассылка · новый пир). Сомнение C-vs-E → E.
+**Classification — what even deserves the approval channel** ([[remote-approval-qqq]] §Classification 07-14): **A** internal / fleet-reversible · **B** our content into our own channels · **C** a short, on-topic outbound message to a third party → I decide MYSELF as a co-founder, journal it into `approvals.db` and report after the fact — those do NOT go to the approval channel. Only **D** "the owner's physical hands are needed" (2FA/UAC/a password; phrase it as a click path, not "give me the go-ahead") and **E** categorically serious matters (money · irreversible deletion · secrets to third parties · legal commitments · mass mailing · a new peer) go there. In doubt between C and E → E.
 
-**Ворота (ровно два):**
-1. **Tier-2 действие класса D/E** → `escalate <id> "<почему>"` фиксирует СОСТОЯНИЕ треда, но сам по себе трекуемого вопроса не создаёт → тем же ходом минчу аск через `approval.py ask` (см. выше) и постю его `ask_text`. Пришёл `QQQ`/`+` от подписанта (Антон · Рита · Нина) → `approve <id> "<кто/где/msg-id>"` фиксирует ОК в треде → только тогда `commit`.
-2. **Пиры не сошлись** за round_cap (3) / таймаут по чему-то важнее Tier-0 → сперва **tie-break Якорьа** (`ANCHOR-1` — координатор, хранилище истины и арбитр межмашинных споров). Якорь мёртв/не способен рассудить (leader-down >70 мин → арбитр-на-тик хаб) → и **только тогда** будим Антона тем же маршрутом `approval.py ask`.
-- **НЕ эскалирую:** безопасный Tier-0-тупик → tie-break (disagree-and-commit) закрывает сам, Антона не трогаю.
-- ⚠️ `tick` при round-cap/таймауте может сам крикнуть в 02 по своей рельсе — это НЕ заменяет аск: он без `#id` approval-движка. Крикнул `tick` — доминчиваю аск через `approval.py`, чтобы у вопроса были id, перепинг и запись ответа.
+**The gates (exactly two):**
+1. **A Tier-2 action of class D/E** → `escalate <id> "<why>"` records the STATE of the thread, but by itself it creates no trackable question → in the same move, mint an ask via `approval.py ask` (see above) and post its `ask_text`. A `QQQ`/`+` arrives from an authorized signer (the owner or one of the two co-signers) → `approve <id> "<who/where/msg-id>"` records the OK in the thread → only then `commit`.
+2. **The peers did not converge** within the round_cap (3) / a timeout on something above Tier-0 → first a **tie-break by the anchor node** (`ANCHOR-1` — the coordinator, the source of truth and the arbiter of cross-machine disputes). The anchor is dead / unable to arbitrate (leader-down >70 min → the hub becomes arbiter-for-this-tick) → and **only then** wake the owner through the same `approval.py ask` route.
+- **Do NOT escalate:** a safe Tier-0 deadlock → the tie-break (disagree-and-commit) closes it by itself, don't bother the owner.
+- ⚠️ On a round cap/timeout, `tick` may shout into the approval channel over its own rail — that does NOT replace the ask: it carries no `#id` from the approval engine. `tick` shouted → mint the ask through `approval.py` anyway, so the question has an id, a re-ping and a recorded answer.
 
-## Доклад Антону (постфактум, коротко)
-Что согласовали · с кем · вердикт (✅ committed+verified / ⏳ ждёт QQQ / 🔴 спор → тебе) · что реально сделано. Простыми словами в конце.
+## Report to the owner (after the fact, briefly)
+What was agreed · with whom · the verdict (✅ committed+verified / ⏳ waiting for approval / 🔴 dispute → over to you) · what was actually done. An "in plain words" line at the end.
 
 ---
 
-### Границы
-- Tier-2 хард-стоп держится: «вы сами» НЕ даёт права самим тратить деньги/слать наружу/переписать канон.
-- Канон коммитит только Антон через хаб [[machine-governance-leader-follower]].
-- Failure-modes (византийский пир, авто-цикл, ложный VERIFY) — открытый DR; до закрытия держим Phase 1 консервативным.
-- Движок — единственный источник истины состояния (`_machine-bus/_decisions/log-<MACHINE>.jsonl`); я не дублирую логику, только вызываю вербы.
+### Boundaries
+- The Tier-2 hard stop holds: "you handle it yourselves" does NOT grant the right to spend money / send outbound / rewrite the canon on your own.
+- Only the owner commits canon, through the hub [[machine-governance-leader-follower]].
+- Failure modes (a byzantine peer, an auto-loop, a false VERIFY) are an open DR; until it closes we keep Phase 1 conservative.
+- The engine is the single source of truth for state (`_machine-bus/_decisions/log-<MACHINE>.jsonl`); I don't duplicate its logic, I only call its verbs.
 
 ---
 
