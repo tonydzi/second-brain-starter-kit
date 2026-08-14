@@ -9,43 +9,44 @@ description: >
 license: MIT
 ---
 
-# /precedent — мы это уже решали? (поиск прецедента перед решением)
+# /precedent — have we decided this already? (find the precedent before deciding)
 
-Дешёвая страховка ПЕРЕД новым структурным выбором или предложением: вдруг по этой теме уже есть вердикт (приняли / отклонили / отложили) — чтобы не пере-предлагать отклонённое и не решать заново то, что решено. Зеркало правила «перед активностью — RECALL» на слой РЕШЕНИЙ.
+Cheap insurance BEFORE a new structural choice or proposal: maybe there is already a verdict on this topic (accepted / rejected / deferred) — so we do not re-pitch something already declined, nor re-decide what is decided. This is the "RECALL before activity" rule applied to the DECISION layer.
 
-## Что поднять (дёшево → дорого; останавливаюсь, как нашёл)
+## What to pull up (cheap → expensive; stop as soon as you find it)
 
-1. **Журнал отклонённого (первым — самое частое попадание):** память
-   `$USERPROFILE/.claude/projects/C--Users----CLAUDE-HP17-May26/memory/declined-decisions.md` —
-   что уже отвергали/откладывали, почему словами Антона, и `Revisit-if` (при каком условии можно вернуть).
-2. **Журнал принятых решений (волт):** grep по `$OBSIDIAN_VAULT/02-Decisions/`
-   (подпапки по доменам) и по файлам `decision-*` в волте.
+1. **The declined journal (first — the most frequent hit):** memory
+   `$USERPROFILE/.claude/projects/<project>/memory/declined-decisions.md` —
+   what was rejected or deferred, why in the owner's own words, and `Revisit-if` (the condition under which it can come back).
+2. **The accepted-decisions journal (vault):** grep `$OBSIDIAN_VAULT/02-Decisions/`
+   (subfolders by domain) and any `decision-*` files in the vault.
    ```bash
-   grep -rinl "<тема/ключевые слова>" "$OBSIDIAN_VAULT/02-Decisions"
+   grep -rinl "<topic/keywords>" "$OBSIDIAN_VAULT/02-Decisions"
    ```
-3. **Библия (правила для всех акторов):** grep по `reglament-*` / `protocol-*` в волте — нет ли
-   уже нормы, закрывающей вопрос.
-4. **Семантический добор (если точный grep пуст, а тема явно обсуждалась):** скилл `/ask`
-   (RAG поверх волта) — ловит формулировки, которые grep пропустил.
+3. **The Bible (rules for all actors):** grep `reglament-*` / `protocol-*` in the vault — maybe a
+   standing rule already closes the question.
+4. **Semantic top-up (if the exact grep is empty but the topic was clearly discussed):** the `/ask` skill
+   (RAG over the vault) — it catches phrasings grep missed.
 
-## Что вернуть Антону
-Короткий вердикт, а не свалка:
-- **Прецедент ЕСТЬ** → что решили · когда · почему · ссылка на заметку. Если это было ОТКЛОНЕНО —
-  назвать `Revisit-if`: открываем повторно ТОЛЬКО если условие выполнилось, либо явно как trade-off
-  «другого выхода нет» (никогда молча не пере-питчить).
-- **Прецедента НЕТ** → так и сказать «по этому решения не нашёл» (проверив ПРАВИЛЬНЫЙ диск/папку —
-  пустой результат часто = искал не там, а не «нет данных»), и тогда идти решать с чистого листа
-  (для стратегического — через Alpha Protocol `R+DR`).
+## What to give back to the operator
+A short verdict, not a dump:
+- **A precedent EXISTS** → what was decided · when · why · a link to the note. If it was REJECTED,
+  name the `Revisit-if`: reopen ONLY if the condition is met, or explicitly as a trade-off
+  ("there is no other way") — never silently re-pitch.
+- **No precedent** → say exactly that: "I found no decision on this" (after checking the RIGHT drive/folder —
+  an empty result is often "looked in the wrong place", not "no data"), and then go decide from scratch
+  (for strategic questions, via the Alpha Protocol `R+DR`).
 
-## Когда звать
-- Перед тем как я предлагаю новое поле/скрипт/структуру/правило/автоматизацию (по `show-before-after`).
-- Когда Антон говорит «мы вроде это обсуждали».
-- В начале Alpha Protocol — как часть шага RECALL.
+## When to call it
+- Before I propose a new field / script / structure / rule / automation (per `show-before-after`).
+- When the operator says "I think we discussed this".
+- At the start of the Alpha Protocol — as part of the RECALL step.
 
-## Границы
-- Read-only: только поднимает прошлое, ничего не решает за Антона.
-- Не дублирует Alpha Protocol — это его узкий под-шаг «есть ли уже вердикт»; для полноценной
-  стратегии всё равно `R+DR`.
+## Boundaries
+- Read-only: it only surfaces the past, it decides nothing for the operator.
+- It does not duplicate the Alpha Protocol — it is that protocol's narrow sub-step "is there already a
+  verdict"; a full strategy still needs `R+DR`.
+
 
 ---
 

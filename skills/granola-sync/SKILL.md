@@ -8,33 +8,34 @@ description: >
 license: MIT
 ---
 
-OBJECTIVE: Инкрементально втянуть свежие встречи/звонки из Granola в волт (саммари + полный транскрипт + участники + матч с календарём), на запрос. Идемпотентно: скрипт сам качает только новое/изменённое (state.json: note id → updated_at).
+OBJECTIVE: Incrementally pull fresh meetings/calls from Granola into the vault (summary + full transcript + participants + a calendar match), on demand. Idempotent: the script downloads only what is new or changed (state.json: note id → updated_at).
 
 CONTEXT:
-- Транспорт: официальный Granola public API `https://public-api.granola.ai/v1` (List Notes / Get Note ?include=transcript; page_size ≤ 30; 5 rps). Ключ: `%WORKDIR%\secrets\granola.env` (аккаунт owner.calendar@example.com, Workspace2, скоупы personal+public, создан 2026-07-02).
-- ⛔ MCP-транспорт больше НЕ используется для синка (browser-OAuth, слетает ~10 дней) — только для интерактивных вопросов, если переавторизован.
-- Движок (вся логика там, скилл — тонкая обёртка): `$IMPORTS_ROOT/granola/granola_pull.py`. Один и тот же скрипт = бэкфилл и инкремент.
-- Дом заметок: `$OBSIDIAN_VAULT/04-Projects/granola-meetings/` (auto_generated: true — правки руками не делать, перезаписываются). Raw JSON: `_imports\granola\raw\`. Лог ночной задачи: `_imports\granola\pull.log`.
-- ⚠️ Запись НЕ автостартует в Granola: пишет только если человек открыл заметку/кликнул нотификацию. «Приложение запущено» ≠ «идёт запись».
+- Transport: the official Granola public API `https://public-api.granola.ai/v1` (List Notes / Get Note ?include=transcript; page_size <= 30; 5 rps). Key: `%WORKDIR%\secrets\granola.env` (account owner.calendar@example.com, Workspace2, scopes personal+public, created 2026-07-02).
+- ⛔ The MCP transport is NO LONGER used for syncing (browser OAuth, it dies after ~10 days) — only for interactive questions, and only if re-authorized.
+- Engine (all the logic lives there, this skill is a thin wrapper): `$IMPORTS_ROOT/granola/granola_pull.py`. The same script does both backfill and increment.
+- Home for notes: `$OBSIDIAN_VAULT/04-Projects/granola-meetings/` (auto_generated: true — never hand-edit, they get overwritten). Raw JSON: `_imports\granola\raw\`. Nightly task log: `_imports\granola\pull.log`.
+- ⚠️ Granola does NOT start recording by itself: it records only when a human opens the note or clicks the notification. "The app is running" is not "it is recording".
 
 STEPS:
-1. BACKUP FIRST ([[vault-backup-rule]]): `python $IMPORTS_ROOT/vault_backup.py` ДО запуска.
-2. Прогнать: `python $IMPORTS_ROOT/granola/granola_pull.py` (опции: `--dry` посчитать без записи, `--limit N` ограничить).
-3. Прочитать счётчики stdout: `DONE new=X updated=Y errors=Z state_total=N`. errors>0 → глянуть, чаще всего сеть/429 (скрипт сам ретраит).
-4. Если new>0 — доложить список свежих встреч (титулы/даты из state или свежих файлов).
-5. Distill (если new>0): `python $IMPORTS_ROOT/granola/call_distill.py` — раскладывает каждый новый звонок на Commitments/Facts/Objections/Alpha с цитатами → `04-Projects\granola-meetings\_distilled\` + `commitments.jsonl`. Счётчики: `DONE distilled=M commitments=C errors=Z`. (Ночной двойник = задача "Granola Call Distill" 03:50; ест и Fireflies-raw.)
-6. Реиндекс RAG подхватит ночью ([[reindex-routine]]); после ПЕРВОГО большого бэкфилла — прогнать `python $IMPORTS_ROOT/brain_embed_update.py` вручную. ⚠️ `_distilled` пока НЕ в курируемом индексе (04-Projects = evidence-слой) — закрывается задачей RUSL-1 (`layer: essence`).
+1. BACKUP FIRST ([[vault-backup-rule]]): `python $IMPORTS_ROOT/vault_backup.py` BEFORE running anything.
+2. Run it: `python $IMPORTS_ROOT/granola/granola_pull.py` (options: `--dry` to count without writing, `--limit N` to cap).
+3. Read the stdout counters: `DONE new=X updated=Y errors=Z state_total=N`. errors>0 → look into it; usually network or 429 (the script retries by itself).
+4. If new>0 — report the list of fresh meetings (titles/dates from the state or the new files).
+5. Distill (if new>0): `python $IMPORTS_ROOT/granola/call_distill.py` — it breaks each new call into Commitments/Facts/Objections/Alpha with quotes → `04-Projects\granola-meetings\_distilled\` + `commitments.jsonl`. Counters: `DONE distilled=M commitments=C errors=Z`. (The nightly twin is the "Granola Call Distill" task at 03:50; it also eats the Fireflies raw files.)
+6. The RAG reindex picks it up overnight ([[reindex-routine]]); after the FIRST big backfill, run `python $IMPORTS_ROOT/brain_embed_update.py` manually. ⚠️ `_distilled` is not in the curated index yet (04-Projects is the evidence layer) — closed by task RUSL-1 (`layer: essence`).
 
 CONSTRAINTS:
-- Windows cp1252: кириллицу в stdout не печатать (скрипт уже ASCII-only).
-- INCREMENTAL ONLY — state.json не удалять (иначе перекачает всё).
-- Provenance: origin: mixed, authored_by: hybrid — НЕ #anton-original (чужая речь).
-- Tier-2: ничего наружу; только чтение API + запись в волт.
-- 401/403 от API → ключ отозван: создать новый в Granola desktop (Settings → Connectors → Personal API keys, скоупы Personal+Public), обновить granola.env. Могу сам через computer-use (проверено 2026-07-02).
+- Windows cp1252: do not print non-ASCII to stdout (the script is already ASCII-only).
+- INCREMENTAL ONLY — never delete state.json (it would re-download everything).
+- Provenance: origin: mixed, authored_by: hybrid — NOT #anton-original (someone else's speech).
+- Tier-2: nothing goes outside; API reads and vault writes only.
+- A 401/403 from the API means the key was revoked: create a new one in the Granola desktop app (Settings → Connectors → Personal API keys, scopes Personal+Public) and update granola.env. I can do this myself through computer-use (verified 2026-07-02).
 
-OUTPUT: счётчики new/updated/errors + период; если пусто — «Новых встреч нет». Заверши 🧒 «Простыми словами».
+OUTPUT: the new/updated/errors counters + the period; if empty, "no new meetings". Finish with an "In plain words" recap.
 
-RELATION (не дублевать): Fireflies-рельса (автозапись, реальные имена спикеров) = skill [[fireflies-sync]]; доступ/история = память [[granola-mcp-integration]]; решение по архитектуре = волт `decision-granola-extraction-official-api`; follow-up-после-звонка SOP = память [[call-followup-group-sop]] (отдельный пайплайн); FAAA-синк = обратное направление (готовые фолоуапы из TG).
+RELATION (do not duplicate): the Fireflies rail (auto-recording, real speaker names) = skill [[fireflies-sync]]; access and history = memory [[granola-mcp-integration]]; the architecture decision = the vault note `decision-granola-extraction-official-api`; the post-call follow-up SOP = memory [[call-followup-group-sop]] (a separate pipeline); the FAAA sync goes the other way (finished follow-ups out of Telegram).
+
 
 ---
 
