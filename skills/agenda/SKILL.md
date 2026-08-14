@@ -10,7 +10,7 @@ license: MIT
 
 # /agenda — today at a glance
 
-> 🧒 When reporting to Anton end with a child-simple "Простыми словами" recap. (memory `eli5-always`)
+> 🧒 When reporting to Anton end with a child-simple "In plain words" recap. (memory `eli5-always`)
 
 A fast, read-only "what does my day look like" — the manual counterpart of the scheduled `Tg calendar agenda` task (same intent, fired by hand). It assembles, it does NOT act (sending/booking lives in /pipeline + /intro).
 
@@ -20,7 +20,7 @@ A fast, read-only "what does my day look like" — the manual counterpart of the
 3. **Today's one commitment** — if /coach logged an evening "tomorrow's one commitment" in `04-Coach/`, echo it.
 
 ## Rank & present
-Top of the list = time-bound + needs-Anton (a meeting in 2h, a lead going cold). Then fixed calendar blocks. Then nice-to-have. Keep it tight — this is a glance, not a report. Offer the obvious next action ("работать лиды → /pipeline", "встреча без повестки → /intro").
+Top of the list = time-bound + needs-Anton (a meeting in 2h, a lead going cold). Then fixed calendar blocks. Then nice-to-have. Keep it tight — this is a glance, not a report. Offer the obvious next action ("work the leads → /pipeline", "a meeting with no agenda → /intro").
 
 ## Safety
 Read-only. Never send a message, book, or commit from here — hand off to /pipeline, /intro, or ask.

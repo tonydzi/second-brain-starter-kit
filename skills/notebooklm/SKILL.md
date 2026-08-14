@@ -10,7 +10,7 @@ license: MIT
 
 # /notebooklm — audio/artifact layer over the Second Brain
 
-> 🧒 When reporting to Anton end with a child-simple "Простыми словами" recap. (memory `eli5-always`)
+> 🧒 When reporting to Anton end with a child-simple "In plain words" recap. (memory `eli5-always`)
 
 NotebookLM = the **artifact/explanation layer** (Audio Overview, study guide, mind map, reports) over the vault — NOT memory or RAG (that stays Obsidian + e5/rerank + SQLite). Flow: `vault → Claude Code curates a NARROW packet → NotebookLM → artifacts back into vault as Derived`. Full state = memory [[notebooklm-integration]].
 

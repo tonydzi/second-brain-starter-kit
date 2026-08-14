@@ -10,7 +10,7 @@ license: MIT
 
 # Telegram lead outreach
 
-> 🧒 **When reporting to Anton** (status/summaries — NEVER inside lead pitches or follow-ups): always end with a child-simple "Простыми словами" recap in his language. His standing request. See memory `eli5-always` / global `CLAUDE.md`.
+> 🧒 **When reporting to Anton** (status/summaries — NEVER inside lead pitches or follow-ups): always end with a child-simple "In plain words" recap in his language. His standing request. See memory `eli5-always` / global `CLAUDE.md`.
 
 > 📖 **Operates under the `bible` skill** — Anton's single behavioral codex. The outreach rules you apply are the vault's outreach domain: `_Bible-Outreach-MOC` (part of `concept-bible-platinum`). Load the relevant slice and follow Bible precedence — **newer rule beats older on the same topic** (`protocol-bible-as-prompt`). This skill is the Telegram-channel playbook under that contract.
 
@@ -22,7 +22,7 @@ Anton runs B2B outreach through his own Telegram account as **Palo Alto AI Resea
 `search_global(query=<keyword>)` sweeps all his chats (DMs + groups), newest first. Also `search_messages(chat_id, query)` for a specific chat. Note: pagination can return the same recent window — for older hits, search target chats individually.
 
 ### 2. Keep only SELF-mentions (the key filter)
-Exclude **Anton's own** messages (sender `Tony📍SF / Bay Area`, `Tony frm Palo Alto…`, @work_acct_a) and his **team** (e.g. `Нина Платинум Олег`, Rita, etc.). Keep messages where the **lead themselves** used the keyword — that's intent. Rank warmth:
+Exclude **Anton's own** messages (sender `Tony📍SF / Bay Area`, `Tony frm Palo Alto…`, @work_acct_a) and his **team** (their names live in the CRM, not here). Keep messages where the **lead themselves** used the keyword — that's intent. Rank warmth:
 - 🔥 **hot** — substantive, knowledgeable discussion (asks technical Qs, names projects/tools).
 - 🟡 **warm** — short but engaged ("X project?", "tell me more").
 - ❄️ **cold** — dismissive/negative ("haven't come across any", a joke). Log but usually don't pitch.
@@ -34,7 +34,7 @@ For an existing 1:1 chat, `chat_id` already **is** the user_id — you can DM di
 
 ### 4. Pitch — message 1 (compose → send; Anton edits after if off)
 - **Personalize per lead** — reference their exact context (their project, their question). No copy-paste blasts.
-- **Concise, по существу, без воды** (his Bible comms rule). Carry the core offer in his words.
+- **Concise, to the point, no filler** (his Bible comms rule). Carry the core offer in his words.
 - **Brand**: Palo Alto AI Research Lab / Silicon Valley VC & incubator.
 - **DM beats group** — group replies get buried; if you only have a group, you can reply there, but prefer DM once the handle resolves (acknowledge the group comment so the DM isn't a blind duplicate).
 - **Voice — relay Anton's words VERBATIM** (standing rule, 2026-06-01): when Anton gives you his words / phrasing / intent for a lead, convey HIS exact words (translate to the lead's language if needed) with only **minor** polish — do NOT rewrite into your own style or paraphrase. Leads should hear *him*, not a reworded version. His default register: casual lowercase in DMs ("gm", "rn", "wagmi", emoji ok), professional when the lead is formal. Mirror his real messages.

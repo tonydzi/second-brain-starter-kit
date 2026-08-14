@@ -10,7 +10,7 @@ license: MIT
 
 # Telegram re-import (incremental)
 
-> 🧒 **When reporting to Anton:** always end with a child-simple "Простыми словами" recap in his language (plain words, no jargon) — his standing request. See memory `eli5-always` / global `CLAUDE.md`.
+> 🧒 **When reporting to Anton:** always end with a child-simple "In plain words" recap in his language (plain words, no jargon) — his standing request. See memory `eli5-always` / global `CLAUDE.md`.
 
 This skill turns "I re-exported chat X" into one orchestrated run that adds only the **new** messages to the vault, without re-doing the whole import. It is the maintenance counterpart to `obsidian-ingest` (which does first-time imports). The heavy per-source mechanics — roster, provenance, triage, layer structure — already live in `obsidian-ingest/references/source-adapters.md`; **this skill is the dispatch + orchestration layer over the real scripts in `$IMPORTS_ROOT/`.** Don't duplicate adapter logic here; read that file when you need the why.
 
@@ -18,7 +18,7 @@ This skill turns "I re-exported chat X" into one orchestrated run that adds only
 
 | Source key | Chat | Vault home | Parser |
 |---|---|---|---|
-| `pokupki` | «Покупки approve Assistant's tasks 777…» | `01-Conversations/Telegram/Pokupki/` | `parse_pokupki.py` (result.json) |
+| `pokupki` | "Purchases approve Assistant's tasks 777…" | `01-Conversations/Telegram/Pokupki/` | `parse_pokupki.py` (result.json) |
 | `assistants-ops` | «All Assistant's tasks 777…» (household rules → Bible) | `01-Conversations/Telegram/Assistants-Ops/` + `03-Insights/Operations/` | `parse_assistants_ops.py` (messages*.html) |
 | `arhiv-golosa` | content-team voice archive | `01-Conversations/Telegram/Arhiv-Golosa/` | `parse_telegram.py` (messages*.html) |
 | `faaa` | «CALLS … FAAA follow up» (CRM) | `04-Projects/crypto/Platinum-CRM/` | `parse_faaa.py` (result.json) |
@@ -69,7 +69,7 @@ After phase 3, **report how many new items need curation and offer to run that p
 
 ## Provenance & the voice gap (carry over, don't re-derive)
 
-Provenance defaults are fixed per source in `source-adapters.md` — relay-footer `Перевела:/Делегировано:` = Anton's voice (`origin: anton`, poster→`transcribed_by`); Alina only by her own name-marker; team SOPs → `mixed`. The **voice gap persists**: Telegram exports omit `.ogg` voice notes, so most of Anton's reasoning still isn't recoverable from text. If this export was made **with media**, that's the moment to Whisper-transcribe and enrich by `msg_id` (idempotent) — flag it. (A Telegram MCP that downloads voice by msg_id would close this — see the connector guide.)
+Provenance defaults are fixed per source in `source-adapters.md` — relay-footer `Translated:/Delegated:` = Anton's voice (`origin: anton`, poster→`transcribed_by`); an assistant only by her own name-marker; team SOPs → `mixed`. The **voice gap persists**: Telegram exports omit `.ogg` voice notes, so most of Anton's reasoning still isn't recoverable from text. If this export was made **with media**, that's the moment to Whisper-transcribe and enrich by `msg_id` (idempotent) — flag it. (A Telegram MCP that downloads voice by msg_id would close this — see the connector guide.)
 
 ## Windows / Cyrillic gotchas (same as obsidian-ingest)
 

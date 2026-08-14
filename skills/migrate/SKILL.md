@@ -10,7 +10,7 @@ license: MIT
 
 # /migrate — seamless Claude across Anton's machines
 
-> 🧒 When reporting to Anton end with a child-simple "Простыми словами" recap. (memory `eli5-always`)
+> 🧒 When reporting to Anton end with a child-simple "In plain words" recap. (memory `eli5-always`)
 
 This is the **single command** over the migration project that several sessions already built. It does NOT redesign anything — it reads `MIGRATION-PLAN.md` + the `migration-prep\*` scripts and runs the right one. Full state + decisions = memory [[machine-migration]] (READ it first each run — the project is live and moves fast).
 
@@ -26,7 +26,7 @@ This is the **single command** over the migration project that several sessions 
 - **`connectors`** — reconnect external MCPs after a move via `migration-prep\CONNECTORS-INVENTORY.md`. The 3 blind spots the vault+config backup MISSES: `C:\mcp\telegram-mcp\` (.env + patched source), `$USERPROFILE/.claude/secrets/` (n8n.env + SSH key), `$USERPROFILE/.local/share/whatsapp-mcp/`. Enumerate from `.claude.json` mcpServers, not the backup. After reconnecting, verify each server is actually alive & authed with the **`/mcp`** skill (its in-session health check — and it carries the Telegram AUTH_KEY_DUPLICATED landmine that bites right after a move: re-auth per machine, never copy `.claude.json`).
 - **`sync`** — Syncthing setup/repair via `migration-prep\SETUP-SYNC.md`. First-sync order is CRITICAL: laptop is most-current → laptop = Send&Receive, desktop = Receive-Only on first pass to ABSORB, THEN flip. Laptop Device ID is in [[machine-migration]]. Same Syncthing pipe also carries the cross-machine RELAY — Claude-to-Claude messages between machines (folder `$OBSIDIAN_VAULT/_machine-bus/`); that is the **`/inbox`** skill's job, NOT `/migrate` (rule lives in [[reglament-multi-machine-claude-i-peredacha-mezhdu-mashinami]]).
 
-## Hard "нельзя" (safety invariants)
+## Hard "never" (safety invariants)
 - **NEVER copy `$USERPROFILE/.claude.json`** to another machine (Telegram MCP session) → AUTH_KEY_DUPLICATED logs the account out. Re-auth per machine.
 - **NEVER start a 2nd MCP client** on the same StringSession (see [[mcp-health-check]]).
 - `_originals` (3.75 GB) is **SACRED** — send-only from hub, never delete.

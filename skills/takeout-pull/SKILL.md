@@ -8,7 +8,7 @@ description: >
 license: MIT
 ---
 
-Anton's Takeout retrieval actor. Reply to Anton in Russian; end with the 🧒 «Простыми словами» recap ([[eli5-always]]). Full project notes: memory [[youtube-history-import]].
+Anton's Takeout retrieval actor. Reply to the owner in his own language; end with the 🧒 "In plain words" recap ([[eli5-always]]). Full project notes: memory [[youtube-history-import]].
 
 ## Why this exists (the root it fixes)
 2026-06: a scoped "YouTube → history only" export completed but its 7-day link

@@ -42,12 +42,12 @@ STEPS:
    - `python link_people.py` (0 tokens): phone-join WhatsApp DM jid (=phone `last10`) → `apple-contacts\contacts.db` → `vault_matches` → CRM/person note → `people_matches.json`. Phone match = T1 (trust); name-only = T2 (DO NOT trust — surname-blind false positives).
    - For T2 candidates spawn a **Sonnet judge** (Agent, model:'sonnet') → `people_verified.json` (conservative: confirm only on surname+role match, else null = WA note stays canonical). Identity-critical: a wrong link corrupts the graph.
    - Concepts: create/confirm any NEW topic-concept (windmill-park, etc.) per concept-creation-rules (DUP-CHECK first — e.g. household already = `concept-bible-household`/`concept-bible-staff-hr`).
-   - `python link_apply.py` (idempotent): writes "## 🔗 Граф" into each WA note (verified person/CRM + concepts) + back-links into the 4 rich targets = BIDIRECTIONAL. Run AFTER vault_backup. Verify 0 broken targets.
+   - `python link_apply.py` (idempotent): writes "## 🔗 Graph" into each WA note (verified person/CRM + concepts) + back-links into the 4 rich targets = BIDIRECTIONAL. Run AFTER vault_backup. Verify 0 broken targets.
 7. VAULT (BACKUP FIRST — [[vault-backup-rule]]): `python $IMPORTS_ROOT/vault_backup.py`, then:
    - `python build_groups_note.py` (→ `_WhatsApp-Groups.md`).
    - Refresh `_WhatsApp-MOC.md` counts if chat/msg totals changed. (Contact notes: refresh only if a key chat changed materially — keep open-action-items current; that's the high-value part.)
 8. REINDEX (RAG): rely on the nightly Brain Reindex @04:00, or `python $IMPORTS_ROOT/brain_embed_update.py --wait-gpu 10` if Anton wants it searchable now.
-9. REPORT: chats/msgs pulled, named vs ✎-inferred counts, new/changed open-action-items flagged for Anton, dashboard path. End with a 🧒 Простыми словами recap (messages TO Anton only).
+9. REPORT: chats/msgs pulled, named vs ✎-inferred counts, new/changed open-action-items flagged for Anton, dashboard path. End with a 🧒 In plain words recap (messages TO Anton only).
 
 CONSTRAINTS:
 - WINDOWS cp1252: never print Cyrillic to python stdout (crashes) — scripts write UTF-8 files; keep stdout ASCII (counts only). ([[deterministic-script-gotchas]])

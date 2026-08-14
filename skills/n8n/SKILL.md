@@ -10,7 +10,7 @@ license: MIT
 
 # /n8n — automation-stack health & repair
 
-> 🧒 When reporting to Anton end with a child-simple "Простыми словами" recap. (memory `eli5-always`)
+> 🧒 When reporting to Anton end with a child-simple "In plain words" recap. (memory `eli5-always`)
 
 Anton's operational nervous system = self-hosted **n8n at `https://n8n.example.com`** (v2.14.2, 89 workflows). n8n = event bus, NOT the brain. Full state + every gotcha = memory [[n8n-stack]] (read it first). Workflows fail SILENTLY → this skill makes failure visible and fixes it safely.
 
@@ -25,7 +25,7 @@ First check the API key is still alive: compare today's date to `N8N_KEY_EXPIRES
 
 - **`health` (default, READ-ONLY)** — `mcp__n8n__n8n_health_check` for liveness, then scan recent executions for errors (`mcp__n8n__n8n_executions` status=error, or `python $IMPORTS_ROOT/n8n/fetch_n8n.py`). Report RED (persistent code-level failures), FLAKY (transient 503/aborted → just enable node auto-retry), and IDLE-but-active (cron not firing). **ALWAYS prove a failure from a real execution** (`resultData.runData[node].error`) before naming a cause — the failing node may differ from the first suspect.
 - **`dashboard`** — `python $IMPORTS_ROOT/n8n/build_dashboard.py` → open `_Dashboards\n8n-Automation-Audit.html` (Anton works by eye). Re-run `fetch_n8n.py` → `enrich_n8n.py` → `build_dashboard.py` to refresh (all 0 LLM tokens; cluster summaries on FREE Sonnet subagents per [[model-routing-sonnet-grunt]]).
-- **`fix <id>`** — repair ONE workflow. **BACKUP FIRST always:** `python $IMPORTS_ROOT/n8n/n8n_edit.py backup-all` (→ `raw/backup_<ts>/`; per-edit before/after to `raw/edits/`, restore via `restore_workflow`). Show Anton the diff (ДО→ПОСЛЕ), get his **"+"**, then apply. PUT needs ONLY {name,nodes,connections,settings} (strip read-only fields).
+- **`fix <id>`** — repair ONE workflow. **BACKUP FIRST always:** `python $IMPORTS_ROOT/n8n/n8n_edit.py backup-all` (→ `raw/backup_<ts>/`; per-edit before/after to `raw/edits/`, restore via `restore_workflow`). Show Anton the diff (BEFORE→AFTER), get his **"+"**, then apply. PUT needs ONLY {name,nodes,connections,settings} (strip read-only fields).
 
 ## Known scars (verify still true before acting — memory may be stale)
 - **Events Posting** — was `name '_input' is not defined` (Python task-runner bug); FIXED 2026-06-16 by converting Code nodes Python→JavaScript. **Rule: when a Python code node mysteriously fails on `_input`, convert to JS** rather than debugging Pyodide.

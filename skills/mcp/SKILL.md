@@ -9,7 +9,7 @@ license: MIT
 
 # /mcp — connector health-check & discovery
 
-> 🧒 When reporting to Anton end with a child-simple "Простыми словами" recap. (memory `eli5-always`)
+> 🧒 When reporting to Anton end with a child-simple "In plain words" recap. (memory `eli5-always`)
 
 Two jobs: (1) **health** — is each MCP server alive & authorized? (2) **discover** — is there an MCP for a need Anton has? Full rules + the Telegram landmine = memory [[mcp-health-check]].
 

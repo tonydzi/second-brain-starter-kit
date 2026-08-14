@@ -10,7 +10,7 @@ license: MIT
 
 # /gitbook-import — GitBook space → vault
 
-> 🧒 When reporting to Anton end with a child-simple "Простыми словами" recap. (memory `eli5-always`)
+> 🧒 When reporting to Anton end with a child-simple "In plain words" recap. (memory `eli5-always`)
 
 Turns a live GitBook space into atomic vault notes. Proven on the Palo Alto / AAA «C(H+A)RM» GitBook (85 pages, 10 chapters, 694 links, 0 broken). Pipeline + slug rules = memory [[palo-alto-gitbook-import]]. This is the GitBook source-adapter; for any other source use [[obsidian-ingest]].
 

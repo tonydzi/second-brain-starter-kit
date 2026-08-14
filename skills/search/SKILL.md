@@ -28,7 +28,7 @@ CONSTRAINTS:
 - Keep it token-cheap: this is deterministic search; do NOT pipe the whole corpus into an LLM. Only synthesize over the small returned hit set if asked.
 - If the query is conceptual/"what do I think about X", prefer `/ask` (semantic) instead; if it's a person's name, prefer `/find`.
 
-OUTPUT: A short ranked list of the best matches (title · source · date · snippet · file link) + any chat-title hits, then offer next step. End replies to Anton with a 🧒 Простыми словами recap.
+OUTPUT: A short ranked list of the best matches (title · source · date · snippet · file link) + any chat-title hits, then offer next step. End replies to Anton with a 🧒 In plain words recap.
 
 RELATION (do not duplicate):
 - /ask = semantic meaning (RAG e5+reranker) over curated vault. /find = exact person names (names.db). /search = exact words across ALL conversations (this).

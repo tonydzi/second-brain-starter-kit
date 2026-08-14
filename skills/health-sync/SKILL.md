@@ -36,7 +36,7 @@ STEPS:
    robocopy "$IMPORTS_ROOT/health/staging" "$OBSIDIAN_VAULT/01-Conversations/Telegram/Health" /E /XO /NFL /NDL /NJH /NJS
    (exit code 0-7 = success.)
 10. Reindex for RAG (so the new notes are searchable): python $IMPORTS_ROOT/brain_embed_update.py --wait-gpu 10  (or rely on the nightly Brain Reindex at 04:00 if the GPU is busy).
-11. Report: new messages per chat, new atomic notes / ledgers created, the new watermarks (max ids), and confirm BROKEN=0. End with a 🧒 Простыми словами recap (messages TO Anton only).
+11. Report: new messages per chat, new atomic notes / ledgers created, the new watermarks (max ids), and confirm BROKEN=0. End with a 🧒 In plain words recap (messages TO Anton only).
 
 CONSTRAINTS:
 - WINDOWS cp1252: never print Cyrillic to python stdout (crashes) — write results to UTF-8 files and Read them; keep python stdout ASCII (counts/slugs only).

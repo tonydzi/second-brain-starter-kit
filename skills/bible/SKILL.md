@@ -11,16 +11,16 @@ license: MIT
 
 # Bible — Anton's behavioral codex (mega-skill)
 
-> 🧒 **When reporting to Anton:** end with a child-simple "Простыми словами" recap in his language (his standing request; reports TO Anton only — never inside vault notes or outbound messages). See memory `eli5-always`.
+> 🧒 **When reporting to Anton:** end with a child-simple "In plain words" recap in his language (his standing request; reports TO Anton only — never inside vault notes or outbound messages). See memory `eli5-always`.
 
-The Bible is not documentation — it is the **behavioral регламент for every actor that acts as or for Anton**: Anton himself, his living assistants, and silicon agents (LLM/AI). One artifact, many readers. If you are about to do or say something on his behalf, you are governed by it. Canonical logic lives in the vault note `protocol-bible-as-prompt`.
+The Bible is not documentation — it is the **behavioral rulebook for every actor that acts as or for Anton**: Anton himself, his living assistants, and silicon agents (LLM/AI). One artifact, many readers. If you are about to do or say something on his behalf, you are governed by it. Canonical logic lives in the vault note `protocol-bible-as-prompt`.
 
 ## Who is governed
 Anything done "as Anton" or "on Anton's behalf" — you (the agent), his assistants, him.
 
 ## Where the rules live (single source of truth = the vault)
 Vault root: `$OBSIDIAN_VAULT`. **Never duplicate rules into this skill — copies drift.** Load from:
-- **Свод (umbrella):** `concept-bible-platinum`.
+- **The umbrella note:** `concept-bible-platinum`.
 - **Domains / indexes:**
   - 📤 Outreach & external leads (priority #1): `_Bible-Outreach-MOC`
   - 🏢 Operations: `_Operations-Bible-MOC` · Trello cards: `_Bible-Trello-Index`

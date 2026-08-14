@@ -10,7 +10,7 @@ license: MIT
 
 # /chat — instant Telegram chat lookup
 
-Anton's pain: "найди чат X" used to mean 20–60 min crawling the live dialog list.
+Anton's pain: "find chat X" used to mean 20–60 min crawling the live dialog list.
 The chat's `telegram_id` + link already live in `chats.db` (built from the CRM
 `tg_entities` dump — the same extraction the CRM's mtproto-api does). Look it up,
 get the id, then operate the chat directly via the Telegram MCP.

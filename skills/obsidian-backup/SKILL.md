@@ -10,7 +10,7 @@ license: MIT
 
 # Obsidian backup & restore (data-safety runbook)
 
-> 🧒 **When reporting to Anton:** always end with a child-simple "Простыми словами" recap in his language (plain words, no jargon) — his standing request. See memory `eli5-always`.
+> 🧒 **When reporting to Anton:** always end with a child-simple "In plain words" recap in his language (plain words, no jargon) — his standing request. See memory `eli5-always`.
 
 This skill is the operational runbook for Anton's vault data-safety system. The **rules** (always preserve originals; always back up offsite to Google Drive) live in memory — `preserve-originals-rule`, `vault-offsite-backup` — and in the import skills (`obsidian-ingest` Rule 0, `telegram-reimport` Step 0). **Don't re-derive or duplicate them here.** This file says *what to run, where things are, and how to recover*.
 
