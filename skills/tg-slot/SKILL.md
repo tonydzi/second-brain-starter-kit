@@ -9,59 +9,59 @@ description: >
 license: MIT
 ---
 
-# /tg-slot — освободить слот под новую Telegram-группу
+# /tg-slot — free a slot for a new Telegram group
 
-**Боль (поймана вживую 26.07 при сборке «Пульса»):** `corp_acct` не смог ни создать супергруппу, ни войти по инвайту. Сообщение Telegram про «maximum number of participants» уводит в сторону — переполнен не чат, а НАШ аккаунт. Пришлось делать владельцем группы запасной `personal_acct`, что неправильно: рабочие группы должны жить на рабочем аккаунте.
+**The pain (caught live on 07-26 while assembling a new working group):** the corporate account could neither create a supergroup nor join by invite. Telegram's message about the "maximum number of participants" sends you the wrong way — it is not the chat that is full, it is OUR account. We ended up making a spare personal account the group owner, which is wrong: work groups must live on the work account.
 
-**Движок:** `~/.claude/scripts/tg_group_slots.py` — режимы `count` · `rank` · `emit-plan` · `leave`. Один файл, Telethon, без сервера и БД.
+**Engine:** `~/.claude/scripts/tg_group_slots.py` — modes `count` · `rank` · `emit-plan` · `leave`. One file, Telethon, no server and no database.
 
-## Ритуал (шаги по порядку, ни один не пропускать)
+## The ritual (steps in order, skip none)
 
-### 1. Замерить — без цифры дальше не идём
+### 1. Measure — no number, no next step
 ```bash
 python ~/.claude/scripts/tg_group_slots.py count --account corp_acct --no-probe
 ```
-Печатает `Premium: ДА/нет · потолок ~N` и `СЛОТОВ ЗАНЯТО`. **Потолок читай из вывода, не из памяти** — он зависит от Premium, и «500» верно далеко не всегда (замер 27.07: `work_acct_b` = 1003 занятых).
+Prints `Premium: YES/no · ceiling ~N` and `SLOTS USED`. **Read the ceiling from the output, not from memory** — it depends on Premium, and "500" is very often wrong (measured 07-27: one work account showed 1003 used).
 
-### 2. Ранжировать кандидатов
+### 2. Rank the candidates
 ```bash
 python ~/.claude/scripts/tg_group_slots.py emit-plan --account corp_acct --top 50
 ```
-Чем МЕНЬШЕ балл, тем безопаснее выходить. Балл понижают: группа молчит ≥1 года (−4, главный сигнал), конференция прошедшего года в названии (−3), молчит ≥полугода (−2), ни одного нашего сообщения (−2), крипто-шум по словарю (−1).
+The LOWER the score, the safer it is to leave. The score is lowered by: the group has been silent ≥1 year (−4, the main signal), a past-year conference in the title (−3), silent ≥6 months (−2), not a single message from us (−2), crypto noise per the dictionary (−1).
 
-**Защита от дурака — в кандидаты не попадают никогда:**
-- **99** — наши бренд-группы (Palo Alto, ClawRus, ClawEng, VCsDAO, SV_founders, страновые event-группы), любые где мы **админ или создатель** (админка теряется необратимо), рабочие чаты флота (03, 02 POLICE, 04, CALLS, Пульс).
-- **98** — **intro-группы** («X <> Palo Alto…», «Intro: …», «Знакомство…»). Intro = ядро продукта Антона; даже тихая intro-группа идёт только отдельным разбором. Мёртвая intro = молчит много месяцев **И** сделка закрыта — это решает Антон поимённо, не скрипт.
+**Idiot-proofing — these never become candidates:**
+- **99** — our own brand groups (the lab, our public channels, our DAO and founder communities, country event groups), anything where we are **admin or creator** (admin rights are lost irreversibly), the fleet's working chats (the fleet log, the approval channel, the task chat, the calls chat, the pulse chat).
+- **98** — **intro groups** ("X <> the lab…", "Intro: …", "Introduction…"). Intros are the core of the owner's product; even a quiet intro group is only handled as a separate review. A dead intro = silent for many months **AND** the deal is closed — that is the owner's call, name by name, never the script's.
 
-Перед показом списка **убедись, что защита реально сработала** — и не по счётчику в шапке, а глазами по названиям. Шапка печатает «защищено (наши/админ): N · intro-групп: M», но счётчик не видит того, чего словарь не знает.
+Before showing the list, **make sure the protection actually fired** — and not by the counter in the header, but by reading the names with your eyes. The header prints "protected (ours/admin): N · intro groups: M", but the counter cannot see what the dictionary does not know.
 
-⚠️ **Инцидент 27.07, ради которого этот шаг и существует.** Первый прогон выдал в кандидаты на выход 10 живых intro-групп: `Mei Shmidt 🤝 Stanford AiW3 Research Lab`, `HSG < > AAAPadSF`, `Ivan 🤝 Ted`. Детектор искал `<>`, а **основная конвенция Антона — эмодзи-рукопожатие `🤝`**; плюс `Stanford AiW3` и `A.A.A / AAAPad` вообще не значились как бренды. Счётчик в шапке при этом выглядел здоровым. Вывод, который дороже самого фикса: **словарь всегда отстаёт от жизни**, поэтому список читается глазами по названиям, а не принимается по метрике. Читая список, ищи глазами: два имени/компании через разделитель · знакомую фамилию · незнакомый бренд, который может оказаться вашим.
+⚠️ **The 07-27 incident this step exists for.** The first run offered 10 live intro groups as leave candidates: `Jane D 🤝 Stanford AI Research Lab`, `HSG < > SF Accelerator`, `Ivan 🤝 Ted`. The detector was looking for `<>`, while **the owner's main convention is the handshake emoji `🤝`**; on top of that, two real brand names were not in the brand list at all. The header counter looked perfectly healthy meanwhile. The takeaway is worth more than the fix itself: **the dictionary always lags behind life**, therefore the list is read by eye, name by name, and never accepted on a metric. While reading, look for: two names/companies joined by a separator · a surname you recognise · an unfamiliar brand that might turn out to be yours.
 
-### 3. Показать Антону и получить «+»
-Покажи список **до** выхода: название · дата последнего сообщения · причина. Выход из группы **НЕОБРАТИМ** — в приватную группу без нового инвайта не вернуться. Поэтому здесь настоящий стоп: без явного «+» Антона на КОНКРЕТНЫЙ список ничего не исполняется. Антона нет у терминала → `approval.py ask` в 02 POLICE (это тип E — необратимое удаление доступа), а не «решу сам».
+### 3. Show the owner and get a "+"
+Show the list **before** leaving: title · date of the last message · reason. Leaving a group is **IRREVERSIBLE** — you cannot get back into a private group without a new invite. So this is a real stop: without the owner's explicit "+" on a SPECIFIC list, nothing is executed. The owner is away from the terminal → `approval.py ask` into the approval channel (this is class E — irreversible loss of access), not "I'll decide myself".
 
-### 4. Выйти
+### 4. Leave
 ```bash
-python ~/.claude/scripts/tg_group_slots.py leave --account corp_acct --confirm ANTON-PLUS-2026-07-27
+python ~/.claude/scripts/tg_group_slots.py leave --account corp_acct --confirm OWNER-PLUS-2026-07-27
 ```
-Исполнитель перепроверяет статус каждой группы **в момент выхода**, а не доверяет плану: план мог устареть (нас сделали админом, группа ожила). Всё защищённое пропускается с причиной. Журнал каждого выхода — `~/.claude/tg_leave_log.jsonl` (это и есть evidence для задачи).
+The executor re-checks each group's status **at the moment of leaving** instead of trusting the plan: the plan may be stale (we were made admin, the group came back to life). Everything protected is skipped with a reason. Every departure is journalled into `~/.claude/tg_leave_log.jsonl` (that journal is the evidence for the task).
 
-### 5. Пере-замерить и войти
-Повтори шаг 1 — цифра должна упасть. Затем войди в новую группу тем аккаунтом, ради которого чистили. **Проверка делом, а не «должно работать»:** пока аккаунт фактически не вошёл, слот не считается освобождённым.
+### 5. Re-measure and join
+Repeat step 1 — the number must drop. Then join the new group with the account you were clearing space for. **Proof by doing, not by "it should work":** until the account has actually joined, the slot does not count as freed.
 
-## Правило «вошёл в новую → освободи слот»
-Это не разовая уборка, а обмен. Каждый раз, когда рабочий аккаунт входит в новую группу вблизи потолка — сразу назови наименее релевантную к выходу и предложи обмен. Иначе через месяц снова упрёмся, уже в разгар живой задачи (ровно так и случилось с «Пульсом»).
+## The rule "joined a new one → free a slot"
+This is not a one-off cleanup, it is a trade. Every time a work account joins a new group near the ceiling — immediately name the least relevant one to leave and propose the swap. Otherwise we hit the wall again in a month, in the middle of live work (which is exactly what happened).
 
-## Границы
-- ⛔ **Выход без явного «+» Антона на конкретный список — никогда.** Необратимо.
-- ⛔ **`personal_acct` и `work_acct_a` не чистим** — они не переполнены, это наш запасной ресурс. Чистка только `corp_acct` и `work_acct_b`.
-- ⛔ Intro-группы и группы с живой перепиской лидов/партнёров — только поимённый разбор Антоном.
+## Boundaries
+- ⛔ **Never leave without the owner's explicit "+" on a concrete list.** Irreversible.
+- ⛔ **Do not clean the personal and primary work accounts** — they are not full, they are our spare capacity. Cleaning applies only to the corporate and the secondary work account.
+- ⛔ Intro groups and groups with live lead/partner conversations — reviewed by the owner, name by name, only.
 
-## Грабли прогона (стоили одного убитого прогона 26.07)
-- **Не оборачивать в `timeout N`** — обход всех диалогов идёт дольше 5 минут, обёртка `timeout 280` убила первый прогон.
-- **Не резать вывод через `tail`** — съедает шапку со счётчиком слотов, ради которого всё и затевалось.
-- **Вывод буферизуется** при перенаправлении в файл: запускай в фоне и опрашивай файл, «пусто» ≠ «сломалось». Проверить, что процесс жив: `Get-CimInstance Win32_Process -Filter "Name like '%python%'" | ? { $_.CommandLine -like '*tg_group_slots*' }`.
-- Между выходами стоит пауза 2 с и обработка `FloodWait` — Telegram не любит пачку выходов подряд.
+## Run pitfalls (they cost one killed run on 07-26)
+- **Don't wrap it in `timeout N`** — walking all dialogs takes longer than 5 minutes, and a `timeout 280` wrapper killed the first run.
+- **Don't trim the output through `tail`** — that eats the header with the slot counter, the very thing you ran it for.
+- **Output is buffered** when redirected to a file: run it in the background and poll the file, "empty" ≠ "broken". To check the process is alive: `Get-CimInstance Win32_Process -Filter "Name like '%python%'" | ? { $_.CommandLine -like '*tg_group_slots*' }`.
+- There is a 2s pause between departures plus `FloodWait` handling — Telegram dislikes a burst of leaves.
 
 ---
 

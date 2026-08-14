@@ -8,52 +8,52 @@ description: >
 license: MIT
 ---
 
-# /fb-watch — добиваем тизеры на FB-посты Антона
+# /fb-watch — finishing the teasers for the owner's Facebook posts
 
-> **Зачем.** Антон иногда пишет пост ПРЯМО на стену FB, минуя пайплайн (голос→эпизод→тиры).
-> Такой пост остаётся БЕЗ тизера в @ClawRus(RU)/X(EN) → охват теряется. Этот сторож ловит
-> «есть авторский FB-пост, тизера ещё не было» и сразу пишет тизеры. Draft-first, пока не взведён.
+> **Why.** The owner sometimes writes a post STRAIGHT onto his Facebook wall, bypassing the pipeline (voice → episode → tiers).
+> Such a post ends up WITHOUT a teaser in the RU chat / X (EN) → reach is lost. This watchdog catches
+> "there is an authored Facebook post with no teaser yet" and writes the teasers immediately. Draft-first until armed.
 
-## Инструменты (тонкий оркестратор, AK-47)
-- **Чтение стены** = Claude-in-Chrome MCP (живая залогиненная вкладка FB, локально на хабе). Реюз паттерна из `/fb-reply` (in-page `javascript_tool`, FB прячет имена за MCP-границей).
-  - ⛔ **НЕ читай ленту профиля `/OwnerProfile`** (консенсус #0223a74a, 20.07): она виртуализирована и рендерит ОДИН пост — соседи висят вечными скелетонами, `scrollHeight` константа, реальный скролл не помогает. Один прогон так спрятал 2 контентных поста из 5.
-  - ✅ **Рельс жатвы = Content Library**: `https://www.facebook.com/professional_dashboard/content/content_library/` → таблица постов, ПОЛНЫЙ текст (обрезка только CSS), точная дата-время, метрики. Парс: `document.body.innerText` → строки, якорь `"Published"`, текст = строка перед, дата = строка после; накапливать между прокрутками (дубли гасить по первым 60 символам).
-  - ⚠️ **Permalink Content Library НЕ отдаёт** (в меню строки только Edit/Delete). Добор: на стене реальный `computer hover` по таймстампу поста → FB подставляет `pfbid` в `href` (до наведения href пустой; синтетические MouseEvent и React-fiber НЕ работают — у FB кастомный ключ рендерера).
-  - **АПГРЕЙД (Антон одобрил 2026-06-30, ждёт креды):** как только есть `secrets\fb_graph.env` (FB_USER_TOKEN, `user_posts`) и `python ~/.claude/scripts/fb_posts_poll.py check` зелёный → читай стену через `python ~/.claude/scripts/fb_posts_poll.py posts --limit 10 --out posts.json` (Graph API, надёжнее браузера, без риска бана) ВМЕСТО Claude-in-Chrome. См. [[decision-social-posting-stack]] §6.
-- **Детектор/леджер/кап** = `python ~/.claude/scripts/fb_teaser_watch.py` (0 токенов, дедуп + дневной кап + kill-switch). Состояние: `$IMPORTS_ROOT/content-factory/fb_teaser_ledger.json` + `fb_watch_config.json`.
-- **Тизеры** пишет Opus в сессии (голос Антона), палитры: `_STYLE.md`/`_CRAFT.md` + `style-reality-show.md`. Черновики → `_imports\content-factory\fb-teasers\<id>.md`.
-- **Постинг RU** = Telegram MCP `send_message`, аккаунт **work_acct_b** (создатель), чат **<YOUR_CHAT_ID>** (@ClawRus). **EN/X** = пока нет постера → ВСЕГДА черновик (ждёт social-tools DR).
+## Tools (a thin orchestrator, AK-47)
+- **Reading the wall** = the Claude-in-Chrome MCP (a live logged-in Facebook tab, locally on the hub). Reuses the pattern from `/fb-reply` (in-page `javascript_tool`, since Facebook hides names behind the MCP boundary).
+  - ⛔ **Do NOT read the profile feed** (consensus #0223a74a, 07-20): it is virtualized and renders ONE post — the neighbours stay eternal skeletons, `scrollHeight` is constant, and real scrolling does not help. One run hid 2 content posts out of 5 that way.
+  - ✅ **The harvesting rail = the Content Library**: `https://www.facebook.com/professional_dashboard/content/content_library/` → a table of posts, FULL text (truncation is CSS-only), exact date-time, metrics. Parsing: `document.body.innerText` → lines, anchor on `"Published"`, the text is the line before, the date the line after; accumulate across scrolls (dedupe by the first 60 characters).
+  - ⚠️ **The Content Library does NOT give permalinks** (the row menu only has Edit/Delete). To get them: on the wall, do a real `computer hover` over the post timestamp → Facebook fills `pfbid` into `href` (before hovering the href is empty; synthetic MouseEvents and React-fiber tricks do NOT work — Facebook uses a custom renderer key).
+  - **UPGRADE (owner approved 2026-06-30, waiting on credentials):** as soon as `secrets\fb_graph.env` exists (FB_USER_TOKEN, `user_posts`) and `python ~/.claude/scripts/fb_posts_poll.py check` is green → read the wall through `python ~/.claude/scripts/fb_posts_poll.py posts --limit 10 --out posts.json` (Graph API, more reliable than the browser, no ban risk) INSTEAD of Claude-in-Chrome. See [[decision-social-posting-stack]] §6.
+- **Detector/ledger/cap** = `python ~/.claude/scripts/fb_teaser_watch.py` (0 tokens, dedup + daily cap + kill switch). State: `$IMPORTS_ROOT/content-factory/fb_teaser_ledger.json` + `fb_watch_config.json`.
+- **Teasers** are written by the top-tier model in-session (the owner's voice), palettes: `_STYLE.md` / `_CRAFT.md` + `style-reality-show.md`. Drafts → `_imports\content-factory\fb-teasers\<id>.md`.
+- **RU posting** = Telegram MCP `send_message`, the secondary work account (the creator), chat **<YOUR_CHAT_ID>** (the RU chat). **EN/X** = no poster yet → ALWAYS a draft (waiting on the social-tools DR).
 
-## Процедура
-1. **Готовность Chrome.** Проверь живую вкладку FB (Claude-in-Chrome). Не готов/не залогинен → **флагни в чат 03** («fb-watch: Chrome/FB не готов, стену не прочитал») и СТОП. Не делать вид, что «постов нет» (слой видимости — тихий ноль = поломка).
-2. **Извлеки авторские посты** со стены Антона (последние ~10): для каждого `{id, permalink, text, ts}`. `id` = стабильный story/permalink id. Только ЕГО авторские (не репосты/чужое). Текст наружу из страницы — безопасный (без скрытых имён).
-   ⛔ **`text` = ПОЛНЫЙ текст поста, ОБЯЗАТЕЛЕН** (разверни «See more» перед съёмом): pfbid ротируется при каждом харвесте (доказано 05.07), идентичность поста живёт на `text_hash`. Пост без text = дедуп по нему слепой (движок ругнётся WARN в stderr — не игнорируй, дособери текст).
-3. **Детектор:** запиши список в `posts.json` → `python fb_teaser_watch.py unteased --in posts.json`. На выходе — посты БЕЗ тизера.
-   🚨 **exit 4 = `HARVEST-THIN`** (собрано <3 постов, порог `FB_TEASER_MIN_HARVEST`): это НЕ «постов нет», это СБОЙ ЖАТВЫ → пережни через Content Library и флагни в 03. Тихий ноль запрещён (консенсус #0223a74a). **Правило: 1 тизер на КАЖДЫЙ такой пост** (нашёл 5 — пиши 5; это не дневной кап).
-   🛡️ **Freshness-гард (14.07):** незнакомый пост старше 72ч (`--max-age-hours`) движок сам засевает как skip со stable-ключами — бэклог стены и ротация pfbid флуд дать не могут; в stderr это `stale-auto-skipped=N`. Отключается `--no-auto-skip` (не отключай в рутине).
-   - **FORWARD-ONLY первый прогон:** `python fb_teaser_watch.py backfill-status` → если NOT DONE (exit 1) и список длинный (это весь бэклог стены) → НЕ публикуй массой: пометь каждый существующий пост `seed-skip --id <id>`, затем `mark-backfill-done`, доложи «forward-only: N постов засеяно как skip, с этого момента каждый НОВЫЙ пост получает тизер». Дальше — только реально новые посты.
-4. **Для каждого un-teased поста** напиши 2 тизера (Opus, голос Антона) **строго по плейбуку** `08-Templates\teaser-writing-playbook.md` (крючок в 1-ю строку, ОДИН приём, 4U-чек, клиффхэнгер + «полное → [ссылка на FB-пост]»):
-   - **RU** — тёплый, для @ClawRus, **240–370 знаков (HARD)**.
-   - **EN** — для X, **≤280 знаков**.
-   - Приватность HARD: ни чужих имён/@/сумм/секретов. CTA co-founder тут НЕ нужен (он в среднем/лонге). Сохрани оба в `fb-teasers\<id>.md`.
-5. **Распубликуй:**
-   - **RU:** `python fb_teaser_watch.py can-post --rail ru` → exit 0 (взведён + под капом) → запость текст в @ClawRus (Telegram MCP, work_acct_b, chat <YOUR_CHAT_ID>) → `mark-posted --id <id> --rail ru`. Exit 3 (disarmed/кап) → оставь черновиком.
-   - **EN:** `x_poster_ready` в `fb_watch_config.json` решает. `false` → черновик. `true` → `python ~/.claude/scripts/x_post.py post "<en teaser>"` (X API v2, OAuth1; exit 0 = запостил, печатает url). Постер взводится, когда у Антона есть X dev-креды в `secrets\x_api.env` и `x_post.py check` зелёный (см. [[decision-social-posting-stack]] §6).
-   - Затем `python fb_teaser_watch.py record-draft --id <id>` (чтобы пост не всплывал снова).
-6. **Доложи Антону.** СТАТУС-ОТЧЁТ (сколько найдено, что запостил RU, что в черновике) — это отчёт, не вопрос → в чат 03 / TG-папку, как обычно.
-   **Если нужен ЕГО ОК** (режим проверки/disarmed: «публикуем И взвести авто?») — ⛔ НЕ пиши вопрос в 03 руками (там heartbeat-шум хоронит аски, Антон не увидит). Подними аск через движок remote-approval, который сам шлёт в **02-POLICE ПЕРВЫМ** + дублирует в 03/личку:
-   `python ~/.claude/scripts/approval.py ask "fb-watch: N черновиков готовы. Публикуем И взводим авто-arm? QQQ=да,публикуем+arm · NO=оставить черновиками"` → вернёт `{id, ask_text, targets}`. Затем ОТПРАВЬ `ask_text` по `targets` **строго по порядку** (Telegram MCP; targets[0] = 02-POLICE = первым). Проверка ответа: `python ~/.claude/scripts/approval.py check`. Канон [[remote-approval-qqq]] («QQQ-аск → 02-POLICE first»); гейт `lint_approval_routing.py` следит, чтоб этот шаг не разъехался снова.
+## Procedure
+1. **Chrome readiness.** Check the live Facebook tab (Claude-in-Chrome). Not ready / not logged in → **flag it in the fleet log chat** ("fb-watch: Chrome/Facebook not ready, wall not read") and STOP. Do not pretend "there are no posts" (visibility layer — a silent zero is a breakage).
+2. **Extract the authored posts** from the owner's wall (the last ~10): for each `{id, permalink, text, ts}`. `id` = a stable story/permalink id. Only HIS authored posts (no reshares, nothing of other people's). Text taken out of the page is safe (no hidden names).
+   ⛔ **`text` = the FULL post text, MANDATORY** (expand "See more" before harvesting): pfbid rotates on every harvest (proved 07-05), so a post's identity lives on `text_hash`. A post with no text = dedup is blind to it (the engine will emit a WARN on stderr — do not ignore it, go back and collect the text).
+3. **Detector:** write the list to `posts.json` → `python fb_teaser_watch.py unteased --in posts.json`. The output is the posts WITHOUT a teaser.
+   🚨 **exit 4 = `HARVEST-THIN`** (fewer than 3 posts collected, threshold `FB_TEASER_MIN_HARVEST`): this is NOT "there are no posts", this is a HARVEST FAILURE → re-harvest through the Content Library and flag it in the fleet log chat. A silent zero is forbidden (consensus #0223a74a). **Rule: 1 teaser for EVERY such post** (found 5 — write 5; that is not a daily cap).
+   🛡️ **Freshness guard (07-14):** an unknown post older than 72h (`--max-age-hours`) is seeded by the engine as a skip with stable keys — the wall's backlog and pfbid rotation cannot cause a flood; on stderr this shows as `stale-auto-skipped=N`. Disable with `--no-auto-skip` (do not disable it in the routine).
+   - **FORWARD-ONLY on the first run:** `python fb_teaser_watch.py backfill-status` → if NOT DONE (exit 1) and the list is long (that is the whole wall backlog) → do NOT publish en masse: mark every existing post `seed-skip --id <id>`, then `mark-backfill-done`, and report "forward-only: N posts seeded as skip, from now on every NEW post gets a teaser". After that — genuinely new posts only.
+4. **For each un-teased post** write 2 teasers (top model, the owner's voice) **strictly per the playbook** `08-Templates\teaser-writing-playbook.md` (the hook in line 1, ONE technique, the 4U check, a cliffhanger + "full version → [link to the Facebook post]"):
+   - **RU** — warm, for the RU chat, **240–370 characters (HARD)**.
+   - **EN** — for X, **≤280 characters**.
+   - Privacy is HARD: no third-party names/@handles/amounts/secrets. The co-founder CTA is NOT needed here (it belongs in the medium/long tiers). Save both into `fb-teasers\<id>.md`.
+5. **Publish:**
+   - **RU:** `python fb_teaser_watch.py can-post --rail ru` → exit 0 (armed + under the cap) → post the text into the RU chat (Telegram MCP, the secondary work account, chat <YOUR_CHAT_ID>) → `mark-posted --id <id> --rail ru`. Exit 3 (disarmed/cap) → leave it as a draft.
+   - **EN:** `x_poster_ready` in `fb_watch_config.json` decides. `false` → draft. `true` → `python ~/.claude/scripts/x_post.py post "<en teaser>"` (X API v2, OAuth1; exit 0 = posted, prints the url). The poster is armed once the owner has X dev credentials in `secrets\x_api.env` and `x_post.py check` is green (see [[decision-social-posting-stack]] §6).
+   - Then `python fb_teaser_watch.py record-draft --id <id>` (so the post does not surface again).
+6. **Report to the owner.** A STATUS REPORT (how many found, what was posted to RU, what stayed a draft) — that is a report, not a question → into the fleet log chat / the Telegram folder, as usual.
+   **If you need HIS OK** (review mode / disarmed: "do we publish AND arm the automation?") — ⛔ do NOT hand-write the question into the fleet log chat (heartbeat noise buries asks there, the owner will not see it). Raise the ask through the remote-approval engine, which sends it to the **approval channel FIRST** and mirrors it into the log chat / DM:
+   `python ~/.claude/scripts/approval.py ask "fb-watch: N drafts ready. Publish AND arm the automation? QQQ=yes,publish+arm · NO=keep them as drafts"` → returns `{id, ask_text, targets}`. Then SEND `ask_text` to `targets` **strictly in order** (Telegram MCP; targets[0] = the approval channel = first). Check the answer: `python ~/.claude/scripts/approval.py check`. Canon [[remote-approval-qqq]] ("a QQQ ask → the approval channel first"); the gate `lint_approval_routing.py` makes sure this step does not drift again.
 
-## Границы (Tier-2 / безопасность)
-- **Авторизация Антона (2026-06-30):** RU-авто-постинг в @ClawRus **ВЗВЕДЁН** (`armed=true`) — Антон дал стоячую авторизацию (тизер = указатель на уже публичный FB-пост, риск минимальный). Kill-switch: `disarm` в любой момент.
-- **1 тизер на каждый пост без тизера** (НЕ дневная квота). Дедуп по леджеру → двойного поста не будет. `daily_hard_cap` (25) — только страховка от бага-флуда.
-- **Forward-only:** первый взведённый прогон засевает существующую стену как `skip` и НЕ постит — чтобы не залить @ClawRus бэклогом; дальше тизер получает каждый НОВЫЙ пост.
-- Только ЕГО собственные посты и его собственные каналы. Никакого блайнд-автопоста в чужое.
-- Авторский голос = **только Opus**. Грунт (детектор) = 0 токенов.
-- Браузерная работа строго ЛОКАЛЬНО на хабе ([[browser-work-on-peers-not-hub]]).
+## Boundaries (Tier-2 / safety)
+- **Owner's authorization (2026-06-30):** RU auto-posting into the RU chat is **ARMED** (`armed=true`) — he gave standing authorization (a teaser is a pointer to an already-public Facebook post, minimal risk). Kill switch: `disarm` at any moment.
+- **1 teaser per post without a teaser** (NOT a daily quota). Dedup via the ledger → no double posting. `daily_hard_cap` (25) is only insurance against a flood bug.
+- **Forward-only:** the first armed run seeds the existing wall as `skip` and posts NOTHING — so the RU chat is not flooded with the backlog; after that every NEW post gets a teaser.
+- Only HIS own posts and HIS own channels. No blind auto-posting into anyone else's space.
+- The authorial voice = **the top-tier model only**. The groundwork (detector) = 0 tokens.
+- Browser work stays strictly LOCAL on the hub ([[browser-work-on-peers-not-hub]]).
 
-## Связь
-Канон правила: память [[teaser-crosspost-clawrus]] + `reglament-tizery-krosspost-v-clawrus-i-tg`. Родня: [[fb-skill-set]] (/fb-post, /fb-reply, fb_guard), [[content-factory]] (Distribute-стадия), [[short-text-when-unreviewed]]. Рутина-двойник: scheduled-task `fb-watch-daily` (1×/день днём).
+## Links
+Canon for the rule: memory [[teaser-crosspost-clawrus]] + the house rulebook entry on teaser cross-posting. Relatives: [[fb-skill-set]] (/fb-post, /fb-reply, fb_guard), [[content-factory]] (the Distribute stage), [[short-text-when-unreviewed]]. The routine twin: the scheduled task `fb-watch-daily` (1×/day, daytime).
 
 ---
 

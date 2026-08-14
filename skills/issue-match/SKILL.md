@@ -9,55 +9,55 @@ description: >
 license: MIT
 ---
 
-# /issue-match — стучаться сюда или мимо?
+# /issue-match — knock here, or walk past?
 
-> 🧒 В конце отчёта Антону — блок «Простыми словами» ([[eli5-always]]).
+> 🧒 End the report to a non-technical owner with an "In plain words" block ([[eli5-always]]).
 
-Правило Антона от 25.07.2026 ([[cold-pr-into-silent-queue]]): **холодный PR в глухую очередь = не вклад, а шум.** Замер очереди — первый шаг, ДО написания кода. Этот скилл делает замер кнопкой вместо ручного дёрганья `gh` в каждой сессии.
+The owner's rule from 2026-07-25 ([[cold-pr-into-silent-queue]]): **a cold PR into a silent queue is not a contribution, it's noise.** Measuring the queue is the first step, BEFORE writing any code. This skill turns that measurement into a button instead of hand-driving `gh` in every session.
 
-Замерено 25.07 в `anthropics/claude-cookbooks`: 220 открытых PR, медиана возраста 47 дней, 51% без единого комментария, 67% мержей — в сутки после подачи (значит договорённость была ДО PR). Наших там 6 открытых, 5 холодных, **смержено 0**. Единственный, на который отреагировал человек, — тот, что вошёл через чужое открытое issue.
+Measured 07-25 on `anthropics/claude-cookbooks`: 220 open PRs, median age 47 days, 51% without a single comment, 67% of merges happened within a day of submission (which means the agreement existed BEFORE the PR). We had 6 open there, 5 cold, **0 merged**. The only one a human reacted to was the one that came in through someone else's open issue.
 
-## Как гонять
+## How to run it
 
 ```bash
 python "$USERPROFILE/.claude/scripts/issue_match.py" anthropics/claude-cookbooks --artifact "search agent, adversarial verify"
 ```
 
-| Команда | Что делает |
+| Command | What it does |
 |---|---|
-| `<owner/repo>` | замер одного репо |
-| `--artifact "kw1, kw2"` | **главный параметр** — ключевые слова нашего артефакта, по ним ищется дверь |
-| `--all` | веер по всем репо из конфига (~5 с на репо; 14 репо ≈ 70 с) |
-| `--init` | собрать конфиг из НАШЕЙ истории PR (`gh` сам находит, куда мы подавали) |
-| `--live-days N` | issue считается живым, если обновлялся за N дней (дефолт 30) |
-| `--json` | машинный вывод |
-| `--no-draft` | без черновика входа |
+| `<owner/repo>` | measure a single repo |
+| `--artifact "kw1, kw2"` | **the main parameter** — the keywords of our artifact, used to find the door |
+| `--all` | fan out across every repo in the config (~5s per repo; 14 repos ≈ 70s) |
+| `--init` | build the config from OUR PR history (`gh` finds where we submitted) |
+| `--live-days N` | an issue counts as live if it was updated within N days (default 30) |
+| `--json` | machine-readable output |
+| `--no-draft` | skip the entry draft |
 
-Конфиг: `~/.claude/issue_match.json`. Exit: `0` замер сделан · `2` кривые аргументы · `4` `gh` недоступен или все заборы упали.
+Config: `~/.claude/issue_match.json`. Exit codes: `0` measurement done · `2` bad arguments · `4` `gh` unavailable or all fetches failed.
 
-## Что читать в выводе
+## How to read the output
 
-1. **ОЧЕРЕДЬ** — открытых PR (точный счёт, не обрезанный лимитом), медиана возраста (при выборке — это **оценка снизу**, настоящая выше), доля без комментариев, паттерн мержей. Если «в день подачи» ≥60% — это не «быстро мёржат», это **преддоговорённость**; холодный PR такой ритм не повторит. Смотри **«разовых авторов»**: если среди мержей нет ни одного разового, репо мержит только своих и здоровая медиана чужаку ничего не обещает.
-2. **МЫ ТАМ** — сколько наших PR лежит и сколько из них без реакции. Много холодных = сперва греть их, а не плодить новые.
-3. **ДВЕРИ** — живые чужие issue с совпадением по ключевым словам. Наши собственные issue считаются отдельно: **своя дверь не приглашение**.
-4. **ВЕРДИКТ** — 🟢 входим через issue · 🟡 открываем своё issue и ждём · 🔴 не пушим · ⚪ **не замерено** (забор issue упал или дверь могла остаться за выборкой) — на таких данных решение не принимаем, гоним замер заново. Молчание забора — не ответ.
+1. **QUEUE** — open PRs (the exact count, not truncated by a limit), median age (when sampled, this is a **lower bound**, the real one is higher), the share with no comments, the merge pattern. If "merged on the day of submission" is ≥60%, that is not "they merge fast", that is **pre-agreement**; a cold PR will not reproduce that rhythm. Look at **one-time authors**: if none of the merges came from a one-time author, the repo merges only its own people, and a healthy median promises an outsider nothing.
+2. **US THERE** — how many of our PRs are sitting and how many got no reaction. Many cold ones = warm those up first instead of spawning new ones.
+3. **DOORS** — live third-party issues matching the keywords. Our own issues are counted separately: **your own door is not an invitation**.
+4. **VERDICT** — 🟢 enter through an issue · 🟡 open our own issue and wait · 🔴 don't push · ⚪ **not measured** (the issue fetch failed, or the door may have fallen outside the sample) — do not make a decision on that data, run the measurement again. A silent fetch is not an answer.
 
-⚠️ Без `--artifact` вердикт 🟢 **не выдаётся намеренно**: совпадение не проверялось, а свежее issue само по себе ещё не наша дверь. Широкие слова («agent», «memory») дают 🟢 почти везде — это честный шум, а не находка; сужай до сути артефакта и смотри строку `← совпало:`.
+⚠️ Without `--artifact` a 🟢 verdict is **deliberately withheld**: the match was never checked, and a fresh issue on its own is not yet our door. Broad words ("agent", "memory") produce 🟢 almost everywhere — that is honest noise, not a find; narrow them to the essence of the artifact and read the `← matched:` line.
 
-## Границы
+## Boundaries
 
-- **READ-ONLY.** Скилл ничего не отправляет. Комментарий в чужой тред и PR = исходящее наружу → отправляет человек (или я по мандату [[ship-github-no-plus-wait]], но с подписью и после гейта качества).
-- Матчинг — по словам в заголовке, метках и теле issue. Это грубый фильтр, а не понимание; финальное «наш это тред или нет» решает человек, глядя на список.
-- Медиана возраста при >100 открытых PR считается по новейшим → занижена. В отчёте помечено.
-- **Живость issue** = человеческая активность (последний комментарий ЖИВОГО человека либо открытие issue человеком), а не `updatedAt`: тот дёргают лейблы и боты, и «bump» от Dependabot/stale выглядел бы как живая дверь. Комментарии ботов считаются отдельно и в живость не идут.
-- **Где совпало — важно.** Совпадение в заголовке или метке = по теме; одно общее слово в теле (`auth`, `fix`, `token`) = скорее коллизия, и 🟢 за него не даётся (нужно либо попадание в заголовок/метку, либо ≥2 слова в теле). Строка `← совпало` показывает, где именно.
-- **Медиана мержей глобальная** по репо: она смешивает все типы PR (правка опечатки и новый рецепт) и не показывает очередь конкретного направления. Ориентир, не приговор — если наш артефакт узкой темы, смотри руками, как двигались PR именно этой темы. (Замечание внешнего ревьюера Codex, 27.07; чинить фильтром по путям = усложнение, пока не берём.)
-- Подпись коммитов/PR проверяй ДО отправки ([[signature-is-part-of-the-work]]) — 16 из 20 PR ушли подписанные пустым аккаунтом.
+- **READ-ONLY.** The skill sends nothing. A comment in someone else's thread and a PR are outbound → a human sends them (or I do under the mandate [[ship-github-no-plus-wait]], but signed and after the quality gate).
+- Matching works on words in the title, labels and issue body. That is a crude filter, not comprehension; the final "is this our thread or not" is a human call over the list.
+- With >100 open PRs the median age is computed over the newest ones → it is understated. That is flagged in the report.
+- **Issue liveness** = human activity (the last comment by a LIVE human, or the issue being opened by a human), not `updatedAt`: that field is bumped by labels and bots, and a "bump" from Dependabot/stale would look like a live door. Bot comments are counted separately and never count as liveness.
+- **Where it matched matters.** A match in the title or a label = on-topic; one generic word in the body (`auth`, `fix`, `token`) = more likely a collision, and no 🟢 is granted for it (you need either a title/label hit or ≥2 words in the body). The `← matched` line shows exactly where.
+- **The merge median is global** per repo: it mixes all PR types (a typo fix and a new recipe) and does not show the queue for a specific area. A guide, not a verdict — if our artifact is narrow, look by hand at how PRs in exactly that area moved. (Raised by the external reviewer Codex, 07-27; fixing it with a path filter = added complexity, not taken for now.)
+- Check the commit/PR signature BEFORE sending ([[signature-is-part-of-the-work]]) — 16 of 20 PRs went out signed by an empty account.
 
-## Дальше по конвейеру
+## Further down the pipeline
 
-🟢 → комментарий в тред → ответ мейнтейнера → PR со ссылкой на issue → `pr_watch.py` сторожит реакцию → бамп по расписанию.
-🔴 → в этот репо не пушим; уже лежащие холодные PR **греем** (привязать каждый к issue, которому он отвечает), а не добавляем девятый.
+🟢 → a comment in the thread → the maintainer answers → a PR referencing the issue → `pr_watch.py` watches for a reaction → a scheduled bump.
+🔴 → don't push into this repo; the cold PRs already sitting there get **warmed up** (tie each one to the issue it answers) instead of adding a ninth.
 
 ---
 

@@ -11,53 +11,53 @@ license: MIT
 
 INTENTION_LANE_RUN
 
-# /intention — намерения дня → посты-намерения (draft-first)
+# /intention — the day's intentions → intention posts (draft-first)
 
-ЦЕЛЬ: превратить сегодняшние НАМЕРЕНИЯ Антона (каждая боль / вопрос «как сделать X» / «нужен человек, кто…» в сессиях дня) в 2-3+ честных поста-намерения с явной ПРОСЬБОЙ, чтобы аудитория вернула АЛЬФУ (решение, тёплое интро, предупреждение, соавтора). Draft-first: ничего не публикуется, черновики уходят Антону в Telegram.
+GOAL: turn the owner's INTENTIONS of today (every pain / "how do I do X" question / "I need someone who…" from the day's sessions) into 2-3+ honest intention posts with an explicit ASK, so the audience returns ALPHA (a solution, a warm intro, a warning, a co-author). Draft-first: nothing is published, the drafts go to the owner over Telegram.
 
-## Пути и движок
-- Майнер+копилка: `python $IMPORTS_ROOT/content-factory/intention/intention_mine.py <cmd>` (0 токенов).
-- Копилка: `intentions.db` (никогда не теряет; дедуп по контент-хэшу).
-- Кандидаты: `candidates\cand-<DAY>.md`. Черновики: `drafts\intentions-<DAY>.md`.
-- Решение/канон: `$OBSIDIAN_VAULT/02-Decisions/decision-intention-lane-content-factory-2026-07-02.md`.
-- Telegram Saved (аккаунт @work_acct_a): numeric chat_id `226258979` (НЕ "me", без parse_mode).
-- ⚠️ FALLBACK доставки (если Telegram MCP недоступен/connecting — он штатно отваливается): Telethon-рельс, MCP-независимый. Текст: `TG_BUS_GROUP=226258979 python $USERPROFILE/.claude/scripts/tg_bus_send.py --raw "…"`; файл: `… --raw --file "<путь>" "<caption>"`. Проверено 2026-07-02.
+## Paths and engine
+- Miner + store: `python $IMPORTS_ROOT/content-factory/intention/intention_mine.py <cmd>` (0 tokens).
+- Store: `intentions.db` (never loses anything; deduped by content hash).
+- Candidates: `candidates\cand-<DAY>.md`. Drafts: `drafts\intentions-<DAY>.md`.
+- Decision/canon: `$OBSIDIAN_VAULT/02-Decisions/decision-intention-lane-content-factory-2026-07-02.md`.
+- Telegram Saved Messages (the primary work account): numeric chat_id `<YOUR_CHAT_ID>` (NOT "me", no parse_mode).
+- ⚠️ DELIVERY FALLBACK (when the Telegram MCP is unavailable/connecting — it drops out routinely): the Telethon rail, MCP-independent. Text: `TG_BUS_GROUP=<YOUR_CHAT_ID> python $USERPROFILE/.claude/scripts/tg_bus_send.py --raw "…"`; file: `… --raw --file "<path>" "<caption>"`. Verified 2026-07-02.
 
-## Правила каналов (из Deep Research 2026-07-02) — ВАЖНО
-- Каналы для ask-постов по «альфе»: **Telegram** (RU) · **X** (EN, #buildinpublic) · **Indie Hackers** (EN) · **Ask HN** (EN, «Ask HN:»). Опц.: LinkedIn (деловой тон).
-- ⛔ **НЕ постить просьбы на Хабр / VC.ru / в тело FB** — там ask-формат не работает (Хабр = площадка статей, не быстрых ответов). Хабр отдельно = канал лонгрида/дев-лога, не намерений.
-- Язык решает площадка: TG=RU, X/IH/HN=EN. Без принудительного билингва.
+## Channel rules (from Deep Research 2026-07-02) — IMPORTANT
+- Channels for alpha-seeking ask posts: **Telegram** (RU) · **X** (EN, #buildinpublic) · **Indie Hackers** (EN) · **Ask HN** (EN, "Ask HN:"). Optional: LinkedIn (business tone).
+- ⛔ **Do NOT post asks on long-form article platforms or in the Facebook body** — the ask format does not work there (an article platform is for articles, not quick answers). Those platforms are separately the channel for longreads/dev-logs, not intentions.
+- The platform decides the language: Telegram=RU, X/IH/HN=EN. No forced bilingual output.
 
-## Формат поста-намерения (established)
-Контекст (что делаю) → что не вышло / что понял → **явный конкретный ask** в конце. Тон честный, уязвимый, без рекламного лоска. Конкретная просьба («выбираю A или B?», «нужен эксперт по X, кто делал?») бьёт размытую. **Описывать ПОДРОБНО, как Антон к этому пришёл и зачем** (правило Антона). Длина: X=тизер (240-370), TG/IH=средний, Ask HN=«Ask HN: <вопрос>» + абзац.
-5 шаблонов (нужен эксперт / выбор A-B / уперся в стену / понял что ошибался / общий опрос) — в решении §A4 / DR.
+## The intention-post format (established)
+Context (what I'm doing) → what failed / what I realised → **an explicit, concrete ask** at the end. Honest, vulnerable tone, no marketing gloss. A concrete request ("do I pick A or B?", "I need an expert on X, who has done it?") beats a vague one. **Describe IN DETAIL how the owner got here and why** (his own rule). Length: X = teaser (240-370), Telegram/IH = medium, Ask HN = "Ask HN: <question>" + a paragraph.
+5 templates (need an expert / A-vs-B choice / hit a wall / realised I was wrong / general poll) — in the decision memo §A4 / the DR.
 
-## ПРИВАТНОСТЬ (жёстко)
-Без реальных имён/@хендлов третьих лиц, без точных сумм (выручка/раунды/чужие сделки), без секретов/путей с личными id. Обобщай («крупный лид», «$X»). Приватность важнее полноты.
+## PRIVACY (hard)
+No real names / @handles of third parties, no exact amounts (revenue/rounds/other people's deals), no secrets or paths with personal ids. Generalise ("a large lead", "$X"). Privacy beats completeness.
 
-## МОДЕЛЬ
-Пост = авторский голос Антона → пишет **Opus**. Если текущий прогон НЕ на Opus — делегируй САМО НАПИСАНИЕ субагенту `model:'opus'` (Agent tool), передав ему кандидатов + формат + приватность. Кластеризацию/отбор кандидатов можно на Sonnet.
+## MODEL
+The post is the owner's authorial voice → written by the **top-tier model**. If the current run is NOT on it — delegate THE WRITING ITSELF to a subagent with `model:'opus'` (Agent tool), passing it the candidates + the format + the privacy rules. Clustering / candidate selection can run on a cheap model.
 
-## ШАГИ
-1. DAY = сегодняшняя локальная дата YYYY-MM-DD (печатай только ASCII).
-2. Майнинг: `intention_mine.py mine <DAY>`. Прочитай сводку (CANDIDATES) и файл `candidates\cand-<DAY>.md`.
-3. Если CANDIDATES == 0: не выдумывай. Сообщи Антону в TG «📭 <DAY>: намерений сегодня не намайнилось» и заверши.
-4. КЛАСТЕРИЗАЦИЯ (судья): из сырых кандидатов собери ОТДЕЛЬНЫЕ намерения (одна боль = одно намерение; слей повторы одной темы). Для каждого: короткий title · pain (боль/вопрос) · journey (как пришёл + зачем, подробно) · ask (явная просьба). Отбрось чистый шум (не-намерения, служебное).
-5. Копилка: для каждого отдельного намерения — `intention_mine.py add --day <DAY> --title "…" --pain "…" --journey "…" --ask "…" --sessions "sid1,sid2"`. Дедуп сам отсечёт уже лежащие (это ок — не постим повторно).
-6. ВЫБОР к постингу: возьми 2-3 самых «альфовых» СЕГОДНЯШНИХ намерения (сильная конкретная просьба, свежесть). Можно больше, если день богатый.
-7. НАПИСАНИЕ (Opus): для каждого выбранного намерения напиши посты по подходящим каналам (TG-RU + X-EN минимум; добавь IH/Ask HN где ask уместен). Формат + приватность выше. Разнообразь тип (просьба/выбор/понял-что-ошибался).
-8. Сохрани все черновики в `drafts\intentions-<DAY>.md` (UTF-8, no BOM; ТОЛЬКО добавление, не перезаписывай чужие правки — если файл есть, дозапиши секцией времени прогона). Пометь намерения: `intention_mine.py mark --id N --status drafted`.
-9. Отправь в Telegram (chat_id 226258979, без parse_mode) шапку «🎯 Намерения-черновики за <DAY> (отредактируй и запости сам):» + по каждому намерению блок «— <title> —» и версии по каналам. Длиннее ~4000 → бей по границам абзацев на «Часть N/M».
-10. Отчёт Антону: сколько намерений намайнено/в копилке/в черновиках, какие каналы, что отложено. Заверши «что дальше».
+## STEPS
+1. DAY = today's local date YYYY-MM-DD (print ASCII only).
+2. Mining: `intention_mine.py mine <DAY>`. Read the summary (CANDIDATES) and the file `candidates\cand-<DAY>.md`.
+3. If CANDIDATES == 0: do not invent anything. Tell the owner over Telegram "📭 <DAY>: no intentions mined today" and finish.
+4. CLUSTERING (the judge): assemble DISTINCT intentions out of the raw candidates (one pain = one intention; merge repeats of the same topic). For each: a short title · pain (the pain/question) · journey (how he got here + why, in detail) · ask (the explicit request). Discard pure noise (non-intentions, housekeeping).
+5. Store: for every distinct intention — `intention_mine.py add --day <DAY> --title "…" --pain "…" --journey "…" --ask "…" --sessions "sid1,sid2"`. Dedup will drop the ones already stored (that is fine — we don't post twice).
+6. SELECTION for posting: take the 2-3 most alpha-worthy intentions OF TODAY (a strong concrete ask, freshness). More if the day was rich.
+7. WRITING (top model): for each selected intention, write posts for the suitable channels (Telegram-RU + X-EN at minimum; add IH/Ask HN where the ask fits). Format + privacy as above. Vary the type (request / choice / realised-I-was-wrong).
+8. Save every draft into `drafts\intentions-<DAY>.md` (UTF-8, no BOM; APPEND ONLY, never overwrite someone else's edits — if the file exists, append a section stamped with the run time). Mark the intentions: `intention_mine.py mark --id N --status drafted`.
+9. Send to Telegram (chat_id `<YOUR_CHAT_ID>`, no parse_mode) a header "🎯 Intention drafts for <DAY> (edit and post them yourself):" + per intention a block "— <title> —" and the per-channel versions. Longer than ~4000 → split on paragraph boundaries into "Part N/M".
+10. Report to the owner: how many intentions were mined / stored / drafted, which channels, what was deferred. Finish with "what's next".
 
-## Мостик в эпизод (намерение → лонгрид/дев-лог на GitHub)
-Сильное намерение стоит развернуть в «серию реалити-шоу»: `intention_mine.py episode --id <N>` создаёт эпизод-бандл (9 черновиков по тирам §7.2, включая longread-habr — Хабр здесь = канал ЛОНГРИДА, не ask) + `intention-seed.md` с контекстом (pain/journey/ask) для писателя. Дальше пиши черновики (голос=Opus) в `episodes/<slug>/`, затем `python episode_adapter.py check --slug <slug>`. Намерение помечается `status=episode`. Это стык с `/episode` — не дублируй его, а вызывай.
+## The bridge into an episode (intention → longread/dev-log on GitHub)
+A strong intention is worth expanding into a "reality show episode": `intention_mine.py episode --id <N>` creates an episode bundle (9 drafts across the tiers of §7.2, including the longread tier — the article platform here is the LONGREAD channel, not an ask channel) + `intention-seed.md` carrying the context (pain/journey/ask) for the writer. Then write the drafts (voice = top model) in `episodes/<slug>/`, then `python episode_adapter.py check --slug <slug>`. The intention is marked `status=episode`. This is the seam with `/episode` — don't duplicate it, call it.
 
-## Петля альфы (по мере откликов)
-Антон говорит «на пост про X ответил <кто>» → `intention_mine.py respond --id <N> --who "<имя/@>" --channel <canal> --note "<суть>"`. Смотреть очередь: `responders --pending`. Повышение в CRM (`leads.db`) = отдельный проверяемый шаг обычным lead-флоу (не писать в прод-CRM вслепую).
+## The alpha loop (as responses arrive)
+The owner says "<who> replied to the post about X" → `intention_mine.py respond --id <N> --who "<name/@>" --channel <channel> --note "<gist>"`. Check the queue: `responders --pending`. Promotion into the CRM (`leads.db`) is a separate verifiable step through the normal lead flow (never write into the production CRM blind).
 
-## Границы
-Draft-first HARD — ничего наружу без явного «публикуем» Антона. Не постить просьбы на Хабр/VC.ru. AK-47: не плодить площадки сверх решённых. Tier-2 (наружу/деньги) не отменяется.
+## Boundaries
+Draft-first is HARD — nothing goes outbound without the owner's explicit "publish". Don't post asks on article platforms. AK-47: don't spawn platforms beyond the decided set. Tier-2 (outbound/money) is not waived.
 
 ---
 
