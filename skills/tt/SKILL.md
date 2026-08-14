@@ -10,113 +10,111 @@ description: >
 license: MIT
 ---
 
-# /tt — ворота качества сразу после сборки
+# /tt — the quality gate right after building
 
-> 🧒 **При докладе Антону:** заверши простым «Простыми словами» на его языке (его standing-правило [[eli5-always]]). Только в сообщении ЕМУ — не внутри артефактов.
+> 🧒 **When reporting to a non-technical operator:** end with a short "In plain words" recap in their language (standing rule [[eli5-always]]). Only in the message TO them — never inside artifacts.
 
-Это **не ретро**. Ретро = упаковка всей сессии в конце. `/tt` = узкая проверка **одной вещи, которую мы только что собрали**, пока контекст горячий. Боль Антона (2026-06-25): «собрали, сказали „готово", пошли дальше — а оно сделано на 2/3». `/tt` ловит это ДО «готово».
+This is **not a retrospective**. Retro = packaging the whole session at the end. `/tt` = a narrow check of **the one thing we just built**, while the context is hot. The pain that created it (2026-06-25): "we built it, said 'done', moved on — and it was only 2/3 finished." `/tt` catches that BEFORE the word "done".
 
-**Когда:** сразу после сборки/правки **скилла · скрипта · рутины · хука · vault-пайплайна · заметки-механики** — всего, что должно ЧТО-ТО делать. Не для разговорных ответов и не для тривиальных правок текста.
+**When:** immediately after building/editing a **skill · script · routine · hook · vault pipeline · mechanism note** — anything that is supposed to DO something. Not for conversational replies and not for trivial text edits.
 
-**Граница vs соседи:** `/1` = жива ли СИСТЕМА после крэша; `/verify` (встроенный) = работает ли ПРИЛОЖЕНИЕ в браузере; `/tt` = работает ли **именно то, что мы только что собрали**.
-
----
-
-## Шаг 0 — RECALL области (что вообще изменили)
-Не по памяти — по фактам. Перечисли, что эта задача реально создала/тронула:
-- свежие/изменённые файлы: `~/.claude/skills`, `~/.claude` (память/CLAUDE.md/хуки/scheduled-tasks), `$IMPORTS_ROOT`, волт-заметки;
-- быстрый якорь: `python "$IMPORTS_ROOT/retro_inventory.py" 1` (тот же инвентарь, что у /retro) ИЛИ просто перечисли то, что правил в ЭТОЙ сессии.
-- Возьми только то, что относится к ТЕКУЩЕЙ задаче (чужие fleet-правки игнор — это не наше, см. [[session-machine-tagging]]).
-- **RECALL знаний по теме** (гейт, грабли 2026-07-04: чинили OAI-путь не глянув память — чуть не продублировали параллельную сессию): перед прогоном/фиксом подними, что УЖЕ известно — grep `memory\` + `/ask` (RAG) + греп волта по теме изменённого. Параллельная сессия могла уже сделать/задокументировать это ([[capture-rules-into-bible]] → RECALL-before-activity).
-
-## Шаг 1 — ПРОГНАТЬ вживую (на реальных данных, не в теории)
-Запусти собранное **по-настоящему** на настоящих данных Антона и покажи фактический вывод:
-- скилл → выполни его процедуру руками здесь же;
-- скрипт → запусти его (read-only/dry-run если есть побочки);
-- рутина/хук → дёрни вручную или проверь, что он реально срабатывает (а не «должен бы»);
-- заметка-правило → проверь, что ссылки/слаги резолвятся, frontmatter валиден.
-«Теоретически работает» ≠ доказано. Нужен живой вывод.
-
-## Шаг 2 — ПОЛОМАТЬ нарочно (negative + edge)
-Попробуй сломать — реальные грабли этого дома:
-- пустой / кривой ввод, отсутствует зависимость или ключ;
-- грабли путей **C:/E:** ([[deterministic-script-gotchas]]) — ищет ли на правильном диске;
-- машинно-специфичный хардкод: `grep -n "C:\\\\Users\\\\[^_]" <файл>` — путь с ЧУЖИМ юзером/машиной в общем движке обязан идти через `_paths.py`/machine.env (грабли 2026-07-04: хаб вшил `%USERPROFILE%`, на ноуте путь мёртв → тихий fallback);
-- v2.1 / 403 / устаревший конфиг — берётся ли факт из ЖИВОГО источника, не со стале-копии ([[recall-first-on-incident-and-live-source-truth]]);
-- деградирует ли мягко (понятная ошибка), а не падает молча/тихо «делает вид».
-
-## Шаг 2.5 — ВТОРОЕ МНЕНИЕ: внешний ломатель (Codex — дефолт · Grok — 2-я рельса · Gemini — 3-я)
-Своя проверка слепа к своим же слепым зонам — второй вендор ловит то, что мы не видим ([[test-after-build-skill]] + Decision Memo Phase 1.5). Поэтому ломает не только сессия, но и внешние глаза. Их ТРИ пары (anton 21.07; ⭐26.07 Grok переехал в CLI; ⭐27.07 добавлен Gemini): **Codex** (headless CLI, дефолт), **Grok** (⭐26.07 на хабе локальная CLI-рельса на подписке, headless — `secondop.py t3 --engine grok`; браузер grok.com = ФОЛБЭК, см. [[grok-second-reviewer-rail]]) и **Gemini** (headless без браузера, `gemini_review.py break`, см. [[gemini-third-reviewer-rail]]).
-
-**Когда зову (узко, чтобы ритуал не раздуло):** в области Шага 0 есть изменённый **исполняемый** артефакт (скрипт · скилл · хук · рутина · пайплайн). Только заметки/тексты/frontmatter → пропускаю **осознанно**, логирую и пишу это в вердикт.
-
-**Рельса 1 — Codex (дефолт, зову всегда первым):**
-```
-python "%USERPROFILE%\.claude\scripts\cc-review\secondop.py" t3 --ritual tt --task <id-задачи> --context "<что собрали + что уже проверили в шагах 1-2>"
-```
-Пир без Codex-логина → тот же вызов через `_shared\secondop_client.py` (брокер ответит по шине).
-
-**Рельса 2 — Grok-ломатель (зову когда):** (а) Codex недоступен/quota-blocked — Grok спасает вердикт от ⚠️; (б) артефакт рискованный/safety-critical или Codex дал спорный COUNTER — гетеро-пара, зову ОБОИХ; (в) Антон сказал «спроси грока».
-**Механика-дефолт (⭐26.07, хаб): локальный CLI headless** — `python ...\secondop.py t3 --engine grok --ritual tt --task <id> --context "..."` (лог и зеркало в чат 04 автоматические, ручной log-ext НЕ нужен). CLI мёртв/разлогинен (`grok doctor`) → **фолбэк-браузер** (Chrome-MCP, человеческий темп, как /dr-fanout; строго локальный браузер [[browser-work-on-peers-not-hub]]):
-1. `python ...\secondop.py grok-prompt --task <id> --context "<что собрали + что проверили>"` → paste-ready промпт;
-2. вставить в НОВЫЙ чат grok.com (обычная модель, Expert не трогать), дождаться ответа;
-3. первая строка ответа = вердикт `ACCEPT`/`COUNTER`/`BLOCK`;
-4. залогировать: `python ...\secondop.py log-ext --reviewer grok --task <id> --ritual tt --verdict "<1-я строка>" --note "<ссылка grok.com/c/… ПЕРВОЙ + суть находок>"`. Ссылка на чат в `--note` **обязательна и идёт первой** (note режется до 200 симв. — длинная преамбула съест ссылку, Grok COUNTER 21.07) — это доказательство, что вердикт реально от Grok, а не вписан рукой (Codex VERIFY 21.07); плюс ответ Grok целиком цитируется в вердикте /tt. Не распознан формат → вердикт НЕ засчитан (переспросить в формате или log-skip).
-
-**Рельса 3 — Gemini-ломатель (⭐27.07, скилл `/gemini`; зову когда):** (а) Codex И Grok недоступны/выжгли квоту — Gemini спасает вердикт от ⚠️; (б) safety-critical артефакт или спорный COUNTER — зову третьим голосом; (в) Антон сказал «спроси джемини».
-```
-python "%USERPROFILE%\.claude\scripts\cc-review\gemini_review.py" break --task <id> --context "<что собрали + что проверили>"
-```
-Headless, без браузера (REST-рельса ~7-10 с; `--engine cli` = `@google/gemini-cli`). Вердикт первой строкой `ACCEPT`/`COUNTER`/`BLOCK` и **сам** пишется в `usage.jsonl` (`log-ext --reviewer gemini`) — ручной log-ext НЕ нужен. Рельса не ответила → скрипт сам пишет `log-skip` и выходит с кодом 3 (вердикт /tt тогда максимум ⚠️ PARTIAL). Ключ = бесплатный тир Google AI Studio (`secrets\gemini.env`), биллинга нет → превышение = 429, не счёт; ⚠️ OAuth-вход CLI для физлиц Google отключил — чинить бесполезно, живёт только API-ключ.
-
-**Как читать ответ (всех трёх рельс):** `COUNTER`/`BLOCK`/сценарии поломки = **находка** → это Шаг 4 (корень → починить → перепрогнать), не «мнение к сведению». `ACCEPT` = согласие, находки нет. Достаточно ОДНОГО полученного внешнего вердикта; вторая пара глаз — по правилам рельсы 2.
-
-**Скип — только явный, никогда молчаливый** (COUNTER Codex 17.07): обе рельсы недоступны / нет исполняемых артефактов →
-```
-python ... secondop.py log-skip --ritual tt --task <id> --reason "<квота|ошибка|нет исполняемых артефактов>"
-```
-и вердикт Шага 5 **не может быть ✅** по этой причине: максимум **⚠️ PARTIAL «второе мнение не получено»**. Пропущенный звонок ≠ зелёный тест. Исключение: артефакт неисполняемый — тогда скип нейтрален, ✅ возможен.
-
-**Наблюдаемость:** каждый вызов/скип пишется в `bridge-state/usage.jsonl` (attempted · ok · skipped · finding); суточный дайджест — `secondop.py digest --post` → чат 03. Ноль вызовов за сутки = сигнал «ритуал не работает», а не тишина.
-
-## Шаг 3 — СЛОЙ ВИДИМОСТИ (видно ли, что сработало?)
-Самый частый тихий баг — не в ядре, а в том, что **результат не видно** ([[verify-existing-before-proposing]]):
-- **Готовый гейт первым:** если у проверяемого есть СВОЙ детерминированный гейт/тест (`memory_guard.py`, `/arch`, `sync_check`, `_test_*.py`) — запусти ЕГО и бери ЕГО вердикт; не пере-выводи логику самодельным awk/grep — дубль гейта со временем разъезжается с оригиналом и даёт ложные/расходящиеся тревоги (грабли 2026-06-27/07-04: raw-awk и `memory_guard.py` мерили длину строк по-разному).
-- есть ли счётчик/лог/строка-доказательство, что оно отработало?
-- «LastResult=N без логов» = неотладимо → это ❌ по видимости, даже если ядро вроде ок. (Так поймали пустой TurnState и ложный RED синка.)
-
-## Шаг 4 — КОРЕНЬ → починить → перепрогнать
-Любой провал шагов 1-3 → копай в КОРЕНЬ ([[fix-root-cause-not-symptoms]]), не лепи заплатку на симптом, почини КЛАСС → вернись на Шаг 1 и перепрогони, пока чисто. Safety-critical (локи/синк/auth/scheduler/идемпотентность) → «прочитай прежде чем чинить» + мини-тест ([[verify-existing-before-proposing]]).
-
-## Шаг 4.5 — РАЗРЫВ СЕССИИ: считаем сигналы (ТЕНЬ с 2026-07-28, Антон «+»)
-Нашёл баг на шагах 1-3 и он не чинится с ходу — прежде чем зарываться, посчитай 4 сигнала и **залогируй**:
-```
-python ~/.claude/scripts/split_rule.py log --what "<что чиним>" --attempts <провалившихся попыток> \
-   --files <файлов в корне> --repro-min <минут на воспроизведение> --context-pct <% контекста> \
-   [--shared] --decision stay|split --minutes <итого> --note "<комментарий>"
-```
-Правило (пока ТЕНЬ, решение всё равно твоё): выносить в отдельную сессию, если сработал ЛЮБОЙ сигнал —
-**A** ≥2 провалившихся попытки · **B** корень >2 файлов или задета смежная система (шина/канон/планировщик/auth) ·
-**C** воспроизведение >10 мин · **D** контекст съеден ≥70%.
-Выносишь — сид-промпт обязателен (что делали · чего достигли · что уже отвергнуто и почему · критерий приёмки ·
-не-цели), задача в `10-Tasks`, артефакт помечается ⚠️, а не ✅. Тень без записей = правило НЕ проверено;
-сводка `split_rule.py summary --days 14`, критерии флипа в `00-System/Split-Rule-Shadow.md`.
-
-## Шаг 5 — ВЕРДИКТ с доказательством
-Короткая таблица: **что проверено · как (живой вывод) · ✅/⚠️/❌**. Затем одна итоговая строка:
-- ✅ **PASS** — прогнал, ломал, видно — работает. ТОЛЬКО это = «готово».
-- ⚠️ **PARTIAL** — работает, но есть жёлтый флаг (назови его + что осталось).
-- ❌ **FAIL** — не работает / не видно → корень + что чиню.
-Доказательство (вывод/счётчик/скрин) обязательно — без него «✅» не считается.
-
-**📋 Журнал задач (декрет Антона 2026-07-04):** вердикт ✅ = момент закрытия в реестре задач ([[task-journal-done-undone-linking]]): если проверенная вещь числится в реестре — отметь `done` с ЭТИМ доказательством + линк, что она разблокировала; ❌/⚠️ = задача остаётся open (хвост «дочинить X» — в реестр сразу). С машины без движка — `bus_send.py` TASK/DONE. Одна строка в докладе: «📋 журнал: #id → done (доказательство: …)».
+**Boundary vs neighbors:** `/1` = is the SYSTEM alive after a crash; a browser verify = does the APP work; `/tt` = does **the exact thing we just built** work.
 
 ---
 
-## Связка с /retro (аудит, не дубль)
-`/tt` тестирует на каждой задаче (горячо). `/retro` в конце сессии лишь **АУДИТит** строку «протестировано? ✅/❌» по каждому артефакту и, если ❌ — флагает и предлагает прогнать `/tt` сейчас. Ретро само проверку НЕ делает (поздно/холодно). Не дублируем: каждый уровень ссылается вниз (AK-47).
+## Step 0 — RECALL the scope (what did we actually change)
+Not from memory — from facts. List what this task really created/touched:
+- fresh/modified files: `~/.claude/skills`, `~/.claude` (memory/CLAUDE.md/hooks/scheduled-tasks), `$IMPORTS_ROOT`, vault notes;
+- quick anchor: `python "$IMPORTS_ROOT/retro_inventory.py" 1` (the same inventory the retro skill uses) OR simply list what you edited in THIS session.
+- Take only what belongs to the CURRENT task (ignore other machines' fleet edits — not ours, see [[session-machine-tagging]]).
+- **RECALL existing knowledge on the topic** (a gate born from a real miss on 2026-07-04: we fixed a pipeline without checking memory first and nearly duplicated a parallel session's work): before running/fixing, pull up what is ALREADY known — grep the memory folder + semantic search + grep the vault for the changed area. A parallel session may have already done/documented it ([[capture-rules-into-bible]] → RECALL-before-activity).
 
-## Границы / не-дубль
-- markdown-only тонкий оркестратор; НЕ сервер/БД/вебхук (если правда нужен > markdown — флаг ⚠️ УСЛОЖНЕНИЕ, решает Антон).
-- read-only/dry-run где есть побочки; запись в волт — бэкап-первым ([[vault-backup-rule]]).
-- Если сессия ничего не собрала — скажи прямо «тестировать нечего», без церемонии.
+## Step 1 — RUN it live (on real data, not in theory)
+Run the thing **for real** on real data and show actual output:
+- a skill → execute its procedure by hand right here;
+- a script → run it (read-only/dry-run if it has side effects);
+- a routine/hook → trigger it manually or verify it actually fires (not "it should");
+- a rule note → check that links/slugs resolve and the frontmatter is valid.
+"Works in theory" ≠ proven. You need live output.
+
+## Step 2 — BREAK it on purpose (negative + edge cases)
+Try to break it — the classic local pitfalls:
+- empty / malformed input, missing dependency or key;
+- wrong-drive path pitfalls ([[deterministic-script-gotchas]]) — does it look on the right disk;
+- machine-specific hardcode: `grep -n "C:\\\\Users\\\\[^_]" <file>` — a path with ANOTHER user/machine inside a shared engine must go through a paths module / machine env (real case 2026-07-04: the hub baked `%USERPROFILE%` in, the path was dead on the laptop → silent fallback);
+- stale config / API-version drift — does it read facts from the LIVE source, not a stale copy ([[recall-first-on-incident-and-live-source-truth]]);
+- does it degrade gracefully (clear error) instead of failing silently or quietly "pretending".
+
+## Step 2.5 — SECOND OPINION: an external breaker (multi-vendor panel)
+Your own check is blind to your own blind spots — a second vendor catches what we can't see ([[test-after-build-skill]]). So it's not only the session that tries to break the artifact; external eyes do too. There are THREE pairs: **Codex** (headless CLI, default), **Grok** (local CLI rail on subscription — `secondop.py t3 --engine grok`; the grok.com browser is the FALLBACK), and **Gemini** (headless, `gemini_review.py break`).
+
+**When to call it (narrowly, so the ritual doesn't bloat):** the Step-0 scope contains a changed **executable** artifact (script · skill · hook · routine · pipeline). Notes/texts/frontmatter only → skip **explicitly**, log it, and state it in the verdict.
+
+**Rail 1 — Codex (default, always called first):**
+```
+python "%USERPROFILE%\.claude\scripts\cc-review\secondop.py" t3 --ritual tt --task <task-id> --context "<what we built + what steps 1-2 already checked>"
+```
+A peer machine without a Codex login → the same call through `_shared\secondop_client.py` (a broker replies over the machine bus).
+
+**Rail 2 — the Grok breaker (call when):** (a) Codex is unavailable/quota-blocked — Grok saves the verdict from ⚠️; (b) the artifact is risky/safety-critical or Codex gave a contested COUNTER — hetero-pair, call BOTH; (c) the operator says "ask Grok".
+**Default mechanics: local headless CLI** — `python ...\secondop.py t3 --engine grok --ritual tt --task <id> --context "..."` (logging and the human-visible mirror are automatic). CLI dead/logged-out (`grok doctor`) → **browser fallback** (live-tab automation, human pace, strictly a local browser):
+1. `python ...\secondop.py grok-prompt --task <id> --context "<what we built + what we checked>"` → paste-ready prompt;
+2. paste into a NEW grok.com chat, wait for the reply;
+3. the first line of the reply = the verdict `ACCEPT`/`COUNTER`/`BLOCK`;
+4. log it: `python ...\secondop.py log-ext --reviewer grok --task <id> --ritual tt --verdict "<line 1>" --note "<grok.com/c/… link FIRST + gist of findings>"`. The chat link in `--note` is **mandatory and goes first** (the note is truncated to 200 chars — a long preamble eats the link) — it proves the verdict really came from Grok and wasn't typed in by hand; the full Grok reply is also quoted in the /tt verdict. Unrecognized format → the verdict does NOT count (re-ask in the format, or log-skip).
+
+**Rail 3 — the Gemini breaker (call when):** (a) Codex AND Grok are unavailable/out of quota — Gemini saves the verdict from ⚠️; (b) a safety-critical artifact or a contested COUNTER — a third voice; (c) the operator says "ask Gemini".
+```
+python "%USERPROFILE%\.claude\scripts\cc-review\gemini_review.py" break --task <id> --context "<what we built + what we checked>"
+```
+Headless, no browser (REST rail ~7-10 s; `--engine cli` = the official CLI). Verdict on the first line `ACCEPT`/`COUNTER`/`BLOCK`, and it logs ITSELF into `usage.jsonl` — no manual log-ext needed. Rail didn't answer → the script logs `log-skip` itself and exits with code 3 (the /tt verdict is then at most ⚠️ PARTIAL). The key = a free API tier with no billing attached → overuse = 429, not a bill.
+
+**How to read the reply (all three rails):** `COUNTER`/`BLOCK`/break-scenarios = a **finding** → that's Step 4 (root cause → fix → re-run), not "an opinion to note". `ACCEPT` = agreement, no finding. ONE received external verdict is enough; a second pair of eyes per Rail-2 rules.
+
+**Skipping — only explicit, never silent** (a reviewer COUNTER taught us this): both rails unavailable / no executable artifacts →
+```
+python ... secondop.py log-skip --ritual tt --task <id> --reason "<quota|error|no executable artifacts>"
+```
+and the Step-5 verdict **cannot be ✅** for that reason: at most **⚠️ PARTIAL "no second opinion received"**. A missed call ≠ a green test. Exception: the artifact is non-executable — then the skip is neutral and ✅ is possible.
+
+**Observability:** every call/skip is written to `bridge-state/usage.jsonl` (attempted · ok · skipped · finding); a daily digest goes to the fleet log chat. Zero calls in a day = the signal "the ritual is not working", not silence.
+
+## Step 3 — the VISIBILITY layer (can you even see that it worked?)
+The most common silent bug is not in the core but in the fact that **the result is invisible** ([[verify-existing-before-proposing]]):
+- **Existing gate first:** if the thing under test has ITS OWN deterministic gate/test (a guard script, a system-map check, a sync check, `_test_*.py`) — run THAT and take ITS verdict; do not re-derive the logic with homemade awk/grep — a duplicated gate drifts from the original over time and produces false/diverging alarms (real case 2026-06-27/07-04: a raw awk and the real guard measured line lengths differently);
+- is there a counter/log/proof line showing it ran?
+- "LastResult=N with no logs" = undebuggable → that's a ❌ on visibility even if the core looks fine. (This is how an empty state ledger and a false-RED sync were caught.)
+
+## Step 4 — ROOT CAUSE → fix → re-run
+Any failure in steps 1-3 → dig to the ROOT ([[fix-root-cause-not-symptoms]]), don't patch the symptom; fix the CLASS → go back to Step 1 and re-run until clean. Safety-critical (locks/sync/auth/scheduler/idempotency) → "read before you fix" + a mini-test ([[verify-existing-before-proposing]]).
+
+## Step 4.5 — SESSION SPLIT: count the signals (shadow rule)
+You found a bug in steps 1-3 and it doesn't fix quickly — before digging in, count 4 signals and **log them**:
+```
+python ~/.claude/scripts/split_rule.py log --what "<what we're fixing>" --attempts <failed attempts> \
+   --files <files in the root cause> --repro-min <minutes to reproduce> --context-pct <% of context> \
+   [--shared] --decision stay|split --minutes <total> --note "<comment>"
+```
+The rule (still a shadow — the decision is yours): split into a separate session if ANY signal fires —
+**A** ≥2 failed attempts · **B** the root spans >2 files or touches an adjacent system (bus/canon/scheduler/auth) ·
+**C** reproduction takes >10 min · **D** ≥70% of the context is consumed.
+If you split — a seed prompt is mandatory (what we did · what we achieved · what was already rejected and why · acceptance criterion · non-goals), a task goes into the task registry, and the artifact is marked ⚠️, not ✅. A shadow with no log entries = the rule was NOT tested; summary via `split_rule.py summary --days 14`.
+
+## Step 5 — VERDICT with evidence
+A short table: **what was checked · how (live output) · ✅/⚠️/❌**. Then one summary line:
+- ✅ **PASS** — ran it, broke it, visible — works. ONLY this = "done".
+- ⚠️ **PARTIAL** — works, but there's a yellow flag (name it + what remains).
+- ❌ **FAIL** — doesn't work / isn't visible → root cause + what I'm fixing.
+Evidence (output/counter/screenshot) is mandatory — without it a "✅" doesn't count.
+
+**📋 Task journal:** verdict ✅ = the moment the item closes in the task registry ([[task-journal-done-undone-linking]]): if the verified thing is in the registry — mark it `done` with THIS evidence + link what it unblocked; ❌/⚠️ = the task stays open (the "finish fixing X" tail goes into the registry immediately). From a machine without the engine — send TASK/DONE over the machine bus. One line in the report: "📋 journal: #id → done (evidence: …)".
+
+---
+
+## Link with the retro (audit, not a duplicate)
+`/tt` tests per task (hot). The retro at the end of the session only **AUDITS** the "tested? ✅/❌" line for each artifact and, if ❌ — flags it and offers to run `/tt` now. The retro does NOT do the check itself (too late/cold). No duplication: each layer references downward (simplicity-first).
+
+## Boundaries / non-duplication
+- markdown-only thin orchestrator; NOT a server/DB/webhook (if you truly need more than markdown — raise a ⚠️ COMPLEXITY flag, the operator decides).
+- read-only/dry-run where side effects exist; vault writes — backup-first ([[vault-backup-rule]]).
+- If the session built nothing — say plainly "nothing to test", no ceremony.
