@@ -9,61 +9,61 @@ description: >
 license: MIT
 ---
 
-# /fb-post — опубликовать пост на стену Антона (безопасно, draft-first)
+# /fb-post — publish a post to the owner's wall (safely, draft-first)
 
-**Зачем.** Контент-фабрика и FB-дневник уже ПИШУТ посты голосом Антона, но черновик до сих пор оседает в Saved/волте. Не хватало только «кнопки публикации». Этот скилл закрывает её — и делает это самым безопасным способом (действуем в живой залогиненной вкладке Chrome, а не headless-ботом), с жёстким счётчиком объёма.
+**Why.** The content factory and the Facebook diary already WRITE posts in the owner's voice, but the draft still ends up parked in Saved Messages / the vault. The only missing piece was the "publish" button. This skill closes it — in the safest possible way (acting inside a live logged-in Chrome tab, not with a headless bot), with a hard volume counter.
 
-**Главные правила (из Deep-Research #32):**
-- Публикация = **OUTBOUND + PUBLIC = Tier-2** → финальный текст показываю Антону и жду явного `+` (или он сам жмёт «Опубликовать»). Никогда не публикую молча.
-- **Голос Антона = Opus.** Текст беру из готового черновика (`content-factory`, `facebook-diary`, `episode`) или пишу на Opus. Не выдумываю новый голос, не даю Sonnet писать авторское.
-- **Объём низкий:** `fb_guard` режет на ≤8 постов/день. Не дублировать один и тот же текст (спам-флаг).
+**Main rules (from Deep Research #32):**
+- Publishing = **OUTBOUND + PUBLIC = Tier-2** → show the final text to the owner and wait for an explicit `+` (or let him press "Publish" himself). Never publish silently.
+- **The owner's voice = the top-tier model.** Take the text from a ready draft (`content-factory`, `facebook-diary`, `episode`) or write it with the top model. Don't invent a new voice, and don't let a cheap model write authorial text.
+- **Keep the volume low:** `fb_guard` caps it at ≤8 posts/day. Don't repeat the same text (spam flag).
 
 ---
 
-## 0. Предохранитель ПЕРЕД браузером (обязательно)
+## 0. The fuse BEFORE the browser (mandatory)
 ```bash
 python "$USERPROFILE/.claude/scripts/fb_guard.py" check post
 ```
-- `OK post (...)` → можно продолжать.
-- `BLOCKED post: ...` (exit 3) → СТОП. Скажи Антону, что дневной лимит постов исчерпан, предложи запланировать на завтра. Не обходи.
+- `OK post (...)` → you may continue.
+- `BLOCKED post: ...` (exit 3) → STOP. Tell the owner the daily post limit is used up, offer to schedule for tomorrow. Do not work around it.
 
-## 1. Текст (голос Антона, Opus)
-1. Если Антон дал готовый черновик — бери его. Если просит «оформи из X» — собери на Opus в его голосе (см. `fb-diary-voice`: вплетённо, с самоиронией, ~4000 знаков для дневникового; короче для анонса).
-2. Покажи Антону **финальный текст** и спроси `+`. Это Tier-2 gate — без явного «да» дальше не идём.
+## 1. The text (owner's voice, top model)
+1. If the owner gave a ready draft — use it. If he asks "make a post out of X" — write it with the top model in his voice (see `fb-diary-voice`: woven narrative, self-irony, ~4000 characters for a diary entry; shorter for an announcement).
+2. Show the owner the **final text** and ask for a `+`. This is the Tier-2 gate — no explicit "yes", no next step.
 
-## 2. Браузер (Claude-in-Chrome, живая вкладка)
-> Браузерная работа — строго ЛОКАЛЬНО на этой машине (Антон за хабом). Не тащить окно Claude вперёд.
-> ⛔ IP-гейт (anton 16.07): постинг/комментинг FB — ТОЛЬКО с хаба `HUB-1` (постоянный IP). Ты на другой машине? НЕ постить отсюда — задачу текстом на хаб (шина/03). Канон: `reglament-ip-sensitive-deystviya-tolko-s-haba`.
+## 2. The browser (Claude-in-Chrome, live tab)
+> Browser work is strictly LOCAL to this machine. Don't pull the Claude window to the front.
+> ⛔ IP gate (owner, 2026-07-16): posting/commenting on Facebook happens ONLY from the hub (a stable IP). On another machine? Do NOT post from here — send the job to the hub as text (bus / fleet log chat). Canon: `ip-sensitive-actions-hub-only`.
 
-1. Проверь, что Chrome-MCP подключён: `mcp__Claude_in_Chrome__list_connected_browsers`. Если нет — попроси Антона открыть Chrome с расширением (не падай в Playwright).
-2. Открой/выбери вкладку `facebook.com` (он уже залогинен — НЕ трогаем логин/пароль). Если не залогинен — это блок, скажи Антону.
-3. Найди композер: `mcp__Claude_in_Chrome__find` запросом «What's on your mind / Что у вас нового — create post box». Кликни, чтобы открыть окно создания поста.
-4. Введи текст в поле композера (`form_input` по ref из `find`). **НЕ нажимай «Опубликовать»** сам, пока не выполнен Tier-2 gate из §1.
-5. После явного `+` Антона — нажми кнопку «Опубликовать»/«Post» (или попроси Антона нажать, если он рядом и хочет сам). ⚠️ Диалог двухшаговый: compose → «Next» → Post settings → «Post». Сделай скриншот результата (`computer` screenshot), чтобы Антон ВИДЕЛ, что пост ушёл.
-6. **Футер 1-м комментарием** (правило §7.7, тело поста без ссылок): открой опубликованный пост → поле «Comment» → блоки B+C+E из `_imports\content-factory\_STYLE-footer.md` (только живые ссылки). ⚠️ Enter отправляет коммент — переносы строк только Shift+Enter.
-7. **Селф-лайк** (правило Антона 05.07: «первый лайк всегда тяжело ставить»): поставь Like на свой пост сразу после футер-коммента. Штатный шаг, отдельно не спрашивать.
-8. Грабли композера: первый клик может попасть в Stories (лента сдвигается при ленивой подгрузке) — после навигации подожди ~2с, скриншот, потом клик по свежим координатам.
+1. Check that the Chrome MCP is connected: `mcp__Claude_in_Chrome__list_connected_browsers`. If not — ask the owner to open Chrome with the extension (don't fall back to Playwright).
+2. Open/select the `facebook.com` tab (he is already logged in — do NOT touch login/password). If not logged in — that is a blocker, tell the owner.
+3. Find the composer: `mcp__Claude_in_Chrome__find` with the query "What's on your mind — create post box". Click it to open the post creation dialog.
+4. Type the text into the composer field (`form_input` on the ref from `find`). **Do NOT press "Publish"** yourself until the Tier-2 gate from §1 is cleared.
+5. After the owner's explicit `+` — press the "Publish"/"Post" button (or ask him to press it, if he is nearby and wants to). ⚠️ The dialog is two-step: compose → "Next" → Post settings → "Post". Take a screenshot of the result (`computer` screenshot) so the owner SEES that the post went out.
+6. **Footer as the 1st comment** (rule §7.7, the post body carries no links): open the published post → the "Comment" field → blocks B+C+E from `_imports\content-factory\_STYLE-footer.md` (live links only). ⚠️ Enter sends the comment — use Shift+Enter for line breaks.
+7. **Self-like** (owner's rule 2026-07-05: "the first like is always the hard one"): like your own post right after the footer comment. A standard step, no separate asking.
+8. Composer pitfall: the first click can land on Stories (the feed shifts while lazy-loading) — after navigating, wait ~2s, screenshot, then click on the fresh coordinates.
 
-## 3. Зафиксируй в счётчике (ПОСЛЕ успешной публикации)
+## 3. Record it in the counter (AFTER a successful publication)
 ```bash
 python "$USERPROFILE/.claude/scripts/fb_guard.py" record post
 ```
 
-## 4. Доложи
-Одной строкой: что опубликовано + ссылка/скрин + «сегодня постов N/8».
+## 4. Report
+One line: what was published + link/screenshot + "posts today N/8".
 
 ---
 
-## Стоп-краны (account safety)
-- Любое предупреждение FB (checkpoint, «вы делаете это слишком часто», запрос подтверждения личности) → **немедленно СТОП**, доложи Антону, НЕ ретрай-спам (ретраи и есть путь в бан).
-- Не публиковать идентичный текст повторно.
-- Не трогать логин/пароль/2FA — если не залогинен, это блок для Антона.
+## Kill switches (account safety)
+- Any Facebook warning (checkpoint, "you're doing this too often", an identity confirmation request) → **STOP immediately**, report to the owner, do NOT retry-spam (retries are exactly the road to a ban).
+- Don't republish identical text.
+- Don't touch login/password/2FA — if the session is logged out, that is a blocker for the owner.
 
-## Связанное
-- `/fb-reply` — ответы на комментарии (Фаза 1, тот же guard).
-- Движок-счётчик: `~/.claude/scripts/fb_guard.py` (общий на post/reply/dm).
-- Тексты: `content-factory`, `facebook-diary`, `episode`, голос — `fb-diary-voice`.
-- Канон: Decision Memo 2026-06-28 (набор FB-скиллов), `chrome-autonomy-self-drive`, `browser-work-on-peers-not-hub`.
+## Related
+- `/fb-reply` — replying to comments (Phase 1, the same guard).
+- The counter engine: `~/.claude/scripts/fb_guard.py` (shared across post/reply/dm).
+- Texts: `content-factory`, `facebook-diary`, `episode`; the voice — `fb-diary-voice`.
+- Canon: Decision Memo 2026-06-28 (the Facebook skill set), `chrome-autonomy-self-drive`, `browser-work-on-peers-not-hub`.
 
 ---
 

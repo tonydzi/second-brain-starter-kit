@@ -8,54 +8,54 @@ description: >
 license: MIT
 ---
 
-# /говори-как <образец> — пост голосом Антона × оптикой выбранного мыслителя
+# /speak-as <role model> — a post in the owner's voice through the chosen thinker's optics
 
-> 🧒 **When reporting to Anton:** end with a child-simple «Простыми словами» recap (only in the reply TO him, NEVER inside the post draft).
+> 🧒 **When reporting to a non-technical owner:** end with a child-simple "In plain words" recap (only in the reply TO him, NEVER inside the post draft).
 
-Тонкий писатель-движок, **параметризованный по образцу**: берёт **палитру стиля выбранного мыслителя** + **голос Антона** + **его реальный материал по теме** и пишет ОДИН пост в миксе «каркас/оптика — от образца, голос/исповедальность/конкретика — от Антона». Один движок на любого образца (Артём сегодня, кто угодно завтра). Ручная команда «напиши пост в стиле X про Y» (≠ ежедневная [[content-factory]], ≠ досье `/портрет`).
+A thin writing engine, **parameterized by the role model**: it takes the **style palette of the chosen thinker** + **the owner's voice** + **his real material on the topic** and writes ONE post as a mix — "frame/optics from the role model, voice/confessional tone/concreteness from the owner". One engine for any role model (one person today, anyone tomorrow). A manual command "write a post in the style of X about Y" (≠ the daily [[content-factory]], ≠ the `/portret` dossier).
 
-> [!warning] ПРЕДОХРАНИТЕЛЬ (читать первым)
-> - ⭐ **Авторский голос Антона пишет Opus ИЛИ СИЛЬНЕЕ** (Fable 5 ок; Sonnet для авторского текста запрещён — карв-аут `model-routing-sonnet-grunt`). Сессия слабее Opus → делегировать само НАПИСАНИЕ Opus-субагенту (`Agent`, `model:'opus'`); грунт (resolve образца, recall, выбор площадки) можно Sonnet.
-> - **ВЛИЯНИЕ, НЕ копирование.** Слова образца = `origin: external`. Не вставлять его фразы дословно, не выдавать его мысли за свои без переосмысления. Пост остаётся постом Антона (`origin: anton`).
-> - **Сохранить Антона** — не раствориться в образце (его — каркас/оптика, Антона — материал и голос).
-> - **Приватность** из [[fb-diary-voice]] в силе (имена/суммы/чувствительное/живые лиды и сделки — не палить; абстрагировать до инсайта).
-> - **Draft-first** — отдаю черновик, Антон постит сам (публикация наружу = Tier-2).
+> [!warning] SAFETY FUSE (read this first)
+> - ⭐ **The owner's authorial voice is written by the top-tier model or stronger** (a cheap model is forbidden for authorial text — a carve-out of `model-routing-sonnet-grunt`). Session weaker than that → delegate the WRITING itself to a top-model subagent (`Agent`, `model:'opus'`); the groundwork (resolving the role model, recall, choosing the platform) can run on the cheap model.
+> - **INFLUENCE, NOT copying.** The role model's words = `origin: external`. Don't paste his phrases verbatim, don't pass his thoughts off as ours without rethinking them. The post stays the owner's post (`origin: anton`).
+> - **Preserve the owner** — don't dissolve into the role model (his = the frame/optics, the owner's = the material and the voice).
+> - **Privacy** from [[fb-diary-voice]] applies (names/amounts/sensitive material/live leads and deals must not be burned; abstract them up to an insight).
+> - **Draft-first** — I hand over the draft, the owner posts it himself (publishing outbound = Tier-2).
 
-## Шаг 0 — Резолв образца → палитра (дёшево, без LLM)
-1. Имя образца → латинский слаг (как в `07-People\person-<slug>.md`).
-2. Искать палитру: `$OBSIDIAN_VAULT/08-Templates/style-<slug>-influence.md`.
-   - **Есть** → загрузить (приёмы + идейная палитра + «чем сохранить Антона»). Идти дальше.
-   - **Нет** → СТОП-развилка Антону: «Палитры стиля для <X> ещё нет. Собрать? → запусти `/портрет <X>` (досье + соцсети + DR), потом я синтезирую `style-<slug>-influence.md` и буду писать в его стиле». Не выдумывать стиль из головы.
-3. Всегда грузить голос Антона: [[fb-diary-voice]] — ⚠️ это ПАМЯТЬ на C: (`~\.claude\projects\...\memory\fb-diary-voice.md`), НЕ заметка волта; в волте её искать бесполезно (грабли C:/E:).
+## Step 0 — Resolve the role model → the palette (cheap, no LLM)
+1. The role model's name → a latin slug (as in `07-People\person-<slug>.md`).
+2. Look for the palette: `$OBSIDIAN_VAULT/08-Templates/style-<slug>-influence.md`.
+   - **Exists** → load it (techniques + idea palette + "how to preserve the owner"). Carry on.
+   - **Missing** → a STOP fork for the owner: "There is no style palette for <X> yet. Build one? → run `/portret <X>` (dossier + social media + DR), then I'll synthesise `style-<slug>-influence.md` and write in his style." Do not invent a style out of thin air.
+3. Always load the owner's voice: [[fb-diary-voice]] — ⚠️ this is a MEMORY file on the system drive (`~\.claude\projects\...\memory\fb-diary-voice.md`), NOT a vault note; searching for it in the vault is pointless (the two-drives pitfall).
 
-## Шаг 1 — RECALL по теме (материал ДОЛЖЕН быть Антона, не общие слова)
-`/ask "<тема>"` (RAG) · `/search "<слова>"` (точные слова) · свежий день из [[content-factory]] inbox, если пост-дневник. Грунт можно на Sonnet-субагенте; сам текст — Opus.
+## Step 1 — RECALL on the topic (the material MUST be the owner's, not generalities)
+`/ask "<topic>"` (RAG) · `/search "<words>"` (exact words) · a fresh day from the [[content-factory]] inbox if it is a diary post. The groundwork can run on a cheap subagent; the text itself — top model.
 
-## Шаг 2 — Площадка и длина
-FB-дневник ~3000–4500 симв. (исповедально, сплетённые нити) · X — короткий (формула-крючок + 1 мысль) · TG-контент — средний. Не указано → дефолт FB-дневник, пометить.
+## Step 2 — Platform and length
+Facebook diary ~3000–4500 chars (confessional, interwoven threads) · X — short (a hook formula + 1 thought) · Telegram content — medium. Not specified → default to the Facebook diary and say so.
 
-## Шаг 3 — Написать в миксе (Opus)
-У **образца** (из его палитры-файла): каркас, оптика, фирменные приёмы, идейные рамки. У **Антона**: конкретика дня, жёсткая самоирония, живые образы, исповедальность, 1–2 настоящих вопроса в конце, честность. Спорные темы — эпистемически нейтрально ([[epistemic-neutrality]]).
+## Step 3 — Write the mix (top model)
+From the **role model** (out of his palette file): the frame, the optics, the signature techniques, the idea boundaries. From the **owner**: the concrete detail of the day, hard self-irony, vivid images, confessional tone, 1–2 genuine questions at the end, honesty. Contested topics — handled with epistemic neutrality ([[epistemic-neutrality]]).
 
-## Шаг 4 — Самопроверка перед выдачей (гейт качества)
-- [ ] Звучит как **Антон**, не как косплей образца? (перевешивает образец → переписать на голос Антона)
-- [ ] Есть крючок + каркас (формула/триада/тезисы) + 1–2 настоящих вопроса?
-- [ ] **Ноль дословных фраз образца**; идеи переосмыслены, не скопированы?
-- [ ] Приватность соблюдена (нет чужих имён/сумм/живых сделок/чувствительного)?
-- [ ] Длина под площадку? Без длинных тире ([[no-long-dashes]]).
-Слабее планки Антона → переписать, не отдавать слабый черновик.
+## Step 4 — Self-check before handing it over (quality gate)
+- [ ] Does it sound like **the owner**, not like a cosplay of the role model? (role model outweighs him → rewrite in the owner's voice)
+- [ ] Is there a hook + a frame (formula/triad/theses) + 1–2 genuine questions?
+- [ ] **Zero verbatim phrases** from the role model; ideas rethought, not copied?
+- [ ] Privacy respected (no third-party names/amounts/live deals/sensitive material)?
+- [ ] Length fits the platform? No long dashes ([[no-long-dashes]]).
+Below the owner's bar → rewrite; don't hand over a weak draft.
 
-## Выдача
-Чистый блок поста (готов копировать) + 1 строка: образец · площадка · длина · какой приём задействован. Антон постит/правит сам. По желанию — 2–3 варианта заголовка-крючка.
+## Delivery
+A clean post block (ready to copy) + one line: role model · platform · length · which technique was used. The owner posts/edits it himself. Optionally — 2–3 hook headline variants.
 
-## Как ДОБАВИТЬ нового образца (полный цикл)
-1. `/портрет <Имя>` → досье `person-<slug>` + (синтез) `insight-*` «как мыслит».
-2. Синтезировать палитру `08-Templates\style-<slug>-influence.md` по образцу `style-Mei-influence.md` (приёмы стиля + идейная палитра + «чем сохранить Антона» + предохранитель influence-not-copy). Бэкап перед записью ([[vault-backup-rule]]).
-3. Готово — `/говори-как <Имя> про <тема>` сразу работает (тот же движок читает новый файл).
+## How to ADD a new role model (full cycle)
+1. `/portret <Name>` → the dossier `person-<slug>` + (synthesis) an `insight-*` note on "how he thinks".
+2. Synthesise the palette `08-Templates\style-<slug>-influence.md` following the reference palette (style techniques + idea palette + "how to preserve the owner" + the influence-not-copy fuse). Back up before writing ([[vault-backup-rule]]).
+3. Done — `/speak-as <Name> about <topic>` works immediately (the same engine reads the new file).
 
-## Гейты и связи
-- Опус для написания; грунт — Sonnet. Draft-first; публикация = Tier-2 (Антон сам).
-- Палитра-эталон: `style-Mei-influence` · идеи-ядро [[insight-ai-native-playbook-Mei]] · голос [[fb-diary-voice]] · пайплайн [[content-factory]] · досье [[person-Alex-Mei]] · память `content-Mei-style`.
+## Gates and links
+- Top model for the writing; groundwork on the cheap model. Draft-first; publication = Tier-2 (the owner himself).
+- The reference palette · the core-ideas insight note · the voice [[fb-diary-voice]] · the pipeline [[content-factory]] · the person dossier.
 
 ---
 
