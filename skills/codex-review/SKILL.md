@@ -45,3 +45,16 @@ license: MIT
 
 ## Расширение — обратная сторона ГОТОВА (хаб полностью двусторонний с 2026-07-14)
 Обратная сторона (Codex ревьюит Claude) построена = `codex_review.py` (см. блок «Двусторонняя гетеро-пара»), нативный `codex exec` на Windows. Codex CLI установлен на хаб `HUB-1` 2026-07-14 (`npm i -g @openai/codex`, v0.144.4, логин по ChatGPT-подписке) и smoke-тест пройден — гетеро-пара работает в обе стороны. Тем же днём развёрнут и на **Якорье** (ANCHOR-1, headless: `auth.json` переносим scp'ом, browser-OAuth не нужен; оба движка + smoke ✅) — Якорь = дополнительный узел, живые тесты дуэта только в чате 04 с хаба.
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

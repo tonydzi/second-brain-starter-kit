@@ -56,3 +56,16 @@ Because the Bible is now a prompt, never load or emit secrets (passwords, access
 
 ## How to write a rule (dual-reader)
 Verbatim from Anton · imperative `WHEN → DO` · self-contained + example · frontmatter (`type`, altitude, `audience`, `theme`, `origin`, `authored_by`, `date_established`, `status`, `confidence`, plus `supersedes` / `superseded_by` on replacement). Full standard: vault note `protocol-bible-as-prompt`. **Step-by-step playbook with examples (even for a weak LLM): vault note `protocol-bible-rule-authoring`.**
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

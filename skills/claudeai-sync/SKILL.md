@@ -60,3 +60,16 @@ python $IMPORTS_ROOT/vault_backup.py
 - **Провенанс**: артефакты `origin: claude-ai, authored_by: claude` (НЕ #anton-original); инструкции проектов `origin: anton`.
 - **Бинарники** (картинки/доки, 524 в манифесте) Антон просил НЕ тянуть (2026-06-12).
 - **Авто-режим**: ночная Windows-задача `Claude-AI Sync Daily` гоняет back-half на любом свежем экспорте; PULL остаётся в сессии. Полный headless («выкачка сама») = переход на отдельный Chrome-профиль + Playwright + детерминированный RAG-линкер — отложено (Антон выбрал безопасный полуавто).
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

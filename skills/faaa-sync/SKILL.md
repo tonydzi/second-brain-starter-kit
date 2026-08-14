@@ -45,3 +45,16 @@ RELATION TO OTHER ENTRIES (do not duplicate):
 - Scheduled twin: $USERPROFILE/.claude/scheduled-tasks/faaa-weekly-sync/SKILL.md (Mondays 09:09) — same scripts.
 - Full first-time import + analytics history: memory [[platinum-crm-import]].
 - For re-importing a whole EXPORTED chat file (not the live group), use the telegram-reimport skill instead.
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

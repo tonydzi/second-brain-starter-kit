@@ -33,3 +33,16 @@ OUTPUT: A short ranked list of the best matches (title · source · date · snip
 RELATION (do not duplicate):
 - /ask = semantic meaning (RAG e5+reranker) over curated vault. /find = exact person names (names.db). /search = exact words across ALL conversations (this).
 - Vector/RRF/reranker lane + refresh routine: see memory `unified-search-layer` + decision note.
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

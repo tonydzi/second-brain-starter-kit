@@ -109,3 +109,16 @@ git -C tmp_restore restore --source <hash> -- "<path>"
 - The **git bundle is the migration artifact** — keep it self-contained (`--all`), verify before trusting.
 - Don't sync the live vault folder (or live `.git`) into Drive directly — we back up the *bundle*, on purpose (avoids corruption / conflict copies / ransomware propagation).
 - The standing rules are in memory ([[preserve-originals-rule]], [[vault-offsite-backup]]); reference them, don't fork them.
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

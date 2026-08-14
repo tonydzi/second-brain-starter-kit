@@ -40,3 +40,16 @@ python $IMPORTS_ROOT/watchers\last30days.py --topic "<term1, term2, …>" --days
 
 ## Границы
 Read-only и **PRIVATE** (Second-Brain слой) — движок только читает БД и пишет дайджест-файл, наружу ничего не шлёт. Скоринг = движковый детектор (engagement + ключи), не «умный» — умную фильтрацию делает шаг 3. Свежесть = ночная (`watch_run.py`); подозреваешь застой → `--refresh`. Тема вне 8 каналов → опирайся на шаг 2 (WebSearch), не выдумывай.
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

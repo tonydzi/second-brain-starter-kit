@@ -80,3 +80,16 @@ Provenance defaults are fixed per source in `source-adapters.md` — relay-foote
 ## Finish
 
 End every re-import with the standard report (rule 8 of obsidian-ingest): new ledgers, new posts/cards, new rules/leads, links validated (0 broken), and the curation hand-off list. The vault should get *more* connected, not just bigger.
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

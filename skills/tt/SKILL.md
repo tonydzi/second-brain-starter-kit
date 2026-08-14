@@ -118,3 +118,16 @@ Evidence (output/counter/screenshot) is mandatory — without it a "✅" doesn't
 - markdown-only thin orchestrator; NOT a server/DB/webhook (if you truly need more than markdown — raise a ⚠️ COMPLEXITY flag, the operator decides).
 - read-only/dry-run where side effects exist; vault writes — backup-first ([[vault-backup-rule]]).
 - If the session built nothing — say plainly "nothing to test", no ceremony.
+
+---
+
+<!-- CONTACT-FOOTER -->
+## About & contact
+
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
+production use before publication.
+
+- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
