@@ -1,147 +1,147 @@
-# Карта скиллов — все 101
+# Skill map — all 101
 
-Один скилл = одна команда `/имя` для Claude Code. Это полный набор, которым система
-работает каждый день; личные данные в примерах заменены на правдоподобные
-вымышленные (см. [WHAT-IS-SHARED.md](../docs/WHAT-IS-SHARED.md)).
+One skill = one `/name` command for Claude Code. This is the full set the lab runs every
+day; personal data in the examples is replaced with plausible fictional stand-ins
+(see [WHAT-IS-SHARED.md](../docs/WHAT-IS-SHARED.md)).
 
 
-## Флот и машины
+## Fleet and machines
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/bus`](bus/SKILL.md) | Cross-machine talk between Anton's computers over a shared TELEGRAM GROUP (primary rail) — every machine posts/reads in one group via the Telegram MCP… |
-| [`/inbox`](inbox/SKILL.md) | Check this machine's cross-machine mailbox — messages Claude on Anton's OTHER computer left for Claude here (via the Syncthing-synced `_machine-bus` f… |
-| [`/fleet`](fleet/SKILL.md) | Snapshot of Anton's autonomous Claude fleet — what his background agents (the Claude Desktop "Cowork" app and its headless Claude Code agents) are doi… |
-| [`/follower-onboard`](follower-onboard/SKILL.md) | Onboard a NEW family/clan machine as a FOLLOWER-CONSUMER (v1 data-only) joining Anton's multi-machine Claude+vault network (Nina + Rita done; Artem / … |
-| [`/migrate`](migrate/SKILL.md) | One command surface over Anton's already-built machine-migration machinery — move/sync the Claude+vault HUB across his computers (always-on desktop = … |
-| [`/raise-sync`](raise-sync/SKILL.md) | ACTIVE recovery when machines can't see each other over Syncthing — the "raise the sync" runbook as one command. Establishes ground truth AT THE HUB (… |
-| [`/sync-check`](sync-check/SKILL.md) | READ-ONLY зелёный/красный отчёт о Syncthing-синхронизации ЭТОЙ машины со всем кланом — одна команда вместо ручного дёрганья REST по каждой папке. Пока… |
-| [`/reboot`](reboot/SKILL.md) | Безопасная ПЕРЕЗАГРУЗКА узла флота (Mac или ПК) по единому протоколу — не «просто shutdown», а pre-flight (сохранить состояние, досинхронить Syncthing… |
-| [`/tg-check`](tg-check/SKILL.md) | Per-machine self-test of BOTH Telegram channels (MCP + Telethon rail) — does THIS computer's Telegram work on both rails? |
-| [`/quarantine`](quarantine/SKILL.md) | Показать, что сейчас в КАРАНТИНЕ входящих посылок — фиксы/скрипты/задачи, прилетевшие по синку (_deploy-манифест) из НЕПРОВЕРЕННОГО источника или без … |
-| [`/arch`](arch/SKILL.md) | Read Anton's "System Architect" map — the deterministic catalog of EVERYTHING the system is made of (vault + _imports scripts + scheduled tasks + MCP … |
-| [`/mcp`](mcp/SKILL.md) | Health-check Anton's connected MCP servers and discover/suggest new ones — the safe pre-flight before any integration work, plus a connector scout |
-| [`/03`](03/SKILL.md) | Запуск АВТОНОМНОГО МЕЖМАШИННОГО КОНСЕНСУСА — Антон говорит «03» (имя TG-чата согласования) или «теперь вы сами / дальше сами / договоритесь сами / реш… |
-| [`/health-sync`](health-sync/SKILL.md) | On-demand pull of FRESH messages from Anton's 7 Telegram HEALTH chats (medicine, blood/pressure, vitamins/БАДы, nootropics/mind, healing-head, longevi… |
-| [`/tt-probe`](tt-probe/SKILL.md) | E2E-проба конвейера fleet-skill-autonomy (создан на MAC-1 2026-07-16 для verify #41ac669a). Не вызывать - это тестовый маркер, после верификации писат… |
-| [`/n8n`](n8n/SKILL.md) | Health-check, audit and (on approval) fix Anton's self-hosted n8n automation stack (n8n.example.com, 89 workflows) |
+| [`/bus`](bus/SKILL.md) | Cross-machine messaging between computers in the fleet over a shared TELEGRAM GROUP (primary rail) — every machine posts/reads in one group via the Te… |
+| [`/inbox`](inbox/SKILL.md) | Check this machine's cross-machine mailbox — messages Claude on ANOTHER computer left for Claude here, via a file-synced bus folder (no couriers). Tri… |
+| [`/fleet`](fleet/SKILL.md) | Snapshot of the autonomous Claude fleet — what the background agents across machines are doing right now, what they've built/committed, and whether an… |
+| [`/follower-onboard`](follower-onboard/SKILL.md) | Onboard a NEW family/team machine as a FOLLOWER-CONSUMER joining the multi-machine Claude+vault network. A follower READS the shared vault + canon + s… |
+| [`/migrate`](migrate/SKILL.md) | One command surface over the machine-migration machinery — move/sync the Claude+vault HUB role across computers (always-on desktop = hub; laptops = sa… |
+| [`/raise-sync`](raise-sync/SKILL.md) | ACTIVE recovery when machines can't see each other over the file-sync network — the "raise the sync" runbook as one command. Establishes ground truth… |
+| [`/sync-check`](sync-check/SKILL.md) | READ-ONLY green/red report on THIS machine's file synchronization with the whole fleet — one command instead of polling the sync REST API by hand. Sho… |
+| [`/reboot`](reboot/SKILL.md) | Safe REBOOT of a fleet node (Mac or PC) by a single protocol — not just shutdown: pre-flight (save state, finish syncing, warn peers, verify autostart… |
+| [`/tg-check`](tg-check/SKILL.md) | Per-machine self-test of BOTH Telegram rails (MCP + userbot library) — does THIS computer's Telegram work on both? Trigger on "/tg-check", "are both t… |
+| [`/quarantine`](quarantine/SKILL.md) | Show what's currently in the QUARANTINE for incoming deliverables — fixes/scripts/tasks that arrived via file sync from an unverified source or withou… |
+| [`/arch`](arch/SKILL.md) | Read the "System Architect" map — a deterministic catalog of EVERYTHING the system is made of (vault + import scripts + scheduled tasks + MCP servers… |
+| [`/mcp`](mcp/SKILL.md) | Health-check the connected MCP servers and discover/suggest new ones — the safe pre-flight before any integration work, plus a connector scout. Trigge… |
+| [`/03`](03/SKILL.md) | Launch autonomous multi-machine consensus between Claude peers (hub + laptops + teammate machines): the peers negotiate a decision among themselves ov… |
+| [`/health-sync`](health-sync/SKILL.md) | On-demand pull of fresh messages from a set of health-related Telegram chats (medicine, supplements, longevity, fasting, etc.) into the Obsidian vault… |
+| [`/tt-probe`](tt-probe/SKILL.md) | E2E probe marker for the fleet-skill-autonomy pipeline (created for a one-off verification). Do not invoke — it's a test marker; the writer may delete… |
+| [`/n8n`](n8n/SKILL.md) | Health-check, audit and (on approval) fix a self-hosted n8n automation stack. Trigger on "/n8n", "/n8n health", "/n8n fix <id>", "which workflows are… |
 
-## Качество и ревью
+## Quality and review
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/tt`](tt/SKILL.md) | Ворота КАЧЕСТВА сразу после сборки — «докажи, что то, что мы ТОЛЬКО ЧТО собрали, реально работает», пока контекст ещё горячий |
-| [`/secondop`](secondop/SKILL.md) | Codex как ВТОРОЕ МНЕНИЕ на каждой содержательной задаче — 3 точки: T1 старт («план валиден?»), T2 развилка («какой путь?»), T3 финиш + QA-ломатель («п… |
-| [`/codex-review`](codex-review/SKILL.md) | Двусторонняя гетеро-пара ревью кода: Claude ревьюит дифф Codex И Codex ревьюит дифф Claude — финальную проверку делает ДРУГОЙ вендор (исследование `ta… |
-| [`/codex-mirror`](codex-mirror/SKILL.md) | Пересобрать зеркало канона для Codex (~/.codex/AGENTS.md) после bump'а CLAUDE.md: движок показывает дельту из CLAUDE.CHANGELOG.md, я вписываю только н… |
-| [`/gemini`](gemini/SKILL.md) | Gemini = ТРЕТЬЯ внешняя пара глаз, по образу и подобию Codex и Grok: ревью диффа (VERDICT: APPROVE | REQUEST_CHANGES) и QA-ломатель для Шага 2.5 ритуа… |
-| [`/declined`](declined/SKILL.md) | Быстрый доступ к реестру ОТКЛОНЁННЫХ/отложенных решений Антона — «что мы уже отвергали и почему», чтобы не пере-предлагать одно и то же |
-| [`/five-hard`](five-hard/SKILL.md) | Five Hard Questions — раз в месяц (или по запросу) брейн САМ задаёт Антону 5 трудных вопросов по его же убеждениям и кодексу (belief-* + concept-bible… |
-| [`/taste-check`](taste-check/SKILL.md) | Авто-ревьюер КАЧЕСТВА КОНТЕНТА (заметки волта / черновики исходящего / дедуп-мерджи / служебные файлы) — явный вердикт ✅ pass / ❌ fail / ⚠️ manual-rev… |
-| [`/precedent`](precedent/SKILL.md) | Перед тем как решать/предлагать что-то структурное — поднять, РЕШАЛИ ли мы это уже: ищет прошлые вердикты в журнале решений (02-Decisions / decision-*… |
-| [`/skill-forge`](skill-forge/SKILL.md) | Пир-локальная кузница скиллов — создать local-<skill> на СВОЁМ узле (Ось А автономии) и подготовить промоушен в общий набор через гейт. Используй когд… |
-| [`/skill-gap`](skill-gap/SKILL.md) | Audit Anton's Claude Code work to find which NEW skills are worth building — scan recent sessions for recurring MANUAL patterns that have no skill yet… |
-| [`/canon-revision`](canon-revision/SKILL.md) | Полная структурная РЕВИЗИЯ always-loaded файла правил (CLAUDE.md / MEMORY.md): ТОП-блок самых важных правил + категории §0-§N, тела правил переезжают … |
-| [`/intake`](intake/SKILL.md) | "/intake" — приёмник правил: один проход раскладывает новое правило/регламент/предпочтение/правку CLAUDE.md/Библии/скилла по ВСЕМ нужным домам и остав… |
+| [`/tt`](tt/SKILL.md) | QUALITY GATE right after building — "prove that what we JUST built actually works" while the context is still hot. Trigger on "/tt", "/test", "prove i… |
+| [`/secondop`](secondop/SKILL.md) | A SECOND OPINION from an external LLM on every substantial task — 3 checkpoints: T1 start ("is the plan valid?"), T2 fork ("which path?"), T3 finish +… |
+| [`/codex-review`](codex-review/SKILL.md) | Two-way heterogeneous code-review pair: Claude reviews Codex's diff AND Codex reviews Claude's diff — the final check is done by the OTHER vendor (res… |
+| [`/codex-mirror`](codex-mirror/SKILL.md) | Rebuild the canon mirror for Codex (~/.codex/AGENTS.md) after a CLAUDE.md version bump: the engine shows the delta from the changelog, the operator wr… |
+| [`/gemini`](gemini/SKILL.md) | Gemini as a THIRD external pair of eyes, alongside Codex and Grok: diff review (VERDICT: APPROVE | REQUEST_CHANGES) and QA breaker for the post-build… |
+| [`/declined`](declined/SKILL.md) | Fast access to the registry of DECLINED/deferred decisions — "what we already rejected and why", so the agent never re-pitches the same idea. Trigger… |
+| [`/five-hard`](five-hard/SKILL.md) | Five Hard Questions — monthly (or on demand) the second brain ITSELF asks the owner 5 hard questions about their own long-held beliefs and codex entri… |
+| [`/taste-check`](taste-check/SKILL.md) | Auto-reviewer of CONTENT QUALITY (vault notes / outgoing drafts / dedup merges / service files) — an explicit verdict ✅ pass / ❌ fail / ⚠️ manual-revi… |
+| [`/precedent`](precedent/SKILL.md) | Before deciding/proposing anything structural — look up whether it was ALREADY decided: searches past verdicts in the decisions journal, the declined-… |
+| [`/skill-forge`](skill-forge/SKILL.md) | Peer-local skill forge — create a local-<skill> on THIS node (local autonomy lane) and prepare its promotion into the shared skill set through a gate.… |
+| [`/skill-gap`](skill-gap/SKILL.md) | Audit recent Claude Code work to find which NEW skills are worth building — scan sessions for recurring MANUAL patterns that have no skill yet, cross-… |
+| [`/canon-revision`](canon-revision/SKILL.md) | Full structural REVISION of an always-loaded rules file (CLAUDE.md / MEMORY.md): build a TOP block of the most important rules + numbered categories,… |
+| [`/intake`](intake/SKILL.md) | Rule intake: one pass routes a new rule/preference/policy edit into ALL the right homes (always-loaded canon, memory, the behavioral Bible, a skill, a… |
 
-## Второй мозг
+## Second brain
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/ask`](ask/SKILL.md) | Ask Anton's Second Brain in plain words — semantic search over the curated vault (e5 embeddings + reranker), not a full-corpus dump |
-| [`/brain`](brain/SKILL.md) | One-glance health of Anton's "second brain" so failures aren't SILENT — is the :8770 search server alive, is the RAG index fresh (reindex running), is… |
-| [`/obsidian-ingest`](obsidian-ingest/SKILL.md) | Universal import pipeline for Anton's Obsidian vault ($OBSIDIAN_VAULT). Handles ANY source: Facebook posts, Telegram HTML, ChatGPT JSON, voice-note tr… |
-| [`/obsidian-backup`](obsidian-backup/SKILL.md) | Anton's Obsidian data-safety runbook: the 3-2-1 backup of the vault ($OBSIDIAN_VAULT), the never-deleted originals archive, the two schedulers that ke… |
-| [`/relink`](relink/SKILL.md) | "Перелинковка важного" — on-command BIDIRECTIONAL integration of a new IMPORTANT node (concept, mental model, framework, theory, project, principle, r… |
-| [`/dedup`](dedup/SKILL.md) | Find and merge DUPLICATE / near-duplicate notes anywhere in Anton's vault (rules, concepts, people, leads) using a deterministic scanner + the proven … |
-| [`/defuddle`](defuddle/SKILL.md) | Clean web→markdown extraction via kepano's defuddle CLI (engine of Obsidian Web Clipper) — turn any article URL into a vault-ready markdown note WITHO… |
-| [`/wisdom-distill`](wisdom-distill/SKILL.md) | Weekly Wisdom Distill - раз в неделю выжать из собственных слов Антона за 7 дней (origin: anton) 3-5 durable-уроков в заметку недели в 03-Insights |
-| [`/find`](find/SKILL.md) | Find a person, lead, contact or company by name in ANY spelling — deterministic name search that catches transliteration (Vlad/Viktor/виктор), wrong k… |
-| [`/search`](search/SKILL.md) | Keyword/full-text search INSIDE all of Anton's conversations at once — Telegram, Facebook, ChatGPT, Claude, Apple-Notes, transcripts (~99k notes) — vi… |
-| [`/chat`](chat/SKILL.md) | Find a Telegram CHAT/group/channel by name instantly — returns its telegram_id + t.me link from the local chats.db index (0 tokens, no live crawl) |
-| [`/chat-search`](chat-search/SKILL.md) | Поиск ВНУТРИ старых чатов Claude Code ("Книга чатов" / episodic-индекс) — найти, в каком прошлом чате обсуждали тему, и одной командой продолжить его.… |
+| [`/ask`](ask/SKILL.md) | Ask the second brain in plain words — semantic search over the curated knowledge vault (embeddings + reranker), not a full-corpus dump. Trigger on "/a… |
+| [`/brain`](brain/SKILL.md) | One-glance health of the "second brain" so failures aren't SILENT — is the local search server alive, is the RAG index fresh, is the session-memory le… |
+| [`/obsidian-ingest`](obsidian-ingest/SKILL.md) | Universal import pipeline for an Obsidian vault. Handles ANY source: social-media posts, Telegram HTML exports, ChatGPT JSON, voice-note transcripts,… |
+| [`/obsidian-backup`](obsidian-backup/SKILL.md) | The Obsidian data-safety runbook: 3-2-1 backup of the vault, the never-deleted originals archive, the schedulers that keep it running, and the restore… |
+| [`/relink`](relink/SKILL.md) | Bidirectional integration of an important NEW node (concept, framework, theory, project, principle) into the WHOLE vault graph — not just creating a n… |
+| [`/dedup`](dedup/SKILL.md) | Find and merge DUPLICATE / near-duplicate notes anywhere in the vault (rules, concepts, people, leads) using a deterministic scanner + a proven supers… |
+| [`/defuddle`](defuddle/SKILL.md) | Clean web→markdown extraction via the defuddle CLI (the engine behind Obsidian Web Clipper) — turn any article URL into a vault-ready markdown note WI… |
+| [`/wisdom-distill`](wisdom-distill/SKILL.md) | Weekly Wisdom Distill — once a week, squeeze 3-5 durable lessons from the owner's OWN words of the last 7 days into a week-note in the insights folder… |
+| [`/find`](find/SKILL.md) | Find a person, lead, contact or company by name in ANY spelling — deterministic name search that catches transliteration (Viktor/Victor across alphabe… |
+| [`/search`](search/SKILL.md) | Keyword/full-text search INSIDE all conversations at once — Telegram, Facebook, ChatGPT, Claude, notes, transcripts — via a local BM25/FTS5 catalog. 0… |
+| [`/chat`](chat/SKILL.md) | Find a Telegram CHAT/group/channel by name instantly — returns its telegram_id + t.me link from a local chats.db index (0 tokens, no live crawl). Trig… |
+| [`/chat-search`](chat-search/SKILL.md) | Search INSIDE past Claude Code sessions (the episodic "book of chats" index) — find which previous session discussed a topic, and continue it with one… |
 | [`/last30days`](last30days/SKILL.md) | Deterministic "what's NEW in the last 30 days on topic X" trend-watch to run BEFORE any strategic decision — the fresh-signal feeder for the GAP phase… |
-| [`/notebooklm`](notebooklm/SKILL.md) | Drive Anton's NotebookLM (the AUDIO/artifact layer over his Second Brain) via the notebooklm-py CLI (programmatic, no browser) — turn a vault slice in… |
-| [`/gitbook-import`](gitbook-import/SKILL.md) | Import a GitBook space (company docs / whitepaper) into Anton's Obsidian vault as well-linked atomic notes + MOC + concept links + RAG reindex — the p… |
-| [`/portret`](portret/SKILL.md) | Build a deep DOSSIER on a person — recall everything Anton already has on them, map ALL their public social profiles via web research, emit an Alpha-P… |
-| [`/journey`](journey/SKILL.md) | Резуректит и продолжает КНИГУ «The Journey / 相棒 AIBŌ · The Partner» — build-in-public историю двух кофаундеров (🧑 Тони + 🤖 Майк) о ~60-дневном пути с … |
-| [`/reality-show`](reality-show/SKILL.md) | Континьюити-движок сезона (v2, 2026-07-10): читает ЕДИНЫЙ КАНОН show-canon (season/arcs/beats/loops) и подсказывает, какой нарративный бит двигать дал… |
+| [`/notebooklm`](notebooklm/SKILL.md) | Drive NotebookLM (the audio/artifact layer over the second brain) via a programmatic CLI, no browser — turn a vault slice into an Audio Overview / stu… |
+| [`/gitbook-import`](gitbook-import/SKILL.md) | Import a GitBook space (company docs / whitepaper) into the Obsidian vault as well-linked atomic notes + MOC + concept links + RAG reindex — a proven… |
+| [`/portret`](portret/SKILL.md) | Build a deep DOSSIER on a person — recall everything already known about them from the vault, map their public profiles via web research, emit a Deep-… |
+| [`/journey`](journey/SKILL.md) | Resurrect and continue a build-in-public BOOK — the serialized story of a founder + AI- cofounder journey. One command: pick up state (which days are… |
+| [`/reality-show`](reality-show/SKILL.md) | Season-continuity engine for serialized build-in-public content: reads a single canon file (season/arcs/beats/loops) and suggests which narrative beat… |
 
-## Ресёрч
+## Research
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/alfa-search-recall-deepresearch`](alfa-search-recall-deepresearch/SKILL.md) | Anton's mandatory decision protocol ("Alpha Protocol") for any new STRATEGIC work — never jump to implementation on local recall alone. Run RECALL (ow… |
-| [`/dr-fanout`](dr-fanout/SKILL.md) | Одна команда — разнести Deep Research промпт сразу по нескольким внешним LLM (ChatGPT / Gemini / Grok) через залогиненный браузер Антона (гибрид: Grok… |
-| [`/research-swarm`](research-swarm/SKILL.md) | Research swarm — turn ANY hypothesis (however wild/fringe) into an ARGUMENT MAP, never a verdict. Fans out 5 independent lenses — Consensus, Skeptic, … |
-| [`/alpha-judge`](alpha-judge/SKILL.md) | The LLM-JUDGE stage of Anton's alpha-extraction engine — the reusable "expensive judge" half of the "cheap detector → expensive judge" pattern, shared… |
-| [`/alpha-review`](alpha-review/SKILL.md) | Open Anton's ALPHA REVIEW screen (the ONE place to mark judge keepers «золото/мимо» and see per-miner precision) + print the eval state |
-| [`/community-alpha`](community-alpha/SKILL.md) | Run ONE full community-alpha pass over an imported community chat corpus — deterministic detector (0 tokens) → LLM-judge (session model / Opus) → harv… |
-| [`/mine-channel`](mine-channel/SKILL.md) | Mine ANY Telegram channel/chat for alpha in one command — scrape (0-token Telethon) → deterministic detector shortlist → Sonnet judge (real alpha FOR … |
-| [`/watch-channel`](watch-channel/SKILL.md) | Put a NIGHTLY alpha watcher on ANY Telegram channel/chat in one command - the "make /mine-channel a routine" button. Registers the channel and a singl… |
-| [`/issue-match`](issue-match/SKILL.md) | Замер очереди ЧУЖОГО репозитория + поиск ЖИВОЙ двери (открытого issue под наш артефакт) ДО того, как пушить туда PR |
-| [`/notpeople-wave`](notpeople-wave/SKILL.md) | One command to run the next NotPeople investor-outreach wave end-to-end, the verified way. NotPeople = $600K pre-seed SAFE pitch, sent from Telegram @… |
+| [`/alfa-search-recall-deepresearch`](alfa-search-recall-deepresearch/SKILL.md) | Mandatory decision protocol ("Alpha Protocol") for any new STRATEGIC work — never jump to implementation on local recall alone. Run RECALL over the kn… |
+| [`/dr-fanout`](dr-fanout/SKILL.md) | One command to fan a Deep Research prompt out to several external LLMs at once (ChatGPT / Gemini / Grok / others) through the operator's logged-in bro… |
+| [`/research-swarm`](research-swarm/SKILL.md) | Research swarm — turn ANY hypothesis (however wild or fringe) into an ARGUMENT MAP, never a verdict. Fans out 5 independent lenses — Consensus, Skepti… |
+| [`/alpha-judge`](alpha-judge/SKILL.md) | The LLM-JUDGE stage of an alpha-extraction engine — the reusable "expensive judge" half of the "cheap detector → expensive judge" pattern, shared by a… |
+| [`/alpha-review`](alpha-review/SKILL.md) | Open the ALPHA REVIEW screen — the one place to mark judge keepers as gold/miss and see per- miner precision — and print the eval state. Trigger on "/… |
+| [`/community-alpha`](community-alpha/SKILL.md) | Run ONE full community-alpha pass over an imported community-chat corpus — deterministic detector (0 tokens) → LLM judge → harvest → review screen. Tr… |
+| [`/mine-channel`](mine-channel/SKILL.md) | Mine ANY Telegram channel/chat for alpha in one command — scrape (0-token, incremental) → deterministic detector shortlist → LLM judge (what's genuine… |
+| [`/watch-channel`](watch-channel/SKILL.md) | Put a NIGHTLY alpha watcher on ANY Telegram channel/chat in one command — the "make channel- mining a routine" button. Registers the channel and a sin… |
+| [`/issue-match`](issue-match/SKILL.md) | Measure a TARGET repository's queue + find a LIVE door (an open issue matching our artifact) BEFORE pushing a PR there. Trigger on "/issue-match", "is… |
+| [`/notpeople-wave`](notpeople-wave/SKILL.md) | Run the next investor-outreach wave end-to-end, the verified way: batch of targets → personalized pitches from real templates → send via the designate… |
 
-## Люди и CRM
+## People and CRM
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/fa`](fa/SKILL.md) | Фоллоуап после звонка — в ГОЛОСЕ Антона, а не протоколом бота |
-| [`/intro`](intro/SKILL.md) | Make a warm INTRODUCTION between two (or more) people from Anton's Telegram, the "познакомь X с Y" operation that is his core product (a warm intro is… |
-| [`/task`](task/SKILL.md) | Лента делегирования «04 TASKS» — Антон делегирует задачу Нина/Рита/себе, а её Клод разворачивает короткую КОДОВУЮ ФРАЗУ («задача НАТ-1») в полный сид … |
-| [`/agenda`](agenda/SKILL.md) | Anton's day at a glance, on demand — today's calendar + what needs HIM personally (leads due, real humans awaiting a reply, deadlines) pulled from Cal… |
-| [`/crm-sync`](crm-sync/SKILL.md) | Keep the CRM-Engine knowledge layer in Anton's vault in sync with the live CRM code on GitLab. Pull the latest of the 16 read-only repos at E:\CRM-app… |
-| [`/telegram-lead-outreach`](telegram-lead-outreach/SKILL.md) | How Anton works leads in Telegram — find prospects by topic, keep only the ones who SELF-mentioned it, resolve their @handle (incl. the common-groups … |
-| [`/telegram-assistant`](telegram-assistant/SKILL.md) | Operate Anton's Telegram as a SCOPED auto-reply assistant (Mode B), grounded in his Obsidian vault / Operations Bible and written in his voice. Use wh… |
-| [`/telegram-howto`](telegram-howto/SKILL.md) | Operating manual for Anton's Telegram via the connected MCP (chigwell/telegram-mcp, ~115 tools). How to find a chat by title with search_dialogs (a to… |
-| [`/telegram-watch`](telegram-watch/SKILL.md) | Run the always-on "вахта" loop over Anton's Telegram using the MCP push tools (wait_for_settled_message) — the assistant identity is the SEPARATE acco… |
-| [`/telegram-reimport`](telegram-reimport/SKILL.md) | One-command incremental RE-IMPORT of a Telegram chat that already lives in Anton's Obsidian vault (Покупки/purchases, Assistants-Ops/household-rules, … |
-| [`/sostav-comments`](sostav-comments/SKILL.md) | Draft short, in-voice reply candidates for Anton to a fresh СОСТАВ alpha shortlist — read the nightly detector report, pick posts in SAFE/opinion topi… |
-| [`/comments`](comments/SKILL.md) | Комментарии под НАШИМ опубликованным контентом одним заходом — показать неотвеченные (⛔ цель «ни одного неотвеченного» ОТМЕНЕНА 15.07: дефолт = молчат… |
+| [`/fa`](fa/SKILL.md) | Follow-up after a call — written in the owner's authentic VOICE, not a bot template. Trigger on "/fa", "follow-up", "what should I write to <name> aft… |
+| [`/intro`](intro/SKILL.md) | Make a warm INTRODUCTION between two (or more) people from the owner's network — the "introduce X to Y" operation. Trigger on "/intro", "introduce X a… |
+| [`/task`](task/SKILL.md) | A delegation lane over a shared task chat: a task is assigned by a short CODE PHRASE ("task <PERSON>-<n>"), and the assignee's Claude expands it into… |
+| [`/agenda`](agenda/SKILL.md) | The operator's day at a glance, on demand — today's calendar plus what needs THEM personally (leads due, real humans awaiting a reply, deadlines) pull… |
+| [`/crm-sync`](crm-sync/SKILL.md) | Keep the CRM knowledge layer in the vault in sync with the live CRM code repositories. Pull the latest of the read-only repos, detect which changed, a… |
+| [`/telegram-lead-outreach`](telegram-lead-outreach/SKILL.md) | How to work leads in Telegram — find prospects by topic, keep only those who SELF-mentioned it, resolve their @handle (incl. the common-groups trick),… |
+| [`/telegram-assistant`](telegram-assistant/SKILL.md) | Operate Telegram as a SCOPED auto-reply assistant, grounded in the owner's knowledge vault and written in their voice. In whitelisted low-stakes chats… |
+| [`/telegram-howto`](telegram-howto/SKILL.md) | Operating manual for Telegram via the connected MCP (~115 tools). How to find a chat by title, the full tool inventory grouped by job, resolving chat… |
+| [`/telegram-watch`](telegram-watch/SKILL.md) | An always-on watch loop over Telegram using MCP push tools, run under a SEPARATE assistant account. Mode 1: when the assistant account is mentioned in… |
+| [`/telegram-reimport`](telegram-reimport/SKILL.md) | One-command incremental RE-IMPORT of a Telegram chat that already lives in the vault. Use whenever a fresh/updated export of an already-imported chat… |
+| [`/sostav-comments`](sostav-comments/SKILL.md) | Draft short, in-voice reply candidates to a fresh community-alpha shortlist — read the nightly detector report, pick posts in safe/opinion topics, pul… |
+| [`/comments`](comments/SKILL.md) | Handle comments under OUR published content in one pass — show unanswered ones (default = stay silent; reply only where a reply is genuinely expected,… |
 
-## Контент
+## Content
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/episode`](episode/SKILL.md) | Адаптеры публикации по ТИРАМ (контент-фабрика v2, S5) — контракт §7.2 решения reality-show 1:1: взять один пост-материал и разложить его на черновики … |
-| [`/content-mine`](content-mine/SKILL.md) | Ручной прогон КОНТЕНТ-МАЙНЕРА — вычитать наши сессии Claude Code и положить контентно-достойные моменты ЧЕРНОВИКАМИ в воронку (draft-first) |
-| [`/wow`](wow/SKILL.md) | «Сессия-ВЕХА → эпизод → публикация ВНЕ ОЧЕРЕДИ» — Антон в конце крутой сессии даёт одну команду, и из ГОРЯЧЕГО контекста этой сессии собирается полный… |
-| [`/release-slice`](release-slice/SKILL.md) | Ритуал «порция наружу» движения «бесплатная школа»: взять кусок нашей системы → санитизировать → leak-scan (hard gate) → опубликовать на GitHub (манда… |
-| [`/speak-as`](speak-as/SKILL.md) | Write a PUBLIC post in Anton's own voice with a ROLE MODEL's STYLE and idea-palette layered on top — a generalized engine: it reads a style-palette fi… |
-| [`/fb-post`](fb-post/SKILL.md) | Publish a VETTED post to Anton's personal Facebook wall through his real logged-in Chrome (Claude-in-Chrome MCP = the low-ban-risk "act in the live ta… |
-| [`/fb-reply`](fb-reply/SKILL.md) | Read who commented on Anton's recent Facebook posts and post PERSONALIZED replies through his real logged-in Chrome (Claude-in-Chrome MCP = low-ban-ri… |
-| [`/fb-watch`](fb-watch/SKILL.md) | Мониторит стену Facebook Антона на АВТОРСКИЕ посты, к которым ещё НЕТ тизера, и сразу пишет тизеры (RU→@ClawRus, EN→X) — draft-first, пока не взведён … |
-| [`/tg-post`](tg-post/SKILL.md) | Publish a VETTED post to one of OUR OWN Telegram channels/supergroups via Telegram MCP (not Chrome), channel resolved STRICTLY by id from the Channels… |
-| [`/x-post`](x-post/SKILL.md) | Publish a VETTED post/tweet to Anton's X (Twitter) account @Tony_Stef_ through his real logged-in Chrome (Claude-in-Chrome MCP, live tab — low-ban-ris… |
-| [`/tg-slot`](tg-slot/SKILL.md) | Освободить СЛОТ в Telegram под новую группу и сразу в неё войти. У аккаунта жёсткий потолок каналов+супергрупп (500 обычный / 1000 Premium); упёршись … |
-| [`/pipeline`](pipeline/SKILL.md) | Work Anton's lead pipeline — CRM/outreach triage: who needs action TODAY (replied→send Calendly; Calendly sent 24h+ but not booked→booking nudge; awai… |
+| [`/episode`](episode/SKILL.md) | Tier-based publication adapters for a content factory: take one source post and split it into drafts — teaser (short, chat-sized) · medium (main socia… |
+| [`/content-mine`](content-mine/SKILL.md) | Manual run of the CONTENT MINER — read through recent Claude Code sessions and capture content-worthy moments as DRAFTS into the publishing funnel (dr… |
+| [`/wow`](wow/SKILL.md) | "Milestone session → episode → publish OUT OF BAND" — at the end of a great session, one command assembles a full content episode (all tiers) from the… |
+| [`/release-slice`](release-slice/SKILL.md) | The "ship a slice" ritual for open-sourcing pieces of a private system: take a component → sanitize → leak-scan (hard gate) → publish to GitHub → chan… |
+| [`/speak-as`](speak-as/SKILL.md) | Write a PUBLIC post in the owner's own voice with a ROLE MODEL's style and idea-palette layered on top — a generalized engine that reads a style-palet… |
+| [`/fb-post`](fb-post/SKILL.md) | Publish a VETTED post to a personal Facebook wall through the owner's real logged-in Chrome (live-tab automation = low-ban-risk path), rate-limit-guar… |
+| [`/fb-reply`](fb-reply/SKILL.md) | Read who commented on the owner's recent Facebook posts and post PERSONALIZED replies through their real logged-in Chrome (live-tab, low-ban-risk), dr… |
+| [`/fb-watch`](fb-watch/SKILL.md) | Monitor the owner's Facebook wall for AUTHORED posts that don't yet have a teaser, and immediately draft the teasers for the short-form channels (draf… |
+| [`/tg-post`](tg-post/SKILL.md) | Publish a VETTED post to one of YOUR OWN Telegram channels/supergroups via the Telegram MCP (not a browser), channel resolved STRICTLY by id from a ch… |
+| [`/x-post`](x-post/SKILL.md) | Publish a VETTED post/tweet to an X (Twitter) account through the owner's real logged-in Chrome (live-tab, low-ban-risk path), rate-guarded and draft-… |
+| [`/tg-slot`](tg-slot/SKILL.md) | Free a SLOT in Telegram for a new group and join it immediately. Accounts have a hard ceiling of channels+supergroups; at the ceiling the account can… |
+| [`/pipeline`](pipeline/SKILL.md) | Work the lead pipeline — CRM/outreach triage: who needs action TODAY (replied → send scheduling link; link sent 24h+ but not booked → nudge; awaiting-… |
 
-## Синхронизация источников
+## Source syncing
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/fireflies-sync`](fireflies-sync/SKILL.md) | On-demand подтягивание свежих звонков из Fireflies.ai (автозапись-бот, реальные имена спикеров) в Obsidian-волт через официальный GraphQL API (ключ в … |
-| [`/granola-sync`](granola-sync/SKILL.md) | On-demand подтягивание свежих звонков/встреч Антона из Granola (саммари + транскрипты + участники) в Obsidian-волт через ОФИЦИАЛЬНЫЙ Granola API (ключ… |
-| [`/chatgpt-sync`](chatgpt-sync/SKILL.md) | On-demand pull of FRESH ChatGPT chats into Anton's Obsidian vault - the MANUAL twin of the scheduled `ChatGPT Nightly Sync` task. Incremental + idempo… |
-| [`/claudeai-sync`](claudeai-sync/SKILL.md) | One-command incremental sync of Anton's claude.ai WEB account into the Obsidian vault — pull only the new/changed chats, fold them in as notes (idempo… |
-| [`/faaa-sync`](faaa-sync/SKILL.md) | On-demand pull of FRESH FAAA follow-up call notes from Anton's Telegram group "CALLS 889 MAIN FA FAAAA follow up" (chat <YOUR_CHAT_ID>) into the Obsid… |
-| [`/whatsapp-sync`](whatsapp-sync/SKILL.md) | On-demand refresh of Anton's WhatsApp text into the Obsidian vault (data layer + dashboard + group labels + contact notes). TEXT ONLY — never download… |
-| [`/gmail`](gmail/SKILL.md) | Check / search / digest Anton's Gmail on demand across his 3 mailboxes (a = owner.personal personal, a2 = owner.work assistants, bb = owner.calendar w… |
-| [`/takeout-pull`](takeout-pull/SKILL.md) | Never let a Google Takeout export expire un-downloaded again. Detects "ready to download" Takeout emails in Anton's a@ mailbox (0-token deterministic … |
-| [`/local-chatgpt-token-heal`](local-chatgpt-token-heal/SKILL.md) | Refresh the ChatGPT bearer token when the nightly sync dies with exit=7 (token expired). Root-cause fix — the bearer lives ~5-9 days but the NextAuth … |
+| [`/fireflies-sync`](fireflies-sync/SKILL.md) | On-demand pull of fresh calls from Fireflies.ai (auto-recording bot, real speaker names) into the Obsidian vault via the official GraphQL API, plus di… |
+| [`/granola-sync`](granola-sync/SKILL.md) | On-demand pull of fresh calls/meetings from Granola (summaries + transcripts + participants) into the Obsidian vault via the official API. Incremental… |
+| [`/chatgpt-sync`](chatgpt-sync/SKILL.md) | On-demand pull of FRESH ChatGPT conversations into the Obsidian vault — the manual twin of the scheduled nightly sync. Incremental + idempotent (keyed… |
+| [`/claudeai-sync`](claudeai-sync/SKILL.md) | One-command incremental sync of a claude.ai WEB account into the Obsidian vault — pull only new/changed chats, fold them in as notes (idempotent, neve… |
+| [`/faaa-sync`](faaa-sync/SKILL.md) | On-demand pull of FRESH follow-up call notes from a dedicated Telegram group into the CRM layer of the vault. Incremental + idempotent (dedup by Teleg… |
+| [`/whatsapp-sync`](whatsapp-sync/SKILL.md) | On-demand refresh of WhatsApp text into the Obsidian vault (data layer + dashboard + group labels + contact notes). TEXT ONLY — never downloads media.… |
+| [`/gmail`](gmail/SKILL.md) | Check / search / digest Gmail on demand across multiple mailboxes (personal / assistants / work) via the owner's own OAuth connector — no browser need… |
+| [`/takeout-pull`](takeout-pull/SKILL.md) | Never let a Google Takeout export expire un-downloaded again. Detects "ready to download" Takeout emails in the mailbox (0-token deterministic scan),… |
+| [`/local-chatgpt-token-heal`](local-chatgpt-token-heal/SKILL.md) | Refresh the ChatGPT bearer token when the nightly sync dies with a token-expired exit code. Root-cause fix: the bearer lives days but the session cook… |
 
-## Сессия и ритуалы
+## Session rituals
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| [`/1`](1/SKILL.md) | Восстановление после ЖЁСТКОГО обрыва сессии (крэш / комп вырубился / контекст потерян посреди работы) — ОДНА сверхкороткая команда «где мы были + всё … |
-| [`/cc`](cc/SKILL.md) | Горячая клавиша-алиас для «сжать контекст» — Антону лень печатать слово «компакт», короткий дуплет /cc удобнее (семья /tt /rr /cc /1). Печатает ГОТОВУ… |
-| [`/rr`](rr/SKILL.md) | Горячая клавиша-алиас для /retro — Антону лень печатать слово «ретро», короткий дуплет /rr удобнее. ТОЖЕ САМОЕ, что /retro, ноль отличий (как /1 == /!… |
-| [`/retro`](retro/SKILL.md) | End-of-session retrospective for Anton — "today we learned a lot" (South Park's Stan). Run at the end of a work/build session to: (0) RECALL & RECONCI… |
-| [`/handoff`](handoff/SKILL.md) | Собрать курированную "точку с запятой" — самодостаточный хэндофф-документ, по которому ДРУГАЯ сессия / другой человек / другая машина продолжит работу… |
-| [`/resume-last`](resume-last/SKILL.md) | "Продолжить прошлый чат в один присест" — собирает твою ПОСЛЕДНЮЮ человеческую сессию (или конкретную по id) в seed и кладёт в буфер обмена: открываеш… |
-| [`/intention`](intention/SKILL.md) | Лейн НАМЕРЕНИЙ контент-фабрики. Одна команда: намайнить намерения Антона из ВСЕХ сессий дня → кластеризовать в отдельные намерения → копилка (intentio… |
-| [`/coach`](coach/SKILL.md) | Anton's daily AI coach — a forward-looking accountability + mirror loop grounded in his FULL identity layer (the vault knows him better than anyone) |
-| [`/cofounder`](cofounder/SKILL.md) | Anton's synthetic COFOUNDER — an aggressive, capital-literate operator persona that sparrs with him on the BUSINESS (revenue, funnel, pricing, fundrai… |
-| [`/cofounder-watch`](cofounder-watch/SKILL.md) | Phase 0 of Anton's real-time / ambient cofounder — a 0-token, PING-ONLY dispatcher that watches the LIVE lead funnel (tg_followups.json) and surfaces … |
-| [`/bible`](bible/SKILL.md) | Anton's Bible — the single behavioral codex governing everyone who acts AS or FOR Anton: himself, his human assistants, and his silicon agents (LLMs/A… |
+| [`/1`](1/SKILL.md) | Recover after a HARD session crash (app died, computer rebooted, context lost mid-work) with one ultra-short command: where were we + is everything al… |
+| [`/cc`](cc/SKILL.md) | Hotkey alias for "compact the context": prints a READY-made `/compact <block>` line in a canonical handoff format so the operator can paste it as the… |
+| [`/rr`](rr/SKILL.md) | Hotkey alias for /retro — the short double-letter is faster to type. IDENTICAL to /retro, zero differences (like /1 == /! and /tt == /test). On any tr… |
+| [`/retro`](retro/SKILL.md) | End-of-session retrospective: (0) RECALL & reconcile this session against the whole collaboration first, (1) INVENTORY what was actually built (git lo… |
+| [`/handoff`](handoff/SKILL.md) | Build a curated "semicolon" — a self-contained handoff document that lets ANOTHER session / person / machine continue the work exactly where this one… |
+| [`/resume-last`](resume-last/SKILL.md) | "Continue the previous chat in one motion" — collects the LAST human session (or a specific one by id) into a seed and puts it on the clipboard: open… |
+| [`/intention`](intention/SKILL.md) | The INTENTIONS lane of a content factory. One command: mine the owner's intentions from all of the day's sessions → cluster into distinct intentions →… |
+| [`/coach`](coach/SKILL.md) | A daily AI coach — a forward-looking accountability + mirror loop grounded in the owner's FULL identity layer (the vault knows them better than anyone… |
+| [`/cofounder`](cofounder/SKILL.md) | A synthetic COFOUNDER — an aggressive, capital-literate operator persona that spars with the founder on the BUSINESS (revenue, funnel, pricing, fundra… |
+| [`/cofounder-watch`](cofounder-watch/SKILL.md) | Phase 0 of an ambient synthetic cofounder — a 0-token, PING-ONLY dispatcher that watches the LIVE lead funnel and surfaces salient events as short cof… |
+| [`/bible`](bible/SKILL.md) | The operations Bible — a single behavioral codex governing everyone who acts AS or FOR the owner: the owner, human assistants, and AI agents. Load BEF… |
