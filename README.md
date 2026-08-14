@@ -5,6 +5,16 @@
 Это рабочая система, которой мы пользуемся сами каждый день, — очищенная от
 личных данных и урезанная до переносимого ядра: **метод, не данные**.
 
+## Flagships — start with these five
+
+| skill / tool | what it gives you in 60 seconds |
+|---|---|
+| [secondop](skills/secondop/SKILL.md) | a second opinion from a PANEL of external LLMs (Codex + Grok + Gemini) on every substantial plan/diff — one model never reviews itself |
+| [tt](skills/tt/SKILL.md) | the quality gate after every build: run it live, break it on purpose, prove it with a counter — only then say "done" |
+| [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) | keeps a Claude Code memory folder clean and deduplicated |
+| [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | graph memory for agents on plain SQLite — no server, no vector DB required |
+| [verbatim-citation-gate](https://github.com/tonydzi/verbatim-citation-gate) | a deterministic gate that catches invented quotes and citations before they ship |
+
 ## Что внутри
 
 | Папка / файл | Что это |
