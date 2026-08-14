@@ -8,31 +8,32 @@ description: >
 license: MIT
 ---
 
-# /alpha-review — экран отбора альфы одной командой
+# /alpha-review — the alpha selection screen in one command
 
-Движок уже построен (2026-06-18/20). Скилл = запуск + сводка, ничего не дублирует.
+The engine is already built (2026-06-18/20). This skill is launch + summary; it duplicates nothing.
 
-## Шаги
+## Steps
 
-1. **Жив ли сервер?** `netstat -ano | findstr :8772` (PowerShell) / `netstat -ano | grep :8772` (bash).
-   - Слушает → шаг 3.
-2. **Поднять** (свежий harvest внутри):
+1. **Is the server alive?** `netstat -ano | findstr :8772` (PowerShell) / `netstat -ano | grep :8772` (bash).
+   - Listening → jump to step 3.
+2. **Start it** (a fresh harvest runs inside):
    ```
    cd /e/Obsidian/_imports/alpha && PYTHONIOENCODING=utf-8 python alpha_review_server.py --no-browser
    ```
-   в фоне (`run_in_background`). Альтернатива для Антона руками: двойной клик `$IMPORTS_ROOT/alpha/alpha-review.cmd`.
-3. **Дать ссылку**: http://127.0.0.1:8772 — открыть в браузере (локально, наружу ничего не ходит).
-4. **Сводка eval** (0 LLM-токенов):
+   in the background (`run_in_background`). Manual alternative for the operator: double-click `$IMPORTS_ROOT/alpha/alpha-review.cmd`.
+3. **Hand over the link**: http://127.0.0.1:8772 — open in a browser (local only, nothing leaves the machine).
+4. **Eval summary** (0 LLM tokens):
    ```
    PYTHONIOENCODING=utf-8 python $IMPORTS_ROOT/alpha/alpha_tune.py
    ```
-   Показать Антону: сколько размечено / precision по майнерам / что метить первым (uncertainty sampling: PARTIAL сначала). ≥8 меток на майнер → tune называет конкретную правку детектора.
-5. **Напомнить петлю**: метки → `alpha_tune.py` → правка порога/фильтра детектора → re-harvest → re-label. На карточках бейдж партии (🆕 = свежая ночная партия).
+   Show the operator: how much is labelled / per-miner precision / what to label first (uncertainty sampling: PARTIAL first). At >=8 labels per miner, tune names a concrete detector fix.
+5. **Remind them of the loop**: labels -> `alpha_tune.py` -> adjust the detector threshold/filter -> re-harvest -> re-label. Cards carry a batch badge (🆕 = fresh nightly batch).
 
-## Грабли
-- БД = накопительный ИНБОКС всех ночных партий (не только последнего judged-файла) — «лишние» айтемы не сталь, а неразмеченный бэклог. Не «чинить».
-- Пусто на экране ≠ нет данных: сперва проверить, что harvest прошёл (`alpha_harvest.py` печатает счётчики) и что смотрим на E:, не на C:.
-- 🔒 sostav-карточки = HIGH sensitivity: экран не скринить наружу, контакты только value-first (reglament-elitnye-kripto-komyuniti-zero-cold-dm-value-first).
+## Pitfalls
+- The DB is a cumulative INBOX of every nightly batch (not just the latest judged file) — "extra" items are not junk, they are an unlabelled backlog. Do not "fix" it.
+- An empty screen is not the same as no data: first check that the harvest actually ran (`alpha_harvest.py` prints counters) and that you are looking at the right drive (E:, not C:).
+- 🔒 Community-sourced cards are HIGH sensitivity: never screenshot the screen outside, and approach contacts value-first only (standing rule for elite crypto communities: zero cold DMs, value first).
+
 
 ---
 

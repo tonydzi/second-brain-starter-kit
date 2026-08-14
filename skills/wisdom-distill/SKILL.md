@@ -8,36 +8,37 @@ description: >
 license: MIT
 ---
 
-# /wisdom-distill — мудрость недели
+# /wisdom-distill — the wisdom of the week
 
-> 🧒 К Антону — в конце recap «Простыми словами».
+> 🧒 When reporting to a non-technical operator, end with an "In plain words" recap in their language.
 
-## Run (deterministic first — 0 токенов)
-`python "$IMPORTS_ROOT/wisdom_week_gather.py"` (или `... 14` для окна 14 дней) →
-заметки `origin: anton`/`#anton-original` за окно (date-поле, fallback mtime), кроме
-`_originals/_imports/_Dashboards`, cap 60 × 500 симв. → `$IMPORTS_ROOT/_wisdom_week_digest.md`.
-**LLM читает только дайджест, не корпус.**
+## Run (deterministic first — 0 tokens)
+`python "$IMPORTS_ROOT/wisdom_week_gather.py"` (or `... 14` for a 14-day window) ->
+notes marked `origin: anton`/`#anton-original` inside the window (date field, mtime as fallback), excluding
+`_originals/_imports/_Dashboards`, capped at 60 x 500 chars -> `$IMPORTS_ROOT/_wisdom_week_digest.md`.
+**The LLM reads only the digest, never the corpus.**
 
-## Distill (Opus — синтез, не грунт)
-Из дайджеста — 3–5 durable-уроков недели (переживёт месяц; «как Антон теперь думает/решает»).
-Формат: урок одной строкой голосом Антона · Откуда: [[note-a]], [[note-b]] (2+ = сильнее) ·
-Что меняет: в каком решении проявится. Отбрось транзиты, чужие идеи, само-очевидное.
-Неделя тонкая (<3) — так и скажи, не выдумывай.
+## Distill (top model — synthesis, not grunt work)
+From the digest, pull 3-5 durable lessons of the week (each must survive a month; "how the owner now thinks/decides").
+Format: the lesson in one line in the owner's voice · Source: [[note-a]], [[note-b]] (2+ = stronger) ·
+What it changes: which decision it will show up in. Drop transient items, other people's ideas, the self-evident.
+Thin week (<3) — say so plainly, do not invent.
 
 ## Save (backup-first: vault_backup.py)
-Заметка: $OBSIDIAN_VAULT/03-Insights/insight-weekly-wisdom-YYYY-Www.md
+Note: $OBSIDIAN_VAULT/03-Insights/insight-weekly-wisdom-YYYY-Www.md
 Frontmatter: title, date, type: insight, origin: anton, authored_by: hybrid,
-tags: [insight, weekly-wisdom, anton-original], summary. Линки на источники
-(no-orphan-notes-rule); затронуты убеждения — линк belief-*. NO 🧒 в заметке.
+tags: [insight, weekly-wisdom, anton-original], summary. Link the sources
+(no-orphan-notes-rule); if beliefs are touched, link the matching belief-* note. NO 🧒 block inside the note.
 
 ## Scheduled twin
-Cron `wisdom-distill-weekly`: Вс 23:20 Lisbon (routines-run-at-night). Сборщик →
-дистилляция (Opus-субагент) → заметка → анонс в TG чат 03 (bus_ping.py --post).
-Manual twin = этот скилл. Single source of truth = wisdom_week_gather.py.
+Cron `wisdom-distill-weekly`: Sunday 23:20 Lisbon (routines-run-at-night). Gatherer ->
+distillation (top-model subagent) -> note -> announcement in the fleet log chat (bus_ping.py --post).
+The manual twin is this skill. Single source of truth = wisdom_week_gather.py.
 
-## Связано
-Карта A–E: пункт D · /five-hard (месяц) · /precedent (решения) · recurring_scan.py
-(весь корпус) · vault-backup-rule · model-routing (синтез → Opus).
+## Related
+Active-brain map A-E: item D · /five-hard (monthly) · /precedent (decisions) · recurring_scan.py
+(the whole corpus) · vault-backup-rule · model-routing (synthesis -> top model).
+
 
 ---
 
