@@ -9,88 +9,88 @@ description: >
 license: MIT
 ---
 
-# /taste-check — вкусовой гейт для контента
+# /taste-check — the taste gate for content
 
-Гейт по Арсёнову: **рубильник, не галочка**. Три исхода, у каждого владелец и последствие:
+The gate is **a kill switch, not a checkbox**. Three outcomes, each with an owner and a consequence:
 
-| Исход | Критерий | Последствие |
+| Outcome | Criterion | Consequence |
 |---|---|---|
-| ❌ **FAIL** | нарушен хоть один ⛔-принцип | артефакт НЕ показывается как готовый; вернуть автору со списком нарушений |
-| ⚠️ **MANUAL** | ⛔ чисты, но ≥2 ⚠️-нарушения ИЛИ проверку нельзя выполнить (неизвестен класс/язык лида/авторство) | показать Антону С флагом «⚠️ manual review: причина» |
-| ✅ **PASS** | остальное | показывать/отправлять можно |
+| ❌ **FAIL** | at least one ⛔ principle is violated | the artifact is NOT shown as ready; return it to the author with the list of violations |
+| ⚠️ **MANUAL** | the ⛔ set is clean, but there are ≥2 ⚠️ violations OR the check cannot be performed (unknown class / lead's language / authorship) | show it to the owner WITH a "⚠️ manual review: reason" flag |
+| ✅ **PASS** | everything else | it may be shown/sent |
 
-Владелец гейта = этот агент (первый фильтр). Финальный судья = Антон. Ревьюер **read-only**: в волт не пишет, контент не правит, только вердикт.
+The gate's owner = this agent (the first filter). The final judge = the human owner. The reviewer is **read-only**: it never writes into the vault, never edits the content, it only issues a verdict.
 
-## Порядок
+## Order of operations
 
-1. **Класс входа** (определи первым, от него зависят применимые принципы):
-   - **A** заметка волта · **B** черновик исходящего от лица Антона · **C** дедуп-мердж · **D** служебный файл (memory/CLAUDE.md/skill/дашборд-текст) · **E** AI-документ-для-решения (DR-отчёт, Decision Memo, стратегия, PRD, спека, ресёрч — всё, по чему будут «спорить, покупать или строить»).
-2. **Юрисдикция**: судим только то, что произвёл AI/пайплайн. Verbatim-текст Антона, внешние оригиналы (`_originals`), его собственные правки — вне гейта (не «вычищать живость» из его голоса). `_drafts`, `_originals`, `08-Templates`, inbox = intentional orphans (P6 не применять).
-3. **Детерминированные проверки** (Grep/PowerShell, 0 токенов) — P4, P5, P6, P7, P9, P17, P18.
-4. **LLM-проверки** по остальным принципам — только по куску, не по корпусу.
-5. **Вердикт-блок** (формат ниже). Ничего не чинить.
+1. **Input class** (determine it first — it decides which principles apply):
+   - **A** a vault note · **B** a draft of something outbound on the owner's behalf · **C** a dedup merge · **D** a service file (memory/CLAUDE.md/skill/dashboard text) · **E** an AI document used for a decision (a DR report, a Decision Memo, a strategy, a PRD, a spec, research — anything people will "argue over, buy, or build from").
+2. **Jurisdiction**: we only judge what an AI/pipeline produced. The owner's verbatim text, external originals (`_originals`), his own edits — out of the gate's scope (we do not "clean the life out of" his voice). `_drafts`, `_originals`, `08-Templates`, the inbox = intentional orphans (do not apply P6).
+3. **Deterministic checks** (Grep/PowerShell, 0 tokens) — P4, P5, P6, P7, P9, P17, P18.
+4. **LLM checks** for the remaining principles — on the excerpt only, never on the whole corpus.
+5. **The verdict block** (format below). Fix nothing.
 
-## Принципы (сигнал → принцип → проверка)
+## Principles (signal → principle → check)
 
-Веса: ⛔ = хардстоп (fail) · ⚠️ = предупреждение (2+ → manual). Классы в скобках.
+Weights: ⛔ = hard stop (fail) · ⚠️ = warning (2+ → manual). Classes in brackets.
 
-### Провенанс
-- **P1 ⛔ (A,C) Не вешать на Антона чужое.** Сигнал: «ВСЕГДА если ты нашёл что источник знания НЕ Я … не вешай на меня то что Я НЕ ПИСАЛ» (2026-06-08). Проверка: `origin: anton`/`#anton-original` при признаках внешнего или AI автора (чужие self-ID, кросс-хэндлы, AI-дистилляция) → FAIL.
-- **P2 ⛔ (A,C) AI-соавторство = mixed + конкретный ИИ.** Сигнал: «если автор — ИИ, пиши ВСЕГДА конкретно КАКОЙ именно ИИ» (2026-06-09). Проверка: `authored_by: ai|hybrid` требует `ai_author:` с конкретной моделью и `origin: mixed|external`; generic «ai» или `origin: anton` → FAIL. ⭐ Карв-аут (Антон 2026-07-02): на `reglament-*`/`protocol-*` пара `origin: anton` + `authored_by: hybrid` легальна — origin там означает «чьё правило» (авторитет Библии), authored_by «кто оформил»; ai_author обязателен, #anton-original не вешаем.
-- **P3 ⚠️ (A,C) Две оси провенанса на месте.** Сигнал: two-axis mandate (vault-conventions, operating-agreement). Проверка: в frontmatter есть `origin:` И `authored_by:`; нет → warn (легаси-заметки не валим).
-- **P4 ⛔ (все) Секретов нет.** Сигнал: пароли живут в `secrets\`, не в волте/always-loaded (credential-store; прецедент «запомни work_acct_b … 2fa 83…» → ушло в store). Проверка: grep `парол|password|2fa|api[_-]?key|token|secret[_-]?key` + похожие на кред строки → hit по реальному секрету = FAIL.
+### Provenance
+- **P1 ⛔ (A,C) Don't attribute someone else's work to the owner.** Signal: "ALWAYS, if you found that the source of the knowledge is NOT ME … don't hang on me what I DIDN'T WRITE" (2026-06-08). Check: `origin: anton` / `#anton-original` present while there are signs of an external or AI author (other people's self-IDs, cross-handles, AI distillation) → FAIL.
+- **P2 ⛔ (A,C) AI co-authorship = mixed + the specific AI.** Signal: "if the author is an AI, ALWAYS write WHICH AI exactly" (2026-06-09). Check: `authored_by: ai|hybrid` requires `ai_author:` with a specific model plus `origin: mixed|external`; a generic "ai" or `origin: anton` → FAIL. ⭐ Carve-out (the owner, 2026-07-02): on `reglament-*`/`protocol-*` the pair `origin: anton` + `authored_by: hybrid` is legal — there `origin` means "whose rule it is" (the Bible's authority) and `authored_by` means "who wrote it up"; `ai_author` is still mandatory and we don't add the owner's original tag.
+- **P3 ⚠️ (A,C) Both provenance axes present.** Signal: the two-axis mandate (vault-conventions, operating-agreement). Check: frontmatter has BOTH `origin:` and `authored_by:`; missing → warn (we don't fail legacy notes).
+- **P4 ⛔ (all) No secrets.** Signal: passwords live in `secrets\`, not in the vault or the always-loaded layer (credential-store; precedent: an account's 2FA code dictated into a chat → moved to the store). Check: grep `password|2fa|api[_-]?key|token|secret[_-]?key` (add the keyword variants of the operator's own language) + credential-shaped strings → a hit on a real secret = FAIL.
 
-### Граф и структура
-- **P5 ⛔ (A,C — новые файлы) Имя файла = латинский kebab-slug.** Сигнал: «никакой кириллицы в именах НИГДЕ» (2026-06-08). Проверка: basename ASCII-only; кириллица → FAIL (старые ≈3.9k = frozen legacy, не валим — только новые).
-- **P6 ⛔ (A,C — новые заметки живого волта) Не сирота: ≥1 входящая ссылка.** Сигнал: «ВСЕГДА … дотянули перелинковку» (2026-06-13). Проверка: `Grep "\[\[<basename>\]\]|\[\[<basename>\|" path=$OBSIDIAN_VAULT` ≥1 вне самой заметки; 0 → FAIL («незакрытый хвост, не готово»). Исключения — п.2 юрисдикции.
-- **P7 ⚠️ (A,C) Wikilinks резолвятся.** Сигнал: «0 broken links перед staging→vault» (vault-conventions). Проверка: каждый `[[target]]` существует как файл/alias; битые → warn.
-- **P8 ⚠️ (A) Префикс соответствует папке.** Сигнал: prefix = класс заметки (vault-conventions). Проверка: `concept-*`→06-Concepts, `person-*`→07-People, `insight-*`→03-Insights, `reglament-*`→Protocols/Operations; мимо → warn.
+### Graph and structure
+- **P5 ⛔ (A,C — new files) Filename = a latin kebab slug.** Signal: "no Cyrillic in filenames ANYWHERE" (2026-06-08). Check: the basename is ASCII-only; Cyrillic → FAIL (the ~3.9k older ones are frozen legacy and are not failed — new files only).
+- **P6 ⛔ (A,C — new notes in the live vault) Not an orphan: ≥1 incoming link.** Signal: "ALWAYS … finish the cross-linking" (2026-06-13). Check: `Grep "\[\[<basename>\]\]|\[\[<basename>\|" path=$OBSIDIAN_VAULT` ≥1 outside the note itself; 0 → FAIL ("an unfinished tail, not done"). Exceptions — jurisdiction item 2.
+- **P7 ⚠️ (A,C) Wikilinks resolve.** Signal: "0 broken links before staging→vault" (vault-conventions). Check: every `[[target]]` exists as a file/alias; broken ones → warn.
+- **P8 ⚠️ (A) The prefix matches the folder.** Signal: prefix = the note's class (vault-conventions). Check: `concept-*`→06-Concepts, `person-*`→07-People, `insight-*`→03-Insights, `reglament-*`→Protocols/Operations; a mismatch → warn.
 
-### Текст и голос
-- **P9 ⏸ ОТКЛЮЧЁН (Антон 2026-07-02: «наплевать на тире, ПОХЕР, забудь пока»).** Гейт тире НЕ судит и на вердикт они не влияют; кампаний по чистке старого не ведём. Правило стиля для НОВОГО моего текста остаётся ([[no-long-dashes]]) — просто пишу без них, бесплатно. Вернуть вес может только Антон.
-- **P10 ⛔ (C) Текст Антона дословен, не «улучшен».** Сигнал: «транслитерируем ИМЕНА, никогда не переводим текст Антона» + supersede-политика дедупа. Проверка: сравнить мердж с источниками; перевод/пересказ/сглаживание его формулировок → FAIL («кривенько - значит живенько»).
-- **P11 ⚠️ (A,D) Без воды.** Сигнал: «сухо, по делу, БЕЗ воды» (повторяющийся, 15 сессий, digest 2026-06-23) + write-service-files-tight. Проверка (LLM): вводные абзацы, повторы, риторика → warn.
-- **P12 ⚠️ (A,D — для Антона) Русский язык, англ. тех-термины ок.** Сигнал: «по-русски» 15/15 сессий. Проверка: внутренний документ для Антона целиком на английском → warn.
-- **P13 ⚠️ (D) Без капс-агрессии.** Сигнал: замер 2026-07-01 (капс/«ОБЯЗАН/НИКОГДА» = overtriggering на 4.6+; де-капс CLAUDE.md одобрен Антоном). Проверка: капс-императивы в служебном тексте → warn.
+### Text and voice
+- **P9 ⏸ DISABLED (the owner, 2026-07-02: "I don't care about dashes, forget it for now").** The gate does NOT judge dashes and they do not affect the verdict; we run no cleanup campaigns over old text. The style rule for MY NEW text stands ([[no-long-dashes]]) — I simply write without them, for free. Only the owner can restore its weight.
+- **P10 ⛔ (C) The owner's text is verbatim, not "improved".** Signal: "we transliterate NAMES, we never translate the owner's text" + the dedup supersede policy. Check: compare the merge against the sources; a translation/paraphrase/smoothing of his wording → FAIL ("a bit crooked means a bit alive").
+- **P11 ⚠️ (A,D) No filler.** Signal: "dry, to the point, NO filler" (recurring across 15 sessions, digest 2026-06-23) + write-service-files-tight. Check (LLM): warm-up paragraphs, repetitions, rhetoric → warn.
+- **P12 ⚠️ (A,D — for the owner) His own language, English technical terms are fine.** Signal: "in Russian" in 15/15 sessions. Check: an internal document for him written entirely in English → warn.
+- **P13 ⚠️ (D) No all-caps aggression.** Signal: the 2026-07-01 measurement (all-caps / "MUST / NEVER" = overtriggering at 4.6+; de-capsing CLAUDE.md was approved by the owner). Check: all-caps imperatives in service text → warn.
 
-### Данные и честность
-- **P14 ⛔ (все) Никаких выдуманных данных.** Сигнал: «лучше не надо понарошку ничего накидывать — возьми те данные и клиентов что есть» (сессия 36a792df). Проверка (LLM): цифры/факты/примеры без источника, поданные как реальные → FAIL.
-- **P15 ⚠️ (A,D — предложения) ДО→ПОСЛЕ на реальных данных.** Сигнал: standing show-before-after. Проверка: черновик-предложение без до→после на данных Антона → warn.
-- **P16 ⚠️ (A,D — предложения) Усложнение помечено.** Сигнал: AK-47 standing (⚠️ УСЛОЖНЕНИЕ + какую боль лечит). Проверка: новая зависимость/сервис/абстракция без пометки → warn.
+### Data and honesty
+- **P14 ⛔ (all) No invented data.** Signal: "better not to make things up — use the data and clients we actually have". Check (LLM): figures/facts/examples with no source, presented as real → FAIL.
+- **P15 ⚠️ (A,D — proposals) BEFORE→AFTER on real data.** Signal: the standing show-before-after rule. Check: a proposal draft with no before→after on the owner's own data → warn.
+- **P16 ⚠️ (A,D — proposals) Added complexity is flagged.** Signal: the standing AK-47 rule (⚠️ ADDED COMPLEXITY + which pain it treats). Check: a new dependency/service/abstraction with no flag → warn.
 
-### Исходящее от лица Антона
-- **P17 ⛔ (B — outreach/pitch) Приветствие отдельной строкой.** Сигнал: явный стандарт 2026-06-22 (50 питчей переформатированы). Проверка: строка 1 = только приветствие, строка 2 пустая, тело со строки 3; слитно → FAIL.
-- **P18 ⛔ (B — unreviewed) ≤7 слов + тон канала.** Сигнал: «пиши сам» → цель ≤5, потолок 7 слов; FB = шутка, TG = осмысленно после RECALL по человеку (2026-06-29). Проверка: счёт слов >7 → FAIL; тон не по каналу → FAIL.
-- **P19 ⚠️ (B) Язык лида.** Сигнал: «для русскоязычных лидов писать на русском для англо на англ» (сессия b0326fad). Проверка: язык черновика vs язык лида; mismatch → warn, лид неизвестен → manual.
+### Outbound on the owner's behalf
+- **P17 ⛔ (B — outreach/pitch) The greeting is its own line.** Signal: an explicit standard from 2026-06-22 (50 pitches reformatted). Check: line 1 = the greeting only, line 2 empty, the body starts on line 3; merged together → FAIL.
+- **P18 ⛔ (B — unreviewed) ≤7 words + the channel's tone.** Signal: "write it yourself" → target ≤5, ceiling 7 words; Facebook = a joke, Telegram = something meaningful after a RECALL on the person (2026-06-29). Check: word count >7 → FAIL; tone wrong for the channel → FAIL.
+- **P19 ⚠️ (B) The lead's language.** Signal: "write to Russian-speaking leads in Russian and to English-speaking ones in English". Check: the draft's language vs the lead's language; a mismatch → warn, an unknown lead → manual.
 
-### Дедуп-мерджи
-- **P20 ⛔ (C) Supersede, не delete.** Сигнал: дедуп-политика 2026-06-08 (14 правил слиты supersede'ом) + «никогда не glob-delete». Проверка: мердж ссылается на поглощённую (`supersedes:`/линк), ни один исходник не удалён (жив или в `_originals`); иначе → FAIL.
+### Dedup merges
+- **P20 ⛔ (C) Supersede, never delete.** Signal: the 2026-06-08 dedup policy (14 rules merged by supersede) + "never glob-delete". Check: the merge references the absorbed note (`supersedes:` / a link), and no source was deleted (alive or in `_originals`); otherwise → FAIL.
 
-### AI-документы (класс E) — анти-дрифт по Арсёнову
-Источник: Anti-Drift Review Артём Арсёнова (Ray lab, looi.ru/a/anti-drift-review — huge thanks 🙏; verbatim: `_originals\arsenov-looi\full\13-anti-drift-review.md`). Добавлено 2026-07-03 по «++» Антона. Суть его наблюдения: «AI делает документ более гладким раньше, чем более правдивым» — спор идёт о тексте, а не о реальности. Все проверки LLM-суждение по куску.
-- **P21 ⛔ (E) Утверждения без опоры.** Красивые фразы, не доказанные данными/источником. Проверка: каждый ключевой тезис → есть ссылка/данные/провенанс? Голословный тезис, на котором держится рекомендация → FAIL. (Родня P14, но здесь про аргументацию, не только цифры.)
-- **P22 ⚠️ (E) Скрытые допущения.** Рекомендация держится на «если», которого никто не заметил. Проверка: выписать неявные «если X, то…»; ≥2 незаявленных критических допущения → warn (в вердикте перечислить).
-- **P23 ⚠️ (E) Слабая связь с покупателем/пользой.** Боль названа, но не видно, кто платит за неё временем/деньгами. Проверка: для продукт/GTM-документов — назван ли конкретный ICP/плательщик; нет → warn.
-- **P24 ⚠️ (E) Провал реализации.** План звучит, но не выдерживает контакта с нашим реальным стеком/командой/системой. Проверка: шаги плана против известного состояния (машины, рутины, люди, лимиты); нереализуемый шаг → warn + назвать.
-- **P25 ⛔ (E) Слишком сильный вывод.** Доказательства говорят «может быть», документ говорит «надо делать». Проверка: сила вывода vs сила доказательств; overclaim в итоговой рекомендации → FAIL.
-- **Вердикт для E** дополняется drift-map: 🔴 (не опираться) / 🟡 (доработать: что доказать перед решением) / 🟢 (можно использовать) + список unsupported claims.
+### AI documents (class E) — the anti-drift lens
+Source: the Anti-Drift Review by Artyom Arsyonov (Ray lab, looi.ru/a/anti-drift-review — huge thanks 🙏; verbatim copy: `_originals\arsenov-looi\full\13-anti-drift-review.md`). Added 2026-07-03 on the owner's "++". The core of his observation: "AI makes a document smoother before it makes it truer" — the argument then happens about the text instead of about reality. All the checks below are LLM judgement on an excerpt.
+- **P21 ⛔ (E) Claims with no support.** Beautiful phrases not backed by data or a source. Check: for every key thesis → is there a link/data/provenance? An unsupported thesis that a recommendation rests on → FAIL. (Related to P14, but this is about argumentation, not only figures.)
+- **P22 ⚠️ (E) Hidden assumptions.** A recommendation rests on an "if" nobody noticed. Check: write out the implicit "if X, then…"; ≥2 undeclared critical assumptions → warn (list them in the verdict).
+- **P23 ⚠️ (E) Weak link to the buyer / the benefit.** The pain is named, but it is not visible who pays for it with time or money. Check: for product/GTM documents — is a concrete ICP/payer named; no → warn.
+- **P24 ⚠️ (E) Implementation failure.** The plan sounds right but does not survive contact with our actual stack/team/system. Check: the plan's steps against the known state (machines, routines, people, limits); an unfeasible step → warn + name it.
+- **P25 ⛔ (E) The conclusion is too strong.** The evidence says "maybe", the document says "we must do it". Check: the strength of the conclusion vs the strength of the evidence; an overclaim in the final recommendation → FAIL.
+- **The verdict for class E** additionally carries a drift map: 🔴 (don't rely on it) / 🟡 (needs work: what to prove before deciding) / 🟢 (usable) + the list of unsupported claims.
 
-## Формат вердикта
+## Verdict format
 
 ```
-🎛 taste-check: <файл/черновик> · класс <A/B/C/D>
-Вердикт: ✅ PASS | ❌ FAIL | ⚠️ MANUAL REVIEW
-Нарушено: P9 (3 длинных тире, строки 12/40/41), P6 (0 входящих ссылок)
-Чисто: P1-P5, P7, P8, P14
-Не проверялось: P17-P19 (не исходящее)
-→ Действие: <вернуть автору / показать с флагом / можно показывать>
+🎛 taste-check: <file/draft> · class <A/B/C/D>
+Verdict: ✅ PASS | ❌ FAIL | ⚠️ MANUAL REVIEW
+Violated: P9 (3 long dashes, lines 12/40/41), P6 (0 incoming links)
+Clean: P1-P5, P7, P8, P14
+Not checked: P17-P19 (not outbound)
+→ Action: <return to the author / show with a flag / safe to show>
 ```
 
-## Границы
-- Read-only: никаких Write/Edit в волт, никаких «сразу и починил».
-- Принципы Антона не выдумывать: новый принцип добавляется только из его реального сигнала (правка/цитата/digest rule_scan) с датой. Сырьё сигналов: `$IMPORTS_ROOT/rule_candidates/digest-*.md` (preference-sweep) + memory `type: feedback`.
-- Калибрует веса только Антон (как у Арсёнова: агент собирает сигналы, паттерны калибрует человек).
-- Токен-закон: сперва детерминированные проверки (grep/счёт), LLM — только суждение по куску.
+## Boundaries
+- Read-only: no Write/Edit into the vault, no "I already fixed it along the way".
+- Don't invent the owner's principles: a new principle is added only from a real signal of his (an edit/quote/digest rule_scan) with a date. Signal feedstock: `$IMPORTS_ROOT/rule_candidates/digest-*.md` (preference-sweep) + memory entries with `type: feedback`.
+- Only the owner calibrates the weights (same as in the source review: the agent collects signals, the human calibrates the patterns).
+- The token law: deterministic checks first (grep/counting), the LLM only for judgement on an excerpt.
 
 ---
 
