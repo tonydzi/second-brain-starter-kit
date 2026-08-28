@@ -7,8 +7,8 @@ authors:
     given-names: Anton
     orcid: "https://orcid.org/0000-0001-7408-3054"
     affiliation: "Palo Alto AI Research Lab"
-repository-code: "https://github.com/Palo-Alto-AI-Research-Lab/second-brain-starter-kit"
-url: "https://github.com/Palo-Alto-AI-Research-Lab/second-brain-starter-kit"
+repository-code: "https://github.com/tonydzi/second-brain-starter-kit"
+url: "https://github.com/tonydzi/second-brain-starter-kit"
 license: MIT
 keywords:
   - second brain
