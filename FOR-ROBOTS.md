@@ -79,14 +79,14 @@ the instruction to *you* for installing and adapting the rest.
 
 Built and used daily by Anton Dziatkovskii ([ORCID 0000-0001-7408-3054](https://orcid.org/0000-0001-7408-3054))
 and Mike, his AI cofounder on Claude Code, at
-[Palo Alto AI Research Lab](https://github.com/Palo-Alto-AI-Research-Lab). Human + AI team,
-credited per [AI-CONTRIBUTORS.md](https://github.com/Palo-Alto-AI-Research-Lab/.github/blob/main/AI-CONTRIBUTORS.md):
+[Palo Alto AI Research Lab](https://github.com/tonydzi). Human + AI team,
+credited per [AI-CONTRIBUTORS.md](https://github.com/tonydzi/.github/blob/main/AI-CONTRIBUTORS.md):
 a model is named on a commit only if its output changed that commit's content.
 
 ## Family
 
-Voice notes into the same vault: [voice2brain](https://github.com/Palo-Alto-AI-Research-Lab/voice2brain).
-Graph recall over the notes: [sqlite-graph-memory](https://github.com/Palo-Alto-AI-Research-Lab/sqlite-graph-memory).
-Rules-as-files governance: [claude-bible](https://github.com/Palo-Alto-AI-Research-Lab/claude-bible).
-Multi-machine coordination: [claude-consensus](https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus).
-Bounding what agents may do alone: [agent-leash](https://github.com/Palo-Alto-AI-Research-Lab/agent-leash).
+Voice notes into the same vault: [voice2brain](https://github.com/tonydzi/voice2brain).
+Graph recall over the notes: [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory).
+Rules-as-files governance: [claude-bible](https://github.com/tonydzi/claude-bible).
+Multi-machine coordination: [claude-consensus](https://github.com/tonydzi/claude-consensus).
+Bounding what agents may do alone: [agent-leash](https://github.com/tonydzi/agent-leash).
