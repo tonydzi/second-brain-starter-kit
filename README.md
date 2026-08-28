@@ -46,7 +46,7 @@ Every one of them ran in production before it was published. One command each.
 | [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | graph memory for agents on plain SQLite — no server, no vector DB |
 | [verbatim-citation-gate](https://github.com/tonydzi/verbatim-citation-gate) | a deterministic gate that catches invented quotes before they ship |
 | [agent-leash](https://github.com/tonydzi/agent-leash) | an 8-domain leash for delegated agent authority |
-| [claude-consensus](https://github.com/tonydzi/claude-consensus) | machines negotiate propose → counter → accept → commit instead of drifting |
+| [claude-consensus](https://github.com/tonydzi/claw-consensus) | machines negotiate propose → counter → accept → commit instead of drifting |
 | [llm-spend-audit](https://github.com/tonydzi/llm-spend-audit) | where your LLM subscription budget actually goes |
 | [agent-runtime-integrity-bench](https://github.com/tonydzi/agent-runtime-integrity-bench) | replay, idempotency and consensus-integrity scenarios from real incidents |
 
