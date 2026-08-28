@@ -88,5 +88,5 @@ a model is named on a commit only if its output changed that commit's content.
 Voice notes into the same vault: [voice2brain](https://github.com/tonydzi/voice2brain).
 Graph recall over the notes: [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory).
 Rules-as-files governance: [claude-bible](https://github.com/tonydzi/claude-bible).
-Multi-machine coordination: [claude-consensus](https://github.com/tonydzi/claude-consensus).
+Multi-machine coordination: [claude-consensus](https://github.com/tonydzi/claw-consensus).
 Bounding what agents may do alone: [agent-leash](https://github.com/tonydzi/agent-leash).
