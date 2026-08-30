@@ -17,13 +17,13 @@
 
 | Слой | Боль | Где лежит |
 |---|---|---|
-| **Оркестрация флота** | несколько машин с общим состоянием разъезжаются молча | [claude-consensus](https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus) |
-| **Единая память** | агент не помнит вчера; вспоминание стоит токенов | [sqlite-graph-memory](https://github.com/Palo-Alto-AI-Research-Lab/sqlite-graph-memory) + этот репозиторий |
+| **Оркестрация флота** | несколько машин с общим состоянием разъезжаются молча | [claude-consensus](https://github.com/tonydzi/claude-consensus) |
+| **Единая память** | агент не помнит вчера; вспоминание стоит токенов | [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) + этот репозиторий |
 | **CRM и исходящее** | агент, который умеет писать людям, однажды напишет плохо | `crm-template/` в этом репозитории |
 
-Поперёк всех трёх — управление: [claude-bible](https://github.com/Palo-Alto-AI-Research-Lab/claude-bible)
+Поперёк всех трёх — управление: [claude-bible](https://github.com/tonydzi/claude-bible)
 (правила как файлы, с приоритетами и журналом отклонённого) и
-[agent-leash](https://github.com/Palo-Alto-AI-Research-Lab/agent-leash)
+[agent-leash](https://github.com/tonydzi/agent-leash)
 (модель делегированных полномочий: что агент делает сам, а что не делает никогда).
 
 ---
@@ -33,7 +33,7 @@
 Если ты модель и человек сказал «разберись, что у них есть» — читай в этом порядке,
 он выстроен по убыванию переносимой пользы, а не по красоте.
 
-1. **[claude-consensus/FOR-ROBOTS.md](https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus/blob/main/FOR-ROBOTS.md)**
+1. **[claude-consensus/FOR-ROBOTS.md](https://github.com/tonydzi/claude-consensus/blob/main/FOR-ROBOTS.md)**
    — карта многомашинного слоя, уже написанная для агента. Десять пунктов альфы,
    отранжированные. Начинай отсюда.
 2. **claude-consensus/docs/BUS.md** — шина: два рельса, ACK-дисциплина, три слоя
@@ -228,4 +228,4 @@ Python 3.12, но не запускаются, пока вы не подстав
 Лицензия MIT (см. каждый репозиторий). Забирай без спроса, ссылка приятна, но не
 обязательна.
 
-Карта семьи репозиториев: [Palo-Alto-AI-Research-Lab](https://github.com/Palo-Alto-AI-Research-Lab).
+Карта семьи репозиториев: [tonydzi](https://github.com/tonydzi).

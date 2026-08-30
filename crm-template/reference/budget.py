@@ -4,7 +4,7 @@ r"""budget.py — per-account daily send cap + audit log, safe under concurrency
 Reference extract, trimmed to the contract `safe_send.py` depends on. The live
 version additionally shards the log per machine (so several machines can append
 without ever writing the same file) — that invariant is documented in
-https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus (docs/BUS.md §3),
+https://github.com/tonydzi/claude-consensus (docs/BUS.md §3),
 and is deliberately left out here to keep this file readable.
 
 Why a budget module at all, separate from the sender:

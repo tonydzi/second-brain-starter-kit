@@ -79,7 +79,7 @@ except Exception:
 BASE = os.path.dirname(os.path.abspath(__file__))
 EPI = os.path.join(BASE, "episodes")
 DRAFTS = os.path.join(BASE, "drafts")
-GITHUB_REPO = "github.com/Palo-Alto-AI-Research-Lab/clawrush"  # repo slug stays until Anton renames
+GITHUB_REPO = "github.com/tonydzi/clawrush"  # repo slug stays until Anton renames
 REPO_CLONE = r"E:\GitHub\clawrush"  # local clone for manual gh publish (longreads/ + devlog/)
 GH_SUBDIR = {"longread": "longreads", "dev-log": "devlog"}  # where each tier lands in the repo
 # RU posting target = @ClawRus megagroup. Resolve STRICTLY by this numeric id, never by
