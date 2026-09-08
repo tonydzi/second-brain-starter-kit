@@ -7,6 +7,30 @@
 Это рабочая система, которой мы пользуемся сами каждый день, — очищенная от
 личных данных и урезанная до переносимого ядра: **метод, не данные**.
 
+## Зачем брать весь набор, а не один скилл
+
+Один скилл — это фокус. Полезным на дистанции агента делают привычки вокруг него: ворота, которые
+не дают сказать «готово» без доказательства; ретро, которое кладёт выученное туда, где следующая
+сессия его найдёт; реестр уже отклонённых решений, чтобы их не предлагали заново; хендофф,
+переживающий крэш. Они работают только вместе — поэтому едут одним китом, а не сотней отдельных
+загрузок.
+
+Ставится целиком и работает с первого дня:
+
+```bash
+npx skills add tonydzi/second-brain-starter-kit
+```
+
+или внутри Claude Code:
+
+```
+/plugin marketplace add tonydzi/second-brain-starter-kit
+/plugin install second-brain-skills@second-brain
+```
+
+MIT, бесплатно, никуда не звонит. Берите нужное, лишнее удаляйте, а если скилл сломался на вашей
+машине — заводите issue. Пути описаны в [docs/PATHS.md](docs/PATHS.md).
+
 ## Start here — 25 skills worth your first hour
 Every one of them ran in production before it was published. One command each.
 
@@ -50,7 +74,7 @@ Every one of them ran in production before it was published. One command each.
 | [llm-spend-audit](https://github.com/tonydzi/llm-spend-audit) | where your LLM subscription budget actually goes |
 | [agent-runtime-integrity-bench](https://github.com/tonydzi/agent-runtime-integrity-bench) | replay, idempotency and consensus-integrity scenarios from real incidents |
 
-Full map of all 101 → [skills/INDEX.md](skills/INDEX.md)
+Full map of all 100 → [skills/INDEX.md](skills/INDEX.md)
 
 ## Что внутри
 
@@ -59,7 +83,7 @@ Full map of all 101 → [skills/INDEX.md](skills/INDEX.md)
 | `SEED.md` | Стартовое сообщение для ПЕРВОЙ сессии Claude Code — с него всё начинается |
 | `BOOTSTRAP-CLAUDE.md` | Инструкция для самого Claude: как установить и адаптировать набор |
 | `CLAUDE-EXTERNAL.md` | Наши рабочие принципы (стиль работы ассистента) — основа для твоего CLAUDE.md |
-| `skills/` | **Все 101 скилл-команда**, которыми система работает каждый день — карта: [`skills/INDEX.md`](skills/INDEX.md). Личные данные в примерах заменены на вымышленные ([как именно](docs/WHAT-IS-SHARED.md)) |
+| `skills/` | **Все 100 скилл-команд**, которыми система работает каждый день — карта: [`skills/INDEX.md`](skills/INDEX.md). Личные данные в примерах заменены на вымышленные ([как именно](docs/WHAT-IS-SHARED.md)) |
 | `templates/` | Шаблоны заметок второго мозга (концепты, решения, ревью недели/месяца) |
 | `crm-template/` | CRM: markdown «карточка = файл» + [движок](crm-template/ENGINE.md) со скорингом теплоты и безопасным исходящим, с демо-данными |
 | `docs/` | Как пользоваться CLAUDE.md, онбординг, что шарится |
@@ -108,7 +132,7 @@ npx skills add tonydzi/second-brain-starter-kit
 ## Дорожная карта
 
 **Сейчас — [v0.1.0](https://github.com/tonydzi/second-brain-starter-kit/releases/tag/v0.1.0).**
-101 скилл, 246 движков, которые эти скиллы реально зовут, шаблоны заметок, CRM-движок
+100 скиллов, 246 движков, которые эти скиллы реально зовут, шаблоны заметок, CRM-движок
 со скорингом теплоты и безопасным исходящим, `SEED.md` + `BOOTSTRAP-CLAUDE.md` для первой
 сессии и `HANDOVER.md` для тех, у кого уже есть свой флот агентов.
 
@@ -176,6 +200,6 @@ Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude C
 running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
 production use before publication.
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 📦 All 100 skills: https://github.com/tonydzi/second-brain-starter-kit
 - 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
 - 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

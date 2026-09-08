@@ -59,7 +59,7 @@ SECRET_NUMBERS = [
 ]
 # Person names: secret ONLY on the freeschool rail. The book keeps names on purpose.
 PERSON_NAMES = [
-    "Нина", "Нина", "Рита", "Олег", "васильева", "Полина",
+    "Нина", "Мария", "Рита", "Олег", "Сидорова", "Полина",
     "Арина", "Артём и алиса", "Dziatkovskii",
 ]
 # Identifiers: secret on EVERY rail (mailboxes, hostnames).

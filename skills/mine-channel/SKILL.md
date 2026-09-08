@@ -1,10 +1,10 @@
 ---
 name: mine-channel
-description: >
-  Mine ANY Telegram channel/chat for alpha in one command — scrape (0-token, incremental) →
-  deterministic detector shortlist → LLM judge (what's genuinely valuable FOR this owner) →
-  well-linked vault notes + database + MOC + reindex. Trigger on "/mine-channel <@channel|id>",
-  "mine this channel", "alpha from <channel>". Generalized: any channel, one config.
+description: >-
+  Mine any Telegram channel or chat for signal in one command: incremental zero-token scrape,
+  deterministic detector shortlist, LLM judge for what is genuinely valuable to this owner, then
+  linked vault notes, a database row, a map-of-content entry and reindex. Triggers:
+  "/mine-channel <@channel|id>", "alpha from <channel>".
 license: MIT
 ---
 
@@ -26,7 +26,7 @@ set PYTHONIOENCODING=utf-8
 python $IMPORTS_ROOT/alpha/mine_channel.py --channel <name|id> --slug <slug> [--limit N] [--top 40] [--since YYYY-MM-DD --until YYYY-MM-DD]
 ```
 → `_imports\alpha\<slug>\<slug>.jsonl` + `<slug>.db` + the shortlist `_imports\alpha\candidates\<slug>-report.md`.
-(The scrape goes through the subscription Telethon session `C:/mcp/telegram-mcp/.env`, account work_acct_a — NOT a paid API [[prefer-included-limits-before-paid-api]]. Re-running without `--channel` plus `--detect-only` = re-detect without re-scraping.)
+(The scrape goes through the subscription Telethon session `<TELEGRAM_MCP_DIR>/.env`, account work_acct_a — NOT a paid API [[prefer-included-limits-before-paid-api]]. Re-running without `--channel` plus `--detect-only` = re-detect without re-scraping.)
 
 **3. The judge (LLM, shortlist only).** Run the shortlist through a **cheap grunt model** (grunt work → the small model [[model-routing-sonnet-grunt]]; a subagent with `model:'sonnet'`, or the `alpha-judge` skill): keep only REAL alpha FOR THE OWNER (a tool/model/deal · a technique or workflow · a mental model · a proof point or benchmark · a build pattern), and drop promos, banter, and anything we already do better. Verdicts: ✅ alpha · 🟡 watch · 🗑 noise.
 
@@ -40,13 +40,15 @@ The detector is generic (AI / tool / deal / startup keywords); per-channel keywo
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

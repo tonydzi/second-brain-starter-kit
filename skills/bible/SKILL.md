@@ -1,11 +1,11 @@
 ---
 name: bible
-description: >
-  The operations Bible — a single behavioral codex governing everyone who acts AS or FOR the
-  owner: the owner, human assistants, and AI agents. Load BEFORE doing or saying anything on the
-  owner's behalf — outreach, replying in their chats, scheduling, purchases, hiring, household
-  ops. Explains where the rules live (the Obsidian vault), how to pull the right slice, and how
-  to resolve conflicts (newest rule wins by topic).
+description: >-
+  Load the operations codex that governs everyone acting as or for the owner (the owner, human
+  assistants and AI agents) before outreach, replies in their chats, scheduling, purchases,
+  hiring or household ops. Covers where the rules live in the vault, how to pull the right
+  slice, and the rule that the newest entry wins per topic. Triggers: "/bible", "what do the
+  rules say".
 license: MIT
 ---
 
@@ -59,13 +59,15 @@ Verbatim from Anton · imperative `WHEN → DO` · self-contained + example · f
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

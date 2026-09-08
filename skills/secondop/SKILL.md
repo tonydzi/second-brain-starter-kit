@@ -1,12 +1,11 @@
 ---
 name: secondop
-description: >
-  A SECOND OPINION from an external LLM on every substantial task — 3 checkpoints: T1 start ("is
-  the plan valid?"), T2 fork ("which path?"), T3 finish + QA breaker ("try to break it"). One
-  structured move per exchange (PROPOSE/COUNTER/VERIFY/ACCEPT/BLOCK) with memory via resume;
-  every exchange is mirrored into a human-visible channel. Supports a multi-vendor panel (Codex
-  + Grok + Gemini) instead of a single reviewer. Trigger on "/secondop", "get a second opinion",
-  "run the review panel".
+description: >-
+  Get a second opinion from an external LLM at three checkpoints: T1 is the plan valid, T2 which
+  path at a fork, T3 finish plus a QA breaker that tries to break the result. One structured
+  move per exchange (PROPOSE, COUNTER, VERIFY, ACCEPT, BLOCK) with memory across turns, and
+  every exchange mirrored into a human-visible channel. Supports a multi-vendor panel instead of
+  a single reviewer. Triggers: "/secondop", "get a second opinion", "run the review panel".
 license: MIT
 ---
 
@@ -39,13 +38,15 @@ Drops a request file onto the machine bus (`_machine-bus/_secondop/`); the hub's
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

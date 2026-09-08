@@ -1,13 +1,12 @@
 ---
 name: retro
-description: >
-  End-of-session retrospective: (0) RECALL & reconcile this session against the whole
-  collaboration first, (1) INVENTORY what was actually built (git log + recently-touched files),
-  (2) summarize the session's arc, (3) classify each artifact keep-&-reuse / one-off / promote-
-  to-permanent, (4) route durable ones to their right home (memory, canon, codex, a skill, a
-  hook) — including spinning repeated actions into new skills, (5) auto-save the retro as a
-  vault note and hand back an enriched /compact block so working memory shrinks WITHOUT losing
-  the thread. Trigger on "/retro", "/rr", "wrap up the session".
+description: >-
+  Close a work session properly: reconcile it against the wider collaboration, inventory what
+  was actually built from git log and recently-touched files, summarize the arc, classify each
+  artifact as keep, one-off or promote-to-permanent, route the durable ones to memory, canon or
+  a new skill, save the retro as a vault note, and hand back an enriched /compact block so
+  working memory shrinks without losing the thread. Triggers: "/retro", "/rr", "wrap up the
+  session".
 license: MIT
 ---
 
@@ -170,13 +169,15 @@ Write a clean note to `$OBSIDIAN_VAULT/01-Conversations/Claude/Retros/retro-<YYY
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

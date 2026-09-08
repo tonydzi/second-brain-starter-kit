@@ -1,11 +1,10 @@
 ---
 name: whatsapp-sync
-description: >
-  On-demand refresh of WhatsApp text into the Obsidian vault (data layer + dashboard + group
-  labels + contact notes). TEXT ONLY — never downloads media. Pulls the recent window the live
-  companion bridge exposes, not the full multi-year archive. Semi-auto by design: it drives the
-  live main-number bridge and needs the phone nearby. Trigger on "/whatsapp-sync", "pull
-  whatsapp".
+description: >-
+  Refresh WhatsApp text into an Obsidian vault (data layer, dashboard, group labels, contact
+  notes). Text only, never downloads media, and pulls the recent window the live companion
+  bridge exposes rather than a full multi-year archive. Semi-automatic by design: it drives the
+  live bridge and needs the phone nearby. Triggers: "/whatsapp-sync", "pull whatsapp".
 license: MIT
 ---
 
@@ -64,13 +63,15 @@ RELATION (do not duplicate):
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

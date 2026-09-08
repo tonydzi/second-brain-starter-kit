@@ -1,11 +1,10 @@
 ---
 name: dr-fanout
-description: >
-  One command to fan a Deep Research prompt out to several external LLMs at once (ChatGPT /
-  Gemini / Grok / others) through the operator's logged-in browser, then collect the reports,
-  archive the originals, and synthesize a consensus. Trigger on "/dr-fanout", "fan out the DR",
-  "distribute the research prompt". Automates the final stage of the Alpha Protocol: no more
-  hand-pasting one prompt into N sites.
+description: >-
+  Fan one deep-research prompt out to several external LLMs at once through a logged-in browser,
+  then collect the reports, archive the originals and synthesize a consensus. Use at the final
+  stage of a research protocol, instead of hand-pasting one prompt into N sites. Triggers:
+  "/dr-fanout", "fan out the DR", "distribute the research prompt".
 license: MIT
 ---
 
@@ -14,7 +13,7 @@ license: MIT
 > The final stage of the Alpha Protocol, automated. Channels: **ChatGPT** (chatgpt.com) · **Gemini** (gemini.google.com) · **Grok** (grok.com). The mechanism = the Claude-in-Chrome MCP (the operator's live logged-in Chrome). Canon: [[alpha-protocol-recall-plus-dr]], decision-multi-llm-vendor-independence (heterogeneous consensus), [[chrome-autonomy-self-drive]], [[browser-work-on-peers-not-hub]] (strictly local).
 
 ## ⭐ What is already decided (the foundation, don't re-research) — updated 2026-07-16
-1. **The browser layer = Firefox-first** (Decision Memo `02-Decisions/decision-2026-07-16-browser-automation-layer.md`, DR26-07-16-HUB-01, confidence high). Chrome 127+ encrypts cookies (ABE) and since April 2026 binds sessions to the hardware (DBSC) → external cookie extraction is impossible without malware techniques. **Firefox cookies are open** (plaintext SQLite, DBSC not implemented) → a dedicated per-service Firefox profile + Playwright `launch_persistent_context`; a Chrome CDP attach is only a fallback for strictly-Chromium sites. The hub stack is already up: `firefox_cookies.py` (`~/.claude/scripts/_shared/`), profiles in `D:\AutomationBrowsers\Firefox\`.
+1. **The browser layer = Firefox-first** (Decision Memo `02-Decisions/decision-2026-07-16-browser-automation-layer.md`, DR26-07-16-HUB-01, confidence high). Chrome 127+ encrypts cookies (ABE) and since April 2026 binds sessions to the hardware (DBSC) → external cookie extraction is impossible without malware techniques. **Firefox cookies are open** (plaintext SQLite, DBSC not implemented) → a dedicated per-service Firefox profile + Playwright `launch_persistent_context`; a Chrome CDP attach is only a fallback for strictly-Chromium sites. The hub stack is already up: `firefox_cookies.py` (`~/.claude/scripts/_shared/`), profiles in `<AUTOMATION_BROWSERS_ROOT>\Firefox\`.
 2. **The live Chrome MCP (Claude-in-Chrome) remains the deliberate anti-ban path** for actions that must look like "a human in a real session" (fb-post/x-post go that way). For dr-fanout the choice of execution path (live Chrome MCP vs headless Firefox+Playwright) is being clarified by an ongoing DR (see item 4).
 3. **A CLI workaround does NOT give you subscription Deep Research** (verified 07-15): the Codex CLI / Gemini CLI only do web search; real consumer-subscription Deep Research cannot be triggered programmatically (Google's DR agent = a separate paid API). ⇒ the browser front end is the only road to subscription DR, so we make it anti-fragile instead of running away from it.
 4. **ToS risk, sharpest at Grok:** the xAI AUP explicitly forbids automated/non-human access (risk of suspension/termination). There are no documented bans for automating YOUR OWN account, but the text is explicit → run the Grok channel at human pace; the decision to "keep / slow down / replace with claude.ai" belongs to the owner.
@@ -161,13 +160,15 @@ Don't run a live DR just to test (it burns quota). Test in parts: (1) the probe 
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

@@ -1,10 +1,10 @@
 ---
 name: notpeople-wave
-description: >
-  Run the next investor-outreach wave end-to-end, the verified way: batch of targets →
-  personalized pitches from real templates → send via the designated account → log every touch
-  in the CRM. Trigger on "/notpeople-wave", "next outreach batch". The skill walks the exact
-  checklist with rate limits and dedup against everyone already contacted.
+description: >-
+  Run an investor-outreach wave end to end: assemble the batch of targets, personalize pitches
+  from real templates, send from the designated account, and log every touch in the CRM. Walks
+  the exact checklist with rate limits and dedup against everyone already contacted. Triggers:
+  "/notpeople-wave", "next outreach batch".
 license: MIT
 ---
 
@@ -14,7 +14,7 @@ license: MIT
 
 > 📖 **Operates under `telegram-lead-outreach`** (the general Telegram outreach playbook) and the `bible` outreach domain. This skill only adds the NotPeople-specific sequencing + the dedup-ledger discipline. Don't duplicate guardrails — they live there; newer rule beats older.
 
-**What this is.** NotPeople = a $600K pre-seed SAFE raise pitched to ranked crypto/VC investors over Telegram from **@work_acct_a**. Nina is the live lead operator; this (follower) machine runs the sends. Project memory: `notpeople-outreach-waves`. Pipeline lives in `D:\OBSIDIAN\_imports\notpeople\` (on the hub: `$IMPORTS_ROOT/notpeople/` — drive-agnostic scripts).
+**What this is.** NotPeople = a $600K pre-seed SAFE raise pitched to ranked crypto/VC investors over Telegram from **@work_acct_a**. Nina is the live lead operator; this (follower) machine runs the sends. Project memory: `notpeople-outreach-waves`. Pipeline lives in `$IMPORTS_ROOT\notpeople\` (on the hub: `$IMPORTS_ROOT/notpeople/` — drive-agnostic scripts).
 
 **The two bugs this skill exists to prevent (25 Jun 2026):**
 1. The 22 Jun wave was **never appended to `NotPeople-Pitched.csv`**, so `select_next_investors.py` kept proposing already-pitched leads.
@@ -31,7 +31,7 @@ The fix is baked into steps 2 and 5 below: **read each lead's live thread before
 
 ### 1. Select the next N truly-new investors
 - Default N = 10 (operator may say a number). The operator may name leads to **skip** (e.g. "skip Karim") → drop them, pull the next-ranked to refill N.
-- Run the selector: `python "D:\OBSIDIAN\_imports\notpeople\select_next_investors.py"` (reads the scored pool, excludes anyone already in `NotPeople-Pitched.csv`).
+- Run the selector: `python "$IMPORTS_ROOT\notpeople\select_next_investors.py"` (reads the scored pool, excludes anyone already in `NotPeople-Pitched.csv`).
 - ⚠️ **The ranked queue is contaminated** — its top was already pitched 22 Jun. Do NOT trust queue position alone. Treat the selector output as *candidates*, then verify each in step 2. If the top is all already-contacted, scan deeper (positions 23+ were clean on 25 Jun).
 
 ### 2. Verify EACH candidate against the live thread (the rule that saved us)
@@ -44,7 +44,7 @@ For every candidate, before composing anything:
 - Assemble the final N truly-new, name-correct leads. **Report the list to the operator and WAIT for "+"** before sending (outbound = Tier-2, ask-first).
 
 ### 3. Compose + send (Opus voice, per lead) — only after "+"
-- Pitches come from `build_pitch_drafts.py` (50 personalized, ranked) — `python "D:\OBSIDIAN\_imports\notpeople\build_pitch_drafts.py"` writes `pitch_queue.json` + a drafts note. Top-N = the batch. Personalize per lead; **@work_acct_a = the operator's personal voice → Opus**, no copy-paste blast, pace the sends ([[telegram-lead-outreach]] guardrails).
+- Pitches come from `build_pitch_drafts.py` (50 personalized, ranked) — `python "$IMPORTS_ROOT\notpeople\build_pitch_drafts.py"` writes `pitch_queue.json` + a drafts note. Top-N = the batch. Personalize per lead; **@work_acct_a = the operator's personal voice → Opus**, no copy-paste blast, pace the sends ([[telegram-lead-outreach]] guardrails).
 - The standing pitch BODY (NotPeople, $600K pre-seed SAFE, Calendly close) lives in `build_pitch_drafts.py` — reuse it, don't rewrite the offer.
 - `send_message(<chat>, <text>, account="work_acct_a")` per lead.
 
@@ -79,13 +79,15 @@ Operator-facing: N sent + N/N delivered (with ids), N dropped (dups/dead handles
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

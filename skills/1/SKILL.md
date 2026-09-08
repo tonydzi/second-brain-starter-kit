@@ -1,12 +1,10 @@
 ---
-name: 1
-description: >
-  Recover after a HARD session crash (app died, computer rebooted, context lost mid-work) with
-  one ultra-short command: where were we + is everything alive + restore history. Trigger on
-  "/1", "/!", "resume after crash", "wake". Three steps: (1) RECALL from the TurnState black-box
-  ledger (last requests, files, decisions — 0 tokens); (2) green/red health ping: system map,
-  file sync, MCP connectors; (3) collect the full previous-session history for seamless pickup.
-  Distinct from a retrospective: after a crash there is nothing to wrap up, only to recover.
+name: "1"
+description: >-
+  Recover a session after a hard crash (app died, machine rebooted, context lost mid-work):
+  replay the turn-state ledger for the last requests, files and decisions, run a green/red
+  health ping over the system map, file sync and MCP connectors, then rebuild the previous
+  session history for pickup. Triggers: "/1", "resume after crash", "wake".
 license: MIT
 ---
 
@@ -60,15 +58,14 @@ Then a 🧒 "In plain words" line (memory [[eli5-always]]).
 ## Canon
 Memory [[crash-recovery-command]]. Building blocks: [[turnstate-ledger]] (the black box), [[claude-desktop-sessions-per-account]] (continue_session), [[system-architect]] (/arch), `syncthing-desktop-laptop-sync` (/sync-check), [[mcp-health-check]] (/mcp). Paired with the SessionStart hook `session_resume_hook` (that one shows the previous session at startup on its own — this one gathers recall + health + full history on command).
 
+<!--kit-footer-->
+
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

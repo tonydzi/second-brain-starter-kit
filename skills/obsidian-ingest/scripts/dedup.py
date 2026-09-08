@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Systematic exact-duplicate detection across Telegram post files.
 - body = text between frontmatter and '## See Also', whitespace-normalized
 - exact dups (same hash) -> keep earliest by filename, delete rest, record remap

@@ -1,12 +1,10 @@
 ---
-name: 03
-description: >
-  Launch autonomous multi-machine consensus between Claude peers (hub + laptops + teammate
-  machines): the peers negotiate a decision among themselves over a shared coordination channel
-  and execute it, without using the human as a courier. Trigger on "/03" or phrases like "work
-  it out among yourselves" / "find consensus". Announce-and-go: drop one status line, then open
-  a proposal via the consensus engine. The human is woken only for irreversible/high-risk
-  actions or a deadlock.
+name: "03"
+description: >-
+  Run an autonomous consensus round between agent peers on several machines: they negotiate a
+  decision over a shared channel and execute it without a human relaying messages. Use when
+  multiple machines must agree on a change. Triggers: "/03", "work it out among yourselves",
+  "find consensus". Wakes the human only for irreversible actions or a deadlock.
 license: MIT
 ---
 
@@ -95,15 +93,14 @@ What was agreed · with whom · the verdict (✅ committed+verified / ⏳ waitin
 - Failure modes (a byzantine peer, an auto-loop, a false VERIFY) are an open DR; until it closes we keep Phase 1 conservative.
 - The engine is the single source of truth for state (`_machine-bus/_decisions/log-<MACHINE>.jsonl`); I don't duplicate its logic, I only call its verbs.
 
+<!--kit-footer-->
+
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

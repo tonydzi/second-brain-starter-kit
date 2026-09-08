@@ -1,10 +1,10 @@
 ---
 name: tg-check
-description: >
-  Per-machine self-test of BOTH Telegram rails (MCP + userbot library) — does THIS computer's
-  Telegram work on both? Trigger on "/tg-check", "are both tg rails up", "check telegram
-  channels". Runs the deterministic detector (0 tokens) AND a true in-session MCP probe, prints
-  a per-rail verdict with the exact fix for whichever is down.
+description: >-
+  Self-test both Telegram rails on this machine, the MCP connector and the userbot library, with
+  a deterministic zero-token detector plus a real in-session MCP probe, and print a per-rail
+  verdict with the exact fix for whichever is down. Triggers: "/tg-check", "are both tg rails
+  up", "check telegram channels".
 license: MIT
 ---
 
@@ -52,7 +52,7 @@ Merge the detector (Step 1) with the live MCP probe (Step 2) into a single per-m
 - **MCP RED + `AuthKeyDuplicated`** → ROOT CAUSE: one TG session used on 2+ machines. The band-aid is to restart
   Claude Code (the harness brings MCP back up; it will hit the same root cause again). The durable fix is that every
   machine has ITS OWN TG session (Rule B in the house rules) — coordinated by the hub, the operator logs in locally.
-- **MCP RED + `TypeNotFound`** → an outdated telethon in `C:\mcp\telegram-mcp\.venv` → update it.
+- **MCP RED + `TypeNotFound`** → an outdated telethon in `<TELEGRAM_MCP_DIR>\.venv` → update it.
 - **MCP "not loaded into the session"** → restart Claude Code (or open a session that loads MCP).
 - **The telethon rail RED** → a missing/broken `REFRESH_*` in `$IMPORTS_ROOT/dialogs/.env` on this machine,
   or the group is unreachable → check the `.env` / access to the group `<YOUR_CHAT_ID>`.
@@ -72,13 +72,15 @@ a bus/Saved ping on RED. That is a local watchdog (deterministic, no LLM); the h
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

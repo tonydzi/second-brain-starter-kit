@@ -1,11 +1,10 @@
 ---
 name: handoff
-description: >
-  Build a curated "semicolon" — a self-contained handoff document that lets ANOTHER session /
-  person / machine continue the work exactly where this one stopped, without this session's
-  context. Format: decisions+why · what's done+tests · exact paths and values · open blockers ·
-  boundaries · an explicit "➤ CONTINUE FROM HERE" step. Lands in a synced folder plus a short
-  seed prompt ("Read X and continue"). Trigger on "/handoff", "prepare a handoff", "hand this
+description: >-
+  Write a self-contained handoff document so another session, person or machine continues the
+  work without this session's context: decisions and why, what is done and tested, exact paths
+  and values, open blockers, boundaries, and an explicit continue-from-here step. Lands in a
+  synced folder with a short seed prompt. Triggers: "/handoff", "prepare a handoff", "hand this
   off".
 license: MIT
 ---
@@ -47,13 +46,15 @@ As headings with bulleted lists:
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

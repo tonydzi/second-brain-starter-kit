@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Phase 4: build _Telegram-MOC.md directly in the vault, data-driven."""
 import json, re
 from pathlib import Path

@@ -1,10 +1,10 @@
 ---
 name: telegram-watch
-description: >
-  An always-on watch loop over Telegram using MCP push tools, run under a SEPARATE assistant
-  account. Mode 1: when the assistant account is mentioned in team chats, comment on the last
-  few directives with actionable, vault-grounded advice. Mode 2: ambient watch of designated
-  chats with salient-event pings. Trigger on "/telegram-watch", "start the telegram watch".
+description: >-
+  Run an always-on Telegram watch loop under a separate assistant account using MCP push tools.
+  Mode 1 answers when the assistant account is mentioned in team chats, with actionable
+  vault-grounded advice; mode 2 ambiently watches designated chats and pings on salient events.
+  Triggers: "/telegram-watch", "start the telegram watch".
 license: MIT
 ---
 
@@ -12,12 +12,12 @@ license: MIT
 
 > Decided by the operator 2026-06-11: **no BotFather bots.** The assistant lives on their
 > own second user-account **@corp_acct** (label `corp_acct`, id 7303193973,
-> Premium, real SIM +96863211225). The operator himself = @work_acct_a (label `default`,
+> Premium, on its own real SIM). The operator himself = @work_acct_a (label `default`,
 > id 226258979). Separate StringSession per account → no AUTH_KEY_DUPLICATED
 > (see memory `telegram-eventloop-listener`).
 
 > ⚙️ **LIVE ENGINE (2026-06-15): standalone daemon, not this in-session loop.**
-> The production watch now runs as `C:\mcp\tg-watch-daemon\tg_watch_daemon.py` — a thin
+> The production watch now runs as `<TG_WATCH_DIR>\tg_watch_daemon.py` — a thin
 > always-on Telethon daemon that is the SOLE owner of the daemon's OWN minted
 > @corp_acct authorization (NOT the MCP's session → no AUTH_KEY_DUPLICATED), with
 > a **singleton lock** (port 47921) so it can never double-run. It catches the operator's
@@ -34,7 +34,7 @@ license: MIT
    and `corp_acct` (@corp_acct, id 7303193973 — the operator's second/lead account, the
    helper identity). If `corp_acct` is missing → `.env` needs
    `TELEGRAM_SESSION_STRING_CORP_ACCT` (generate via
-   `C:\mcp\telegram-mcp\login_corp_acct.py`, see its header) + MCP restart.
+   `<TELEGRAM_MCP_DIR>\login_corp_acct.py`, see its header) + MCP restart.
    ⚠️ @corp_acct must also be a MEMBER of the whitelisted chats (see Mode 1).
 2. The events.py patch is live: `wait_for_settled_message` result contains an
    `"account"` field. If not → the MCP server predates the patch → restart the
@@ -154,13 +154,15 @@ Append every action to `$IMPORTS_ROOT/tg_assistant_log.jsonl`:
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

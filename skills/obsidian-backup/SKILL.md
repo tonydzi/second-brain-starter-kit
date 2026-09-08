@@ -1,10 +1,10 @@
 ---
 name: obsidian-backup
-description: >
-  The Obsidian data-safety runbook: 3-2-1 backup of the vault, the never-deleted originals
-  archive, the schedulers that keep it running, and the restore / new-PC migration procedure.
-  Trigger on "make a backup", "verify the backup", "the backup looks broken", "restore the
-  vault". Verifies by reading state, not by trusting exit codes.
+description: >-
+  Run the vault data-safety runbook: 3-2-1 backup, the never-deleted originals archive, the
+  schedulers that keep it running, and the restore or new-machine migration procedure. Verifies
+  by reading state rather than trusting exit codes. Triggers: "make a backup", "verify the
+  backup", "the backup looks broken", "restore the vault".
 license: MIT
 ---
 
@@ -17,7 +17,7 @@ This skill is the operational runbook for Anton's vault data-safety system. The 
 ## The system at a glance — 4 layers
 
 1. **Originals (Rule 0).** Every import's raw source is copied verbatim to `$OBSIDIAN_ROOT/_originals/<key>\<date>__<name>\` (sha256 manifest), **never deleted**. Script: `archive_original.py`.
-2. **3-2-1 backup.** Vault → one **git bundle** (full history) + `_originals` copy-only → to **Google Drive** (offsite/cloud) **and** `C:\ObsidianBackup` (separate disk). Script: `backup_to_drive.py`.
+2. **3-2-1 backup.** Vault → one **git bundle** (full history) + `_originals` copy-only → to **Google Drive** (offsite/cloud) **and** `<LOCAL_BACKUP_DIR>` (separate disk). Script: `backup_to_drive.py`.
 3. **Nightly automation.** Windows Task Scheduler job `Obsidian Backup to Drive` runs the backup daily 03:00 (runs even when Claude is closed).
 4. **Weekly watchdog.** Claude routine `obsidian-backup-healthcheck` (Mon ~10:00) runs `backup_healthcheck.py` and Telegrams Anton — heartbeat if fine, alert (and may self-heal) if broken.
 
@@ -28,8 +28,8 @@ This skill is the operational runbook for Anton's vault data-safety system. The 
 | Vault (git repo) | `$OBSIDIAN_VAULT` |
 | Originals (permanent) | `$OBSIDIAN_ROOT/_originals/` (+ `README.txt`) |
 | Scripts | `$IMPORTS_ROOT/{archive_original,backup_to_drive,backup_healthcheck}.py` (+ `backup_to_drive.cmd`, log `backup_to_drive.log`, verdicts in `backup_health\`) |
-| **Offsite copy (cloud)** | `E:\Google Drive on HP Palo Alto\Obsidian-Backup\` — Google account **owner.personal@example.com** (G: shortcut → this folder; Google uploads to cloud) |
-| **Local copy (2nd disk)** | `C:\ObsidianBackup\` |
+| **Offsite copy (cloud)** | `<GDRIVE_ROOT>\Obsidian-Backup\` — Google account **owner.personal@example.com** (G: shortcut → this folder; Google uploads to cloud) |
+| **Local copy (2nd disk)** | `<LOCAL_BACKUP_DIR>\` |
 | Each copy holds | `vault\Owner-Knowledge-<date>.bundle` (last 14 kept) · `_originals\` · `MIGRATE.md` · `last-backup.txt` |
 
 Path is machine-specific (`Google Drive on HP Palo Alto`); on another machine, `backup_to_drive.py` auto-detects `E:\Google Drive on*`.
@@ -71,7 +71,7 @@ Disable-ScheduledTask -TaskName 'Obsidian Backup to Drive'   # pause
 The backup folder (Drive **or** C:) is self-describing — it contains `MIGRATE.md`. The vault lives entirely inside the newest `vault\Owner-Knowledge-<date>.bundle` (full git history in one file).
 
 **Migrate the whole vault to a NEW computer:**
-1. Install Git + Obsidian. Sign into Google Drive `owner.personal@example.com` so `Obsidian-Backup\` syncs down (or copy it from `C:\ObsidianBackup`).
+1. Install Git + Obsidian. Sign into Google Drive `owner.personal@example.com` so `Obsidian-Backup\` syncs down (or copy it from `<LOCAL_BACKUP_DIR>`).
 2. Take the **newest** bundle in `Obsidian-Backup\vault\`.
 3. `git clone "Owner-Knowledge-<date>.bundle" Owner-Knowledge` → the result is the full vault repo with history.
 4. Open that folder as an Obsidian vault. Copy `_originals\` across too (it's just files).
@@ -112,13 +112,15 @@ git -C tmp_restore restore --source <hash> -- "<path>"
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

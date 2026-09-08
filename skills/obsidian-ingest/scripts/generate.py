@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Phase 3 generator: classified JSONL -> Obsidian markdown into STAGING.
 - every post (>=200 chars) -> own file in posts/
 - monthly session masters in sessions/ (Feb-2025 split per-session per user)

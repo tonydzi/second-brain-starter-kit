@@ -1,12 +1,10 @@
 ---
 name: alpha-judge
-description: >
-  The LLM-JUDGE stage of an alpha-extraction engine — the reusable "expensive judge" half of the
-  "cheap detector → expensive judge" pattern, shared by all miners. Given a miner's
-  deterministic candidate list (0-token prefilter), it keeps only the REAL signal and drops
-  noise, then proposes additions to that miner's curated home note. Trigger on "/alpha-judge
-  <miner>", "judge the candidates". Token-cheap: reads ONLY the small candidate digest + the
-  home note, never the corpus.
+description: >-
+  LLM-judge stage of an alpha-mining pipeline: take a miner's deterministic candidate list, keep
+  only real signal, drop noise, and propose additions to that miner's curated note. Use after
+  any zero-token detector run. Reads only the candidate digest and the home note, never the
+  corpus. Triggers: "/alpha-judge <miner>", "judge the candidates".
 license: MIT
 ---
 
@@ -54,13 +52,15 @@ Building/refining a DETECTOR script = direct work in `_imports\alpha\` (not here
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

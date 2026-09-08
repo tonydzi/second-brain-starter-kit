@@ -7,6 +7,31 @@ A starter kit for running **Claude Code as a second brain + working assistant**,
 This is the system we run ourselves every day — stripped of personal data and cut down to a
 portable core: **the method, not the data**.
 
+## Why take the whole thing, not one skill
+
+A single skill is a trick. What makes an agent useful over months is the set of habits around it:
+a gate that refuses to say "done" without evidence, a retrospective that files what you learned
+where the next session will actually find it, a registry of decisions you already rejected so
+nobody re-pitches them, a handoff that survives a crash. Those only work together, which is why
+they ship as one kit rather than as 100 separate downloads.
+
+Install it whole and you get a working second brain on day one:
+
+```bash
+npx skills add tonydzi/second-brain-starter-kit
+```
+
+or, inside Claude Code:
+
+```
+/plugin marketplace add tonydzi/second-brain-starter-kit
+/plugin install second-brain-skills@second-brain
+```
+
+It is MIT, it costs nothing, and nothing here phones home. Take what you need, delete the rest,
+and open an issue if a skill breaks on your machine. Paths are documented in
+[docs/PATHS.md](docs/PATHS.md).
+
 ## Start here — 25 skills worth your first hour
 Every one of them ran in production before it was published. One command each.
 
@@ -50,7 +75,7 @@ Every one of them ran in production before it was published. One command each.
 | [llm-spend-audit](https://github.com/tonydzi/llm-spend-audit) | where your LLM subscription budget actually goes |
 | [agent-runtime-integrity-bench](https://github.com/tonydzi/agent-runtime-integrity-bench) | replay, idempotency and consensus-integrity scenarios from real incidents |
 
-Full map of all 101 → [skills/INDEX.md](skills/INDEX.md)
+Full map of all 100 → [skills/INDEX.md](skills/INDEX.md)
 
 ## What's inside
 
@@ -59,7 +84,7 @@ Full map of all 101 → [skills/INDEX.md](skills/INDEX.md)
 | `SEED.md` | The opening message for your FIRST Claude Code session — everything starts here |
 | `BOOTSTRAP-CLAUDE.md` | Instructions for Claude itself: how to install and adapt the kit |
 | `CLAUDE-EXTERNAL.md` | Our working principles (assistant behavior) — the base for your own CLAUDE.md |
-| `skills/` | **All 101 skill commands** the system runs on every day — map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
+| `skills/` | **All 100 skill commands** the system runs on every day — map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
 | `templates/` | Second-brain note templates (concepts, decisions, weekly/monthly reviews) |
 | `crm-template/` | CRM: markdown "one card = one file" + an [engine](crm-template/ENGINE.md) with warmth scoring and safe outbound, with demo data |
 | `docs/` | How to use CLAUDE.md, onboarding, what is shared |
@@ -107,7 +132,7 @@ npx skills add tonydzi/second-brain-starter-kit
 ## Roadmap
 
 **Now — [v0.1.0](https://github.com/tonydzi/second-brain-starter-kit/releases/tag/v0.1.0).**
-101 skills, 246 engines those skills actually call, note templates, a CRM engine with warmth
+100 skills, 246 engines those skills actually call, note templates, a CRM engine with warmth
 scoring and safe outbound, `SEED.md` + `BOOTSTRAP-CLAUDE.md` for the first session, and
 `HANDOVER.md` for people who already run their own agent fleet.
 
@@ -172,6 +197,6 @@ Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude C
 running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
 production use before publication.
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 📦 All 100 skills: https://github.com/tonydzi/second-brain-starter-kit
 - 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
 - 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.

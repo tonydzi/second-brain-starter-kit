@@ -1,17 +1,17 @@
 ---
 name: telegram-howto
-description: >
-  Operating manual for Telegram via the connected MCP (~115 tools). How to find a chat by title,
-  the full tool inventory grouped by job, resolving chat ids, auto-transcription of voice notes,
-  and the connector's gotchas (pinned-first ordering, big-page crash, reload-after-reconnect,
-  untrusted fields, always pass an explicit account). Load whenever non-trivial Telegram work
-  starts.
+description: >-
+  Operating manual for Telegram over its MCP connector and roughly 115 tools: how to find a chat
+  by title, the tool inventory grouped by job, resolving chat ids, auto-transcribing voice
+  notes, and the connector gotchas (pinned-first ordering, big-page crashes, reload after
+  reconnect, untrusted fields, always passing an explicit account). Load before any non-trivial
+  Telegram work.
 license: MIT
 ---
 
 # Telegram howto — operating manual (the operator's account @work_acct_a)
 
-> Born 2026-06-08: finding ONE private chat by title cost a dozen calls. The operator taught the fix, then we removed the gap for good by adding a `search_dialogs` tool to the connector. The connector is **chigwell/telegram-mcp** (a git checkout at `C:\mcp\telegram-mcp`, Telethon + FastMCP, tools `mcp__telegram__*`). After it reconnects, **reload schemas via ToolSearch** before calling.
+> Born 2026-06-08: finding ONE private chat by title cost a dozen calls. The operator taught the fix, then we removed the gap for good by adding a `search_dialogs` tool to the connector. The connector is **chigwell/telegram-mcp** (a git checkout at `<TELEGRAM_MCP_DIR>`, Telethon + FastMCP, tools `mcp__telegram__*`). After it reconnects, **reload schemas via ToolSearch** before calling.
 
 ## 0) Find a chat by title — LOCAL INDEX FIRST, live MCP only as fallback
 **⚡ STEP 0 (default, ALWAYS try first): the local index.** `PYTHONUTF8=1 python "$IMPORTS_ROOT/dialogs/find_chat.py" <words>` — queries **`chats.db`** (125,885 entities / 21,146 groups+channels + 104,739 user DMs; backbone = the CRM `tg_entities` export + live refresh). **~0.16s, 0 API calls, 0 tokens, zero FloodWait/ban risk.** Translit + wrong-keyboard-layout aware (a Latin-typed query still finds a chat named in another script). Prints `[TYPE] telegram_id  name  t.me-link (+members)`. Flags: `--all` (include user DMs), `--users` (only DMs), `--limit N`. The `/chat` skill wraps this. This is why chat-finding is INSTANT — never go to the live API for a chat you can find here. (Born 2026-06-19: the operator flagged "you take AGES to find chats" — the cause was skipping this local step and paginating the live API. Rebuilt 2026-06-19 from the CRM dump; chats.db supersedes the old 10k-capped dialogs.db.)
@@ -83,7 +83,7 @@ In `<YOUR_CHAT_ID>`, each the operator **voice** message gets two auto-replies f
 - **Download a voice note (chat without the bot):** `download_media(chat_id, message_id, file_path)` → faster-whisper.
 
 ## 6) Local modifications to the connector (keep these alive)
-The connector at `C:\mcp\telegram-mcp` is a git checkout of upstream `github.com/chigwell/telegram-mcp`. We have LOCAL changes that a naive reinstall/`git pull` could lose:
+The connector at `<TELEGRAM_MCP_DIR>` is a git checkout of upstream `github.com/chigwell/telegram-mcp`. We have LOCAL changes that a naive reinstall/`git pull` could lose:
 - **`telegram_mcp/tools/chats.py`** — added `search_dialogs` (2026-06-08, +86). Read-only, mirrors `list_chats`.
 - **`telegram_mcp/tools/messages.py`** — added `search_messages_global`, `find_media`, `get_new_messages_since`, `resolve_message_link`, `get_unread_mentions` (2026-06-08/12). All read-only, mirror `list_messages` patterns.
 - 🚫 **`transcribe_audio` REMOVED 2026-06-12** per the operator's rule: NEVER transcribe via Telegram's native STT (poor Russian quality) — ALWAYS use our local faster-whisper on the GPU. Canonical rule: vault `reglament-voice-transcribe-only-local-whisper-never-telegram`. Do not re-add it.
@@ -103,19 +103,21 @@ This is the operator's PERSONAL warmed account (not a bot). Operate gently:
 - **Voice = LOCAL faster-whisper only**, never Telegram STT (see §6 removal + vault `reglament-voice-transcribe-only-local-whisper-never-telegram`).
 - **`telegram_mcp/runner.py`** — a PRE-EXISTING local patch (the earlier MCP-launch/health fix). Not ours; leave it.
 - **Combined patch (all 3 tools):** `$IMPORTS_ROOT/content-factory/telegram-mcp-local-tools.patch` (+ `*.bak-2026-06-08` beside each edited file).
-- **Re-apply after a reinstall:** `cd C:\mcp\telegram-mcp && git apply $IMPORTS_ROOT/content-factory/telegram-mcp-local-tools.patch`, then restart the connector.
+- **Re-apply after a reinstall:** `cd <TELEGRAM_MCP_DIR> && git apply $IMPORTS_ROOT/content-factory/telegram-mcp-local-tools.patch`, then restart the connector.
 - **New tools need a connector restart** to appear (not mid-session).
 - **Permanent fix (optional):** PR these upstream so they ship in the package and survive upgrades.
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

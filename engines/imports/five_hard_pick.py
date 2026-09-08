@@ -1,3 +1,4 @@
+# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 # ---------------------------------------------------------------------------
 # PUBLISHED SAMPLE - the paths and identifiers below are placeholders, not live
 # values. This file runs a real system on the author's machines. Before it runs

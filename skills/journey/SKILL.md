@@ -1,10 +1,9 @@
 ---
 name: journey
-description: >
-  Resurrect and continue a build-in-public BOOK — the serialized story of a founder + AI-
-  cofounder journey. One command: pick up state (which days are written in which languages,
-  what's uncommitted, where the gaps are), then continue writing via the established pipeline.
-  Trigger on "/journey", "the book", "continue the journey".
+description: >-
+  Pick up and continue a serialized build-in-public book: read the current state (which days are
+  written in which languages, what is uncommitted, where the gaps are), then keep writing
+  through the established pipeline. Triggers: "/journey", "the book", "continue the journey".
 license: MIT
 ---
 
@@ -24,7 +23,7 @@ A book about the two of us: 🧑 **Tony** (the owner's public persona, a cinemat
 ## PATHS AND SOURCES (real, verified)
 
 ```
-Repo (git, public):      E:\GitHub\the-journey\
+Repo (git, public):      <GITHUB_ROOT>\the-journey\
   parts:                 01-may-genesis\week-0 · 02-june-scaling\week-1..4 · 03-july-productization\week-5
   craft (ALWAYS load):   BOOK-SPEC.md · PLAYBOOK.md · STYLE.md · VOICE-RECIPE.md · STYLE-VISUAL.md
   auxiliary:             GLOSSARY.md · SOURCES.md · 00-prologue.md · START-HERE.md
@@ -63,7 +62,7 @@ Goal: understand where the book stands in a single glance, without retelling the
 1. Read `memory\book-the-journey.md` (the whole canon: voice rules, privacy, loose ends).
 2. Take the state from the repo:
    ```bash
-   cd "E:/GitHub/the-journey"
+   cd "<GITHUB_ROOT>/the-journey"
    git log --oneline -12
    git status --short                       # what is uncommitted (hanging work from the last session!)
    # RU/EN/DEV coverage matrix:
@@ -137,7 +136,7 @@ so the gate physically could not block a push and reported a false verdict for t
 a permanent leak in the public `canon/BEATS.md` (an IP, a hostname, bot handles).
 
 ```bash
-cd "E:/GitHub/the-journey"
+cd "<GITHUB_ROOT>/the-journey"
 # 1) THE MAIN THING: scan the ARTIFACTS (the files), not only the diff
 python "$IMPORTS_ROOT/leak_scan.py" 03-july-productization canon --profile book || echo "⛔ BLOCK"
 # 2) additionally: only the ADDED lines of the stage
@@ -180,13 +179,15 @@ The canon and the project's full journal: `memory\book-the-journey.md`.
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

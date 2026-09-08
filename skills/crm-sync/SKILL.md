@@ -1,10 +1,10 @@
 ---
 name: crm-sync
-description: >
-  Keep the CRM knowledge layer in the vault in sync with the live CRM code repositories. Pull
-  the latest of the read-only repos, detect which changed, and refresh ONLY the affected
-  reverse-engineering notes and the KEEP/DROP/DECIDE decision note. Trigger on "/crm-sync",
-  "refresh CRM knowledge", "what changed in the CRM code".
+description: >-
+  Sync CRM knowledge notes in a vault with the live CRM code repositories: pull the read-only
+  repos, detect which changed, and refresh only the affected reverse-engineering notes and the
+  keep/drop/decide note. Triggers: "/crm-sync", "refresh CRM knowledge", "what changed in the
+  CRM code".
 license: MIT
 ---
 
@@ -19,8 +19,8 @@ It is the recurring half of the standing rule `evaluate-recurring-into-routine`.
 pull, see what changed, update only the notes that map to the changed code.
 
 ## Where everything lives
-- **Code (read-only clone, 16 repos):** `E:\CRM-app` (memory `crm-gitlab`).
-- **Decomposition audit (HTML, source of the notes):** `E:\CRM-app\_AUDIT\`
+- **Code (read-only clone, 16 repos):** `<CRM_REPOS_ROOT>` (memory `crm-gitlab`).
+- **Decomposition audit (HTML, source of the notes):** `<CRM_REPOS_ROOT>\_AUDIT\`
   (`Functional-Map.html`, `Know-How-Decomposition.html`, `Architecture-Deep.html`).
 - **Vault knowledge layer:** `$OBSIDIAN_VAULT/05-Resources/CRM-Engine/`
   - `_CHARM-CRM-Engine-MOC.md` (hub)
@@ -34,7 +34,7 @@ pull, see what changed, update only the notes that map to the changed code.
   - decision: `$OBSIDIAN_VAULT/02-Decisions/decision-crm-keep-cc-drop-decide.md`
 
 ## Repo -> note map (which note to refresh when which code changes)
-| Code area in E:\CRM-app | Note(s) to refresh |
+| Code area in <CRM_REPOS_ROOT> | Note(s) to refresh |
 |---|---|
 | `admin-panel` / `admin-panel-api` (FastAPI brain, filter-DSL, $facet) | `crm-admin-panel-api-brain` |
 | `mtproto-api` (Telethon hands, event-pool, dialog export, FloodWait) | `crm-mtproto-engine` |
@@ -48,8 +48,8 @@ pull, see what changed, update only the notes that map to the changed code.
 ## Procedure
 1. **RECALL first (don't duplicate).** Read memory `crm-gitlab` and `_CHARM-CRM-Engine-MOC.md`
    so you refresh, not rewrite. Note the date of the last sync.
-2. **Pull the repos.** For each repo dir under `E:\CRM-app`:
-   `git -C "E:\CRM-app\<repo>" pull --ff-only` (clone is read-only; this only updates).
+2. **Pull the repos.** For each repo dir under `<CRM_REPOS_ROOT>`:
+   `git -C "<CRM_REPOS_ROOT>\<repo>" pull --ff-only` (clone is read-only; this only updates).
    Collect the set of repos that actually moved (non-empty pull, or
    `git -C <repo> log --oneline <old>..<new>`). If a pull needs GitLab creds and fails,
    stop and tell Anton (creds in `secrets\`; do NOT hardcode).
@@ -85,13 +85,15 @@ On demand (after Anton hears the CRM changed), or as a light routine. Pairs with
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

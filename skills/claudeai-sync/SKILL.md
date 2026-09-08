@@ -1,10 +1,10 @@
 ---
 name: claudeai-sync
-description: >
-  One-command incremental sync of a claude.ai WEB account into the Obsidian vault — pull only
-  new/changed chats, fold them in as notes (idempotent, never overwrites curated ones), extract
-  artifacts as first-class notes, concept-link the new artifacts, refresh the RAG index +
-  dashboard. Trigger on "/claudeai-sync", "pull claude.ai", "grab new claude.ai chats".
+description: >-
+  Pull new and changed claude.ai web conversations into an Obsidian vault, extract artifacts as
+  first-class notes, concept-link them, and refresh the RAG index and dashboard. Idempotent:
+  curated notes are never overwritten. Triggers: "/claudeai-sync", "pull claude.ai", "grab new
+  claude.ai chats".
 license: MIT
 ---
 
@@ -63,13 +63,15 @@ A short summary to the operator (Telegram Saved Messages works fine): "claude.ai
 
 ---
 
-<!-- CONTACT-FOOTER -->
-## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
-running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
-production use before publication.
+<!--kit-footer-->
 
-- 📦 All 101 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

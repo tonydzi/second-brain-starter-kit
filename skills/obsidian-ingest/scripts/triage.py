@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Phase 2: triage + sessionize.
 Reads telegram-archive.jsonl, drops media-only (audio/photo/video/file per user),
 classifies text, assigns session ids (30-min gap) and month buckets.

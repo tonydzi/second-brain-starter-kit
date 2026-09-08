@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Backfill authored_by into Telegram post frontmatter.
 human  = Anton's own voice transcripts / his messages
 ai     = GPT-generated summaries
