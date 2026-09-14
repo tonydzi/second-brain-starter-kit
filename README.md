@@ -184,7 +184,7 @@ demo — and it runs on its own: nothing here phones home to the rest.
 
 **See how the whole thing fits together → [SYSTEM.md](https://github.com/tonydzi/tonydzi/blob/main/SYSTEM.md)**
 
-Its closest neighbours in the **memory** layer: [`sqlite-graph-memory`](https://github.com/tonydzi/sqlite-graph-memory) · [`voice2brain`](https://github.com/tonydzi/voice2brain) · [`compact-canon`](https://github.com/tonydzi/compact-canon)
+Its closest neighbours in the **memory** layer: [`voice2brain`](https://github.com/tonydzi/voice2brain) · [`compact-canon`](https://github.com/tonydzi/compact-canon) · [`claw-retro`](https://github.com/tonydzi/claw-retro)
 
 <!--ecosystem-map:end-->
 
