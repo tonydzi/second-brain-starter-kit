@@ -81,7 +81,7 @@ Full map of all 100 → [skills/INDEX.md](skills/INDEX.md)
 
 | Folder / file | What it is |
 |---|---|
-| `SEED.md` | The opening message for your FIRST Claude Code session — everything starts here |
+| `SEED.en.md` / `SEED.md` | The opening message for your FIRST Claude Code session (English / Russian) — everything starts here |
 | `BOOTSTRAP-CLAUDE.md` | Instructions for Claude itself: how to install and adapt the kit |
 | `CLAUDE-EXTERNAL.md` | Our working principles (assistant behavior) — the base for your own CLAUDE.md |
 | `skills/` | **All 100 skill commands** the system runs on every day — map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
@@ -115,8 +115,10 @@ npx skills add tonydzi/second-brain-starter-kit
 3. Install [Obsidian](https://obsidian.md) — to look at your second brain with your own eyes.
 4. Clone this repository: `git clone https://github.com/tonydzi/second-brain-starter-kit.git`
    (or Code → Download ZIP).
-5. Open `SEED.md`, put your name in, and paste the text as the first message to Claude Code.
-   Claude takes it from there, following `BOOTSTRAP-CLAUDE.md`.
+5. Open [`SEED.en.md`](SEED.en.md), put your name in, and paste the text as the first message to Claude Code.
+   Claude takes it from there, following `BOOTSTRAP-CLAUDE.md`. (Russian version: [`SEED.md`](SEED.md).)
+
+Using Gemini CLI instead of Claude? → [docs/INSTALL-GEMINI.md](docs/INSTALL-GEMINI.md)
 
 ## The principles this stands on
 
