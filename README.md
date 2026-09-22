@@ -175,6 +175,31 @@ Questions, war stories, or you want to run this yourself:
 
 ---
 
+<!--we-ask:start-->
+
+## Contributors welcome — and here is what we are missing
+
+We spend a lot of time answering other people's issues. It was fair to say out loud
+what we have not built ourselves:
+
+- [Clone this on a machine that is not ours and write down everything that breaks](https://github.com/tonydzi/second-brain-starter-kit/issues/2)
+- [Localize the README (Chinese, Japanese, Korean or Spanish)](https://github.com/tonydzi/second-brain-starter-kit/issues/3)
+- [ONBOARDING.md routes newcomers through five directories that do not exist here](https://github.com/tonydzi/second-brain-starter-kit/issues/1)
+
+Issues labelled [`accepted`](https://github.com/tonydzi/second-brain-starter-kit/issues?q=is%3Aissue+is%3Aopen+label%3Aaccepted) are scoped, free to take, and nobody is on them.
+Comment **"claiming this"** — no permission needed — and it is yours for 7 days.
+New here? Start with [`good first issue`](https://github.com/tonydzi/second-brain-starter-kit/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+
+**You keep the copyright to your code.** No CLA, no assignment, ever — your contribution goes
+in under this repo's existing license, the same terms as ours. We answer every issue and PR
+within 48 hours, including "no, and here is why"; our silence is our bug, so ping the thread.
+
+Full deal: [CONTRIBUTING.md](https://github.com/tonydzi/.github/blob/main/CONTRIBUTING.md)
+
+<!--we-ask:end-->
+
+---
+
 <!--ecosystem-map:start-->
 
 ## 🧩 One piece of a working system
