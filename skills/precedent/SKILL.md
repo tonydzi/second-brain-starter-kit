@@ -1,63 +1,43 @@
 ---
 name: precedent
-description: >-
-  Check whether something was already decided before proposing it: searches the decisions
-  journal, the declined registry and the rules codex plus semantic search, and returns what was
-  decided, why, what was rejected, and under what condition to revisit. Triggers: "/precedent
-  <topic>", "did we already decide this".
-license: MIT
+description: "Перед тем как решать/предлагать что-то структурное — поднять, РЕШАЛИ ли мы это уже: ищет прошлые вердикты в журнале решений (02-Decisions / decision-*), в журнале… Триггеры: “/precedent“, “мы это уже решали?“, “был ли прецедент“, “что мы решили по“, “проверь решения по“, “не отклоняли ли мы“, “prior decision“, “did we decide this“. 0 токенов на поиске (grep/SQL первым), LLM только на суждении"
+version: 1.0.0
 ---
 
-# /precedent — have we decided this already? (find the precedent before deciding)
+# /precedent — мы это уже решали? (поиск прецедента перед решением)
 
-Cheap insurance BEFORE a new structural choice or proposal: maybe there is already a verdict on this topic (accepted / rejected / deferred) — so we do not re-pitch something already declined, nor re-decide what is decided. This is the "RECALL before activity" rule applied to the DECISION layer.
+Дешёвая страховка ПЕРЕД новым структурным выбором или предложением: вдруг по этой теме уже есть вердикт (приняли / отклонили / отложили) — чтобы не пере-предлагать отклонённое и не решать заново то, что решено. Зеркало правила «перед активностью — RECALL» на слой РЕШЕНИЙ.
 
-## What to pull up (cheap → expensive; stop as soon as you find it)
+## Что поднять (дёшево → дорого; останавливаюсь, как нашёл)
 
-1. **The declined journal (first — the most frequent hit):** memory
-   `$USERPROFILE/.claude/projects/<project>/memory/declined-decisions.md` —
-   what was rejected or deferred, why in the owner's own words, and `Revisit-if` (the condition under which it can come back).
-2. **The accepted-decisions journal (vault):** grep `$OBSIDIAN_VAULT/02-Decisions/`
-   (subfolders by domain) and any `decision-*` files in the vault.
+1. **Журнал отклонённого (первым — самое частое попадание):** память
+   `$USERPROFILE/.claude/projects/C--Users----CLAUDE-HP17-May26/memory/declined-decisions.md` —
+   что уже отвергали/откладывали, почему словами Антона, и `Revisit-if` (при каком условии можно вернуть).
+2. **Журнал принятых решений (волт):** grep по `$OBSIDIAN_VAULT/02-Decisions/`
+   (подпапки по доменам) и по файлам `decision-*` в волте.
    ```bash
-   grep -rinl "<topic/keywords>" "$OBSIDIAN_VAULT/02-Decisions"
+   grep -rinl "<тема/ключевые слова>" "$OBSIDIAN_VAULT/02-Decisions"
    ```
-3. **The Bible (rules for all actors):** grep `reglament-*` / `protocol-*` in the vault — maybe a
-   standing rule already closes the question.
-4. **Semantic top-up (if the exact grep is empty but the topic was clearly discussed):** the `/ask` skill
-   (RAG over the vault) — it catches phrasings grep missed.
+3. **Библия (правила для всех акторов):** grep по `reglament-*` / `protocol-*` в волте — нет ли
+   уже нормы, закрывающей вопрос.
+4. **Семантический добор (если точный grep пуст, а тема явно обсуждалась):** скилл `/ask`
+   (RAG поверх волта) — ловит формулировки, которые grep пропустил.
 
-## What to give back to the operator
-A short verdict, not a dump:
-- **A precedent EXISTS** → what was decided · when · why · a link to the note. If it was REJECTED,
-  name the `Revisit-if`: reopen ONLY if the condition is met, or explicitly as a trade-off
-  ("there is no other way") — never silently re-pitch.
-- **No precedent** → say exactly that: "I found no decision on this" (after checking the RIGHT drive/folder —
-  an empty result is often "looked in the wrong place", not "no data"), and then go decide from scratch
-  (for strategic questions, via the Alpha Protocol `R+DR`).
+## Что вернуть Антону
+Короткий вердикт, а не свалка:
+- **Прецедент ЕСТЬ** → что решили · когда · почему · ссылка на заметку. Если это было ОТКЛОНЕНО —
+  назвать `Revisit-if`: открываем повторно ТОЛЬКО если условие выполнилось, либо явно как trade-off
+  «другого выхода нет» (никогда молча не пере-питчить).
+- **Прецедента НЕТ** → так и сказать «по этому решения не нашёл» (проверив ПРАВИЛЬНЫЙ диск/папку —
+  пустой результат часто = искал не там, а не «нет данных»), и тогда идти решать с чистого листа
+  (для стратегического — через Alpha Protocol `R+DR`).
 
-## When to call it
-- Before I propose a new field / script / structure / rule / automation (per `show-before-after`).
-- When the operator says "I think we discussed this".
-- At the start of the Alpha Protocol — as part of the RECALL step.
+## Когда звать
+- Перед тем как я предлагаю новое поле/скрипт/структуру/правило/автоматизацию (по `show-before-after`).
+- Когда Антон говорит «мы вроде это обсуждали».
+- В начале Alpha Protocol — как часть шага RECALL.
 
-## Boundaries
-- Read-only: it only surfaces the past, it decides nothing for the operator.
-- It does not duplicate the Alpha Protocol — it is that protocol's narrow sub-step "is there already a
-  verdict"; a full strategy still needs `R+DR`.
-
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Границы
+- Read-only: только поднимает прошлое, ничего не решает за Антона.
+- Не дублирует Alpha Protocol — это его узкий под-шаг «есть ли уже вердикт»; для полноценной
+  стратегии всё равно `R+DR`.

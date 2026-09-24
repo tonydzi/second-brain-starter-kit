@@ -102,7 +102,7 @@ def slice_db(w, terms, since, until):
         low = (text or "").lower()
         hits = [t for t in terms if t in low]
         s += 3 * (len(hits) - 1)          # reward on-topic density (multi-term posts)
-        out.append({"slug": slug, "label": w.get("username") or slug, "chan": w.get("username") or w["chat_id"],
+        out.append({"slug": slug, "label": w.get("username") or slug, "[человек]": w.get("username") or w["chat_id"],
                     "id": mid, "day": day, "text": text, "views": views or 0, "fwd": fwd or 0,
                     "rx": rx or 0, "file": file, "score": s, "hits": hits})
     return slug, None, out
@@ -122,9 +122,9 @@ def dedup(items):
 
 
 def link_for(it):
-    chan = str(it["chan"])
-    if chan.startswith("@") or not chan.lstrip("-").isdigit():
-        return f"https://t.me/{chan.lstrip('@')}/{it['id']}"
+    [человек] = str(it["[человек]"])
+    if [человек].startswith("@") or not [человек].lstrip("-").isdigit():
+        return f"https://t.me/{[человек].lstrip('@')}/{it['id']}"
     return ""
 
 
@@ -150,10 +150,10 @@ def main():
         subprocess.run([sys.executable, str(HERE / "watch_run.py")], check=False)
 
     watchers = load_watchers()
-    all_items, per_chan = [], []
+    all_items, per_[человек] = [], []
     for w in watchers:
         slug, err, items = slice_db(w, terms, since, until)
-        per_chan.append((w.get("username") or slug, len(items), err))
+        per_[человек].append((w.get("username") or slug, len(items), err))
         all_items.extend(items)
 
     kept = dedup(all_items)
@@ -167,7 +167,7 @@ def main():
           f"{len(all_items)} topic-matching posts → {len(kept)} after dedup → top {len(top)}. Собрано {now}._",
           f"_Terms: {', '.join(terms)}. Next: LLM (Sonnet) clusters into themes + «что нового / что изменилось / за чем следить»._",
           "", "## По каналам"]
-    for label, n, err in sorted(per_chan, key=lambda x: -x[1]):
+    for label, n, err in sorted(per_[человек], key=lambda x: -x[1]):
         md.append(f"- **{label}**: {n}" + (f"  ⚠️ {err}" if err else ""))
     md += ["", "## 🔥 Топ сигналов", ""]
     for i, it in enumerate(top, 1):

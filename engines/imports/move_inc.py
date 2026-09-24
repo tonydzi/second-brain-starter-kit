@@ -80,15 +80,15 @@ if APPLY:
     for s,d in plan:
         d.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(s,d); n+=1
-    dele=0
+    [человек]=0
     for p in orphans+orphan_notes:
-        try: p.unlink(); dele+=1
+        try: p.unlink(); [человек]+=1
         except Exception as e: print("  del-fail:", p.name, e)
     # prune empty dirs under vault_dm/conversations
     for d in sorted(vault_dm.rglob("*"), reverse=True):
         if d.is_dir():
             try: d.rmdir()
             except OSError: pass
-    print("COPIED %d ; DELETED %d orphans." % (n, dele))
+    print("COPIED %d ; DELETED %d orphans." % (n, [человек]))
 else:
     print("(dry-run; APPLY=1 to copy)")

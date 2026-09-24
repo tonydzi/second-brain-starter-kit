@@ -1,0 +1,482 @@
+[
+ {
+  "url": "https://job-boards.greenhouse.io/vercel/jobs/[id]",
+  "company": "Vercel",
+  "ats": "greenhouse",
+  "title": "DevRel Engineer, Agentic Infrastructure",
+  "location": "Hybrid - San Francisco, New York City, Austin",
+  "cluster": "devrel",
+  "row": 48,
+  "extra": {
+   "currently based in any of these countries": {
+    "section": "option",
+    "value": [
+     "United States",
+     "USA",
+     "US",
+     "Yes"
+    ]
+   },
+   "authorization to work in the country where you live": {
+    "section": "option",
+    "value": [
+     "valid work permit and do not need a company to sponsor",
+     "do not need a company to sponsor"
+    ]
+   },
+   "Job Applicant Privacy Notice|acknowledge that I have read": {
+    "section": "option",
+    "value": [
+     "Acknowledge/Confirm",
+     "Acknowledge"
+    ]
+   },
+   "double-check all the information": {
+    "section": "option",
+    "value": [
+     "I have reviewed and confirmed",
+     "I have reviewed"
+    ]
+   },
+   "live in one of the following states": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "United States"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "valid work permit and do not need a company to sponsor",
+     "do not need a company to sponsor"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "Acknowledge/Confirm",
+     "Acknowledge"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "I have reviewed and confirmed",
+     "I have reviewed"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "valid work permit and do not need a company to sponsor",
+     "do not need a company to sponsor"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "I have reviewed and confirmed",
+     "I have reviewed"
+    ]
+   },
+   "link to something you made that taught developers": {
+    "section": "text",
+    "value": "https://github.com/tonydzi/claw-consensus"
+   }
+  }
+ },
+ {
+  "url": "https://job-boards.greenhouse.io/vercel/jobs/[id]",
+  "company": "Vercel",
+  "ats": "greenhouse",
+  "title": "Director of Forward Deployed Engineering",
+  "location": "Hybrid - San Francisco, New York City, Austin",
+  "cluster": "fde",
+  "row": 49,
+  "extra": {
+   "currently based in any of these countries": {
+    "section": "option",
+    "value": [
+     "United States",
+     "USA",
+     "US",
+     "Yes"
+    ]
+   },
+   "authorization to work in the country where you live": {
+    "section": "option",
+    "value": [
+     "valid work permit and do not need a company to sponsor",
+     "do not need a company to sponsor"
+    ]
+   },
+   "Job Applicant Privacy Notice|acknowledge that I have read": {
+    "section": "option",
+    "value": [
+     "Acknowledge/Confirm",
+     "Acknowledge"
+    ]
+   },
+   "double-check all the information": {
+    "section": "option",
+    "value": [
+     "I have reviewed and confirmed",
+     "I have reviewed"
+    ]
+   },
+   "live in one of the following states": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "United States"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "valid work permit and do not need a company to sponsor",
+     "do not need a company to sponsor"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "Acknowledge/Confirm",
+     "Acknowledge"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "I have reviewed and confirmed",
+     "I have reviewed"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "valid work permit and do not need a company to sponsor",
+     "do not need a company to sponsor"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "I have reviewed and confirmed",
+     "I have reviewed"
+    ]
+   },
+   "link to something you made that taught developers": {
+    "section": "text",
+    "value": "https://github.com/tonydzi/claw-consensus"
+   }
+  }
+ },
+ {
+  "url": "https://job-boards.greenhouse.io/togetherai/jobs/[id]",
+  "company": "Together AI",
+  "title": "Senior Product Manager, Model APIs & Developer Experience",
+  "ats": "greenhouse",
+  "cluster": "product",
+  "location": "San Francisco",
+  "row": 161
+ },
+ {
+  "url": "https://boards.greenhouse.io/robinhood/jobs/8044746?t=gh_src=&gh_jid=8044746",
+  "company": "robinhood",
+  "title": "Staff Product Manager, Banking",
+  "ats": "greenhouse",
+  "cluster": "product",
+  "location": "Menlo Park, CA; New York, NY; Washington, DC",
+  "row": 182,
+  "extra": {
+   "ever worked for robinhood|previously (worked|been employed)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "pronouns": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him",
+     "he/him",
+     "He"
+    ]
+   },
+   "legally (work )?authorized|authorized to work": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "require (visa )?sponsorship|(require|need).*(sponsor|visa)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "willing to work from|listed offices|in.?office|relocat": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "personal relationships|outside business activities|stock holdings|competing investments|IP to retain|conflict": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "government (office|official|referral)|government official": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "gender identity|^gender": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "race|ethnicity": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "veteran|military": {
+    "section": "option",
+    "value": [
+     "I don't wish to answer",
+     "Decline To Self Identify",
+     "I am not a protected veteran",
+     "Prefer not to say"
+    ]
+   },
+   "disability": {
+    "section": "option",
+    "value": [
+     "I do not want to answer",
+     "I don't wish to answer",
+     "Decline To Self Identify",
+     "Prefer not to say"
+    ]
+   },
+   "lgbtq|sexual orientation|transgender": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "salary|compensation|pay expectation": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|earliest": {
+    "section": "text",
+    "value": "10/01/2026"
+   },
+   "years of (relevant )?experience": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "how did you hear|where did you (hear|find)": {
+    "section": "option",
+    "value": [
+     "Job Board",
+     "Job board",
+     "Company Website",
+     "Careers site",
+     "Other"
+    ]
+   },
+   "why (do you want to work at |are you interested in |join )?robinhood|why robinhood|why this role|interested in this (role|position)": {
+    "section": "text",
+    "value": "Banking and spending is the part of Robinhood that turns a trading app into a daily habit. I have worked with banks from the other side: in 2018, frameworks for first stablecoins with CB Bank in Myanmar and central-bank stakeholders in Cambodia, Thailand and Australia; at Everex, lending and risk management with stable-value payments. I know how legal, compliance and operations shape what ships. I am in Palo Alto and can be in Menlo Park three days a week."
+   },
+   "(relevant|previous|your) experience|tell us about (your|yourself)|background": {
+    "section": "text",
+    "value": "Chief Engineer, Lending and Risk Management at Everex (2017-2018): blockchain credit scoring, stable-value payments, government and bank relations across Southeast Asia. Eleven years co-running a software house and venture incubator in APAC as product owner over 40+ engineers: exchange backends, custom distributed ledgers for enterprise clients including subsidiaries of Foxconn and ANA Airlines. Before that, nine years at Merlion building ERP and CRM on Microsoft Navision and Salesforce.\n\nSince 2023, Palo Alto AI Research Lab: a production multi-agent Claude fleet, published evals, contributions merged into 14 third-party engineering projects."
+   },
+   "(how (do|would) you use )?ai (in|at) (your )?(work|day)|use of ai|ai tools|modern ai|ai.?native": {
+    "section": "text",
+    "value": "I do not write production code by hand. I run a fleet of Claude agents that does the work: code review, live-install QA, bug reports with a deterministic repro and a red test, drafts, research. The fleet runs 13 daily autonomous lanes across several machines with human approval on anything irreversible. Since July 2026 that produced contributions merged into 14 third-party engineering projects. I own the framing, the architecture, the evals and the final call. That is how I would run product work too: agents do the grind, I decide."
+   },
+   "proud|accomplishment|achievement|biggest impact|biggest (deal|win)": {
+    "section": "text",
+    "value": "The one I would show first: a production multi-agent Claude fleet that runs unattended and gets its work accepted by strangers. Example: a review on google/adk-python, an OAuth2 secret leaking over three endpoints, adopted by the author within six hours. Published evals and a failure-modes doc go with it. Earlier: in 2018 I worked with banks and central-bank stakeholders in Myanmar, Cambodia, Thailand and Australia on frameworks for their first stablecoins."
+   },
+   "degree|education level|highest level": {
+    "section": "option",
+    "value": [
+     "Doctorate",
+     "Doctoral Degree",
+     "PhD",
+     "Master's Degree",
+     "Master's"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "Yes"
+    ]
+   },
+   "willing to work from the office": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "never worked at Robinhood",
+     "never worked"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "Yes"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "Yes"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "question_[id]": {
+    "section": "combo",
+    "value": [
+     "No"
+    ]
+   },
+   "Personal/Familial Relationships|Outside Business Activi": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "government official": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "ever worked for Robinhood as an employee, intern or contractor": {
+    "section": "option",
+    "value": [
+     "never worked at Robinhood",
+     "never worked"
+    ]
+   }
+  }
+ }
+]

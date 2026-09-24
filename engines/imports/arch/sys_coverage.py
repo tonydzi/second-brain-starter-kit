@@ -14,7 +14,7 @@
 # ---------------------------------------------------------------------------
 """
 sys_coverage.py -- System Architect: COVERAGE AUDIT.
-Answers "is absolutely everything covered by the architecture?" with NUMBERS, not hope.
+Answers "is absolutely everything covered by the architecture?" with NUMBERS, not [человек].
 Measures, deterministically (0 tokens):
   1. Vault knowledge  -- % of notes connected (non-orphan)        [from orphan-scan]
   2. CC sessions      -- % of on-disk sessions imported to vault   [disk UUID files vs sessions.db]
@@ -60,7 +60,7 @@ except Exception as e:
 # Freshness of the pool is already asserted by the SOURCES row "Claude sessions (live pool)".
 try:
     ARCH = os.path.join(VAULT, "_session-archive")
-    INB  = os.path.join(VAULT, "_machine-bus", "_session-archive-inbound")
+    INB  = os.path.join(VAULT, "[шина]", "_session-archive-inbound")
     def _pool_catalogs():
         out = []
         for pat in (os.path.join(ARCH, "catalog-*.json"),
@@ -160,7 +160,7 @@ def newest_bundle(folder, prefix):
 
 # Offsite resolver = the ONE from backup_to_drive.py (single source of truth).
 # It knows machine.env GDRIVE_BACKUP_ROOT (the hub mounts Drive as a letter, not
-# "E:\Google Drive on*"). A local twin of this logic drifted once already: the hub
+# "[путь владельца] Drive on*"). A local twin of this logic drifted once already: the hub
 # false-alarmed "GDrive нет" on 2026-07-04 because the twin missed machine.env.
 sys.path.insert(0, IMPORTS)
 try:
@@ -168,7 +168,7 @@ try:
     gdrive = resolve_drive()          # Path | None; None = no offsite mount on THIS machine
 except Exception:
     gdrive = None
-LOCALBK = r"C:\ObsidianBackup"
+LOCALBK = r"[путь владельца]"
 off_dir = os.path.join(gdrive, "repos") if gdrive else None
 loc_dir = os.path.join(LOCALBK, "repos")
 # 4a. _imports CODE bundle offsite (precious, irreplaceable layer) -- VERIFY it actually lands

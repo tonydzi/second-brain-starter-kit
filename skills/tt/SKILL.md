@@ -1,135 +1,489 @@
 ---
 name: tt
-description: >-
-  Quality gate immediately after building: prove that what was just built actually works, while
-  the context is still hot. Six steps: scope what changed, run live on real data, break it on
-  purpose, show a counter or log proving it ran, root-cause any failure and re-run, then a
-  verdict with evidence. Only a green verdict earns the word done. Supports an external
-  multi-vendor review panel as a mid-step. Triggers: "/tt", "/test", "prove it works", "test
-  what we built".
-license: MIT
+description: "Ворота качества сразу после сборки: доказать, что собранное реально работает, пока контекст горячий. Триггеры: /tt, /test, протестируй, докажи что работает, проверь качество, оттестируй, test what we built, prove it works. НЕ путать: /qa = переживёт ли деталь завтра; этот = работает ли она сейчас."
+version: 1.0.0
 ---
 
-# /tt — the quality gate right after building
+# /tt — ворота качества сразу после сборки
 
-> 🧒 **When reporting to a non-technical operator:** end with a short "In plain words" recap in their language (standing rule [[eli5-always]]). Only in the message TO them — never inside artifacts.
+> 🧒 **При докладе Антону:** заверши простым «Простыми словами» на его языке (его standing-правило [[eli5-always]]). Только в сообщении ЕМУ — не внутри артефактов.
 
-This is **not a retrospective**. Retro = packaging the whole session at the end. `/tt` = a narrow check of **the one thing we just built**, while the context is hot. The pain that created it (2026-06-25): "we built it, said 'done', moved on — and it was only 2/3 finished." `/tt` catches that BEFORE the word "done".
+Это **не ретро**. Ретро = упаковка всей сессии в конце. `/tt` = узкая проверка **одной вещи, которую мы только что собрали**, пока контекст горячий. Боль Антона (2026-06-25): «собрали, сказали „готово", пошли дальше — а оно сделано на 2/3». `/tt` ловит это ДО «готово».
 
-**When:** immediately after building/editing a **skill · script · routine · hook · vault pipeline · mechanism note** — anything that is supposed to DO something. Not for conversational replies and not for trivial text edits.
+**Когда:** сразу после сборки/правки **скилла · скрипта · рутины · хука · vault-пайплайна · заметки-механики** — всего, что должно ЧТО-ТО делать. Не для разговорных ответов и не для тривиальных правок текста.
 
-**Boundary vs neighbors:** `/1` = is the SYSTEM alive after a crash; a browser verify = does the APP work; `/tt` = does **the exact thing we just built** work.
+**Граница vs соседи:** `/1` = жива ли СИСТЕМА после крэша; `/verify` (встроенный) = работает ли ПРИЛОЖЕНИЕ в браузере; `/tt` = работает ли **именно то, что мы только что собрали**.
 
 ---
 
-## Step 0 — RECALL the scope (what did we actually change)
-Not from memory — from facts. List what this task really created/touched:
-- fresh/modified files: `~/.claude/skills`, `~/.claude` (memory/CLAUDE.md/hooks/scheduled-tasks), `$IMPORTS_ROOT`, vault notes;
-- quick anchor: `python "$IMPORTS_ROOT/retro_inventory.py" 1` (the same inventory the retro skill uses) OR simply list what you edited in THIS session.
-- Take only what belongs to the CURRENT task (ignore other machines' fleet edits — not ours, see [[session-machine-tagging]]).
-- **RECALL existing knowledge on the topic** (a gate born from a real miss on 2026-07-04: we fixed a pipeline without checking memory first and nearly duplicated a parallel session's work): before running/fixing, pull up what is ALREADY known — grep the memory folder + semantic search + grep the vault for the changed area. A parallel session may have already done/documented it ([[capture-rules-into-bible]] → RECALL-before-activity).
-
-## Step 1 — RUN it live (on real data, not in theory)
-Run the thing **for real** on real data and show actual output:
-- a skill → execute its procedure by hand right here;
-- a script → run it (read-only/dry-run if it has side effects);
-- a routine/hook → trigger it manually or verify it actually fires (not "it should");
-- a rule note → check that links/slugs resolve and the frontmatter is valid.
-"Works in theory" ≠ proven. You need live output.
-
-## Step 2 — BREAK it on purpose (negative + edge cases)
-Try to break it — the classic local pitfalls:
-- empty / malformed input, missing dependency or key;
-- wrong-drive path pitfalls ([[deterministic-script-gotchas]]) — does it look on the right disk;
-- machine-specific hardcode: `grep -n "C:\\\\Users\\\\[^_]" <file>` — a path with ANOTHER user/machine inside a shared engine must go through a paths module / machine env (real case 2026-07-04: the hub baked `%USERPROFILE%` in, the path was dead on the laptop → silent fallback);
-- stale config / API-version drift — does it read facts from the LIVE source, not a stale copy ([[recall-first-on-incident-and-live-source-truth]]);
-- does it degrade gracefully (clear error) instead of failing silently or quietly "pretending".
-
-## Step 2.5 — SECOND OPINION: an external breaker (multi-vendor panel)
-Your own check is blind to your own blind spots — a second vendor catches what we can't see ([[test-after-build-skill]]). So it's not only the session that tries to break the artifact; external eyes do too. There are THREE pairs: **Codex** (headless CLI, default), **Grok** (local CLI rail on subscription — `secondop.py t3 --engine grok`; the grok.com browser is the FALLBACK), and **Gemini** (headless, `gemini_review.py break`).
-
-**When to call it (narrowly, so the ritual doesn't bloat):** the Step-0 scope contains a changed **executable** artifact (script · skill · hook · routine · pipeline). Notes/texts/frontmatter only → skip **explicitly**, log it, and state it in the verdict.
-
-**Rail 1 — Codex (default, always called first):**
+## Шаг 0 — RECALL области (что вообще изменили)
+Не по памяти — по фактам. Перечисли, что эта задача реально создала/тронула:
+- свежие/изменённые файлы: `~/.claude/skills`, `~/.claude` (память/CLAUDE.md/хуки/scheduled-tasks), `$IMPORTS_ROOT`, волт-заметки;
+- быстрый якорь: `python "$IMPORTS_ROOT/retro_inventory.py" 1` (тот же инвентарь, что у /retro) ИЛИ просто перечисли то, что правил в ЭТОЙ сессии.
+- Возьми только то, что относится к ТЕКУЩЕЙ задаче (чужие fleet-правки игнор — это не наше, см. [[session-machine-tagging]]).
+- **RECALL знаний по теме** (гейт, грабли 2026-07-04: чинили OAI-путь не глянув память — чуть не продублировали параллельную сессию): перед прогоном/фиксом подними, что УЖЕ известно — grep `memory\` + `/ask` (RAG) + греп волта по теме изменённого. Параллельная сессия могла уже сделать/задокументировать это ([[capture-rules-into-bible]] → RECALL-before-activity).
+- ⭐ **А ЭТО УЖЕ НЕ ПОСТРОЕНО? — ПРИБОРОМ, ДО ПЕРВОЙ СТРОКИ КОДА** (замер 03.09.2026): память, RAG и волт свежий чужой скрипт НЕ видят — он лежит в `~/.claude/scripts` и всё. Сессия собрала `tg_voice_translate.py`, хотя рабочий `tg_translate_3chats.py` уже сутки лежал в той же папке, а рядом был и третий, `tg_translate.py`. RECALL был сделан «честно» и промахнулся, потому что не обошёл поверхность с кодом.
 ```
-python "%USERPROFILE%\.claude\scripts\cc-review\secondop.py" t3 --ritual tt --task <task-id> --context "<what we built + what steps 1-2 already checked>"
+python ~/.claude/scripts/prior_art.py build <2-4 слова задачи>
 ```
-A peer machine without a Codex login → the same call through `_shared\secondop_client.py` (a broker replies over the machine bus).
+Обходит scripts · _imports · skills · hooks · memory, печатает СКОЛЬКО поверхностей и файлов обошёл (пусто = замеренное пусто, а не «я посмотрел»). exit 0 = чисто, строй · **exit 3 = есть готовое: прочти найденное в разделах `scripts`/`_imports` ПРЕЖДЕ чем писать своё**. Русский запрос по английским именам ловится — внутри мост RU→EN. Контрфакт-проверка на реальном промахе: готовый движок вышел бы 5-м в топе своей поверхности. Канон: память `class-counted-by-name-never-reaches-three` (там же семьи дефектов и почему счёт по имени не работает).
 
-**Rail 2 — the Grok breaker (call when):** (a) Codex is unavailable/quota-blocked — Grok saves the verdict from ⚠️; (b) the artifact is risky/safety-critical or Codex gave a contested COUNTER — hetero-pair, call BOTH; (c) the operator says "ask Grok".
-**Default mechanics: local headless CLI** — `python ...\secondop.py t3 --engine grok --ritual tt --task <id> --context "..."` (logging and the human-visible mirror are automatic). CLI dead/logged-out (`grok doctor`) → **browser fallback** (live-tab automation, human pace, strictly a local browser):
-1. `python ...\secondop.py grok-prompt --task <id> --context "<what we built + what we checked>"` → paste-ready prompt;
-2. paste into a NEW grok.com chat, wait for the reply;
-3. the first line of the reply = the verdict `ACCEPT`/`COUNTER`/`BLOCK`;
-4. log it: `python ...\secondop.py log-ext --reviewer grok --task <id> --ritual tt --verdict "<line 1>" --note "<grok.com/c/… link FIRST + gist of findings>"`. The chat link in `--note` is **mandatory and goes first** (the note is truncated to 200 chars — a long preamble eats the link) — it proves the verdict really came from Grok and wasn't typed in by hand; the full Grok reply is also quoted in the /tt verdict. Unrecognized format → the verdict does NOT count (re-ask in the format, or log-skip).
+- **⭐ Карта дверей [[three-tools-three-doors]]** (anton 09.08): АК-47 применяется на ОБОИХ концах — если спека НЕ прошла вопрос «слабейший починит молотком?» ДО стройки, это находка Шага 4, а не только брак приёмки. Чинится 3-й рецидив класса → сперва карта условий (`reglament-pyat-pochemu-koren-po-serii-sessiy`); очевидный фикс создаёт предъявленный вред → карточка противоречия (ТРИЗ), ⛔ до доказанной причины.
 
-**Rail 3 — the Gemini breaker (call when):** (a) Codex AND Grok are unavailable/out of quota — Gemini saves the verdict from ⚠️; (b) a safety-critical artifact or a contested COUNTER — a third voice; (c) the operator says "ask Gemini".
+## Шаг 0-бис — СОБИРАЕШЬСЯ СКАЗАТЬ «НЕЛЬЗЯ»? СПРОСИ ИНСТРУМЕНТ
+
+Срабатывает, если в вердикте вот-вот появится «невозможно», «нет такой ручки»,
+«by design не поддерживается», «архитектурно нельзя» — или если ты готов
+предложить Антону ручной шаг вместо автоматизации.
+
+«Невозможно» — такой же claim, как вывод, и улика №1 не лог, а **собственный
+интерфейс инструмента**. Пройди дешёвый круг снизу вверх, порядок не нарушать:
+
+1. `<инструмент> --help` (и `-h`, и `help <подкоманда>`) — ПОЛНЫЙ список флагов,
+   а не тот, что помнишь.
+2. Подкоманды и их собственные `--help`.
+3. Конфиг инструмента и переменные окружения.
+4. Документация ТОЙ ЖЕ версии.
+5. Только теперь логи, реверс бинаря, эксперимент.
+
+Не прошёл круг — формулировка ровно одна: «я не нашёл, как это сделать».
+Писать «этого не существует» без названного места поиска = вердикт максимум ⚠️.
+
+⚠️ Ловушка, из-за которой правило родилось (10.09.2026, RC-факап): чем дороже
+был путь к выводу, тем убедительнее он кажется. Сорок минут форензики по логам
+приложения дали красивое доказанное «нельзя», а `claude --help` содержал
+`--remote-control [name]` и закрывал задачу за пять секунд.
+Дорогая улика НЕ отменяет обязанность пройти дешёвую.
+
+⛔ **МОЛЧАЩИЙ `--help` — ЭТО ДЕФЕКТ ИНСТРУМЕНТА, А НЕ ОТСУТСТВИЕ ОТВЕТА.** Шаг 1
+круга обязан ОТКРЫВАТЬСЯ: `--help` с ненулевым кодом, трейсбеком или «неизвестный
+флаг» означает, что дверь канона заперта, и чинить надо её, а не искать обход.
+Проверка одной строкой: `<инструмент> --help; echo $?` → не 0 = задача, не факт.
+
+Практика: дверь `--help` не имеет права зависеть от библиотеки, про которую
+спрашиваешь — usage печатается ДО тяжёлых импортов, иначе полу-правка соседа
+уносит с собой и возможность спросить. Замер 21.09.2026 на [машина флота]: у
+`deploy_register.py` `--help` давал exit 2 («неизвестный флаг»), у
+`touchbase.py` — `TypeError` при импорте; обе рельсы месяц обходили руками,
+потому что круг Шага 0-бис упирался в первую же ступень.
+
+Канон: `reglament-sprosi-instrument-pered-tem-kak-obyavit-nevozmozhnost`
++ память [[ask-the-tool-before-declaring-impossible]].
+
+## Шаг 1 — ПРОГНАТЬ вживую (на реальных данных, не в теории)
+Запусти собранное **по-настоящему** на настоящих данных Антона и покажи фактический вывод:
+- скилл → выполни его процедуру руками здесь же;
+- скрипт → запусти его (read-only/dry-run если есть побочки);
+- рутина/хук → дёрни вручную или проверь, что он реально срабатывает (а не «должен бы»);
+- заметка-правило → проверь, что ссылки/слаги резолвятся, frontmatter валиден.
+«Теоретически работает» ≠ доказано. Нужен живой вывод.
+- ⚠️ ТЕМ ЖЕ ИНТЕРПРЕТАТОРОМ/БИНАРЁМ, каким пойдёт у ПОТРЕБИТЕЛЯ (планировщик/рутина/другой узел), не «каким попало из PATH»: класс «PATH резолвит не тот питон/бинарь» кусался 11.08 (258 ложных падений регресса), 12.08 (две установки CC), 13.08 (gdocs_bridge: google-либы только у 3.12 из 5 питонов), 19.08 (brain_ask месяцами красный не тем питоном). Сомнение → напечатай `sys.executable`/`py -0p`/`which` и сверь с вызовом потребителя (Breakage-Journal, task-2026-08-13-python-path-class-repair).
+
+## Шаг 2 — ПОЛОМАТЬ нарочно (negative + edge)
+Попробуй сломать — реальные грабли этого дома:
+- пустой / кривой ввод, отсутствует зависимость или ключ;
+- грабли путей **[путь владельца] ([[deterministic-script-gotchas]]) — ищет ли на правильном диске;
+- машинно-специфичный хардкод: `grep -n "[путь владельца]]" <файл>` — путь с ЧУЖИМ юзером/машиной в общем движке обязан идти через `_paths.py`/machine.env (грабли 2026-07-04: хаб вшил `[путь владельца]`, на ноуте путь мёртв → тихий fallback);
+- v2.1 / 403 / устаревший конфиг — берётся ли факт из ЖИВОГО источника, не со стале-копии ([[recall-first-on-incident-and-live-source-truth]]);
+- деградирует ли мягко (понятная ошибка), а не падает молча/тихо «делает вид»;
+- ⭐⭐ **ЛЮБАЯ ПОЧИНКА, а не только сторож, закрывается ТЕСТОМ, ПОКАЗАННЫМ КРАСНЫМ** (CLAUDE.md §5.4 [[red-first-or-the-test-is-fake]]; дверь достроена 03.09.2026 — до этого шаг ниже требовал красноты только у СТОРОЖЕЙ/гейтов, а правило в каноне универсально, и обычный код закрывался «на глаз»). Порядок: сперва проверка на НЕчинёном коде и её падение ПОКАЗАНО (номер кейса + exit 1), потом починка, потом зелёный. Ломать — на КОПИИ в скретчпаде, живые файлы не портить; брейк-кейс остаётся в `_test_*.py`. Контр-кейс обязателен: хотя бы одна проверка, зелёная С САМОГО НАЧАЛА, иначе сетка красит всё подряд и ничего не доказывает. Нет предъявленного красного прогона → вердикт максимум ⚠️, «я посмотрел глазами» красным прогоном не является.
+  - ⛔ **СПЕРВА СПРОСИ, СПОСОБЕН ЛИ ВЫБРАННЫЙ ПРИБОР УВИДЕТЬ ЭТОТ КЛАСС.** Прибор, зелёный на заведомо сломанном коде, даёт фальшивую сетку, которую потом предъявляют как доказательство.
+
+    Замер 21.09.2026: под класс «py39 падает на `int | None`» просился `python -m py_compile` — но PEP 604 синтаксически валиден и в 3.9, падение происходит при ИСПОЛНЕНИИ модуля. Сетка была бы зелёной на всех мёртвых рельсах. Дискриминатор пришлось строить по AST + позиции аннотации (`scripts/py39_union_lint.py`).
+
+    Тест самого прибора: прогони его по файлу, про который ТОЧНО знаешь, что он сломан. Молчит — значит мимо класса.
+- ⭐⭐ **КРАСНОТУ ДОКАЗЫВАЕТ ПРИБОР, А НЕ ТВОЙ ГЛАЗОМЕР** (замер 04.09.2026, семья `neizvestnyy-flag-molcha-rabotaet` — 13 датированных случаев с 11.08): краснота трёх кейсов «проверялась» цепочкой `python test.py --flagA || python test.py --flagB`. Первый вызов шёл с ЧУЖИМ флагом, тест проглотил его молча (`"--red" in sys.argv` — членство, не разбор), отработал ЗЕЛЁНЫЙ набор, вернул 0, и `||` до правильного вызова не дошёл. Вывод «красный прогон показан» описывал команду, которая не запускалась.
+  ```
+  python ~/.claude/scripts/red_verify.py <test.py> --red-flag --against-broken-<чей>
+  ```
+  Три замера, ни один не пропускается: **канарейка строгости** (мусорный флаг обязан дать ≠0 — иначе скрипт глотает аргументы и его красный режим недоказуем в принципе), **зелёный 0**, **красный ≠0**. exit 0 доказано · 3 недоказуемо · 4 сам прибор не сошёлся на контрольном примере. ⛔ **Отказ запуститься (exit 2) краснотой НЕ является** — прибор ловил на этом сам себя на живом прогоне. Лечение недоказуемого теста — `_shared/strict_argv.py` (одна строка `strict(["--red"])` до любой работы; публичным артефактам — 6-строчная inline-копия, чтобы репо оставалось stdlib-only).
+  ⭐ **У FAIL-CLOSED ГЕЙТА — МУТАЦИОННЫЙ ЗАМЕР, а не «тесты зелёные»** (замер 10.09.2026, процедура скилла `/red-first-review`): глуши по одной КАЖДУЮ его защиту и гоняй набор. Тест зелёный на мутанте = защиту можно удалить, и никто не заметит; именно она регрессирует молча. Живой результат на нашем leak-гейте касбука: **выжило 5 из 8** — сносились список имён людей, заимствованные паттерны, страховка по имени класса и САМ `control_sample`, все 14 тестов оставались зелёными. По ходу вскрылось, что заимствование паттернов у зрелого сканера было сломано молча (`getattr(rls,"PATTERNS",[])` при списке `FAIL` — тихий дефолт вернул пустоту, «мы берём зрелый сканер» было неправдой шесть дней). После кейсов-убийц: 8 из 8. Образец = `~/.claude/scripts/_mutate_casebook_gate.py`. ⚠️ Мутант обязан РЕАЛЬНО ломать защиту: `X = [] or [...]` возвращает НЕПУСТОЙ список, и два «выживших» оказались артефактом кривой мутации — проверяй саму мутацию, прежде чем верить её вердикту.
+
+  ⚠️ **СЕРИЮ мутантов гоняй с `PYTHONDONTWRITEBYTECODE=1`.** `__pycache__` инвалидируется по (mtime, size), поэтому мутации в пределах одной секунды проходят проверку насквозь, и следующий мутант показывает провалы ПРЕДЫДУЩЕГО.
+
+  Замер 21.09.2026: мутант B отдал профиль мутанта A, а изолированно был зелёным — я чуть не «починил» здоровую проверку.
+
+  Ловец: мутант обязан убивать ровно СВОЮ проверку; валит чужие — либо назван неверно, либо прогон грязный. Контрольный прогон на восстановленном оригинале в конце обязателен [[mutant-runs-need-dontwritebytecode]].
+  ⚠️ И проверь, что краснеет КАЖДЫЙ кейс, а не файл целиком: красная ветка обязана ломать ОБЪЕКТ (подменить фильтр, движок, загрузчик), а не стирать провал теста (`if RED: missed = []`). Общий exit 1 от одного честного кейса маскирует соседей, которые не краснеют никогда — так 04.09 в одном файле два кейса из трёх молча проходили красный режим [[kill-list-makes-tests-checkable]].
+- ⭐ артефакт = СТОРОЖ/гейт/пробник → ДВОЙНОЕ доказательство обязательно (anton «+++» 05.08, Библия `reglament-storozh-krasneet-na-slomannom-i-zhivyot-v-svoyom-kontekste`): (1) RED на заведомо сломанном показан, и брейк-кейс ОСТАЛСЯ в `--self-test`/`_test_*.py`; (2) прогон В КОНТЕКСТЕ проживания — из планировщика/cron (`schtasks /Run` / вызов crontab-строки) + чтение его ВЫХОДА (лог/артефакт), не из живой сессии. Замер 05.08: session_reaper 15 зелёных прогонов из Task Scheduler при живой аварии (MSIX-редирект). Нет любой половины → вердикт максимум ⚠️;
+- ⭐ **чинил ВЫБОР/маршрутизацию (движок, вендор, модель, рельса, путь) → провокация обязана бить и ветку УМОЛЧАНИЯ, не только явную ошибку.** Вызови артефакт БЕЗ параметра выбора и докажи, что дефолт — тот, что заявлен (панель/None/явный отказ), а не тихий первый вендор. Замер 04→06.08: тест рельс secondop на 13 пунктов сторожил только явный `--engine`, ветка «движок не назван → молча codex» жила при зелёном тесте, нашёл Антон («почему только кодекс??»). У поломки выбора ВСЕГДА две двери: «назван неверно» и «не назван вообще» — закрыл одну, проверь вторую (паспорт `scripts/docs/secondop_rails.md`, проверки 8/8b/8c);
+- ⭐ **РАЗНЫЕ РИТМЫ ПРОИЗВОДИТЕЛЯ И ПОТРЕБИТЕЛЯ → провоцируй ГЭП, а не «здесь и сейчас»** [[consumer-stamp-not-collector-stamp]]. Если сборщик бегает чаще потребителя (или наоборот), а потребитель читает «самый свежий» файл — подделай штамп/дату на длину пропуска и докажи, что окно РАСТЯНУЛОСЬ, а не осталось дефолтным; отдельно проверь недоставку (окно обязано копиться, а не пропадать) и потолок догона. Замер 30.08: сборщик ежедневный + судья раз в 2 суток = каждая вторая ночь клуба молча не доезжала до Антона, при этом ВСЕ приборы зелёные (каждый мерил свой шаг, а не сквозной путь данных); нашла панель Шага 2.5, живой прогон этот класс не ловит в принципе.
+- ⭐ **ДЕТЕКТОР СУДИТ ПОДСТРОКУ, А НЕ СТРУКТУРУ** [[gate-must-judge-action-not-substring]] — прогон ОБЯЗАТЕЛЕН, если правка трогает гейт/сторож/фильтр/precheck/тест:
+  `python3 ~/.claude/scripts/substr_lint.py <изменённые файлы>` (0 токенов, stdlib; exit 1 = находки).
+  Шесть правил: R0 файл не разобрался → зелёный по нему ничего не значит (fail-closed) · R1 `"<короткое
+  слово>" in <текст>` без границы · R2 regex-альтернатива голых слов без `\b` · R3 `grep` по выводу
+  структурированного источника (JSON/YAML/py — слово может быть КЛЮЧОМ, а не значением) · R4 флагом
+  `--md` — текстовое правило по заметке без отрезания YAML-шапки · **R5 вердикт по СЫРОЙ команде
+  харнеса** (`tool_input["command"]` целиком уходит в матчер) → спроси `_shared/cmd_action.executed_text`:
+  команда ЗАПУСКАЕТ сторожимое или лишь УПОМИНАЕТ его в данных. Находка = Шаг 4 (корень), либо
+  ОСОЗНАННЫЙ глушитель `# substr-ok: <причина>` (голый маркер без причины не глушит).
+  ⭐ **ПОПУЛЯЦИЯ, А НЕ АДРЕСАТ ИЗ РУК** (замер 03.09, разбор 22-го случая): у двери был ОДИН вызыватель —
+  этот шаг по «изменённым файлам», счётчик показал 12 прогонов за 15 суток и только на хабе, поэтому
+  10+ новых случаев родились в гейтах, которых никто в тот заход не правил. Правишь ЛЮБОЙ гейт/хук →
+  добавь `python ~/.claude/scripts/substr_lint.py --roster` (живая перепись hook-файлов из settings.json
+  + их `_shared`). Без рук это же сторожит ночная сетка: `_test_hook_roster_substr.py` (храповик —
+  красный только на РОСТЕ долга, старый долг зафиксирован пер-узловой базовой линией).
+  ⛔ **ПЕРЕПИСЬ — ТОЖЕ CLAIM, И ЕЁ ЧИСЛО НАДО ЧИТАТЬ** (замер 04.09, 23-й случай — дефект нашёлся
+  В САМОЙ ДВЕРИ): `--roster` печатает «живых hook-файлов: N». Сверь N с `settings.json` глазами
+  ОДИН раз. До 04.09 пути тянул regex по ВИДУ пути (требовал начала `[путь владельца]`, `$HOME/`, `%USERPROFILE%/`,
+  `~/`), голый POSIX-абсолют `/Users/...` не матчился: на [машина флота] из 39 команд попадали 3, перепись
+  говорила «17» вместо 64, и вне неё были ровно рецидивисты класса — `blackbox_session_guard.py`
+  (сломался дважды за утро 04.09), `maintenance_gate.py`, `false_no_guard.py`. Ночной храповик при
+  этом был зелёным на базовой линии «1 находка» при реальном долге **43 находки в 16 гейтах (25%
+  популяции)**. Урок общий: у сторожа с ПОПУЛЯЦИЕЙ доказывают не только вердикт, но и ПЕРЕПИСЬ —
+  пустая или куцая популяция даёт зелёный, неотличимый от честного [[instrument-is-a-claim-too]].
+  Замер 19.08: класс дал **5 датированных поломок за 8 дней** — 11.08 `"да"` внутри «со**зда**ём» увело
+  приватную запись в `visibility: public` · 14.08 «является» внутри «появляется» · 18.08 «не **пост**авка»
+  в ЗАГОЛОВКЕ сняла живой пост с публикации (SKIP не красный) · 19.08 `grep -E "dispatch|collect|deliver"`
+  по JSON, где это КЛЮЧИ → 7 часовых тиков подряд будили LLM впустую. Шум двери замерен: **5.3% файлов
+  на корпусе 1117** — это дверь, а не вечно красный сторож [[always-red-watchdog-teaches-ignoring-red]].
+  ⛔ ГРАНИЦА (АК-47, не превращать каждый grep в парсер): структурный разбор обязателен там, где источник
+  структурирован **И** вердикт что-то ГАСИТ (skip/block/publish/будить LLM); над плоским человеческим
+  текстом, где ложный хит виден и дёшев, grep остаётся правильным решением. Тест: `_test_substr_lint.py`;
+- ⭐ **СТАТУС-CLAIM БЕЗ УЛИКИ: ✅ рядом с именем файла** [[prichina-kak-claim]] — прогон ОБЯЗАТЕЛЕН,
+  если в области Шага 0 есть НАРУЖНЫЙ док (README / INSTALL / отчёт / паспорт / пост) или черновик, писанный агентом:
+  `python ~/.claude/scripts/status_claim_lint.py <файлы>` (0 токенов, stdlib; exit 2 = находки).
+  Судит СТРУКТУРУ, не подстроку: ✅ в пределах 80 символов от имени файла → файл ищется на диске
+  в НЕСКОЛЬКИХ корнях (§5.4 check-all-places), вердикт = «НЕ ПОДТВЕРЖДЁН + где искал», не «файла нет».
+  Починка находки: приложи улику (`ls`/цитата) ЛИБО замени ✅ на 🤔 ЛИБО осознанный `status-claim-ok: <причина>`
+  (голый маркер не глушит). Замер 29.08: класс дал **3 датированные поломки** (10.08 панель ревьюит
+  непрочитанный файл · 13.08 панель судит вырожденный контекст · 14.08 draft-агент подал несуществующие
+  `package_verify.py`/`quarantine_lite.py` как установленные ✅). Шум двери замерен: **3.5% файлов на корпусе 200**
+  (было 1334 находки до структурного порога — это был бы вечно-красный сторож).
+  Входная половина того же класса стоит сама: `secondop` EVIDENCE RULE + 5-я строка сид-блока 🔍 УЛИКА.
+  Тест: `_test_status_claim_lint.py`;
+- ⭐ **метрика-ДОЛЯ/отношение → сверь ЕДИНИЦЫ числителя и знаменателя** [[measurement-units-must-match]].
+  Правка строит или трогает долю/процент/сравнение двух рельс записи? Выпиши, что физически
+  означает ОДНА строка КАЖДОЙ рельсы. Разные единицы (событие хука vs подъём процесса vs
+  сессия) → доля врёт молча. Замер 13.08: доля Firefox 9 дней сравнивала подъёмы драйвера
+  с MCP-кликами (1.6% сырая vs 7.6% честная); ТРИ внешних ломателя не поймали — каждый
+  смотрел свою рельсу порознь, сравнение единиц не проверял никто;
+- ⭐ **фолбэк метрики: рапорт можно, ДЕЙСТВИЕ нельзя** [[fallback-metric-ok-to-report-never-to-act]].
+  Найди в правке каждое место «честный измеритель молчит → беру соседний похуже» и посмотри,
+  что стоит НИЖЕ по потоку: `print` — ок, `kill`/`send`/`write`/`commit` — дыра.
+  Прогон: `grep -nE "or 0\b|except.*:\s*$|is None|not .*_map|fallback" <файл>` и глазами по хитам.
+  Замер 04.08: обещание «судим только по дельте» жило в docstring и 54 зелёных тестах, а
+  отменяла его ОДНА строка фолбэка на `ps %CPU` — нашёл внешний ломатель, не тесты.
+
+## Шаг 2.5 — ВТОРОЕ МНЕНИЕ: ⭐ПАНЕЛЬ, все рельсы ОДНОВРЕМЕННО (приказ Антона 05.08.2026)
+
+**Дефолт с 05.08 — одна команда, четыре пары глаз разом:**
 ```
-python "%USERPROFILE%\.claude\scripts\cc-review\gemini_review.py" break --task <id> --context "<what we built + what we checked>"
+python "%USERPROFILE%\.claude\scripts\cc-review\secondop.py" panel --ritual tt --task <id> --context "<что собрали + что проверили>"
+
+⭐⭐ **ПАНЕЛЬ СУДИТ ПОЧИНКУ, А НЕ ИСХОДНУЮ ЗАДАЧУ** (замер 04.09.2026). Чинил корень — в `--context` кладёшь КОД ПОЧИНКИ и список «что я объявил закрытым», а в `--task` пишешь «сломай ЭТИ починки». Зелёная СВОЯ приёмка доказательством не является: 21 корень был зелёным локально и на сервере, после чего панель из 8 движков нашла в тех же починках **8 дефектов**, из них три назвали ≥2 движка независимо (маркер готовности удовлетворялся текстом прошлого отчёта · порог размера добивался сайдбарными ссылками · fail-closed гейт оказался fail-open по состоянию ПРЕДКА элемента). Сходимость ≥2 движков = чинить не думая; одиночное наблюдение = проверять уликой. И сетку, написанную НА находки панели, гони мутантами отдельно: её первая версия пропускала 4 из 8 мутантов, потому что смотрела на возвращаемый текст, а починки меняли время и сообщение ([[red-first-or-the-test-is-fake]], [[panel-broke-my-own-fix]]).
+
+⚠️ ЛИМИТ КОМАНДНОЙ СТРОКИ (замер 17.09, T09): `--context` уезжает АРГУМЕНТОМ, файлового флага у `secondop.py` нет, и на Windows контекст >32 КБ падает с `Argument list too long` ещё ДО вендоров. Класть весь файл нельзя: резать до ГОРЯЧИХ функций (у T09 влезло 13.6 КБ = схема + закрытие + sync + apply_order + врезка) — и это не отмена правила ниже, а его форма.
+
+⭐ В `--context` кладём ПЕРВОИСТОЧНИК — живой код горячих участков (или файлы целиком), не свой пересказ; пересказ допустим лишь как навигация поверх. Замер 20-21.08: панель на пересказе — точность 25% (2 из 3 ложных находок выросли из формулировок пересказа), та же панель на живом коде — 10/10. Находки панели — гипотезы: каждую сверить с первоисточником, в отчёт обе колонки (принято/опровергнуто с уликой). Канон: Библия `reglament-proveryayushchemu-pervoistochnik-ne-pereskaz` + память [[panel-judges-my-spec-not-the-code]].
 ```
-Headless, no browser (REST rail ~7-10 s; `--engine cli` = the official CLI). Verdict on the first line `ACCEPT`/`COUNTER`/`BLOCK`, and it logs ITSELF into `usage.jsonl` — no manual log-ext needed. Rail didn't answer → the script logs `log-skip` itself and exits with code 3 (the /tt verdict is then at most ⚠️ PARTIAL). The key = a free API tier with no billing attached → overuse = 429, not a bill.
+Codex, Grok и Gemini идут ПАРАЛЛЕЛЬНО (каждый своим процессом), а промпт браузерной ноги GLM ложится на диск ДО их старта — открывай вкладку `chat.z.ai`, пока headless крутятся, и добей вердикт через `log-ext --engine glm`. Код выхода `3` = независимого второго мнения нет (ответил один) → вердикт `/tt` максимум ⚠️. Порядок «сначала Codex, потом остальные» отменён: на практике он означал «только Codex» (замер 05.08: Grok $300/мес выбран на 12%). Паспорт: `scripts/docs/secondop_panel.md`.
 
-**How to read the reply (all three rails):** `COUNTER`/`BLOCK`/break-scenarios = a **finding** → that's Step 4 (root cause → fix → re-run), not "an opinion to note". `ACCEPT` = agreement, no finding. ONE received external verdict is enough; a second pair of eyes per Rail-2 rules.
+Ниже — механика ОДИНОЧНЫХ рельс: она жива и нужна, когда панель избыточна (одна мелкая правка) или когда чинишь конкретного вендора.
 
-**Skipping — only explicit, never silent** (a reviewer COUNTER taught us this): both rails unavailable / no executable artifacts →
+### Одиночные рельсы (частный случай)
+Своя проверка слепа к своим же слепым зонам — второй вендор ловит то, что мы не видим ([[test-after-build-skill]] + Decision Memo Phase 1.5). Поэтому ломает не только сессия, но и внешние глаза. Их ТРИ пары (anton 21.07; ⭐26.07 Grok переехал в CLI; ⭐27.07 добавлен Gemini): **Codex** (headless CLI, дефолт), **Grok** (⭐26.07 на хабе локальная CLI-рельса на подписке, headless — `secondop.py t3 --engine grok`; браузер grok.com = ФОЛБЭК, см. [[grok-second-reviewer-rail]]) и **Gemini** (headless без браузера, `gemini_review.py break`, см. [[gemini-third-reviewer-rail]]).
+
+**Когда зову (узко, чтобы ритуал не раздуло):** в области Шага 0 есть изменённый **исполняемый** артефакт (скрипт · скилл · хук · рутина · пайплайн). Только заметки/тексты/frontmatter → пропускаю **осознанно**, логирую и пишу это в вердикт.
+
+**Рельса 1 — Codex (дефолт, зову всегда первым):**
 ```
-python ... secondop.py log-skip --ritual tt --task <id> --reason "<quota|error|no executable artifacts>"
+python "%USERPROFILE%\.claude\scripts\cc-review\secondop.py" t3 --ritual tt --task <id-задачи> --context "<что собрали + что уже проверили в шагах 1-2>"
 ```
-and the Step-5 verdict **cannot be ✅** for that reason: at most **⚠️ PARTIAL "no second opinion received"**. A missed call ≠ a green test. Exception: the artifact is non-executable — then the skip is neutral and ✅ is possible.
+Пир без Codex-логина → тот же вызов через `_shared\secondop_client.py` (брокер ответит по шине).
 
-**Observability:** every call/skip is written to `bridge-state/usage.jsonl` (attempted · ok · skipped · finding); a daily digest goes to the fleet log chat. Zero calls in a day = the signal "the ritual is not working", not silence.
+**Рельса 2 — Grok-ломатель (зову когда):** (а) Codex недоступен/quota-blocked — Grok спасает вердикт от ⚠️; (б) артефакт рискованный/safety-critical или Codex дал спорный COUNTER — гетеро-пара, зову ОБОИХ; (в) Антон сказал «спроси грока».
+**Механика-дефолт (⭐26.07, хаб): локальный CLI headless** — `python ...\secondop.py t3 --engine grok --ritual tt --task <id> --context "..."` (лог и зеркало в чат 04 автоматические, ручной log-ext НЕ нужен). CLI мёртв/разлогинен (`secondop.py doctor` — ⚠️ не `grok doctor`: такой подкоманды у grok НЕТ, проверено 04.08, в `grok --help` 13 команд и doctor среди них нет; exit 0 = обе рельсы живы · 3 = вендор установлен и не отвечает ЛИБО рельс нет вовсе · 1 = канон обещает подкоманду, которой в движке нет) → **фолбэк-браузер** (Chrome-MCP, человеческий темп, как /dr-fanout; строго локальный браузер [[browser-work-on-peers-not-hub]]):
+1. `python ...\secondop.py grok-prompt --task <id> --context "<что собрали + что проверили>"` → paste-ready промпт;
+2. вставить в НОВЫЙ чат grok.com (обычная модель, Expert не трогать), дождаться ответа;
+3. первая строка ответа = вердикт `ACCEPT`/`COUNTER`/`BLOCK`;
+4. залогировать: `python ...\secondop.py log-ext --reviewer grok --task <id> --ritual tt --verdict "<1-я строка>" --note "<ссылка grok.com/c/… ПЕРВОЙ + суть находок>"`. Ссылка на чат в `--note` **обязательна и идёт первой** (note режется до 200 симв. — длинная преамбула съест ссылку, Grok COUNTER 21.07) — это доказательство, что вердикт реально от Grok, а не вписан рукой (Codex VERIFY 21.07); плюс ответ Grok целиком цитируется в вердикте /tt. Не распознан формат → вердикт НЕ засчитан (переспросить в формате или log-skip).
 
-## Step 3 — the VISIBILITY layer (can you even see that it worked?)
-The most common silent bug is not in the core but in the fact that **the result is invisible** ([[verify-existing-before-proposing]]):
-- **Existing gate first:** if the thing under test has ITS OWN deterministic gate/test (a guard script, a system-map check, a sync check, `_test_*.py`) — run THAT and take ITS verdict; do not re-derive the logic with homemade awk/grep — a duplicated gate drifts from the original over time and produces false/diverging alarms (real case 2026-06-27/07-04: a raw awk and the real guard measured line lengths differently);
-- is there a counter/log/proof line showing it ran?
-- "LastResult=N with no logs" = undebuggable → that's a ❌ on visibility even if the core looks fine. (This is how an empty state ledger and a false-RED sync were caught.)
-
-## Step 4 — ROOT CAUSE → fix → re-run
-Any failure in steps 1-3 → dig to the ROOT ([[fix-root-cause-not-symptoms]]), don't patch the symptom; fix the CLASS → go back to Step 1 and re-run until clean. Safety-critical (locks/sync/auth/scheduler/idempotency) → "read before you fix" + a mini-test ([[verify-existing-before-proposing]]).
-
-## Step 4.5 — SESSION SPLIT: count the signals (shadow rule)
-You found a bug in steps 1-3 and it doesn't fix quickly — before digging in, count 4 signals and **log them**:
+**Рельса 3 — Gemini-ломатель (⭐27.07, скилл `/gemini`; зову когда):** (а) Codex И Grok недоступны/выжгли квоту — Gemini спасает вердикт от ⚠️; (б) safety-critical артефакт или спорный COUNTER — зову третьим голосом; (в) Антон сказал «спроси джемини».
 ```
-python ~/.claude/scripts/split_rule.py log --what "<what we're fixing>" --attempts <failed attempts> \
-   --files <files in the root cause> --repro-min <minutes to reproduce> --context-pct <% of context> \
-   [--shared] --decision stay|split --minutes <total> --note "<comment>"
+python "%USERPROFILE%\.claude\scripts\cc-review\gemini_review.py" break --task <id> --context "<что собрали + что проверили>"
 ```
-The rule (still a shadow — the decision is yours): split into a separate session if ANY signal fires —
-**A** ≥2 failed attempts · **B** the root spans >2 files or touches an adjacent system (bus/canon/scheduler/auth) ·
-**C** reproduction takes >10 min · **D** ≥70% of the context is consumed.
-If you split — a seed prompt is mandatory (what we did · what we achieved · what was already rejected and why · acceptance criterion · non-goals), a task goes into the task registry, and the artifact is marked ⚠️, not ✅. A shadow with no log entries = the rule was NOT tested; summary via `split_rule.py summary --days 14`.
+Headless, без браузера (REST-рельса ~7-10 с; `--engine cli` = `[аккаунт]/gemini-cli`). Вердикт первой строкой `ACCEPT`/`COUNTER`/`BLOCK` и **сам** пишется в `usage.jsonl` (`log-ext --reviewer gemini`) — ручной log-ext НЕ нужен. Рельса не ответила → скрипт сам пишет `log-skip` и выходит с кодом 3 (вердикт /tt тогда максимум ⚠️ PARTIAL). Ключ = бесплатный тир Google AI Studio (`secrets\gemini.env`), биллинга нет → превышение = 429, не счёт; ⚠️ OAuth-вход CLI для физлиц Google отключил — чинить бесполезно, живёт только API-ключ.
 
-## Step 5 — VERDICT with evidence
-A short table: **what was checked · how (live output) · ✅/⚠️/❌**. Then one summary line:
-- ✅ **PASS** — ran it, broke it, visible — works. ONLY this = "done".
-- ⚠️ **PARTIAL** — works, but there's a yellow flag (name it + what remains).
-- ❌ **FAIL** — doesn't work / isn't visible → root cause + what I'm fixing.
-Evidence (output/counter/screenshot) is mandatory — without it a "✅" doesn't count.
+**Как читать ответ (всех трёх рельс):** `COUNTER`/`BLOCK`/сценарии поломки = **находка** → это Шаг 4 (корень → починить → перепрогнать), не «мнение к сведению». `ACCEPT` = согласие, находки нет. Достаточно ОДНОГО полученного внешнего вердикта; вторая пара глаз — по правилам рельсы 2.
 
-**📋 Task journal:** verdict ✅ = the moment the item closes in the task registry ([[task-journal-done-undone-linking]]): if the verified thing is in the registry — mark it `done` with THIS evidence + link what it unblocked; ❌/⚠️ = the task stays open (the "finish fixing X" tail goes into the registry immediately). From a machine without the engine — send TASK/DONE over the machine bus. One line in the report: "📋 journal: #id → done (evidence: …)".
+**Рельса 4 — браузерная дверь ЛЮБОГО вендора (⭐31.07, правило Антона: отменяется дверь, а не вендор).** Кончилась квота / нет CLI / headless разлогинен → это закрылась ОДНА дверь; веб-морда вендора открыта всегда (подписки живые, Chrome залогинен на всех машинах [[one-chrome-account-all-machines]]):
+1. `python ...\secondop.py web-prompt --engine <grok|gemini|chatgpt|claude|mistral|deepseek> --context "<что собрали + что проверили>"` → paste-ready промпт с контрактом вердикта;
+2. вставить в НОВЫЙ чат на сайте вендора (строго локальный браузер), дождаться ответа;
+3. залогировать `log-ext --reviewer <вендор>` со ссылкой на чат ПЕРВОЙ в `--note`.
+Состояние дверей узла — факт, не догадка: `python ~/.claude/scripts/llm_rails.py --verify` (❌ = двери нет совсем; ⚠️/✅ = дверь есть). Цена ошибки замерена 31.07: Grok был залогинен в браузере и уже дал вердикт, а сессия записала «нужен login = руки Антона» — смотрели на закрытую дверь рядом с открытой ([[browser-door-when-cli-dead]]).
+
+**Скип — только явный, никогда молчаливый** (COUNTER Codex 17.07): причины **«квота» и «нет CLI» больше НЕ принимаются** — сперва рельса 4; log-skip законен, только когда закрыты ВСЕ двери (включая браузерную — например, узел headless без браузера И шина-брокер молчит) / нет исполняемых артефактов →
+```
+python ... secondop.py log-skip --ritual tt --task <id> --reason "<все двери закрыты: перечисли какие|нет исполняемых артефактов>"
+```
+и вердикт Шага 5 **не может быть ✅** по этой причине: максимум **⚠️ PARTIAL «второе мнение не получено»**. Пропущенный звонок ≠ зелёный тест. Исключение: артефакт неисполняемый — тогда скип нейтрален, ✅ возможен.
+
+**Наблюдаемость:** каждый вызов/скип пишется в `bridge-state/usage.jsonl` (attempted · ok · skipped · finding); суточный дайджест — `secondop.py digest --post` → чат 03. Ноль вызовов за сутки = сигнал «ритуал не работает», а не тишина.
+
+## Шаг 3 — СЛОЙ ВИДИМОСТИ (видно ли, что сработало?)
+Самый частый тихий баг — не в ядре, а в том, что **результат не видно** ([[verify-existing-before-proposing]]):
+- **Готовый гейт первым:** если у проверяемого есть СВОЙ детерминированный гейт/тест (`memory_guard.py`, `/arch`, `sync_check`, `_test_*.py`) — запусти ЕГО и бери ЕГО вердикт; не пере-выводи логику самодельным awk/grep — дубль гейта со временем разъезжается с оригиналом и даёт ложные/расходящиеся тревоги (грабли 2026-06-27/07-04: raw-awk и `memory_guard.py` мерили длину строк по-разному).
+- есть ли счётчик/лог/строка-доказательство, что оно отработало?
+- «LastResult=N без логов» = неотладимо → это ❌ по видимости, даже если ядро вроде ок. (Так поймали пустой TurnState и ложный RED синка.)
+- ⭐ **ПРИЧИНА ОБЯЗАНА БЫТЬ ПРИЧИНОЙ ТОГО, ЧТО ДЕРЖИТ** (замер 14.08.2026, `hold-with-reason-ok-is-a-lying-indicator`). У прибора с НЕСКОЛЬКИМИ условиями возьми красную строку и спроси: «по ней человек знает, что чинить?». Красный флаг с зелёным хвостом (`[HOLD] файл.md — ok`) = прибор ВРЁТ: он считал два условия, а напечатал причину не того. Так 47 из 106 постов копилки стояли молча, 21 из них 8 суток. Держат оба условия — печатать оба. Это ❌ по видимости, даже если ядро право.
+
+## Шаг 3.1 — ⭐ ГЕЙТ МАСШТАБА: цена растёт с ОБЪЁМОМ или с ИЗМЕНЕНИЯМИ? (03.09.2026)
+Собрал/правил прибор, который что-то ОБХОДИТ (треды, файлы, репо, чаты, строки БД) — задай ему один вопрос: **с чем растёт цена прогона?**
+- Растёт с ЧИСЛОМ ИЗМЕНЕНИЙ — ок, поток изменений примерно постоянен.
+- Растёт с ОБЪЁМОМ — **дата смерти уже назначена**, прибор сломается ровно от нашего успеха. Лечение = кэш вердикта по дешёвому признаку изменения, который отдаёт сам источник (`updated_at`, ETag, хэш, mtime): неизменившийся объект обязан стоить НОЛЬ запросов. Поднять потолок ≠ починить (это перенос смерти на месяц).
+- Есть потолок/лимит/`--max-*` — три обязательных проверки: (1) прибор ПЕЧАТАЕТ, что посчитал не всё («осмотрено N из M»), а не отдаёт голое число ([[instrument-is-a-claim-too]]); (2) рез идёт ПОСЛЕ сортировки, иначе под нож уходит хвост списка — а там обычно лежит добор-заплатка, закрывающая дыру покрытия; (3) у кэша названа ГРАНИЦА ТОЧНОСТИ (что признак изменения НЕ ловит) и принудительное протухание по возрасту.
+- Замер, из которого правило: `github_reply_meter` умер дважды от одного корня — 29.08 по таймауту (громко), 03.09 потолком с молчаливой потерей 14 тредов из 214 (тихо). Кэш по `updated_at`: покрытие 200/214 → 217/217, API 433 → 110. Канон: [[instrument-cost-must-scale-with-change]].
+- Пропустил гейт на приборе-обходчике → вердикт максимум ⚠️.
+
+## Шаг 3.2 — ПУБЛИЧНАЯ ВИДИМОСТЬ: смотри с чужой стороны провода (01.08.2026)
+Если изменённый артефакт **публичный** (профиль, README, страница, репо, пакет, пост) — зелёный тест на нашей стороне ещё НЕ значит, что снаружи это видно. Проверка обязана быть **анонимной**: свой токен/кука/логин показывают тебе твою же приватную картину, и ты объявишь «готово» ровно там, где сломано.
+- Правило: **опубликовано ≠ видно.** Пока анонимный запрос не увидел артефакт — он не зашипен, а лежит.
+- Инструмент (GitHub-аккаунт лабы и его Pages): `python3 ~/.claude/scripts/public_surface_audit.py --html` → exit 1 при красном, дашборд `_Dashboards/Public-Surface.html`, паспорт `00-System/Public-Surface-Passport.md`. Ночная рутина сигналит только на СМЕНУ картины.
+- Для чего у аудитора нет строки — проверь руками одним `curl` без токенов на конкретную строку из артефакта (не на код 200: 200 с пустым телом — самый частый тихий сбой).
+- Цена пропуска замерена: profile README двух сессий (S0 31.07 + S1 01.08) был невидим, потому что GitHub требует отдельного клика «Share to Profile» и молчит, когда он не нажат ([[github-profile-readme-share-to-profile]]).
+
+## Шаг 3.3 — ⭐ ЖИВОЙ ЛИ ОБЪЕКТ, В КОТОРЫЙ МЫ ПИШЕМ? (03.09.2026)
+Артефакт пишет в **профиль / аккаунт / базу / ветку / слот / канал**, выбранные по КОНФИГУ (`default=`, `current`, `active`, `[Install*]`, «первый в списке») → один дешёвый замер ДО вердикта: чем доказано, что этим объектом ПОЛЬЗУЮТСЯ? Конфиг называет НАМЕРЕНИЕ установщика, диск показывает ФАКТ — свежесть `prefs.js`/`cookies`/`logins`/mtime/счётчика.
+- ⛔ Признак живости НЕ должен включать файл, который пишет сам проверяемый инструмент: после залива мёртвый объект выглядит самым свежим, и прибор врёт ровно там, где его зовут.
+- Расхождение конфига и факта печатается ВСЛУХ (`WARN: конфиг указывает на X (активность …), живой — Y (активность …)`), а не глушится.
+- Замер, из-за которого шаг появился: `chrome2firefox` залил 19978 адресов, 59646 визитов и 6817 закладок в профиль Firefox из `profiles.ini` и напечатал зелёные счётчики; живой профиль Антона в `profiles.ini` не значился вовсе, а у выбранного последняя активность была за три недели ДО миграции. Поймал не тест, а человек, который пошёл проверять свои пароли.
+- Не доказал живость → вердикт максимум ⚠️. Канон: память [[live-object-is-picked-by-use-not-by-config]], [[instrument-is-a-claim-too]].
+
+## Шаг 3.3-полу — ⭐ СКОРИНГ СУДИТ ОБЪЕКТ ИЛИ МЕШОК СЛОВ? (04.09.2026)
+Артефакт **фильтрует / скорит / ранжирует / отбирает** из РАЗНОРОДНОГО потока (лента, канал, инбокс, выдача поиска, чужой борд) → два вопроса ДО вердикта, оба с цифрой:
+- **Чем доказано, что это объект нужного ТИПА?** У вакансии есть ДОЛЖНОСТЬ; буллет, проза и рекламная простыня должностью не являются. Отвод только по ПОЗИТИВНО опознанному признаку («это фрагмент»), а не по «не нашёл каноническую форму» — иначе выпадают живые разговорные посты и дайджесты списком.
+- **Признак взят из ПРЕДМЕТА или из текста вокруг него?** Роль и тема считаются по должности; тело даёт уменьшенный вес, но не ноль (иначе теряется не-AI роль в AI-компании).
+- ⛔ **Каждое слово словаря — claim, и его надо посчитать на живых данных**: сколько верных срабатываний против ложных. Голое «Partner» дало 82 срабатывания и НИ ОДНОГО верного.
+- Замер, из-за которого шаг появился: фильтр вакансий `jobs_tg.py` принимал за вакансию обрывки разрезанных постов, резюме соискателей (96 в базе), рекламу самого канала и скам с торговлей SSN — последний брал 8-11 баллов, потому что нёс и EU, и US, и remote. Брак: 13 строк из 60, 5 из 12 верхних. Прибор не падал ни разу, счётчики были зелёные.
+- Не опознал тип и не посчитал словарь → вердикт максимум ⚠️. Канон: память [[score-the-object-not-the-bag-of-words]], [[instrument-is-a-claim-too]].
+
+## Шаг 3.3-бис — ⭐ КЛЮЧ, ПО КОТОРОМУ СШИВАЮТ: он вообще заполнен? (03.09.2026)
+Артефакт опирается на **join key / поле идемпотентности / ключ дедупа / ключ «уже сделано»** (`slug`, `external_id`, `msg_id`, `hash`, `story_id`) → ОДИН дешёвый замер ДО вердикта: какая ДОЛЯ записей этот ключ реально несёт? Считать `count(*) WHERE key = '' OR key IS NULL`, а не проверять, что поле есть в схеме.
+- ⛔ Пустой у большинства ключ = гейт, который открыт ВСЕГДА и молчит: проверка честно возвращает False на каждой записи, ни один прибор не краснеет, счётчики печатают числа, и по ним принимают решения.
+- Ключ читает один код, а заполняет другой → назови обоих поимённо. Читатель есть, писателя нет — это и есть поломка, а не «фича не сработала».
+- Второй провод обязан быть НЕЗАВИСИМ от первого: статус в базе и файл на диске врут по-разному. У детектора расхождения обязан быть исполнитель (`--heal`), иначе долг только печатается ([[detector-without-executor]]).
+- Замер, из-за которого шаг появился: в контент-воронке `slug` пуст у 2248 записей из 2276 (98.8%) и у 100% сидов в статусе `new`. Один пустой ключ дал три следствия — идемпотентность выбора не срабатывала ни разу, обратная связь черновик→воронка рвалась молча (2 живых долга), а публикация не пришивалась к сиду: леджер 173 `posted` (137 с 20.08) против `published: 2` в воронке.
+- Не посчитал заполненность ключа → вердикт максимум ⚠️. Канон: память [[empty-join-key-is-an-always-open-gate]], [[instrument-is-a-claim-too]].
+
+## Шаг 3.3-тер — ⭐ ПРОМЕЖУТОЧНОЕ СОСТОЯНИЕ: кто вернёт элемент, если держатель умрёт? (04.09.2026)
+Артефакт переводит элемент в **промежуточную корзину** (`taking` / `in-progress` / `claimed` / `lease` / `processing` / статус «взято в работу») → три вопроса ДО вердикта, все три дешёвые:
+- **(1) Кто возвращает?** Есть ли жатва/reaper, которая по TTL вернёт элемент в очередь, если держатель умер между «взял» и «отметил». Атомарный захват защищает от ДУБЛЯ и ничего не говорит про ПОТЕРЮ — это разные беды, и вторая молчит.
+- **(2) От какого события мерится возраст удержания?** `os.replace`/`mv`/`UPDATE` часто сохраняют старую метку, и возраст выходит «сколько лежит в очереди», а не «сколько держат». Сторож на такой метке сожмёт свежий захват старого элемента в первую же секунду.
+- **(3) Видит ли счётчик здоровья промежуточную корзину?** Если «сколько ждёт» считает только `pending`, потерянные элементы делают очередь короче, чем она есть, и здоровье выглядит зелёным.
+- Замер, из-за которого шаг появился (04.09, `spawn_queue.py`): `take` уносил сид в `taking/` атомарно и правильно, возврата не было — 03.09 два сида восстанавливали руками, 04.09 третий висел 11 часов и не считался никем; возраст при этом мерился от `add`, а не от `take`.
+- Исполнителя вешай на УЖЕ СУЩЕСТВУЮЩУЮ дверь ([[detector-without-executor]]): здесь жатву вшили в хук самой очереди (96 срабатываний за двое суток), новой рутины не завели.
+- Нет ответа хотя бы на один из трёх вопросов → вердикт максимум ⚠️. Канон: память [[atomic-take-without-reaper-loses-work]].
+
+## Шаг 3.3-кватер — ⭐ СКЛЕЙКА ЛЮДЕЙ: чем доказано, что это ОДИН человек? (04.09.2026)
+Артефакт **связывает запись с человеком** (импорт контактов, обогащение CRM, дедуп карточек, «дописать ссылку в существующую карточку») → назови КЛЮЧ каждой связи ДО вердикта.
+- **В файл пишется только сильный ключ** — телефон или handle. Совпадение по ИМЕНИ или ПОЧТЕ в файл не идёт никогда: оно уходит в корзину «требует глаз» и ждёт человека. Молча выбросить = потерять подсказку, молча записать = отравить карточку.
+- **Сильный ключ на входе не делает сильной всю цепочку.** Замер 03.09: телефон верно находил контакт в мосте `apple-contacts`, а ложной была следующая связь «контакт → заметка волта» со своим tier. Проверяй tier у КАЖДОГО звена, а не только у первого.
+- **Ошибка склейки выглядит как успех**: лог рапортует «дописано ссылок 143», карточка выглядит обогащённой. Поэтому нужен красный кейс «слабый tier → ссылки нет», а не глазами по логу.
+- Ключ-индекс строй по нормализованной форме рядом с маркером (`+`, `phone:`, `тел`), а не «любое число 9-15 цифр»: 637 коллизий last10 и склеенные даты `2026 09 03` в роли номеров, победитель по порядку `os.walk`. При коллизии не выигрывает НИКТО.
+- Замер, из-за которого шаг появился: мост на 75% построен по имени (T4-name 957 из 1275), и слабый tier вписал 4 ЧУЖИЕ переписки в боевые карточки лидов — Azam Shaghaghi в `[человек]-[человек]-[человек]-[человек].md`, Manizha Ash дважды в `alex-ge-[человек]-ge.md`, [коллега] Лебедева в `[человек]-2.md`.
+- **Прогон гейта** (эталонная сетка склейки, 0 LLM — красный кейс «слабый tier → ссылки нет» уже внутри):
+  ```bash
+  python [путь владельца]
+  ```
+  Свой импортёр людей — скопируй оттуда секцию «ИДЕНТИЧНОСТЬ» под свой мост и покажи её КРАСНОЙ на сломанной копии.
+- Не назвал ключ каждой связи → вердикт максимум ⚠️. Канон: память [[identity-merge-only-on-strong-key]], [[crm-lead-full-provenance]].
+
+## Шаг 3.3-квинт — ⭐ КОРПУС В ВОЛТЕ: чем его НАЙДУТ, и доказано ли это запросом? (04.09.2026)
+Артефакт кладёт в волт **пачку заметок** (импорт переписки, выгрузка, корпус) → назови ДВЕРЬ поиска и покажи ЖИВОЙ хит.
+- Строка в логе про реиндекс — claim про прибор, не про результат ([[instrument-is-a-claim-too]]). Реиндекс мог отработать ДО рождения заметок, не покрыть их по scope или собрать базу, у которой нет потребителя.
+- Доказательство = запрос по редкому слову из конкретной новой заметки и её путь в выдаче. Замер 03.09: 454 заметки и 148 696 сообщений лежали в волте, в векторном индексе WhatsApp-чанков **ноль**, FTS знал 35 старых путей. После пересборки каталога запрос «Dearden» вернул `wa-[человек]-Dearden--461055.md`, путей стало 492.
+- Есть быстрый SQL/FTS слой поверх корпуса → назови его вслух в `/find` и `/ask`, иначе LLM будет читать markdown вместо бесплатного запроса (§6.1).
+- Дверь не названа или названа без живого хита → вердикт максимум ⚠️. Канон: память [[corpus-needs-a-named-search-door]].
+
+## Шаг 3.3-секст — ⭐ СШИВКА С ЧУЖИМ ОБЪЕКТОМ: ключ СТРУКТУРНЫЙ или текстовый? (04.09.2026)
+Прибор связывает НАШУ запись с ЧУЖИМ объектом (письмо, страница, карточка, тред) → четыре вопроса, каждый обязателен:
+- **Ключ структурный?** Домен адреса, id в URL, отдельное поле — да. «Имя компании встречается в строке письма» — нет: текст несёт ещё и транспорт (`no-reply@ashbyhq.com`), и матч цепляется за него. Замер 04.09: в реестре лежала строка `company='ashby'` (мусор писателя), её алиас совпадал в служебном адресе КАЖДОГО письма Ashby и забрал 16 чужих подтверждений — mem0, dust, Cursor получили вердикт «заявка не ушла», а 61/61 тестов были зелёными.
+- **Матч однозначен?** «Первый по порядку словаря» = случайный владелец, то есть тихая кража В ПЛЮС. Побеждает самый длинный/специфичный ключ, ничья → None. Молчание честнее выдуманного хозяина.
+- **Приговор по ТЕЛУ или по заголовку?** Заголовок (тема письма, title страницы) — свободный текст чужого вендора, бесконечное множество: латать его регекспами = чинить симптом, дыра откроется на следующем шаблоне (замер: латали 03.09, открылась 04.09). Тело — шаблонный язык, конечное множество идиом; пополнять его законно.
+- **Какой канал прибор НЕ смотрит?** Назови вслух. Часть объектов приходит другой дорогой (мы подавались письмом, а не формой) — для них у прибора обязан быть ОТДЕЛЬНЫЙ вердикт, а не молчаливое «не найдено». Смешать со «доказано» = соврать в цифрах; выдать за «пропало» = послать человека делать необратимый дубль.
+- Хоть один вопрос без ответа → вердикт максимум ⚠️. Канон: память [[match-entity-by-structural-key]], [[instrument-is-a-claim-too]].
+
+## Шаг 3.4 — ⭐ РАТЧЕТ: escape-авария в коде (03.09.2026)
+
+```
+python ~/.claude/scripts/_test_no_control_bytes.py
+```
+
+Правил код патчем, внутри которого есть обратный слэш (windows-путь, `\n`, `\b`, `\d` в регулярке)? Прогони это ПЕРЕД вердиктом. `exit 1` = где-то в коде лежит управляющий байт.
+
+**Почему отдельный шаг, а не «и так увижу».** 03.09 класс сработал шесть раз за один день, и один случай был дорогим и невидимым: в `deploy_deadwood.py` литерал `r"\bmd5"` стал `r"<0x08>md5"`, и живая проверка «verify прибит к md5» не срабатывала **никогда**. Голый `grep` печатает такую строку как `r"md5"` — терминал съедает backspace, глазами дефект не виден вообще. Нашёлся только побайтовым сканом.
+
+**Лечение на будущее:** патч с обратными слэшами пишем **файлом** (Write → `python файл.py`), а не python-в-heredoc: escape ломается на границе слоёв. Канон: память [[patch-code-via-file-not-heredoc]].
+
+## Шаг 3.45 — ⭐ ВЛАДЕЛЕЦ ОБЪЕКТА: не заводи второго убийцу (04.09.2026)
+
+```
+python ~/.claude/scripts/robot_owner_lint.py
+```
+
+Собрал робота, который **трогает объект** — гасит процессы, перезапускает приложение, чистит папку, правит общий файл? Прогони это перед вердиктом. `exit 1` = появился робот, которого нет в `~/.claude/robot_owners.json`.
+
+**Правило:** у объекта один АВТОМАТИЧЕСКИЙ владелец. Владелец есть — расширяй его, а не заводи своего. Свой всё же нужен (ручной инструмент, патруль) — впиши в реестр с ролью и с тем, чем он ограничен, и **уважай рельсы владельца**.
+
+**Почему отдельный шаг.** Класс с тремя датированными случаями: 26.07 два сторожа дрались на восстановлении пакета; 31.08 двенадцать чинилок на одно приложение довели до приказа «выключить всё», и невиновный жнец простоял трое суток (138 зависших процессов); 03.09 патруль закрыл ровно те процессы, что жнец пощадил осознанно. Пять «почему» дали корень не в роботах: **владельца негде было посмотреть, поэтому своего написать дешевле, чем найти чужого.** Замер 04.09: 13 скриптов способны убить процесс Claude.
+
+Канон: память [[one-object-one-owner-robot]], реестр `~/.claude/robot_owners.json`.
+
+## Шаг 3.5 — ТЕСТ + ДОК гейт (§5.8, anton 28.07 «и ВСЕГДА это делать теперь»)
+Каждая живая деталь в области Шага 0 обязана выйти из /tt с тестом И доком — иначе вердикт максимум ⚠️:
+- **НОВАЯ деталь** (скрипт/скилл/рутина/хук): тест и док-паспорт рождаются **в этом же заходе**, ждать «докажи, что приживётся» ⛔. Паспорт — для слабейшего починщика ([[repairability-first-how-we-build]]): что делает · вход/выход · кто дёргает · что ломается · как понять · как починить.
+- ⭐ **РУТИНА → СТРОКА В РЕЕСТРЕ** (anton 02.09, голосом): собрал/изменил повторяющийся процесс (задача планировщика · cron · hook · вахта · ручная повторёнка) → покажи его строку в мега-списке рутин: обнови снимок узла `python %USERPROFILE%\.claude\scripts\fleet_routines_collect.py` и найди рутину в `[шина]\_fleet-routines\routines-<NODE>.json` (Маяк ежечасно сводит снимки в Google-книгу «Флот — живой стол»). Повторёнка ВНЕ планировщика сама не доедет — занеси в книгу руками. Нет строки → ⚠️. Канон `reglament-lyubaya-povtoryayushchayasya-rabota-zhivyot-v-reestre-rutin` + [[routine-must-live-in-registry]].
+- ⭐ **РУТИНА → НАЗОВИ СВОЙ ВЫХОД** (класс `silent-green-watchdog` / семья `instrument-vrjot-zelyonym`, 46 датированных случаев, починка 04.09): рутина рождается с рапортом «зелено» и БЕЗ единого свидетеля результата — «задача выстрелила» ≠ «работа приземлилась». Прогон: `python %USERPROFILE%\.claude\scripts\_shared\green_gap.py` (0 LLM, свой контрольный пример, exit 0/1/3/4). Новая рутина обязана дать ОДНО из двух: строку в `ARTIFACTS` (`scripts\_shared\output_freshness.py` — ГДЕ приземляется её работа) **либо** строку с ПРИЧИНОЙ в `~/.claude/green_gap_exempt.json` (выхода нет осознанно). Молчание = зелёный, который никто не проверял → вердикт максимум ⚠️. Ратчет: старый долг назван числом и молчит, кричит только НОВОЕ. Замер 04.09 (хаб): 243 наших включённых задачи против 41 строки реестра = выход заявлен у 17%.
+- ⭐ **ВЫХОД В СИНКАЕМОЙ ПАПКЕ → НАЗОВИ ЕГО КЛАСС** (класс `shared-writers`, починка 14.09): выход рутины/скрипта лёг в синкаемое (волт · `[шина]` · `~/.claude` · `_imports`) → он ОБЯЗАН иметь строку в `[путь владельца]`, ровно в одном из трёх классов: `per_node` (данные пер-узловые — имя получает суффикс узла, конфликт физически невозможен) · `writers` (данные общие — ОДИН назначенный владелец, и раннер у него ДОКАЗАН, иначе меняем громкую поломку на тихую заморозку) · `idempotent_verified` (тело рендера НЕ зависит от часов — **только с именем теста**, который это доказывает). Прогон: `python [путь владельца] --check` и `--audit`. Нет строки → вердикт максимум ⚠️. ⚠️ Класс определяется по ВОПРОСУ «данные тут про ЭТОТ узел или про весь флот?», а не по тому, где лежит файл: ошибка в эту сторону стоила слепоты — один писатель у пер-узлового файла = ослепли на пяти узлах. Замер 14.09: 8 путей кровоточили 10 суток, самый громкий (`ACTIVE_NOW.md`) — 43 копии с 6 узлов, потому что класс `idempotent` был объявлен БЕЗ теста и оказался ложью. Канон: `derived_writers.json` §_refuted + [[watchdog-must-verify-the-item]].
+- ⭐ **ПУТЬ В КОНФИГЕ ОБЯЗАН СУЩЕСТВОВАТЬ** (класс `config-path-points-nowhere`, замер 06.09.2026): трогал реестр аккаунтов/профилей (`_imports/chatgpt/accounts.json`, `~/.claude/browser-profiles/accounts.json`) → прогони `python3 ~/.claude/scripts/accounts_paths_lint.py` (0 LLM, 0 сети; exit 0 чисто · 1 красное · 3 нет данных · 4 крэш). Повод: `ff_profile` у `bb`/`au04` указывал на `autoff-bb`/`autoff-au04`, которых не было НИ НА ОДНОМ узле — лестница жатвы токена не могла отработать в принципе и **не сказала ни слова** (рельса печатала честный SKIP «нет bearer», а ПРИЧИНУ не назвал никто). Линт судит и **связку двух реестров**, но ТОЛЬКО у аккаунта, чей `runner` = этот узел: браузерный реестр машинно-локален (`browser-profiles/` в `~/.claude/.gitignore` + под `*` в `.stignore` — ни git, ни Syncthing его не возят), поэтому у чужого аккаунта два поля описывают РАЗНЫЕ машины и сравнивать их нельзя (у a2 верны ОБА: `fbread` на хабе, `autoff` на [машина флота]). Такое не молчит и не желтит — идёт строкой «НЕ СВЕРЯЛОСЬ» + `meta[join_not_compared]`. ⚠️ Имя узла с доменным хвостом (`<узел>.local`, FQDN в Docker/CI) резолвится срезом хвоста: без него СВОЙ сломанный аккаунт выходил ЗЕЛЁНЫМ (замер 07.09: `rc=0`, `GREY` вместо `RED`). Красное = чинится здесь; не прогнал после правки реестра → вердикт максимум ⚠️. Тест: `_test_accounts_paths_lint.py` (5 мутаций, все показаны красными 07.09).
+- ⭐ **ДОКА ЖИВЁТ В КОДЕ** (anton 07.08 голосом, СУПЕР ВАЖНО): у Python-детали док = **docstring в самом файле** (назначение · вход/выход · кто дёргает · рельса · `updated: ГГГГ-ММ-ДД`), один источник — отдельный md-пересказ того же самого ⛔; тест назван в docstring, деталь названа в тесте (код·тест·дока = единый узел). Docstring отсутствует или без updated-даты → ⚠️. Канон `reglament-dokumentaciya-po-chastyam-i-vnutri-koda`.
+- **ИЗМЕНЁННАЯ/ПОЧИНЕННАЯ деталь**: поведение поменялось → док обновляется **той же сессией** (док, который врёт, дороже отсутствующего); класс пойманного бага получает тест/гейт, чтобы не вернулся ([[fix-root-cause-not-symptoms]] forever-fix).
+- **«Тест есть» ≠ «тест гоняют»** ([[test-exists-vs-grid-runs-it]]): тест без расписания/сетки и видимой даты прогона ≤30 дн считается несуществующим (§5.8 правило 2). Подключи в регресс-сетку или назови причину.
+- ⭐ **СЧЁТЧИК ИСПОЛЬЗОВАНИЯ** (§5.8 третий атрибут, anton 04.08: «на весь функционал вешаем счётчики — кто и насколько успешно использует»): деталь считает свои вызовы строкой JSONL `ts·node·actor·event·outcome` рядом с собой (эталоны: `usage.jsonl` secondop, `_spawn_slot_guard.log`, `_chip_guard.log` — тот же паттерн, НЕ новая инфраструктура). Гейт считает ALLOW/BLOCK, скилл — старт, рутина — исход тика (не факт запуска). Флотовой механизм → лог читаем с хаба, иначе «кто пользуется» снова слепое пятно (замер 04.08: session-control-pack — применение видно 5/6, использование только локально). Нет счётчика → ⚠️. Канон `reglament-schyotchik-ispolzovaniya-na-ves-funkcional`.
+  ⭐ **И ТЕСТ В НЕГО НЕ ПИШЕТ** (замер 04.09.2026): путь счётчика обязан переопределяться флагом `--counter`/env, а регресс-сетка обязана его переопределять — иначе метрика «живое или утиль» врёт. Замер: в `whatsapp_pipeline.jsonl` 67% строк написал тест, использование было завышено **в 7 раз**, и почти не используемая деталь выглядела живой. Кейс приёмки: снять размер боевого JSONL в начале теста и сверить в конце («боевой счётчик тестом НЕ тронут»). Эталон: `[путь владельца]` (подстановка в общей `run()`). Счётчик без флага → ⚠️. Память [[counter-is-production-tests-must-not-write-it]].
+- ⭐ **KILL-LIST: тест обязан сказать, что именно он ловит** (замер 11.08, [[kill-list-makes-tests-checkable]]). В докстроке теста — блок `МУТАЦИИ, КОТОРЫЕ ЭТОТ ТЕСТ ОБЯЗАН УБИТЬ`: одна строка = конкретная правка исходника → ИМЯ падающего от неё кейса. Ревьюер применяет каждую строку к **КОПИИ** детали (живую не мутируй: сторож стреляет каждые 5-20 минут) и смотрит, покраснел ли НАЗВАННЫЙ кейс. Строка не сработала = ЛОЖНАЯ заявка, и это хуже отсутствующей: по ней деталь считается защищённой. Добавь сверх списка СВОЮ мутацию — обе фикции 11.08 (кейс из одних отрицательных проверок; снятая защита, которую тест не заметил) всплыли именно на ней. Пустая мутация (добавил переменную) ничего не доказывает — сверь, что подстановка изменила поведение. Пишет тест внешняя подписка (§6.3, `secondop.py implement`), kill-list требуй прямо в спеке + «честный пробел лучше зелёного вранья».
+- **Доказательство**: строка детали в карте покрытия — `python ~/.claude/scripts/coverage_map.py` (тест ✅ · док ✅ · ссылки); нет карты на узле → перечисли тест и док явными путями в вердикте. ⚠️ Карта считает покрытым только `_test_<имя детали>.py`: тест, названный по сценарию (`_test_cron_watchdog_absent.py`), в зачёт не идёт → покрытие ЗАНИЖЕНО, проверь глазами перед выводом «тестов нет».
+- ⭐ **РЕЛЬСА ХРАНЕНИЯ — НАЗОВИ ОКНО ВОССТАНОВЛЕНИЯ** (anton 21.08 «почини корень»): деталь, которую зовём бэкапом / зеркалом / репликой / синком / снапшотом, выходит из /tt с ✅ только если (1) названо ОКНО — сколько времени есть на откат, и (2) показан ПРОГОН, где удаление на источнике НЕ уничтожило вторую копию. Способы ровно три: датированный карантин · версия/снимок · отказ прохода по порогу из ЗАМЕРА (медиана + наблюдённый максимум по истории прогонов, не из головы). Реплика без окна — вторая мишень, а не страховка. Отчёт обязан нести ЧИСЛО удалённого/отложенного И В ХОРОШИЕ ДНИ ТОЖЕ (цифры, которой нет в отчёте, для наблюдателя не существует), красное едет на живую рельсу, а не в файл рядом со скриптом. Нет окна или нет прогона → максимум ⚠️. Замер 21.08: зеркало E→F каждую ночь переносило в «запасную копию» все удаления суток и рапортовало успех, потому что «удалено N extras» лежит внутри кодов возврата 0-7. Канон `reglament-strahovka-ne-povtoryaet-razrushenie` + [[insurance-must-not-replay-destruction]].
+- ⭐ **CLI-ДЕТАЛЬ ОБЯЗАНА ОТВЕЧАТЬ НА `--help` И БИТЬ ПО НЕИЗВЕСТНОМУ ФЛАГУ** (гейт при рождении, замер 03.09.2026): тронул/собрал скрипт, который читает аргументы → `python ~/.claude/scripts/help_flag_lint.py --check <путь>`. ⚠️ Линт ответил «не понял аргумент --check» — это НЕ «фичи нет», это ОТСТАВШАЯ КОПИЯ НА УЗЛЕ: прогони `python ~/.claude/scripts/copy_sweep.py help_flag_lint` и сверь размеры (канон с `--check` = 28 683 б, августовская без него = 23 393 б). Замер 17.09 на хабе: фичу дописали ЗДЕСЬ 03.09 (рядом лежал её `bak-precheck-[id]`), а sync-конфликт 15.09 откатил рабочую копию к августовской и оставил каноническую рядом файлом `*.sync-conflict-*` — узел ослеп на свой же гейт, а скилл для оператора выглядел врущим. Лечение: поставить каноническую копию в `scripts/`, прогнать парный `_test_help_flag_lint.py` (с секцией G должно быть PASS 35). exit 0 = чисто ЛИБО дыра заморожена в baseline (**старый долг правку НЕ блокирует**) · **exit 1 = НОВАЯ дыра класса `unparsed-flag-silently-runs-work` → чинить В ЭТОМ ЖЕ заходе**, иначе вердикт максимум ⚠️ (лечение линт печатает сам, 3 строки в начало `main()`). Почему гейт ЗДЕСЬ, а не только в ночной сетке: ratchet краснеет НОЧЬЮ и только ОТЧЁТОМ, а отчёт ничего не держит — за 11 дней после baseline 23.08 во флот въехало **55 новых дыр, ВСЕ в файлах, тронутых после baseline** (старых 0), и класс дал 8 датированных случаев уже ПОСЛЕ объявления «закрыт» (`pr_watch.py --help` = 7.5 мин живого тика по GitHub; `output_freshness.py --help` отправил пост в живой чат 03 в 01:41). ⚠️ **exit 2 = «НЕ ПРОВЕРЕН», и это НЕ «чисто»**: файл вне корней линта (`scripts/`, `imports/`) он не сканирует — гони гейт на детали, живущей в корнях, либо задай `HELP_FLAG_LINT_ROOT`. Тест: `_test_help_flag_lint.py` секция G (мутации: вырезать ветку → G1/G3/G4/G5; гейт, который не краснеет → G2; убрать проверку корней → G6 ловит ложное зелёное).
+- ⭐ **ОТПЕЧАТОК АВТОРА ВНЕ GIT — ЧЕРЕЗ ЕДИНСТВЕННУЮ ДВЕРЬ** (§5.11; дыра вскрыта замером 15.09.2026): тронул деталь → проверь, доедет ли провенанс. `git ls-files --error-unmatch <файл>` отвечает «не знает git» (на ZBOOKG8 `~/.claude/.gitignore` держит `*`, поэтому `scripts/` и `skills/` под git НЕ ходят) → идёт вне-git ветка §5.11: подпись с датой ВНУТРЬ артефакта + строка РОВНО через `python ~/.claude/scripts/change_ledger.py add --actor … --tool … --target … --summary …`. ⛔ Самодельный писатель запрещён: `open(<леджер>,'a')` руками и имя узла из `socket.gethostname()` вместо `COMPUTERNAME` — это класс `ledger-writer-bypasses-the-one-door`, ТРИ датированных случая (04.09 · 10.09 · 15.09), и 10.09 он стоил УНИЧТОЖЕННОГО файла журнала на case-insensitive FS (два написания одного узла = один инод). Доказательство: `python ~/.claude/scripts/change_ledger.py lint` — назови долю канона ЧИСЛОМ (замер ZBOOKG8 15.09: всего 234, канон 5, вне канона 227 — дверь обходили 97%). Строки нет либо писал мимо двери → вердикт максимум ⚠️. Канон `reglament-otpechatok-avtora-na-kazhdom-izmenenii-koda` + [[edit-authorship-signature]]; корневой гейт — `task-2026-09-15-ledger-writer-bypasses-the-one-door`.
+- **УБЕРИ ВЕРСТАК** (§5.8 правило 1): каждый созданный по пути инструмент проштампуй — постоянный (тест+док) / одноразовый (`_scratch\`, авто-снос 30 дн) / в корзину. Не проштамповал = не закрыл.
+
+## Шаг 3.6 — BACKPRESSURE: цикл без внешнего давления не допускается (альфа 17.08.2026)
+Если проверяемая деталь **работает без человека в цикле** (рутина, cron, `/loop`, [человек]-луп, `claude -p`
+в баш-цикле, самоперезапускающийся агент, автоулучшатель) — она обязана **назвать своё внешнее
+давление**. Не назвала → вердикт максимум ⚠️, в прод не идёт.
+
+Откуда правило: Geoffrey Huntley, приём **backpressure** — внешнее давление, которое удерживает
+зацикленного агента от того, чтобы «слететь с катушек». Агент в цикле **будет** придумывать себе
+всё новые улучшения; без давления он уходит в космос и жжёт бак. Источник — доклад Крестникова
+(Сбер/GigaChain) 17.08.2026, [[insight-2026-08-17-harness-i-[человек]-loop-krestnikov]]. ⚠️ Приём чужой,
+у нас на своих задачах ещё не замерен — это 🤔 гипотеза, но цена ошибки односторонняя: без давления
+теряем бак и данные, с давлением теряем только пару строк кода.
+
+**Не новая инфраструктура:** у нас давление УЖЕ есть, просто у него не было имени и не было двери,
+которая спрашивает. Годные виды давления (нужен хотя бы один, лучше два):
+1. **Детерминированный судья** — `_test_*.py` / готовый гейт (`regress_run.py`, `memory_guard.py`,
+   `/arch`), который цикл обязан пройти на каждой итерации. Судья не живёт внутри того, что судит (§5.5).
+2. **Потолок итераций / времени** — жёсткий кап и авто-kill ([[shadow-first-mvp-pattern]] time-box).
+   «Бесконечный» цикл без капа = ❌, а не ⚠️.
+3. **Бюджетный тормоз** — лимит токенов/вызовов, при упоре цикл встаёт САМ, а не после счёта Антону.
+4. **Kill-switch** — файл-флаг/`paused`, который останавливает цикл без правки кода.
+5. **Порог «не хуже»** — метрика упала → откат итерации (это и есть keep/rollback п.6 альфы).
+
+**Проверка на приёмке (не на слово):** взять названное давление и **сломать нарочно** —
+одна итерация обязана быть отбита. Не проверил прогоном = давления нет (§5.8 «проверка без
+прогона = нет проверки»).
+
+⛔ Давлением НЕ являются: «промпт просит быть аккуратным», «я посмотрю утром», «модель умная»,
+ревью человеком постфактум. Давление должно быть машинным и срабатывать БЕЗ человека —
+иначе человек снова оказался в середине конвейера (§4.1 [[human-is-the-bottleneck]]).
+
+## Шаг 3.7 — ⭐ РАЗДАЙ НА ФЛОТ: ноу-хау без раздачи = пользы нет (anton 05.08, капсом «ДАВАТЬ ПОЛЬЗУ»)
+Собрал полезное — оно обязано доехать до КАЖДОГО узла-потребителя, иначе вердикт максимум ⚠️.
+Правило §7.3-бис существовало и молчало: 05.08 два новых скилла и патч движка пролежали три часа
+никому не раздаными, потому что ни одна дверь не спрашивала «а флот?». Теперь спрашивает эта.
+1. **Назови круг потребителей ДО раздачи.** Кому не нужно — явная строка `NOTFORME` с причиной
+   (чужая ОС, нет железа), а не молчание.
+2. **Проверь РЕЛЬС, а не надежду.** «Синк довезёт» — claim, требующий улики: у каждой шары свой
+   список пиров. Спроси факт у самого Syncthing:
+   `python3 -c "..."` → `rest/db/file?folder=<шара>&file=<путь>` (файл в индексе = едет).
+   Замер 05.08: `claude-skills` = 6 узлов, `claude-home` (там же `scripts/*.py`) = 5 — **Маяка нет**,
+   и скилл приехал бы туда без движка, который зовёт. Дверь без замка хуже отсутствия двери.
+3. **Рельс не достаёт → payload-посылка** (`_deploy/payloads/<id>/` + `install.py` + `CHECKSUMS.txt`) —
+   единственный канал, провабельно доходящий до всех; затем `deploy_register.py all <id> ... --verdict PASS --tier 1`
+   с МАШИННЫМИ apply/verify (verify читает ФАКТ: маркер/хэш/значение, не намерение).
+   `--verdict` обязателен (гейт 02.09): в шину едет только PASS этого /tt; WARN/FAIL = отказ,
+   осознанный обход `--force-unsafe "причина"` (причина уезжает в запись посылки).
+4. **Закрой свой узел сам** (`deploy_apply.py <id>`) и назови поимённо, кто ещё не применил.
+   ⛔ Тишина узла ≠ применено: выключенный, отставший и исправный молчат одинаково.
+5. ⭐ **КАНАРЕЙКА СНАЧАЛА, ПОТОМ ОСТАЛЬНЫЕ** (anton 06.08, [[canary-before-fleet-rollout]]):
+   раздача ОПАСНОГО класса (канон · хук · шина · синк · сторож · авторизация · автозапуск ·
+   системная настройка) идёт ступенями — **1 узел-канарейка** → verify читает ФАКТ (+ один живой
+   прогон, если тронута рельса) → **узел ДРУГОГО типа/ОС** → остальные потребители. Откат назван
+   ДО раскатки; узлам без того же механизма — `NOTFORME`. Безобидное (заметка · док · тест ·
+   строка в скилл) едет сразу всем. Сомнение → считаем опасным. Опасный класс, уехавший на всех
+   разом без зелёной канарейки, — вердикт максимум ⚠️: повезло ≠ проверено.
+Табло: `python ~/.claude/scripts/fleet_fix_audit.py --html`. Канон: CLAUDE.md §7.3-бис,
+[[fleet-parity-board]], [[improvement-rollout-all-peers]], [[sync-can-silently-downgrade-a-part]].
+
+## 🛠 ВЕРДИКТ О СКИЛЛЕ, КОТОРЫМ ПОЛЬЗОВАЛИСЬ (anton 07.09, голосом — обязателен, молчание = нарушение)
+Применил в этой работе скилл — вынеси вердикт об ЕГО обновлении. Одной строкой, с причиной в обе стороны:
+`🔧 обновляю /X — <что споткнулось>` (чинить В ТОМ ЖЕ заходе) · `📝 обновлю не сейчас — <причина>, строка легла в <адрес>` · `✅ /X обновлять не надо — <почему именно: прошло без заминки / заминка разовая и внешняя / правка дороже боли>`.
+
+⭐ **ВЕРДИКТОВ ДВА, НЕ ОДИН** (anton 13.09, голосом). Второй вердикт: **собственная инструкция того, кто сейчас работал** (рутина `scheduled-tasks/<имя>/SKILL.md`, сид, хук): «не стоит ли переписать мою инструкцию на будущее, чтобы она была качественнее?». Та же тройка `🔧 обновляю` · `📝 не сейчас` · `✅ не надо`, всегда с причиной. ⚠️ Замер 13.09: рутина `devto-publish-rhythm` починила СВОЙ файл и смолчала про скилл `/comments`, где висел ПРОТИВОПОЛОЖНЫЙ гейт, правило исполнилось наполовину, и спрашивать пришлось Антону. Канон живёт в СКИЛЛЕ, рутина держит только специфику прогона: разошлись, значит правду в скилл, а из рутины указатель. Канон: [[routine-judges-its-own-instruction-too]], CLAUDE.md §9.3-бис.
+Пустое «не надо» вердиктом не является. ⛔ Не путать с `/skill-gap` (тот про скилл, которого НЕТ) и не право раздувать: АК-47 в силе — правка снимает ПЕРЕЖИТУЮ боль, не гипотетическую.
+Канон: Библия `reglament-polzuemsya-skillom-srazu-sudim-nado-li-ego-obnovit` · CLAUDE.md §9.3-бис · [[skill-used-judge-if-it-needs-update]].
+
+## Шаг 4 — КОРЕНЬ → починить → перепрогнать
+⭐ СНАЧАЛА ГЕЙТ ТРЕТЬЕЙ ПОЛОМКИ (anton 09-10.08, CLAUDE.md §5.10): поломка объекта ВНЕ области этой задачи → НЕ чинить. До выбора имени класса обязательно вызови `python "$HOME/.claude/scripts/prior_art.py" class "<описание поломки своими словами>"`: `exit 3` означает найденный prior art, а не ошибку. Напечатанную `СЕМЬЯ <slug>` используй как `--class`; если прибор показал прежние строки без известной семьи, бери имя предмета ремонта/нарушенного инварианта из самой ранней строки, не новый синоним. При `exit 0`, когда прежней строки нет, назови класс по текущему предмету ремонта/нарушенному инварианту и запиши как 1-й датированный случай; канал, код возврата, текст алерта и симптом классом не являются.
+
+Только после этого запиши случай дверью `python "$HOME/.claude/scripts/selfheal.py" journal --class <класс> --what "..." --conditions "..." --parts "..." --guess "..."` — рукописная строка в Breakage-Journal.md НЕВИДИМА счётчику (journal_rows считает только |-таблицу; замер 21.08: 27 рукописных строк browser-rail-down не подняли ни одной починки). Счёт бери из фактического ответа двери: дедуп означает, что новой строки нет.
+
+На 3-й датированной строке, а также сразу для KEEP-ядра, потери данных, безопасности, денег или совравшего прибора, корень НЕ разбирай внутри `/tt`: используй ровно одну отдельную ВИДИМУЮ repair-сессию, и её первый явный вызов обязан быть `/five-whys <класс>` в Claude или `$five-whys <класс>` в Codex, с датированными строками серии. Если `selfheal.py` уже поставил такую сессию в очередь, вторую не создавай. Первый/второй рядовой случай, доказанная простая причина и единичный внешний сбой в `/five-whys` не идут.
+
+⭐ ИМЯ КЛАССА = ПРЕДМЕТ РЕМОНТА, НЕ КАНАЛ (CLAUDE.md §5.10, 02.09): не бери в `--class` симптом сторожа, код возврата или «красную строку» — проверь фразой «починю — класс закроется НАВСЕГДА?». «Нет, завтра приедет другой предмет» = это очередь под видом дефекта, дроби по предмету (`<цель>-<тег>`). Замер: 32 разных робота сидели в одном `dead-scheduled-task`, счёт не опускался ниже порога и две настоящие починки его не закрыли [[breakage-class-is-a-defect-not-a-channel]].
+Любой провал шагов 1-3 (= артефакт ЭТОЙ задачи) → копай в КОРЕНЬ ([[fix-root-cause-not-symptoms]]), не лепи заплатку на симптом, почини КЛАСС → вернись на Шаг 1 и перепрогони, пока чисто. Safety-critical (локи/синк/auth/scheduler/идемпотентность) → «прочитай прежде чем чинить» + мини-тест ([[verify-existing-before-proposing]]).
+
+## Шаг 4.5 — РАЗРЫВ СЕССИИ: считаем сигналы (ТЕНЬ с 2026-07-28, Антон «+»)
+Нашёл баг на шагах 1-3 и он не чинится с ходу — прежде чем зарываться, посчитай 4 сигнала и **залогируй**:
+```
+python ~/.claude/scripts/split_rule.py log --what "<что чиним>" --attempts <провалившихся попыток> \
+   --files <файлов в корне> --repro-min <минут на воспроизведение> --context-pct <% контекста> \
+   [--shared] --decision stay|split --minutes <итого> --note "<комментарий>"
+```
+Правило (пока ТЕНЬ, решение всё равно твоё): выносить в отдельную сессию, если сработал ЛЮБОЙ сигнал —
+**A** ≥2 провалившихся попытки · **B** корень >2 файлов или задета смежная система (шина/канон/планировщик/auth) ·
+**C** воспроизведение >10 мин · **D** контекст съеден ≥70%.
+Выносишь — сид-промпт обязателен (что делали · чего достигли · что уже отвергнуто и почему · критерий приёмки ·
+не-цели), задача в `10-Tasks`, артефакт помечается ⚠️, а не ✅. Тень без записей = правило НЕ проверено;
+сводка `split_rule.py summary --days 14`, критерии флипа в `00-System/Split-Rule-Shadow.md`.
+
+## Шаг 4.9 — ⭐⭐ ВТОРОЙ ЗАХОД: «готово» — такой же CLAIM, как причина (anton 13.09.2026, две голосовые подряд)
+Дословно: «когда ты сделал тесты, всё проверил и думаешь, что всё работает — сделай тест ещё раз. Часто бывает: ты говоришь, что всё работает, а на самом деле нихера не работает. И когда я спрашиваю „а ты точно всё починил?" — оказывается „ой, нет, что-то не сделал"».
+
+⚠️ ЗАМЕР АРХИВА 15.08→14.09.2026 (3613 транскриптов): **57 реплик-сомнений Антона в 36 сессиях, 21 из них — сразу после моего claim'а готовности**. Самая частая форма — голое «проверь ещё раз» и «ТЫ УВЕРЕН???????????». Класс датирован многократно, механизм по §5.10 законен.
+
+Шаги 1-3 зелёные — это ПЕРВЫЙ заход. Слово «готово» произносится только после ВТОРОГО, и второй обязан отличаться от первого, иначе он повторяет ту же слепоту:
+
+1. **От ТРЕБОВАНИЯ, а не от кода.** Выпиши списком, что просили (по словам Антона/сида, не по своему пересказу), и против КАЖДОГО пункта поставь улику: живой вывод, счётчик, строку файла. Пункт без улики = не сделан, даже если помнишь, что делал его. Именно тут ловится «сделано на 2/3».
+2. **ДРУГИМ методом.** Повтор той же команды вторым заходом НЕ является. Смени угол: прочитай изменённое место С ДИСКА вместо памяти о правке · спроси ПОТРЕБИТЕЛЯ вместо производителя · посчитай прибором то, что первый раз смотрел глазами · глянь артефакт с чужой стороны провода.
+3. **Ровно те места, что чинил.** Не общее здоровье системы: изменение реально на диске? доехало до потребителя? СТАРОЕ поведение исчезло (а не соседствует с новым)?
+4. **Свой ПРИБОР — тоже объект второго захода.** Первый замер этого самого правила дал 475 «случаев»; второй заход по прибору показал, что в выборку попали системные вставки харнеса, и честное число — 57. Зелёный счётчик, посчитавший не то, хуже отсутствия счётчика.
+5. **Назови, чего НЕ проверял.** Строка «проверено: … · НЕ проверено: … (почему)» обязательна. Честное «эту половину не трогал» — нормальный результат; умолчание — ложное «готово».
+6. **Критичное → ТРЕТИЙ заход, чужими глазами** (деньги · необратимое · раскатка на флот · исходящее третьим лицам · публикация · секреты · правка канона): панель Шага 2.5, другой узел или другой инструмент.
+
+⛔ Пока Шаг 4.9 не пройден, запрещены слова «всё работает» · «готово» · «починил» · «✅». Максимум — «первый прогон зелёный, иду на перепроверку». Вердикт ✅ без предъявленного второго захода = максимум ⚠️.
+Канон: CLAUDE.md §4.3-бис · Библия `reglament-gotovo-dokazyvaetsya-vtorym-zahodom` · [[done-is-a-claim-recheck-twice]]; блок для рутин — `~/.claude/scripts/routine-recheck-block.md` (раскатка `routine_discipline_apply.py --block=recheck`).
+
+## Шаг 5 — ВЕРДИКТ с доказательством
+Короткая таблица: **что проверено · как (живой вывод) · ✅/⚠️/❌**. Затем одна итоговая строка:
+- ✅ **PASS** — прогнал, ломал, видно — работает. ТОЛЬКО это = «готово».
+- ⚠️ **PARTIAL** — работает, но есть жёлтый флаг (назови его + что осталось).
+- ❌ **FAIL** — не работает / не видно → корень + что чиню.
+Доказательство (вывод/счётчик/скрин) обязательно — без него «✅» не считается.
+⭐ **Второй заход (Шаг 4.9) предъявлен строкой** «перепроверил так-то, нашёл/не нашёл то-то» — иначе вердикт максимум ⚠️, каким бы зелёным ни был первый прогон.
+
+**🪞 Гейт льстящего вывода (до того, как назвать вердикт).** Вывод, к которому пришёл, — ВЫГОДЕН ли он мне? (закрывает работу · объясняет неудачу не нашей виной · ставит нас впереди · разрешает не делать неприятное · подтверждает то, во что уже верили).
+
+Да → усилить проверку, а не ослабить: ОДНА НЕЗАВИСИМАЯ улика сверх той, что уже есть.
+Прибор: `python ~/.claude/scripts/self_serving_gate.py --check "<вывод>"` (`--ru` печатает чек-лист).
+
+**Потолки вердикта (жёлтый максимум, даже если всё остальное зелёное):** явный скип второго мнения
+(Шаг 2.5) · нет теста/дока/счётчика (Шаг 3.5) · **автономный цикл без названного и проверенного
+backpressure (Шаг 3.6)** · не раздано на флот (Шаг 3.7). Автономный цикл БЕЗ потолка итераций —
+не ⚠️, а ❌: это единственный случай, когда отсутствие давления валит вердикт сразу.
+
+**🌍 Мировой потребитель (декрет Антона 24.08.2026):** вердикт ✅ на починке КЛАССА (чужой может воспроизвести симптом без наших внутренностей) → в ТОМ ЖЕ заходе прогнать скилл **`/share-fix`** (реверс-поиск по дословному симптому → 3-5 лучших живых тредов → gist → вахта pr_watch). Вердикт обязателен: 🟢 раздал (ссылки) · ⚪ искал-пусто · ⛔ непереносимо/приватно+причина; молчание запрещено. Механика целиком в `/share-fix` — тут только вызов и вердикт. Канон: `reglament-pochinil-u-sebya-srazu-razday-miru` + память `fixed-it-share-it-with-the-world`.
+
+**📋 Журнал задач (декрет Антона 2026-07-04):** вердикт ✅ = момент закрытия в реестре задач ([[task-journal-done-undone-linking]]): если проверенная вещь числится в реестре — отметь `done` с ЭТИМ доказательством + линк, что она разблокировала; ❌/⚠️ = задача остаётся open (хвост «дочинить X» — в реестр сразу). С машины без движка — `bus_send.py` TASK/DONE. Одна строка в докладе: «📋 журнал: #id → done (доказательство: …)».
 
 ---
 
-## Link with the retro (audit, not a duplicate)
-`/tt` tests per task (hot). The retro at the end of the session only **AUDITS** the "tested? ✅/❌" line for each artifact and, if ❌ — flags it and offers to run `/tt` now. The retro does NOT do the check itself (too late/cold). No duplication: each layer references downward (simplicity-first).
+## Связка с /retro (аудит, не дубль)
+`/tt` тестирует на каждой задаче (горячо). `/retro` в конце сессии лишь **АУДИТит** строку «протестировано? ✅/❌» по каждому артефакту и, если ❌ — флагает и предлагает прогнать `/tt` сейчас. Ретро само проверку НЕ делает (поздно/холодно). Не дублируем: каждый уровень ссылается вниз (AK-47).
 
-## Boundaries / non-duplication
-- markdown-only thin orchestrator; NOT a server/DB/webhook (if you truly need more than markdown — raise a ⚠️ COMPLEXITY flag, the operator decides).
-- read-only/dry-run where side effects exist; vault writes — backup-first ([[vault-backup-rule]]).
-- If the session built nothing — say plainly "nothing to test", no ceremony.
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Границы / не-дубль
+- markdown-only тонкий оркестратор; НЕ сервер/БД/вебхук (если правда нужен > markdown — флаг ⚠️ УСЛОЖНЕНИЕ, решает Антон).
+- read-only/dry-run где есть побочки; запись в волт — бэкап-первым ([[vault-backup-rule]]).
+- Если сессия ничего не собрала — скажи прямо «тестировать нечего», без церемонии.

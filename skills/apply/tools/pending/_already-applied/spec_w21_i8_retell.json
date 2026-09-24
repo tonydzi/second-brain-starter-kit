@@ -1,0 +1,37 @@
+{
+ "idx": 8,
+ "company": "Retell AI",
+ "url": "https://jobs.ashbyhq.com/retell-ai/5652ab47-6c89-4889-a507-7a3a943c3669",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w21_i8_retell",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "Linkedin Profile": "https://tonydzi.github.io/"
+ },
+ "combos": {
+  "Location": {
+   "query": "Palo Alto",
+   "want": [
+    "Palo Alto, California",
+    "Palo Alto, CA"
+   ]
+  }
+ },
+ "options": {
+  "Are you currently authorized to work in the United States": "Yes",
+  "Are you open to working in-office 5x per week": "Yes",
+  "Are you comfortable working in a fast-paced": "Yes"
+ },
+ "url_fields": [
+  "Linkedin Profile"
+ ],
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone Number",
+  "Resume",
+  "Linkedin Profile"
+ ]
+}

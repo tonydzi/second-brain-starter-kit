@@ -16,9 +16,9 @@
 """Render Platinum CRM DM-leads (no-call) into cards. Rich if synth present, else thin.
 Renders to staging_dm (NOT vault). Idempotent; slug-deduped vs existing FAAA cards."""
 import json, io, os, re, glob
-VL=r"E:/Obsidian/Owner-Knowledge/04-Projects/crypto/Platinum-CRM/leads"
-ST=r"E:/Obsidian/_imports/staging_dm/04-Projects/crypto/Platinum-CRM/leads"
-DMB=r"E:/Obsidian/_imports/faaa/dm_batches"; DMS=r"E:/Obsidian/_imports/faaa/dm_synth"
+VL=r"[путь владельца]"
+ST=r"[путь владельца]"
+DMB=r"[путь владельца]"; DMS=r"[путь владельца]"
 DATE="2026-06-01"
 TIER_RU={"investor":"Инвестор","founder":"Фаундер / проект","kol":"KOL","b2b":"B2B","other":"—"}
 TR=str.maketrans("абвгдеёжзийклмнопрстуфхцчшщъыьэюя","abvgdeejziyklmnoprstufhccss y eya")
@@ -38,7 +38,7 @@ for f in glob.glob(DMS+"/batch_*.json"):
             if isinstance(o,dict) and o.get("lead_id"): synth[o["lead_id"]]=o
     except Exception: pass
 # dedup vs AUTHORITATIVE staging FAAA card filenames (vault may be mid-rebuild)
-FAAA_REF=r"E:/Obsidian/_imports/staging/04-Projects/crypto/Platinum-CRM/leads"
+FAAA_REF=r"[путь владельца]"
 used={}
 for f in glob.glob(FAAA_REF+"/**/*.md", recursive=True): used[os.path.basename(f)[:-3]]=1
 def uniq(b):

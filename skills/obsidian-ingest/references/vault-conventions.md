@@ -20,7 +20,7 @@ Imports/checkpoints live **outside** the vault proper in `$IMPORTS_ROOT/` (JSONL
 ## Naming
 
 - Concepts: `concept-<slug>.md` (e.g. `concept-aging`, `concept-hardware-dex`)
-- People: `person-<slug>.md` (e.g. `person-vitalik-buterin`). **Anton's standing rule: when you encounter a NEW identifiable person, create the note — but always dedup first.** Check the existing `07-People/` set AND merge obvious variants (`person-huberman` ⇄ `person-andrew-huberman`, first-name ⇄ full-name) into one canonical note with the rest as `aliases:`, never a second file. Truly ambiguous bare first names with no context still get flagged in the source note's `unresolved_flags` rather than spawned as empty stubs.
+- People: `person-<slug>.md` (e.g. `person-[человек]-[человек]`). **Anton's standing rule: when you encounter a NEW identifiable person, create the note — but always dedup first.** Check the existing `07-People/` set AND merge obvious variants (`person-huberman` ⇄ `person-andrew-huberman`, first-name ⇄ full-name) into one canonical note with the rest as `aliases:`, never a second file. Truly ambiguous bare first names with no context still get flagged in the source note's `unresolved_flags` rather than spawned as empty stubs.
 - Insights: `insight-<slug>.md`
 - Posts/transcripts (batch): `YYYY-MM-DD-<translit-slug>.md`
 - MOCs: `_<Source>-MOC.md` (underscore sorts to top)

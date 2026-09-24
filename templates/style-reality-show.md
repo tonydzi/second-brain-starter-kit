@@ -6,13 +6,13 @@ audience: anton
 origin: anton
 authored_by: claude-code
 date: 2026-06-29
-machine: PaloAlto-Desktop
+machine: [машина флота]
 operator: Anton
 status: active
 aliases: [reality show стиль, блокбастер стиль, нарративный движок, сериал стиль, style reality show]
 tags: [template, style-guide, content, reality-show, narrative, build-in-public, digital-twin]
 dr_synced: 2026-07-01
-sources: "внешний Deep Research «Authentic Narrative Engineering for Solo Build in Public» (2026-07-01, оригинал в _originals\\deep-research-reality-show-narrative-2026-07-01.md); опоры: Mittell (previously-on), мета-анализ Zeigarnik/Ovsiankina 2025, Pieter Levels / Marc Lou / Arvid Kahl (build-in-public), Treiber (Claude-Code diary)"
+sources: "внешний Deep Research «Authentic Narrative Engineering for Solo Build in Public» (2026-07-01, оригинал в _originals\\deep-research-reality-show-narrative-2026-07-01.md); опоры: Mittell (previously-on), мета-анализ Zeigarnik/Ovsiankina 2025, [человек] Levels / [человек] Lou / Arvid Kahl (build-in-public), Treiber (Claude-Code diary)"
 ---
 
 # Reality-show / блокбастер — нарративный движок

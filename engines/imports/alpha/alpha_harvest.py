@@ -62,8 +62,8 @@ MINERS = [
     # ("orphan", ...) RETIRED 2026-07-16: 37.5% precision on Anton's etalon; orphan-weaving lives in /relink --deep
     ("lobster",       "lobster-judged-latest.md",       "LobsterDAO-Alpha MOC (community)"),
     ("sostav",        "sostav-judged-latest.md",        "🔒 Sostav-MOC (PRIVATE — high sensitivity)"),
-    ("promptdesign",  "promptdesign-judged-latest.md",  "AI-tooling alpha (@prompt_design channel)"),
-    ("promptchat",    "promptchat-judged-latest.md",    "AI-tooling alpha (@prompt_chat — Силиконовый Мешок discussion)"),
+    ("promptdesign",  "promptdesign-judged-latest.md",  "AI-tooling alpha ([аккаунт] channel)"),
+    ("promptchat",    "promptchat-judged-latest.md",    "AI-tooling alpha ([аккаунт] — Силиконовый Мешок discussion)"),
 ]
 
 # a heading that STARTS the DROP / rejected region — the drop token must lead the

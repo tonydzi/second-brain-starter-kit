@@ -1,80 +1,79 @@
 ---
 name: intake
-description: >-
-  Route a new rule, preference or policy edit into every home it belongs in (always-loaded
-  canon, memory, the behavioral codex, a skill, a hook) and leave a trace in the always-loaded
-  layer so parallel sessions pick it up on their own. Flow: dedup recall, classify by form,
-  write to all homes, back up, report. Triggers: "/intake", "record this rule", "route this to
-  its homes".
-license: MIT
+description: "- “/intake“ — приёмник правил: один проход раскладывает новое правило/регламент/предпочтение/правку CLAUDE.md/Библии/скилла по ВСЕМ нужным домам и оставляет след в always-loaded слое, чтобы параллельные процессы увидели его сами. Trigger on “/intake“, “запиши правило“, “прими правило“, “разложи это по домам“, “новое правило в библию“"
+version: 1.0.0
 ---
 
-# /intake — the rule intake (route it to its homes, don't just write it down)
+# /intake — приёмник правил (разложить по домам, не просто записать)
 
-> 🧒 **When reporting to a non-technical owner:** end with a child-simple "In plain words" recap (memory `eli5-always`). Reports TO him only — never inside vault notes.
+> 🧒 **When reporting to Anton:** end with a child-simple "Простыми словами" recap (memory `eli5-always`). Reports TO Anton only — never inside vault notes.
 
-**Why (canon: memory `rules-intake-channel`).** This chat is the dedicated channel where the owner drops ALL rules/policies/Bible entries/skills/`CLAUDE.md` edits/preferences, so that working chats stay clean. My job is **not just to write it down, but to DELIVER** the rule to all of its homes, cross-link it, and leave a trace in the always-loaded layer, so that automatic/parallel processes see it on their next start. This skill = the same manual flow I repeated ~10× in one session, folded into a single command.
+**Зачем (канон: память `rules-intake-channel`).** Этот чат — выделенный канал, куда Антон скидывает ВСЕ правила/регламенты/Библию/скиллы/правки `CLAUDE.md`/предпочтения, чтобы не захламлять рабочие чаты. Моя работа — **не просто записать, а РАЗВЕЗТИ** правило по всем домам, перелинковать и оставить след в always-loaded слое, чтобы автоматические/параллельные процессы увидели его при следующем запуске. Этот скилл = тот же ручной flow, что я повторял ~10× за сессию, свёрнутый в одну команду.
 
-**Architecture (skill-design-three-layer):** a thin `SKILL.md` orchestrator + deterministic steps (backup/commit/grep) + an external store (CLAUDE.md, memory, the vault). The routing decision **is still shown to the owner** in the report — the skill does not hide the logic, it executes it without asking at every step.
+**Архитектура (skill-design-three-layer):** тонкий `SKILL.md`-оркестратор + детерминированные шаги (бэкап/commit/grep) + внешний store (CLAUDE.md, память, волт). Решение о маршруте **всё равно показываю Антону** в отчёте — скилл не прячет логику, он её исполняет без переспросов на каждом шаге.
 
 ---
 
-## Step 0 — RECALL (dedup; cheap, ~0 tokens). NEVER spawn a duplicate
-Before writing — check whether such a rule already exists (update it, don't spawn a copy; resolve conflicts by "newer beats older"):
-- `MEMORY.md` is already in context — scan its index by topic.
-- `grep` over memory: `$USERPROFILE/.claude/projects/<project>/memory/`.
-- `grep` over the Bible/vault: `reglament-*` / `protocol-*` under `03-Insights\Operations\` and `05-Resources\Protocols\`; if needed, RAG via `brain_ask.py "<topic>"`.
-- Found an existing one → **update it** (don't create a second), mark `supersedes` / refresh `date_established`. A conflict between the owner's own rules (`origin: anton`) is resolved only by him or by an explicit `supersedes`.
+## Шаг 0 — RECALL (дедуп; дёшево, ~0 токенов). НИКОГДА не плодить дубль
+Прежде чем писать — проверить, нет ли уже такого правила (обновить, не плодить копию; снять конфликт по «свежее бьёт старое»):
+- `MEMORY.md` уже в контексте — сканирую его индекс по теме.
+- `grep` по памяти: `$USERPROFILE/.claude/projects/C--Users----CLAUDE-HP17-May26/memory/`.
+- `grep` по Библии/волту: `reglament-*` / `protocol-*` под `03-Insights\Operations\` и `05-Resources\Protocols\`; при нужде RAG `brain_ask.py "<тема>"`.
+- Нашёл существующее → **обновляю его** (не создаю второе), помечаю `supersedes`/обновляю `date_established`. Конфликт правил Антона (`origin: anton`) разрешает только Антон или явный `supersedes`.
 
-## Step 1 — Classify the rule by its FORM → pick the homes
-Route per `operating-agreement` → "Where durable rules go" (do NOT duplicate the rule across files — each level REFERENCES the one below):
-- **How I work / a machine process** (imports, dashboards, token economy, routines, my reply style) → `CLAUDE.md` (an always-on block) + memory (+ a line in `MEMORY.md`).
-- **A durable fact / preference** → memory (`memory\*.md` + a pointer line in `MEMORY.md`).
-- **An action ON THE OWNER'S BEHALF towards the outside world** (outreach, his chats, calendar, purchases, hiring, household) → **the Bible** (`reglament-*` in the vault) + if needed a lift into always-on in `CLAUDE.md`.
-- **"Every time automatically when X"** → a **hook** (skill `update-config`), not "keep it in mind".
-- **Time-based "every Monday / every morning"** → a **scheduled task / routine** (skill `schedule`).
+## Шаг 1 — Классифицировать правило по ФОРМЕ → выбрать дома
+Маршрут по `operating-agreement` → «Where durable rules go» (НЕ дублирую правило по файлам — каждый уровень ССЫЛАЕТСЯ вниз):
+- **Как работаю Я / машинный процесс** (импорт, дашборды, токен-экономия, рутины, мой стиль ответа) → `CLAUDE.md` (always-on блок) + память (+ строка в `MEMORY.md`).
+- **Устойчивый факт / предпочтение** → память (`memory\*.md` + строка-указатель в `MEMORY.md`).
+- **Действие ОТ ЛИЦА Антона вовне** (аутрич, его чаты, календарь, закупки, найм, быт) → **Библия** (`reglament-*` в волте) + при нужде подъём в always-on в `CLAUDE.md`.
+- **«Каждый раз автоматически когда X»** → **hook** (skill `update-config`), не «держать в уме».
+- **Время-based «каждый понедельник / каждое утро»** → **scheduled task / рутина** (skill `schedule`).
 
-## Step 1★ — THE TEST "could a HUMAN do this?" → YES → the rule ALSO GOES INTO THE BIBLE
-If the rule could hypothetically be executed by the owner's **live assistant** (not only by me/code) — it is **duplicated into the Bible** (the single rulebook for all actors: the owner + assistants + AI). To keep the copies from drifting: **the canon of the human-executable part lives in the Bible**, and the machine layer (`CLAUDE.md`/memory) REFERENCES it. Purely mechanical things (an import script, a reindex — no human does that) are NOT duplicated into the Bible.
+## Шаг 1★ — ТЕСТ «а мог бы это сделать ЧЕЛОВЕК?» → ДА → правило ИДЁТ И В БИБЛИЮ
+Если правило гипотетически может выполнить **живой ассистент Антона** (не только я/код) — оно **дублируется в Библию** (единый свод для всех акторов: Антон + ассистенты + AI). Чтобы копии не разъезжались: **канон человеко-исполнимой части — в Библии**, машинный слой (`CLAUDE.md`/память) ССЫЛАЕТСЯ на неё. Чисто-машинное (импорт-скрипт, реиндекс — человек так не делает) в Библию НЕ дублирую.
 
-## Step 2 — THE KEY invariant: a trace in the always-loaded layer is MANDATORY
-The only things that "surface by themselves" for parallel processes are the ones in the **always-loaded** layer: `CLAUDE.md` and the `MEMORY.md` index load into EVERY session; individual memory files load by relevance; **the vault does NOT surface on its own** (it needs grep/RAG); a skill surfaces on its trigger. → For a rule to become "background/automatic", it MUST leave a trace in `CLAUDE.md` or `MEMORY.md` (at least a pointer line to the canon), not only in the vault/skill.
+## Шаг 2 — КЛЮЧЕВОЙ инвариант: след в always-loaded слое ОБЯЗАТЕЛЕН
+«Само всплывает» у параллельных процессов только то, что в **always-loaded** слое: `CLAUDE.md` и индекс `MEMORY.md` грузятся в КАЖДУЮ сессию; отдельные файлы памяти — по релевантности; **волт сам НЕ всплывает** (нужен grep/RAG); скилл — по триггеру. → Чтобы правило стало «фоновым/автоматическим», у него ДОЛЖЕН быть след в `CLAUDE.md` или `MEMORY.md` (хотя бы строкой-указателем на канон), а не только в волте/скилле.
 
-## Step 3 — Write into every chosen home
-- **Memory:** create/update `memory\<slug>.md` with frontmatter (`name`, `description`, `metadata.type`: user/feedback/project/reference). Body: for feedback/project — `**Why:**` + `**How to apply:**`. Use `[[name]]` links liberally. + one pointer line in `MEMORY.md` (`- [Title](file.md) — hook`, ≤200 chars).
-- **CLAUDE.md:** if it is always-on — add a block `## ALWAYS: <topic> (standing — set <date>)` or append a bullet to an existing one; finish with "Canon: memory `<slug>` + Bible `<reglament>`". ⚠️ Entry budget: the block = ONLY trigger + gist + pointer, target ≤4 lines / ~900 characters; the mechanics (commands, formats, IDs, examples) live in the Bible/memory/skill, they have no place in CLAUDE.md. ⭐ PAY THE ENTRY FEE (Bible entry on optimising always-loaded files): BEFORE writing, run `python ~/.claude/scripts/claude_md_guard.py --preflight <block.md>` — exit 0 = go ahead; exit 1 = the file is in the yellow/red zone, first free up at least the block's size (compress a section with the harness `claude_md_compress.py index→build→verify` / move the body into the Bible), then write. We do not re-compress at the word level (declined) — structure only. The write hook on CLAUDE.md will repeat the warning, but the preflight is your step, don't wait for the hook.
-- **The Bible (if Step 1★ applies):** a `reglament-*.md` in `03-Insights\Operations\` (or the right domain) in the `protocol-bible-as-prompt` format (the owner verbatim, `WHEN → DO`, frontmatter with `audience`/`origin`/`authored_by`/`date_established`/`status`/`confidence`). **Wire it into the MOC** (`_Operations-Bible-MOC` or the domain index) — otherwise the assistant will never find it.
+## Шаг 3 — Написать во все выбранные дома
+- **Память:** создать/обновить `memory\<slug>.md` с frontmatter (`name`, `description`, `metadata.type`: user/feedback/project/reference). Body: для feedback/project — `**Why:**` + `**How to apply:**`. Линки `[[name]]` либерально. + одна строка-указатель в `MEMORY.md` (`- [Title](file.md) — hook`, ≤200 симв).
+- **CLAUDE.md:** если always-on — добавить блок `## ALWAYS: <тема> (standing — set <дата>)` или дописать буллет в существующий; закончить «Канон: память `<slug>` + Библия `<reglament>`». ⚠️ Бюджет входа: блок = ТОЛЬКО триггер + суть + указатель, цель ≤4 строк / ~900 символов; механика (команды, форматы, ID, примеры) живёт в Библии/памяти/скилле, в CLAUDE.md ей не место. ⭐⭐ ЗАПИСЬ НЕ ГЕЙТИТСЯ РАЗМЕРОМ (anton 21.08, голосом — supersedes «плати за вход»): ДО записи прогнать `python ~/.claude/scripts/claude_md_guard.py --preflight <блок.md>` как ЗАМЕР; красный/жёлтый вердикт НЕ блокирует — правило пишется ВСЁ РАВНО (полнота записи = качество работы сессии), а вердикт уходит строкой-репортом Антону «⚠️ CLAUDE.md <размер>KB». Освобождение места = работа суточного оптимизатора (§10.0), не пишущей сессии; сжимать чужие секции по ходу по-прежнему ⛔ (anton 18.08). Канон: Библия `reglament-optimizatsiya-always-loaded-faylov-claude-md-i-memory-md` §Поправка 21.08 + память `rule-write-never-gated-by-size`. Слова не пережимаем (declined) — только структура. Хук на запись CLAUDE.md продублирует предупреждение, но preflight — твой шаг, не жди хука.
+- **Библия (если Шаг 1★):** `reglament-*.md` в `03-Insights\Operations\` (или нужном домене) по формату `protocol-bible-as-prompt` (verbatim Антона, `WHEN → DO`, frontmatter с `audience`/`origin`/`authored_by`/`date_established`/`status`/`confidence`). **Вшить в MOC** — руками MOC не правим: `python [путь владельца]` пересобирает каталог `_Bible-Rules-MOC` со скана диска и подхватывает новое правило сам (ночной бэкстоп — задача `MOC Catalog Nightly`, §4.6: исполнитель работает сразу, крон только страхует). Тематическая секция берётся из поля `theme:` во frontmatter — поставь его, иначе правило уедет в «Прочее». Доменные индексы (`_Pokupki-Rules`, `_Bible-Outreach-MOC`) правим руками как раньше.
 
-## Step 4 — Backup + selective commit (safety)
-- Writing into the vault → FIRST `vault_backup.py` ([[vault-backup-rule]]).
-- **⚠️ If the shared backup is blocked** (the fuse catches someone else's mass deletions from a parallel fleet run) — do NOT force it; commit ONLY your own files: `cd $OBSIDIAN_VAULT && git add "<my file>" && git commit -m "..."`. Never `--force`, never a blanket glob delete.
-- `CLAUDE.md`/memory are auto-committed by git (`claude-skills-git-backup`, a 15-minute task) — no separate commit needed.
+- **Правило ОТМЕНЯЕТ старое → закрой старое явно, а не перезаписывай молча** (дверь §8.6, добавлена 2026-09-02). Тихая перезапись оставляет опровергнутый вердикт живым в другой папке памяти — замер 02.09: `chatgpt-dr-zero-searches-fake-report.md` жил девять дней после опровержения, потому что «свежее бьёт старое» знал только человек, а машина — нет. Прогон: `python ~/.claude/scripts/memory_epistemic.py --close <старый-слаг> --superseded-by <новый-слаг> --status superseded --evidence "<чем опровергнуто>" --actor session` (сначала `--dry-run`, если не уверен, какие копии слага затронет; одна копия — `--only-path`). Ставит `valid_to`/`superseded_by` во frontmatter и пишет строку в книгу противоречий. Ничего не отменяем → строка «⛔ отмены нет». Контракт полей и замер целиком: CLAUDE.md §8.4-бис + память [[memory-records-close-by-fields-not-rewrite]] (вывод жил в ЧЕТЫРЁХ записях, закрыли одну, девять дней три сессии работали по мёртвому правилу).
 
-## Step 4★ — THE HOMES MATRIX + the watchdog (a gate, not an option; canon: the Bible entry on writing lessons into every home)
-Before the report, fill in the matrix: **each** of the 6 homes (Bible · CLAUDE.md · memory + MEMORY.md · skill · hook/task · MOC) gets an explicit verdict **✅ written / ⛔ not needed + reason** — silently skipping a home is not allowed (pitfall 2026-07-14: the Bible was forgotten because the route was kept "in the head"). Then prove it with the counter:
-`python ~/.claude/scripts/rule_home_guard.py <slug/keywords>` — exit 1 = no trace in the always-loaded layer (Step 2 violated) → fix it before reporting.
+## Шаг 4 — Бэкап + выборочный commit (safety)
+- Запись в волт → СНАЧАЛА `vault_backup.py` ([[vault-backup-rule]]).
+- **⚠️ Если общий бэкап заблокирован** (предохранитель ловит чужие массовые удаления параллельного флота) — НЕ форсить; коммитить ТОЛЬКО свои файлы: `cd $OBSIDIAN_VAULT && git add "<мой файл>" && git commit -m "..."`. Никогда `--force`, никогда blanket-glob-delete.
+- `CLAUDE.md`/память авто-коммитятся git'ом (`claude-skills-git-backup`, 15-мин таск) — отдельный commit не нужен.
 
-## Step 5 — Report after the fact (NOT for permission — for transparency)
-Briefly to the owner: **WHAT** the rule is · **THE HOMES MATRIX from Step 4★** (a verdict per home) · **what was cross-linked** · conflicts/duplicates (if an existing one was updated). Like with concepts — after the fact, without asking permission for each home.
+## Шаг 4★ — МАТРИЦА ДОМОВ + сторож (гейт, не опция; канон `reglament-vyuchennoe-zapisyvaetsya-vo-vse-doma-matritsa`)
+Перед отчётом заполнить матрицу: **каждый** из 6 домов (Библия · CLAUDE.md · память+MEMORY.md · скилл · hook/task · MOC) получает явный вердикт **✅ записано / ⛔ не нужен + причина** — молча пропустить дом нельзя (грабли 2026-07-14: Библию забыли, потому что маршрут держали «в голове»). Затем доказать счётчиком:
+`python ~/.claude/scripts/rule_home_guard.py <slug/ключевые-слова>` — exit 1 = нет следа в always-loaded (Шаг 2 нарушен) → чинить до отчёта.
+⭐ **КВОТА «одно правило = одна ДВЕРЬ»** (anton 06.08 «+ квота», память `rule-needs-a-door-quota`): тот же прогон печатает вердикт двери — **✅ ДВЕРЬ ЕСТЬ и она ИСПОЛНИМАЯ** / **⚠️ ПОХОЖА НА ФИКТИВНУЮ** (слаг упомянут прозой, рядом нет команды или шага с проверкой — находка панели ломателей 06.08) / **⛔ БЕЗ ДВЕРИ**. Канон и Библия дверью НЕ считаются: они читаются, но не вызывают. Замер, из-за которого квота появилась: 19 из 25 свежих правил без двери, «5 почему» пролежал в каноне 42 дня и не применился ни разу. Нет двери → построить в ТОМ ЖЕ заходе (строка в существующем скилле дешевле нового робота) ЛИБО вписать правило в `~/.claude/rules-without-door.md` с датой и причиной. Регресс: `python ~/.claude/scripts/_test_rule_home_guard_door.py`.
+⭐ **Правило адресовано РУТИНАМ → дверь у них ОДНА и уже есть** (замер 13.09, вечер): правило «рутина судит два объекта» записали в канон и повесили двери в `/tt` и `/retro`, а 13 живых рутин узла остались без строки — 0 из 13, то есть правило приняли и не применили. Не писать в каждую рутину руками и не заводить нового робота: блок кладёт `python ~/.claude/scripts/routine_discipline_apply.py --block=<имя>` (тело блока — файл `routine-<имя>-block.md` рядом, маркер в шапке = идемпотентность, `--verify` читает факт, `SKIP` в скрипте выводит рутины, которым шаг не нужен, с причиной). Проверка правила: «кто ИСПОЛНИТЕЛЬ — человек в сессии или робот по расписанию?»; робот → блок обязателен, иначе дверь стоит только на живых сессиях.
+Дом MOC доказывается отдельным счётчиком: `python ~/.claude/scripts/rule_home_guard.py --moc-audit` — сирот должно быть 0. Не 0 → правило лежит вне сканируемых папок (перенести или добавить папку в `SCAN_DIRS` генератора).
+
+## Шаг 4★★ — ГЕЙТ ЖИВОСТИ: у правила есть способ оказаться ЛОЖНЫМ? (гейт, не опция)
+Шаг 4★ доказывает, что правило **всплывёт**. Этот шаг доказывает, что мы **заметим его нарушение** — это разные вопросы, и второй до 04.08.2026 никто не задавал.
+
+`python ~/.claude/scripts/_shared/rule_liveness.py --gate <slug/ключевые-слова>` — exit 1 = ворота закрыты.
+
+Три буля, все три обязательны: **дверь** (скрипт/гейт, способный вернуть «нарушено») · **расписание** (Task Scheduler / cron / hook, который дверь ДЁРГАЕТ) · **потребитель** (кто читает вывод). Чаще всего отсутствует второе: замер 04.08 нашёл **88 дверей, которые умеют краснеть, но их никто не гоняет**.
+
+Закрытые ворота лечатся ОДНИМ из трёх, и третий — полноправный:
+1. **назвать дверь** — упомянуть механизм (`foo.py`) **в тексте самого правила**: карта живости связывает правило с дверью по явному упоминанию, безымянная дверь для неё не существует;
+2. **повесить расписание** — задача/крон/хук; «дверь есть, но её никто не дёргает» = правило умрёт тихо (так умерли Firefox-first за 13 дней и `publish_format_gate` с 25 красными в 13 репо);
+3. **честно признать правило НЕПРОВЕРЯЕМЫМ и назвать ЦЕНУ его тихой смерти.** Цена ≈ 0 → правило **кандидат в утиль, а не в автоматизацию**. Покрыть всё сторожами = построить 60 сторожей, которых никто не читает, то есть та же болезнь этажом выше.
+
+⛔ Не плодить дверь ради зелёного вердикта. Непроверяемое правило с названной ценой — законный исход; молчаливое непроверяемое — нет.
+
+## Шаг 5 — Отчёт постфактум (НЕ для разрешения — для прозрачности)
+Коротко Антону: **ЧТО** за правило · **МАТРИЦА домов из Шага 4★** (вердикт по каждому) · **что перелинковал** · конфликты/дубли (если обновил существующее). Как с концептами — постфактум, не спрашивая разрешения на каждый дом.
 
 ---
 
-## Boundaries / don't duplicate
-- Always RECALL before writing (Step 0) — update what exists instead of spawning a second copy.
-- The canon of this procedure = memory `rules-intake-channel` (this skill is its executable form). The mirror is `capture-rules-into-bible` (which catches rules in ANY chat; intake = the dedicated channel + the always-loaded-layer mechanics).
-- Secrets (passwords/access/financial figures/"grey" techniques) — NEVER in the loaded layer (`CLAUDE.md`/`MEMORY.md`/the Bible); their home is `secrets\` (memory `credential-store`).
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Граница / не дублировать
+- Перед записью всегда RECALL (Шаг 0) — обновляю существующее, а не пложу второе.
+- Канон процедуры = память `rules-intake-channel` (этот скилл — её исполняемая форма). Зеркало — `capture-rules-into-bible` (ловит правила в ЛЮБОМ чате; intake = выделенный канал + механика always-loaded слоя).
+- Секреты (пароли/доступы/финцифры/«серые» техники) — НИКОГДА в загружаемый слой (`CLAUDE.md`/`MEMORY.md`/Библию); их дом = `secrets\` (память `credential-store`).

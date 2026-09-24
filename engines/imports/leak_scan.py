@@ -52,14 +52,14 @@ for _s in (sys.stdout, sys.stderr):   # cp1252 console -> force UTF-8 so non-ASC
 
 # --- tokens that must NEVER leave (compact digit forms; matched on normalized text)
 SECRET_NUMBERS = [
-    "182355026", "4074838102", "6634998361", "9095182014", "9232703764",
-    "1000941603212", "1007588357707", "226258979", "5966672828",
-    "9110567260", "970102884", "7179668356",
-    "355388751851", "96863211225", "963308162378", "79010892080",
+    "[id]", "[id]", "[id]", "[id]", "[id]",
+    "[id]", "[id]", "[id]", "[id]",
+    "[id]", "[id]", "[id]",
+    "[id]", "[id]", "[id]", "[id]",
 ]
 # Person names: secret ONLY on the freeschool rail. The book keeps names on purpose.
 PERSON_NAMES = [
-    "Нина", "Мария", "Рита", "Олег", "Сидорова", "Полина",
+    "Нина", "[человек]", "Рита", "Олег", "Сидорова", "Полина",
     "Арина", "Артём и алиса", "Dziatkovskii",
 ]
 # Identifiers: secret on EVERY rail (mailboxes, hostnames).
@@ -71,7 +71,7 @@ IDENTIFIER_WORDS = [
 ]
 SECRET_WORDS = PERSON_NAMES + IDENTIFIER_WORDS   # kept for backwards compatibility
 SECRET_REGEX = [
-    re.compile(r"AIza[0-9A-Za-z_\-]{10,}"),
+    re.compile(r"[человек][0-9A-Za-z_\-]{10,}"),
     re.compile(r"sk-[A-Za-z0-9]{15,}"),
     re.compile(r"gho_[A-Za-z0-9]{10,}"),
     re.compile(r"xox[bp]-[A-Za-z0-9\-]{10,}"),
@@ -83,7 +83,7 @@ FREESCHOOL_ONLY_REGEX = [
     re.compile(r"%VAULT_ROOT%|%USERPROFILE%", re.I),
 ]
 # --- authorized public tokens → INFO (visible, but not a failure)
-ALLOW_NUMBERS = ["16213388980"]           # co-founder WA CTA (Anton-authorized, never strip)
+ALLOW_NUMBERS = ["[id]"]           # co-founder WA CTA (Anton-authorized, never strip)
 ALLOW_WORDS = ["anton dzyatkovsky", "palo-alto-ai-research-lab",
                "a@corp_acct.fund"]   # публичный контакт Антона (стоит в START-HERE рядом с LinkedIn)
 
@@ -97,7 +97,7 @@ MACHINE_RULES = [
     ("hostname-mac",    r"(?i)MacBook-(?:Anton|Rita)",          "Mac"),
     # аккаунты и ящики: сканируются словарём IDENTIFIER_WORDS, но скрабить их обязан
     # тот же слой, иначе рендер вечно падает на гейте и «чинится» руками (было 2026-07-27)
-    ("acct-service",    r"(?i)\b@?(?:corp_acct\d*|bbplatinum[a-z]*)\b", "служебный аккаунт"),
+    ("acct-service",    r"(?i)\b@?(?:corp_acct\d*|[рабочий аккаунт][a-z]*)\b", "служебный аккаунт"),
     ("acct-work",       r"(?i)\b@?(?:work_acct_b|work_acct_a|personal_acct)\b",   "рабочий аккаунт"),
     ("acct-peer",       r"(?i)\b@?(?:teammate_r|teammate_n)\b",      "личный аккаунт"),
     ("mailbox",         r"[A-Za-z0-9._%+-]+@(?:gmail|platinum)[A-Za-z0-9.-]*\.[a-z]{2,}", "почтовый ящик"),
@@ -109,7 +109,7 @@ MACHINE_RULES = [
     ("device-id",       r"\b[A-Z0-9]{7}-[A-Z0-9]{7}-[A-Z0-9]{7}[A-Z0-9-]*", "<device-id>"),
     ("tg-chat-id",      r"-100\d{6,}|(?<![\d.])-\d{9,}\b",         "<chat-id>"),
     # Положительный user-id идёт без минуса, поэтому правилом выше не ловился и уехал в
-    # публичный артефакт («своя сессия @… id 7303193973», найдено глазами 2026-07-27).
+    # публичный артефакт («своя сессия @… id [id]», найдено глазами 2026-07-27).
     # Голое 10-значное число ловить нельзя (ложняки), поэтому якорим по слову-контексту.
     ("tg-user-id",      r"(?i)\b(?:user_?id|chat_?id|peer_?id|id)[\s:=]+\d{8,}", "id <tg-id>"),
     ("bot-handle",      r"@[A-Za-z0-9_]{2,}_?bot\b",               "служебный бот"),
@@ -220,13 +220,13 @@ def scan_file(path, profile="freeschool"):
 def _self_test():
     """The gate must catch what actually leaked on 2026-07-27 and stay quiet on safe text."""
     must_catch = ["ssh 167.233.122.145", "узел 100.122.143.5", "host ANCHOR1",
-                  "@fleet_wake_bot пингует", "хост HUB1", "чат -1008317706981",
+                  "[аккаунт] пингует", "хост HUB1", "чат -[id]",
                   "ssh ANCHOR1.tail1234.ts.net", "ключ sk-abcdefghijklmnopqrst",
                   "ssh [2001:db8::1] порт 22",        # IPv6 — дыру нашёл Codex T3 2026-07-27
-                  "своя сессия id 7303193973"]        # положительный tg user-id
+                  "своя сессия id [id]"]        # положительный tg user-id
     # Tailscale/Syncthing как ПРОДУКТЫ обсуждать можно: гейт ловит идентификаторы, не темы.
     must_pass_book = ["версия 2026.07.26.1", "счёт 15/15 ссылок", "Нина решила сама",
-                      "Дмитрий Глеб ответил", "loopback 127.0.0.1", "5 из 5 за 48 секунд",
+                      "[человек] [человек] ответил", "loopback 127.0.0.1", "5 из 5 за 48 секунд",
                       "поставили Tailscale на все машины", "Syncthing держит один волт"]
     bad = 0
     for s in must_catch:
@@ -240,7 +240,7 @@ def _self_test():
     # freeschool profile must still block person names (backwards compatibility)
     if not scan_text("Нина решила сама", "freeschool")[0]:
         print("  REGRESSION: freeschool stopped blocking person names"); bad += 1
-    sample = "хост HUB1 по адресу 167.233.122.145 пингует @fleet_wake_bot"
+    sample = "хост HUB1 по адресу 167.233.122.145 пингует [аккаунт]"
     scrubbed = scrub(sample)
     if scan_text(scrubbed, "book")[0]:
         print("  SCRUB LEFT A HIT:", scrubbed); bad += 1

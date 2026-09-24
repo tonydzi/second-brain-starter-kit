@@ -40,7 +40,7 @@ import os, sys, json, socket, shutil, argparse, datetime, urllib.request, urllib
 # --- the 4 Anton-machines that MAY hold the canon pen (roaming leader) --------------------------
 ANTON_MACHINES = {"LAPTOP1", "HUB1", "ANCHOR1", "MAC1"}
 # friendly-label aliases -> canonical key (macOS has no COMPUTERNAME; MACHINE_KEY env is canonical)
-ALIASES = {"LAPTOP1": "LAPTOP1", "PALOALTO-DESKTOP": "HUB1",
+ALIASES = {"LAPTOP1": "LAPTOP1", "[машина флота]": "HUB1",
            "ANCHOR1": "ANCHOR1", "ANCHOR1": "ANCHOR1"}
 # Syncthing folder IDs that carry canon; require need=0 on every one that EXISTS on this machine.
 CANON_FOLDERS = {"claude-config", "claude-home", "claude-memory", "Owner-Knowledge"}
@@ -185,7 +185,7 @@ def selftest():
             fails += 1
 
     ck("hub in allowlist", "HUB1" in ANTON_MACHINES)
-    ck("Mac16 in allowlist", "MAC1" in ANTON_MACHINES)
+    ck("[машина флота] in allowlist", "MAC1" in ANTON_MACHINES)
     ck("Nina follower NOT in allowlist", "NAT1-Nina" not in ANTON_MACHINES)
     ck("Rita follower NOT in allowlist", "MacBook-Rita" not in ANTON_MACHINES)
     ck("alias LAPTOP1 -> canonical", ALIASES.get("LAPTOP1") == "LAPTOP1")

@@ -18,7 +18,7 @@ into per-note files for LLM repair. Deterministic detection.
 import json, re
 from pathlib import Path
 
-EXPORT = Path(r"E:\Google Drive on HP Palo Alto\!_Claude_Mac16\Apple Notes Export 2026-06-11")
+EXPORT = Path(r"[путь владельца] Drive on HP Palo Alto\!_Claude_[машина флота]\Apple Notes Export 2026-06-11")
 OUT = Path(r"%IMPORTS%\apple-notes")
 MDIR = OUT / "mangled"
 MDIR.mkdir(exist_ok=True)

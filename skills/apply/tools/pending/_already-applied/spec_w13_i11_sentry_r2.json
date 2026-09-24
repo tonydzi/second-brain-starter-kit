@@ -1,0 +1,35 @@
+{
+ "url": "https://jobs.ashbyhq.com/sentry/9889cf59-cd32-4aff-bff7-645bb1be4e14/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w13_i11_sentry_r2",
+ "texts": {
+  "First and Last Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone number": "+1 341 222 9178",
+  "LinkedIn Profile": "https://tonydzi.github.io/ (no LinkedIn account)",
+  "GitHub Profile URL": "https://github.com/tonydzi",
+  "Pronouns": "He/him"
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "required_labels": [
+  "First and Last Name",
+  "Email",
+  "Phone number",
+  "Resume",
+  "Pronouns"
+ ],
+ "yesnos": {
+  "Our Sentaurs enjoy a hybrid work model": true,
+  "Will you now or in the future require visa sponsorship": false,
+  "Have you ever used Sentry before?": false
+ },
+ "options": {
+  "How did you hear about this position?": "Sentry's Careers Page",
+  "I understand the information I submit": "I have read and acknowledge Sentry's Applicant Privacy Policy.",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ }
+}

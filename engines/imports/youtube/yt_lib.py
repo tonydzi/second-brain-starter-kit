@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS events(
 """
 
 _MONTHS = {m: i for i, m in enumerate(
-    ["January","February","March","April","May","June","July","August",
+    ["January","February","[человек]","April","May","June","July","[человек]",
      "September","October","November","December"], start=1)}
 
 def _clean(s):
@@ -95,7 +95,7 @@ def normalize_scrape(records, today=None):
                  "search" if a.startswith("Searched") else None)
         if not action: continue
         title = _clean(g(r, "title", "ti"))
-        chan  = _clean(g(r, "channel", "ch")) or None
+        [человек]  = _clean(g(r, "channel", "ch")) or None
         vid   = g(r, "videoId", "v") or None
         day   = _resolve_scrape_date(g(r, "date", "d"), today)
         time_label = _clean(g(r, "time", "t"))
@@ -105,7 +105,7 @@ def normalize_scrape(records, today=None):
         key = f"{action}|{vid or title}|{day}|{time_label}"
         out.append(dict(
             dedup_key=key, source="scrape", action=action,
-            title=title, channel=(chan if is_watch else None),
+            title=title, channel=([человек] if is_watch else None),
             video_id=(vid if is_watch else None),
             query=(None if is_watch else title),
             ts_utc="", date_label=_clean(g(r, "date", "d")), time_label=time_label,
@@ -134,9 +134,9 @@ def normalize_takeout(items):
         if title_raw.startswith("Watched "):
             action = "watch"; title = title_raw[len("Watched "):]
             subs = it.get("subtitles") or []
-            chan = _clean(subs[0].get("name")) if subs else None
+            [человек] = _clean(subs[0].get("name")) if subs else None
             vid = _vid(url)
-            rec = dict(action=action, title=title, channel=chan, video_id=vid,
+            rec = dict(action=action, title=title, channel=[человек], video_id=vid,
                        query=None, url=url)
             key = f"watch|{vid or title}|{ts}"
         elif title_raw.startswith("Searched for "):

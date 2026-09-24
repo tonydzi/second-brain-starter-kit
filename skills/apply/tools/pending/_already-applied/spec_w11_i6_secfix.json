@@ -1,0 +1,20 @@
+{
+ "url": "https://jobs.ashbyhq.com/secfix/31bd29d1-011f-4017-adfb-e84ac0edff1e/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w11_i6_secfix",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn Profile": "No LinkedIn account - please see https://tonydzi.github.io/ and https://github.com/tonydzi"
+ },
+ "check_options": {
+  "Do you have native or C2 level in": "Yes",
+  "Do you have 1+ years of experience working in a fast-paced": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "CV",
+  "LinkedIn Profile"
+ ]
+}

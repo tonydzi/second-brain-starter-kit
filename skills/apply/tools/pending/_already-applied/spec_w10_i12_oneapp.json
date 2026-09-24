@@ -1,0 +1,25 @@
+{
+ "url": "https://jobs.ashbyhq.com/oneapp/3dfd8d97-4d98-49bf-b2c3-ebb3cd0a6e8d/application",
+ "out_prefix": "w10_i12_oneapp",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "texts": {
+  "Full Legal Name": "Anton Dziatkovskii",
+  "Preferred Name": "Anton",
+  "Phone Number": "+1 341 222 9178",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/"
+ },
+ "check_options": {
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status",
+  "Are you currently authorized to work lawfully in the United States?": "Yes",
+  "Will you now or in the future require employment-based immigration sponsorship": "No"
+ },
+ "required_labels": [
+  "Full Legal Name",
+  "Phone Number",
+  "Email",
+  "Resume"
+ ]
+}

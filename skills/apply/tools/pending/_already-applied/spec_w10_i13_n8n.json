@@ -1,0 +1,46 @@
+{
+ "url": "https://jobs.ashbyhq.com/n8n/bcf96878-d41a-479d-b506-[id]c4/application",
+ "out_prefix": "w10_i13_n8n",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "texts": {
+  "First and last name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "What is your expected yearly salary for the role?": "Open / market rate",
+  "What about n8n or the role caught your attention and made you apply?": "I am an n8n user, not just an applicant. My lab operates a production fleet of six machines run by AI agents - a consensus layer, persistent memory, an AI-native CRM and 100+ automation routines - and n8n is part of that stack: real workflows run through a live n8n instance, and I have felt both the power and the sharp edges (we even added our own change-authorship convention on top of workflow node notes, because we needed to know who changed what). A Senior PM (Enterprise) role on a product I operate daily, at a company treating automation as the platform for AI agents, is the closest match between a job posting and my actual working life I have seen this year.",
+  "Tell us about the personal or side project /product you've built recently": "The project is my daily operating system: a production fleet of six machines operated by Claude agents, built almost entirely with AI coding tools - I am the non-engineer who owns problem framing, architecture decisions and evals, while agents implement. Public pieces: claw-consensus (reproducible multi-machine agent consensus with an offline demo, published evals and FAILURE-MODES.md), verbatim-citation-gate (zero-token gate + burden-of-proof judge that catches fabricated RAG citations, MIT), sqlite-graph-memory and second-brain-starter-kit - 110 public repos in total. The fleet runs my CRM, knowledge base and 100+ scheduled routines; n8n handles workflow automation inside it. Published reliability measurement: 0/17 high-risk (Tier-2) actions slipped past the human approval gate in recorded runs."
+ },
+ "combos": {
+  "What would be your preferred main location for your contract?": "Germany"
+ },
+ "check_options": {
+  "Tick all options relevant": "I can be based in Germany and do not need visa support",
+  "Tick all options relevant for the role": "I can be based in a European country other than Germany or the UK where I do not need visa support",
+  "Have you worked in a startup or built products yourself?": "Yes – I founded or was an early hire at a startup and owned product",
+  "How many years of experience do you have in product management?": "More than 10 years",
+  "Which of these product types have you had direct ownership over?": "AI-powered or agent-based products",
+  "Which of these product types have you had direct ownership over? (Select all": "Integration platforms, APIs, or dev tools",
+  "What level of experience do you have building AI or LLM-powered product features?": "Led multiple shipped AI/LLM features in production",
+  "Have you built or managed products that rely heavily on third-party APIs or integrations?": "Yes - integrations/APIs were core to the product",
+  "What best describes your comfort level with product data and SQL?": "I write/edit SQL for funnels/cohorts and interpret experiment results",
+  "How often do you personally prototype product ideas using tools or code?": "Very often (AI tools, scripts, prototypes, etc.)",
+  "Which best describes your technical fluency?": "I can't code on but am proficient in using AI vibe coding tools for both work and perosnal projects",
+  "Which best describes your technical fluency": "I can't code on but am comfortable discussing APIs, integrations, and constraints with engineering teams",
+  "What knowledge/experience do you have with n8n?": "I've been building workflows with n8n for 1-3 months",
+  "What is your current age?": "I prefer not to answer",
+  "What is your gender identity?": "I prefer not to answer",
+  "Do you identify as transgender?": "I prefer not to answer",
+  "How do you identify your sexual orientation?": "I prefer not to answer",
+  "Which ethnicity(ies) do you identify with?": "I prefer not to answer",
+  "Which of the following communities do you belong to?": "I prefer not to answer",
+  "Do you agree to allow n8n to contact you about job opportunities": "I agree"
+ },
+ "required_labels": [
+  "First and last name",
+  "Email",
+  "Resume",
+  "What is your expected yearly salary for the role?",
+  "What about n8n or the role caught your attention",
+  "Tell us about the personal or side project"
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "url": "https://jobs.ashbyhq.com/mem0/5fdf00fb-0046-4731-85f3-c27d796c7c7e/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w10_i7_mem0",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Tell us about a piece of exceptional work": "A production multi-machine Claude fleet (6 machines) that I run in public: cross-machine consensus (claw-consensus - reproducible multi-machine agent consensus with an offline demo and published evals), persistent memory over a 10-year knowledge base, a CRM layer, and 100+ automation routines. The part I am most proud of is the reliability work: published agent-fleet evals (07.2026) where 0/17 high-risk Tier-2 actions slipped past the human approval gate in recorded runs, failure modes documented publicly (FAILURE-MODES.md), plus verbatim-citation-gate - a zero-token gate and burden-of-proof judge that catches fabricated RAG citations (MIT).",
+  "Why do you want to work at Mem0?": "Memory is the part of the agent stack I already live in: my fleet runs persistent memory over a 10-year knowledge base (RAG + SQLite; public repos include sqlite-graph-memory and second-brain-starter-kit), and my day-to-day is deploying that into messy real-world workflows. Mem0 is building exactly that layer as a product, and Forward Deployed is how I actually work: I ship working agent systems end-to-end (MCP connectors, RAG, evals) and can sit in front of a customer - 15+ years founder/BD background, including compliance-heavy environments (banks, governments in SE Asia).",
+  "Website / GitHub / LinkedIn / Portfolio": "https://tonydzi.github.io/ , https://github.com/tonydzi",
+  "Were you referred to Mem0": "No",
+  "What is your target total compensation": "Open / market rate"
+ },
+ "check_options": {
+  "This is an onsite role based in San Francisco": "Yes",
+  "Are you currently authorized to work in the United States?": "Yes",
+  "Will you now or in the future require sponsorship": "No"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "Tell us about",
+  "Why do you want to work at Mem0",
+  "Website / GitHub",
+  "Were you referred",
+  "What is your target total compensation"
+ ]
+}

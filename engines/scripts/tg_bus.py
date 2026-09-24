@@ -19,7 +19,7 @@
 # WHY: machine_bus rides Syncthing -> if sync is down / a machine is offline / a file
 # is still in transit, the link goes silent (this bit us 2026-06-25). A Telegram GROUP
 # is a cloud channel EVERY machine reaches independently, it "just works", and HUMANS
-# can watch the machines talk in plain sight. So: Telegram = primary, _machine-bus = backup
+# can watch the machines talk in plain sight. So: Telegram = primary, [шина] = backup
 # (used only for >4096-char giants or when Telegram is unreachable).
 #
 # THIS SCRIPT IS THIN ON PURPOSE (AK-47). It does ONLY the deterministic, 0-token parts:
@@ -46,7 +46,7 @@ CLAUDE = os.path.join(HOME, ".claude")
 SCRIPTS = os.path.join(CLAUDE, "scripts")
 CONFIG_PATH = os.environ.get("TG_BUS_CONFIG", os.path.join(CLAUDE, "tg_bus.json"))
 STATE_DIR = os.path.join(CLAUDE, "tg_bus_state")          # per-machine read offset (filename is single-writer-safe)
-WIRE_LIMIT = 4096                                          # Telegram hard message length; longer -> use _machine-bus fallback
+WIRE_LIMIT = 4096                                          # Telegram hard message length; longer -> use [шина] fallback
 
 # ---- machine identity: reuse machine_bus.ME (single source of truth) ----
 def _machine_key():
@@ -165,7 +165,7 @@ def cmd_envelope(target, text, msg_id=None):
             f"[tg_bus] RATE LIMIT TRIPPED: {ME} already posted {n} msgs in 60s (limit {RATE_LIMIT}). "
             f"REFUSING to prevent a loop / Telegram ban. If legit, wait or raise TG_BUS_RATE_LIMIT.\n")
         sys.exit(3)
-    # tag with a content-UUID so the SAME message mirrored to another channel (_machine-bus) is
+    # tag with a content-UUID so the SAME message mirrored to another channel ([шина]) is
     # de-duplicated on the receiver. Pass an explicit id to mirror; else auto-generate.
     if not msg_id:
         msg_id = bus_seen.gen_id() if bus_seen else os.urandom(4).hex()
@@ -173,7 +173,7 @@ def cmd_envelope(target, text, msg_id=None):
     if len(msg) > WIRE_LIMIT:
         sys.stderr.write(
             f"[tg_bus] WARNING: message is {len(msg)} chars > {WIRE_LIMIT} Telegram limit.\n"
-            f"[tg_bus] Use the _machine-bus fallback for giants:\n"
+            f"[tg_bus] Use the [шина] fallback for giants:\n"
             f'           python "{os.path.join(SCRIPTS, "machine_bus.py")}" send {target} "<text>"\n'
         )
     print(msg)
@@ -217,7 +217,7 @@ def cmd_filter(dedup=False):
     or {"result": "...json..."} / {"messages":[...]}). Print the NEW bus messages
     addressed to ME or ALL, not sent by ME, then a final 'ADVANCE <maxid>' line.
     dedup=True (CLI flag --dedup) also consults the shared bus_seen ledger -> a message whose
-    content-id was already processed (on THIS or the _machine-bus channel) is skipped + marked.
+    content-id was already processed (on THIS or the [шина] channel) is skipped + marked.
     Use --dedup ONLY on the CONSUMING read (the one that advances the offset), never on a peek."""
     raw = sys.stdin.read().strip()
     msgs = _coerce_messages(raw)
@@ -357,7 +357,7 @@ if __name__ == "__main__":
     if cmd == "config":
         cmd_config()
     elif cmd == "envelope" and len(a) >= 3:
-        # to MIRROR the same message to _machine-bus too, set env BUS_MSG_ID so both carry one id
+        # to MIRROR the same message to [шина] too, set env BUS_MSG_ID so both carry one id
         cmd_envelope(a[1], " ".join(a[2:]), os.environ.get("BUS_MSG_ID"))
     elif cmd == "offset":
         cmd_offset(a[1:])

@@ -23,9 +23,9 @@ import re, json, hashlib, os
 from pathlib import Path
 from collections import defaultdict
 
-POSTS = Path(r"E:/Obsidian/Owner-Knowledge/01-Conversations/Telegram/Arhiv-Golosa/posts")
-SESS = Path(r"E:/Obsidian/Owner-Knowledge/01-Conversations/Telegram/Arhiv-Golosa/sessions")
-IMP = Path(r"E:/Obsidian/_imports")
+POSTS = Path(r"[путь владельца]")
+SESS = Path(r"[путь владельца]")
+IMP = Path(r"[путь владельца]")
 APPLY = os.environ.get("APPLY") == "1"
 
 def body_of(text):

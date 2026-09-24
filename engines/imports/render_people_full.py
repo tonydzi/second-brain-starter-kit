@@ -16,14 +16,14 @@
 """Promote ALL Platinum-CRM leads with >=1 call (incl no-show) OR >=20 DM msgs to 07-People.
 New -> create; mine(context:platinum-crm) -> overwrite; others(Personal-DM/orig) -> enrich (append)."""
 import glob, io, os, re
-LV=r"E:/Obsidian/Owner-Knowledge/04-Projects/crypto/Platinum-CRM/leads"
-PPL=r"E:/Obsidian/Owner-Knowledge/07-People"
+LV=r"[путь владельца]"
+PPL=r"[путь владельца]"
 TR=str.maketrans("абвгдеёжзийклмнопрстуфхцчшщъыьэюя","abvgdeejziyklmnoprstufhccss y eya")
 def slugify(t):
     t=(t or "").lower().translate(TR); t=re.sub(r"['`’]","",t); t=re.sub(r"[^a-z0-9]+","-",t).strip("-")
     return re.sub(r"-+","-",t)[:46].strip("-") or "lead"
 def fv(fm,k):
-    m=re.search(r'%s:\s*"?([^"\n]*)"?'%k,fm); return (m.group(1).strip() if m else "")
+    m=re.search(r'%[путь владельца]"?([^"\n]*)"?'%k,fm); return (m.group(1).strip() if m else "")
 TIER_RU={"investor":"Инвестор","founder":"Фаундер/проект","kol":"KOL","b2b":"B2B","other":"—","not_investor":"Не инвестор"}
 
 # existing people index

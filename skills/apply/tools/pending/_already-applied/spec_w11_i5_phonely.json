@@ -1,0 +1,24 @@
+{
+ "url": "https://jobs.ashbyhq.com/phonely/6d4a6801-3b5b-40cf-af4d-7447bbf86de7/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w11_i5_phonely",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn Profile": "https://tonydzi.github.io/",
+  "Role Applying for": "Business Development Representative",
+  "GitHub Profile": "https://github.com/tonydzi"
+ },
+ "check_options": {
+  "Are you legally authorized to work in the United States": "Yes",
+  "Will you now or in the future require sponsorship": "No",
+  "Are you willing to work 5-days in office": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "LinkedIn Profile",
+  "Role Applying for"
+ ]
+}

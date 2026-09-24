@@ -33,7 +33,7 @@ HOME          = os.path.expanduser("~")
 SKILLS_DIR    = os.path.join(HOME, ".claude", "skills")
 
 # ONE fleet map of designed-signal exit codes (see scan_scheduled_tasks). Deliberately read by
-# path, not imported: this engine lives on E:\ and must not grow a cross-drive import of
+# path, not imported: this engine lives on [путь владельца] and must not grow a cross-drive import of
 # ~/.claude/scripts. Fail-safe: unreadable map -> nothing is a signal -> nonzero stays broken.
 # Map lives in scripts/_shared/ so it AUTO-TRAVELS via Syncthing to every fleet machine (same lane
 # as cron_watchdog.py). scripts/ ROOT was machine-local (/scripts/** ignored) -> hub never got it
@@ -92,7 +92,7 @@ DIR_DENY = {"__pycache__", ".git", "staging", "staging_airtable", "staging_pokup
 VENDOR_DENY = ("Adobe", "MicrosoftEdge", "OneDrive", "Zoom", "Kaspersky", "nWizard",
                "GoogleUpdate", "Google Update", "CCleaner", "Dropbox", "NVIDIA",
                "NvNode", "NvTmRep", "NvProfile", "NvDriver",  # NVIDIA root tasks (Nv* not caught by "NVIDIA")
-               "Intel", "Dell", "Brave", "Firefox", "Opera", "Steam", "Spotify",
+               "Intel", "[человек]", "Brave", "Firefox", "Opera", "Steam", "Spotify",
                "user_feed", "Microsoft\\")
 
 DEFAULT_TIER = {
@@ -252,7 +252,7 @@ def scan_tasks():
     # "an instance of this task is already running": the STEADY state of a single-instance
     # always-on daemon (e.g. call-monitor-daemon) whose keep-alive trigger re-fires while the
     # one instance is healthily running -> NOT broken (same class cron_watchdog already whitelists).
-    OKRES = {0, 267008, 267009, 267010, 267011, 1803543125}
+    OKRES = {0, 267008, 267009, 267010, 267011, [id]}
     # Designed-signal exits: these tasks use a nonzero exit as the CHECK RESULT by design and
     # already DELIVERED their own alert (bus/TG ping), so a nonzero here means "check fired",
     # not "script crashed" -> not broken. Exit 3 = alarm undeliverable and must STAY broken.
@@ -293,7 +293,7 @@ def scan_machines():
     if os.path.exists(MACHINE_ENV):
         add("machine", "this-host (machine.env)", MACHINE_ENV, "local_fs",
             detail="machine.env present")
-    for m in ["LAPTOP1 (LAPTOP1)", "PaloAlto-Desktop (HUB1)"]:
+    for m in ["LAPTOP1 (LAPTOP1)", "[машина флота] (HUB1)"]:
         add("machine", m, "roster", "git", detail="from session-machine-tagging")
 
 def scan_backup_targets():

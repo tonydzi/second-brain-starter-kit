@@ -1,16 +1,12 @@
 ---
 name: chat
-description: >-
-  Find a Telegram chat, group or channel by name and return its numeric id and t.me link from a
-  local index, with no live crawl. Also answers which groups you share with a person or company.
-  This is the chat lane, not people search. Triggers: "/chat <query>", "find the <X> chat",
-  "chat id for <X>".
-license: MIT
+description: "Find a Telegram CHAT/group/channel by name instantly — returns its telegram_id + t.me link from the local chats.db index (0 tokens, no live crawl). Trigger on “/chat <query>“, “найди чат <X>“, “id чата <X>“, “дай ссылку на чат <X>“, “в каком чате <...>“, “find the <X> chat“"
+version: 1.0.0
 ---
 
 # /chat — instant Telegram chat lookup
 
-Anton's pain: "find chat X" used to mean 20–60 min crawling the live dialog list.
+Anton's pain: "найди чат X" used to mean 20–60 min crawling the live dialog list.
 The chat's `telegram_id` + link already live in `chats.db` (built from the CRM
 `tg_entities` dump — the same extraction the CRM's mtproto-api does). Look it up,
 get the id, then operate the chat directly via the Telegram MCP.
@@ -33,7 +29,7 @@ the DB stores proper UTF-8 — read it programmatically when you need the real t
 
 ## "Common groups with a person / company" — `common_groups.py`
 ```
-PYTHONUTF8=1 python common_groups.py @handle [--account corp_acct]
+PYTHONUTF8=1 python common_groups.py @handle [--account [рабочий аккаунт]]
 PYTHONUTF8=1 python common_groups.py "Firstname Lastname"
 PYTHONUTF8=1 python common_groups.py <telegram_id>
 ```
@@ -55,18 +51,3 @@ If a brand-new chat is missing, run that refresh or fall back to live `search_di
 `build_chats_db.py` → index · `build_group_graph.py` → accounts/members/ours-theirs ·
 `build_group_digest.py` + Sonnet classifier → `group_class` · `build_groups_dashboard.py`.
 All under `$IMPORTS_ROOT/dialogs/`. See memory [[telegram-chat-index]].
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

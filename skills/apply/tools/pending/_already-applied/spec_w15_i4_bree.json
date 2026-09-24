@@ -1,0 +1,22 @@
+{
+ "url": "https://jobs.ashbyhq.com/bree/cdbd3d67-72b7-4127-a495-834890b0db08/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w15_i4_bree",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "Please link your Instagram or TikTok account here": "https://x.com/Tony_Stef_",
+  "How many Instagram/TikTok followers do you have?": "0",
+  "Share your most viral or successful post": "https://t.me/PaloAltoAi"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "LinkedIn URL",
+  "Please link your Instagram",
+  "How many Instagram",
+  "Share your most viral"
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "idx": 5,
+ "company": "9fin",
+ "url": "https://jobs.ashbyhq.com/9fin/39f53248-1eb6-47fe-a95a-031073f85c70",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w21_i5_9fin",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Contact number": "+1 341 222 9178",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Salary Expectations": "Open / market rate",
+  "If 'other', please": "Found this role on 9fin's own careers page."
+ },
+ "combos": {
+  "How did you hear about 9fin?": {
+   "query": "",
+   "want": [
+    "Company careers page",
+    "Company website",
+    "Careers page",
+    "Website",
+    "9fin website",
+    "Company Careers Page",
+    "Other"
+   ]
+  }
+ },
+ "options": {
+  "Do you require sponsorship to work in the US": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "url_fields": [],
+ "required_labels": [
+  "Name",
+  "Contact number",
+  "Email",
+  "Resume",
+  "Salary Expectations"
+ ]
+}

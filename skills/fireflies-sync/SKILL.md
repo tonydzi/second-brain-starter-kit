@@ -1,53 +1,33 @@
 ---
 name: fireflies-sync
-description: >-
-  Pull fresh call recordings and transcripts from Fireflies.ai into an Obsidian vault over the
-  official GraphQL API, then distill action items and commitments and reindex. Incremental and
-  idempotent by transcript id. Triggers: "/fireflies-sync", "pull fireflies", "sync call
-  recordings".
-license: MIT
+description: "Fireflies.ai звонки: On-demand подтягивание свежих звонков из Fireflies.ai (автозапись-бот, реальные имена спикеров) в Obsidian-волт через официальный GraphQL API (ключ в secrets\fireflies.env) + прогон дистилляции (alpha/commitments) + реиндекс. Trigger on “/fireflies-sync“, “подтяни fireflies“, “забери звонки из fireflies“, “sync fireflies“, “обнови файрфлайз“, “планёрки в волт“"
+version: 1.0.0
 ---
 
-OBJECTIVE: Incrementally pull fresh calls from Fireflies into the vault (a note with diarized speaker NAMES + summary + action items), catch the distillation up (alpha/commitments/facts) and make sure it lands in the index.
+OBJECTIVE: Инкрементально втянуть свежие звонки из Fireflies в волт (заметка с диаризованными ИМЕНАМИ спикеров + саммари + action items), догнать дистилляцию (alpha/commitments/facts) и убедиться, что попадёт в индекс.
 
 CONTEXT:
-- Transport: the official Fireflies GraphQL API `https://api.fireflies.ai/graphql`. Key: `FIREFLIES_API_KEY` in `secrets\fireflies.env` (SSO account, PRO plan). Autojoin is ON — the bot joins calendar calls by itself (catching standups and corporate calls that a manually-started recorder misses).
-- Engine (all the logic lives there, this skill is a thin wrapper): `$IMPORTS_ROOT/fireflies\fireflies_pull.py`. One script does both backfill and increment.
-- Home for notes: `$OBSIDIAN_VAULT/04-Projects\fireflies-meetings\` (auto_generated — never edit by hand). Raw JSON (with keys COMPATIBLE with the other call rail, which `call_distill.py` consumes): `$IMPORTS_ROOT/fireflies\raw\`. State: `$IMPORTS_ROOT/fireflies\state.json`. Log: `pull.log`.
-- ⚠️ The nightly pull runs on the anchor node: vault notes travel by sync, but the raw JSON does NOT reach the hub → the hub's distiller cannot see fresh Fireflies calls. Running this skill on the hub CLOSES that gap: the local state lags behind the anchor's → the pull drags the missing raw files here (idempotent; notes are rewritten with identical content).
-- Distillation: `$IMPORTS_ROOT/granola\call_distill.py` reads BOTH raw directories (granola + fireflies) → `_distilled\` + commitments.jsonl.
+- Транспорт: официальный Fireflies GraphQL API `https://api.fireflies.ai/graphql`. Ключ: `FIREFLIES_API_KEY` в `secrets\fireflies.env` ([рабочий аккаунт] SSO, тариф PRO). Autojoin ON — бот сам заходит в календарные звонки (ловит планёрки/корпоративные, которые Granola с ручным стартом пропускает).
+- Движок (вся логика там, скилл — тонкая обёртка): `$IMPORTS_ROOT/fireflies\fireflies_pull.py`. Один скрипт = бэкфилл и инкремент.
+- Дом заметок: `$OBSIDIAN_VAULT/04-Projects\fireflies-meetings\` (auto_generated — руками не править). Raw JSON (Granola-СОВМЕСТИМЫЕ ключи, их ест call_distill.py): `$IMPORTS_ROOT/fireflies\raw\`. State: `$IMPORTS_ROOT/fireflies\state.json`. Лог: `pull.log`.
+- ⚠️ Ночной pull работает на МАЯКЕ: заметки волта доезжают синком, но raw-JSON на хаб НЕ доезжает → дистиллер хаба свежие Fireflies-звонки не видит. Этот скилл на хабе ЗАКРЫВАЕТ дыру: локальный state отстаёт от маяковского → pull дотянет пропущенные raw сюда (идемпотентно, заметки перепишутся идентичным содержимым).
+- Дистилляция: `$IMPORTS_ROOT/granola\call_distill.py` читает ОБА raw-каталога (granola + fireflies) → `_distilled\` + commitments.jsonl.
 
 STEPS:
-1. BACKUP FIRST ([[vault-backup-rule]]): `python $IMPORTS_ROOT/vault_backup.py` BEFORE running anything.
-2. Pull: `python $IMPORTS_ROOT/fireflies\fireflies_pull.py` (options: `--dry`, `--limit N`). Counters on stdout: `DONE new=X errors=Y state_total=N`.
-3. Distill (if new>0): `python $IMPORTS_ROOT/granola\call_distill.py` — counters `DONE distilled=M commitments=C errors=Z`.
-4. Report the list of fresh calls (titles/dates). errors>0 → check the log; usually network or 429 (the script retries by itself).
-5. Reindex: the nightly `brain_embed_update.py` picks it up on its own; after a big backfill, run it manually. ⚠️ Until `_distilled` is marked `layer: essence`, distillates do not enter the curated index (a known gap, tracked as task RUSL-1).
+1. BACKUP FIRST ([[vault-backup-rule]]): `python $IMPORTS_ROOT/vault_backup.py` ДО запуска.
+2. Pull: `python $IMPORTS_ROOT/fireflies\fireflies_pull.py` (опции: `--dry`, `--limit N`). Счётчики stdout: `DONE new=X errors=Y state_total=N`.
+3. Distill (если new>0): `python $IMPORTS_ROOT/granola\call_distill.py` — счётчики `DONE distilled=M commitments=C errors=Z`.
+4. Доложить список свежих звонков (титулы/даты). errors>0 → глянуть лог, чаще сеть/429 (скрипт ретраит сам).
+5. Реиндекс: ночной `brain_embed_update.py` подхватит сам; после большого бэкфилла — прогнать вручную. ⚠️ Пока `_distilled` не помечен `layer: essence`, в курируемый индекс дистилляты не попадают (гэп в работе, задача RUSL-1).
 
 CONSTRAINTS:
-- Windows cp1252: stdout must stay ASCII-only (the script already complies).
-- INCREMENTAL ONLY — never delete `state.json` (it would re-download everything).
-- Provenance: origin: mixed, authored_by: hybrid — NOT #anton-original (someone else's speech).
-- Tier-2: nothing goes outside; API reads and vault writes only.
-- A 401 from the API means the key was revoked: get a new one in the Fireflies dashboard (Integrations → API) and update `secrets\fireflies.env`. ⚠️ CRLF pitfall: a trailing `\r` breaks the Bearer header (the engine already strips it).
-- Do NOT re-enable the hub task "Fireflies Nightly Pull" without consensus — it is deliberately Disabled (migrated to the anchor node, see fleet_migration_dashboard.py migrated_markers).
+- Windows cp1252: stdout ASCII-only (скрипт уже соблюдает).
+- INCREMENTAL ONLY — `state.json` не удалять (иначе перекачает всё).
+- Provenance: origin: mixed, authored_by: hybrid — НЕ #anton-original (чужая речь).
+- Tier-2: ничего наружу; только чтение API + запись в волт.
+- 401 от API → ключ отозван: новый в Fireflies dashboard (Integrations → API), обновить `secrets\fireflies.env`. ⚠️ CRLF-грабля: `\r` в конце строки ломает Bearer (движок уже strip'ает).
+- Задачу хаба "Fireflies Nightly Pull" НЕ включать обратно без консенсуса — она сознательно Disabled (мигрирована на Маяк, см. fleet_migration_dashboard.py migrated_markers).
 
-OUTPUT: the pull counters (new) + the distill counters (distilled/commitments) + the period; if empty, "no new calls". Finish with an "In plain words" recap.
+OUTPUT: счётчики pull (new) + distill (distilled/commitments) + период; пусто — «Новых звонков нет». Заверши 🧒 «Простыми словами».
 
-RELATION (do not duplicate): the other call rail = skill [[granola-sync]]; the comparison of the two rails + the "where content lands" map = the vault `00-System` note / task RUSL-1; the alpha screen = `/alpha-review`.
-
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+RELATION (не дублировать): Granola-рельса = skill [[granola-sync]]; сравнение двух рельс + карта «куда падает контент» = волт `00-System` / задача RUSL-1; экран альфы = `/alpha-review`.

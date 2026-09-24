@@ -1,0 +1,32 @@
+{
+ "url": "https://jobs.ashbyhq.com/netic/3aa8e841-6bf7-4801-a6c0-122964af10a3/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w11_i1_netic",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "Phone Number": "+1 341 222 9178",
+  "When can you start a new role?": "Available immediately",
+  "How many years of industry experience do you have?": "20+ (in industry since 2004; founder/BD since 2015; AI agents since 2023)",
+  "Additional Information": "Available immediately. Active US O-1 (no sponsorship needed now or in the future). Public proof of work: https://tonydzi.github.io/ and https://github.com/tonydzi - production multi-machine Claude fleet, published agent-fleet reliability evals (0/17 high-risk actions slipped past the human approval gate in recorded runs). 15+ years founder/BD: 10,000+ founder calls, enterprise advisory for subsidiaries of Foxconn and ANA Airlines - comfortable owning deployments in front of customers.",
+  "What's the most interesting": "Anthropic's Model Context Protocol documentation (the spec plus the connector guides) - not a glamorous pick, but it is the document I keep coming back to. I run a production multi-machine Claude fleet (6 machines, 100+ automation routines), and MCP is the layer where an agent demo becomes an agent that survives contact with real systems. Reading the spec closely changed how I structure connectors and evals in my own fleet (public repos: claw-consensus, verbatim-citation-gate). The deployment lesson: boring interface documentation, read carefully, beats another 'agents are the future' blog post."
+ },
+ "combos": {
+  "Location": "Palo Alto, California"
+ },
+ "check_options": {
+  "Are you able to work from our SF office five days per week?": "Yes",
+  "Will you now or in the future require sponsorship": "No"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "LinkedIn",
+  "Resume",
+  "Phone Number",
+  "When can you start",
+  "How many years",
+  "What's the most interesting"
+ ]
+}

@@ -38,17 +38,17 @@ data = json.loads(SRC.read_text(encoding="utf-8"))
 MSGS = data["messages"]
 
 # ---- roster: from_id -> (origin, role) ------------------------------------
-ANTON_IDS = {"user5966672828", "user226258979", "user7303193973"}
-ANNA_IDS  = {"user426601098"}
+ANTON_IDS = {"user[id]", "user[id]", "user[id]"}
+ANNA_IDS  = {"user[id]"}
 # bot that transcribes Anton's voice memos -> his content (transcription != authorship)
-PAS_IDS   = {"user5305064675"}            # "Personal Audio Summary"
+PAS_IDS   = {"user[id]"}            # "Personal Audio Summary"
 ASSISTANT_IDS = {
-    "user211067686","user489495224","user87864031","user281413791","user7020224638",
-    "user9110567260","user491984776","user3358031936","user2060931467","user587779309",
-    "user4286009743","user505488052","user7301492879","user3061144566","user478891369",
-    "user1007340082","user5351469091","user421440605","user338528443",
+    "user[id]","user[id]","user[id]","user[id]","user[id]",
+    "user[id]","user[id]","user[id]","user[id]","user[id]",
+    "user[id]","user[id]","user[id]","user[id]","user[id]",
+    "user[id]","user[id]","user[id]","user[id]",
 }
-AI_IDS = {"user1778159120"}               # "Eliza AI Agent Manager"
+AI_IDS = {"user[id]"}               # "Eliza AI Agent Manager"
 
 def who(fid):
     if fid in ANTON_IDS or fid in PAS_IDS: return ("anton", "principal")
@@ -77,12 +77,12 @@ def render_text(m):
 # ---- relay / directive footer (Anton's voice transcribed by an assistant) --
 # Disambiguate "Перевела <Name>" (relay: translated-by) from "перевела деньги"
 # (transferred money) by anchoring the verb to a known relay NAME / handle / бот.
-RELAY_NAME = (r"(?:бот|Полина\w*|Лен\w*|Кат\w*|Маш\w*|Арина\w*|Юли\w*|Елен\w*|"
-              r"Хелен\w*|Рита\w*|Ольг\w*|Ол[яейю]|Ев\w*|Зубейде|Кейт|Инн\w*|"
-              r"Маргарет|Викт\w*|Игорь\w*|@\w+)")
+RELAY_NAME = (r"(?:бот|Полина\w*|Лен\w*|Кат\w*|Маш\w*|Арина\w*|Юли\w*|[человек]\w*|"
+              r"Хелен\w*|Рита\w*|[человек]\w*|Ол[яейю]|Ев\w*|Зубейде|Кейт|Инн\w*|"
+              r"Маргарет|Викт\w*|[человек]\w*|@\w+)")
 TRANS_RE = re.compile(rf"Перев[еёа]л[аи]?\s*:?\s*({RELAY_NAME})\b", re.I)
 DELEG_RE = re.compile(r"Делегировано\b\s*:?\s*([^\n]*)")      # passive footer form only
-ANNA_MARK = re.compile(r"@helper_an\b|@helper_an\b|От Алина\b|Алина просит")
+ANNA_MARK = re.compile(r"[аккаунт]\b|[аккаунт]\b|От Алина\b|Алина просит")
 # trailing footer lines to lift OUT of the body into frontmatter (metadata, not content)
 FOOTER_LINE = re.compile(
     rf"^\s*(?:Перев[еёа]л[аи]?\s*:?\s*{RELAY_NAME}\b.*|Делегировано\b.*|[CС]рок\s*:.*|"

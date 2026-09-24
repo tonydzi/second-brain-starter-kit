@@ -1,0 +1,37 @@
+{
+ "url": "https://jobs.ashbyhq.com/spade/891399ac-d654-4828-a8be-d8ec1585ca59/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+ "out_prefix": "w20_i11_spade",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "GitHub User Name": "tonydzi",
+  "If Referral or Other, please share additional details": "Hacker News 'Who is hiring?' (September 2026). No LinkedIn account - the URL above is my personal site; GitHub: tonydzi",
+  "What sparked your interest in Spade?": "Candid disclosure first: this application was prepared by my own Claude agent fleet under my direction, from my verified bio - building and operating that fleet in public is my core work (github.com/tonydzi). Spade itself is the draw: I spent a decade turning messy, adversarial financial data into decisions (exchange infrastructure, market-maker engines, anti-fraud) with an MSc in information-systems security - 'messy transaction data into structured, verified records' is exactly the problem I want to keep solving."
+ },
+ "geo": {
+  "Location": {
+   "type": "Palo Alto",
+   "exact": "Palo Alto"
+  },
+  "Where did you hear about Spade?": {
+   "type": "Hacker",
+   "exact": "Hacker News"
+  }
+ },
+ "options": {
+  "Will you now or in the future require sponsorship": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "LinkedIn",
+  "GitHub User Name",
+  "What sparked your interest"
+ ]
+}

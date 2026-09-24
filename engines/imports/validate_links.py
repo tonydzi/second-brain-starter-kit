@@ -68,7 +68,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 try:
     from _paths import VAULT as _VAULT, memory_dir as _memory_dir
 except Exception:                                   # never break on a partial box
-    _VAULT = r"E:/Obsidian/Owner-Knowledge"
+    _VAULT = r"[путь владельца]"
     def _memory_dir():
         return os.path.join(os.path.expanduser("~"), ".claude", "projects",
                             "C--Users----CLAUDE-HP17-May26", "memory")
@@ -146,7 +146,7 @@ def yaml_values(blob):
 # aliases is what timed the old approach out.
 SKIP_DIRS = {".stversions", ".git", ".obsidian", ".trash", "node_modules",
              ".claude", "_backups", "_originals", "_imports", "_session-md",
-             "_sync-conflict-archive", "_machine-bus.preD2-bak"}
+             "_sync-conflict-archive", "[шина].preD2-bak"}
 # Only these roots define aliases that a curated link could target -> only these
 # get a head READ. Names from everywhere still populate the stem index for free.
 ALIAS_ROOTS = {"06-Concepts", "07-People", "09-Bridges", "02-Decisions",

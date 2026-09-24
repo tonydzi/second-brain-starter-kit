@@ -64,13 +64,13 @@ PERSONAL_NAME_RX = re.compile(
     r"reference letter|rental|mortgage|\bloan\b|bank acc|выписк|notice to vacate|"
     r"residence|\bvisa\b|\bвиза\b|scholarship guidelines|criteria unfolded|"
     r"purchase and sale agreement|window.installation|dogovor_okna|furniture return|"
-    r"inventory casa|employment contract|income amount|restricted unit agreement|"
+    r"inventory casa|employment contract|[человек] amount|restricted unit agreement|"
     r"taxes payable|expense-reimbursement|декларац",
     re.I)
 
 # --- EXTERNAL: clearly other people's projects (narrow, safe) ---
 EXTERNAL_RX = re.compile(
-    r"eesee tokenomics|dechat|secret pad tokenomics|gotbit|"
+    r"[человек] tokenomics|dechat|secret pad tokenomics|gotbit|"
     r"копия инфлюенсеры|сидус|sidus clients|umoja web3|guild of heroes|"
     r"humanity protocol|tiktok emails|выгрузка crm",
     re.I)

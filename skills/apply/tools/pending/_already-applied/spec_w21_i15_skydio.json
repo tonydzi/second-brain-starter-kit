@@ -1,0 +1,24 @@
+{
+  "index": 15,
+  "job_url": "https://jobs.ashbyhq.com/skydio/0a517f25-4222-4ccf-bd09-bb332dc4c446",
+  "url": "https://jobs.ashbyhq.com/skydio/0a517f25-4222-4ccf-bd09-bb332dc4c446/application",
+  "out_prefix": "w21_i15_skydio",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone Number": "+1 341 222 9178",
+    "Linkedin URL": "https://tonydzi.github.io/",
+    "Websites": "https://tonydzi.github.io/"
+  },
+  "check_options": {
+    "This role is based 5 days/week": "Yes, I am local and can be in the office 5 days/week.",
+    "Gender": "Decline to self-identify",
+    "Race": "Decline to self-identify",
+    "Veteran Status": "I decline to self-identify for protected veteran status",
+    "Disability Status": "I do not want to answer"
+  },
+  "yesnos": {
+    "Prior US Government": false
+  }
+}

@@ -14,11 +14,11 @@
 # ---------------------------------------------------------------------------
 """tg_bus_read.py -- surface NEW Telegram-bus messages addressed to THIS machine.
 
-WHY: the cross-machine bus is now PRIMARY on Telegram (group -996940094), but the
-SessionStart inbox hook only auto-read the Syncthing `_machine-bus`. So when Syncthing
+WHY: the cross-machine bus is now PRIMARY on Telegram (group -[id]), but the
+SessionStart inbox hook only auto-read the Syncthing `[шина]`. So when Syncthing
 is down (the exact case TG-primary was built for) and another computer writes to me on
 TG, I'd never see it until told to look. This closes that gap: it reads the TG bus group
-on the SAME proven @work_acct_a Telethon rail as bus_ping.py (shared lock -> no
+on the SAME proven [аккаунт] Telethon rail as bus_ping.py (shared lock -> no
 AUTH_KEY_DUPLICATED) and prints what's NEW for this machine since last time.
 
 NEVER raises. If the rail isn't on this machine, or the account can't see the group,
@@ -32,7 +32,7 @@ Usage:
   python tg_bus_read.py --peek          # show, but DON'T advance the marker (headless robot)
   python tg_bus_read.py --check         # verify rail+group access WITHOUT printing messages
   python tg_bus_read.py --all           # show recent bus traffic regardless of last-seen
-Env: BUS_PING_ENV (default %IMPORTS%\\dialogs\\.env); TG_BUS_GROUP (default -996940094)
+Env: BUS_PING_ENV (default %IMPORTS%\\dialogs\\.env); TG_BUS_GROUP (default -[id])
 """
 import os, io, sys, re
 
@@ -42,7 +42,7 @@ except Exception:
     _untrusted = None
 
 # machine.env rung (ANCHOR1 audit 2026-07-16 #ee1aa4bd): same ladder as bus_ping -- the hub hardcode
-# made the rail silently SKIP on nodes whose @work_acct_a session lives elsewhere (ANCHOR1:
+# made the rail silently SKIP on nodes whose [аккаунт] session lives elsewhere (ANCHOR1:
 # ~/secrets/dialogs.env). Explicit BUS_PING_ENV still wins; hub default unchanged.
 def _menv_ping_env():
     p = os.path.join(os.path.expanduser("~"), ".claude", "machine.env")
@@ -57,18 +57,18 @@ def _menv_ping_env():
     return None
 
 ENV   = os.environ.get("BUS_PING_ENV") or _menv_ping_env() or r"%IMPORTS%\dialogs\.env"
-LOCK  = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")   # shared w/ @work_acct_a session
-GROUP = int(os.environ.get("TG_BUS_GROUP", "-996940094"))
+LOCK  = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")   # shared w/ [аккаунт] session
+GROUP = int(os.environ.get("TG_BUS_GROUP", "-[id]"))
 LIMIT = int(os.environ.get("TG_BUS_LIMIT", "25"))
 
 # this machine's friendly label + the substrings the BUS uses to address it.
 # NOTE: the bus calls this laptop "laptop-HP17" (not the importer label "LAPTOP1"),
 # and the hub "HUB1" -- so match on distinguishing SUBSTRINGS, case-insensitive.
 _HOST = (os.environ.get("COMPUTERNAME") or "").upper()
-_LABEL = {"LAPTOP1": "LAPTOP1", "HUB1": "PaloAlto-Desktop"}.get(_HOST, _HOST or "?")
+_LABEL = {"LAPTOP1": "LAPTOP1", "HUB1": "[машина флота]"}.get(_HOST, _HOST or "?")
 _ALIASES = {
     "LAPTOP1": ["HP17", "ZBOOK", "LAPTOP-HP17", "НОУТ", "NOUT"],
-    "HUB1":   ["A-2022", "BAYAREA", "PALOALTO", "PALO ALTO", "PALOALTO-DESKTOP", "HUB", "ХАБ"],
+    "HUB1":   ["A-2022", "BAYAREA", "PALOALTO", "PALO ALTO", "[машина флота]", "HUB", "ХАБ"],
 }
 _MINE = _ALIASES.get(_HOST, [_HOST or "?"])   # substrings that mean "me" in src/dst
 
@@ -226,7 +226,7 @@ def main():
         print("TG-BUS SKIP: no REFRESH_* session in %s (rail not on this machine)" % ENV)
         return
     if not acquire_lock():
-        print("TG-BUS SKIP: @work_acct_a session busy (lock held) -- will catch up next session")
+        print("TG-BUS SKIP: [аккаунт] session busy (lock held) -- will catch up next session")
         return
     try:
         import asyncio

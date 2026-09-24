@@ -49,7 +49,7 @@ def main():
     ap.add_argument("--out", default=os.getcwd())
     args = ap.parse_args()
     repo = args.repo_wsl.replace("\\", "/")
-    # Git-Bash (MSYS) mangles a WSL path like /root/x into 'C:/Program Files/Git/root/x'
+    # Git-Bash (MSYS) mangles a WSL path like /root/x into '[путь владельца] Files/Git/root/x'
     # when passed on its command line. Recover the intended Linux path.
     for anchor in ("/root", "/home", "/tmp", "/mnt"):
         idx = repo.find(anchor)

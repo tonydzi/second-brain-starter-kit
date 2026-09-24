@@ -53,9 +53,9 @@ SEEDS = os.path.join(VAULT, "10-Tasks", "_seeds")
 REG = os.path.join(SEEDS, "_registry.json")
 
 PEOPLE = {  # slug -> (id prefix, display name, tg @username for pings — ALWAYS mention, else the message sinks)
-    "nat": ("NAT", "Нина", "@teammate_n"),
-    "rusl": ("RUSL", "Рита", "@teammate_r"),
-    "ant": ("ANT", "Антон", "@personal_acct"),
+    "nat": ("NAT", "Нина", "[аккаунт]"),
+    "rusl": ("RUSL", "Рита", "[аккаунт]"),
+    "ant": ("ANT", "Антон", "[аккаунт]"),
 }
 
 

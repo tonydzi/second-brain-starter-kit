@@ -30,9 +30,9 @@ Output:
 import sys, re, datetime
 from pathlib import Path
 
-VAULT = Path(r"E:/Obsidian/Owner-Knowledge")
-OUT = Path(r"E:/Obsidian/_imports/_wisdom_week_digest.md")
-EXCLUDE_PARTS = {"_originals", "_imports", "_Dashboards", "_machine-bus", ".trash",
+VAULT = Path(r"[путь владельца]")
+OUT = Path(r"[путь владельца]")
+EXCLUDE_PARTS = {"_originals", "_imports", "_Dashboards", "[шина]", ".trash",
                  ".obsidian", "_cowork-inbox", "_sync-conflict-archive"}
 MAX_FILES = 60          # hard cap: digest stays judge-sized
 SNIPPET = 500           # chars of body per note
@@ -65,7 +65,7 @@ def main():
             continue
         # prune ANY dot-dir (.stversions Syncthing history, .git, etc.) and stray
         # *.sync-conflict-* copies -- else the digest fills with duplicate ghosts
-        # ([[stversions-scan-class]] vault-walker gotcha).
+        # ([[stversions-scan-class]] vault-[человек] gotcha).
         if any(part.startswith(".") for part in p.parts) or ".sync-conflict-" in p.name:
             continue
         # cheap mtime pre-filter: skip files untouched since cutoff (a note edited

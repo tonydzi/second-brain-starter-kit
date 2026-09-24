@@ -68,7 +68,7 @@ CONFIG = os.path.join(CF_DIR, "fb_watch_config.json")
 MIN_HARVEST = int(os.environ.get("FB_TEASER_MIN_HARVEST", "3"))
 
 DEFAULT_CONFIG = {
-    "clawrus_chat": -1006847702008,        # @ClawRus megagroup (Anton's literal RU target 2026-06-30)
+    "clawrus_chat": -[id],        # @ClawRus megagroup (Anton's literal RU target 2026-06-30)
     "clawrus_account": "work_acct_b",          # creator -> can post
     "armed": False,                         # False = draft-first; True = auto-post RU
     "x_poster_ready": False,                # until the social-tools DR builds an X poster -> EN stays draft

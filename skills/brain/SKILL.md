@@ -1,50 +1,31 @@
 ---
 name: brain
-description: >-
-  Health-check the second brain so failures are not silent: is the local search server alive, is
-  the RAG index fresh, is the session-memory ledger filling, did the nightly distillation run.
-  Read-only, with a green/red verdict per component. Triggers: "/brain", "/memory", "is the
-  reindex alive".
-license: MIT
+description: "One-glance health of Anton's “second brain“ so failures aren't SILENT — is the :8770 search server alive, is the RAG index fresh (reindex running), is the TurnState memory ledger filling, did the nightly dream run, what's the A/B… Trigger on “/brain“, “/memory“, “здоровье мозга“, “мозг жив?“, “проверь память“, “реиндекс жив?“, “сервер поиска жив“, “brain health“, “is my brain ok“, “memory health“"
+version: 1.0.0
 ---
 
-# /brain — second-brain health at one glance
+# /brain — здоровье «второго мозга» одним взглядом
 
-> 🧒 When reporting to a non-technical operator, end with a short plain-words recap (rule `eli5-always`).
+> 🧒 В конце ответа Антону — простой recap «Простыми словами» (memory `eli5-always`).
 
-Catches SILENT breakage of the memory/RAG stack (the things that kept breaking month after month: the reindex, the local search server, the memory pilot). Read-only, 0 tokens.
+Ловит ТИХИЕ поломки memory/RAG-стека (то, что в этом месяце ломалось снова и снова: реиндекс, сервер :8770, пилот памяти). Read-only, 0 токенов.
 
-## What it does (one script)
+## Что делает (один скрипт)
 `python $IMPORTS_ROOT/brain_health.py`
 
-Checks 5 things and colors them 🟢/🟡/🔴:
-1. **Search server** on its local port — alive or not (if it's down, auto-recall silently disappears); also shows whether the graph-assisted mode is on.
-2. **Index** `_brain_e5.npy` — how fresh (🟡 if the reindex lags >48h).
-3. **TurnState ledger** — how many turns recorded (memory Phase 1), when the last one was.
-4. **Nightly distillation** — candidates in quarantine + when the last run happened.
-5. **A/B direct-vs-graph recall** — how many runs + the operator's verdicts (👍/👎).
+Проверяет 5 вещей и красит 🟢/🟡/🔴:
+1. **Поисковый сервер** :8770 — жив ли (если лёг → авто-recall молча пропадает); показывает, включена ли Ассоциативная (граф).
+2. **Индекс** `_brain_e5.npy` — насколько свежий (🟡 если реиндекс отстал >48ч).
+3. **TurnState-леджер** — сколько ходов записано (Phase 1 памяти), последний когда.
+4. **Ночной сон** — кандидаты в карантине + когда последний прогон.
+5. **A/B Прямая↔Ассоциативная** — сколько прогонов + твои вердикты (👍/👎).
 
-Writes a dashboard `$OBSIDIAN_VAULT/_Dashboards/Brain-Health.html` (the operator reads with their eyes, [[prefer-visual-dashboards]]). Exit code 0/1/2 = ok/warn/red (for scripts).
+Пишет дашборд `$OBSIDIAN_VAULT/_Dashboards/Brain-Health.html` (Антон смотрит глазами, [[prefer-visual-dashboards]]). Exit-код 0/1/2 = ok/warn/red (для скриптов).
 
-## When to fix (on 🔴/🟡)
-- **🔴 search server down** → run the restart script (as admin, see [[always-on-memory-pilot]]); or reboot (the at-logon task brings it up).
-- **🟡 index lagging** → `gpu_check.py [--kill]`, then `brain_embed_update.py [--wait-gpu 10]` ([[reindex-routine]]).
-- **🟡 ledger empty** → fine if memory Phase 1 was just enabled (it fills from the next sessions on).
+## Когда чинить (если 🔴/🟡)
+- **🔴 сервер :8770** → `restart_brain_server.cmd` (от админа, см. [[always-on-memory-pilot]]); или ребут (AtLogon поднимет).
+- **🟡 индекс отстал** → `gpu_check.py [--kill]` затем `brain_embed_update.py [--wait-gpu 10]` ([[reindex-routine]]).
+- **🟡 леджер пуст** → норм, если Phase 1 только включился (заполнится со следующих сессий).
 
-## What it does NOT do
-It doesn't fix anything and doesn't write to the vault. It's a diagnostic. Fixing is a separate explicit step (the "read before you fix" rule, [[verify-existing-before-proposing]]).
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Что НЕ делает
+Не чинит сам и не пишет в волт. Это диагностика. Чинит — отдельный явный шаг (правило «прочитай перед починкой» [[verify-existing-before-proposing]]).

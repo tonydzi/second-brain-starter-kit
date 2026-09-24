@@ -68,7 +68,7 @@ VAULT = get("OBSIDIAN_VAULT", r"%VAULT%")
 IMPORTS = get("IMPORTS_ROOT", r"%IMPORTS%")
 PYTHON_EXE = get("PYTHON_EXE", "python")
 # Secrets STORE (dir with *.env). Default is home-relative so it lands on the right
-# C:\Users\<user> on any Windows box; Macs/other layouts override via machine.env.
+# [путь владельца] on any Windows box; Macs/other layouts override via machine.env.
 SECRETS = get("SECRETS_DIR", os.path.join(_home(), "!CLAUDE-HP17 May26", "secrets"))
 
 

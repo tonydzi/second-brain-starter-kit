@@ -24,7 +24,7 @@ DESIGN = synthesis of DR26-07-05-HUB-07 (Grok + Gemini + ChatGPT), Decision Memo
 decision-2026-07-05-onair-work-declaration-board.md. Key rules the code enforces:
   * ADVISORY, never a real lock (Syncthing is eventually-consistent; cannot guarantee single
     writer under partition -- honest coordination only). Precedent: Chubby COARSE advisory locks.
-  * ONE FILE PER DECLARATION under _machine-bus/_onair/active/ -> single-writer, 0 sync-conflicts
+  * ONE FILE PER DECLARATION under [шина]/_onair/active/ -> single-writer, 0 sync-conflicts
     (only the holder ever writes its own file). ACTIVE_NOW.md is a generated CACHE, not truth.
   * 3 modes: EXCLUSIVE (do not touch zone+descendants) / COLLAB (talk-first) / FYI (heads-up).
   * DERIVED expiry = renewed_at + ttl_sec (never store a 2nd expires_at that can drift -- ChatGPT).
@@ -57,7 +57,7 @@ def _home():
     return os.path.expanduser("~")
 
 def _bus_dir():
-    return os.environ.get("MACHINE_BUS_DIR") or r"%VAULT%\_machine-bus"
+    return os.environ.get("MACHINE_BUS_DIR") or r"%VAULT%\[шина]"
 
 ONAIR_DIR = os.path.join(_bus_dir(), "_onair")
 ACTIVE_DIR = os.path.join(ONAIR_DIR, "active")
@@ -97,7 +97,7 @@ ZONES = [
     "dashboards",       # _Dashboards / pulse
     "scheduled-tasks",  # cron / scheduled-tasks / hooks
     "secrets-auth",     # secrets store / auth / tokens (READ-heavy, declare rarely)
-    "machine-bus",      # the bus itself / _machine-bus plumbing
+    "machine-bus",      # the bus itself / [шина] plumbing
     "arch-system",      # System Architect map / system.db
 ]
 
@@ -254,7 +254,7 @@ def cmd_declare(a):
             "machine": MACHINE,
             "session_id": session,
             "agent_kind": kind,
-            "contact": a.contact or "telegram:@personal_acct",
+            "contact": a.contact or "telegram:[аккаунт]",
         },
         "created_at": iso(ts),
         "renewed_at": iso(ts),

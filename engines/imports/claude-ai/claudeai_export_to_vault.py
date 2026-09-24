@@ -48,7 +48,7 @@ TRANSLIT = str.maketrans({c: l for c, l in zip(_CYR, _LAT)})
 
 ART_RE = re.compile(r'<antArtifact\b([^>]*)>(.*?)</antArtifact>', re.DOTALL)
 ATTR_RE = lambda name, s: (re.search(name + r'="([^"]*)"', s) or [None, ''])[1]
-ROOT_SENTINEL = '00000000-0000-4000-8000-000000000000'
+ROOT_SENTINEL = '[id]-0000-4000-8000-[id]'
 
 def slugify(text, fallback='note'):
     text = (text or '').lower().translate(TRANSLIT)
@@ -132,9 +132,9 @@ def main():
     conv_artifacts = {}  # conv_uuid -> list of artifact dicts (with slug)
     for cid, c in convs.items():
         msgs = c.get('chat_messages', []) or []
-        arts = collect_artifacts(msgs)
+        [человек] = collect_artifacts(msgs)
         local = []
-        for ident, art in arts.items():
+        for ident, art in [человек].items():
             h = hashlib.md5(ident.encode('utf-8')).hexdigest()[:6]
             slug = 'claudeai-art-' + slugify(art['title'], 'artifact') + '-' + h
             art_slug_by_ident[ident] = slug
@@ -186,7 +186,7 @@ def main():
         proj_uuid = c.get('project_uuid')
         proj = proj_name_by_uuid.get(proj_uuid, '')
         stub = conv_filename_stub(c)
-        local_arts = conv_artifacts[cid]
+        local_[человек] = conv_artifacts[cid]
         linked = set()
 
         lines = []
@@ -215,11 +215,11 @@ def main():
                 lines.append('**%s:**\n\n%s%s' % (who, txt, att_block))
 
         # artifacts that belong to this conv but were not on the active path
-        extra = [a for a in local_arts if a['identifier'] not in linked]
+        extra = [a for a in local_[человек] if a['identifier'] not in linked]
         art_index = ''
-        if local_arts:
-            art_index = '\n## Артефакты этого чата (%d)\n\n' % len(local_arts)
-            for a in local_arts:
+        if local_[человек]:
+            art_index = '\n## Артефакты этого чата (%d)\n\n' % len(local_[человек])
+            for a in local_[человек]:
                 art_index += '- [[%s]]\n' % a['slug']
         extra_note = ''
         if extra:
@@ -257,7 +257,7 @@ def main():
             'tags: [claude-ai, ai-conversation%s]\n' % ((', ' + slugify(proj, '')) if proj else '') +
             'value_score: 0.0\n'
             'msg_count: %d\n' % len(path) +
-            'artifact_count: %d\n' % len(local_arts) +
+            'artifact_count: %d\n' % len(local_[человек]) +
             'file_count: %d\n' % len(cfiles) +
             'related_concepts: []\n'
             'revisit_if: ""\n'
@@ -265,14 +265,14 @@ def main():
         )
         header = '# %s\n\n' % name
         meta = '> claude.ai · %s%s · %d сообщений · %d артефактов\n\n' % (
-            updated, (' · проект: ' + proj) if proj else '', len(path), len(local_arts))
+            updated, (' · проект: ' + proj) if proj else '', len(path), len(local_[человек]))
         body = header + meta + art_index + extra_note + '\n## Диалог\n\n' + '\n\n---\n\n'.join(lines) + '\n' + files_block
         (d_conv / (stub + '.md')).write_text(fm + body, encoding='utf-8')
         stats['conversations'] += 1
         stats['artifact_links'] += len(linked)
         stats['attachments'] += n_attach
         stats['files_listed'] += len(cfiles)
-        moc_rows.append((updated, name, stub, len(path), len(local_arts), proj))
+        moc_rows.append((updated, name, stub, len(path), len(local_[человек]), proj))
 
     # ---- pass 3: projects + knowledge docs ----
     for p in projects:

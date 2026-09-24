@@ -19,7 +19,7 @@ youtube/yt_lib.py already normalizes — Gemini chats export via Google Takeout:
   takeout.google.com -> Deselect all -> "My Activity" -> Gemini Apps -> JSON.
 
 ONE normalized record schema, ONE source adapter (normalize_gemini). Everything
-downstream (SQLite dedup store, day-notes, MOC) is reused verbatim in spirit
+downstream (SQLite dedup store, day-notes, MOC) is reused verbatim in [человек]
 from the chatgpt/youtube importers so a non-engineer can reason about it.
 
 Design choices grounded in the export's real shape (verified against Google's
@@ -38,7 +38,7 @@ USAGE:
   python gemini_lib.py import <MyActivity.json|MyActivity.html|takeout.zip>  # -> DB + notes
   python gemini_lib.py stats                                                 # DB summary
 
-REALITY CHECK (2026-07-25, hub): the first REAL Takeout (takeout-20260620T220849Z)
+REALITY CHECK (2026-07-25, hub): the first REAL Takeout (takeout-[id]T220849Z)
 delivered My Activity as **HTML**, not JSON (HTML is Google's default; JSON only if
 explicitly chosen at export time). Field shape confirmed against that real export via
 browser-history/my_activity_to_db.py, which parsed it successfully on HP17:
@@ -58,7 +58,7 @@ from pathlib import Path
 HERE = Path(os.path.dirname(os.path.abspath(__file__)))
 DB = HERE / "gemini_activity.db"
 
-# Portable vault root: env first (Mac16 sets CLAUDE_VAULT_ROOT), then hub default.
+# Portable vault root: env first ([машина флота] sets CLAUDE_VAULT_ROOT), then hub default.
 VAULT = Path(os.environ.get("CLAUDE_VAULT_ROOT")
              or os.environ.get("OBSIDIAN_VAULT")
              or os.path.expanduser("~/Obsidian/Owner-Knowledge"))

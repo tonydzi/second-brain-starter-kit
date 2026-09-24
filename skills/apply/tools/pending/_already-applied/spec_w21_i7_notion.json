@@ -1,0 +1,37 @@
+{
+ "idx": 7,
+ "company": "Notion",
+ "url": "https://jobs.ashbyhq.com/notion/77861b77-9493-4869-bbaf-eaa11477a251",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w21_i7_notion",
+ "texts": {
+  "Full Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone": "+1 341 222 9178",
+  "LinkedIn Profile": "https://tonydzi.github.io/"
+ },
+ "combos": {
+  "Location": {
+   "query": "Lisbon",
+   "want": [
+    "Lisbon, Portugal",
+    "Lisbon"
+   ]
+  }
+ },
+ "options": {
+  "We work from our offices on Mondays": "Yes",
+  "Will you now or in the future require Notion to sponsor": "No",
+  "How did you hear about this opportunity?": "Notion Website"
+ },
+ "url_fields": [
+  "LinkedIn Profile"
+ ],
+ "required_labels": [
+  "Full Name",
+  "Email",
+  "Phone",
+  "Resume",
+  "LinkedIn Profile"
+ ]
+}

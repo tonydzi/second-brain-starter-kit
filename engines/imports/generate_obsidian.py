@@ -24,7 +24,7 @@ from pathlib import Path
 from datetime import datetime
 from collections import Counter, defaultdict
 
-IMP = Path(r"E:/Obsidian/_imports")
+IMP = Path(r"[путь владельца]")
 SRC = IMP / "telegram-archive-classified.jsonl"
 STAGE = IMP / "staging"
 POSTS = STAGE / "01-Conversations/Telegram/Arhiv-Golosa/posts"

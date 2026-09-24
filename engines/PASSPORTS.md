@@ -3397,7 +3397,7 @@ Engines are ordered by how many published documents cite them, so the ones you a
 
 **What it does.** season_state.py — season-bible контент-фабрики v2 (S3 reality-show континьюити-слой).
 
-**Input.** command line: `--arc`, `--cliff`, `--episode`, `--id`, `--json`, `--name`, `--text`, `--title`
+**Input.** command line: `--arc`, `--[человек]`, `--episode`, `--id`, `--json`, `--name`, `--text`, `--title`
 
 **Output.** writes files (see the paths near the top of the source)
 

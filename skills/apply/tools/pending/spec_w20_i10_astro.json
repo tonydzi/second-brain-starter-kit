@@ -1,0 +1,33 @@
+{
+ "url": "https://jobs.ashbyhq.com/astronomer/14bd571c-84eb-447f-9cb5-08e353017a2e/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w20_i10_astro",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "Current Company": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)",
+  "To help us with scheduling and time zones: where are you based?": "Palo Alto, CA",
+  "Please briefly describe your experience with Kubernetes, including years and project types": "0 years hands-on Kubernetes - honestly. Adjacent infra: I operate a 6-machine production AI-agent fleet (deployment, monitoring, consensus, 100+ automation routines, published reliability evals) and shipped crypto-exchange backends, market-maker and HFT systems as product owner of a 40+ engineering org.",
+  "Linkedin Profile": "https://tonydzi.github.io/ (no LinkedIn account)",
+  "Portfolio or other website": "https://tonydzi.github.io/",
+  "Additional Information": "Full transparency: this application was prepared and submitted by my own Claude agent fleet under my direction, using my verified biography - building and operating that fleet in public is the core of my candidacy (github.com/tonydzi, https://tonydzi.github.io/). Customer-facing is my native mode: 15+ years founder/BD, incl. structuring crypto payments and stablecoins with banks and governments in SE Asia - adversarial, compliance-heavy environments; today I deploy AI into messy real-world environments daily (MCP connectors, RAG over a 10-year knowledge base, CRM automation, evals)."
+ },
+ "options": {
+  "Are you able to cover EST working hours and have you done so before?": "Yes",
+  "Are you authorized to work in the United States?": "Yes",
+  "Do you now or will you in the future require work visa sponsorship": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone Number",
+  "Resume",
+  "To help us with scheduling",
+  "Please briefly describe your experience with Kubernetes",
+  "Linkedin Profile"
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "url": "https://jobs.ashbyhq.com/everai/[id]-9710-4d32-a544-735d779e1d44/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w12_i3_everai",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone number": "+1 341 222 9178",
+  "LinkedIn Profile URL": "https://tonydzi.github.io/",
+  "In which country are you currently located?": "Portugal",
+  "What have you personally built and shipped using AI coding tools": "A production multi-machine Claude fleet (6 machines), built and operated in public: multi-machine agent consensus (claw-consensus, offline demo + published evals), a self-built AI-native CRM, persistent memory over a 10-year knowledge base (RAG + SQLite), and 100+ automation routines. Also verbatim-citation-gate (MIT) - a zero-token gate that catches fabricated RAG citations. Tools: mainly Claude Code with MCP connectors. 110 public repos: github.com/tonydzi.",
+  "What's the highest-impact product or experiment": "The deal-flow machine at Platinum VC & Incubator, owned end-to-end as co-founder: I designed and wrote our own CRM (roots: 5 years building ERP/CRM on Salesforce and Microsoft Navision at Merlion) with social enrichment, parsing at scale and lead-to-call pipelines. Measurable outcome: 10,000+ founder calls and 2,000+ institutional-investor calls processed, up to 30 operators working in it daily, and it now runs AI-native. Built on top of it: $35M fund under management and a syndicate of 250 VCs/angels."
+ },
+ "date_fields": {
+  "When did your most recent full-time role end?": "12/31/2018"
+ },
+ "check_options": {
+  "Are you legally authorized to work in that location?": "Yes",
+  "Are you willing and able to work under a B2B": "Yes",
+  "Have you reviewed the CandyAI product": "Yes",
+  "What is your current employment status?": "Employed (full-time)",
+  "What is your current notice period?": "0 - 2 weeks",
+  "What are your preferred pronouns?": "He/him"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone number",
+  "LinkedIn Profile URL",
+  "In which country",
+  "When did your most recent",
+  "What have you personally built",
+  "What's the highest-impact",
+  "Resume",
+  "What are your salary expectations"
+ ],
+ "combos": {
+  "What are your salary expectations for this role": "More than 125,000"
+ }
+}

@@ -119,7 +119,7 @@ def collect(folder, prefix, id_key, want_status):
 
 def board_value(fm_text, field):
     """Текущее табло: список id из inline-списка wiki-линков."""
-    m = re.search(r"^%s:\s*(\[.*\])\s*$" % re.escape(field), fm_text, re.M)
+    m = re.search(r"^%[путь владельца]])\s*$" % re.escape(field), fm_text, re.M)
     if not m:
         return None
     return re.findall(r"\[\[([^\]]+)\]\]", m.group(1))
@@ -170,7 +170,7 @@ def cmd_board(apply_it):
             print("   + %s — %s" % (i, titles.get(i, "?")))
         for i in removed:
             print("   - %s (уже не %s в файлах)" % (i, want))
-        new_fm = re.sub(r"^%s:\s*\[.*\]\s*$" % re.escape(field),
+        new_fm = re.sub(r"^%[путь владельца]]\s*$" % re.escape(field),
                         render(field, wanted).replace("\\", "\\\\"), new_fm, count=1, flags=re.M)
 
     if not changes:

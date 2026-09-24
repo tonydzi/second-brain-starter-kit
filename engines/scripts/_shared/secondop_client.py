@@ -16,7 +16,7 @@
 """secondop_client.py -- peer-side client for the Codex second-opinion broker (Phase 1.5).
 
 For fleet machines WITHOUT a local Codex login: write a request onto the Syncthing bus
-(_machine-bus/_secondop/), the HUB broker (secondop.py serve-once, schtasks every 5 min)
+([шина]/_secondop/), the HUB broker (secondop.py serve-once, schtasks every 5 min)
 answers over the same rail and mirrors the exchange to chat 04 "AI-DUO".
 
 ДО: the peer's live session decides it wants a second opinion (SessionStart hook reminds it).
@@ -35,7 +35,7 @@ except Exception:
 
 # Vault root differs per OS; env override first (peers set OBSIDIAN_VAULT in settings env).
 VAULT = os.environ.get("OBSIDIAN_VAULT", r"%VAULT%")
-BUS_SECONDOP = os.path.join(VAULT, "_machine-bus", "_secondop")
+BUS_SECONDOP = os.path.join(VAULT, "[шина]", "_secondop")
 HOST = os.environ.get("COMPUTERNAME", socket.gethostname())
 
 

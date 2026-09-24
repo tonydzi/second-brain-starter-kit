@@ -1,0 +1,28 @@
+{
+ "url": "https://jobs.ashbyhq.com/sesame/[id]-65ef-43b6-8049-f0186ae3bc10/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w11_i2_sesame",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone": "+1 341 222 9178",
+  "Why Sesame?": "Voice is the first interface that makes AI feel like a companion rather than a tool, and shipping it well means hardware, latency and product judgment meeting in one place - that intersection is where I want to work. My current proof of craft: a production multi-machine Claude fleet (6 machines) that I run in public - persistent memory over a 10-year knowledge base, agent consensus, 100+ automation routines - essentially building an always-on AI partner and living with the result every day. Add 10+ years as a venture founder owning problem framing, architecture decisions, evaluation and GTM, and Sesame's hardware PM seat is the natural next step: operator discipline, daily-driver empathy for AI companions, end-to-end ownership.",
+  "What's the consumer hardware": "Honest answer: I have not shipped a consumer hardware product - my record is software and systems. The closest analogues: (1) the physical 6-machine agent fleet I specified, assembled and operate 24/7 - procurement, thermals, failure modes and uptime are my daily reality, at fleet-of-one scale; (2) crypto-exchange infrastructure (matching engines, market-maker and high-frequency trading systems) where reliability constraints feel closer to hardware than to typical web software; (3) a self-built CRM used daily by up to 30 operators - my [человек] lesson in product empathy under real load. I bring senior product judgment and AI-native depth, would lean on Sesame's hardware veterans for the manufacturing half, and own the product end to end."
+ },
+ "check_options": {
+  "Are you willing to work from the required location?": "Yes",
+  "Do you have 6 or more years": "Yes",
+  "Are you currently employed as an intern": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "Phone",
+  "Why Sesame?",
+  "What's the consumer hardware"
+ ]
+}

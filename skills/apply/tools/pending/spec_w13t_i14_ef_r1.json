@@ -1,0 +1,34 @@
+{
+ "url": "https://jobs.ashbyhq.com/ethereum-foundation/f1b908d7-691e-4df7-b6ac-aa92578c922e/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+ "out_prefix": "w13t_i14_ef_r1",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "What is your notice period with your current employer?": "None - I run my own lab; available immediately.",
+  "X (twitter)": "https://x.com/Tony_Stef_",
+  "GitHub": "https://github.com/tonydzi",
+  "Other  URL/ website": "https://tonydzi.github.io/",
+  "Additional Information": "EU citizen (Poland) based in Lisbon - no visa needed for a Europe role; also hold an active US O-1. MSc in Computer & Information Systems Security (MEPhI, cryptography). Today I build and publish security tooling for production AI-agent fleets (agent-leash, verbatim-citation-gate, claw-consensus with published evals and FAILURE-MODES.md); earlier: production smart contracts and stablecoin payment structuring at Everex (Singapore), a decade of adversarial crypto-market infrastructure. I have been explicit in the answers below about where my protocol-level experience is thin - I would rather be judged on an honest map than an inflated one.",
+  "Have you contributed to an Ethereum client, protocol specification, or other consensus-critical project? If so, please provide links (PRs, commits, issues, EIPs, etc.).": "Honest answer: no merged contributions to an Ethereum client or consensus-critical specification yet. My Ethereum-adjacent record is at the application/contract layer: as Chief Engineer for Lending & Risk Management at Everex (Singapore, 2017-2018) I wrote production smart contracts for stablecoin payments and blockchain credit scoring, and at Platinum we shipped crypto-exchange infrastructure (cryptocurrency backends, market-maker engines) whose safety depended on precise understanding of EVM behavior. My current public security work is in AI-agent safety: agent-leash, verbatim-citation-gate, claw-consensus with published evals and FAILURE-MODES.md - all at github.com/tonydzi.",
+  "Have you reported any security vulnerabilities, bug bounty findings, or protocol issues? Please include links or a short description.": "No public bug-bounty reports or CVEs under my name. My audit experience is commercial and private: smart-contract audit work and anti-fraud engineering from a decade in adversarial crypto markets (exchange infrastructure, market-maker engines), where findings stayed in-house with the clients. The closest public artifacts today are from my agent-security work: verbatim-citation-gate (a zero-token gate plus burden-of-proof judge that catches fabricated RAG citations, MIT-licensed) and published failure-mode analyses of multi-agent systems - written up disclosure-style: reproduce, minimize, publish.",
+  "Which Ethereum client(s) or protocol areas are you most familiar with (EL, CL, networking, cryptography, execution, state, etc.)?": "Strongest at the EL/application boundary: EVM semantics, Solidity, contract-level attack patterns - from writing production contracts at Everex and building exchange infrastructure against them - plus the cryptography foundations from an MSc in Computer & Information Systems Security (MEPhI). I have not worked inside client codebases (Geth/Reth or CL clients); I would be learning those on the job, and I say that plainly rather than overclaim.",
+  "What do you consider the most interesting or underexplored attack surface in Ethereum today, and why?": "The boundary between the protocol and the automation that now operates it. A fast-growing share of transactions is originated by AI agents and bots holding keys: LLM-driven wallets, solvers, intent infrastructure. That off-chain layer has protocol-level consequences - correlated agent behavior can create mempool and MEV dynamics no human-actor model predicts, and one vulnerability in a popular agent framework becomes a systemic key-compromise event across thousands of wallets at once. I run a production multi-machine agent fleet and publish its failure modes, and what I see daily - prompt injection, confused-deputy chains, instruments that fail silently while reporting green - convinces me Ethereum's threat model will need to treat the agents at the edge as part of its attack surface, not as someone else's problem."
+ },
+ "combos": {
+  "Where are you based?": "Lisbon"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "What is your notice period",
+  "Have you contributed to an Ethereum client",
+  "Have you reported any security vulnerabilities",
+  "Which Ethereum client(s) or protocol areas",
+  "What do you consider the most interesting"
+ ],
+ "options": {
+  "How did you hear about this opportunity?": "Website"
+ }
+}

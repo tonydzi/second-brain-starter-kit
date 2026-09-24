@@ -23,7 +23,7 @@ from pathlib import Path
 from datetime import datetime
 from collections import Counter
 
-OUT = Path(r"E:/Obsidian/_imports")
+OUT = Path(r"[путь владельца]")
 SRC = OUT / "telegram-archive.jsonl"
 GAP_MIN = 30  # session gap threshold in minutes
 

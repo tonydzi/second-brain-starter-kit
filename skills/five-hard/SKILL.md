@@ -1,62 +1,43 @@
 ---
 name: five-hard
-description: >-
-  Have the second brain ask the owner five hard questions about their own long-held beliefs and
-  codex entries that have not been revisited, so assumptions stop fossilizing. Monthly or on
-  demand. Triggers: "/five-hard", "challenge my beliefs", "pressure-test my views".
-license: MIT
+description: "- Five Hard Questions — раз в месяц (или по запросу) брейн САМ задаёт Антону 5 трудных вопросов по его же убеждениям и кодексу (belief-* + concept-bible-*), где он давно НЕ пересматривал позицию. Trigger on “/five-hard“, “5 hard“, “пять трудных“, “задай мне трудные вопросы“, “challenge my beliefs“, “pressure-test my views“"
+version: 1.0.0
 ---
 
-# /five-hard — five hard questions
+# /five-hard — пять трудных вопросов
 
-> 🧒 When reporting to a non-technical operator, end with a child-simple "In plain words" recap in their language.
+> 🧒 К Антону — в конце recap «Простыми словами».
 
-**Why:** the identity layer (`belief-*` + `concept-bible-*`, ~24 notes) is "how I think".
-That gets dangerous once part of it is wrong and nobody has checked. Here the brain itself starts the pressure-test.
+**Зачем:** identity-слой (`belief-*` + `concept-bible-*`, ~24 заметки) = «как я думаю».
+Опасно, если часть уже неверна, а никто не проверил. Брейн сам инициирует pressure-test.
 
 ## Run
-`python "$IMPORTS_ROOT/five_hard_pick.py"` -> the 5 most stagnant notes (oldest mtime)
--> `$IMPORTS_ROOT/_five_hard_pick.json`. Override: env `FIVE_HARD_N=7`.
+`python "$IMPORTS_ROOT/five_hard_pick.py"` → 5 самых застоявшихся (oldest mtime) заметок
+→ `$IMPORTS_ROOT/_five_hard_pick.json`. Override: env `FIVE_HARD_N=7`.
 
-## The questions (top-model quality — identity synthesis, not grunt work)
-Read each note IN FULL and give ONE hard question per note:
+## Вопросы (Opus-качество — identity-синтез, не грунт)
+Прочитай каждую заметку ЦЕЛИКОМ и дай ОДИН трудный вопрос на каждую:
 ```
-N. **[<stem>]** — <the owner's thesis in your own words>
-   Question: <sharp, Socratic, capable of forcing a rethink>
-   Why it is hard: <which counter-fact or trend could flip it>
+N. **[<stem>]** — <тезис Антона своими словами>
+   Вопрос: <острый сократический, способный заставить пересмотреть>
+   Почему трудно: <какой контр-факт/тенденция могла бы перевернуть>
 ```
-Style: Socratic — not "you are wrong" but "what makes you sure today?"; lean on CONCRETE recent
-signals; `epistemic-neutrality`; aim at the UNTESTED edge (the "tension / nuance" section),
-not at the part already reflected on. "The rule still stands" is a valid answer (`bible-as-prompt`).
+Стиль: сократично, не «ты неправ», а «откуда уверен сегодня?»; опирайся на КОНКРЕТНЫЕ свежие
+сигналы; `epistemic-neutrality`; бей в НЕПРОВЕРЕННУЮ грань (секция «Напряжение / нюанс»),
+не в отрефлексированную. Валидный ответ: «правило стоит» (`bible-as-prompt`).
 
-## Recording the answer (long memory; backup-first: vault_backup.py)
--> `$OBSIDIAN_VAULT/04-Coach/_Five-Hard/five-hard-YYYY-MM-DD.md`
+## Запись ответа (длинная память; backup-first: vault_backup.py)
+→ `$OBSIDIAN_VAULT/04-Coach/_Five-Hard/five-hard-YYYY-MM-DD.md`
 Frontmatter: title, date, `type: five-hard`, `source: claude-session`,
-`tags: [five-hard, coach, identity-layer]`. Body: the questions + the owner's answers verbatim;
-if they changed position, propose a diff to the belief/bible note with `supersedes:` (via `/intake`). NO 🧒 block inside the note.
+`tags: [five-hard, coach, identity-layer]`. Тело: вопросы + ответы Антона дословно;
+изменил позицию → предложи diff к belief/bible с `supersedes:` (через `/intake`). NO 🧒 в заметке.
 
 ## Scheduled twin
-Cron `five-hard-monthly`: 1st of the month, 05:25 Lisbon (the briefing window, `routines-run-at-night`).
-Picker -> questions (top-model subagent) -> **the fleet log chat** via `python $USERPROFILE/.claude/scripts/bus_ping.py --post "..."`
-(canon: alerts go to the fleet log chat, never to Saved Messages) + "answer by voice or text, I will file it into the vault".
-The manual twin is this skill; the single source of truth is the picker.
+Cron `five-hard-monthly`: 1-е число 05:25 Lisbon (окно брифингов, `routines-run-at-night`).
+Picker → вопросы (Opus-субагент) → **TG чат 03** через `python $USERPROFILE/.claude/scripts/bus_ping.py --post "..."`
+(канон `cc-alerts-to-chat-03`; Saved ⛔) + «отвечай голосом/текстом — запишу в волт».
+Manual twin = этот скилл; single source of truth = picker.
 
-## Related
-[[self-bible-identity-layer]] · [[bible-as-prompt]] · [[epistemic-neutrality]] · /coach (daily) vs
-/five-hard (monthly). Active-brain map A-E: item B. ⚠️ Restored 2026-07-04 after the 2026-06-24 migration wipe.
-
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Связано
+[[self-bible-identity-layer]] · [[bible-as-prompt]] · [[epistemic-neutrality]] · /coach (день) vs
+/five-hard (месяц). Карта A–E: пункт B. ⚠️ Восстановлен 2026-07-04 после migration-wipe 24.06.

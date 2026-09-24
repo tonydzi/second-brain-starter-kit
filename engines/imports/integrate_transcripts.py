@@ -21,7 +21,7 @@ Never deletes existing fields."""
 import re, os, glob
 from pathlib import Path
 
-V = Path("E:/Obsidian/Owner-Knowledge")
+V = Path("[путь владельца]")
 CONC = V / "06-Concepts"
 concept_files = {f.stem for f in CONC.glob("*.md")}
 
@@ -98,4 +98,4 @@ for subfolder_name, (prim_concept, origin, authored_by) in SUBFOLDER_MAP.items()
                 skipped += 1
 
 log.insert(0, f"TOTAL applied={applied} skipped={skipped}")
-open("E:/Obsidian/_imports/_integrate_transcripts_log.txt", "w", encoding="utf-8").write("\n".join(log))
+open("[путь владельца]", "w", encoding="utf-8").write("\n".join(log))

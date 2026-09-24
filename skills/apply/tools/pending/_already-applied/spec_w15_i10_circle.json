@@ -1,0 +1,15 @@
+{
+ "url": "https://jobs.ashbyhq.com/circle/37d7acf2-3ce3-48cb-aa89-1120c72680f3/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w15_i10_circle",
+ "texts": {
+  "Preferred First Name & Last Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn Profile": "https://tonydzi.github.io/",
+  "Personal Website/Portfolio": "https://tonydzi.github.io/"
+ },
+ "combos": {
+  "How did you hear about this role?": "Circle Careers Page"
+ },
+ "required_labels": ["Preferred First Name & Last Name", "Email", "Resume"]
+}

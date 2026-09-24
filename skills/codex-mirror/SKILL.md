@@ -1,81 +1,65 @@
 ---
 name: codex-mirror
-description: >-
-  Rebuild the canon mirror for a second coding agent (AGENTS.md) after a rules-file version
-  bump: show the changelog delta, write in only the new rules, then enforce the size cap,
-  version stamp, structural anchors, a copy into the shared folder and the linter run. Triggers:
-  "/codex-mirror", "update the codex mirror", "AGENTS.md is stale".
-license: MIT
+description: "Пересобрать зеркало канона для Codex (~/.codex/AGENTS.md) после bump'а CLAUDE.md: движок показывает дельту из CLAUDE.CHANGELOG.md, я вписываю только новые правила, скрипт сам держит кап 32 КиБ, штамп… Триггеры: /codex-mirror, «обнови зеркало кодексу», «AGENTS.md устарел», RED от lint_agents_mirror в /arch, а также САМ после MINOR/MAJOR bump CLAUDE.md (канон-ревизия, новое правило через /intake)"
+version: 1.0.0
 ---
 
-# codex-mirror — the shared-canon mirror for Codex
+# codex-mirror — зеркало общего канона для Codex
 
-The pain (found 2026-07-25): CLAUDE.md went through a v2 revision on 07-22, while `~/.codex/AGENTS.md` quietly stayed on its June version — **Codex worked off stale rules for a month**, and the drift checker of that era was blind to the very same revision. The cure: the mirror is **version-based** (we compare versions, not shape), a watchdog shouts at night, and this skill is the cheap "rebuild" button so that the shouting doesn't turn into evening manual labour.
+Боль (найдена 25.07.2026): CLAUDE.md пережил ревизию v2 22.07, а `~/.codex/AGENTS.md` тихо остался июньским — **Codex месяц работал по устаревшим правилам**, и сверщик того времени ослеп на той же ревизии. Лечение: зеркало **версионное** (сравниваем версии, не форму), сторож кричит ночью, а этот скилл — дешёвая кнопка «пересобрать», чтобы крик не превращался в вечернюю ручную работу.
 
-Roles (AK-47): the **script** moves the bytes and checks everything; **I** only write the text of the new rules. Do not retype the file by hand and do not eyeball the byte count.
+Роли (АК-47): **скрипт** двигает байты и всё проверяет; **я** пишу только текст новых правил. Руками не перепечатывать файл и не считать байты на глаз.
 
-Engine: `python %USERPROFILE%\.claude\scripts\codex_mirror.py <check|backup|stamp|publish|selftest>`
+Движок: `python %USERPROFILE%\.claude\scripts\codex_mirror.py <check|backup|stamp|publish|selftest>`
 
-## Step 0 — RECALL + the frame
-- Memory: [[canon-versioning-and-drift-watchdog]] (the class "the watchdog died silently together with the thing it watched"), [[codex-cli-install]], [[any-llm-vault-actor]], [[claude-md-compression-contract]].
-- The mirror = a **canon edit** → only the owner's machine in a live session; followers are receive-only ([[machine-governance-leader-follower]]).
-- The 32 KiB cap is hard (DR 06-29: "lost in the middle" — a bloated file is WORSE than an empty one). The mirror = a distillation + pointers, NOT a copy of CLAUDE.md.
+## Шаг 0 — RECALL + рамки
+- Память: [[canon-versioning-and-drift-watchdog]] (класс «сторож умер молча вместе с объектом»), [[codex-cli-install]], [[any-llm-vault-actor]], [[claude-md-compression-contract]].
+- Зеркало = **канон-правка** → только машина Антона в живой сессии; ведомые receive-only ([[machine-governance-leader-follower]]).
+- Кап **48 КиБ** (поднят 06.08 с 32 КиБ, «+» Антона). Зеркало = выжимка + указатели, НЕ копия CLAUDE.md — DR 29.06: раздутый файл ХУЖЕ пустого, кап держит эту дисциплину.
+- ⚠️ Два разных числа, не путать: **CAP** в движке = наш ВИДИМЫЙ гейт; `project_doc_max_bytes` в `~/.codex/config.toml` = ТИХИЙ обрез Codex CLI (без строки — дефолт 32 КиБ, и всё сверх него срезается молча, первым умирает CODEX-БЛОК в конце). Гейт `readable` в `publish` теперь читает реальный конфиг. Поднимаешь CAP — сперва подними настройку, иначе вернёшь тихий обрез.
 
-## Step 1 — What exactly is stale
+## Шаг 1 — Что именно устарело
 ```
 python %USERPROFILE%\.claude\scripts\codex_mirror.py check
 ```
-Prints both versions, the headroom left before the cap and **the delta from `CLAUDE.CHANGELOG.md`** — exactly the entries that appeared after the mirror's version. That is the work list; you don't need to read all of CLAUDE.md.
-- `VERDICT: OK` → leave, nothing to do.
-- `PATCH lag only` → green by design; write it in only if the micro-edit changes BEHAVIOUR (thresholds, gates), not wording.
-- `REBUILD` → carry on.
+Печатает версии обеих сторон, остаток до капа и **дельту из `CLAUDE.CHANGELOG.md`** — ровно те записи, что появились после версии зеркала. Это и есть список работы; читать целиком CLAUDE.md не нужно.
+- `VERDICT: OK` → выходим, делать нечего.
+- `PATCH lag only` → зелёно по дизайну; вписываем, только если микро-правка меняет ПОВЕДЕНИЕ (пороги, гейты), а не формулировку.
+- `REBUILD` → идём дальше.
 
-## Step 2 — The safety net
+## Шаг 2 — Страховка
 ```
 python %USERPROFILE%\.claude\scripts\codex_mirror.py backup
 ```
-Snapshot into `~/.codex/_backup/AGENTS.md.pre-<version>-<date-time>`. Rollback = copy it back.
+Снапшот в `~/.codex/_backup/AGENTS.md.pre-<версия>-<дата-время>`. Откат = скопировать обратно.
 
-## Step 3 — Write in the delta (the only step where I think)
-For every delta entry:
-1. Find the **matching §** in the mirror (the mirror's numbering mirrors CLAUDE.md's, so canon §8.4 lives in mirror §8.4).
-2. Write the rule in the mirror's style: a bold `**§X.Y ...**` + the essence in 1-3 sentences + a pointer to the canon in the vault. Do not copy bodies.
-3. A rule about people/the outside world (the house rulebook) — one line with a pointer; a rule about the Claude harness (skills/hooks) — translate into a **principle**, Codex has none of those mechanisms.
-4. If the rule is entirely about Codex itself (the reviewer role, Windows pitfalls, protected zones) — its home is the **CODEX BLOCK C1-C6**, not the § part.
+## Шаг 3 — Вписать дельту (единственный шаг, где думаю я)
+Для каждой записи дельты:
+1. Найти в зеркале **соответствующий §** (нумерация зеркала = нумерация CLAUDE.md, поэтому §8.4 канона живёт в §8.4 зеркала).
+2. Вписать правило в стиле зеркала: жирный `**§X.Y ...**` + суть в 1-3 предложения + указатель на канон в волте. Тела не копировать.
+3. Правило про людей/внешку (Библия) — одной строкой с указателем; правило про **хуки** Claude — переводить в **принцип**, хуков у Codex нет.
+   ⚠️ **СКИЛЛЫ — НЕ ПЕРЕВОДИТЬ В ПРИНЦИП** (замер 11.09.2026): у Codex 0.147+ есть РОДНАЯ полка `~/.codex/skills`, и все наши скиллы примонтированы туда junction'ами (`codex_skills_bridge.py`, §C8 зеркала). Правило со скиллом-дверью пишется Codex'у как есть, с именем скилла. Прежняя формулировка «у Codex скиллов нет» была протухшим claim и держалась месяцами — она же стояла строкой 7 самого зеркала.
+4. Если правило целиком про меня-Codex (роль ревьюера, грабли Windows, защищённые зоны) — его дом **CODEX-БЛОК C1-C6**, не §-часть.
 
-⚠️ **Headroom before the cap is tiny** (as of 07-26 — 37 bytes). New material fits only as a trade: squeeze the most bloated paragraph of the SAME § section, don't cut the TOP-20 and don't drop whole rules. Doesn't fit even then → that is the signal for a full mirror revision (as on 07-25: 137 KB → 32.7 KB), not for going "just a little" over the cap.
+⚠️ **Следи за запасом** — `check` печатает его и кричит ниже 1 КБ. Запас кончился → новое влезает только в обмен: ужать самый раздутый абзац ТОЙ ЖЕ §-секции, не выкидывая правил. Не влезает даже так → полная ревизия зеркала (как 25.07: 137 КБ → 32.7 КБ), а не «чуть-чуть за кап».
+📌 Замер 28.07 — как выглядит настоящий упор в кап: дельта на 5 КБ при 3 байтах запаса съела ТОП-20 (свернулся в дайджест) и все примеры-инциденты; правила уцелели, но зеркало обеднело. Это и был сигнал, что кап пора поднимать, а не резать канон дальше.
 
-## Step 4 — Stamp + publish
+## Шаг 4 — Штамп + публикация
 ```
 python %USERPROFILE%\.claude\scripts\codex_mirror.py stamp
 python %USERPROFILE%\.claude\scripts\codex_mirror.py publish
 ```
-`stamp` rewrites the `> MIRRORS: ...` line from the LIVE canon (version, date, md5, host) — never touch it by hand. `publish` runs the gates (cap · stamp vs canon · 17 anchors `## §0..§10` + `### C1..C6`), then copies into `$IMPORTS_ROOT\codex-canon\`, verifies md5 and runs `lint_agents_mirror.py`. Any FAIL = nothing was copied; fix and repeat.
+`stamp` переписывает строку `> MIRRORS: ...` из ЖИВОГО канона (версия, дата, md5, хост) — руками её не трогать. `publish` — гейты (кап · штамп vs канон · 17 якорей `## §0..§10` + `### C1..C6`), потом копия в `$IMPORTS_ROOT\codex-canon\`, md5-сверка и прогон `lint_agents_mirror.py`. Любой FAIL = ничего не скопировано, чиним и повторяем.
 
-## Step 5 — Proof and homes
-- A live Codex run: `codex exec -s read-only --skip-git-repo-check "quote §<new number> from your instructions"` — does it actually read the new rule.
-- External eyes per the /tt rule: `secondop.py t3 --ritual tt` (Codex itself as the breaker) — if the engine changed, not just the mirror text.
-- A node that has Codex but is not the hub: run `lint_agents_mirror.py` locally there too (a line in `codex-onboard-checklist.md`).
-- The rule changed the collaboration CONTRACT (what Codex may / may not do) → update `~/.codex/CODEX-COLLABORATION.md` + the copy in the shared folder, not only the mirror.
+## Шаг 5 — Доказательство и дома
+- Живой прогон Codex: `codex exec -s read-only --skip-git-repo-check "процитируй §<новый номер> из своих инструкций"` — читает ли он новое правило на самом деле.
+- Сторонние глаза по правилу /tt: `secondop.py t3 --ritual tt` (Codex сам как ломатель) — если менялся движок, а не только текст зеркала.
+- Узел с Codex, но не хаб: там же прогнать `lint_agents_mirror.py` локально (строка в `codex-onboard-checklist.md`).
+- Правило поменяло КОНТРАКТ коллаборации (что Codex может/не может) → обновить `~/.codex/CODEX-COLLABORATION.md` + копию в шаре, а не только зеркало.
 
-## Boundaries and accepted limitations
-- ⛔ Don't edit CLAUDE.md with this skill (that is `/intake` for a rule and `/canon-revision` for structure); the mirror follows the canon, never leads it.
-- ⛔ Don't run it on other people's machines: only the owner's hub rebuilds the canon.
-- **Accepted:** an edit to the mirror body WITHOUT a stamp change is not caught by the watchdog (receive-only governance keeps that hole closed organisationally). We are not building a second watchdog — [[gate-implement-critical-only]].
-- The cap and the anchors are the truth inside the engine's code (`CAP`, `ANCHORS`); a mismatch between code and this text is a bug in the code.
-- Relatives: `/arch` (the nightly rail where the watchdog lives) · `/secondop` (Codex as reviewer) · `/canon-revision` (revising the canon itself) · `/follower-onboard` (a new node).
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Границы и принятые ограничения
+- ⛔ Не менять этим скиллом CLAUDE.md (это `/intake` для правила и `/canon-revision` для структуры); зеркало едет ЗА каноном, никогда впереди.
+- ⛔ Не запускать на чужих машинах: канон пересобирает только хаб Антона.
+- **Принято:** правка тела зеркала БЕЗ смены штампа сторожем не ловится (governance receive-only держит эту дыру закрытой организационно). Второго сторожа не строим — [[gate-implement-critical-only]].
+- Кап и якоря — истина в коде движка (`CAP`, `ANCHORS`); расхождение кода с этим текстом = баг кода.
+- Родня: `/arch` (ночная рельса, где живёт сторож) · `/secondop` (Codex как ревьюер) · `/canon-revision` (ревизия самого канона) · `/follower-onboard` (новый узел).

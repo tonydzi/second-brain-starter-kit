@@ -1,0 +1,24 @@
+{
+ "url": "https://jobs.ashbyhq.com/magical/55801f62-d42b-4c68-87ba-01c483ba4459/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w10_i6_magical",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/ (no LinkedIn account)",
+  "GitHub": "https://github.com/tonydzi"
+ },
+ "combos": {
+  "Where are you currently located?": "Palo Alto"
+ },
+ "check_options": {
+  "Are you located in or willing to relocate": "Yes",
+  "Will you require sponsorship": "No"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "LinkedIn",
+  "Resume"
+ ]
+}

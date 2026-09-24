@@ -48,7 +48,7 @@ const LENS_SCHEMA = {
 
 const LENSES = [
   { key: 'Consensus', brief: 'Steelman the current mainstream/established view. What does well-replicated science or the market actually hold about this, and WHY. Be its best advocate — but mark where "consensus" is assumption vs proven.' },
-  { key: 'Skeptic', brief: 'Strongest arguments AGAINST. Where does the idea break? Hidden assumptions, conservation laws / unit economics it must violate, known failure modes, the sharpest falsification test. Attack the idea, not the person.' },
+  { key: 'Skeptic', brief: 'Strongest arguments AGAINST. Where does the idea break? Hidden assumptions, conservation [человек] / unit economics it must violate, known failure modes, the sharpest falsification test. Attack the idea, not the person.' },
   { key: 'Frontier', brief: 'Strongest arguments FOR. Steelman the believer: what would have to be true for this to work, adjacent emerging/anomalous evidence, why it is NOT obviously impossible, the most promising version of the idea.' },
   { key: 'Historian', brief: 'Precedents and base rates. Ideas in this domain once dismissed then vindicated, AND once hyped then debunked. What is the closest historical analog to THIS idea, and what did it teach? Give a calibrated base rate.' },
   { key: 'ExperimentalDesign', brief: 'How would we actually settle this? The cheapest DECISIVE experiment/measurement, what data to gather first, what result would confirm vs refute, and what a believer and a skeptic would both accept as a fair test.' },

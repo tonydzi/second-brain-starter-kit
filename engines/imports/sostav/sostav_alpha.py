@@ -14,7 +14,7 @@
 # ---------------------------------------------------------------------------
 r"""sostav_alpha.py — COMMUNITY-alpha detector over the СОСТАВ club (sostav.db).
 
-Sibling of `..\lobster\lobster_alpha.py`, adapted for a RU entrepreneurs/finance club:
+Sibling of `..\lobster\lobster_alpha.py`, adapted for a RU [человек]/finance club:
   - sostav.db schema (rx, reply_count, topic, authors.rx_recv) instead of lobster's.
   - RU business/finance/dealflow alpha keywords (not DeFi-English).
   - PENALISE intro posts — in СОСТАВ the top-reacted substantive msgs are member

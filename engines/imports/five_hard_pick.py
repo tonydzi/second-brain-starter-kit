@@ -18,7 +18,7 @@ Reusable: same script feeds both /five-hard manual call and the monthly schedule
 import os, sys, re, json
 from pathlib import Path
 
-VAULT = Path(r"E:/Obsidian/Owner-Knowledge")
+VAULT = Path(r"[путь владельца]")
 SOURCES = [
     VAULT / "03-Insights",
     VAULT / "06-Concepts",
@@ -58,7 +58,7 @@ def main():
     pick = items[:n]
     print(f"five_hard: {len(items)} candidates -> picked {len(pick)} oldest")
     out = {"candidates_total": len(items), "picked": pick}
-    Path(r"E:/Obsidian/_imports/_five_hard_pick.json").write_text(
+    Path(r"[путь владельца]").write_text(
         json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     for p in pick:
         print(f"  - {p['stem']}")

@@ -19,7 +19,7 @@ Unrecognized → concept-life-observations (safe default)."""
 import re, os
 from pathlib import Path
 
-V = Path("E:/Obsidian/Owner-Knowledge")
+V = Path("[путь владельца]")
 CONC = V / "06-Concepts"
 concept_files = {f.stem for f in CONC.glob("*.md")}
 
@@ -27,7 +27,7 @@ concept_files = {f.stem for f in CONC.glob("*.md")}
 EXPLICIT = {
     # Alternative history / ancient mysteries
     "The Randall Carlson 4675": ("concept-alternative-history", "external", "ai"),
-    "Lucius Aurelian": ("concept-alternative-history", "external", "ai"),
+    "[человек] Aurelian": ("concept-alternative-history", "external", "ai"),
     "BrienFoerster": ("concept-alternative-history", "external", "ai"),
     "JonLevi": ("concept-alternative-history", "external", "ai"),
     "HiddenRabbit": ("concept-alternative-history", "external", "ai"),
@@ -58,9 +58,9 @@ EXPLICIT = {
     "Jarid Boosters MD": ("concept-biohacking-nutrition", "external", "ai"),
     "fuckbiohacking": ("concept-biohacking-nutrition", "external", "ai"),
     "Kasparov Vadim Telegram fuck biohacking": ("concept-biohacking-nutrition", "external", "ai"),
-    "Paul Cook": ("concept-biohacking-nutrition", "external", "ai"),
+    "[человек] [человек]": ("concept-biohacking-nutrition", "external", "ai"),
     "my lunch Break 1 (1)": ("concept-biohacking-nutrition", "external", "ai"),
-    "interviews with Michael Levin": ("concept-aging", "external", "ai"),
+    "interviews with [человек] [человек]": ("concept-aging", "external", "ai"),
 
     # Crypto
     "Crypto": ("concept-blockchain", "external", "ai"),
@@ -71,10 +71,10 @@ EXPLICIT = {
     # AI / Tech
     "deeplearningAI": ("concept-ai-agents", "external", "ai"),
 
-    # LobsterDAO group (ID 1002159389293)
-    "chat_-1003779381054_part_001": ("concept-dao", "external", "ai"),
-    "chat_-1003779381054_part_002": ("concept-dao", "external", "ai"),
-    "chat_-1003779381054_part_003": ("concept-dao", "external", "ai"),
+    # LobsterDAO group (ID [id])
+    "chat_-[id]_part_001": ("concept-dao", "external", "ai"),
+    "chat_-[id]_part_002": ("concept-dao", "external", "ai"),
+    "chat_-[id]_part_003": ("concept-dao", "external", "ai"),
     "lobster_tg_messages_last_5_days": ("concept-dao", "external", "ai"),
 
     # Joe Rogan
@@ -119,11 +119,11 @@ def get_mapping(subfolder_name):
         return EXPLICIT[subfolder_name]
     # Heuristic fallback
     n = subfolder_name.lower()
-    if any(k in n for k in ["randall", "levi", "foerster", "lucius", "aurelian", "megali", "biglino", "masterov"]):
+    if any(k in n for k in ["randall", "[человек]", "foerster", "[человек]", "aurelian", "megali", "biglino", "masterov"]):
         return ("concept-alternative-history", "external", "ai")
     if any(k in n for k in ["lobster", "dao"]):
         return ("concept-dao", "external", "ai")
-    if any(k in n for k in ["biohack", "beloveshkin", "health", "huberman", "levin"]):
+    if any(k in n for k in ["biohack", "beloveshkin", "health", "huberman", "[человек]"]):
         return ("concept-biohacking-nutrition", "external", "ai")
     if any(k in n for k in ["crypto", "token", "blockchain", "defi"]):
         return ("concept-blockchain", "external", "ai")
@@ -185,4 +185,4 @@ if unmapped:
     for u in sorted(unmapped):
         log.append(f"  {u}")
 
-open("E:/Obsidian/_imports/_integrate_transcripts2_log.txt", "w", encoding="utf-8").write("\n".join(log))
+open("[путь владельца]", "w", encoding="utf-8").write("\n".join(log))

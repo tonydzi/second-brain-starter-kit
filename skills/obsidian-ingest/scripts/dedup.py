@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Systematic exact-duplicate detection across Telegram post files.
 - body = text between frontmatter and '## See Also', whitespace-normalized
 - exact dups (same hash) -> keep earliest by filename, delete rest, record remap
@@ -10,9 +9,9 @@ import re, json, hashlib, os
 from pathlib import Path
 from collections import defaultdict
 
-POSTS = Path(r"E:/Obsidian/Owner-Knowledge/01-Conversations/Telegram/Arhiv-Golosa/posts")
-SESS = Path(r"E:/Obsidian/Owner-Knowledge/01-Conversations/Telegram/Arhiv-Golosa/sessions")
-IMP = Path(r"E:/Obsidian/_imports")
+POSTS = Path(r"[путь владельца]")
+SESS = Path(r"[путь владельца]")
+IMP = Path(r"[путь владельца]")
 APPLY = os.environ.get("APPLY") == "1"
 
 def body_of(text):

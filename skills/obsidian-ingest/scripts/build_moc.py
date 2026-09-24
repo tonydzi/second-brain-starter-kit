@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Phase 4: build _Telegram-MOC.md directly in the vault, data-driven."""
 import json, re
 from pathlib import Path
 from collections import Counter, defaultdict
 
-IMP = Path(r"E:/Obsidian/_imports")
-VAULT = Path(r"E:/Obsidian/Owner-Knowledge")
+IMP = Path(r"[путь владельца]")
+VAULT = Path(r"[путь владельца]")
 BASE = VAULT / "01-Conversations/Telegram/Arhiv-Golosa"
 recs = [json.loads(l) for l in (IMP / "telegram-archive-classified.jsonl").open(encoding="utf-8")]
 posts = [r for r in recs if r["cls"] == "post"]

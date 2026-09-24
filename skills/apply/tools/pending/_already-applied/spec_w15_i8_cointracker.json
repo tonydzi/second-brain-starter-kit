@@ -1,0 +1,20 @@
+{
+ "url": "https://jobs.ashbyhq.com/cointracker/d8e5ae8d-b4db-4844-a78c-1799ee95fdeb/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w15_i8_cointracker",
+ "texts": {
+  "Full name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Country of residence": "United States",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "Website or Blog URL": "https://tonydzi.github.io/",
+  "Twitter URL": "https://x.com/Tony_Stef_",
+  "How did you hear about CoinTracker?": "Company careers page",
+  "How do you personally use cryptocurrency": "I have worked in crypto daily since 2017. At Everex (Singapore) I wrote smart contracts and led government and bank relations across SE Asia on structuring crypto payments and stablecoins, and I designed one of the first detailed frameworks for a national government to issue its own stablecoins. At Platinum VC & Incubator our portfolio is ~70% crypto; I shipped crypto-exchange infrastructure (backends, market-maker engines, HFT systems) and have fundraised in crypto since 2017 ($35M fund, syndicate of 250 VCs/angels). Personally I use crypto for cross-border payments and settlement between the US, EU and APAC. What keeps me interested is programmable money: stablecoins and on-chain settlement remove friction that traditional rails cannot - and tools like CoinTracker are what make that usable (and tax-reportable) for normal people.",
+  "What are your goals for your next role": "I want to own a growth/GTM problem end-to-end inside a focused product team, rather than across a portfolio. My default mode is launching from scratch: 10+ years as a venture founder, I own problem framing, funnel design, evaluation and GTM while engineers (human or AI) implement. My current proof is a production multi-machine Claude fleet (6 machines) with 100+ automation routines that I run in public. My goal is to combine that AI-agent automation with a decade of crypto depth in a company where growth is measured and shipped weekly - CoinTracker sits exactly at that intersection of crypto and consumer product."
+ },
+ "check_options": {
+  "Do you require Visa sponsorship": "No, I do not require sponsorship"
+ },
+ "required_labels": ["Full name", "Email", "Country of residence", "Resume", "LinkedIn URL", "How did you hear about CoinTracker?", "How do you personally use cryptocurrency", "What are your goals for your next role"]
+}

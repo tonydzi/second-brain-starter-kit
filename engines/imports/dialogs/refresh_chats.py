@@ -111,7 +111,7 @@ async def run(acc):
         print("chats.db has no 'chats' table -- aborting BEFORE crawl. Rebuild chats.db first."); return
     env = load_env(ENV)
     keys = ("%s_API_ID" % acc, "%s_API_HASH" % acc, "%s_SESSION" % acc)
-    # back-compat: the original tg_login_step1/2 wrote REFRESH_* for @work_acct_a
+    # back-compat: the original tg_login_step1/2 wrote REFRESH_* for [аккаунт]
     if acc == "WORK_ACCT_A" and not all(env.get(k) for k in keys):
         leg = ("REFRESH_API_ID", "REFRESH_API_HASH", "REFRESH_SESSION_STRING")
         if all(env.get(k) for k in leg):

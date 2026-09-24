@@ -190,7 +190,7 @@ FUNCTION_STOPWORDS = {
     "человек",               # "person" - too generic in any note about people
     "ответ", "ответа",       # "answer" - generic discourse
     "брать", "берет", "взять",  # "to take" - generic verb
-    "ребят", "ребята",       # "guys" - address form, not topic
+    "ребят", "ребята",       # "[человек]" - address form, not topic
     # Generic DOMAIN vocabulary (2026-07-04): bare business nouns are FREQUENT but not
     # an "insight" - the recurring miner's value is SPECIFIC themes, not field vocabulary.
     # Screen verdict 2026-07-04: these 7 anchors were top-scored yet ALL judged noise

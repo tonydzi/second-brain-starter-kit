@@ -18,7 +18,7 @@ Each batch: ~25 notes, body truncated to 3500 chars. UTF-8 JSON.
 import json
 from pathlib import Path
 
-EXPORT = Path(r"E:\Google Drive on HP Palo Alto\!_Claude_Mac16\Apple Notes Export 2026-06-11")
+EXPORT = Path(r"[путь владельца] Drive on HP Palo Alto\!_Claude_[машина флота]\Apple Notes Export 2026-06-11")
 OUT = Path(r"%IMPORTS%\apple-notes")
 BATCH_DIR = OUT / "triage_batches"
 BATCH_DIR.mkdir(exist_ok=True)

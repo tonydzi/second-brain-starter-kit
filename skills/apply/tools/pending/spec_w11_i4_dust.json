@@ -1,0 +1,25 @@
+{
+ "url": "https://jobs.ashbyhq.com/dust/18e07aa5-cbf7-4521-8c00-44246ceee65b/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w11_i4_dust",
+ "texts": {
+  "Full Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "Share links that showcase your craft": "https://github.com/tonydzi , https://tonydzi.github.io/",
+  "Salary Expectations?": "Open / market rate",
+  "Why do you want to join Dust?": "Dust is building the layer I already live in: getting agents deployed into real company workflows, not demos. My daily work since 2023 is exactly that - I run a production multi-machine Claude fleet (6 machines) in public: MCP connectors, RAG over a 10-year knowledge base, CRM automation, 100+ routines, published reliability evals (0/17 high-risk actions slipped past the human approval gate in recorded runs). The customer-facing half is my native ground: 15+ years founder/BD, 10,000+ founder calls, enterprise advisory for subsidiaries of Foxconn and ANA Airlines, government/bank relations across SE Asia. AI Deployment Strategist is that combination in one seat. EU citizen (Poland) based in Lisbon - no visa needed, happy to relocate to Paris and be office-based."
+ },
+ "check_options": {
+  "Do you have the appropriate work authorization for this role?": "Yes",
+  "Are you happy 4 days office based?": "Yes"
+ },
+ "required_labels": [
+  "Resume",
+  "Full Name",
+  "Email",
+  "Salary Expectations?",
+  "Why do you want to join Dust?"
+ ]
+}

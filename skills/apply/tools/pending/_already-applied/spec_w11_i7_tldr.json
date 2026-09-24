@@ -1,0 +1,24 @@
+{
+ "url": "https://jobs.ashbyhq.com/tldr.tech/897f4391-66ab-44ca-a8eb-65dd9809200d/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w11_i7_tldr",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "No LinkedIn account - please see https://tonydzi.github.io/ and https://github.com/tonydzi",
+  "Phone Number": "+1 341 222 9178",
+  "How many years of experience do you have as a product manager": "10",
+  "What AI-native products / systems have you built": "A production multi-machine Claude agent fleet (6 machines) that I run in public: cross-machine consensus, an AI-native CRM, persistent memory, and 100+ automation routines. Published pieces: claw-consensus (reproducible multi-machine agent consensus with offline demo and published evals) and verbatim-citation-gate (a zero-token gate plus a burden-of-proof judge that catches fabricated RAG citations, MIT). Earlier I rebuilt my own CRM into an AI-native system - social enrichment, parsing at scale, lead-to-call pipelines - used daily by up to 30 operators. I also published measured agent-fleet reliability evals (07.2026): 0/17 high-risk actions slipped past the human approval gate in recorded runs. 110 public repos at github.com/tonydzi."
+ },
+ "check_options": {
+  "Are you currently authorized to work lawfully in the U.S.": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "LinkedIn",
+  "Phone Number",
+  "How many years",
+  "What AI-native"
+ ]
+}

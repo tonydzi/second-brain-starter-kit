@@ -15,7 +15,7 @@
 """clan_alive.py -- THE deterministic answer to "is clan node X alive?" (0 LLM, read-only).
 
 WHY (грабли 2026-07-04): asked to "contact Rita's Mac", the hub session judged the node
-DEAD from stale `_machine-bus` file-marker mtimes (.read-*, .robot-done-*, no log-<node>.jsonl)
+DEAD from stale `[шина]` file-marker mtimes (.read-*, .robot-done-*, no log-<node>.jsonl)
 and raised a false alarm + nudged the human for nothing. The node was in fact `connected=True`
 in Syncthing and posting to TG-03 -- it just speaks on the TG rail, where the file-decision-rail
 markers are frozen BY DESIGN. Root of the CLASS: no single entry point answered "is X up?", so
@@ -37,7 +37,7 @@ try:
 except Exception:
     pass
 
-BUS = os.environ.get("MACHINE_BUS_DIR", r"%VAULT%\_machine-bus")
+BUS = os.environ.get("MACHINE_BUS_DIR", r"%VAULT%\[шина]")
 GREEN, WARN, RED, UNK = "🟢", "🟡", "🔴", "?"
 TG_SEEN_FRESH_MIN = 90   # .tg-seen-<node> newer than this = the node's TG rail is live
 

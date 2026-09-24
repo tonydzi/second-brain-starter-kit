@@ -1,11 +1,6 @@
 ---
 name: local-chatgpt-token-heal
-description: >-
-  Re-mint a ChatGPT bearer token when a nightly sync exits with a token-expired code: the
-  session cookie lives for months and deterministically produces a fresh bearer, with no LLM and
-  no browser. Triggers: "/chatgpt-token-heal", "chatgpt token dead", or the sync failing on that
-  error.
-license: MIT
+description: Refresh the ChatGPT bearer token when the nightly sync dies with exit=7 (token expired). Root-cause fix — the bearer lives ~5-9 days but the NextAuth SESSION cookie lives ~3 months and re-mints a fresh bearer deterministically (0 LLM, 0 browser). Trigger on "/chatgpt-token-heal", "почини chatgpt токен", "chatgpt exit 7", "обнови bearer chatgpt", "chatgpt token dead", "heal chatgpt token", or when nightly_sync/incremental_pull reports AUTH FAILED / exit 7. Fleet-local skill (hub [машина флота] — where the nightly runs + a logged-in chatgpt.com Chrome lives). Engine = $IMPORTS_ROOT/chatgpt/token_heal.py. Pairs with /chatgpt-sync + memory [[chatgpt-export-pipeline]].
 ---
 
 OBJECTIVE: Get the ChatGPT nightly sync back to `exit=0` by refreshing the dead bearer token — the correct, root-cause way (session cookie → fresh bearer), falling back to Chrome only when the cookie itself has died.
@@ -19,7 +14,7 @@ The `secrets\bearer.txt` accessToken expires every **~5-9 days** — that is Ope
 
 ### L1 — deterministic re-mint (default; no browser, no LLM)
 ```
-python "%IMPORTS_ROOT%\chatgpt\token_heal.py"     # PowerShell: use %IMPORTS%\chatgpt\token_heal.py
+python "%IMPORTS_ROOT%\chatgpt\token_heal.py"     # PowerShell: use [путь владельца]
 ```
 - exit **0** → fresh bearer written + VERIFIED (HTTP 200), cookie rotated if server rotated it. DONE — go to "Finish".
 - exit **5** → session cookie dead/absent → do **L2**.
@@ -28,9 +23,9 @@ python "%IMPORTS_ROOT%\chatgpt\token_heal.py"     # PowerShell: use %IMPORTS%\ch
 Note: nightly_sync.py already calls L1 automatically on pull exit 7 and retries the pull. So most of the time you never run this by hand — this skill is for when L1 itself returns 5 (cookie dead) and a human-in-the-loop Chrome step is needed, or when Anton runs `/chatgpt-token-heal` directly.
 
 ### L2 — Chrome re-harvest of the session cookie (only when L1 exits 5)
-Needs a Chrome logged into chatgpt.com on account **owner.work@example.com** + the Claude-in-Chrome MCP (load via ToolSearch if deferred). Do it ON THE HUB.
+Needs a Chrome logged into chatgpt.com on account **dzyatkovskiy.a2@gmail.com** + the Claude-in-Chrome MCP (load via ToolSearch if deferred). Do it ON THE HUB.
 1. `list_connected_browsers` → confirm a local Chrome. `navigate` a tab to `https://chatgpt.com/api/auth/session`.
-2. `get_page_text` on that tab → JSON. (On the hub this reads the token directly; the old Blob-download dance is NOT needed here.)
+2. `get_page_text` on that tab → JSON. (On the hub this reads the token directly; the old Blob-download [человек] is NOT needed here.)
 3. From that JSON take BOTH fields and write them to secrets (single line, no trailing newline, back up the old first):
    - `accessToken` → `secrets\bearer.txt`
    - `sessionToken` → `secrets\session_token.txt`  ← **this is the long-lived cookie; saving it is what makes future heals deterministic**
@@ -44,27 +39,12 @@ Escalate to Anton via the approval rail (D-type "needs his hands"): ask him to l
 
 ## Finish (after any layer reaches a fresh bearer)
 ```
-cmd /c "%IMPORTS%\chatgpt\nightly_sync.cmd"
+cmd /c "[путь владельца]"
 ```
-then tail `%IMPORTS%\chatgpt\_nightly_sync-HUB-1.log` → confirm `exit=0`. Report: which layer healed it, session-cookie expiry date, +N new chats. NEVER print the token/cookie value.
+then tail `[путь владельца]` → confirm `exit=0`. Report: which layer healed it, session-cookie expiry date, +N new chats. NEVER print the token/cookie value.
 
 ## Files
-- Engine: `%IMPORTS%\chatgpt\token_heal.py` (L1 + `--verify-only`)
+- Engine: `[путь владельца]` (L1 + `--verify-only`)
 - Secrets: `secrets\bearer.txt` (short-lived, ~5-9d) · `secrets\session_token.txt` (long-lived cookie, ~3mo) · `_token_heal_last.json` (heal stamp)
 - Auto-heal loop: `nightly_sync.py` calls L1 on pull exit 7, retries pull, and bus-TASKs the hub (L2) if L1 exits 5.
 - Canon: memory [[chatgpt-export-pipeline]], [[credential-store]]; sibling skill `/chatgpt-sync`.
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

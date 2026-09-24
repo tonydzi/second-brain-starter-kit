@@ -33,7 +33,7 @@ TOPIC_NAMES = {
 
 
 def fmget(fm, key):
-    m = re.search(r"(?m)^%s:\s*(.+?)\s*$" % key, fm)
+    m = re.search(r"(?m)^%[путь владельца])\s*$" % key, fm)
     return m.group(1).strip().strip('"\'') if m else ""
 
 

@@ -21,7 +21,7 @@ try:
 except Exception: pass
 import glob, io, re, json
 from collections import Counter
-V   = r"E:/Obsidian/Owner-Knowledge/04-Projects/crypto/Platinum-CRM/leads"
+V   = r"[путь владельца]"
 EXP = r"C:$HOME/!CLAUDE-HP17 May26/crm_export"
 TIER_RU={"investor":"Инвестор","founder":"Фаундер / проект","kol":"KOL","b2b":"B2B","other":"—","not_investor":"Не инвестор"}
 HANDLE=re.compile(r'@([A-Za-z][A-Za-z0-9_]{3,31})')

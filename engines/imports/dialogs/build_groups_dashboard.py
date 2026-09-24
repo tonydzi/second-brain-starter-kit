@@ -44,7 +44,7 @@ def main():
     con.close()
 
     data = []
-    for (cid, name, link, typ, mc, origin, topic, nour, accts, ts, nmsg,
+    for (cid, name, link, typ, mc, origin, topic, [человек], accts, ts, nmsg,
          what, value, vwhy, extract, corigin, notable) in rows:
         data.append({
             "id": cid, "n": name or "", "l": link or "", "t": typ or "",

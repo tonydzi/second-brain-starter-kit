@@ -14,8 +14,8 @@ Run with PYTHONUTF8=1.
 import os, sys, json, argparse, subprocess
 from pathlib import Path
 
-IMPORTS = Path(r"%IMPORTS%")
-VAULT   = Path(r"%VAULT%")
+IMPORTS = Path(r"[путь владельца]")
+VAULT   = Path(r"[путь владельца]")
 
 SOURCES = {
     "pokupki": {
@@ -224,7 +224,7 @@ def main():
         p("To MERGE (adds new files only, never overwrites/deletes):")
         p(f'  robocopy "{st}" "{vb}" /E /XC /XN /XO')
         if cfg.get("post_merge"):
-            p("Then deterministic reconcile (post-merge, in %IMPORTS%):")
+            p("Then deterministic reconcile (post-merge, in [путь владельца]):")
             for step in cfg["post_merge"]:
                 p("   ", step)
         p("Then LLM curation for the new items:")

@@ -1,0 +1,10 @@
+{
+  "url": "https://jobs.ashbyhq.com/paradigm/c18c1fb4-9ad7-4657-8366-bc0f5078d3ca/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+  "out_prefix": "w12_i13_paradigm",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com"
+  },
+  "required_labels": ["Name", "Email", "Resume"]
+}

@@ -1,0 +1,19 @@
+{
+ "url": "https://jobs.ashbyhq.com/kognitos/75ef6778-ee45-4eb5-b2fa-02834f78a986/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w10_i5_kognitos",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Linkedin": "https://tonydzi.github.io/ (no LinkedIn account)",
+  "Compensation Expectations?": "Open / market rate"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume"
+ ],
+ "check_options": {
+  "Have you given us a follow": "No"
+ }
+}

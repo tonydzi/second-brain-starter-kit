@@ -1,0 +1,33 @@
+{
+ "url": "https://jobs.ashbyhq.com/ashby/dfc35159-ffe5-4d42-bea3-552b5dc17628/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w13_i1_ashby",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn Profile": "https://tonydzi.github.io/",
+  "What is the biggest team you have managed": "A distributed engineering org of 40+ developers across APAC at Platinum Software Development Company / Platinum VC & Incubator, where I am co-founder and acted as product owner. We built the company from scratch starting in 2015, so essentially all of them were hired rather than inherited - I was directly involved in recruiting. Separately, the CRM I wrote to run our deal flow had up to 30 operators working in it daily, whom I hired, trained and managed.",
+  "You'll be in enterprise deals yourself": "I keep myself in deals - that is non-negotiable. Across 11 years running an incubator I personally did 10,000+ founder calls and 2,000+ institutional-investor calls; a [человек]-coach who stops playing quickly loses the right to coach. In practice: roughly half my week in live enterprise deals (owning the hardest two or three myself, joining SEs' calls as second chair), about a third developing the five SEs - deal reviews, call shadowing with written feedback, per-SE growth plans - and the remainder scaling. Scaling is my strongest muscle: at Platinum I automated every repeatable connector motion (enrichment, matching, follow-up), first with a self-built CRM and today with AI agents, and I would do the same for demo environments, POC templates and security-review answers so team capacity grows faster than headcount.",
+  "This is the first dedicated Enterprise SE Manager": "My one question: who owns the SE team's time when an enterprise deal and the product roadmap disagree, and what single metric will you and the Global Head of SE use to judge this function after two quarters? A clear owner plus a revenue-linked metric (POC win rate, enterprise ACV influenced) means the function is set up to succeed; 'we will figure it out' means the first dedicated manager becomes a buffer instead of a builder.",
+  "What do you believe makes a great solutions engineer": "That a great solutions engineer is an operator, not a demo artist - and that being a classical software engineer is optional. I ship production agent systems end-to-end (I run a 6-machine Claude fleet in public: MCP connectors, RAG over a 10-year knowledge base, CRM automation, published evals) without being a classical SWE. What made the difference in front of customers, banks and regulators for 15+ years was owning the messy last mile - data, permissions, politics, compliance - until the thing actually runs in the customer's environment. Many believe deep coding ability is the core of the role; I believe the core is end-to-end ownership in adversarial, compliance-heavy environments, and the code is learnable tooling around it."
+ },
+ "combos": {
+  "Which country do you intend to work from": "United States"
+ },
+ "check_options": {
+  "Will you now or in the future require sponsorship": "No",
+  "What is your current age": "I prefer not to answer",
+  "What is your gender identity": "I prefer not to answer",
+  "Which ethnicity(ies) do you identify with": "I prefer not to answer",
+  "Which of the following communities do you belong to": "I prefer not to answer"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "What is the biggest team",
+  "You'll be in enterprise deals",
+  "This is the first dedicated",
+  "What do you believe makes"
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "url": "https://jobs.ashbyhq.com/matter-labs/c193ea99-6a1d-4b4a-845d-5ae[id]d/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+ "out_prefix": "w14_i3_matterlabs",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com"
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "yesnos": {
+  "Are you authorized to work in the United States": true
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume"
+ ]
+}

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Backfill authored_by into Telegram post frontmatter.
 human  = Anton's own voice transcripts / his messages
 ai     = GPT-generated summaries
@@ -9,7 +8,7 @@ import re
 from pathlib import Path
 from collections import Counter
 
-POSTS = Path(r"E:/Obsidian/Owner-Knowledge/01-Conversations/Telegram/Arhiv-Golosa/posts")
+POSTS = Path(r"[путь владельца]")
 SUMMARY_HEAD = re.compile(r'^(Краткое содержание|Обсуждали|Обсуждается|Summary|Резюме|Краткое резюме)', re.I)
 
 def author_of(fm):

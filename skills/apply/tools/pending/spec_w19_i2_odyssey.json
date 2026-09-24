@@ -1,0 +1,25 @@
+{
+ "url": "https://jobs.ashbyhq.com/odyssey/68b8890a-2bad-4d09-96c6-292dd63b9c03/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+ "out_prefix": "w19_i2_odyssey",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone number": "+1 341 222 9178",
+  "What is your desired compensation?": "200000",
+  "Linkedin Profile": "https://tonydzi.github.io/"
+ },
+ "check_options": {
+  "While we are open to remote candidates": "Not Applicable",
+  "Are you legally authorized to work in the US without sponsorship?": "Yes",
+  "Are you comfortable with flying": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone number",
+  "Resume",
+  "What is your desired compensation?",
+  "Linkedin Profile"
+ ]
+}

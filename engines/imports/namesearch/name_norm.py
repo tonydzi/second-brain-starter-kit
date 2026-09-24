@@ -155,7 +155,7 @@ def fuzzy_thr(k):
 if __name__ == '__main__':
     # быстрый самотест: всё про Виктора должно дать один ключ
     import sys
-    samples = ['виктор', 'Vlad', 'Viktor', 'dbrnjh', 'ВИКТОР', '@lead_vk']
+    samples = ['виктор', 'Vlad', 'Viktor', 'dbrnjh', 'ВИКТОР', '[аккаунт]']
     for s in samples:
         print(f'{s:14} -> {sorted(keys(s))}')
     # опечатки — через нечёткое сравнение к "viktor"

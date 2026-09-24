@@ -26,7 +26,7 @@ VL = os.path.join(VAULT, "04-Projects", "crypto", "Platinum-CRM", "leads")
 MOC = os.path.join(VAULT, "04-Projects", "crypto", "Platinum-CRM", "_Platinum-CRM-MOC.md")
 
 def fm(t, key):
-    m = re.search(r'^%s:\s*"?([^"\n]*)"?\s*$' % re.escape(key), t, re.M)
+    m = re.search(r'^%[путь владельца]"?([^"\n]*)"?\s*$' % re.escape(key), t, re.M)
     return (m.group(1).strip() if m else "") or ""
 
 cards = []

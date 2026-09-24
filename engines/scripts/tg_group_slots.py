@@ -90,7 +90,7 @@ KEEP_MARKERS = [
 ]
 # ---- Признаки шума (понижают балл, но НЕ решают в одиночку) ----
 NOISE_WORDS = [
-    "airdrop", "pump", "koin", "drops", "nft", "yup", "doge", "meme",
+    "airdrop", "pump", "[человек]", "drops", "nft", "yup", "doge", "meme",
     "kol", "kols", "influencer", "crypto wolf",   # "trade"/"signal" убраны: бьют по легитимным бизнес-группам
 ]
 # по границам слова: подстрокой "kol" ловилась "Kolkata", "trade" -- "Trade Finance"
@@ -108,7 +108,7 @@ INTRO_RE = re.compile(
 )
 # Бренды Антона, которых не было в словаре и которые из-за этого попали в кандидаты (инцидент 27.07)
 BRAND_RE = re.compile(r"\ba\.?\s?a\.?\s?a\b|aaapad|aiw3|c\(h\+a\)rm|stanford")
-# Партнёрская/дил-группа двух сущностей ("EdgeIn x Ape Terminal", "DAOBase & Pinksale").
+# Партнёрская/дил-группа двух сущностей ("EdgeIn x Ape Terminal", "DAOBase & [человек]").
 # Применяется ТОЛЬКО когда нет года прошедшей конференции и нет шумовых слов -- иначе
 # "MALTA AI & BLOCKCHAIN SUMMIT 2019" и "KOLs + Influencers Global" ушли бы в защиту зря.
 PARTNER_RE = re.compile(r"\s[x×]\s|\s&\s|\s\+\s|\[adv\]|\botc\b")
@@ -149,7 +149,7 @@ def title_of(d):
 
 COMPACT_RE = re.compile(r"[^a-zа-яё0-9]+")
 # Бренд-маркеры в «сжатом» виде: без пробелов и знаков.
-# ⚠️ Инцидент 27.07 (второй): бренд лежал как "vcsdao", а группа называлась "Everstake - VCs DAO"
+# ⚠️ Инцидент 27.07 (второй): бренд лежал как "vcsdao", а группа называлась "[человек] - VCs DAO"
 # -- с пробелом. Совпадения не было, партнёрская группа с НАШИМ брендом попала в кандидаты.
 # Сравнение по сжатой строке ловит любое написание: "VCs DAO" / "VCsDAO" / "vcs-dao".
 KEEP_COMPACT = [COMPACT_RE.sub("", m) for m in KEEP_MARKERS]

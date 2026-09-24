@@ -1,0 +1,74 @@
+{
+  "01-happy-path.jsonl": {
+    "errors": [],
+    "rounds": 0,
+    "state": "committed",
+    "verifies": 2
+  },
+  "02-counter.jsonl": {
+    "errors": [],
+    "rounds": 1,
+    "state": "committed",
+    "verifies": 0
+  },
+  "03-timeout.jsonl": {
+    "errors": [],
+    "rounds": 0,
+    "state": "committed",
+    "verifies": 0
+  },
+  "04-duplicate-event.jsonl": {
+    "errors": [],
+    "lines": 5,
+    "note": "duplicate delivery must not double-count: 5 lines collapse to 3 events",
+    "rounds": 0,
+    "state": "committed",
+    "unique_events": 3,
+    "verifies": 0
+  },
+  "05-round-cap.jsonl": {
+    "errors": [],
+    "note": "4 counters exceed the cap of 3, so an ESCALATE is required; without it this fixture must fail",
+    "rounds": 4,
+    "state": "escalated",
+    "verifies": 0
+  },
+  "06-tier2-escalation.jsonl": {
+    "errors": [],
+    "note": "tier 2 committed ONLY because HUMAN_APPROVED precedes the COMMIT",
+    "rounds": 0,
+    "state": "committed",
+    "verifies": 0
+  },
+  "07-tier2-gate-violation.jsonl": {
+    "errors": [
+      "TIER-2 GATE VIOLATED: COMMIT without a recorded HUMAN_APPROVED"
+    ],
+    "note": "NEGATIVE fixture: the human gate must REFUSE this. If this ever reports no errors, the gate is gone.",
+    "rounds": 0,
+    "state": "committed",
+    "verifies": 0
+  },
+  "08-schema-violation.jsonl": {
+    "errors": [
+      "08-schema-violation.jsonl:2: field 'type' = 'MAYBE' is not one of the allowed values",
+      "08-schema-violation.jsonl:3: field 'event_id' = 'not-a-uuid' does not match ^[0-9a-f]{32}$",
+      "08-schema-violation.jsonl:4: missing required field 'actor'",
+      "08-schema-violation.jsonl:5: field 'risk_tier' = 9 above maximum 2",
+      "08-schema-violation.jsonl:5: unknown field 'smuggled' (schema forbids extras)"
+    ],
+    "note": "NEGATIVE fixture: proves the schema file is actually applied, not decorative.",
+    "rounds": 0,
+    "state": "agreed",
+    "verifies": 0
+  },
+  "09-round-cap-violation.jsonl": {
+    "errors": [
+      "round cap exceeded (4 counters > cap 3) but the proposal did not escalate — it is looping"
+    ],
+    "note": "NEGATIVE fixture: 05 shows the cap being honoured, this one proves the check actually fires. Without it, deleting the cap logic keeps every fixture green.",
+    "rounds": 4,
+    "state": "countered",
+    "verifies": 0
+  }
+}

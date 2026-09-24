@@ -1,0 +1,26 @@
+{
+ "url": "https://jobs.ashbyhq.com/duvo/e2156092-50f1-4181-87fb-9e4bc299dde3/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w10_i2_duvo",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone": "+1 341 222 9178",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "Why do you want to": "Your posting says the FDE writes the glue, not the core product - that is literally my daily work. I run a production multi-machine Claude fleet (6 machines) and ship agent systems end to end: MCP connectors, integration scripts, RAG over a 10-year knowledge base, CRM automation, evals. Debugging live agents against real systems (ERPs, portals, spreadsheets, email, custom tools) is what my work has looked like since 2023.\n\nThe customer-facing half is my native ground: 15+ years founder/BD, 10,000+ founder calls, enterprise advisory for subsidiaries of Foxconn and ANA Airlines, and government/bank relations across SE Asia - adversarial, compliance-heavy environments where you have to earn the right to push back. I own outcomes end to end and I like the messy middle between AI, process, and customer.\n\nI am an EU citizen based in Lisbon, and frequent travel to customer sites is fine.",
+  "What is one area of your life": "Running my agent fleet in public with measured accountability. I did not just build a multi-machine Claude fleet - I published the evals: in recorded runs, 0/17 high-risk (Tier-2) actions slipped past the human approval gate, and failure modes are documented publicly in FAILURE-MODES.md. Holding infrastructure to that standard - reproducible demos, published failure modes, 100+ automation routines that have to survive real days, not demos - is where I push for excellence.\n\nThe older example: an 11-year deal-flow machine at my incubator - 10,000+ founder calls and 2,000+ institutional-investor calls, run on a CRM I wrote myself, with up to 30 operators working in it daily.",
+  "Is there anything else you would like us to know": "EU citizen (Poland) based in Lisbon, Portugal - no visa needed for an EU role; I also hold an active US O-1. Available immediately. Public proof of work: https://tonydzi.github.io/ and https://github.com/tonydzi (110 public repos; flagships: claw-consensus, verbatim-citation-gate)."
+ },
+ "check_options": {
+  "How did you hear about us?": "Website"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone",
+  "LinkedIn URL",
+  "Resume",
+  "Why do you want to",
+  "What is one area"
+ ]
+}

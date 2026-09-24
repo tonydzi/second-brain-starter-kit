@@ -13,8 +13,8 @@ own locations, or export the matching environment variables and let your agent e
 | `$VAULT_ROOT` | The Obsidian vault the second brain lives in | `~/Obsidian/My-Knowledge` |
 | `$IMPORTS_ROOT` | Scratch + engine directory next to the vault | `~/Obsidian/_imports` |
 | `<GDRIVE_ROOT>` | Mounted cloud-drive folder used for offsite backup | `~/Google Drive` |
-| `<GDRIVE_ROOT_2>` | Second cloud-drive account, if you run one | `D:\GoogleDrive` |
-| `<LOCAL_BACKUP_DIR>` | Second local disk holding the backup copy | `D:\ObsidianBackup` |
+| `<GDRIVE_ROOT_2>` | Second cloud-drive account, if you run one | `[путь владельца]` |
+| `<LOCAL_BACKUP_DIR>` | Second local disk holding the backup copy | `[путь владельца]` |
 | `<GITHUB_ROOT>` | Where your git checkouts live | `~/GitHub` |
 | `<CRM_REPOS_ROOT>` | Read-only checkouts of the CRM repos | `~/GitHub/crm` |
 | `<TELEGRAM_MCP_DIR>` | Checkout of the Telegram MCP server | `~/mcp/telegram-mcp` |

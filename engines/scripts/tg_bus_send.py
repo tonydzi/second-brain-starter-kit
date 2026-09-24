@@ -16,7 +16,7 @@
 
 WHY: the chigwell Telegram-MCP drops under load (big get_history payloads) / idle, taking
 posting with it. The bus must not depend on a flaky connector. This sends straight over the
-same @work_acct_a Telethon rail that tg_bus_read.py / bus_ping.py use (shared lock -> no
+same [аккаунт] Telethon rail that tg_bus_read.py / bus_ping.py use (shared lock -> no
 AUTH_KEY_DUPLICATED). Pairs with tg_bus_read.py to make the bus fully MCP-independent.
 
 It auto-wraps your text in the bus envelope `🤖 [<this-machine> -> <dst>] text` unless your
@@ -26,12 +26,12 @@ Usage:
   python tg_bus_send.py "кто живой?"                 # -> 🤖 [laptop-HP17 -> ALL] кто живой?
   python tg_bus_send.py --to HUB1 "текст"   # direct to the hub
   python tg_bus_send.py --raw "🤖 [x -> y] ..."      # send verbatim (no auto-envelope)
-Env: BUS_PING_ENV (default %IMPORTS%\\dialogs\\.env); TG_BUS_GROUP (default -996940094)
+Env: BUS_PING_ENV (default %IMPORTS%\\dialogs\\.env); TG_BUS_GROUP (default -[id])
 """
 import os, io, sys, argparse
 
 # machine.env rung (ANCHOR1 audit 2026-07-16 #ee1aa4bd): same ladder as bus_ping -- the hub hardcode
-# made the rail silently SKIP on nodes whose @work_acct_a session lives elsewhere (ANCHOR1:
+# made the rail silently SKIP on nodes whose [аккаунт] session lives elsewhere (ANCHOR1:
 # ~/secrets/dialogs.env). Explicit BUS_PING_ENV still wins; hub default unchanged.
 def _menv_ping_env():
     p = os.path.join(os.path.expanduser("~"), ".claude", "machine.env")
@@ -47,7 +47,7 @@ def _menv_ping_env():
 
 ENV   = os.environ.get("BUS_PING_ENV") or _menv_ping_env() or r"%IMPORTS%\dialogs\.env"
 LOCK  = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")
-GROUP = int(os.environ.get("TG_BUS_GROUP", "-996940094"))
+GROUP = int(os.environ.get("TG_BUS_GROUP", "-[id]"))
 _HOST = (os.environ.get("COMPUTERNAME") or "").upper()
 _LABEL = {"LAPTOP1": "laptop-HP17", "HUB1": "HUB1"}.get(_HOST, _HOST or "?")
 
@@ -123,7 +123,7 @@ def main():
     if not all(env.get(k) for k in ("REFRESH_API_ID", "REFRESH_API_HASH", "REFRESH_SESSION_STRING")):
         print("BUS-SEND SKIP: no REFRESH_* session on this machine"); return
     if not acquire_lock():
-        print("BUS-SEND SKIP: @work_acct_a session busy (lock held) -- retry"); return
+        print("BUS-SEND SKIP: [аккаунт] session busy (lock held) -- retry"); return
     try:
         import asyncio
         from telethon import TelegramClient

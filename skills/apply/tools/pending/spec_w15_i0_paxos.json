@@ -1,0 +1,25 @@
+{
+  "url": "https://jobs.ashbyhq.com/paxos/a37cdf1c-9b0d-45e8-810c-f90965d9f918/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+  "out_prefix": "w15_i0_paxos",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone": "+1 341 222 9178",
+    "LinkedIn Profile": "https://tonydzi.github.io/ (no LinkedIn account)"
+  },
+  "combos": {
+    "How did you hear about Paxos?": "Company careers page"
+  },
+  "contains_options": {
+    "This position is hybrid and based in New York City": "willing to relocate",
+    "Gender": "Decline to self-identify",
+    "Race": "Decline to self-identify",
+    "Veteran Status": "I decline to self-identify"
+  },
+  "checkboxes": {
+    "Due to the sensitive nature": true,
+    "As part of our hiring process": true
+  },
+  "required_labels": ["Name", "Email", "Resume", "Phone", "LinkedIn Profile"]
+}

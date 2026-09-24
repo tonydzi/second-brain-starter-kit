@@ -1,0 +1,5 @@
+[batch_evening:0] Vercel: no-outcome / retry: no-outcome
+[batch_evening:1] Vercel: no-outcome / retry: no-outcome
+[batch_evening:2] Together AI: no-outcome / retry: no-outcome
+[batch_evening:3] robinhood: no-outcome / retry: no-outcome
+BATCH_EVENING-SEGMENT-DONE 0..4: ✅0 🟡0 ✖4

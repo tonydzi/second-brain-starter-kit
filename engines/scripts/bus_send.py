@@ -13,10 +13,10 @@
 # Passport (what it does / what breaks / how to fix): see engines/README.md.
 # ---------------------------------------------------------------------------
 """bus_send.py -- the ONE entry point for every machine->machine message. DUAL-SEND BY
-CONSTRUCTION: posts to BOTH rails (Telegram group 03 + Syncthing _machine-bus) in a single
+CONSTRUCTION: posts to BOTH rails (Telegram group 03 + Syncthing [шина]) in a single
 call, so an actor can NEVER send on one rail only.
 
-WHY (грабли 2026-06-28): a task went out only on _machine-bus (via `machine_bus.py send`) and
+WHY (грабли 2026-06-28): a task went out only on [шина] (via `machine_bus.py send`) and
 Anton did not see it in TG-03. Root: DUAL-SEND was a PROSE rule with no enforcement -> the
 human/LLM had to remember to call both rails, and forgot. This gate removes the choice.
 
@@ -35,8 +35,8 @@ Usage: python bus_send.py [<target>] "<message>"
        needs the "--" separator (bus_send.py --to HUB -- "--literal text"); unknown flags and
        --help now exit 2/0 BEFORE any send (the publish_canon "--help fired" class).
 Exit: 0 = both rails OK; 1 = degraded (one rail down, other delivered + signalled); 3 = both down.
-  "both rails" = (A) Syncthing/_machine-bus and (B) TG group 03. Rail B is reached by EITHER the
-  user-session transport (bus_ping) OR, as a FALLBACK, the fleet BOT (tg_bot_send, @fleet_bus_bot,
+  "both rails" = (A) Syncthing/[шина] and (B) TG group 03. Rail B is reached by EITHER the
+  user-session transport (bus_ping) OR, as a FALLBACK, the fleet BOT (tg_bot_send, [аккаунт],
   stdlib Bot API). The bot fires ONLY when the user transport did not deliver, so a healthy send
   never double-posts into 03. The 0/1/3 contract is UNCHANGED -- it still turns on the two logical
   rails (A, B); the bot only makes rail B resilient / decoupled from Anton's personal account
@@ -67,14 +67,14 @@ except Exception:
 # --- portable soft-detect (linux fleet nodes; hub Windows untouched) ---------
 # Trigger = the Windows bus dir does NOT exist (i.e. we are not on the hub) AND the node
 # carries BUS_PING_ENV (its Telethon rail config). Both conditions true == a configured
-# linux node. On the hub the E:\ dir exists -> this whole block is skipped.
-_WIN_BUS = r"%VAULT%\_machine-bus"
+# linux node. On the hub the [путь владельца] dir exists -> this whole block is skipped.
+_WIN_BUS = r"%VAULT%\[шина]"
 if not os.path.exists(_WIN_BUS) and os.environ.get("BUS_PING_ENV"):
     # 1) TG rail tag: bus_ping._machine_tag() reads COMPUTERNAME; unset on linux -> tag "[?]".
     #    Feed it MACHINE_KEY so posts are tagged with the real node name (e.g. [ANCHOR1]).
     if not os.environ.get("COMPUTERNAME") and os.environ.get("MACHINE_KEY"):
         os.environ["COMPUTERNAME"] = os.environ["MACHINE_KEY"]
-    # 2) Syncthing rail dir: machine_bus.py honours MACHINE_BUS_DIR (default = the E:\ path).
+    # 2) Syncthing rail dir: machine_bus.py honours MACHINE_BUS_DIR (default = the [путь владельца] path).
     #    If the caller did not set it, point it at the node's local bus dir when present.
     if not os.environ.get("MACHINE_BUS_DIR"):
         for _cand in ("/root/machine-bus",):
@@ -154,7 +154,7 @@ def _build_parser():
         prog="bus_send.py",
         usage='bus_send.py [--to MACHINE] [--sign] [--] [<target>] "<message>"',
         description="DUAL-SEND one machine->machine message on BOTH rails "
-                    "(Syncthing _machine-bus + Telegram group 03). Target defaults to ALL.",
+                    "(Syncthing [шина] + Telegram group 03). Target defaults to ALL.",
         epilog='A message whose first word starts with "-" needs the "--" separator: '
                'bus_send.py --to HUB -- "--literal text". Exit: 0 both rails, 1 degraded, '
                '2 refused/usage, 3 both rails down.')
@@ -163,7 +163,7 @@ def _build_parser():
     p.add_argument("--sign", action="store_true",
                    help="Layer-2: attach the fleet signature so receivers treat this as a real command")
     p.add_argument("words", nargs="*", metavar="[target] message",
-                   help="optional target (machine | ALL | @capability), then the message text")
+                   help="optional target (machine | ALL | [аккаунт]), then the message text")
     return p
 
 
@@ -283,7 +283,7 @@ def main():
             os.remove(FLAG)
         return 0
 
-    down = ([] if st_ok else ["syncthing/_machine-bus"]) + ([] if tg_ok else ["telegram-03"])
+    down = ([] if st_ok else ["syncthing/[шина]"]) + ([] if tg_ok else ["telegram-03"])
     sig = "\U0001F534 BUS RAIL DOWN: %s -- msg still delivered on the surviving rail: '%s'" % (
         ", ".join(down), msg[:60])
     open(FLAG, "w", encoding="utf-8").write(sig)

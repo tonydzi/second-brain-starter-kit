@@ -1,0 +1,20 @@
+{
+ "url": "https://jobs.ashbyhq.com/cognition/ca40e489-d1cb-4a8a-b761-ec3a67c8fda6/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w13_i9_cognition_r2",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Preferred Name": "Anton",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "How did you hear about us?": "Company careers page",
+  "Linkedin profile": "https://tonydzi.github.io/ (no LinkedIn account)",
+  "Is there anything else you'd like to add in support of your application?": "I run what this role manages: AI transformation in production, every day. My multi-machine Claude fleet (6 machines, 100+ automation routines, MCP connectors, RAG over a 10-year knowledge base, published reliability evals) is operated in public - claw-consensus, verbatim-citation-gate, FAILURE-MODES.md at github.com/tonydzi. Before that: 15+ years as founder/operator - co-founder of Platinum VC & Incubator ($35M under management, 40+ engineers across APAC), Chief Engineer at Everex (Singapore) structuring crypto payments and stablecoins with banks and governments across SE Asia - so I can sit in front of an enterprise customer or a regulator and drive adoption end-to-end. US O-1 visa active, no sponsorship needed; available immediately; SF Bay Area."
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "How did you hear about us?",
+  "Linkedin profile"
+ ]
+}

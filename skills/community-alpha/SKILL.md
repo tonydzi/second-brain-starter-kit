@@ -1,48 +1,139 @@
 ---
 name: community-alpha
-description: >-
-  Run one full mining pass over an imported community-chat corpus: deterministic detector, LLM
-  judge, harvest, review screen. Works on any imported corpus through a per-source config and is
-  safe to re-run, being idempotent by message id. Triggers: "/community-alpha <source> [month]",
-  "mine alpha from <community>".
-license: MIT
+description: "Run ONE full community-alpha pass over an imported community chat corpus — deterministic detector (0 tokens) → LLM-judge (session model / Opus) → harvest → review screen. Trigger on “/community-alpha <source> [month]“, “прогони альфу по <чату>“, “альфа по лобстерам/составу за <месяц>“, “community alpha“, “намайни альфу из <комьюнити>“"
+version: 1.2.0
 ---
 
-# /community-alpha <source> [month] — one community-alpha run
+# /community-alpha <source> [month] — один прогон комьюнити-альфы
 
-Example: `/community-alpha sostav 2026-06`. No month given → the previous full month.
+Пример: `/community-alpha sostav 2026-06`. Месяц не задан → прошлый полный месяц.
 
-## Steps
+## Шаги
 
-1. **Is there a detector?** `$IMPORTS_ROOT/<source>\<source>_alpha.py` (today: `lobster`, `sostav`).
-   - No → this is a NEW corpus: offer the operator a one-off adapter built to the existing pattern (schema from their SQLite + language keys + intro/banter penalty + topic weights; template = `sostav_alpha.py`). Do not build it without an explicit "+".
-2. **Run the detector** (0 tokens):
+1. **Детектор есть?** `$IMPORTS_ROOT/<source>\<source>_alpha.py` (сегодня: `lobster`, `sostav`).
+   - Нет → это НОВЫЙ корпус: предложить Антону разовую сборку адаптера по паттерну (schema из его SQLite + языковые ключи + intro/banter-penalty + веса тем; шаблон = `sostav_alpha.py`). Без «+» не строить.
+   - ⭐ РОТ ПРИ РОЖДЕНИИ (anton «+» 31.08, память `pipe-born-with-a-mouth`): новая труба не готова без потребителя ТЕМ ЖЕ заходом — судья по расписанию + доставка человеку с честными exit 3/4/5 + `_test_<source>_deliver.py` + штамп потребителя. Эталон = `sostav_judge.cmd`+`sostav_deliver.py`, порт = `lobster_*`. Отчёт без читателя не существует (Connect).
+2. **Прогнать детектор** (0 токенов):
    ```
    cd /e/Obsidian/_imports/<source> && PYTHONIOENCODING=utf-8 python <source>_alpha.py \
-     --since <YYYY-MM-01> --until <the 1st of the next month> --top 35 --tag <YYYY-MM>
+     --since <YYYY-MM-01> --until <первое число след. месяца> --top 35 --tag <YYYY-MM>
    ```
-   → `$IMPORTS_ROOT/alpha/candidates/<source>-<tag>-report.md`. Show the scanned→shortlisted counter.
-3. **Judge** (me, with the session model): I read ONLY the report (~35 candidates, never the corpus — token economy) and give a verdict ✅ ALPHA / 🟡 WATCH / 🗑 NOISE with a reason for each → write `$IMPORTS_ROOT/alpha/candidates/<source>-judged-latest.md` (format: `## ✅ ALPHA` / `## 🟡 WATCH` / `## 🗑 NOISE (DROP)`, inside it `### #N — title` + Verdict + Reason — the harvest parser already understands this).
-4. **Is the miner registered?** `MINERS` in `$IMPORTS_ROOT/alpha/alpha_harvest.py`. No → add the row `("<source>", "<source>-judged-latest.md", "<home-note>")`. ⚠️ A parallel fleet edits this file too — re-read it immediately before editing (verify-existing), and keep the edit strictly additive. Optional: a label in the server's `MINER_LABEL`/`ORDER` (it does not crash without one — there is a fallback).
-5. **Harvest + screen**: `python $IMPORTS_ROOT/alpha/alpha_harvest.py` (counters!) → `/alpha-review`. The new batch is visible by the 🆕 badge.
+   → `$IMPORTS_ROOT/alpha/candidates/<source>-<tag>-report.md`. Показать счётчик scanned→shortlisted.
+   ⏱ СВЕЖИЙ прогон (не месячный отчёт) — СКОЛЬЗЯЩЕЕ окно, не календарные даты (anton 28.08: «день = последние 24 часа»):
+   ```
+   python <source>_alpha.py --hours 24 --top 25 --tag <ГГГГММДД-ЧЧММ> --stamp <ключ>
+   ```
+   `--stamp` дотягивает окно до прошлого прогона (потолок 7 суток), чтобы пропущенная ночь не терялась молча. Месячный режим `--since/--until` жив для ретроспективных отчётов.
+   ✅ Свежесть корпуса sostav: `python $IMPORTS_ROOT/sostav\corpus_fresh.py --max-age-h 24` (exit 4 = корпус старый, не судим).
+3. **Судить** (я, моделью сессии): читаю ТОЛЬКО отчёт (~35 кандидатов, не корпус — токен-экономия), вердикты ✅ ALPHA / 🟡 WATCH / 🗑 ШУМ с причиной по каждому → пишу `$IMPORTS_ROOT/alpha/candidates/<source>-judged-latest.md` (формат: `## ✅ ALPHA` / `## 🟡 WATCH` / `## 🗑 ШУМ (DROP)`, внутри `### #N — титул` + Verdict + Причина — парсер harvest его уже понимает).
+4. **Майнер в реестре?** `MINERS` в `$IMPORTS_ROOT/alpha/alpha_harvest.py`. Нет → добавить строку `("<source>", "<source>-judged-latest.md", "<home-заметка>")`. ⚠️ Файл правит и параллельный флот — перечитать файл непосредственно перед правкой (verify-existing), правка строго аддитивная. Опционально: ярлык в `MINER_LABEL`/`ORDER` сервера (без него не падает — фолбэк есть).
+5. **Harvest + экран**: `python $IMPORTS_ROOT/alpha/alpha_harvest.py` (счётчики!) → `/alpha-review`. Новая партия видна по бейджу 🆕.
 
-## Boundaries
-- 🔒 Private communities (sostav and the like) are HIGH sensitivity: the layer stays strictly local, nothing goes outside; people surfaced by a find are approached value-first / warm intro only (zero cold DMs). Risk signals are DATA, not "opportunities".
-- Judge honestly: reference cards, intro blurbs and restatements are 🗑 — never stretch a ✅ to pad the counter.
-- This skill writes nothing into the vault; moving gold into home notes is a separate step behind the Tier-2 gate (the "→ to home" queue on the screen).
+6. **Кредит автору** — по каждому кандидату с вердиктом ✅ ALPHA, у которого есть НАЗВАННЫЙ автор,
+   строка в реестр кредита (иначе совет доедет до кода, а человек об этом не узнает):
+   ```
+   python ~/.claude/scripts/alpha_credit.py add --source tg \
+     --author "<Имя>" --handle @<nick> --url https://t.me/<канал>/<msg_id> \
+     --advice "<совет одной фразой>" --kind repo|tool|method|critique \
+     --ref "tg:<канал>:<msg_id>"
+   ```
+   ⚠️ Согласие: открытый канал (@ClawRus, @ClawInga, LobsterDAO) + ссылка → `public`.
+   🔒 Закрытый клуб (sostav) → **не передавать `--consent public`**: дефолт `private`, имя наружу
+   не идёт никогда, благодарим лично. Дальше цепочка — `/alpha-credit`.
 
 
----
+## Полоса «люди»: WhatsApp-комьюнити (с 10.09.2026)
 
+⭐ У WhatsApp-групп источник даёт ДВА урожая, а не один, и путать их нельзя:
+**альфа-содержание** (сделка/дилфлоу/дверь — шаги 1-6 выше) и **люди** (портрет поведения +
+лид в CRM). Приказ Антона 10.09.2026 голосом: «выгружать всю переписку по каждой группе,
+потом сортировать её в карточку каждого лида, принимать, как лид общается в контексте — не
+только его сообщение, но и на какие сообщения отвечал, как он себя вёл».
 
-<!--kit-footer-->
+Порядок — ровно такой, каждый шаг читает выход предыдущего:
 
----
+```
+cd $IMPORTS_ROOT\whatsapp
+python wa_ingest.py                                     # 1. сторы моста -> wa_live.db
+python wa_group_people.py --group "<имя группы>"        # 2. транскрипт + портреты + INDEX
+python wa_group_crm.py --from wa_groups/<slug> --dry-run # 3. решения по лидам (сперва сухо!)
+python wa_group_crm.py --from wa_groups/<slug>           #    потом всерьёз
+python wa_group_alpha.py --group "<имя>" --tag <тег>     # 4. шортлист альфы для судьи
+```
 
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+Дальше судейство и харвест — как у остальных источников (шаги 3-6 выше), майнер в реестре
+называется `wa-<slug>`.
 
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+### Три вещи, которые здесь легко сделать неправильно
 
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+1. **✅ цитата ≠ 🪟 окно.** «На что отвечал» есть в двух видах: цитата (человек нажал
+   «ответить» — это ФАКТ, лежит в `reply_to_text`) и окно (что говорилось за 30 минут до его
+   реплики — это СОСЕДСТВО ВО ВРЕМЕНИ, догадка). Замер 10.09.2026 на Future of Humanity
+   Summit: 3044 сообщения, прямых цитат **десять**. Выдать окно за цитату — соврать в
+   доказательстве, поэтому в портрете они помечены разными значками и никогда не смешиваются.
+2. **Реакций в корпусе НЕТ вообще** — мост WhatsApp их не хранит. У СОСТАВа реакции = главный
+   вес сигнала («сообщество проголосовало»); здесь такого измерителя нет, и шортлист слабее
+   провалидирован. Судить строже; предупреждение печатается в шапке отчёта само.
+3. **Имени участника чаще всего нет, и это норма, а не сбой.** WhatsApp не раскрывает имена
+   тех, кого нет в адресной книге телефона: замер 10.09 — человеческое имя у 66 из 222
+   лидов. В CRM едут ВСЕ по номеру (номер и есть ключ), а заметку в волте получает тот, у
+   кого есть имя ЛИБО вес (>=10 сообщений / ему отвечали цитатой). Иначе 07-People забивается
+   заметками-номерами без содержания.
 
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+### Подгруппы Сообщества: мост их не отдаёт, путь через локальную базу WhatsApp Web
+
+Замер 11.09.2026. Кнопки «Экспорт чата» в подгруппах **Сообщества** WhatsApp НЕ показывает
+вообще (не про админство). Мост-компаньон отдаёт по ним метаданные и не отдаёт текст:
+`get_chat` честно говорит «есть непрочитанное сегодня», а `recentMessages` пуст.
+
+Рабочий путь (один скан QR, дальше без рук):
+1. Привязать `web.whatsapp.com` в Chrome Антона (галочка «Stay logged in» обязательна).
+2. Выгрузить метаданные из локальной базы браузера одним Blob-скачиванием:
+   `indexedDB → model-storage`, сторы `contact` (lid→телефон→имя), `participant`
+   (ПОЛНЫЕ составы групп + кто ушёл), `group-metadata` (дерево Сообщества).
+   Файл падает в Downloads как `wa_web_meta.json`.
+3. `python wa_web_meta_ingest.py --only "foh,davos"` → индекс имён + составы + отчёт.
+4. Дальше обычные шаги: `wa_group_crm.py`, `wa_group_alpha.py`.
+
+⛔ **Честная граница:** тела сообщений в этой базе ЗАШИФРОВАНЫ (`msgRowOpaqueData`, ключи в
+`wawc_db_enc`) — метаданные да, текст нет. Текст берётся из DOM открытой страницы.
+
+⭐ **Что это даёт числами:** по семье FOH было 325 человек (авторы сообщений одной группы),
+стало **758 с телефонами в 14 группах**; 98 человек сидят в двух и более подгруппах — это и
+есть шкала вовлечённости. Свои номера обязательно исключать (иначе Антон приезжает лидом
+собственной базы, поймано 11.09).
+
+⚠️ **Догрузка СТАРЫХ сообщений требует телефона на связи.** В шапке чата появляется
+«Click here to get older messages from your phone»; если телефон недоступен, Web честно
+пишет «Couldn't get older messages. Open WhatsApp on your phone and click here to try again».
+Значит перед прогоном просим Антона открыть WhatsApp на телефоне и не закрывать.
+
+⚠️ **Малый трафик ≠ обрезанная история.** В FOHS-AI 101 участник и реально ДВА сообщения за
+июль-сентябрь. Не ищи баг там, где группа просто молчит: смотри `participant`-состав, он
+несёт сигнал даже при нуле сообщений.
+
+### Чего эта полоса НЕ может (называем вслух, чтобы не искали ошибку в коде)
+
+Компаньон-устройство подтягивает историю ГРУППЫ только частично. Замер 10.09.2026: из десяти
+групп сообщества Future of Humanity в сторе живёт ОДНА (3044 сообщения, и та кончается
+24.06.2026), остальные девять — 0-7 сообщений, а живой `list_messages` по ним отдаёт `[]`.
+Значит альфы и лидов по этим подгруппам не существует, пока историю не выгрузят с ТЕЛЕФОНА
+(WhatsApp → чат → ⋮ → Ещё → Экспорт чата → без медиа). Это шаг РУК Антона; молчать про него
+нельзя — иначе пустой отчёт читается как «в группе ничего нет».
+
+### ⚠️ Формат judged-файла: keepers ВСЕГДА выше секции ШУМ
+
+`alpha_harvest._keeper_region` обрезает файл на **первом** заголовке `## 🗑 ШУМ (DROP)`.
+Всё, что написано ниже, для экрана `/alpha-review` не существует вообще -- молча, без ошибки.
+Замер 11.09.2026: дописал два раздела вердиктов в конец файла, счётчик так и показывал
+11 блоков; после переноса добавок выше секции ШУМ стало 18.
+
+Поэтому при ДОПОЛНЕНИИ уже существующего judged-файла (новое окно, новая подгруппа):
+вставлять новые `✅`/`🟡` блоки **перед** секцией ШУМ, а внутри вставки подзаголовок вида
+«🗑 ШУМ свежего окна» переименовывать -- иначе он обрежет регион для всего, что после него.
+Проверка одна: после харвеста число блоков у майнера обязано ВЫРАСТИ. Не выросло = не доехало.
+
+## Границы
+- 🔒 Приватные комьюнити (sostav, WhatsApp-группы и подобные) = HIGH sensitivity: слой строго локальный, наружу ничего; люди из находок — только value-first/warm-intro (zero cold DM). Риск-сигналы = ДАННЫЕ, не «возможности».
+- Судейство честное: reference-карточки, интро-визитки и рестейтменты = 🗑, не натягивать ✅ ради счётчика.
+- Скилл ничего не пишет в волт; перенос золота в home-заметки = отдельный шаг за Tier-2 гейтом (очередь «→ в дом» на экране).

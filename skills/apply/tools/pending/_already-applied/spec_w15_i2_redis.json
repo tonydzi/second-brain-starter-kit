@@ -1,0 +1,26 @@
+{
+  "url": "https://jobs.ashbyhq.com/redis/b2e2354a-0b0b-4560-8719-f84fa4010a8b/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+  "out_prefix": "w15_i2_redis",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "LinkedIn profile": "https://tonydzi.github.io/ (no LinkedIn account)"
+  },
+  "combos": {
+    "Location": "Palo Alto"
+  },
+  "check_options": {
+    "Are you legally eligible to work": "Yes",
+    "Will you now or in the future require sponsorship": "No",
+    "If your position is located in or near a Redis office": "Yes"
+  },
+  "contains_options": {
+    "Gender": "Decline to self-identify",
+    "Race": "Decline to self-identify",
+    "Veteran Status": "I decline to self-identify",
+    "Disability Status": "I do not want to answer"
+  },
+  "redump_after": false,
+  "required_labels": ["Name", "Email", "Resume", "LinkedIn profile"]
+}

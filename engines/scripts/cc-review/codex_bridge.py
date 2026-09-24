@@ -188,7 +188,7 @@ def _codex_base():
             "schtasks-задачей, выполняющей `npm i -g @openai/codex`." % " | ".join(searched))
     # The npm shim needs `node` too -- make sure both homes are on PATH for the child process.
     extra = [os.path.dirname(exe)] if os.path.isabs(exe) else []
-    extra += [p for p in (r"C:\Program Files\nodejs",
+    extra += [p for p in (r"[путь владельца] Files\nodejs",
                           os.path.join(os.environ.get("APPDATA", ""), "npm")) if os.path.isdir(p)]
     if not shutil.which("node"):
         import glob as _glob

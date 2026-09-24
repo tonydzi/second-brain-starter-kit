@@ -154,7 +154,7 @@ netherlands, kyrgyzstan, finland, mauritius, india, sweden, czech, belgium
 | Person | `First-Last.md` | `Peter-Thiel.md` |
 | Multi-word concept | `kebab-case-or-PascalCase.md` | `ARC-AGI.md`, `prompt-engineering.md` |
 | Locations | EN canonical | `Lisbon.md`, `Silicon-Valley.md` |
-| RU-канонический термин | строчные Марк. с дефисом | `биохакинг.md`, `аутофагия.md` |
+| RU-канонический термин | строчные [человек]. с дефисом | `биохакинг.md`, `аутофагия.md` |
 
 ### Title vs Aliases
 
@@ -397,7 +397,7 @@ theme: <тема>
 
 - CLAUDE [internal] — главные правила vault
 - [[concept-note]] — Templater-шаблон для ручного создания
-- _concept-candidates-20260530 [internal] — TF-IDF mined candidates
+- _concept-candidates-[id] [internal] — TF-IDF mined candidates
 - 06-Concepts/README [internal] (если есть)
 - `scripts/utils.py` — `safe_move`, `read_markdown`, `write_markdown`
 

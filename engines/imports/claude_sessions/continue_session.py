@@ -34,7 +34,7 @@ from export_md import conversation_text, iter_sources
 VAULT_ROOT = os.environ.get("CLAUDE_VAULT_ROOT", r"%VAULT%")
 SEEDDIR = os.path.join(VAULT_ROOT, "_Dashboards", "sessions-md", "_continue")
 ARCHIVE = os.path.join(VAULT_ROOT, "_session-archive")
-INBOUND = os.path.join(VAULT_ROOT, "_machine-bus", "_session-archive-inbound")
+INBOUND = os.path.join(VAULT_ROOT, "[шина]", "_session-archive-inbound")
 MAX = 120_000  # char cap for the seed; longer sessions keep the tail (full text stays in catalog)
 
 def find_transcript(cli):

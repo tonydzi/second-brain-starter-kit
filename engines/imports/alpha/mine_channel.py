@@ -21,7 +21,7 @@ then obsidian-ingest) — kept OUT of here so this stays 0-token & idempotent.
 
   set PYTHONIOENCODING=utf-8
   python mine_channel.py --channel prompt_design --slug promptdesign
-  python mine_channel.py --channel -1000800842092 --slug silmeshok --limit 500 --top 40
+  python mine_channel.py --channel -[id] --slug silmeshok --limit 500 --top 40
   python mine_channel.py --slug promptdesign --detect-only        # re-detect, no re-scrape
 
 Output (under %IMPORTS%\alpha\<slug>\): <slug>.jsonl, <slug>.db
@@ -32,7 +32,7 @@ import os, sys, re, json, sqlite3, asyncio
 from pathlib import Path
 
 ALPHA = Path(r"%IMPORTS%\alpha")
-ENV = Path(r"C:/mcp/telegram-mcp/.env")
+ENV = Path(r"[путь владельца]")
 CAND = ALPHA / "candidates"
 
 try:

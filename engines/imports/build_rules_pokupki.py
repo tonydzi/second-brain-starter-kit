@@ -19,8 +19,8 @@ import re, json
 from collections import Counter
 from pathlib import Path
 
-VAULT = Path(r"E:/Obsidian/Owner-Knowledge")
-OUT = Path(r"E:/Obsidian/_imports")
+VAULT = Path(r"[путь владельца]")
+OUT = Path(r"[путь владельца]")
 OPS = VAULT / "03-Insights/Operations"
 POK = VAULT / "01-Conversations/Telegram/Pokupki"
 

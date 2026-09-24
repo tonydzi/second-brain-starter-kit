@@ -16,8 +16,8 @@
 alt_spellings.py — ЧИТАЕМЫЕ альтернативные написания имени для поля в карточке.
 Целое имя в ОДНОМ алфавите за раз (не смешиваем), без раскладочного мусора.
 
-  Sergey Davydov  -> Сергей Давыдов, Sergei Davydov
-  Виктория Елена  -> Viktoria Elena
+  Sergey Davydov  -> Сергей Давыдов, [человек] Davydov
+  Виктория [человек]  -> [человек] Elena
 """
 import os, sys, re, itertools
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -70,16 +70,16 @@ def _lat_variants(lat):
 
 
 # --- «уверенно славянское имя?» — чтобы иностранцам НЕ лепить кириллицу (вариант 1) ---
-RU_FIRST = set('''sergey sergei viktor Vlad aleksandr alexander aleksandra alexandra
-ivan dmitry dmitrii dmitriy andrey andrei mikhail mihail nikolay nikolai vladimir
-anton pavel roman denis maxim maksim konstantin oleg igor kirill artem artyom artiom
-evgeny evgenii evgeniy alexey aleksey yuri yury yuriy vadim vasily vasiliy boris gleb
-stanislav stas vyacheslav valery valeriy ruslan timur german arseny arseniy fedor
-Alina elena yelena olga Nina Nina nataliya maria mariya marya irina ekaterina
-katerina tatiana tatyana svetlana daria darya dasha viktoria victoria ksenia kseniya
-polina sofia sofya alina marina galina vera nadezhda lyudmila oksana yulia julia
-nina raisa zinaida valentina lidia lidiya alla angelina veronika kristina karina
-mikhailo bogdan taras ostap petro mykola oleksandr oleksiy volodymyr'''.split())
+RU_FIRST = set('''sergey [человек] viktor Vlad [человек] alexander [человек] [человек]
+ivan [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] vladimir
+anton pavel roman denis [человек] [человек] [человек] [человек] igor [человек] [человек] [человек] artiom
+[человек] [человек] [человек] alexey [человек] [человек] [человек] [человек] vadim [человек] [человек] [человек] [человек]
+[человек] [человек] [человек] [человек] [человек] [человек] [человек] german [человек] [человек] [человек]
+Alina elena yelena [человек] Nina Nina [человек] maria [человек] marya [человек] ekaterina
+[человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] kseniya
+polina [человек] sofya alina [человек] [человек] [человек] [человек] lyudmila oksana [человек] julia
+nina raisa zinaida [человек] lidia lidiya [человек] [человек] [человек] [человек] [человек]
+mikhailo [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек]'''.split())
 RU_SUFFIX = ('ov', 'ova', 'ev', 'eva', 'iev', 'ieva', 'yev', 'yeva', 'in', 'ina',
              'yn', 'yna', 'sky', 'skiy', 'skii', 'skaya', 'ski', 'tsky', 'tskaya',
              'enko', 'chenko', 'uk', 'yuk', 'chuk', 'ich', 'ovich', 'evich', 'ovna',
@@ -94,7 +94,7 @@ def looks_slavic(name):
         return True
     if toks[0] in RU_FIRST:
         return True
-    # суффикс фамилии проверяем только на ПОСЛЕДНЕМ слове (иначе Albin/Martin → ложно)
+    # суффикс фамилии проверяем только на ПОСЛЕДНЕМ слове (иначе [человек]/[человек] → ложно)
     return toks[-1].endswith(RU_SUFFIX) and len(toks[-1]) >= 5 and len(toks) >= 2
 
 
@@ -119,8 +119,8 @@ def alt_spellings(name, max_n=5):
 
 if __name__ == '__main__':
     sys.stdout.reconfigure(encoding='utf-8')
-    tests = sys.argv[1:] or ['Sergey Davydov', 'Viktoria Elena', 'Виктория Елена',
-                             'Konstantin Sedura', 'Glory Lucas', 'Abhishek Mahto',
-                             'John Smith', 'Jun Hasegawa']
+    tests = sys.argv[1:] or ['Sergey Davydov', '[человек] Elena', 'Виктория [человек]',
+                             '[человек] Sedura', '[человек] [человек]', '[человек] Mahto',
+                             'John Smith', 'Jun [человек]']
     for t in tests:
         print(f'{t:20} -> {alt_spellings(t)}')

@@ -53,18 +53,18 @@ ANTON_ACCTS = {
 }
 # Alina (the other principal) across her accounts:
 ANNA_ACCTS = {
-    "Alina Dz", "01 Alina AAAAA АААААА 01 Dziatkovskaia", "Алина",
+    "Alina Dz", "01 Alina AAAAA АААААА 01 [человек]", "Алина",
 }
 # The rotating assistant team over the years (current + former):
 ASSISTANT_ACCTS = {
     "Helena Kondricheva Tickets 77", "Oksana Assistant",
-    "Ekaterina Lavrenyuk Assistant Екатерина Лавренюк", "Anastasiia assistent",
-    "Yuliya", "Ecaterina Klimbovskaya", "Eva Alina",
-    "Rita Vasilieva Assistance", "Inna", "Zubeyde", "Olya Tkalich",
-    "Alice-Mariia Aesir", "Evgeniya Kazantseva", "Varvara Boger", "Kate",
-    "Julia | Executive Search", "Катерина Рудакова", "Evgeniia Vialaya",
-    "Maria Assistent", "Margaret", "Виктория", "Екатерина", "Anastasia_Betsy",
-    "Tatyana", "Iryna", "Maria", "Elena OTC",
+    "Ekaterina Lavrenyuk Assistant [коллега] Лавренюк", "Anastasiia assistent",
+    "Yuliya", "[человек] [человек]", "Eva Alina",
+    "Rita Vasilieva Assistance", "[человек]", "Zubeyde", "Olya Tkalich",
+    "Alice-[человек] [человек]", "Evgeniya Kazantseva", "[человек] [человек]", "Kate",
+    "Julia | Executive Search", "[человек] Рудакова", "Evgeniia Vialaya",
+    "Maria Assistent", "[человек]", "Виктория", "[коллега]", "[человек]_Betsy",
+    "[человек]", "[человек]", "Maria", "Elena OTC",
 }
 def who(name):
     n = (name or "").strip()
@@ -170,7 +170,7 @@ TRANS_RE = re.compile(r"Перев[а-яё]*:\s*([^\n<]+)")
 DELEG_RE = re.compile(r"Делегировано:\s*([^\n]+)")
 # Alina authors a directive ONLY via her own account/handle or an explicit source
 # phrase. Generic "задача Алина" = a task in Alina's domain, NOT Alina authoring it.
-ANNA_MARK = re.compile(r"@helper_an\b|@helper_an\b|От Алина\b|Алина просит")
+ANNA_MARK = re.compile(r"[аккаунт]\b|[аккаунт]\b|От Алина\b|Алина просит")
 def footer(t):
     tr = TRANS_RE.search(t); dl = DELEG_RE.search(t)
     return (tr.group(1).strip() if tr else None,

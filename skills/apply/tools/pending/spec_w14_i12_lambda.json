@@ -1,0 +1,28 @@
+{
+ "url": "https://jobs.ashbyhq.com/lambda/[id]-164f-45b6-a822-f54c11b5fc60/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w14_i12_lambda",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "LinkedIn Profile": "https://tonydzi.github.io/",
+  "Most Recent Company": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)"
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "check_options": {
+  "Interview Recording Consent": "Yes, I consent to be recorded",
+  "Are you legally authorized to work in the United States?": "Yes",
+  "Lambda may agree to sponsor individuals": "No",
+  "Are you able and willing to work onsite": "Yes",
+  "Have you completed a data center acquisition?": "No",
+  "Have you raised capital for a data center development project before?": "No",
+  "Have you built a data center development project finance model?": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "required_labels": ["Name", "Email", "Resume", "Phone Number"]
+}

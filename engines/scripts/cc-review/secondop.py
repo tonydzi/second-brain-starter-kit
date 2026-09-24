@@ -28,8 +28,8 @@ PIPELINE (мост-и-берега, Connect грань 4):
   ДО   (кто зовёт): SessionStart hook secondop_hook.cmd напоминает каждой сессии; skill /secondop.
   ЭТО  (деталь):    this CLI -> codex_bridge.py -> signed one-move reply.
   ПОСЛЕ (потребитель): the calling session acts on the reply; every exchange is mirrored to the
-       human-visible chat 04 "AI-DUO" (-5806098746) so Anton sees the duo work. Peers WITHOUT a
-       local Codex use secondop_client.py (writes req to _machine-bus/_secondop; this hub broker
+       human-visible chat 04 "AI-DUO" (-[id]) so Anton sees the duo work. Peers WITHOUT a
+       local Codex use secondop_client.py (writes req to [шина]/_secondop; this hub broker
        `serve-once` answers over the same rail + mirrors to 04).
 
 QUOTA TRACKER: every call logged to bridge-state/usage.jsonl; `status` shows the 5h rolling window.
@@ -54,13 +54,13 @@ STATE_DIR = os.path.join(HERE, "bridge-state")
 CONF_PATH = os.path.join(HERE, "secondop.json")
 USAGE_LOG = os.path.join(STATE_DIR, "usage.jsonl")
 QUOTA_STATE = os.path.join(STATE_DIR, "_quota.json")
-# Bus path is machine-specific: hub keeps _machine-bus inside the vault, ANCHOR1 syncs it to
+# Bus path is machine-specific: hub keeps [шина] inside the vault, ANCHOR1 syncs it to
 # /root/machine-bus -- so resolve via env (SECONDOP_BUS wins, then MACHINE_BUS root).
 BUS_SECONDOP = os.environ.get("SECONDOP_BUS") or os.path.join(
-    os.environ.get("MACHINE_BUS", r"%VAULT%\_machine-bus"), "_secondop")
+    os.environ.get("MACHINE_BUS", r"%VAULT%\[шина]"), "_secondop")
 # bus_ping (TG mirror) lives in a different dir per node -- try each known layout.
 SCRIPT_DIRS = [SCRIPTS, "$HOME/hub-scripts-fresh/scripts"]
-CHAT_04 = -5806098746  # "04 AI-DUO Claude×Codex" -- human-visible mirror
+CHAT_04 = -[id]  # "04 AI-DUO Claude×Codex" -- human-visible mirror
 HOST = os.environ.get("COMPUTERNAME", socket.gethostname())
 STALE_MIN_DEFAULT = 15  # standby takes over when every other broker beat is older than this
 RITUAL_TIMEOUT = 90     # hard budget for a call made from inside a ritual (/tt): never hang the gate
@@ -222,7 +222,7 @@ def grok_prompt_text(role, context):
 
 
 def _grok_env():
-    """Subscription rail ONLY. A stray XAI_API_KEY in the environment would silently bill the paid
+    """Subscription rail ONLY. A stray XAI_API_KEY in the environment would silently [человек] the paid
     API and make our 'we stay on the subscription' claim false -- strip it for the child."""
     env = dict(os.environ)
     env.pop("XAI_API_KEY", None)
@@ -376,7 +376,7 @@ def run_point(point, task, context, timeout, post, conf, ritual="", engine="code
     print(header)
     print(reply)
     if ritual and rec.get("finding") is None:
-        # An unparseable move ("Looks good.\nACCEPT", prose, truncation) is NOT a clean bill of
+        # An unparseable move ("Looks good.\nACCEPT", prose, truncation) is NOT a clean [человек] of
         # health: the ritual must degrade to ⚠️, never read a green gate out of an unknown shape
         # (Grok T3-BREAK #2, 24.07). ok=True only means the vendor answered, not that it approved.
         print("⚠️ ФОРМА ВЕРДИКТА НЕ РАСПОЗНАНА (первое слово не ACCEPT/PROPOSE/COUNTER/VERIFY/BLOCK) "
@@ -618,7 +618,7 @@ def main():
     ap.add_argument("--verdict", default="", help="log-ext: первое слово ответа (ACCEPT/COUNTER/...)")
     # Hub-compat: the hub's log-ext (retro 22.07) speaks --reviewer/--note. Accepting BOTH spellings
     # keeps one fleet contract instead of forking it per machine -- the very divergence that let
-    # this rail sit un-propagated on Mac16 for two days. Do not drop these aliases.
+    # this rail sit un-propagated on [машина флота] for two days. Do not drop these aliases.
     ap.add_argument("--reviewer", default="", help="log-ext (hub-совместимость): синоним --engine")
     ap.add_argument("--note", default="", help="log-ext: ссылка-доказательство / суть ответа")
     ap.add_argument("--task", default="")

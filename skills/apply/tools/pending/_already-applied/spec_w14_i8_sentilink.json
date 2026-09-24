@@ -1,0 +1,42 @@
+{
+  "idx": 8,
+  "company": "SentiLink",
+  "url": "https://jobs.ashbyhq.com/sentilink/7544abb9-c2ec-4e5e-b751-ed9732f8ca3e/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+  "out_prefix": "w14_i8_sentilink",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone Number": "+1 341 222 9178",
+    "What is your most recent company?": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)",
+    "What is your most recent job title?": "Founder",
+    "Please add your LinkedIn profile URL": "https://tonydzi.github.io/ (no LinkedIn account)",
+    "How many years of experience do you have selling into Crypto": "9",
+    "Please share some notable new logos you have closed": "Founder-led B2B sales, not a quota-carrying AE role. Notable closed engagements: enterprise advisory for subsidiaries of Foxconn and ANA Airlines (via Platinum VC & Incubator); partnerships with hedge funds, market makers and brokers for our crypto-exchange infrastructure (backends, market-maker engines, HFT); designed one of the first national-government stablecoin frameworks (government client) and led bank/government relations across SE Asia at Everex. Context on the crypto years figure: crypto-focused BD since 2017 (fundraising: $35M fund, syndicate of 250 VCs/angels; 10,000+ founder calls and 2,000+ institutional-investor calls), with Platinum's portfolio ~70% crypto since 2015. Note on the numeric fields below: my current primary role (AI research lab founder) is not a quota-carrying sales role, so I entered 0 rather than invent an average deal size or sales cycle; at Platinum, founder-led engagements ranged too widely (advisory retainers to fundraising mandates) for one honest average.",
+    "What is the average deal size for your current or most recent role": "0",
+    "How long is the average sales cycle for your current or most recent role": "0"
+  },
+  "location": {"label": "Location", "type": "Palo Alto", "want": "palo alto, california"},
+  "combo_pick": {
+    "Where did you learn about this job?": ["Company careers page", "Careers page", "Company website", "Website", "Other"]
+  },
+  "options": {
+    "Phone Number": "Yes - I consent to receiving text messages",
+    "What is your highest level of education?": "Doctorate",
+    "Gender": "Decline to self-identify",
+    "Race": "Decline to self-identify",
+    "Veteran Status": "I decline to self-identify for protected veteran status"
+  },
+  "toggles": {
+    "Are you legally authorized to work in the United States?": "Yes",
+    "Will you now or in the future require SentiLink to sponsor you": "No",
+    "Do you live in the U.S. or plan to live in the U.S.": "Yes"
+  },
+  "linkedin_fallback": {"Please add your LinkedIn profile URL": "https://tonydzi.github.io/"},
+  "required_labels": ["Name", "Email", "Resume", "Phone Number",
+    "What is your most recent company?", "What is your most recent job title?",
+    "Please add your LinkedIn profile URL",
+    "How many years of experience do you have selling into Crypto",
+    "Please share some notable new logos you have closed",
+    "What is the average deal size", "How long is the average sales cycle"]
+}

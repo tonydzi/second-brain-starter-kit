@@ -24,7 +24,7 @@ n8n PUT /workflows/{id} requires {name, nodes, connections, settings}.
 """
 import json, sys, os, urllib.request, urllib.parse, datetime
 
-BASE = "E:/Obsidian/_imports/n8n"
+BASE = "[путь владельца]"
 # Portable per-machine path (was hardcoded C:$HOME/ = laptop placeholder, broke on hub).
 ENV = os.path.join(os.path.expanduser("~"), ".claude", "secrets", "n8n.env")
 cfg = {}

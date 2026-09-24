@@ -9,7 +9,7 @@ from pathlib import Path
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-CF = Path(r"%IMPORTS%\content-factory")
+CF = Path(r"[путь владельца]")
 QUEUE = CF / "priority.json"
 EPISODES = CF / "episodes"
 

@@ -18,8 +18,8 @@ import re
 from collections import Counter
 from pathlib import Path
 
-VAULT = Path(r"E:/Obsidian/Owner-Knowledge")
-STAGE = Path(r"E:/Obsidian/_imports/staging_pokupki")
+VAULT = Path(r"[путь владельца]")
+STAGE = Path(r"[путь владельца]")
 
 vault_stems = {p.stem for p in VAULT.rglob("*.md")}
 stage_files = list(STAGE.rglob("*.md"))

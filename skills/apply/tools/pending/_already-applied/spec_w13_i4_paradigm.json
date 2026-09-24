@@ -1,0 +1,12 @@
+{
+  "url": "https://jobs.ashbyhq.com/paradigm/b85b9094-2467-4f49-9a36-ca93da34a3f5/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+  "out_prefix": "w13_i4_paradigm",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "What AI application are you most proud of building and why?": "A production multi-machine Claude fleet (6 machines) that I run as my daily operating system, in public. The agents coordinate through a consensus protocol I open-sourced as claw-consensus (reproducible multi-machine agent consensus, offline demo, published evals), share persistent memory (SQLite + RAG over a 10-year knowledge base), and run 100+ automation routines: CRM enrichment, follow-ups, monitoring, content. I'm most proud of the reliability work: published measured evals show 0/17 high-risk (Tier-2) actions slipped past the human approval gate in recorded runs, and the failure modes are documented publicly in FAILURE-MODES.md. It's not a demo - it runs my actual business every day, and it changed how much one person can ship.",
+    "How have you used AI to improve your personal or professional projects?": "AI runs most of my professional workflow today. The CRM behind my incubator (originally self-built; up to 30 human operators worked in it daily) is now AI-native: agents do social enrichment, lead parsing, drafting and follow-ups. I use RAG over a 10-year personal knowledge base for recall before every decision, and LLM-judge pipelines as quality gates - I open-sourced verbatim-citation-gate, a zero-token gate plus burden-of-proof judge that catches fabricated RAG citations. Claude-driven routines handle scheduling, monitoring and reporting across 6 machines. Practically: work that used to take a team of operators is now handled by agent routines, with a human only at the irreversible edges."
+  },
+  "required_labels": ["Name", "Email", "Resume", "What AI application", "How have you used AI"]
+}

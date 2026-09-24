@@ -33,7 +33,7 @@ F = os.path.join(OUT, "faaa")
 TEAM_SUB = ["corp_acct", "plainumvc", "platinum1", "owner_alt", "aowner_alt", "work_acct_a",
             "work_acct_b", "tony_", "personal_acct", "zetaltd", "zetald", "helper_m",
             "ksplat", "lead_sc", "Nina", "Rita",
-            "teammate_r", "teammate_d", "teammate_d"]  # +team handles (Rita=@teammate_r; Denis=@teammate_d/@teammate_d, internal site/outreach ops)
+            "teammate_r", "teammate_d", "teammate_d"]  # +team handles (Rita=[аккаунт]; Denis=[аккаунт]/[аккаунт], internal site/outreach ops)
 EMAIL_DOM = {"gmail", "yahoo", "hotmail", "outlook", "icloud", "mail", "proton",
              "gmx", "yandex", "qq", "163", "me", "live", "msn"}
 def is_team(h):
@@ -63,7 +63,7 @@ def is_fa(txt):
 
 def attendee_line(txt):
     for pat in (r'(?:^|\n)[^\n]*?\bParticipants?\s*:[^\n]*', r'(?:^|\n)[^\n]*?\bУчастник\w*[^\n]*',
-                r'(?:^|\n)\s*Личк\w*[^\n]*'):  # allow a leading word, e.g. "Meeting participants:" — else body @handles (intro targets) leak in
+                r'(?:^|\n)\s*Личк\w*[^\n]*'):  # allow a leading word, e.g. "Meeting participants:" — else body [аккаунт] (intro targets) leak in
         m = re.search(pat, txt, re.I)
         if m:
             return m.group(0)

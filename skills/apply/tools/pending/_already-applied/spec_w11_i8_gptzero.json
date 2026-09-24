@@ -1,0 +1,30 @@
+{
+ "url": "https://jobs.ashbyhq.com/gptzero/9a863cc6-e2d7-4aa3-b453-f377d757863e/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w11_i8_gptzero",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "Current Company": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)",
+  "LinkedIn Profile URL": "https://tonydzi.github.io/",
+  "Portfolio URL": "https://tonydzi.github.io/",
+  "Why do you believe you're a good fit for this role at GPTZero": "I have spent the last three years building AI-trust tooling adjacent to what GPTZero productizes: my verbatim-citation-gate (MIT, public) is a zero-token gate plus a burden-of-proof judge that catches fabricated RAG citations - the same 'is this text actually grounded?' problem approached from the verification side. As founder of Palo Alto AI Research Lab I run a production multi-machine Claude fleet in public with published reliability evals (0/17 high-risk actions slipped past the human approval gate in recorded runs). Product background: 10+ years as a venture founder owning problem framing, roadmap and GTM; product owner for a 40+ engineer distributed org; built and ran an AI-native CRM used daily by up to 30 operators. I also publish academically (136 citations, h-index 7), so I speak the language of GPTZero's education and academic-integrity users.",
+  "What is one feature you would be excited to add or improve": "An evidence-first explanation mode: alongside the AI-probability score, attach per-span evidence (which signals contributed, plus verifiable citation checks) so an educator can see why a passage was flagged. I built a similar burden-of-proof judge for RAG citation fabrication (verbatim-citation-gate), and in my experience the explainability step is what turns skeptical users into adopters.",
+  "If you answered": "Company careers page"
+ },
+ "check_options": {
+  "How'd you find out about this role": "Other"
+ },
+ "checkboxes": {
+  "Please confirm you can work from the Toronto or NYC office": true,
+  "Please confirm you are authorized a to work in USA or Canada": true
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Current Company",
+  "Resume",
+  "Why do you believe"
+ ]
+}

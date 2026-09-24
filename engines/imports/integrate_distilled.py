@@ -20,7 +20,7 @@ Never deletes existing fields."""
 import re, os, glob
 from pathlib import Path
 
-V = Path("E:/Obsidian/Owner-Knowledge")
+V = Path("[путь владельца]")
 CONC = V / "06-Concepts"
 
 concept_files = {f.stem for f in CONC.glob("*.md")}
@@ -180,4 +180,4 @@ for folder in FOLDERS:
             skipped += 1
 
 log.append(f"\nTOTAL applied={applied} skipped={skipped}")
-open("E:/Obsidian/_imports/_integrate_distilled_log.txt", "w", encoding="utf-8").write("\n".join(log))
+open("[путь владельца]", "w", encoding="utf-8").write("\n".join(log))

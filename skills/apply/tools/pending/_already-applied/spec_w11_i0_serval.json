@@ -1,0 +1,19 @@
+{
+ "url": "https://jobs.ashbyhq.com/serval/565c665a-c632-448b-87c5-849bc095de05/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w11_i0_serval",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/"
+ },
+ "check_options": {
+  "Are you able and willing to work from our San Francisco HQ": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "LinkedIn"
+ ]
+}

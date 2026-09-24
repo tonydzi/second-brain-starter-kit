@@ -1,0 +1,32 @@
+{
+ "idx": 6,
+ "company": "duvo",
+ "url": "https://jobs.ashbyhq.com/duvo/23feed80-3cae-4a73-a578-780ed0bc0f4a",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w21_i6_duvo",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone": "+1 341 222 9178",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "Why do you want to": "Duvo's FDE role is the job I already do, minus the customer logo. Every day I deploy agents into a messy real environment: a six-machine Claude fleet I run in public, with MCP connectors, RAG over a ten-year knowledge base, an AI-native CRM and 100+ automation routines that run unattended. I publish the evals and the failure modes rather than a demo reel (claw-consensus, verbatim-citation-gate on github.com/tonydzi). The glue work you describe - integration scripts, agent configuration, data transformations, debugging live agents - is exactly what that fleet is made of.\n\nThe customer half is not new either. I spent five years building ERP and CRM systems on Microsoft Navision and Salesforce at Merlion, then co-founded a software house and incubator in APAC where I ran a distributed engineering org of 40+ developers as product owner and did enterprise advisory for subsidiaries of Foxconn and ANA Airlines. At Everex I sat across the table from banks and regulators in Southeast Asia to structure crypto payments and stablecoins - about as adversarial as a working session gets. After 10,000+ founder calls, holding my own with a technical counterpart and pushing back on bad scope is ordinary work for me.\n\nI want the messy middle, onsite, with travel. I am authorized to work in the US on an active O-1, based between Palo Alto and Lisbon, and I ship before I polish.",
+  "What is one area of your life": "Making agent systems safe enough to leave running unattended - and proving it with numbers.\n\nIt would have been easy to post a demo of my Claude fleet and move on. Instead I built the boring half: a human approval gate for high-risk actions, an eval harness, and a public failure-modes document. The measured result from July 2026 - 0 of 17 high-risk actions slipped past the approval gate in recorded runs - is published next to the modes where the system does fail, because a number nobody can reproduce is not a result.\n\nThe same standard shows up in the writing: 50+ published items, 136 citations, h-index 7, 110 public repositories, and an operating manual written day by day rather than in one burst. Excellence for me is not the first version being brilliant; it is refusing to call something done until it has been broken on purpose, measured, and documented for whoever comes next.",
+  "Is there anything else": "Two practical notes. First, I have no LinkedIn account - the LinkedIn field points to my site, https://tonydzi.github.io/, and my work is easiest to judge from github.com/tonydzi (110 public repos). Second, I am authorized to work in the US on an active O-1 visa, so no sponsorship is needed now or in the future. Happy to walk through a live agent deployment on a call."
+ },
+ "combos": {},
+ "options": {
+  "How did you hear about us?": "Website"
+ },
+ "url_fields": [
+  "LinkedIn URL"
+ ],
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone",
+  "LinkedIn URL",
+  "Resume",
+  "Why do you want to",
+  "What is one area of your life"
+ ]
+}

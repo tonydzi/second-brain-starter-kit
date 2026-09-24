@@ -29,7 +29,7 @@ SAFETY:
 import json, subprocess, time, os, sys, io, re, threading
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", line_buffering=True)
 
-IDX = os.path.expanduser(r"~\AppData\Roaming\npm\node_modules\@oss_maintainer\whatsapp-mcp\dist\index.js")
+IDX = os.path.expanduser(r"~\AppData\Roaming\npm\node_modules\[аккаунт]\whatsapp-mcp\dist\index.js")
 OUT = r"%IMPORTS%\whatsapp"
 RAW = os.path.join(OUT, "raw_train")
 os.makedirs(RAW, exist_ok=True)

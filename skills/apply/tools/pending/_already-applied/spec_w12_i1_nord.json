@@ -1,0 +1,17 @@
+{
+  "url": "https://jobs.ashbyhq.com/nord-security/faea833d-b935-47ad-86b9-93cd401f1195/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+  "out_prefix": "w12_i1_nord",
+  "texts": {
+    "Full name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone number": "+1 341 222 9178",
+    "LinkedIn": "https://tonydzi.github.io/",
+    "GitHub": "https://github.com/tonydzi",
+    "Portfolio": "https://tonydzi.github.io/"
+  },
+  "combos": {
+    "Location": "Lisbon"
+  },
+  "required_labels": ["Full name", "Email", "Phone number", "Resume"]
+}

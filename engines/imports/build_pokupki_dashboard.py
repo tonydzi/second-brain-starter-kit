@@ -134,11 +134,11 @@ RE_URL = re.compile(r'https?://([^/\s)]+)', re.I)
 # non-shopping domains: link shorteners, search, chat, internal tools -> excluded from vendor chart
 NON_VENDOR = ('goo.gl','google.','youtube','youtu.be','chatgpt','openai','t.me','telegram',
               'zoom.us','zoom.com','wa.me','whatsapp','bit.ly','tinyurl','trello','drive.google',
-              'docs.google','maps.google','facebook','instagram','wikipedia','yadi.sk','disk.yandex')
+              'docs.google','maps.google','facebook','instagram','wikipedia','[человек].sk','disk.yandex')
 VENDOR_CANON = [
     ('amazon','Amazon'),('amzn','Amazon'),('ebay','eBay'),('aliexpress','AliExpress'),('decathlon','Decathlon'),
     ('thule','Thule'),('ikea','IKEA'),('booking.','Booking'),('airbnb','Airbnb'),
-    ('leroymerlin','Leroy Merlin'),('leroy','Leroy Merlin'),('worten','Worten'),
+    ('leroymerlin','[человек] Merlin'),('[человек]','[человек] Merlin'),('worten','Worten'),
     ('continente','Continente'),('pingodoce','Pingo Doce'),('auchan','Auchan'),
     ('olx.','OLX'),('standvirtual','StandVirtual'),('litres','Litres'),('ozon','Ozon'),
     ('wildberries','Wildberries'),('wb.ru','Wildberries'),('etsy','Etsy'),('apple.','Apple'),

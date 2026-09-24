@@ -1,0 +1,25 @@
+{
+  "url": "https://jobs.ashbyhq.com/dust/f6b3bb6d-ea15-4303-a52f-648ced4b82fb/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+  "out_prefix": "w12_i0_dust",
+  "texts": {
+    "Full Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone Number": "+1 341 222 9178",
+    "LinkedIn": "https://tonydzi.github.io/",
+    "Share links that showcase your craft": "https://tonydzi.github.io/ - https://github.com/tonydzi - https://scholar.google.com/citations?user=b8gKHiMAAAAJ",
+    "Compensation Expectations": "180000",
+    "Why do you want to join Dust?": "Enterprise AI agents are the world I already live in daily: I run a production multi-machine Claude fleet (6 machines) with shared memory, CRM and 100+ automation routines, operated in public (claw-consensus, verbatim-citation-gate). My track record is the BD side: co-founder of Platinum VC & Incubator ($35M under management, syndicate of 250 VCs/angels), 10,000+ founder calls and 2,000+ institutional-investor calls, with deal-flow pipelines I built and automated myself - first as a self-built CRM, today AI-native. A BDR role at Dust lets me sell a category I build in myself and bring an operator network across the US, Japan, Korea and Europe. Available immediately; US work authorization (O-1 active, no sponsorship needed)."
+  },
+  "check_options": {
+    "Do you have the appropriate work authorization for this role?": "Yes",
+    "Will you now or at any point in the future require sponsorship": "No",
+    "We are in office 5 days a week": "Yes",
+    "What knowledge or experience do you have working with AI": [
+      "I have built or shipped products or features that incorporate AI/LLMs",
+      "I have experience deploying AI tools in an enterprise or team setting"
+    ],
+    "Where did you find out about this role?": "Other"
+  },
+  "required_labels": ["Resume", "Full Name", "Email", "Compensation Expectations", "Why do you want to join Dust?"]
+}

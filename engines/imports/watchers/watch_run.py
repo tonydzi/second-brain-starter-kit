@@ -42,7 +42,7 @@ except Exception:
 
 HERE = Path(r"%IMPORTS%\watchers")
 ALPHA = Path(r"%IMPORTS%\alpha")
-ENV = Path(r"C:/mcp/telegram-mcp/.env")
+ENV = Path(r"[путь владельца]")
 REGISTRY = HERE / "watchers.json"
 sys.path.insert(0, str(ALPHA))          # reuse the shared detector
 import mine_channel                       # detect(), build_db(), KW/PROMO/BANTER

@@ -1,0 +1,42 @@
+{
+ "url": "https://jobs.ashbyhq.com/hackerone/9721a4c7-ff1e-47ca-a89e-97688ebff96c/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w14_i2_hackerone",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone": "+1 341 222 9178",
+  "LinkedIn URL:": "https://tonydzi.github.io/",
+  "What AI projects have you built": "I run a production multi-machine Claude agent fleet (6 machines), operated in public: cross-machine consensus, persistent memory, a self-built AI-native CRM, RAG over a 10-year knowledge base, MCP connectors and 100+ automation routines. Open-source flagships across 110 public repos (github.com/tonydzi): claw-consensus (reproducible multi-machine agent consensus with published evals and FAILURE-MODES.md), verbatim-citation-gate (a zero-token gate + burden-of-proof judge that catches fabricated RAG citations, MIT), agent-leash, sqlite-graph-memory, second-brain-starter-kit. Published measured reliability evals (07.2026): 0/17 high-risk actions slipped past the human approval gate in recorded runs.",
+  "Zip Code / Postal Code": "Will provide upon offer"
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "yesnos": {
+  "Are you located within ~50 [человек] of [человек]": false,
+  "We use Ashby AI Notetaker": true
+ },
+ "check_options": {
+  "Pronouns": "He/Him",
+  "Can you provide proof of authorization": "Yes",
+  "Will you now or in the future require employer sponsorship": "No",
+  "How did you hear about us?": "Company website",
+  "What is your current age?": "I prefer not to answer",
+  "What is your gender identity?": "I prefer not to answer",
+  "Do you identify as transgender?": "I prefer not to answer",
+  "How do you identify your sexual orientation?": "I prefer not to answer",
+  "Which ethnicity(ies) do you identify with?": "I prefer not to answer",
+  "Which of the following communities do you belong to?": "I prefer not to answer",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status",
+  "Disability Status": "I do not want to answer"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "Zip Code / Postal Code"
+ ]
+}

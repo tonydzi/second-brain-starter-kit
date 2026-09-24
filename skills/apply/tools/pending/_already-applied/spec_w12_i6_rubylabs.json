@@ -1,0 +1,30 @@
+{
+ "url": "https://jobs.ashbyhq.com/ruby-labs/f3e82a5c-de43-4245-a423-0e5900e9f1e2/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w12_i6_rubylabs",
+ "texts": {
+  "Full Name": "Anton Dziatkovskii",
+  "Email address": "dzyatkovskiy.a@gmail.com",
+  "Phone number": "+1 341 222 9178",
+  "Link to your LinkedIn profile": "https://tonydzi.github.io/",
+  "What is your availability to start a new role?": "Available immediately",
+  "What is your expected monthly gross wage in euros": "15000",
+  "Are you currently part of any Discord, YouTube, or Telegram communities?": "Yes - mostly Telegram: I run my own AI-engineering channel and participate in a number of founder/crypto/AI communities. Also active on X ([аккаунт]) and GitHub (github.com/tonydzi).",
+  "Is there anything else you would like to add to support your application?": "A few facts that map to this seat: 15+ years as a founder/BD operator across fintech and data-heavy products - co-founder of Platinum VC & Incubator, Chief Engineer at Everex (Singapore fintech, cross-border payments), enterprise advisory for subsidiaries of Foxconn and ANA Airlines, government and bank relations across SE Asia. I negotiate and operationalize partnerships end-to-end: sourcing, terms, integration, reporting. EU citizen (Poland) based in Lisbon, no visa needed, available immediately. I work AI-first: a production multi-machine Claude fleet automates my CRM, lead triage and outreach - github.com/tonydzi."
+ },
+ "combos": {
+  "What is your country of residence?": "Portugal"
+ },
+ "check_options": {
+  "Are you located within a": "Yes",
+  "How many years of relevant experience do you have?": "More than 10 years",
+  "What is your English proficiency level?": "Advanced (C1)"
+ },
+ "required_labels": [
+  "Full Name",
+  "Email address",
+  "Resume",
+  "What is your availability to start a new role?",
+  "What is your expected monthly gross wage in euros"
+ ]
+}

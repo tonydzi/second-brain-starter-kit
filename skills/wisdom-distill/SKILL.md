@@ -1,55 +1,41 @@
 ---
 name: wisdom-distill
-description: >-
-  Squeeze three to five durable lessons out of the owner's own words from the last seven days
-  into a weekly note in the insights folder. The LLM reads only a collector's digest, never the
-  raw corpus. Triggers: "/wisdom-distill", "distill my week", "weekly wisdom".
-license: MIT
+description: "- Weekly Wisdom Distill - раз в неделю выжать из собственных слов Антона за 7 дней (origin: anton) 3-5 durable-уроков в заметку недели в 03-Insights. Trigger on “/wisdom-distill“, “выжми мудрость недели“, “что я понял за неделю“, “weekly wisdom“, “distill my week“. Часть активного брейна (D из карты A-E). LLM читает только дайджест сборщика."
+version: 1.0.0
 ---
 
-# /wisdom-distill — the wisdom of the week
+# /wisdom-distill — мудрость недели
 
-> 🧒 When reporting to a non-technical operator, end with an "In plain words" recap in their language.
+> 🧒 К Антону — в конце recap «Простыми словами».
 
-## Run (deterministic first — 0 tokens)
-`python "$IMPORTS_ROOT/wisdom_week_gather.py"` (or `... 14` for a 14-day window) ->
-notes marked `origin: anton`/`#anton-original` inside the window (date field, mtime as fallback), excluding
-`_originals/_imports/_Dashboards`, capped at 60 x 500 chars -> `$IMPORTS_ROOT/_wisdom_week_digest.md`.
-**The LLM reads only the digest, never the corpus.**
+## Run (deterministic first — 0 токенов)
+`python "$IMPORTS_ROOT/wisdom_week_gather.py"` (или `... 14` для окна 14 дней) →
+заметки `origin: anton`/`#anton-original` за окно (date-поле, fallback mtime), кроме
+`_originals/_imports/_Dashboards`, cap 60 × 500 симв. → `$IMPORTS_ROOT/_wisdom_week_digest.md`.
+**LLM читает только дайджест, не корпус.**
 
-## Distill (top model — synthesis, not grunt work)
-From the digest, pull 3-5 durable lessons of the week (each must survive a month; "how the owner now thinks/decides").
-Format: the lesson in one line in the owner's voice · Source: [[note-a]], [[note-b]] (2+ = stronger) ·
-What it changes: which decision it will show up in. Drop transient items, other people's ideas, the self-evident.
-Thin week (<3) — say so plainly, do not invent.
+## Distill (Opus — синтез, не грунт)
+Из дайджеста — 3–5 durable-уроков недели (переживёт месяц; «как Антон теперь думает/решает»).
+Формат: урок одной строкой голосом Антона · Откуда: [[note-a]], [[note-b]] (2+ = сильнее) ·
+Что меняет: в каком решении проявится. Отбрось транзиты, чужие идеи, само-очевидное.
+Неделя тонкая (<3) — так и скажи, не выдумывай.
 
 ## Save (backup-first: vault_backup.py)
-Note: $OBSIDIAN_VAULT/03-Insights/insight-weekly-wisdom-YYYY-Www.md
+Заметка: $OBSIDIAN_VAULT/03-Insights/insight-weekly-wisdom-YYYY-Www.md
 Frontmatter: title, date, type: insight, origin: anton, authored_by: hybrid,
-tags: [insight, weekly-wisdom, anton-original], summary. Link the sources
-(no-orphan-notes-rule); if beliefs are touched, link the matching belief-* note. NO 🧒 block inside the note.
+tags: [insight, weekly-wisdom, anton-original], summary. Линки на источники
+(no-orphan-notes-rule); затронуты убеждения — линк belief-*. NO 🧒 в заметке.
+
+⚠️ ЗАМЕТКА-СИРОТА (orphan_check_hook падает на записи, урок 2026-09-20): outgoing-ссылок
+на источники недостаточно — нужна ВХОДЯЩАЯ. Добавь строку в
+`03-Insights/_index.md` §«Свежее» по образцу прошлых недель (дата · [[insight-weekly-wisdom-YYYY-Www]] —
+одной строкой перечисли уроки) ДО завершения шага Save.
 
 ## Scheduled twin
-Cron `wisdom-distill-weekly`: Sunday 23:20 Lisbon (routines-run-at-night). Gatherer ->
-distillation (top-model subagent) -> note -> announcement in the fleet log chat (bus_ping.py --post).
-The manual twin is this skill. Single source of truth = wisdom_week_gather.py.
+Cron `wisdom-distill-weekly`: Вс 23:20 Lisbon (routines-run-at-night). Сборщик →
+дистилляция (Opus-субагент) → заметка → анонс в TG чат 03 (bus_ping.py --post).
+Manual twin = этот скилл. Single source of truth = wisdom_week_gather.py.
 
-## Related
-Active-brain map A-E: item D · /five-hard (monthly) · /precedent (decisions) · recurring_scan.py
-(the whole corpus) · vault-backup-rule · model-routing (synthesis -> top model).
-
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Связано
+Карта A–E: пункт D · /five-hard (месяц) · /precedent (решения) · recurring_scan.py
+(весь корпус) · vault-backup-rule · model-routing (синтез → Opus).

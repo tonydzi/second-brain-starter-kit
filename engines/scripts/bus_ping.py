@@ -16,14 +16,14 @@
 
 Tiny, dependency-light notifier reused by the cross-machine PLAN-MODE robot
 (robot_inbox_prompt.md). Sends `text` to Anton's own Saved Messages via the
-dedicated @work_acct_a Telethon session. NEVER raises -- if the session env is not
+dedicated [аккаунт] Telethon session. NEVER raises -- if the session env is not
 on this machine (the laptop has it; other machines may not, since _imports does
 NOT sync), it prints "PING SKIP" and exits 0 so the caller proceeds gracefully.
 
-This is the SAME proven rail as cowork_loop.send_saved (shared @work_acct_a session,
+This is the SAME proven rail as cowork_loop.send_saved (shared [аккаунт] session,
 shared lock so it never collides with refresh_chats / the Telegram MCP ->
 never AUTH_KEY_DUPLICATED). Copied standalone (not imported) so it works even
-where cowork_loop's E:\\_imports paths are absent.
+where cowork_loop's [путь владельца] paths are absent.
 
 Usage:
   python bus_ping.py "your message text"     -> send (Cyrillic OK, UTF-8)
@@ -36,7 +36,7 @@ REFRESH_API_HASH / REFRESH_SESSION_STRING. Default = %IMPORTS%\\dialogs\\.env
 import os, io, sys, json, time, argparse
 
 # env resolution ladder (canon-proposal NAT1-Nina #61582f29, same as bus_group_post):
-# BUS_PING_ENV -> machine.env's BUS_PING_ENV -> %LOCALAPPDATA%\claude-tgbus\session.env -> hub default E:\...
+# BUS_PING_ENV -> machine.env's BUS_PING_ENV -> %LOCALAPPDATA%\claude-tgbus\session.env -> hub default [путь владельца]
 # machine.env rung (ANCHOR1 audit 2026-07-16 #ee1aa4bd): the hub hardcode made ping silently SKIP on
 # nodes whose session lives elsewhere (ANCHOR1: ~/secrets/dialogs.env) and whose cron lacks the env
 # var -- ~/.claude/machine.env already carries the right path per machine, so read it here.
@@ -55,9 +55,9 @@ def _menv_ping_env():
 _LOCAL = os.path.join(os.environ.get("LOCALAPPDATA", ""), "claude-tgbus", "session.env")
 ENV = (os.environ.get("BUS_PING_ENV") or _menv_ping_env()
        or (_LOCAL if os.path.exists(_LOCAL) else r"%IMPORTS%\dialogs\.env"))
-LOCK = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")  # shared w/ @work_acct_a session
+LOCK = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")  # shared w/ [аккаунт] session
 SAVED = "me"   # Telethon alias for own Saved Messages
-GROUP = int(os.environ.get("TG_BUS_GROUP", "-996940094"))   # machine-bus mirror group "03"
+GROUP = int(os.environ.get("TG_BUS_GROUP", "-[id]"))   # machine-bus mirror group "03"
 BUS_GROUP = GROUP  # compat alias: hub-side ack_watchdog.py imports bus_ping.BUS_GROUP (2026-07-03)
 
 def _machine_tag():
@@ -111,7 +111,7 @@ def _pid_alive(pid):
 
 
 def acquire_lock(wait_s=0):
-    """Take the shared @work_acct_a lock. `wait_s` > 0 = keep trying for that long.
+    """Take the shared [аккаунт] lock. `wait_s` > 0 = keep trying for that long.
 
     The lock is held for the duration of ONE send (a couple of seconds), so a caller that
     gives up instantly loses its message to a collision that would have cleared on its own.
@@ -155,7 +155,7 @@ def send(text):
         print("PING SKIP: no REFRESH_* session in %s (rail not on this machine)" % ENV)
         return False
     if not acquire_lock():
-        print("PING SKIP: @work_acct_a session busy (lock held) -- caller may retry next cycle")
+        print("PING SKIP: [аккаунт] session busy (lock held) -- caller may retry next cycle")
         return False
     try:
         import asyncio
@@ -191,7 +191,7 @@ def post(text):
         print("PING SKIP: no REFRESH_* session in %s (rail not on this machine)" % ENV)
         return False
     if not acquire_lock():
-        print("PING SKIP: @work_acct_a session busy (lock held) -- caller may retry next cycle")
+        print("PING SKIP: [аккаунт] session busy (lock held) -- caller may retry next cycle")
         return False
     try:
         import asyncio
@@ -367,13 +367,13 @@ def _post_to_bot(chat_id, text, tag):
 
 
 def post_to(chat_id, text, tag=True):
-    """Post `text` to an ARBITRARY chat id (e.g. 02 POLICE -6491142604, or an operator's
+    """Post `text` to an ARBITRARY chat id (e.g. 02 POLICE -[id], or an operator's
     personal id). Used by the F1-F4 silent-peer escalators (ack_watchdog second-reping, robot
     3-consecutive-fail), post_police(), and the secondop 04-mirror. Never raises.
 
     LADDER (2026-07-20, after a silent drop): user session -> fleet bot -> disk spool.
     Root it fixes: this function had NO fallback while its sibling post() got one via
-    bus_send -- so a momentarily busy @work_acct_a lock silently ate one-shot messages, INCLUDING
+    bus_send -- so a momentarily busy [аккаунт] lock silently ate one-shot messages, INCLUDING
     Tier-2 escalations to Anton in 02 POLICE. Caught because a Codex second-opinion exchange
     never reached chat 04 and nothing said a word. Canon: Telegram mirror is never optional,
     and a dead rail is a SIGNAL, not a reason to give up quietly."""
@@ -399,7 +399,7 @@ def post_to(chat_id, text, tag=True):
         # Wait out a collision instead of dropping the message (see acquire_lock).
         got_lock = acquire_lock(POST_TO_LOCK_WAIT_S)
         if not got_lock:
-            reason = "@work_acct_a session busy for %ds" % POST_TO_LOCK_WAIT_S
+            reason = "[аккаунт] session busy for %ds" % POST_TO_LOCK_WAIT_S
             print("PING SKIP: %s -> falling back to bot rail" % reason)
     if got_lock:
         try:
@@ -448,11 +448,11 @@ def post_to(chat_id, text, tag=True):
 
 
 # 02 POLICE = the "needs Anton's attention" clean channel (canon: approval.json targets.tg_police).
-POLICE_GROUP = int(os.environ.get("TG_POLICE_GROUP", "-6491142604"))
+POLICE_GROUP = int(os.environ.get("TG_POLICE_GROUP", "-[id]"))
 
 
 def post_police(text):
-    """Escalate to 02 POLICE (-6491142604), the clean 'requires Anton' channel."""
+    """Escalate to 02 POLICE (-[id]), the clean 'requires Anton' channel."""
     return post_to(POLICE_GROUP, text)
 
 

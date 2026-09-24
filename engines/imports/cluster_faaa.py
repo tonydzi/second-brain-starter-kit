@@ -65,7 +65,7 @@ name_freq = Counter(r["lead_name_norm"] for r in fa if r["lead_name_norm"])
 for h, ids in by_handle.items():
     for i in ids[1:]:
         union(ids[0], i)
-# union by name: only multi-token full names (e.g. "Dan Marin").
+# union by name: only multi-token full names (e.g. "Dan [человек]").
 # single first-names ("Alex", "Igor") are NOT merged by name alone — they only
 # join via a shared handle. Safer to leave a rare lead as 2 cards than to fuse
 # two different people named "Alex".

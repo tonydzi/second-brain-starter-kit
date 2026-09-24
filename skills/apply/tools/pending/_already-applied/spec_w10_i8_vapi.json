@@ -1,0 +1,31 @@
+{
+ "url": "https://jobs.ashbyhq.com/vapi/854a9bf5-e330-4afa-9c0f-38c3d6084808/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w10_i8_vapi",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "Linkedin": "https://tonydzi.github.io/ (no LinkedIn account)",
+  "Github Link": "https://github.com/tonydzi"
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "check_options": {
+  "Are you able to work in our San Francisco office": "Yes",
+  "Will you now or in the future require visa sponsorship": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status",
+  "Are you  authorized to work in the US": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone Number",
+  "Linkedin",
+  "Github Link",
+  "Resume"
+ ]
+}

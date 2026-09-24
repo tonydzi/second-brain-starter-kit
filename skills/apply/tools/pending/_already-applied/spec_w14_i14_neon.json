@@ -1,0 +1,16 @@
+{
+ "url": "https://jobs.ashbyhq.com/neon/ceeecef6-dce4-4d8f-aea9-c2ffb87c7a91/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w14_i14_neon",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn URL": "https://tonydzi.github.io/"
+ },
+ "check_options": {
+  "I'm willing to work from the office in SF or NYC most days.": "Yes",
+  "Are you legally authorized to work in the United States?": "Yes",
+  "Will you now or in the future require visa sponsorship": "No"
+ },
+ "required_labels": ["Name", "Email", "Resume", "LinkedIn URL"]
+}

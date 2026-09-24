@@ -1,0 +1,19 @@
+TO: careers@sakana.ai
+FROM: dzyatkovskiy.a@gmail.com (must be sent from Anton's own address BEFORE form submit)
+SUBJECT: Forward Deployed Engineer application - Anton Dziatkovskii
+
+Hello Sakana AI team,
+
+I'm applying for the Forward Deployed Engineer role. I run Palo Alto AI Research Lab, where I operate a production multi-machine Claude agent fleet in public — MCP connectors, RAG over a 10-year knowledge base, CRM automation and published evals — deploying AI into messy real-world environments every day. Before that: 15+ years as a founder/BD operator, including structuring crypto payments and stablecoins with banks and governments in SE Asia, and 11 years co-running an incubator (Platinum) with my Japanese partner [человек] [человек], with deep roots in the Japanese startup community. I don't speak Japanese yet, but I'm ready to relocate to [человек]; my publications and open-source work are at https://tonydzi.github.io/ and https://github.com/tonydzi.
+
+Anton Dziatkovskii
+
+---
+ПОСЛЕ отправки письма заполнить форму https://apply.workable.com/j/9B6A0E82AF/apply/ :
+- firstname Anton / lastname Dziatkovskii / email dzyatkovskiy.a@gmail.com
+- Address: Lisbon, Portugal · Country of residence: Portugal
+- Resume: Anton-Dziatkovskii-CV-FDE.pdf · English level: fluent · Japanese level: none
+- Earliest Start Date: 2026-09-15 · Reasons for applying: careers page/website
+- QA_[id] (based in [человек]) = YES · QA_[id] (read Defense Policy) = YES (прочитать секцию в описании)
+- QA_[id] (sent email first) = YES — только после реальной отправки письма выше
+- ⚠️ на сабмите будет Cloudflare Turnstile «Verify you are human» — кликнуть руками

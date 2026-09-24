@@ -1,0 +1,30 @@
+{
+ "url": "https://jobs.ashbyhq.com/tennr/a439c5b8-1686-4b90-b2bc-cffd761e002d/application",
+ "out_prefix": "w12_i0_tennr",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "texts": {
+  "Full Legal Name": "Anton Dziatkovskii",
+  "Preferred Name or Nickname": "Anton",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "Linkedin Profile": "https://tonydzi.github.io/",
+  "What are your salary expectations for this role?": "180000"
+ },
+ "combos": {
+  "Location": "Palo Alto, California"
+ },
+ "yesnos": {
+  "This is an in-person position": true,
+  "Will you now or in the future require Tennr to sponsor": false
+ },
+ "check_options": {
+  "How did you first hear about this opportunity?": "Company Website/Careers Page"
+ },
+ "required_labels": [
+  "Resume",
+  "Full Legal Name",
+  "Email",
+  "Phone Number",
+  "What are your salary expectations for this role?"
+ ]
+}

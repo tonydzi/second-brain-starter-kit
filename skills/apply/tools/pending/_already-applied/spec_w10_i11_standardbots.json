@@ -1,0 +1,23 @@
+{
+ "url": "https://jobs.ashbyhq.com/standardbots/a5a3b8f8-145c-4e54-a69a-79e2b47a93f1/application",
+ "out_prefix": "w10_i11_standardbots",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Linkedin": "https://tonydzi.github.io/",
+  "Phone Number": "+1 341 222 9178",
+  "Where do you currently live? (City and state)": "Palo Alto, California"
+ },
+ "check_options": {
+  "Do you require Visa sponsorship to work in the U.S.?": "No, I do not require Visa sponsorship now or in the future.",
+  "Do you currently reside within commuting distance of NYC?": "No",
+  "If hired, are you able to come into the NYC office 2-3x per week?": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "Where do you currently live"
+ ]
+}

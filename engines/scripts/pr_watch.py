@@ -199,7 +199,7 @@ def diff(old, new):
 
 
 def send_alert(text):
-    """Один вызов dual-send рельсы (TG-03 + _machine-bus). True = хоть одна рельса доставила."""
+    """Один вызов dual-send рельсы (TG-03 + [шина]). True = хоть одна рельса доставила."""
     if not os.path.exists(BUS_SEND):
         log("[!] bus_send.py не найден: %s — алярм слать некуда" % BUS_SEND)
         return False

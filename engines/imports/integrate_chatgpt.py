@@ -21,7 +21,7 @@ import re, glob, os
 from pathlib import Path
 import yaml
 
-VAULT = Path(r"E:/Obsidian/Owner-Knowledge")
+VAULT = Path(r"[путь владельца]")
 CGPT = VAULT / "01-Conversations/ChatGPT"
 CONCEPTS = VAULT / "06-Concepts"
 MARK = "## Концепты и сущности"

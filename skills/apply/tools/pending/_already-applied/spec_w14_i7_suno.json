@@ -1,0 +1,24 @@
+{
+  "idx": 7,
+  "company": "Suno",
+  "url": "https://jobs.ashbyhq.com/suno/dba162e0-97f1-4efe-b4ff-c7d671a01b11/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+  "out_prefix": "w14_i7_suno",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "LinkedIn Profile": "No LinkedIn account - please see https://tonydzi.github.io/ and https://github.com/tonydzi",
+    "Why are you interested in working at Suno?": "Suno is generative AI shipped to consumers at scale - exactly where trust & safety stops being a policy document and becomes a production engineering problem. That is the problem I already work on daily: I run a production multi-machine Claude agent fleet (6 machines, 100+ automation routines) operated in public, and I build guardrails for it - agent-leash, and verbatim-citation-gate, an MIT-licensed gate that catches fabricated RAG citations. My MSc is in computer and information systems security (MEPhI, cryptography), and I spent a decade in adversarial crypto markets (exchange infrastructure, market-maker engines, anti-fraud), so I think about abuse paths before launch, not after. I would love to apply that mix of applied security engineering and hands-on agentic tooling to keeping Suno safe for its creators."
+  },
+  "location": {"label": "Location", "type": "Palo Alto", "want": "palo alto, california"},
+  "checkboxes": {"Suno fosters an in-office culture": true},
+  "options": {
+    "What is your fluency level with modern coding workflows?": "Complete Delegation to Autonomous AI with Quality Controls",
+    "Can you work out of the San Francisco office 5 days a week?": "Yes"
+  },
+  "toggles": {
+    "Are you legally authorized to work in the United States?": "Yes"
+  },
+  "linkedin_fallback": {"LinkedIn Profile": "https://tonydzi.github.io/"},
+  "required_labels": ["Name", "Email", "Resume", "Why are you interested"]
+}

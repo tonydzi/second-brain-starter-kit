@@ -1,12 +1,21 @@
 ---
 name: crm-sync
-description: >-
-  Sync CRM knowledge notes in a vault with the live CRM code repositories: pull the read-only
-  repos, detect which changed, and refresh only the affected reverse-engineering notes and the
-  keep/drop/decide note. Triggers: "/crm-sync", "refresh CRM knowledge", "what changed in the
-  CRM code".
-license: MIT
+description: "Keep the CRM-Engine knowledge layer in Anton's vault in sync with the live CRM code on GitLab. Trigger on “/crm-sync“, “обнови знания по CRM“, “пересними CRM“, “что изменилось в CRM коде“, “re-decompose the CRM“, “sync crm knowledge“, “resync crm“"
+version: 1.0.0
 ---
+
+## ⚖️ ШАГ 0 — СНАЧАЛА БИБЛИЯ (обязательно, origin: anton 2026-07-26)
+
+Перед ЛЮБЫМ действием этого скилла подними выстраданные правила Библии по лидам:
+
+```bash
+python3 ~/.claude/scripts/bible_leads.py            # карта (0 токенов)
+python3 ~/.claude/scripts/bible_leads.py --grep <тема>   # срез
+```
+
+Идёт РАНЬШЕ `outreach_log.py check` и раньше RECALL по человеку. Нет правила в Библии →
+это находка, после работы занести через `/intake`, а не импровизировать молча.
+Канон: `reglament-lyubaya-rabota-s-lidami-snachala-bibliya` · `_Bible-Outreach-MOC` · CLAUDE.md §9.5
 
 # /crm-sync - keep the CRM knowledge layer fresh
 
@@ -19,8 +28,8 @@ It is the recurring half of the standing rule `evaluate-recurring-into-routine`.
 pull, see what changed, update only the notes that map to the changed code.
 
 ## Where everything lives
-- **Code (read-only clone, 16 repos):** `<CRM_REPOS_ROOT>` (memory `crm-gitlab`).
-- **Decomposition audit (HTML, source of the notes):** `<CRM_REPOS_ROOT>\_AUDIT\`
+- **Code (read-only clone, 16 repos):** `[путь владельца]` (memory `crm-gitlab`).
+- **Decomposition audit (HTML, source of the notes):** `[путь владельца]`
   (`Functional-Map.html`, `Know-How-Decomposition.html`, `Architecture-Deep.html`).
 - **Vault knowledge layer:** `$OBSIDIAN_VAULT/05-Resources/CRM-Engine/`
   - `_CHARM-CRM-Engine-MOC.md` (hub)
@@ -34,7 +43,7 @@ pull, see what changed, update only the notes that map to the changed code.
   - decision: `$OBSIDIAN_VAULT/02-Decisions/decision-crm-keep-cc-drop-decide.md`
 
 ## Repo -> note map (which note to refresh when which code changes)
-| Code area in <CRM_REPOS_ROOT> | Note(s) to refresh |
+| Code area in [путь владельца] | Note(s) to refresh |
 |---|---|
 | `admin-panel` / `admin-panel-api` (FastAPI brain, filter-DSL, $facet) | `crm-admin-panel-api-brain` |
 | `mtproto-api` (Telethon hands, event-pool, dialog export, FloodWait) | `crm-mtproto-engine` |
@@ -48,8 +57,8 @@ pull, see what changed, update only the notes that map to the changed code.
 ## Procedure
 1. **RECALL first (don't duplicate).** Read memory `crm-gitlab` and `_CHARM-CRM-Engine-MOC.md`
    so you refresh, not rewrite. Note the date of the last sync.
-2. **Pull the repos.** For each repo dir under `<CRM_REPOS_ROOT>`:
-   `git -C "<CRM_REPOS_ROOT>\<repo>" pull --ff-only` (clone is read-only; this only updates).
+2. **Pull the repos.** For each repo dir under `[путь владельца]`:
+   `git -C "[путь владельца]" pull --ff-only` (clone is read-only; this only updates).
    Collect the set of repos that actually moved (non-empty pull, or
    `git -C <repo> log --oneline <old>..<new>`). If a pull needs GitLab creds and fails,
    stop and tell Anton (creds in `secrets\`; do NOT hardcode).
@@ -62,7 +71,7 @@ pull, see what changed, update only the notes that map to the changed code.
 5. **Backup before writing.** `python "$IMPORTS_ROOT/vault_backup.py"` (rule
    `vault-backup-rule`). NEVER blanket-delete; edit in place.
 6. **Update the mapped note(s)** - the "How it works" / "Weak spots" sections only.
-   PRESERVE frontmatter, `origin: external`, `authored_by:` (denis-udot / gleb-taigunov),
+   PRESERVE frontmatter, `origin: external`, `authored_by:` (denis-[человек] / [человек]-[человек]),
    and all `[[wikilinks]]`. If a capability moved KEEP<->DROP<->DECIDE, update the decision
    note too. New behavioral pattern worth a concept? Follow `concept-creation-rules` (create
    if >=3 repeats + entity noun + domain), and relink (`no-orphan-notes-rule`).
@@ -82,18 +91,3 @@ pull, see what changed, update only the notes that map to the changed code.
 ## When to run
 On demand (after Anton hears the CRM changed), or as a light routine. Pairs with the
 `crm-gitlab` DD-audit and the `decision-crm-keep-cc-drop-decide` open items.
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

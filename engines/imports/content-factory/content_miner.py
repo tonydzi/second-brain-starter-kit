@@ -94,7 +94,7 @@ FAMILIES = {
     # REACTION (w3): Anton's genuine excitement -> the most quotable show beats (rare).
     "wow": (3, [
         "это веха", "/wow", "офигеть", "офигел", "гениальн", "это шедевр",
-        "круто получилось", "обалден", "прорыв", "breakthrough", "это магия",
+        "круто получилось", "обалден", "прорыв", "[человек]", "это магия",
         "волшебн", "это будущее", "не верю что", "поразительно", "восхитительно",
         "это победа", "это огонь", "это бомба", "кайф", "красота какая",
     ]),
@@ -139,7 +139,7 @@ LOW_TITLE = ("/1", "/sync", "/inbox", "/agenda", "ping", "статус", "?", "�
 # on "Syncthing клиент", version numbers, and the PUBLIC co-founder number +1 341...).
 PRIV = ["пароль", "password", "секрет ", "api key", "api_key", "ghp_", "sk-ant",
         " crm", "crm-", "лид:", "lead:", "досье", "паспорт", "виза ", "налог",
-        "@gmail", "@corp_acct"]
+        "@gmail", "[аккаунт]"]
 SECRET_RX = [
     re.compile(r"sk-ant-[A-Za-z0-9\-_]{18,}"),
     re.compile(r"\bsk-[A-Za-z0-9]{20,}"),

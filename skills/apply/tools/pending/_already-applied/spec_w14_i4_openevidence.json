@@ -1,0 +1,27 @@
+{
+ "url": "https://jobs.ashbyhq.com/openevidence/3d94cd5a-6c06-4f13-ab0e-8ccea8bb2b0b/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w14_i4_openevidence",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "If you think you would be a good fit, tell us why.": "I deploy AI into messy real-world environments every day: I run a production multi-machine Claude agent fleet with cross-machine consensus, persistent memory, RAG over a 10-year knowledge base, MCP connectors and published reliability evals (0/17 high-risk actions slipped past the human approval gate in recorded runs). I ship agent systems end-to-end and can sit in front of a customer or a regulator: 15+ years founder/BD background, including structuring stablecoin frameworks with banks and governments in SE Asia. 110 public repos (claw-consensus, verbatim-citation-gate), 50+ published items, 136 citations, h-index 7. OpenEvidence's mission - trustworthy AI answers in a domain where fabrication is unacceptable - is exactly the problem my citation-verification work attacks: verbatim-citation-gate catches fabricated RAG citations before they reach the user. US O-1 active, based in Palo Alto, available immediately.",
+  "Current Location": "Palo Alto, CA"
+ },
+ "yesnos": {
+  "Are you legally authorized to work in the United States": true,
+  "Will you now or in the future require sponsorship": false
+ },
+ "check_options": {
+  "Will you be able to be in person in SF or Miami office 5 days a week?": "Yes in San Francisco"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "LinkedIn",
+  "If you think you would be a good fit",
+  "Current Location"
+ ]
+}

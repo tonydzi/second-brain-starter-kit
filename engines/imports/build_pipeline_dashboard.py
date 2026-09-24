@@ -122,9 +122,9 @@ def card_html(lead, lane, data):
     if angle:
         bits.append(f'<div class="meta">🎯 {html.escape(str(angle))}</div>')
     # WHO OWES THE NEXT MOVE. "ждём ответа" hid a lead who had answered 10 days ago
-    # (arseniy-sp, 2026-07-17) -- so the ball is now shown, not inferred from the lane.
-    if lead.get("ball") == "us":
-        bits.append('<div class="ball-us">🔴 мяч у нас — ход наш, лид уже ответил</div>')
+    # ([человек]-sp, 2026-07-17) -- so the [человек] is now shown, not inferred from the lane.
+    if lead.get("[человек]") == "us":
+        bits.append('<div class="[человек]-us">🔴 мяч у нас — ход наш, лид уже ответил</div>')
     # PROOF that the touch exists in a live thread (message_id), or an honest "not verified".
     lt = lead.get("last_touch")
     ver = lead.get("verified")
@@ -141,7 +141,7 @@ def card_html(lead, lane, data):
         bits.append(f'<div class="reply">💬 {html.escape(str(replied))}</div>')
     # Two-step rule: their silence for 7+ days means STOP, not "nudge harder".
     days = None
-    if lt and lead.get("ball") != "us":
+    if lt and lead.get("[человек]") != "us":
         dt = parse_dt(lt)
         if dt:
             days = (NOW - dt).days
@@ -163,7 +163,7 @@ def card_html(lead, lane, data):
         bits.append(f'<div class="draft" title="клик — скопировать черновик" '
                     f'onclick="navigator.clipboard.writeText(this.dataset.t);this.classList.add(\'copied\')" '
                     f'data-t="{d}">✍️ {d}<span class="cp"> ⧉ copy</span></div>')
-    if lane in ("await", "cold") or lead.get("ball") == "us":
+    if lane in ("await", "cold") or lead.get("[человек]") == "us":
         chk = lead.get("check", "")
         if chk:
             bits.append(f'<div class="meta dim">проверить: {html.escape(chk[:240])}</div>')
@@ -230,7 +230,7 @@ a{{color:var(--acc);text-decoration:none}} .mut{{color:var(--mut)}} .dim{{opacit
 .reply{{font-size:12px;color:#cdd6e2;background:#1a2330;border-radius:8px;padding:5px 8px;margin-top:6px}}
 .reply.ok{{background:#13241a;color:#bdf0d2}}
 .meta.ok{{color:#7fd8a5}} .meta.warn{{color:#ffb454}}
-.ball-us{{font-size:12px;font-weight:700;color:#ffd9e0;background:#2a1219;border:1px solid #5c2231;border-radius:8px;padding:5px 8px;margin-top:6px}}
+.[человек]-us{{font-size:12px;font-weight:700;color:#ffd9e0;background:#2a1219;border:1px solid #5c2231;border-radius:8px;padding:5px 8px;margin-top:6px}}
 .stop{{font-size:12px;color:#ffc9c9;background:#2a1414;border:1px solid #5c2626;border-radius:8px;padding:5px 8px;margin-top:6px}}
 .draft{{font-size:12px;color:#f4d6a6;background:#1c1207;border:1px solid #4a3413;border-radius:8px;padding:6px 9px;margin-top:7px;cursor:pointer}}
 .draft .cp{{color:var(--mut);font-size:10px}} .draft.copied{{border-color:var(--acc2);color:#bdf0d2}}

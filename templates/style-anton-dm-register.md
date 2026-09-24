@@ -32,7 +32,7 @@ summary: Разговорный/аутрич-голос Антона 1-на-1, �
 - **Смайл «))» / «)))» — 743 раза.** Фирменный тёплый маркер, снимает пафос.
 - **КАПС для акцента — 761 слово** (ВАЖНО, НЕТУ ХАЙПОВ, УЖЕ, СРОЧНО).
 - **Многоточие «…» — 196 раз** для паузы/недосказанности.
-- Тёплые открывалки с именем: «Салют, Костя!», «Привет, Женя!», «Приветствую!», «Добрый день, Сергей!», «Dear Robert! glad to e-meet you!».
+- Тёплые открывалки с именем: «Салют, Костя!», «Привет, Женя!», «Приветствую!», «Добрый день, Сергей!», «Dear Robert! [человек] to e-meet you!».
 
 ## Голосовые ходы (паттерны)
 - **Даёшь, не просишь.** «денег не прошу. Просто хочу быть знакомым с правильными парнями ))». Открывает ценностью: «могу вам интро сделать», «дам план», «покажу финмодели».
@@ -47,7 +47,7 @@ summary: Разговорный/аутрич-голос Антона 1-на-1, �
 
 > Можно к вам в друзья? Я строю финтек в юва - р2р лендинг. денег не прошу. Просто хочу быть знакомым с правильными парнями ))
 
-> Dear Robert! glad to e-meet you! can i ask you to become our country ambassador? thanx in advance! i will be happy to give you our tokens as gift for your help. We want to bring 2,5 Bln UNBANKED to the new crypto economy.
+> Dear Robert! [человек] to e-meet you! can i ask you to become our country ambassador? thanx in advance! i will be happy to give you our tokens as gift for your help. We want to bring 2,5 Bln UNBANKED to the new crypto economy.
 
 ## Как применять
 - `/telegram-lead-outreach` и любой холодный DM от лица Антона → тон отсюда, факты и границы из bible-as-prompt [internal].

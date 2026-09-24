@@ -1,0 +1,13 @@
+{
+  "url": "https://jobs.ashbyhq.com/yeet/39dbebc0-42da-4fdf-8f17-1ceb[id]/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-DevRel.pdf",
+  "out_prefix": "w20_i18_yeet",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "What’s the most absurd place": "Hacker News 'Who is hiring' threads. Plain-text comment dumps, zero formatting, no images - yet founders explain their architecture there more honestly than on most landing pages (your own post taught me more about the BPF runtime you're building than a docs page would). It works because the constraint strips the marketing away: one paragraph, a real engineer's voice, an audience made entirely of builders. I apply the same lesson daily - I run my multi-machine Claude agent fleet in public and write its operating manual as I go (110 public repos, flagships: claw-consensus, verbatim-citation-gate), and the rawest write-ups are consistently the ones engineers actually respond to."
+  },
+  "geo": {},
+  "options": {},
+  "required_labels": ["Name", "Email", "Resume"]
+}

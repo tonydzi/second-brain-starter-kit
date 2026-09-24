@@ -20,16 +20,16 @@ import os
 
 # --- Telegram ---------------------------------------------------------------
 # Team chat «Календарь» where a lead's Calendly link is dropped.
-CALENDAR_CHAT_ID = -5437873947
+CALENDAR_CHAT_ID = -[id]
 
-# Who may request a booking / approve with "+" (numeric IDs, not @handles).
-# Polina (@helper_ox) and Arina (@helper_as) were REMOVED 2026-06-23.
+# Who may request a booking / approve with "+" (numeric IDs, not [аккаунт]).
+# Polina ([аккаунт]) and [человек] ([аккаунт]) were REMOVED 2026-06-23.
 BOOKING_ALLOWLIST = {
-    9110567260: "Rita (@teammate_r)",
-    970102884:  "Nina (@teammate_n)",
-    226258979:  "Anton (@work_acct_a)",
-    7303193973: "Anton (@corp_acct)",
-    265315838:  "Anton (@work_acct_b)",
+    [id]: "Rita ([аккаунт])",
+    [id]:  "Nina ([аккаунт])",
+    [id]:  "Anton ([аккаунт])",
+    [id]: "Anton ([аккаунт])",
+    [id]:  "Anton ([аккаунт])",
 }
 
 # Telethon account the bot posts proposals from in the team chat.
@@ -72,7 +72,7 @@ LOG_PATH = os.path.join(BASE_DIR, "booking_daemon.log")
 # (TIMEZONE/WINDOW/BOOKING_ALLOWLIST/BOT_ACCOUNT/Telethon env/OAuth) — single source.
 #
 # Team chat «CALLS 889 MAIN FA FAAAA follow up» where the monitor reports/drafts.
-CALLS_CHAT_ID = -1006070720018
+CALLS_CHAT_ID = -[id]
 # The calendar the monitor WATCHES for call events. BB Platinum ONLY
 # (Anton 2026-06-25: A2 is NOT read by the monitor — that's the booking module).
 MONITOR_CALENDAR = "owner.calendar@example.com"
@@ -87,7 +87,7 @@ MONITOR_STATE_PATH = os.path.join(BASE_DIR, "monitor_state.json")
 MONITOR_LOG_PATH = os.path.join(BASE_DIR, "monitor_daemon.log")
 # Telethon session env (one of these is sourced for BOT_ACCOUNT).
 DIALOGS_ENV = r"%IMPORTS%\dialogs\.env"
-MCP_ENV = r"C:\mcp\telegram-mcp\.env"
+MCP_ENV = r"[путь владельца]"
 # Google OAuth (gmail client reused; calendar scope added by gcal_auth.py).
 GMAIL_DIR = r"%WORKDIR%\gmail"
 GCAL_TOKEN_DIR = os.path.join(BASE_DIR, "gcal_tokens")

@@ -1,83 +1,70 @@
 ---
 name: skill-forge
-description: >-
-  Create a node-local skill on a follower machine and prepare its promotion into the shared set
-  through a gate. Use when a new skill idea appears on a peer and should not wait for the hub.
-  Triggers: "/skill-forge <idea>".
+description: "Пир-локальная кузница скиллов: создать local-<skill> на своём узле и подготовить промоушен в общий набор через гейт. Используй, когда придумал новый скилл на follower-машине."
+consumer: "Писатель общего набора скиллов и полка Codex Desktop"
 permissions: [filesystem]
 risk_level: shell-local
 processes_untrusted_data: false
 disable-model-invocation: false
-origin: MAC-1
+origin: [машина флота]
 related: decision-2026-07-14-fleet-skill-autonomy-local-namespace
-license: MIT
+version: 1.1.0
 ---
 
-# skill-forge — a peer's skill forge (axis A + the promotion gate)
+# skill-forge — кузница скиллов пира (Ось А + гейт промоушена)
 
-The implementation of the approved design [[decision-2026-07-14-fleet-skill-autonomy-local-namespace]]:
-a peer creates ITS OWN skills locally (poisoning nobody — the blast radius on others is 0),
-and they reach the fleet-wide set only through a gate. While named `local-*` a skill lives here only
-(`.stignore local-*`: not synced, not rolled back by receiveonly, but still loaded by the loader).
+Реализация одобренного дизайна [[decision-2026-07-14-fleet-skill-autonomy-local-namespace]]:
+пир создаёт СВОИ скиллы локально (никого не «отравляет», радиус поражения чужих = 0),
+а на общий набор флота попадает только через гейт. Пока `local-*` — живёт только здесь
+(`.stignore local-*`, не синкается, не откатывается receiveonly, но грузится loader'ом).
 
-The gatekeeper: `skill_guard.py` in this same folder (0 LLM, stdlib only). Rails from DR26-07-14-MAC-1-01.
+Привратник: `skill_guard.py` в этой же папке (0-LLM, stdlib). Рельсы из DR26-07-14-MACANTON-01.
 
 ---
 
-## Mode A — `/skill-new` (create a local skill)
+## Режим A — `new` (создать local-скилл)
 
-1. **Name** — `local-<slug>`, only `[a-z0-9-]`. Check it:
+1. **Имя** — `local-<slug>`, только `[a-z0-9-]`. Проверить:
    `python ~/.claude/skills/skill-forge/skill_guard.py --check-name local-<slug>`
-2. **Scaffold**: create `~/.claude/skills/local-<slug>/SKILL.md` with frontmatter:
-   - `name`, `description` (when to invoke it), `permissions: [...]` (filesystem/shell/network — only what is truly needed),
-     `risk_level` (inert / shell-local / shell-networked / secret-touching / always-loaded-core / irreversible — the taxonomy from the external DR),
-     `processes_untrusted_data: true|false`, and `disable-model-invocation: true` for side-effecting or manual-only skills.
-   - ⚠️ **shell is OFF by default**: do not ask for `shell` without a real need; a skill with shell requires a mandatory review at promotion time.
-3. **Run the gate scan immediately**: `python ~/.claude/skills/skill-forge/skill_guard.py`
-   (rail 1 collision + rail 3 sync-conflict — you learn at once whether you are shadowing a shared skill).
-4. **`/tt`** the new skill (run it live → break it → prove it) BEFORE any promotion.
+2. **Скаффолд**: создать `~/.claude/skills/local-<slug>/SKILL.md` с frontmatter:
+   - `name`, `description` (когда вызывать), `permissions: [...]` (filesystem/shell/network — что реально нужно),
+     `risk_level` (inert / shell-local / shell-networked / secret-touching / always-loaded-core / irreversible — таксономия ChatGPT-DR),
+     `processes_untrusted_data: true|false`, `disable-model-invocation: true` для side-effect/ручных.
+   - ⚠️ **shell OFF по умолчанию**: не проси `shell` без реальной нужды; скилл с shell → обязательный review при промоушене.
+3. **Гейт-скан** сразу: `python ~/.claude/skills/skill-forge/skill_guard.py`
+   (рельс 1 collision + рельс 3 sync-conflict — узнаешь сразу, не шадоуишь ли общий скилл).
+4. **`/tt`** новый скилл (прогнать вживую → сломать → доказать) ДО любого промоушена.
 
-## Mode B — `/skill-promote` (local → the fleet-wide set)
+## Режим B — `promote` (local → общий набор флота)
 
-The gate (approved by the owner): **`/tt` + leak scan + collision check + risk classification + one peer opinion → route it to the writer.**
-A follower does NOT write the shared set itself (it is receiveonly) — it prepares a bundle and hands it to the single writer.
+Гейт (одобрен Антоном): **`/tt` + leak-scan + collision-check + risk-classify + 1 мнение пира → маршрут писателю.**
+Follower НЕ пишет общий набор сам (он receiveonly) — готовит бандл и отдаёт единственному писателю.
 
-1. **Deterministic gate** (everything a machine can check, right here):
+1. **Гейт детерминированно** (всё, что можно проверить машиной, здесь и сейчас):
    ```
    python ~/.claude/skills/skill-forge/skill_guard.py --leak local-<slug>
    ```
-   → collision (rail 1) + sync-conflict (rail 3) + name (step 2) + leak (rail 6). Exit 1 = stop.
-   A heavier leak scan when available — `gitleaks`/`trufflehog` on top (the `/release-slice` engine).
-2. **Did `/tt` pass?** — no ✅, no promotion.
-3. **Risk class** → if `secret-touching` / `always-loaded-core` / `irreversible` / it triggers Tier-2 →
-   **the owner's gate** (an ask in the approval channel); otherwise one peer opinion is enough.
-4. **One peer opinion** — `bus_send.py <peer> "SKILL-REVIEW: local-<slug> …"` ([[peer-opinion-before-fleet-rollout]]).
-5. **Route to the writer**: copy the bundle into `_machine-bus/_transit/canon-proposals/` + ping the writer
-   (today the hub; after migration step 3, the anchor node). The writer strips the `local-` prefix, commits and syncs it to everyone
-   ([[skills-rollout-all-machines-default]]). ⛔ A follower never strips `local-` itself — that is the writer's job.
+   → collision (рельс 1) + sync-conflict (рельс 3) + name (Step 2) + leak (рельс 6). Exit 1 = стоп.
+   Тяжёлый leak-scan при наличии — `gitleaks`/`trufflehog` поверх (движок `/release-slice`).
+2. **`/tt` пройден?** — без ✅ не промоутим.
+3. **Risk-класс** → если `secret-touching` / `always-loaded-core` / `irreversible` / trigger Tier-2 →
+   **гейт Антона** (QQQ в 02), иначе — 1 мнение пира достаточно.
+4. **1 мнение пира** — `bus_send.py <peer> "SKILL-REVIEW: local-<slug> …"` ([[peer-opinion-before-fleet-rollout]]).
+5. **Маршрут писателю**: скопировать бандл в `[шина]/_transit/canon-proposals/` + пинг писателю
+   (сейчас = хаб; после Step 3 миграции = Маячок). Писатель снимает `local-`, коммитит, синкает всем
+   ([[skills-rollout-all-machines-default]]). ⛔ Сам `local-` не снимаю на follower — это работа писателя.
+6. **Дверь Codex после записи в общий источник.** На узле, где существует
+   `~/.claude/scripts/codex_skills_bridge.py`, писатель обязан сразу выполнить:
+   `python ~/.claude/scripts/codex_skills_bridge.py sync`, затем
+   `python ~/.claude/scripts/codex_skills_bridge.py status`. Любой ненулевой код = промоушен
+   не завершён. Скрипта на этом узле нет → отправить применение на хаб; не создавать копию руками.
 
 ---
 
-## Boundaries (what this skill does NOT do)
-- **Step 3 (moving the writer from hub to the anchor node)** — a fleet consensus decision, not made here.
-- **Step 5 (codifying it into the Bible / CLAUDE.md)** — the canonical writer (the hub) does it, AFTER the mechanism is built.
-- **OS-level read-only on shared/** (option B from the DR) — node infrastructure, separate from this skill.
+## Границы (что НЕ делает этот скилл)
+- **Step 3 (перенос писателя hub→Маячок)** — fleet-консенсус, НЕ отсюда.
+- **Step 5 (кодификация в Библию/CLAUDE.md)** — канонический писатель (хаб), ПОСЛЕ сборки механизма.
+- **OS-read-only на shared/** (вызов B из DR) — инфра узла, отдельно от этого скилла.
 
-🧒 In plain words: this is a workbench for inventing your own tool at home, checking that it breaks
-nobody else's and hides no secret, and then handing it to the "master smith" who distributes it to everyone.
-
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+🧒 Простыми словами: это верстак, чтобы придумать свой инструмент прямо у себя, проверить, что
+он не ломает чужие и не прячет секрет, а потом отдать «главному [человек]», который раздаёт всем.

@@ -1,0 +1,19 @@
+{
+ "url": "https://jobs.ashbyhq.com/e2b/648efda2-d209-41eb-83fc-e6d1370fba71/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-DevRel.pdf",
+ "out_prefix": "w14_i13_e2b",
+ "texts": {
+  "Full name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn account": "https://tonydzi.github.io/",
+  "Portfolio": "https://tonydzi.github.io/",
+  "X (Twitter) account": "https://x.com/Tony_Stef_"
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "check_options": {
+  "Are you legally allowed to work in the United States?": "Yes"
+ },
+ "required_labels": ["Full name", "Email", "Resume", "LinkedIn account"]
+}

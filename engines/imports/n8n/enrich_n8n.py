@@ -22,7 +22,7 @@ Writes out/call_graph.json, out/deep_profiles.json, out/agent_prompts.md.
 import json, re
 from collections import defaultdict
 
-BASE = "E:/Obsidian/_imports/n8n"
+BASE = "[путь владельца]"
 wfs = json.load(open(f"{BASE}/raw/all_workflows.json", encoding="utf-8"))
 by_id = {str(w["id"]): w for w in wfs}
 name_of = {str(w["id"]): w["name"] for w in wfs}

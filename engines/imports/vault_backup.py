@@ -102,7 +102,7 @@ def _twin_is_fresh(path):
     m = re.search(r"~(\d{8}-\d{6})", os.path.basename(path))
     now = time.time()
     # bounded window: 0..RECOVER_FRESH_DAYS in the PAST, with 1-day future grace for clock skew.
-    # A far-FUTURE stamp (e.g. ~20990101 from a broken clock) must NOT read as "fresh" via a
+    # A far-FUTURE stamp (e.g. ~[id] from a broken clock) must NOT read as "fresh" via a
     # negative age — that would mask loss forever (Gemini break v2 #1).
     def _fresh(age):
         return -86400 <= age <= RECOVER_FRESH_DAYS * 86400
@@ -265,7 +265,7 @@ with Lock(name="vault_backup", busy_exit_code=0, max_age_min=30):  # backup = с
     elif r.returncode != 0:
         # LOUD but HONEST failure (1A): report git's REAL error, never GUESS "corrupt".
         # A broken HEAD used to fall through to the "committed" branch and LIE the snapshot
-        # was saved (hid a 2-day gap on PaloAlto-Desktop, 2026-06-21) -> we fail loud now.
+        # was saved (hid a 2-day gap on [машина флота], 2026-06-21) -> we fail loud now.
         # But blaming EVERY nonzero rc on "bad HEAD/ref" was ALSO a lie: the usual cause is a
         # parallel/interrupted backup holding index.lock (concurrency), not corruption.
         print("BACKUP FAILED (git commit rc=%d) — snapshot NOT saved:" % r.returncode)

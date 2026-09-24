@@ -1,0 +1,1300 @@
+[
+ {
+  "url": "https://coreweave.com/careers/job?[id]&board=weights_and_[человек]&gh_jid=[id]",
+  "company": "weights_and_[человек]",
+  "title": "Staff Product Manager, Training Infrastructure - Weights & [человек]",
+  "ats": "greenhouse",
+  "cluster": "product",
+  "location": "[человек], NJ / New York, NY / San Francisco, CA / Sunnyvale, CA / Bellevue, WA / Remote - US",
+  "extra": {
+   "why (weights|w&b|wandb|coreweave)|interested in (weights|w&b|wandb|coreweave)|why this role": {
+    "section": "text",
+    "value": "I am a W&B-class user by necessity: I run a production multi-machine Claude fleet and publish its evals. What I lack every day is exactly training and experiment infrastructure that treats runs, evals and failure modes as first-class objects across machines. I have shipped in this space from the outside: claw-consensus (reproducible multi-machine agent consensus with published evals), verbatim-citation-gate, and a casebook of control-plane failures with deterministic repros. I want to build the infrastructure I keep rebuilding for myself, for teams training at CoreWeave scale."
+   },
+   "product management experience|relevant experience|describe your experience": {
+    "section": "text",
+    "value": "Product owner for a distributed engineering org of 40+ developers across APAC for 11 years: crypto exchange backends, market-maker engines, HFT systems, custom ledgers for ANA and Foxconn. Before that, 5 years building ERP and CRM on Navision and Salesforce. Since 2023 I run an independent AI lab in Palo Alto with a 500+ practitioner community and a production Claude fleet with 13 autonomous daily lanes. I ship reproducible evals and bug reports upstream; contributions merged into 14 third-party projects including MCP Go SDK, UK AISI inspect_ai and fastmcp (verified 2026-09-04)."
+   },
+   "how (do|are) you us(e|ing) AI|AI in your (work|role)|AI tools": {
+    "section": "text",
+    "value": "My work is AI-operated. A fleet of Claude agents on several machines runs code review, install-documentation QA, issue-first bug reports and thread watch daily, with human approval on anything irreversible. I do not write code by hand; I own problem framing, architecture, evals and final QA. Public artifacts: https://github.com/tonydzi"
+   },
+   "proud|accomplishment|achievement|impact": {
+    "section": "text",
+    "value": "A review I filed on google/adk-python#6957 found an OAuth2 client secret leaking over three endpoints; the mutation matrix showed which of their tests stayed green, and the author adopted all three findings within six hours. Same program: 14 third-party projects merged, 52 issues with reproductions, credited in a release 40 hours after report. That is what I want product to feel like: evidence first."
+   },
+   "technical background|engineering background|coding|programming": {
+    "section": "text",
+    "value": "MSc in computer and information systems security (MEPhI). I do not write production code myself; my Python is basic. I work with engineers as product owner and run AI agents that implement under my specs and evals."
+   },
+   "training infrastructure|ML infrastructure|distributed training|GPU": {
+    "section": "text",
+    "value": "I have not run large-scale distributed training myself. My infrastructure experience is multi-machine agent orchestration, eval pipelines and failure-mode casebooks in production, plus prior ownership of exchange and HFT backends. I would learn the training stack from the users and the numbers."
+   },
+   "located in|currently reside|where are you (based|located)": {
+    "section": "text",
+    "value": "Palo Alto, California 94301"
+   },
+   "san francisco|sunnyvale|bay area|new york|[человек]|bellevue|work from (the|an) office|hybrid|in.office": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, I can work from this location",
+     "I am able"
+    ]
+   },
+   "salary|compensation|base pay|desired pay|expected pay|OTE": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|when can you start|earliest start": {
+    "section": "text",
+    "value": "10/01/2026 (immediately available)"
+   },
+   "relocat": {
+    "section": "yesno",
+    "value": true
+   },
+   "sponsor": {
+    "section": "option",
+    "value": [
+     "No",
+     "I do not require sponsorship",
+     "Not required"
+    ]
+   },
+   "authorized to work|legally eligible|work authorization|right to work": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "I am authorized",
+     "Authorized"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "years of experience|how many years": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "pronoun": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him/His"
+    ]
+   },
+   "gender|ethnicity|race|veteran|disability|transgender|sexual orientation": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I prefer not to answer",
+     "I do not want to answer",
+     "Decline"
+    ]
+   },
+   "how did you hear|hear about": {
+    "section": "option",
+    "value": [
+     "Job board",
+     "Company website",
+     "Other"
+    ]
+   }
+  }
+ },
+ {
+  "url": "https://job-boards.greenhouse.io/airtable/jobs/[id]",
+  "company": "airtable",
+  "title": "Senior Solutions Architect",
+  "ats": "greenhouse",
+  "cluster": "fde",
+  "location": "Remote - US",
+  "extra": {
+   "using AI today|AI experiment|how are you using AI": {
+    "section": "text",
+    "value": "All of my work runs through AI agents. I operate a production multi-machine fleet of Claude agents: 13 autonomous daily lanes (code review, live-install documentation QA, issue-first bug reports, thread watch) with human approval gates on anything irreversible. I do not write the code myself; I own framing, architecture, evals and final QA. Last experiment: claw-consensus, reproducible multi-machine agent consensus with an offline demo, published evals and a FAILURE-MODES.md. Related: verbatim-citation-gate, a zero-token gate that catches fabricated RAG citations, and agent-control-plane-casebook with deterministic repros and red tests. Links: https://github.com/tonydzi and https://tonydzi.github.io/"
+   },
+   "why airtable|interested in airtable|why this role": {
+    "section": "text",
+    "value": "Airtable is where business teams already keep their workflows; the next step is putting agents inside them without breaking trust. That is the exact problem I solve for myself every day: humans and agents in one pipeline, with clear handoffs and approval gates. I have done enterprise transformation before, hands-on: 5 years building ERP and CRM on Navision and Salesforce, then 11 years of process redesign for portfolio companies and enterprise clients such as subsidiaries of Foxconn and ANA Airlines. I want to design those human-plus-agent architectures for customers, and stay accountable through delivery."
+   },
+   "relevant experience|client.facing|consulting|professional services|enterprise transformation": {
+    "section": "text",
+    "value": "20 years client-facing: 5 years as CRM/ERP development director at Merlion (Navision, Salesforce), 11 years as co-founder of a venture incubator and software house in APAC with enterprise advisory for Foxconn and ANA subsidiaries, bank and regulator engagements across Southeast Asia on stablecoin frameworks (2018). Product owner for 40+ engineers. Since 2023, founder of an independent AI lab in Palo Alto running a production agent fleet in public."
+   },
+   "proud|accomplishment|achievement": {
+    "section": "text",
+    "value": "Building my own CRM to run a $35M fund and a 250-investor syndicate, with up to 30 operators in it daily, and then rebuilding that whole workflow so AI agents run it with humans only at the edges. It is the same design pattern I would bring to Airtable customers: process first, then platform, then agents."
+   },
+   "travel": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "I am willing to travel"
+    ]
+   },
+   "located in|currently reside|where are you (based|located)": {
+    "section": "text",
+    "value": "Palo Alto, California 94301"
+   },
+   "united states|based in the US|reside in the US": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "salary|compensation|base pay|desired pay|expected pay|OTE": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|when can you start|earliest start": {
+    "section": "text",
+    "value": "10/01/2026 (immediately available)"
+   },
+   "relocat": {
+    "section": "yesno",
+    "value": true
+   },
+   "sponsor": {
+    "section": "option",
+    "value": [
+     "No",
+     "I do not require sponsorship",
+     "Not required"
+    ]
+   },
+   "authorized to work|legally eligible|work authorization|right to work": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "I am authorized",
+     "Authorized"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "years of experience|how many years": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "pronoun": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him/His"
+    ]
+   },
+   "gender|ethnicity|race|veteran|disability|transgender|sexual orientation": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I prefer not to answer",
+     "I do not want to answer",
+     "Decline"
+    ]
+   },
+   "how did you hear|hear about": {
+    "section": "option",
+    "value": [
+     "Job board",
+     "Company website",
+     "Other"
+    ]
+   }
+  }
+ },
+ {
+  "url": "https://job-boards.greenhouse.io/airtable/jobs/[id]",
+  "company": "airtable",
+  "title": "Senior Solutions Architect- West Coast",
+  "ats": "greenhouse",
+  "cluster": "fde",
+  "location": "Remote-US",
+  "extra": {
+   "using AI today|AI experiment|how are you using AI": {
+    "section": "text",
+    "value": "All of my work runs through AI agents. I operate a production multi-machine fleet of Claude agents: 13 autonomous daily lanes (code review, live-install documentation QA, issue-first bug reports, thread watch) with human approval gates on anything irreversible. I do not write the code myself; I own framing, architecture, evals and final QA. Last experiment: claw-consensus, reproducible multi-machine agent consensus with an offline demo, published evals and a FAILURE-MODES.md. Related: verbatim-citation-gate, a zero-token gate that catches fabricated RAG citations, and agent-control-plane-casebook with deterministic repros and red tests. Links: https://github.com/tonydzi and https://tonydzi.github.io/"
+   },
+   "why airtable|interested in airtable|why this role": {
+    "section": "text",
+    "value": "Airtable is where business teams already keep their workflows; the next step is putting agents inside them without breaking trust. That is the exact problem I solve for myself every day: humans and agents in one pipeline, with clear handoffs and approval gates. I have done enterprise transformation before, hands-on: 5 years building ERP and CRM on Navision and Salesforce, then 11 years of process redesign for portfolio companies and enterprise clients such as subsidiaries of Foxconn and ANA Airlines. I want to design those human-plus-agent architectures for customers, and stay accountable through delivery."
+   },
+   "relevant experience|client.facing|consulting|professional services|enterprise transformation": {
+    "section": "text",
+    "value": "20 years client-facing: 5 years as CRM/ERP development director at Merlion (Navision, Salesforce), 11 years as co-founder of a venture incubator and software house in APAC with enterprise advisory for Foxconn and ANA subsidiaries, bank and regulator engagements across Southeast Asia on stablecoin frameworks (2018). Product owner for 40+ engineers. Since 2023, founder of an independent AI lab in Palo Alto running a production agent fleet in public."
+   },
+   "proud|accomplishment|achievement": {
+    "section": "text",
+    "value": "Building my own CRM to run a $35M fund and a 250-investor syndicate, with up to 30 operators in it daily, and then rebuilding that whole workflow so AI agents run it with humans only at the edges. It is the same design pattern I would bring to Airtable customers: process first, then platform, then agents."
+   },
+   "travel": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "I am willing to travel"
+    ]
+   },
+   "located in|currently reside|where are you (based|located)": {
+    "section": "text",
+    "value": "Palo Alto, California 94301"
+   },
+   "united states|based in the US|reside in the US": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "salary|compensation|base pay|desired pay|expected pay|OTE": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|when can you start|earliest start": {
+    "section": "text",
+    "value": "10/01/2026 (immediately available)"
+   },
+   "relocat": {
+    "section": "yesno",
+    "value": true
+   },
+   "sponsor": {
+    "section": "option",
+    "value": [
+     "No",
+     "I do not require sponsorship",
+     "Not required"
+    ]
+   },
+   "authorized to work|legally eligible|work authorization|right to work": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "I am authorized",
+     "Authorized"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "years of experience|how many years": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "pronoun": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him/His"
+    ]
+   },
+   "gender|ethnicity|race|veteran|disability|transgender|sexual orientation": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I prefer not to answer",
+     "I do not want to answer",
+     "Decline"
+    ]
+   },
+   "how did you hear|hear about": {
+    "section": "option",
+    "value": [
+     "Job board",
+     "Company website",
+     "Other"
+    ]
+   }
+  }
+ },
+ {
+  "url": "https://boards.greenhouse.io/robinhood/jobs/8082718?t=gh_src=&gh_jid=8082718",
+  "company": "robinhood",
+  "title": "Senior Product Manager, Crypto Wallet",
+  "ats": "greenhouse",
+  "cluster": "product",
+  "location": "Menlo Park, CA; New York, NY",
+  "extra": {
+   "ever worked for robinhood|previously (worked|been employed)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "pronouns": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him",
+     "he/him",
+     "He"
+    ]
+   },
+   "legally (work )?authorized|authorized to work": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "require (visa )?sponsorship|(require|need).*(sponsor|visa)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "willing to work from|listed offices|in.?office|relocat": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "personal relationships|outside business activities|stock holdings|competing investments|IP to retain|conflict": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "government (office|official|referral)|government official": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "gender identity|^gender": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "race|ethnicity": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "veteran|military": {
+    "section": "option",
+    "value": [
+     "I don't wish to answer",
+     "Decline To Self Identify",
+     "I am not a protected veteran",
+     "Prefer not to say"
+    ]
+   },
+   "disability": {
+    "section": "option",
+    "value": [
+     "I do not want to answer",
+     "I don't wish to answer",
+     "Decline To Self Identify",
+     "Prefer not to say"
+    ]
+   },
+   "lgbtq|sexual orientation|transgender": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "salary|compensation|pay expectation": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|earliest": {
+    "section": "text",
+    "value": "10/01/2026"
+   },
+   "years of (relevant )?experience": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "how did you hear|where did you (hear|find)": {
+    "section": "option",
+    "value": [
+     "Job Board",
+     "Job board",
+     "Company Website",
+     "Careers site",
+     "Other"
+    ]
+   },
+   "why (do you want to work at |are you interested in |join )?robinhood|why robinhood|why this role|interested in this (role|position)": {
+    "section": "text",
+    "value": "Banking and spending is the part of Robinhood that turns a trading app into a daily habit. I have worked with banks from the other side: in 2018, frameworks for first stablecoins with CB Bank in Myanmar and central-bank stakeholders in Cambodia, Thailand and Australia; at Everex, lending and risk management with stable-value payments. I know how legal, compliance and operations shape what ships. I am in Palo Alto and can be in Menlo Park three days a week."
+   },
+   "(relevant|previous|your) experience|tell us about (your|yourself)|background": {
+    "section": "text",
+    "value": "Chief Engineer, Lending and Risk Management at Everex (2017-2018): blockchain credit scoring, stable-value payments, government and bank relations across Southeast Asia. Eleven years co-running a software house and venture incubator in APAC as product owner over 40+ engineers: exchange backends, custom distributed ledgers for enterprise clients including subsidiaries of Foxconn and ANA Airlines. Before that, nine years at Merlion building ERP and CRM on Microsoft Navision and Salesforce.\n\nSince 2023, Palo Alto AI Research Lab: a production multi-agent Claude fleet, published evals, contributions merged into 14 third-party engineering projects."
+   },
+   "(how (do|would) you use )?ai (in|at) (your )?(work|day)|use of ai|ai tools|modern ai|ai.?native": {
+    "section": "text",
+    "value": "I do not write production code by hand. I run a fleet of Claude agents that does the work: code review, live-install QA, bug reports with a deterministic repro and a red test, drafts, research. The fleet runs 13 daily autonomous lanes across several machines with human approval on anything irreversible. Since July 2026 that produced contributions merged into 14 third-party engineering projects. I own the framing, the architecture, the evals and the final call. That is how I would run product work too: agents do the grind, I decide."
+   },
+   "proud|accomplishment|achievement|biggest impact|biggest (deal|win)": {
+    "section": "text",
+    "value": "The one I would show first: a production multi-agent Claude fleet that runs unattended and gets its work accepted by strangers. Example: a review on google/adk-python, an OAuth2 secret leaking over three endpoints, adopted by the author within six hours. Published evals and a failure-modes doc go with it. Earlier: in 2018 I worked with banks and central-bank stakeholders in Myanmar, Cambodia, Thailand and Australia on frameworks for their first stablecoins."
+   },
+   "degree|education level|highest level": {
+    "section": "option",
+    "value": [
+     "Doctorate",
+     "Doctoral Degree",
+     "PhD",
+     "Master's Degree",
+     "Master's"
+    ]
+   }
+  }
+ },
+ {
+  "url": "https://boards.greenhouse.io/robinhood/jobs/8044746?t=gh_src=&gh_jid=8044746",
+  "company": "robinhood",
+  "title": "Staff Product Manager, Banking",
+  "ats": "greenhouse",
+  "cluster": "product",
+  "location": "Menlo Park, CA; New York, NY; Washington, DC",
+  "extra": {
+   "ever worked for robinhood|previously (worked|been employed)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "pronouns": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him",
+     "he/him",
+     "He"
+    ]
+   },
+   "legally (work )?authorized|authorized to work": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "require (visa )?sponsorship|(require|need).*(sponsor|visa)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "willing to work from|listed offices|in.?office|relocat": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "personal relationships|outside business activities|stock holdings|competing investments|IP to retain|conflict": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "government (office|official|referral)|government official": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "gender identity|^gender": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "race|ethnicity": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "veteran|military": {
+    "section": "option",
+    "value": [
+     "I don't wish to answer",
+     "Decline To Self Identify",
+     "I am not a protected veteran",
+     "Prefer not to say"
+    ]
+   },
+   "disability": {
+    "section": "option",
+    "value": [
+     "I do not want to answer",
+     "I don't wish to answer",
+     "Decline To Self Identify",
+     "Prefer not to say"
+    ]
+   },
+   "lgbtq|sexual orientation|transgender": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "salary|compensation|pay expectation": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|earliest": {
+    "section": "text",
+    "value": "10/01/2026"
+   },
+   "years of (relevant )?experience": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "how did you hear|where did you (hear|find)": {
+    "section": "option",
+    "value": [
+     "Job Board",
+     "Job board",
+     "Company Website",
+     "Careers site",
+     "Other"
+    ]
+   },
+   "why (do you want to work at |are you interested in |join )?robinhood|why robinhood|why this role|interested in this (role|position)": {
+    "section": "text",
+    "value": "Banking and spending is the part of Robinhood that turns a trading app into a daily habit. I have worked with banks from the other side: in 2018, frameworks for first stablecoins with CB Bank in Myanmar and central-bank stakeholders in Cambodia, Thailand and Australia; at Everex, lending and risk management with stable-value payments. I know how legal, compliance and operations shape what ships. I am in Palo Alto and can be in Menlo Park three days a week."
+   },
+   "(relevant|previous|your) experience|tell us about (your|yourself)|background": {
+    "section": "text",
+    "value": "Chief Engineer, Lending and Risk Management at Everex (2017-2018): blockchain credit scoring, stable-value payments, government and bank relations across Southeast Asia. Eleven years co-running a software house and venture incubator in APAC as product owner over 40+ engineers: exchange backends, custom distributed ledgers for enterprise clients including subsidiaries of Foxconn and ANA Airlines. Before that, nine years at Merlion building ERP and CRM on Microsoft Navision and Salesforce.\n\nSince 2023, Palo Alto AI Research Lab: a production multi-agent Claude fleet, published evals, contributions merged into 14 third-party engineering projects."
+   },
+   "(how (do|would) you use )?ai (in|at) (your )?(work|day)|use of ai|ai tools|modern ai|ai.?native": {
+    "section": "text",
+    "value": "I do not write production code by hand. I run a fleet of Claude agents that does the work: code review, live-install QA, bug reports with a deterministic repro and a red test, drafts, research. The fleet runs 13 daily autonomous lanes across several machines with human approval on anything irreversible. Since July 2026 that produced contributions merged into 14 third-party engineering projects. I own the framing, the architecture, the evals and the final call. That is how I would run product work too: agents do the grind, I decide."
+   },
+   "proud|accomplishment|achievement|biggest impact|biggest (deal|win)": {
+    "section": "text",
+    "value": "The one I would show first: a production multi-agent Claude fleet that runs unattended and gets its work accepted by strangers. Example: a review on google/adk-python, an OAuth2 secret leaking over three endpoints, adopted by the author within six hours. Published evals and a failure-modes doc go with it. Earlier: in 2018 I worked with banks and central-bank stakeholders in Myanmar, Cambodia, Thailand and Australia on frameworks for their first stablecoins."
+   },
+   "degree|education level|highest level": {
+    "section": "option",
+    "value": [
+     "Doctorate",
+     "Doctoral Degree",
+     "PhD",
+     "Master's Degree",
+     "Master's"
+    ]
+   }
+  }
+ },
+ {
+  "url": "https://job-boards.greenhouse.io/singlestore/jobs/7956719",
+  "company": "singlestore",
+  "title": "Staff Product Manager | Cloud Data Platform",
+  "ats": "greenhouse",
+  "cluster": "product",
+  "location": "United States",
+  "extra": {
+   "LinkedIn": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "Website|Portfolio|Blog URL|Personal site": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "GitHub": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "require.*sponsorship|need.*sponsorship|visa sponsorship": {
+    "section": "option",
+    "value": [
+     "No, I do not require sponsorship",
+     "No, I will not require sponsorship",
+     "No - I do not require sponsorship",
+     "No"
+    ]
+   },
+   "authorized to work|legally authorized|eligible to work": {
+    "section": "option",
+    "value": [
+     "Yes, I am authorized to work in the United States",
+     "Yes, I am legally authorized",
+     "Yes"
+    ]
+   },
+   "salary|compensation|expected pay|OTE|base pay": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|when can you start|availability|available to start|notice period": {
+    "section": "text",
+    "value": "Immediately available (target start 10/01/2026)"
+   },
+   "years of (relevant |professional )?experience|how many years": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10+ years",
+     "11+ years"
+    ]
+   },
+   "pronouns": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him/His",
+     "He/him/his"
+    ]
+   },
+   "gender|transgender|sexual orientation|ethnicity|race|veteran|disability": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "I prefer not to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "Country": {
+    "section": "option",
+    "value": [
+     "United States",
+     "United States of America",
+     "USA"
+    ]
+   },
+   "City": {
+    "section": "text",
+    "value": "Palo Alto"
+   },
+   "State": {
+    "section": "option",
+    "value": [
+     "California",
+     "CA"
+    ]
+   },
+   "Zip|Postal": {
+    "section": "text",
+    "value": "94301"
+   },
+   "currently located|current location|where are you (currently )?based|where do you live": {
+    "section": "text",
+    "value": "Palo Alto, California, USA (US O-1 visa active, EU citizen). Open to relocation."
+   },
+   "Why SingleStore|why do you want to work|why are you interested|interest in this role|why this role": {
+    "section": "text",
+    "value": "SingleStore sells one thing I have had to build myself: a data platform that stays fast and honest when transactions and analytics hit it at once. I shipped crypto-exchange backends, market-maker engines and high-frequency trading systems where the database was the bottleneck and the customer was an enterprise that measured us in milliseconds and uptime. Today I run a production multi-machine fleet of AI agents, and the platform underneath is again the product: reliability, observability, developer experience. I want to own that roadmap for customers who are pushing real-time AI workloads onto a database, because I am one of them."
+   },
+   "relevant experience|describe your experience|tell us about|background|why are you a (good )?fit|why should we|product management experience": {
+    "section": "text",
+    "value": "15 years, most of it as the person who decided what got built. Product owner for a distributed engineering org of 40+ developers across APAC; shipped exchange infrastructure, cryptocurrency backends, market-maker engines and HFT systems for hedge funds, market makers and brokers, enterprise customers who paid for scale and did not forgive downtime. Built custom distributed ledgers for ANA and Foxconn subsidiaries. Earlier, five years building ERP and CRM on Microsoft Navision and Salesforce at a large IT distributor. Today I run a production fleet of Claude agents in public and publish its evals and failure modes; I own framing, architecture, evaluation and final QA. Trained in CS security (MSc, MEPhI)."
+   },
+   "AI tools|AI-native|how do you use AI|use AI": {
+    "section": "text",
+    "value": "I run AI as infrastructure. My lab operates a production fleet of Claude agents across several machines: they pull from my knowledge base, draft specs and reports, review each other's work and file their own failures without me starting each run. I own the problem framing, architecture, evaluation and final QA. What I care about most is the checks: I built an open-source gate that catches fabricated citations and a casebook of reproducible agent failures, because unverified agent output is worse than none. For a data-platform PM this is the daily loop: customer signal in, prioritized roadmap out, every claim backed by a reproducible measurement."
+   },
+   "proud|greatest accomplishment|strongest achievement|biggest win|most significant": {
+    "section": "text",
+    "value": "Running an evidence-first reliability program across the AI-agent open-source ecosystem, unattended. Since July 2026 my fleet has landed contributions in 14 third-party engineering projects, including the Model Context Protocol Go SDK, UK AISI inspect_ai, fastmcp and pydantic/logfire, plus 52 issues filed with deterministic reproductions. One review on google/adk-python found an OAuth2 client secret leaking over three endpoints; the author adopted all three findings within six hours. Thirteen daily autonomous lanes, human gates only on anything irreversible. That is product management applied to a platform: define the bar, instrument it, ship."
+   },
+   "enterprise customer|customer(s)? at scale|work(ed)? with customers": {
+    "section": "text",
+    "value": "Enterprise customers were the only customers I had: hedge funds, market makers and brokers for exchange infrastructure; subsidiaries of Foxconn and ANA Airlines for custom distributed ledgers; banks and central-bank stakeholders in Myanmar, Cambodia, Thailand and Australia on stablecoin frameworks in 2018. I ran discovery, priorities and delivery with them directly."
+   },
+   "distributed systems|databases|technical (background|depth)|SQL|Python": {
+    "section": "text",
+    "value": "MSc in computer and information systems security (MEPhI). Product owner for exchange backends, market-maker engines and HFT systems; built custom distributed ledgers for enterprise clients. Five years building ERP/CRM on Microsoft Navision and Salesforce, SQL every day. I am not a full-time engineer: Python at a working level, and I run a production multi-machine agent fleet with Claude as implementation collaborator. I own architecture, evaluation and QA."
+   },
+   "hear about|how did you (find|learn)|source": {
+    "section": "option",
+    "value": [
+     "Job board",
+     "Job Board",
+     "Greenhouse",
+     "Other",
+     "Company website"
+    ]
+   },
+   "school|university|education": {
+    "section": "option",
+    "value": [
+     "0 - Other",
+     "Other"
+    ]
+   },
+   "degree": {
+    "section": "option",
+    "value": [
+     "Doctoral Degree",
+     "Doctorate",
+     "PhD",
+     "Master's Degree"
+    ]
+   },
+   "Additional information|anything else|cover letter|additional comments": {
+    "section": "text",
+    "value": "US O-1 visa active, no sponsorship needed; EU citizen. Based in Palo Alto, CA, open to relocation. Full profile, published evals and contribution evidence: https://tonydzi.github.io/"
+   }
+  }
+ },
+ {
+  "url": "https://job-boards.greenhouse.io/sourcegraph91/jobs/[id]",
+  "company": "sourcegraph91",
+  "title": "Product Manager [IC4]",
+  "ats": "greenhouse",
+  "cluster": "product",
+  "location": "Remote",
+  "extra": {
+   "LinkedIn": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "Website|Portfolio|Blog URL|Personal site": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "GitHub": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "require.*sponsorship|need.*sponsorship|visa sponsorship": {
+    "section": "option",
+    "value": [
+     "No, I do not require sponsorship",
+     "No, I will not require sponsorship",
+     "No - I do not require sponsorship",
+     "No"
+    ]
+   },
+   "authorized to work|legally authorized|eligible to work": {
+    "section": "option",
+    "value": [
+     "Yes, I am authorized to work in the United States",
+     "Yes, I am legally authorized",
+     "Yes"
+    ]
+   },
+   "salary|compensation|expected pay|OTE|base pay": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|when can you start|availability|available to start|notice period": {
+    "section": "text",
+    "value": "Immediately available (target start 10/01/2026)"
+   },
+   "years of (relevant |professional )?experience|how many years": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10+ years",
+     "11+ years"
+    ]
+   },
+   "pronouns": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him/His",
+     "He/him/his"
+    ]
+   },
+   "gender|transgender|sexual orientation|ethnicity|race|veteran|disability": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "I prefer not to answer",
+     "Prefer not to say",
+     "Decline"
+    ]
+   },
+   "Country": {
+    "section": "option",
+    "value": [
+     "United States",
+     "United States of America",
+     "USA"
+    ]
+   },
+   "City": {
+    "section": "text",
+    "value": "Palo Alto"
+   },
+   "State": {
+    "section": "option",
+    "value": [
+     "California",
+     "CA"
+    ]
+   },
+   "Zip|Postal": {
+    "section": "text",
+    "value": "94301"
+   },
+   "currently located|current location|where are you (currently )?based|where do you live": {
+    "section": "text",
+    "value": "Palo Alto, California, USA (US O-1 visa active, EU citizen). Open to relocation."
+   },
+   "software engineer|part-time engineer|SDLC|engineering experience|coding experience": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, I have"
+    ]
+   },
+   "processes in (a )?fast|balancing stakeholder|built processes": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, I have"
+    ]
+   },
+   "B2B|enterprise customer": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, I have"
+    ]
+   },
+   "time ?zone|EST overlap|hours overlap|overlap": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, I can"
+    ]
+   },
+   "Why Sourcegraph|why do you want to work|why are you interested|interest in this role|why this role": {
+    "section": "text",
+    "value": "Sourcegraph builds for the two users I live with every day: developers and AI agents reading real codebases. I run a production fleet of Claude agents across several machines, and their weakest point is exactly what Sourcegraph works on, understanding a large codebase before touching it. I also do developer activation for a living: my lab has landed contributions in 14 third-party engineering projects since July, with mutation-tested reviews and reproducible bug reports, so I know what wins and loses trust with engineers who evaluate tools by reading the diff. I want to turn that into a roadmap."
+   },
+   "relevant experience|describe your experience|tell us about|background|why are you a (good )?fit|why should we|product management experience": {
+    "section": "text",
+    "value": "15 years deciding what gets built and shipping it with engineers. Product owner for a distributed engineering org of 40+ developers across APAC: exchange backends, market-maker engines, HFT systems, custom distributed ledgers for enterprise clients. Startup experience by trade: co-founded an incubator and software house in 2015 and ran cohorts end to end. Hands-on technical roots: MSc in CS security, five years building ERP and CRM on Microsoft Navision and Salesforce, smart contracts at Everex in 2017. Today I run a production multi-machine Claude fleet in public, publish its evals and failure modes, and manage a public review and bug-report program across the AI developer-tooling ecosystem. Git and pull requests are my daily surface."
+   },
+   "AI tools|AI-native|how do you use AI|use AI|coding assistant": {
+    "section": "text",
+    "value": "AI is the workforce, and I am the product manager for it. My lab runs a production fleet of Claude agents across several machines: they research, draft, review each other, run tests and file bug reports upstream without me starting each run. I own framing, architecture, evaluation and final QA. The output is public: contributions merged into 14 third-party projects, 52 issues with deterministic reproductions, an open-source gate that catches fabricated citations, and a casebook of reproducible agent control-plane failures. That is direct experience of what coding agents get wrong in real repositories, which is the product problem Sourcegraph is solving."
+   },
+   "proud|greatest accomplishment|strongest achievement|biggest win|most significant": {
+    "section": "text",
+    "value": "A review accepted by the author, not merely posted. On google/adk-python#6957 my process found an OAuth2 client secret leaking over three endpoints; the mutation matrix showed which of the project's own tests stayed green, and the author adopted all three findings within six hours, calling it one of the most useful reviews the PR had received. It came out of a program I designed and run unattended: 13 daily autonomous lanes, human gates only on anything irreversible, contributions landed in 14 third-party engineering projects since July 2026."
+   },
+   "developer tools|developer-facing|products for developers|technical products": {
+    "section": "text",
+    "value": "I did developer activation for a frontier platform when smart contracts were where LLM agents are now: built Solidity curricula, ran hackathons and incubations from first [человек] to shipped mainnet product, and supplied engineers and deal flow to Ethereum, [человек], Cardano, Aptos, Sui and Canton. Today the same work runs against the AI developer-tooling ecosystem: MCP Go SDK, inspect_ai, fastmcp, agno, logfire and others."
+   },
+   "hear about|how did you (find|learn)|source": {
+    "section": "option",
+    "value": [
+     "Job board",
+     "Job Board",
+     "Greenhouse",
+     "GitHub",
+     "Other"
+    ]
+   },
+   "school|university|education": {
+    "section": "option",
+    "value": [
+     "0 - Other",
+     "Other"
+    ]
+   },
+   "degree": {
+    "section": "option",
+    "value": [
+     "Doctoral Degree",
+     "Doctorate",
+     "PhD",
+     "Master's Degree"
+    ]
+   },
+   "Additional information|anything else|cover letter|additional comments": {
+    "section": "text",
+    "value": "US O-1 visa active, no sponsorship needed; EU citizen (Polish passport). Based in Palo Alto, CA with time in Sintra, PT; 20+ hours of EST overlap is not a problem and I am open to relocation. Contribution evidence and published evals: https://tonydzi.github.io/"
+   }
+  }
+ },
+ {
+  "url": "http://www.bishopfox.com/jobs?gh_jid=8110348",
+  "company": "bishopfox",
+  "title": "Solutions Engineer",
+  "ats": "greenhouse",
+  "cluster": "fde",
+  "location": "U.S. Remote",
+  "extra": {
+   "offensive security consulting|supporting technical sales": {
+    "section": "text",
+    "value": "0"
+   },
+   "Penetration Testing|Red Teaming|hands-on experience": {
+    "section": "text",
+    "value": "0"
+   },
+   "rate your offensive security|penetration testing proficiency|proficiency": {
+    "section": "option",
+    "value": [
+     "Beginner",
+     "Basic",
+     "Novice",
+     "Limited",
+     "Foundational",
+     "1"
+    ]
+   },
+   "English level|level of English": {
+    "section": "option",
+    "value": [
+     "Fluent",
+     "Advanced",
+     "Professional",
+     "Full professional proficiency",
+     "C1",
+     "C2"
+    ]
+   },
+   "currently located|Where are you located|State": {
+    "section": "option",
+    "value": [
+     "California",
+     "CA"
+    ]
+   },
+   "why (are you interested in|[человек] Fox)": {
+    "section": "text",
+    "value": "I am classically trained in CS security (MSc, MEPhI) and spent 11 years selling and scoping technical work to founders, banks and enterprise clients. [человек] Fox sells expertise, not licenses; scoping that expertise into proposals a CISO trusts is the job I have done for exchange infrastructure and stablecoin frameworks. I am not a pentester and I say so up front."
+   },
+   "relevant experience|describe your experience": {
+    "section": "text",
+    "value": "Chief Engineer, Lending & Risk at Everex (2017-2018): led bank and government relations across SE Asia on crypto payments and stablecoins. 2018: frameworks with CB Bank Myanmar and central-bank stakeholders in four countries. 11 years co-running an APAC incubator and software house: 10,000+ founder calls, 2,000+ institutional-investor calls, proposals and scoping for exchange backends, market-maker engines and HFT systems. Today: I run a production multi-machine Claude agent fleet in public: 13 daily autonomous lanes (code review, live-install docs QA, issue-first bug reports, thread watch) with human approval gates on anything irreversible. Since Jul 2026 that program has merged contributions into 14 third-party engineering projects (MCP Go SDK, UK AISI inspect_ai, fastmcp, agno, pydantic/logfire and others) and filed 52 issues with reproductions. I do not write the code myself; I own problem framing, architecture, evaluation, QA and the operating manual. Evidence: https://github.com/tonydzi/github-evidence"
+   },
+   "accomplishment|proud of|greatest achievement": {
+    "section": "text",
+    "value": "I run a production multi-machine Claude agent fleet in public: 13 daily autonomous lanes (code review, live-install docs QA, issue-first bug reports, thread watch) with human approval gates on anything irreversible. Since Jul 2026 that program has merged contributions into 14 third-party engineering projects (MCP Go SDK, UK AISI inspect_ai, fastmcp, agno, pydantic/logfire and others) and filed 52 issues with reproductions. I do not write the code myself; I own problem framing, architecture, evaluation, QA and the operating manual. Evidence: https://github.com/tonydzi/github-evidence"
+   },
+   "how did you hear|hear about": {
+    "section": "option",
+    "value": [
+     "[человек] Fox website",
+     "Company website",
+     "Greenhouse",
+     "Job board",
+     "Other"
+    ]
+   },
+   "cover letter": {
+    "section": "text",
+    "value": "Solutions Engineer at [человек] Fox. Security-trained (MSc, Computer and Information Systems Security, MEPhI), 15 years in client-facing technical roles, C-level relationships with banks and enterprises in SE Asia and Japan. Zero years of hands-on penetration testing; strong at scoping, proposals and translating technical depth into business decisions. US O-1 active, no sponsorship needed, Palo Alto based, willing to travel 10-20%. Available from 10/01/2026. https://tonydzi.github.io/"
+   },
+   "salary|compensation|OTE|pay expectation": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|earliest.*start": {
+    "section": "text",
+    "value": "10/01/2026"
+   },
+   "years of (relevant |professional )?experience": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "relocat": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, I am willing to relocate",
+     "Open to relocation"
+    ]
+   },
+   "willing to travel|travel requirement|able to travel": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, up to 25%",
+     "10-20%",
+     "25%"
+    ]
+   },
+   "pronoun": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him/His",
+     "He"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "authorized to work|legally authori[sz]ed|legal right to work|eligible to work": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "sponsorship|visa.*(now or in the future|future)|require.*(visa|permit)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "gender identity|transgender|sexual orientation|race|ethnicity|hispanic|veteran|disability": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "I prefer not to answer",
+     "Decline"
+    ]
+   },
+   "privacy|consent|acknowledge|I agree|certify": {
+    "section": "checkbox",
+    "value": true
+   }
+  }
+ },
+ {
+  "url": "https://www.[человек].com/company/careers/open-positions/?gh_jid=7861730",
+  "company": "[человек]",
+  "title": "Channel Solutions Engineer -North Central Region",
+  "ats": "greenhouse",
+  "cluster": "fde",
+  "location": "Illinois, United States",
+  "extra": {
+   "reside in the North Central|North Central": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "^School|School": {
+    "section": "option",
+    "value": [
+     "0 - Other",
+     "Other"
+    ]
+   },
+   "^Degree|Degree": {
+    "section": "option",
+    "value": [
+     "Doctorate",
+     "Doctoral Degree",
+     "PhD",
+     "Ph.D.",
+     "Master's Degree",
+     "Master's"
+    ]
+   },
+   "Discipline": {
+    "section": "option",
+    "value": [
+     "Computer Science",
+     "Information Technology",
+     "Education",
+     "Other"
+    ]
+   },
+   "how did you hear|hear about": {
+    "section": "text",
+    "value": "[человек] careers page"
+   },
+   "why (are you interested in|[человек])": {
+    "section": "text",
+    "value": "Channel work is ecosystem building: make partners able to pitch, demo and win without you in the room. That is what I did for 11 years in APAC with founders, advisors and blockchain foundations (Ethereum, [человек], Cardano, Aptos, Sui), supplying engineers and deal flow and running cohorts and curricula from first [человек] to shipped product. Security-trained (MSc, MEPhI). I am not a systems administrator; my strength is enablement, training and executive relationships."
+   },
+   "relevant experience|describe your experience": {
+    "section": "text",
+    "value": "11 years co-founding an APAC incubator and software house: partner enablement, cohort training, Solidity curricula and hackathons, enterprise advisory for Foxconn and ANA subsidiaries, 40+ engineer org as product owner. 2018: stablecoin frameworks with banks in Myanmar, Cambodia, Thailand and Australia. Earlier: five years building ERP/CRM on Salesforce and Microsoft Navision. Today: I run a production multi-machine Claude agent fleet in public: 13 daily autonomous lanes (code review, live-install docs QA, issue-first bug reports, thread watch) with human approval gates on anything irreversible. Since Jul 2026 that program has merged contributions into 14 third-party engineering projects (MCP Go SDK, UK AISI inspect_ai, fastmcp, agno, pydantic/logfire and others) and filed 52 issues with reproductions. I do not write the code myself; I own problem framing, architecture, evaluation, QA and the operating manual. Evidence: https://github.com/tonydzi/github-evidence"
+   },
+   "accomplishment|proud of|greatest achievement": {
+    "section": "text",
+    "value": "I run a production multi-machine Claude agent fleet in public: 13 daily autonomous lanes (code review, live-install docs QA, issue-first bug reports, thread watch) with human approval gates on anything irreversible. Since Jul 2026 that program has merged contributions into 14 third-party engineering projects (MCP Go SDK, UK AISI inspect_ai, fastmcp, agno, pydantic/logfire and others) and filed 52 issues with reproductions. I do not write the code myself; I own problem framing, architecture, evaluation, QA and the operating manual. Evidence: https://github.com/tonydzi/github-evidence"
+   },
+   "cover letter": {
+    "section": "text",
+    "value": "Channel Solutions Engineer, North Central. I do not currently live in the region; I am based in Palo Alto and ready to relocate, and I travel to partners as the job requires. Background: 15 years client-facing technical work, CS security MSc, 11 years running partner and founder enablement in APAC, executive relationships with banks and enterprise clients. US O-1 active, no sponsorship needed. Available from 10/01/2026. https://tonydzi.github.io/"
+   },
+   "salary|compensation|OTE|pay expectation": {
+    "section": "text",
+    "value": "180000"
+   },
+   "start date|available to start|earliest.*start": {
+    "section": "text",
+    "value": "10/01/2026"
+   },
+   "years of (relevant |professional )?experience": {
+    "section": "option",
+    "value": [
+     "15",
+     "More than 10",
+     "10+",
+     "10 or more"
+    ]
+   },
+   "relocat": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, I am willing to relocate",
+     "Open to relocation"
+    ]
+   },
+   "willing to travel|travel requirement|able to travel": {
+    "section": "option",
+    "value": [
+     "Yes",
+     "Yes, up to 25%",
+     "10-20%",
+     "25%"
+    ]
+   },
+   "pronoun": {
+    "section": "option",
+    "value": [
+     "He/him",
+     "He/Him/His",
+     "He"
+    ]
+   },
+   "linkedin": {
+    "section": "text",
+    "value": "https://tonydzi.github.io/"
+   },
+   "website|portfolio|github": {
+    "section": "text",
+    "value": "https://github.com/tonydzi"
+   },
+   "authorized to work|legally authori[sz]ed|legal right to work|eligible to work": {
+    "section": "option",
+    "value": [
+     "Yes"
+    ]
+   },
+   "sponsorship|visa.*(now or in the future|future)|require.*(visa|permit)": {
+    "section": "option",
+    "value": [
+     "No"
+    ]
+   },
+   "gender identity|transgender|sexual orientation|race|ethnicity|hispanic|veteran|disability": {
+    "section": "option",
+    "value": [
+     "Decline To Self Identify",
+     "I don't wish to answer",
+     "I do not want to answer",
+     "Prefer not to say",
+     "I prefer not to answer",
+     "Decline"
+    ]
+   },
+   "privacy|consent|acknowledge|I agree|certify": {
+    "section": "checkbox",
+    "value": true
+   }
+  }
+ }
+]

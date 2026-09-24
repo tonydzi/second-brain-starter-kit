@@ -1,0 +1,25 @@
+{
+  "idx": 5,
+  "company": "Polygon Labs",
+  "url": "https://jobs.ashbyhq.com/polygon-labs/10a0eee7-50fc-40f8-9523-0b26aa385717/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+  "out_prefix": "w14_i5_polygon",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Linkedin": "https://tonydzi.github.io/ (no LinkedIn account)",
+    "Twitter": "https://x.com/Tony_Stef_",
+    "GitHub": "https://github.com/tonydzi"
+  },
+  "location": {"label": "Location", "type": "Lisbon", "want": "lisbon"},
+  "options": {
+    "What is your current age?": "I prefer not to answer",
+    "What is your gender identity?": "I prefer not to answer",
+    "Do you identify as transgender?": "I prefer not to answer",
+    "How do you identify your sexual orientation": "I prefer not to answer",
+    "Which ethnicity(ies) do you identify with": "I prefer not to answer",
+    "Which of the following communities do you belong to": "I prefer not to answer"
+  },
+  "linkedin_fallback": {"Linkedin": "https://tonydzi.github.io/"},
+  "required_labels": ["Name", "Email", "Resume", "Linkedin"]
+}

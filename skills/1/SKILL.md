@@ -1,71 +1,107 @@
 ---
-name: "1"
-description: >-
-  Recover a session after a hard crash (app died, machine rebooted, context lost mid-work):
-  replay the turn-state ledger for the last requests, files and decisions, run a green/red
-  health ping over the system map, file sync and MCP connectors, then rebuild the previous
-  session history for pickup. Triggers: "/1", "resume after crash", "wake".
-license: MIT
+name: 1
+description: "Восстановление после ЖЁСТКОГО обрыва сессии (крэш / комп вырубился / контекст потерян посреди работы) — ОДНА сверхкороткая команда «где мы были + всё ли живо + верни историю». Триггеры: “/1“, “/!“, “восстановись“, “продолжаем“, “я вернулся“, “где мы остановились“, “проверь что всё работает“, “сделай recall и проверь систему“, “resume after crash“, “wake“"
+version: 1.0.0
 ---
 
-# /1 — resurrection after a crash ("where were we + is everything working")
+# /1 — воскрешение после крэша («где мы были + всё ли работает»)
 
-**The operator's pain:** the session died mid-work (a crash / the computer went off) → the new session is empty. Before: remember by hand, then separately fire `/arch`, `/sync-check`, `/mcp`, then work out "where did we stop". Now it is one word: `/1` (or `/!`).
+**Боль Антона:** сессия умерла посреди работы (крэш / комп выключился) → новая сессия пустая. Раньше: руками вспоминай, потом отдельно дёргай `/arch`, `/sync-check`, `/mcp`, потом думай «на чём остановились». Теперь — одно слово `/1` (или `/!`).
 
-**What this is NOT:** `/retro` is for a CLEAN end of session (inventory of what was built → routing to homes → /compact). After a sudden crash there is nothing left to package, the context is already gone → you need resurrection, NOT `/retro`. Two different tools.
+**Чем это НЕ является:** `/retro` — для ЧИСТОГО конца сессии (инвентарь сделанного → раскладка по домам → /compact). После внезапного крэша упаковывать нечего, контекст уже потерян → нужен НЕ `/retro`, а воскрешение. Это разные инструменты.
 
-## 3 steps (run them in order, report as one panel)
+## 4 шага (выполняй по порядку, отчитайся одной плашкой)
 
-### Step 1 — RECALL: where we were (0 tokens, deterministic)
-The TurnState black box writes EVERY turn into SQLite (a Stop hook), and it survives any crash. Read the last turns:
+### Шаг 0 — СВЕРЬ ЧАСЫ (одна команда, до всего остального)
+```bash
+date
+```
+Сравни с датой последней записи чёрного ящика (`turnstate_show.py --n 1`) и с датой в шапке
+контекста. **Разошлись — верь турнстейту и контексту, а не `date`.** Замер 18.08.2026 на
+[машина флота]: `date` отдал «Tue Aug 4», реальным было 18-е, и целая сессия успела сохранить
+ретро-ноту, две карточки задач и запись памяти с датой на две недели в прошлом.
+
+Если между «тогда» и «сейчас» разрыв больше суток — премисса задачи протухла
+([[seed-premise-expires-measure-before-building]], [[resume-check-date-first]]):
+каждое «не сделано» из прошлой сессии **перепроверь живым замером**, прежде чем чинить.
+Замер 18.08: P0 «флот разлогинен» был закрыт ещё 13.08, оставался один узел из трёх.
+
+### Шаг 1 — RECALL: где мы были (0 токенов, детерминированно)
+TurnState-чёрный-ящик пишет КАЖДЫЙ ход в SQLite (Stop-хук), переживает любой крэш. Прочитай последние ходы:
 ```bash
 python "$IMPORTS_ROOT/turnstate/turnstate_show.py" --n 12
 ```
-From the output pull out: what the operator asked for last · which files were touched · which DECISIONS were made · the next step. That is "where we were cut off". (Flags: `--stats`, `--session <id>`, `--n N`.)
+Из вывода вытяни: что Антон просил последним · какие файлы трогали · какие РЕШЕНИЯ приняли · следующий шаг. Это и есть «на чём оборвались». (Флаги: `--stats`, `--session <id>`, `--n N`.)
 
-**⚠️ Fallback if the box is EMPTY** (`turnstate_show.py --stats` shows `turns: 0` — it happens when the Stop hook hasn't fired yet after a Claude Code restart; see [[crash-recovery-command]]): do NOT say "there is no data". Derive "where we were" from the LAST session — its full seed is already assembled in step 3 (`_Dashboards/sessions-md/_continue/<cli>.seed.md`): read the TAIL of that file (the last 1-2 human→assistant exchanges) and pull the task plus the last step out of them. So with an empty box, step 1 leans on the result of step 3.
+⛳ **И сразу — вопрос-рефлекс на входе** (anton hub:5090; единственный источник текста и формата — `/skill-gap` §⛳): «что из этой задачи уже должно быть скиллом — а если скилл есть, чего ему не хватило?» Ответ ОДНОЙ строкой идёт в плашку ниже; «не тянет» — валидный ответ, молчание — нет.
 
-### Step 2 — HEALTH PING: is everything alive (green/red)
-Three fast deterministic checks:
+**⚠️ Фолбэк, если ящик ПУСТ** (`turnstate_show.py --stats` показывает `turns: 0` — бывает, если Stop-хук ещё не активировался после рестарта Claude Code; см. [[crash-recovery-command]]): НЕ говори «данных нет». Деривируй «где мы были» из ПОСЛЕДНЕЙ сессии — её полный seed уже собран в шаге 3 (`_Dashboards/sessions-md/_continue/<cli>.seed.md`): прочитай ХВОСТ этого файла (последние 1–2 обмена «человек→ассистент») и вытяни из них задачу + последний шаг. То есть шаг 1 при пустом ящике опирается на результат шага 3.
+
+**📅 Шире одного хода — вчерашний день целиком** (0 токенов, читает готовый файл):
+```bash
+python "$IMPORTS_ROOT/day_ledger.py" --recall
+```
+TurnState помнит ХОДЫ, леджер помнит ДЕНЬ: коммиты, ретро, решения, ДР — то, что случилось
+между сессиями и в чужих сессиях. После долгого перерыва бери `--recall 7`. Дверь целиком — `/ledger`.
+
+### Шаг 2 — ПИНГ здоровья: всё ли живо (зелёный/красный)
+Три быстрых детерминированных проверки:
 ```bash
 python "$IMPORTS_ROOT/arch/arch_status.py"
 powershell -NoProfile -ExecutionPolicy Bypass -File "$IMPORTS_ROOT/sync_check\sync_check.ps1"
 ```
-**MCP — IN-SESSION ONLY** (⚠️ NOT `claude mcp list` and NOT a second Telethon client → `AUTH_KEY_DUPLICATED` logs the account out; memory [[mcp-health-check]]): fire one cheap read call per live server — Telegram `mcp__telegram__get_me` (expect the work account), WhatsApp `mcp__whatsapp__get_my_profile`, n8n `mcp__n8n__n8n_health_check`. If a server's tools are missing from the session, it never loaded (diagnostics live in `/mcp`).
+**MCP — ТОЛЬКО внутрисессионно** (⚠️ НЕ `claude mcp list` и НЕ второй Telethon-клиент → `AUTH_KEY_DUPLICATED` разлогинит аккаунт; память [[mcp-health-check]]): дёрни по одному дешёвому read-вызову у живых серверов — Telegram `mcp__telegram__get_me` (ждём Tony/@[рабочий аккаунт]), WhatsApp `mcp__whatsapp__get_my_profile`, n8n `mcp__n8n__n8n_health_check`. Если инструментов сервера нет в сессии — он не загрузился (диагностика — в `/mcp`).
 
-### Step 3 — FULL PICKUP: the whole history into the clipboard
-Assemble this machine's previous human session into a seed → the clipboard (the `/resume-last` engine):
+⭐ **Шаг 2-бис — RED, НАЗВАВШИЙ ЛЕКАРСТВО, ЛЕЧИШЬ ТЫ, В ЭТОМ ЖЕ ЗАХОДЕ** (добавлено 15.09.2026; память [[alert-ownership-routing]] §Поправка 15.09).
+Пинг выше — не «посмотреть и пойти дальше». Если прибор вернул RED/WARN **и напечатал команду лечения**,
+эта команда **запускается сразу**, без спроса и без записи в бэклог, когда лечение обратимо
+(карантин/перемещение/переиндекс/перезапуск сервиса). Молча пройти мимо красного с названным лекарством = нарушение.
+⛔ Не запускать и вместо этого написать строку Антону: необратимое удаление · Tier-2 · чужой узел · команда НЕ названа.
+⚠️ Это НЕ «паразитная активность» §10.0: тот суточный потолок про профилактические сканы по своей инициативе,
+а тут — реакция на КОНКРЕТНЫЙ красный сигнал, который прибор уже предъявил.
+⚠️ Замер, из-за которого шаг появился: `sync_check` печатал `oldest is 48.6 days (threshold 3), 64 live` и рядом —
+`resolve_conflicts.py --quarantine`; порог был превышен в 16 раз, потому что вызывателей у движка НЕ БЫЛО НИ ОДНОГО
+(`grep -rl` по scripts/skills/scheduled-tasks = 0), а каждая сессия считала, что лечит кто-то другой. 7-й случай семьи с 14.08.
+
+### Шаг 3 — ПОЛНЫЙ ПОДХВАТ: вся история в буфер
+Собери прошлую человеческую сессию этой машины в seed → буфер (движок `/resume-last`):
 ```bash
 python "$IMPORTS_ROOT/claude_sessions/continue_session.py" --last
 ```
-Tell the operator: **"Open a New session and hit Ctrl+V — you get the whole conversation back."** If it prints `clipboard: FAILED`, the seed is on disk at `_Dashboards/sessions-md/_continue/<cli>.seed.md`.
+Скажи Антону: **«Открой New session и нажми Ctrl+V — вернёшь весь разговор целиком».** Если `clipboard: FAILED` — seed лежит файлом `_Dashboards/sessions-md/_continue/<cli>.seed.md`.
 
-## What to reply with (one panel + 🧒)
+## Что ответить (одна плашка + 🧒)
 ```
-🔄 Resurrection
-📍 Where we were: <1-2 lines from TurnState — the task, the last file/decision, the next step>
-💚 System: arch <✅/⚠️/🔴> · sync <✅/⚠️/🔴> · mcp <tg ✅ / wa ✅ / n8n ✅>
-📋 The previous session's full history is in the clipboard (New session → Ctrl+V).
-➤ Continue from: <the next step>?
+🔄 Воскрешение
+🕒 Часы: <date == турнстейт ✅ | РАЗОШЛИСЬ: date=<X>, реально <Y> → премиссы перепроверены>
+📂 Кабинет: <родной ✅ | ЧУЖОЙ: сессия в <папке>, родная <родная-папка> → память здесь чужая, стройку вести из родной (сигнал = SessionStart-хук home-dir-guard; реестр home_dirs.json)>
+📍 Где были: <1-2 строки из TurnState — задача, последний файл/решение, следующий шаг>
+💚 Система: arch <✅/⚠️/🔴> · sync <✅/⚠️/🔴> · mcp <tg ✅ / wa ✅ / n8n ✅>
+📋 Полная история прошлой сессии — в буфере (New session → Ctrl+V).
+⛳ Скилл: <нет скилла, не тянет | нет скилла, тянет → ДО→ПОСЛЕ | есть /X, не хватило <чего> → апгрейд>
+➤ Продолжаем с: <следующий шаг>?
 ```
-Then a 🧒 "In plain words" line (memory [[eli5-always]]).
+Затем 🧒 «Простыми словами» (память [[eli5-always]]).
 
-## Boundaries
-- **READ-ONLY.** It sends nothing, edits no live data, and does not repair sync/MCP — it only READS the black box and the status scripts, and writes a seed file + the clipboard. Fixing a red light is `/arch` / `/sync-check` / `/mcp` separately.
-- The skill's name is `1`, so `/1` works natively; `/!` is an alias trigger (a special character can't be a folder name): when you see `/!`, run this same skill.
-- On Macs: `python3`; with a non-standard vault path — env `CLAUDE_VAULT_ROOT=<...>`.
+## Если окно Claude вообще не поднимается (класс `app-in-session-0`, Windows)
 
-## Canon
-Memory [[crash-recovery-command]]. Building blocks: [[turnstate-ledger]] (the black box), [[claude-desktop-sessions-per-account]] (continue_session), [[system-architect]] (/arch), `syncthing-desktop-laptop-sync` (/sync-check), [[mcp-health-check]] (/mcp). Paired with the SessionStart hook `session_resume_hook` (that one shows the previous session at startup on its own — this one gathers recall + health + full history on command).
+Симптом: окно не открывается ни ярлыком, ни из Пуска, трей пуст, а процессы живые. Прибор:
 
-<!--kit-footer-->
+```
+Get-Process claude | Select Id,SessionId,MainWindowHandle
+```
 
----
+`SessionId=0` и `MainWindowHandle=0` = приложение стартовало в СЛУЖЕБНОЙ сессии Windows, где нет рабочего стола;
+single-instance замок не даёт создать окно в интерактивной сессии. **Перезагрузка машины НЕ нужна.** Лечение —
+кнопка `Починить Claude` на рабочем столе (хаб: стоит с 22.08.2026; пиры — посылка `fix-claude-button-260822`),
+она же `%USERPROFILE%\.claude\scripts\fix_claude_app.cmd`: гасит все `claude.exe` и стартует приложение заново.
+По ssh шаг СТАРТА бесполезен — ssh это та же сессия 0 (скрипт это ловит и говорит вслух). После подъёма сверить
+аккаунт узла (память `claude-account-per-node`). Память `claude-app-session-0-restart`.
 
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+## Границы
+- **READ-ONLY.** Ничего не отправляет, не правит живые данные и не чинит синк/MCP — только ЧИТАЕТ чёрный ящик, статус-скрипты и пишет seed-файл + буфер. Лечение красного — это уже `/arch` / `/sync-check` / `/mcp` отдельно.
+- Имя скилла = `1`, поэтому `/1` работает нативно; `/!` — алиас-триггер (спецсимвол нельзя сделать именем папки): увидев `/!`, запускай этот же скилл.
+- На Маках: `python3`; при нестандартном пути волта — env `CLAUDE_VAULT_ROOT=<...>`.
 
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Канон
+Память [[crash-recovery-command]]. Кирпичи: [[turnstate-ledger]] (чёрный ящик), [[claude-desktop-sessions-per-account]] (continue_session), [[system-architect]] (/arch), `syncthing-desktop-laptop-sync` (/sync-check), [[mcp-health-check]] (/mcp). Пара к SessionStart-хуку `session_resume_hook` (тот показывает прошлую сессию сам на старте — этот собирает recall+здоровье+полную историю по команде).

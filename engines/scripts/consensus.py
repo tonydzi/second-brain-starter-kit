@@ -27,7 +27,7 @@ ARCHITECTURE (Anton 2026-06-28):
       Each machine appends ONLY to its own shard; readers MERGE all shards by proposal_id and
       dedup events by event_id (idempotent across duplicate multi-rail delivery).
   * ALWAYS-ON DUAL + human-visible feed + recoverable record: Telegram chat 03. EVERY event is
-      emitted through bus_send.py, which dual-sends to BOTH Telegram-03 and _machine-bus BY
+      emitted through bus_send.py, which dual-sends to BOTH Telegram-03 and [шина] BY
       CONSTRUCTION (single rail is forbidden) -> "TG always on" is structural, not optional, and
       every envelope carries type+id+actor+subject so the negotiation is readable in plain sight
       and the ledger is reconstructable from Telegram alone if a shard is lost.
@@ -66,7 +66,7 @@ except Exception:
     pass
 
 SCRIPTS = os.path.dirname(os.path.abspath(__file__))
-BUS = os.environ.get("MACHINE_BUS_DIR", r"%VAULT%\_machine-bus")
+BUS = os.environ.get("MACHINE_BUS_DIR", r"%VAULT%\[шина]")
 ME  = os.environ.get("MACHINE_KEY", os.environ.get("COMPUTERNAME", "unknown")).strip()
 
 # S1 IDENTITY LAYER (2026-07-04, spec = decision-consensus-blockchain-reuse-roadmap par.7-S1):
@@ -376,7 +376,7 @@ def _wm_load():
 # observation log ("what I WOULD have done"). Old engines ignore the key; a lagging peer
 # that clobbers a live engine with this build therefore FAILS SAFE (observes, never acts).
 # Explicit "observe_only": true in config = kill-switch that wins even when armed.
-ENGINE_BUILD = "S9-20260716"
+ENGINE_BUILD = "S9-[id]"
 
 # ---- S2 (Consensus-2.0) TYPED-PROPOSAL SHADOW (2026-07-23, task-2026-07-17-shadow-builds; queue
 # row #7 in Shadow-First-Queue.md). PONAROSHKU / dark: on every REAL propose the engine ALSO
@@ -391,12 +391,12 @@ ENGINE_BUILD = "S9-20260716"
 #   "off"                      -> kill-switch: skip the shadow observer entirely (still 0 behavior
 #                                 change) -- an operator brake if the shadow ever misbehaves.
 #   true / "armed"             -> RESERVED for the FUTURE flip to real typed routing/freeze. NOT
-#                                 built in S2-20260723; an armed value changes NOTHING yet and is
+#                                 built in S2-[id]; an armed value changes NOTHING yet and is
 #                                 treated as SHADOW (data keeps flowing) -- "не армить на прод".
 # Datchik (flip-or-kill after a week): `consensus.py v2-shadow` counts DISTINCT real proposals that
-# would_benefit==True over the window. shadow_review.py sees build S2-20260723 in the shadows and
+# would_benefit==True over the window. shadow_review.py sees build S2-[id] in the shadows and
 # scores agreement (the would_append rides the SAME (pid, PROPOSE) the armed engine really wrote).
-S2_SHADOW_BUILD = "S2-20260723"
+S2_SHADOW_BUILD = "S2-[id]"
 
 # track = deterministic keyword routing (0 LLM, AK-47). FIRST match wins; else "general". The
 # point of a track is that today's engine routes ONLY on risk_tier -- track/freeze are invisible
@@ -460,7 +460,7 @@ def _v2_classify(subject, details, tier, reversible, tripwire_hit):
 
 
 def _v2_shadow_observe(ev, subject, details, tier, reversible, tripwire_hit, cfg=None):
-    """Dark S2 sensor. Wrapped so a bug here can NEVER break a live propose (the whole raison
+    """Dark S2 sensor. Wrapped so a bug here can NEVER break a live propose (the whole [человек]
     d'etre of shadow-first: dark code in the live engine must fail silently, not brick it)."""
     try:
         cfg = cfg or _cfg()
@@ -702,7 +702,7 @@ def _deadline(s, cfg):
 
 
 def _bus(text):
-    """Dual-send through bus_send.py -> TG-03 + _machine-bus BY CONSTRUCTION (TG always on)."""
+    """Dual-send through bus_send.py -> TG-03 + [шина] BY CONSTRUCTION (TG always on)."""
     if _observe_only():
         _observe_log("would_bus", {"text": text})
         print("   [OBSERVE_ONLY] would bus: %s" % text[:160])
@@ -719,9 +719,9 @@ def _bus(text):
 
 # TOP-ESCALATION (Anton 2026-06-30): "02 POLICE" group. Machines post here ONLY when consensus
 # genuinely CANNOT resolve (round-cap with no agreement / timeout on a tier>0 proposal / manual
-# escalate) and a human (ANY of Anton/Nina/Rita/Artem) must answer NOW. Routine Tier-2 QQQ
+# escalate) and a human (ANY of Anton/Nina/Rita/[человек]) must answer NOW. Routine Tier-2 QQQ
 # approvals stay in chat 03 — keep this channel STRICTLY for deadlocks. Best-effort, never raises.
-POLICE_GROUP = -6491142604
+POLICE_GROUP = -[id]
 
 
 def _police(text):
@@ -765,14 +765,14 @@ def _police(text):
 # Syncthing"): chat 03 IS the negotiation transport now, the file ledger is archive/anti-entropy.
 # Every mirrored event carries a second machine-readable line so any peer INGESTS it straight
 # from TG (minutes) instead of waiting for a flapping Syncthing batch (20-60 min per move).
-GROUP_03 = -996940094
+GROUP_03 = -[id]
 PAYLOAD_MARK = "⚙ CONSENSUS-EV "
 
 
 def _ingest_tg(limit=200, quiet=True):
     """Pull PEER consensus events straight from TG chat 03 (the live rail, #4d1772b0).
 
-    Reads new group messages via the shared @work_acct_a Telethon session (same env + lock as
+    Reads new group messages via the shared [аккаунт] Telethon session (same env + lock as
     bus_ping -> never AUTH_KEY_DUPLICATED), extracts PAYLOAD_MARK JSON lines, appends FOREIGN
     events into the single-writer shard log-tg-<ME>.jsonl. _all_events() already dedups by
     event_id, so the same event arriving later on the file rail is harmless. Fail-DARK: no
@@ -870,7 +870,7 @@ def _emit(ev, extra="", police=False):
 
 
 def _sig_fail_note(reason):
-    """ENGINE-VISIBILITY (#94389335): dark mode must stay dark for the LEDGER, but never
+    """ENGINE-VISIBILITY (#[id]): dark mode must stay dark for the LEDGER, but never
     silent for the OPERATOR. A signing failure keeps the event flowing (unsigned), and
     additionally: one stderr line + a bump of the sig_fail-<MACHINE> counter next to the
     shard. The nightly consensus_config_guard reads that counter and alarms when it grows
@@ -1547,7 +1547,7 @@ def main():
     a = sys.argv[1:]
     if not a:
         print(__doc__); return 2
-    # CLI-HYGIENE (#94389335): -h/--help works bare AND after any verb, so nobody has to
+    # CLI-HYGIENE (#[id]): -h/--help works bare AND after any verb, so nobody has to
     # read 1100 lines of header to recall an argument order.
     if a[0] in ("-h", "--help", "help") or "--help" in a[1:] or "-h" in a[1:]:
         print(USAGE); return 0

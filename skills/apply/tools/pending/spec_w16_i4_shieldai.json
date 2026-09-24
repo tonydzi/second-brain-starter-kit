@@ -1,0 +1,31 @@
+{
+ "idx": 4,
+ "comp": "shieldai",
+ "url": "https://jobs.lever.co/shieldai/1382eb7c-f076-470f-9808-0e701f21d857/apply",
+ "cv": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "steps": [
+  {"kind": "text", "name": "name", "value": "Anton Dziatkovskii"},
+  {"kind": "text", "name": "email", "value": "dzyatkovskiy.a@gmail.com"},
+  {"kind": "text", "name": "phone", "value": "+1 341 222 9178"},
+  {"kind": "location", "name": "location", "value": "Lisbon, Portugal"},
+  {"kind": "text", "name": "org", "value": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)"},
+  {"kind": "text", "name": "urls[Twitter]", "value": "https://x.com/Tony_Stef_"},
+  {"kind": "text", "name": "urls[GitHub]", "value": "https://github.com/tonydzi"},
+  {"kind": "text", "name": "urls[Portfolio]", "value": "https://tonydzi.github.io/"},
+  {"kind": "choice", "name": "cards[07fdf1f1-9952-493d-a9b7-320969a56fed][field0]", "value": "No"},
+  {"kind": "text", "name": "cards[07fdf1f1-9952-493d-a9b7-320969a56fed][field4]", "value": "Immediately (by 2026-09-15)"},
+  {"kind": "text", "name": "cards[07fdf1f1-9952-493d-a9b7-320969a56fed][field5]", "value": "Business Development Lead, Central Europe (DACH, Czech [человек], Slovakia) (R5054)"},
+  {"kind": "choice", "name": "cards[a90569ad-6b52-448e-9792-055f7c122285][field0]", "value": "Other"},
+  {"kind": "text", "name": "cards[a90569ad-6b52-448e-9792-055f7c122285][field1]", "value": "Shield AI careers page (company website)"},
+  {"kind": "select", "name": "cards[f27077c2-d069-4885-b031-ee14b393fd41][field0]", "value": "Yes"},
+  {"kind": "choice", "name": "cards[f27077c2-d069-4885-b031-ee14b393fd41][field1]", "value": "International"},
+  {"kind": "text", "name": "cards[f27077c2-d069-4885-b031-ee14b393fd41][field2]", "value": "Munich, Germany (this role's region). Currently based in Lisbon, Portugal; EU (Polish) citizen - no visa required to work in Germany."},
+  {"kind": "choice", "name": "cards[0712feed-8da9-4a01-9d5f-cc96fcbd4bcc][field0]", "value": "English"},
+  {"kind": "select", "name": "eeo[gender]", "value": "Decline to self-identify"},
+  {"kind": "choice", "name": "eeo[race]", "value": "Decline to self-identify"},
+  {"kind": "select", "name": "eeo[veteran]", "value": "I decline to self-identify"},
+  {"kind": "select", "name": "eeo[disability]", "value": "I do not want to answer"},
+  {"kind": "text", "name": "eeo[disabilitySignature]", "value": "Anton Dziatkovskii"},
+  {"kind": "text", "name": "eeo[disabilitySignatureDate]", "value": "2026-09-03"}
+ ]
+}

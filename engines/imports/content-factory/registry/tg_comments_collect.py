@@ -16,8 +16,8 @@ r"""tg_comments_collect.py - комменты к нашим TG-постам -> p
 
 Для каждой публикации tg_* из pubmetrics.db (url = t.me/<slug>/<msg_id>) тянет тред
 ответов через MTProto (messages.GetReplies): работает и для мегагрупп (@ClawRus,
-@ClawEng - реплаи прямо в группе), и для каналов с discussion-группой (@openclaw_lab,
-@PaloAltoAi - комменты в привязанном чате). Каналы без discussion (@PaloAltoAiRu)
+@ClawEng - реплаи прямо в группе), и для каналов с discussion-группой ([аккаунт],
+[аккаунт] - комменты в привязанном чате). Каналы без discussion ([аккаунт])
 дают пусто - это норма, комментов там физически нет.
 
 Правила:
@@ -25,7 +25,7 @@ r"""tg_comments_collect.py - комменты к нашим TG-постам -> p
   replied  = после чужого коммента в том же треде есть НАШЕ сообщение новее (id больше)
 Идемпотентно: INSERT OR IGNORE по (platform, comment_id); replied только повышаем.
 
-Сессия = та же общая @work_acct_a Telethon-рельса, что bus_ping/tg_bus_read (общий лок ->
+Сессия = та же общая [аккаунт] Telethon-рельса, что bus_ping/tg_bus_read (общий лок ->
 никогда AUTH_KEY_DUPLICATED).
 
 USAGE:
@@ -48,7 +48,7 @@ ENV = os.environ.get("BUS_PING_ENV", r"%IMPORTS%\dialogs\.env")
 LOCK = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")
 
 # наши аккаунты (комменты от них = is_ours): work_acct_b, work_acct_a, personal_acct; corp_acct резолвим на лету
-OUR_IDS = {265315838, 226258979, 5966672828}
+OUR_IDS = {[id], [id], [id]}
 OUR_USERNAMES = ["corp_acct"]  # id узнаём через get_entity при старте
 
 # slug -> где живут комменты: сам чат (мегагруппа) или канал (GetReplies сам идёт в linked chat)
@@ -138,7 +138,7 @@ def main():
     print(f"публикаций с t.me-ссылкой: {len(targets)}")
 
     if not acquire_lock():
-        print("SKIP: @work_acct_a сессия занята (лок) - повтори позже"); sys.exit(3)
+        print("SKIP: [аккаунт] сессия занята (лок) - повтори позже"); sys.exit(3)
 
     stats = {"threads": 0, "empty": 0, "comments_new": 0, "ours": 0, "replied_upd": 0, "errors": 0}
     try:

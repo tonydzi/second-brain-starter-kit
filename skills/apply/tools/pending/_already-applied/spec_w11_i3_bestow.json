@@ -1,0 +1,34 @@
+{
+ "url": "https://jobs.ashbyhq.com/bestow/bc38d425-54cd-40b2-a8ea-ac814aa4e8a9/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w11_i3_bestow",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "Address Line 1": "Will provide upon offer",
+  "Zip code": "Will provide upon offer",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "GitHub": "https://github.com/tonydzi",
+  "Other links": "https://tonydzi.github.io/"
+ },
+ "combos": {
+  "Location": "Palo Alto, California"
+ },
+ "check_options": {
+  "We are open to US Remote Employees": "Yes",
+  "Do you now or at anytime in the future require visa sponsorship": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify"
+ },
+ "required_labels": [
+  "Name",
+  "Resume",
+  "Email",
+  "Address Line 1",
+  "Zip code",
+  "Phone Number",
+  "LinkedIn"
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "url": "https://jobs.ashbyhq.com/relayfi/[id]-6da3-42f8-89db-43e021922c51/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w12_i5_relayfi",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn Profile": "https://tonydzi.github.io/",
+  "What is your desired annual salary (CAD)?": "180000",
+  "What specifically at Relay interests you?": "Relay sits where my two backgrounds meet: fintech infrastructure and partner-led growth. I spent 15+ years as a founder/BD operator: co-founded Platinum VC & Incubator, was Chief Engineer at Everex (Singapore fintech, cross-border payments), and ran enterprise advisory for subsidiaries of Foxconn and ANA Airlines plus government and bank relations across SE Asia. Sourcing partnerships, negotiating them, and then turning them into repeatable programs with playbooks and metrics is the work I have done my whole career - mostly with small-business founders as the end customer (10,000+ founder calls). Strategic operations for partnerships at an SMB banking platform is a seat where that experience compounds.",
+  "How do you use AI in your professional or personal life?": "Daily and deeply. I run a production multi-machine Claude fleet (6 machines) as my working environment: MCP connectors into Telegram/Gmail/CRM, RAG over a 10-year personal knowledge base, 100+ automated routines, and published reliability evals. Practically all my BD work runs through it - lead triage, CRM enrichment, outreach drafts, meeting follow-ups. I build the automation myself and document it in public: https://github.com/tonydzi"
+ },
+ "combos": {
+  "Location": "Lisbon"
+ },
+ "check_options": {
+  "Are you legally authorized to work in Canada?": "No",
+  "Will you now or in the future require sponsorship to work in Canada?": "No",
+  "Are you able to join us in our office three days a week": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "What is your desired annual salary (CAD)?",
+  "What specifically at Relay interests you?",
+  "How do you use AI in your professional or personal life?"
+ ]
+}

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# NOTE: absolute paths below come from the fleet this kit was extracted from. Adapt them to yours (see docs/PATHS.md).
 """Phase 1 parser: Telegram HTML export -> JSONL checkpoint.
 Lossless parse of all message types. Audio kept but tagged type='audio'
 so Phase 2 can drop it (user: forget audio, all already transcribed).
@@ -8,8 +7,8 @@ import re, json, html as html_lib
 from pathlib import Path
 from datetime import datetime
 
-EXPORT = Path(r"C:$HOME/Downloads/Telegram Desktop/ChatExport_2026-05-27")
-OUT = Path(r"E:/Obsidian/_imports")
+EXPORT = Path(r"[путь владельца] Desktop/ChatExport_2026-05-27")
+OUT = Path(r"[путь владельца]")
 FILES = ["messages.html", "messages2.html", "messages3.html"]
 
 A_TAG = re.compile(r'<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>', re.DOTALL)

@@ -20,7 +20,7 @@ list the groups where one of OUR accounts is present alongside them.
 
 Usage:
   python common_groups.py @handle
-  python common_groups.py 712617695            # telegram_id
+  python common_groups.py [id]            # telegram_id
   python common_groups.py "Firstname Lastname" # fuzzy name over known members
   python common_groups.py @handle --account corp_acct   # restrict to one account
 

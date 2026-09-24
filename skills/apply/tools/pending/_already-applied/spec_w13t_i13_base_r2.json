@@ -1,0 +1,19 @@
+{
+ "url": "https://jobs.ashbyhq.com/base/b0b2f833-d82b-4345-92c5-b2302b1caf99/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w13t_i13_base_r2",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Why Base? What got you interested?": "I build in-real-life community for a living, and I know how rare it is to get it right. In 2023 I founded the Palo Alto AI Research Lab and grew it to 500+ practitioners - Stanford researchers, big-tech engineers - through regular in-person gatherings; before that I ran a startup incubator for 11 years where cohorts, events and advisor matchmaking were the product. What [человек] me in this posting: Base treats partnerships as the product itself - 'the table nobody else gets' - not a sponsorship spreadsheet. That is how I have always run rooms: the right partner elevates the room, the wrong one cheapens it. Building that portfolio from zero, with a revenue number on it, is the job I want. (US work eligibility: active O-1, no sponsorship needed.)",
+  "Tell us about a time you were relentlessly resourceful in solving a problem in life or work.": "Raising our $35M fund and syndicate with no brand and no warm market. I turned fundraising into an assembly line: 2,000+ institutional-investor calls I qualified and enriched myself, a CRM I wrote from scratch when nothing off the shelf fit (roots: 5 years building ERP/CRM on Salesforce and Navision at Merlion), and lead-to-call pipelines that up to 30 operators ran daily. When people stopped scaling, I automated the repeatable motions - enrichment, matching, follow-up cadences - first with scripts, today with AI agents. Result: a standing syndicate of 250 VCs/angels and $35M under management. The lesson I bring to partnerships: resourcefulness is not heroics, it is refusing to accept that a bottleneck is permanent.",
+  "Who is your dream dinner guest?": "[человек] Karpathy - I run my whole operation on AI agents and document it in public, and I'd love to compare notes on what daily life inside 'software 3.0' actually looks like."
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "Why Base",
+  "Tell us about a time"
+ ]
+}

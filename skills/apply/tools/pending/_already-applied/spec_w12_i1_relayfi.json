@@ -1,0 +1,32 @@
+{
+ "url": "https://jobs.ashbyhq.com/relayfi/6f330039-fb85-4745-8345-ef5dd79aeefc/application",
+ "out_prefix": "w12_i1_relayfi",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn Profile": "https://tonydzi.github.io/",
+  "What are your preferred pronouns?": "he/him",
+  "What is your preferred name (if different from your full name)?": "Anton",
+  "What is your desired annual salary (CAD)?": "180000",
+  "What specifically at Relay interests you?": "Relay sits at the intersection of my two decades: fintech infrastructure and small-business operations. I have spent 11 years running an incubator and software house (Platinum VC & Incubator) watching hundreds of founders struggle with exactly the money-operations problems Relay solves - cash-flow visibility, spend control, banking that works for the owner instead of against them. On the build side I have shipped financial infrastructure hands-on: crypto-exchange backends, market-maker engines, a lending and credit-scoring system at Everex in Singapore, and one of the first detailed frameworks for a government-issued stablecoin. I want to bring that combination - product ownership plus real empathy for the SMB operator - to a team where banking IS the product.",
+  "How do you use AI in your professional or personal life?": "Daily and structurally. My lab runs a production fleet of six machines operated by Claude agents: multi-machine consensus (claw-consensus, with published evals and a public FAILURE-MODES.md), a persistent memory layer, an AI-native CRM and 100+ automation routines - all built and operated in public across 110 GitHub repos. I am the non-engineer in the loop: I own problem framing, architecture decisions and evaluation, while AI agents implement. We published a measured reliability eval: 0/17 high-risk actions slipped past the human approval gate in recorded runs. Personally, the same fleet runs my knowledge base, calendar and outreach - I dogfood AI operations every day."
+ },
+ "combos": {
+  "Location": "Palo Alto, California",
+  "How did you hear about Relay?": "Relay Website"
+ },
+ "check_options": {
+  "Are you legally authorized to work in Canada?": "No",
+  "Will you now or in the future require sponsorship to work in Canada?": "No",
+  "Are you able to join us in our office three days a week (Tues/Weds/Thurs)?": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "What is your desired annual salary (CAD)?",
+  "What specifically at Relay interests you?",
+  "How do you use AI in your professional or personal life?"
+ ]
+}

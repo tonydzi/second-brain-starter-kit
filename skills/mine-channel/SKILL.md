@@ -1,54 +1,34 @@
 ---
 name: mine-channel
-description: >-
-  Mine any Telegram channel or chat for signal in one command: incremental zero-token scrape,
-  deterministic detector shortlist, LLM judge for what is genuinely valuable to this owner, then
-  linked vault notes, a database row, a map-of-content entry and reindex. Triggers:
-  "/mine-channel <@channel|id>", "alpha from <channel>".
-license: MIT
+description: "Mine ANY Telegram channel/chat for alpha in one command — scrape (0-token Telethon) → deterministic detector shortlist → Sonnet judge (real alpha FOR Anton) → well-linked vault notes + db + MOC + reindex. Trigger on “/mine-channel <@channel|id>“, “затащи канал <X>“, “отожми альфу из <канал>“, “намайни <канал>“, “разбери канал <X>“, “mine this channel“, “alpha from <channel>“"
+version: 1.0.0
 ---
 
-# /mine-channel — pull in a channel and squeeze out the alpha in one command
+# /mine-channel — затащить канал и отжать альфу одной командой
 
-> 🧒 Finish the reply to a non-technical operator with a simple "In plain words" recap (memory `eli5-always`).
+> 🧒 В конце ответа Антону — простой recap «Простыми словами» (memory `eli5-always`).
 
-This generalizes a pattern that was repeated by hand 5+ times across different channels. Cost ladder [[vault-data-architecture]]: a deterministic detector (0 tokens) → an LLM judge over the shortlist only → the vault.
+Обобщает повторённый ≥5 раз вручную паттерн (Фокс · prompt_design · Состав · Lobster). Лестница стоимости [[vault-data-architecture]]: детерминированный детектор (0 токенов) → LLM-судья только по шортлисту → волт.
 
-## Steps
+## Шаги
 
-**0. RECALL (do not duplicate).** Has this channel been mined already? Check `$IMPORTS_ROOT/alpha/<slug>\` and memory (`*-mine`, `*-community-import`). If yes, this is a TOP-UP: same slug, incremental.
+**0. RECALL (не дублируй).** Канал уже майнили? Проверь `$IMPORTS_ROOT/alpha/<slug>\` и память (`*-mine`, `sostav-community-import`). Если да — это ДОЗАБОР: тот же slug, инкремент.
 
-**1. Resolve the channel.** A username (`@some_channel` / `some_channel`) or a numeric id (`<YOUR_CHAT_ID>`). If you do not know the id — `mcp__telegram__search_dialogs` or `/chat <name>`. Pick a short Latin **slug** (e.g. `silmeshok`).
+**1. Резолв канала.** Юзернейм (`[аккаунт]` / `prompt_design`) или числовой id (`-[id]`). Если не знаешь id — `mcp__telegram__search_dialogs` или `/chat <имя>`. Выбери короткий латинский **slug** (напр. `silmeshok`).
 
-**2. Scrape + detector (0 tokens, 0 GPU):**
+**2. Скрейп + детектор (0 токенов, 0 GPU):**
 ```
 set PYTHONIOENCODING=utf-8
 python $IMPORTS_ROOT/alpha/mine_channel.py --channel <name|id> --slug <slug> [--limit N] [--top 40] [--since YYYY-MM-DD --until YYYY-MM-DD]
 ```
-→ `_imports\alpha\<slug>\<slug>.jsonl` + `<slug>.db` + the shortlist `_imports\alpha\candidates\<slug>-report.md`.
-(The scrape goes through the subscription Telethon session `<TELEGRAM_MCP_DIR>/.env`, account work_acct_a — NOT a paid API [[prefer-included-limits-before-paid-api]]. Re-running without `--channel` plus `--detect-only` = re-detect without re-scraping.)
+→ `_imports\alpha\<slug>\<slug>.jsonl` + `<slug>.db` + шортлист `_imports\alpha\candidates\<slug>-report.md`.
+(Скрейп идёт через подписочную Telethon-сессию `[путь владельца]` [рабочий аккаунт] — НЕ платный API [[prefer-included-limits-before-paid-api]]. Повторный запуск без `--channel` + `--detect-only` = пере-детект без пере-скрейпа.)
 
-**3. The judge (LLM, shortlist only).** Run the shortlist through a **cheap grunt model** (grunt work → the small model [[model-routing-sonnet-grunt]]; a subagent with `model:'sonnet'`, or the `alpha-judge` skill): keep only REAL alpha FOR THE OWNER (a tool/model/deal · a technique or workflow · a mental model · a proof point or benchmark · a build pattern), and drop promos, banter, and anything we already do better. Verdicts: ✅ alpha · 🟡 watch · 🗑 noise.
+**3. Судья (LLM, только по шортлисту).** Прогони шортлист через **Sonnet** (грунт → Sonnet [[model-routing-sonnet-grunt]]; субагент `model:'sonnet'` или skill `alpha-judge`): оставь только РЕАЛЬНУЮ альфу ДЛЯ АНТОНА (инструмент/модель/сделка · техника/воркфлоу · ментальная модель · пруф-поинт/бенчмарк · билд-паттерн), выкинь промо/баянтер/то-что-мы-уже-делаем-лучше. Вердикт ✅ alpha · 🟡 watch · 🗑 шум.
 
-**4. Into the vault (obsidian-ingest).** Backup first [[vault-backup-rule]]. ✅ alpha → atomic notes + concept links ([[no-orphan-notes-rule]]) + a MOC `_<Slug>-MOC`; a sensitive channel → `#private`. The original jsonl stays in `_imports\alpha\<slug>\` (that IS the _originals copy for the channel). Reindex [[reindex-routine]] (or let the nightly job pick it up).
+**4. В волт (obsidian-ingest).** Бэкап-фёрст [[vault-backup-rule]]. ✅-альфу → атомарные заметки + концепт-линки ([[no-orphan-notes-rule]]) + MOC `_<Slug>-MOC`; чувствительный канал → `#private`. Оригинал jsonl остаётся в `_imports\alpha\<slug>\` (это и есть _originals для канала). Реиндекс [[reindex-routine]] (или ночной подхват).
 
-**5. Make it a routine? ([[evaluate-recurring-into-routine]])** A valuable channel → propose a weekly top-up (night window [[routines-run-at-night]]).
+**5. На рутину? ([[evaluate-recurring-into-routine]])** Ценный канал → предложи еженедельный дозабор (ночное окно [[routines-run-at-night]]).
 
-## Boundaries
-The detector is generic (AI / tool / deal / startup keywords); per-channel keyword and promo filters are tuned inside `mine_channel.py`. Sensitivity: closed / adult / personal channels → `#private`, never surfaced outside. Read the channel only, never post into it.
-
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Границы
+Детектор обобщённый (AI/tool/deal/стартап-ключи); под конкретный канал KW/PROMO тюнятся в `mine_channel.py`. Чувствительность: закрытые/adult/личные каналы → `#private`, не светить наружу. Только чтение канала, ничего туда не слать.

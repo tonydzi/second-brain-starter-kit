@@ -23,7 +23,7 @@ Claude<->Codex (cc_review.py / codex_review.py). Grok Build CLI даёт ТРЕ�
 VERDICT: APPROVE | REQUEST_CHANGES.
 
 Engine: `grok -p` (Grok Build CLI, headless single-turn). Подписка SuperGrok Heavy по
-X-логину (@lab_x_acct), НЕ платный xAI API-ключ. Проверено на Mac16 2026-07-20:
+X-логину ([аккаунт]), НЕ платный xAI API-ключ. Проверено на [машина флота] 2026-07-20:
 grok-build 0.2.106, grok-4.5.
 
 ⚠️ Read-only гарантируется --tools '' (без файловых/шелл-инструментов) + --no-subagents:

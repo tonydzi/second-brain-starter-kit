@@ -19,7 +19,7 @@ ROOT it closes (Anton 2026-07-05 + 2026-07-07):
      of going through approval.py -> the question lands in heartbeat noise and Anton misses it
      (fb-watch bug 2026-07-05, ask #4b8e6e2f drowned). The rule "asks go through approval.py,
      02-POLICE first" was canon but had NO gate, so skills drifted.
-  B) 02-NOISE (NEW 2026-07-07, Anton "пишите в 02, там я точно увижу"): 02-POLICE (-6491142604)
+  B) 02-NOISE (NEW 2026-07-07, Anton "пишите в 02, там я точно увижу"): 02-POLICE (-[id])
      is the CLEAN channel -- its whole value is that it carries ONLY questions to Anton. If any
      code posts non-approval content (heartbeat/status/chatter) to 02, it rots into a second 03.
      So: referencing the police chat id anywhere OTHER than the approval engine, without an
@@ -68,8 +68,8 @@ WHITELIST = ("approval.py", "approval.json", "lint_approval_routing.py",
              # escalation transport (post_police = the sanctioned 02 delivery) + read-only pulse tail
              "bus_ping.py", "pulse_tg_feed.py")
 
-POLICE_ID = "-6491142604"          # 02-POLICE
-GROUP_ID  = "-996940094"           # 03 group (heartbeat noise)
+POLICE_ID = "-[id]"          # 02-POLICE
+GROUP_ID  = "-[id]"           # 03 group (heartbeat noise)
 
 # an approval-ask signature (the question-to-Anton envelope, in any of its forms)
 ASK_RX = re.compile(
@@ -149,7 +149,7 @@ def main():
 
     lines = ["approval-routing lint -- %d files scanned" % scanned,
              "rule A: asks to Anton go THROUGH approval.py (never hand-rolled into a chat id)",
-             "rule B: 02-POLICE (-6491142604) carries ONLY approval questions -- no other content",
+             "rule B: 02-POLICE (-[id]) carries ONLY approval questions -- no other content",
              "known/baselined (accepted): %d  |  NEW since baseline: %d" % (len(base), len(new)), ""]
     if new:
         lines.append("NEW VIOLATIONS (regressions): %d" % len(new))

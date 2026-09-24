@@ -20,7 +20,7 @@ Additive: never touches frontmatter."""
 import re, os, glob
 from pathlib import Path
 
-V = Path("E:/Obsidian/Owner-Knowledge")
+V = Path("[путь владельца]")
 
 # Build full file index (all basenames → path)
 idx = set()
@@ -79,4 +79,4 @@ for folder in FOLDERS:
                 log.append(f"{fpath.name}: stripped {count} links")
 
 log.insert(0, f"files_changed={files_changed} total_stripped={stripped}")
-open("E:/Obsidian/_imports/_ghost_strip_new_log.txt", "w", encoding="utf-8").write("\n".join(log))
+open("[путь владельца]", "w", encoding="utf-8").write("\n".join(log))

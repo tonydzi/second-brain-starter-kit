@@ -24,7 +24,7 @@ import json, re, hashlib, unicodedata
 from pathlib import Path
 from collections import Counter
 
-EXPORT = Path(r"E:\Google Drive on HP Palo Alto\!_Claude_Mac16\Apple Notes Export 2026-06-11")
+EXPORT = Path(r"[путь владельца] Drive on HP Palo Alto\!_Claude_[машина флота]\Apple Notes Export 2026-06-11")
 VAULT = Path(r"%VAULT%")
 OUT = Path(r"%IMPORTS%\apple-notes")
 OUT.mkdir(parents=True, exist_ok=True)

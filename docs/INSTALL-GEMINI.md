@@ -25,7 +25,7 @@ You should see a version like `v22.x`. Any number = good.
 ## Step 2 — Install Gemini CLI (3 min)
 In the same Terminal / PowerShell window paste:
 ```
-npm install -g @google/gemini-cli
+npm install -g [аккаунт]/gemini-cli
 ```
 Then start it:
 ```
@@ -87,7 +87,7 @@ their own computer — their notes stay theirs.
 ## If something breaks
 - `npm` / `node` not found → reinstall Node.js (Step 1), then close and reopen the terminal.
 - `gemini` not found → close and reopen the terminal; still broken → repeat Step 2.
-- Permission error on Mac during `npm install -g` → run `sudo npm install -g @google/gemini-cli`
+- Permission error on Mac during `npm install -g` → run `sudo npm install -g [аккаунт]/gemini-cli`
   and type your Mac password.
 - `cd` says "no such file or directory" → the unzipped folder has a different name;
   type `cd ~/Documents/second` and press Tab to auto-complete it.

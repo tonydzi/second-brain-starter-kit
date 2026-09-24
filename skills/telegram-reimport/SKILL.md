@@ -1,15 +1,12 @@
 ---
 name: telegram-reimport
-description: >-
-  Fold a fresh export of an already-imported Telegram chat into a vault, adding only the new
-  messages. Idempotent by message id, so it never duplicates. Triggers: "re-import <chat>",
-  "update the telegram import".
-license: MIT
+description: "- Пере-импорт TG-чата: One-command incremental RE-IMPORT of a Telegram chat that already lives in Anton's Obsidian vault (Покупки/purchases, Assistants-Ops/household-rules, Arhiv-Golosa/content-team, FAAA/CRM-calls)."
+version: 1.0.0
 ---
 
 # Telegram re-import (incremental)
 
-> 🧒 **When reporting to Anton:** always end with a child-simple "In plain words" recap in his language (plain words, no jargon) — his standing request. See memory `eli5-always` / global `CLAUDE.md`.
+> 🧒 **When reporting to Anton:** always end with a child-simple "Простыми словами" recap in his language (plain words, no jargon) — his standing request. See memory `eli5-always` / global `CLAUDE.md`.
 
 This skill turns "I re-exported chat X" into one orchestrated run that adds only the **new** messages to the vault, without re-doing the whole import. It is the maintenance counterpart to `obsidian-ingest` (which does first-time imports). The heavy per-source mechanics — roster, provenance, triage, layer structure — already live in `obsidian-ingest/references/source-adapters.md`; **this skill is the dispatch + orchestration layer over the real scripts in `$IMPORTS_ROOT/`.** Don't duplicate adapter logic here; read that file when you need the why.
 
@@ -17,7 +14,7 @@ This skill turns "I re-exported chat X" into one orchestrated run that adds only
 
 | Source key | Chat | Vault home | Parser |
 |---|---|---|---|
-| `pokupki` | "Purchases approve Assistant's tasks 777…" | `01-Conversations/Telegram/Pokupki/` | `parse_pokupki.py` (result.json) |
+| `pokupki` | «Покупки approve Assistant's tasks 777…» | `01-Conversations/Telegram/Pokupki/` | `parse_pokupki.py` (result.json) |
 | `assistants-ops` | «All Assistant's tasks 777…» (household rules → Bible) | `01-Conversations/Telegram/Assistants-Ops/` + `03-Insights/Operations/` | `parse_assistants_ops.py` (messages*.html) |
 | `arhiv-golosa` | content-team voice archive | `01-Conversations/Telegram/Arhiv-Golosa/` | `parse_telegram.py` (messages*.html) |
 | `faaa` | «CALLS … FAAA follow up» (CRM) | `04-Projects/crypto/Platinum-CRM/` | `parse_faaa.py` (result.json) |
@@ -68,29 +65,14 @@ After phase 3, **report how many new items need curation and offer to run that p
 
 ## Provenance & the voice gap (carry over, don't re-derive)
 
-Provenance defaults are fixed per source in `source-adapters.md` — relay-footer `Translated:/Delegated:` = Anton's voice (`origin: anton`, poster→`transcribed_by`); an assistant only by her own name-marker; team SOPs → `mixed`. The **voice gap persists**: Telegram exports omit `.ogg` voice notes, so most of Anton's reasoning still isn't recoverable from text. If this export was made **with media**, that's the moment to Whisper-transcribe and enrich by `msg_id` (idempotent) — flag it. (A Telegram MCP that downloads voice by msg_id would close this — see the connector guide.)
+Provenance defaults are fixed per source in `source-adapters.md` — relay-footer `Перевела:/Делегировано:` = Anton's voice (`origin: anton`, poster→`transcribed_by`); Anna only by her own name-marker; team SOPs → `mixed`. The **voice gap persists**: Telegram exports omit `.ogg` voice notes, so most of Anton's reasoning still isn't recoverable from text. If this export was made **with media**, that's the moment to Whisper-transcribe and enrich by `msg_id` (idempotent) — flag it. (A Telegram MCP that downloads voice by msg_id would close this — see the connector guide.)
 
 ## Windows / Cyrillic gotchas (same as obsidian-ingest)
 
 - Python `print()` of Cyrillic crashes on cp1252 stdout → write UTF-8 files, keep stdout ASCII. Run with `$env:PYTHONUTF8=1`.
-- Never `rm -rf` inside `%VAULT_ROOT%\` (Obsidian/indexer hold handles → "Device or resource busy"). The dispatcher merges with `robocopy` (no delete), never mirror.
+- Never `rm -rf` inside `[путь владельца]` (Obsidian/indexer hold handles → "Device or resource busy"). The dispatcher merges with `robocopy` (no delete), never mirror.
 - Transliterate Cyrillic filenames → latin kebab, date-prefix `YYYY-MM-DD-slug`.
 
 ## Finish
 
 End every re-import with the standard report (rule 8 of obsidian-ingest): new ledgers, new posts/cards, new rules/leads, links validated (0 broken), and the curation hand-off list. The vault should get *more* connected, not just bigger.
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

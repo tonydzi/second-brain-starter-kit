@@ -18,7 +18,7 @@ WHAT (Anton's rule 2026-07-02): every pain / question / "how do I X" the user
 raises across the DAY's sessions is an INTENTION. Mine them from ALL sessions
 (all machines) like fb_diary_collect does, drop them into a never-losing POOL
 ("копилка намерений" = intentions.db), then the LLM judge/writer turns 2-3+ per
-day into detailed build-in-public "ask" posts (X / Telegram / Indie Hackers /
+day into detailed build-in-public "ask" posts (X / Telegram / [человек] Hackers /
 Ask HN), draft-first. See decision-intention-lane-content-factory-2026-07-02.
 
 This file = the DETERMINISTIC half (0 tokens):
@@ -163,7 +163,7 @@ def is_intention(text):
     if len(low) < MIN_LEN or low in SIGNALS:
         return False
     # skip pure paths / tool dumps / injected skill headers
-    if low.startswith(("c:\\", "e:\\", "http", "```", "<", "/")):
+    if low.startswith(("[путь владельца]", "[путь владельца]", "http", "```", "<", "/")):
         return False
     if "base directory for this skill" in low[:80]:
         return False

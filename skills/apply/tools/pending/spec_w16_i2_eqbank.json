@@ -1,0 +1,17 @@
+{
+ "idx": 2,
+ "comp": "eqbank",
+ "url": "https://jobs.lever.co/eqbank/ec09420e-fdd5-4c37-be7e-035ded7dfcb3/apply",
+ "cv": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "steps": [
+  {"kind": "text", "name": "name", "value": "Anton Dziatkovskii"},
+  {"kind": "text", "name": "email", "value": "dzyatkovskiy.a@gmail.com"},
+  {"kind": "text", "name": "phone", "value": "+1 341 222 9178"},
+  {"kind": "location", "name": "location", "value": "Lisbon, Portugal"},
+  {"kind": "text", "name": "org", "value": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)"},
+  {"kind": "choice", "name": "surveysResponses[54d5f494-8f40-45ec-a0d4-736d5c1eac87][responses][field0]", "value": "Prefer not to say"},
+  {"kind": "choice", "name": "surveysResponses[54d5f494-8f40-45ec-a0d4-736d5c1eac87][responses][field1]", "value": "Prefer not to say"},
+  {"kind": "choice", "name": "surveysResponses[54d5f494-8f40-45ec-a0d4-736d5c1eac87][responses][field2]", "value": "Prefer not to say"},
+  {"kind": "choice", "name": "surveysResponses[54d5f494-8f40-45ec-a0d4-736d5c1eac87][responses][field3]", "value": "Prefer not to say"}
+ ]
+}

@@ -16,8 +16,8 @@
 """Build a self-contained HTML dashboard from the n8n audit profiles. 0 tokens, no CDN."""
 import json, html
 
-BASE = "E:/Obsidian/_imports/n8n"
-OUT = "E:/Obsidian/Owner-Knowledge/_Dashboards/n8n-Automation-Audit.html"
+BASE = "[путь владельца]"
+OUT = "[путь владельца]"
 prof = json.load(open(f"{BASE}/out/audit_profiles.json", encoding="utf-8"))
 deep = {d["id"]: d for d in json.load(open(f"{BASE}/out/deep_profiles.json", encoding="utf-8"))}
 estat = json.load(open(f"{BASE}/out/exec_stats.json", encoding="utf-8"))

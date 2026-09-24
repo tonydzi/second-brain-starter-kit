@@ -1,23 +1,20 @@
 ---
 name: health-sync
-description: >-
-  Pull fresh messages from a set of health-related Telegram chats (medicine, supplements,
-  longevity, fasting) into an Obsidian vault. Incremental and idempotent by message id, and the
-  manual counterpart of the weekly job. Triggers: "/health-sync", "pull the health chats".
-license: MIT
+description: "7 HEALTH-чатов TG: On-demand pull of FRESH messages from Anton's 7 Telegram HEALTH chats (medicine, blood/pressure, vitamins/БАДы, nootropics/mind, healing-head, longevity/weight-loss, fasting-community) into the Obsidian vault. Trigger on “/health-sync“, “подтяни здоровье“, “обнови health“, “забери свежее из health-чатов“, “sync health chats“, “что нового по здоровью в телеграме“."
+version: 1.0.0
 ---
 
 OBJECTIVE: Pull fresh messages from Anton's 7 Telegram health chats and incrementally fold them into the Obsidian vault (day-ledgers + atomic notes + MOC + dashboard), on demand. Fully idempotent (dedup by Telegram message id). Identical pipeline to the weekly task `health-weekly-sync`; the only difference is this fires when Anton asks.
 
 CONTEXT:
-- 7 source chats (registry: $IMPORTS_ROOT/health/chats.json). ALWAYS pull with the Telegram MCP using account="default" (@work_acct_a); the other account errors (GEN-ERR-862) on these basic groups.
-  - -713270622  medicine-health-main
-  - -278366896  blood-pressure
-  - -771718625  longevity-weightloss-fasting
-  - -656827278  vitamins-bads
-  - -260984215  healing-head
-  - -175731578  medicine-for-mind
-  - -8169212160 fasting-community
+- 7 source chats (registry: $IMPORTS_ROOT/health/chats.json). ALWAYS pull with the Telegram MCP using account="default" (@[рабочий аккаунт]); the other account errors (GEN-ERR-862) on these basic groups.
+  - -[id]  medicine-health-main
+  - -[id]  blood-pressure
+  - -[id]  longevity-weightloss-fasting
+  - -[id]  vitamins-bads
+  - -[id]  healing-head
+  - -[id]  medicine-for-mind
+  - -[id] fasting-community
 - Vault home: $OBSIDIAN_VAULT/01-Conversations/Telegram/Health/ (per-chat folders + posts\ + _Health-MOC.md). Dashboard: _Dashboards\Health-Dashboard.html. Scripts + watermarks + raw: $IMPORTS_ROOT/health/.
 - Watermark per chat (last imported msg id) = $IMPORTS_ROOT/health/watermarks.json (keyed by chat_id as string).
 - Provenance: health data is NOT private (Anton's explicit instruction) — do NOT tag #private. Anton's own messages -> origin: anton (+ #anton-original); forwarded -> origin: external (+ forwarded_from); community members (fasting-community) -> origin: external.
@@ -35,7 +32,7 @@ STEPS:
    robocopy "$IMPORTS_ROOT/health/staging" "$OBSIDIAN_VAULT/01-Conversations/Telegram/Health" /E /XO /NFL /NDL /NJH /NJS
    (exit code 0-7 = success.)
 10. Reindex for RAG (so the new notes are searchable): python $IMPORTS_ROOT/brain_embed_update.py --wait-gpu 10  (or rely on the nightly Brain Reindex at 04:00 if the GPU is busy).
-11. Report: new messages per chat, new atomic notes / ledgers created, the new watermarks (max ids), and confirm BROKEN=0. End with a 🧒 In plain words recap (messages TO Anton only).
+11. Report: new messages per chat, new atomic notes / ledgers created, the new watermarks (max ids), and confirm BROKEN=0. End with a 🧒 Простыми словами recap (messages TO Anton only).
 
 CONSTRAINTS:
 - WINDOWS cp1252: never print Cyrillic to python stdout (crashes) — write results to UTF-8 files and Read them; keep python stdout ASCII (counts/slugs only).
@@ -47,18 +44,3 @@ RELATION (do not duplicate):
 - Scheduled twin: $USERPROFILE/.claude/scheduled-tasks/health-weekly-sync/ (Mondays) — same scripts.
 - First-time backfill design + counts: memory [[health-import]].
 - Sibling pattern: [[faaa-sync]] (CRM calls). Reuses the FAAA weekly-sync architecture.
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

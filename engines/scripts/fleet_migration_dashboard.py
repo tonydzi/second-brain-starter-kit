@@ -20,7 +20,7 @@ Built 2026-07-11 (Anton demanded exact numbers + a regularly-updated dashboard).
 import os, sys, json, subprocess, datetime, re
 
 OUT = r"%VAULT%\_Dashboards\Fleet-Migration.html"
-ANCHOR1_HEALTH_LOCAL = r"%VAULT%\_machine-bus\_heartbeat\ANCHOR1-routines-health.json"
+ANCHOR1_HEALTH_LOCAL = r"%VAULT%\[шина]\_heartbeat\ANCHOR1-routines-health.json"
 
 # --- routines that STAY on hub forever (physical binding) -> never counted as "todo" ---
 STAYS_FOREVER = {

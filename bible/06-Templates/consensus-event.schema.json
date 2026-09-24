@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/tonydzi/PaloAlto-AI-Research-Lab-Knowledge/blob/main/06-Templates/consensus-event.schema.json",
+  "title": "Consensus event (v1)",
+  "description": "One append-only event in the machine-to-machine consensus ledger. The live engine is private; this is the frozen wire contract it writes, so a peer can validate event shape, transitions, idempotency, the round cap and the Tier-2 human gate without access to the fleet. Ledger = JSONL, one event per line, single writer per shard; readers merge shards by proposal_id and de-duplicate by event_id.",
+  "type": "object",
+  "required": ["event_id", "proposal_id", "type", "actor", "ts"],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$",
+      "description": "UUID4 hex. THE idempotency key: every rail may deliver the same event more than once, so readers de-duplicate on this and must not count it twice."
+    },
+    "proposal_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$",
+      "description": "UUID4 hex identifying the negotiation this event belongs to."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["PROPOSE", "COUNTER", "ACCEPT", "REJECT", "COMMIT", "VERIFY",
+               "ESCALATE", "HUMAN_APPROVED", "TENTATIVE_COMMIT", "FINALIZE"],
+      "description": "PROPOSE opens. COUNTER/ACCEPT/REJECT respond. COMMIT records the decision of record (the agent then applies it). VERIFY is the cross-agent proof that it really landed. ESCALATE hands it to the human. HUMAN_APPROVED records that the human said yes. TENTATIVE_COMMIT/FINALIZE are the degraded path when no peer is awake."
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The node that wrote this event. One shard per actor: never write into another node's shard."
+    },
+    "ts": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}",
+      "description": "ISO-8601 timestamp. Ordering within a proposal is by ts; ties break by arrival order in the merged shards."
+    },
+    "subject": {
+      "type": "string",
+      "description": "Human-readable one-liner. Carried on every event so the negotiation is readable in the plain-text feed alone."
+    },
+    "details": {
+      "type": ["object", "null"],
+      "description": "Structured payload of the proposal. Free-form by design; the schema does not constrain it."
+    },
+    "risk_tier": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "0 = reversible/local. 1 = needs peer agreement. 2 = money, irreversible deletion, outbound to third parties, secrets, config. Tier 2 NEVER auto-commits: it requires a recorded HUMAN_APPROVED first."
+    },
+    "reversible": {
+      "type": "boolean",
+      "description": "Declares the action can be undone. Only a reversible tier-1 proposal may take the TENTATIVE_COMMIT path when no peer is awake."
+    },
+    "committee": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "The set of nodes considered awake, frozen AT PROPOSE time. Never recomputed at the deadline — a moving denominator makes quorum meaningless."
+    },
+    "text": {"type": "string", "description": "Free-text reason for a COUNTER, REJECT or ESCALATE."},
+    "proof": {"type": "string", "description": "Evidence string for VERIFY, or who/where/message-id for HUMAN_APPROVED."},
+    "proof_grade": {"type": "string", "description": "How strong the VERIFY proof is (e.g. exit-code vs prose)."},
+    "sig": {"type": "string", "description": "Optional detached signature over the event."},
+    "signer": {"type": "string", "description": "Which node's key produced sig."}
+  }
+}

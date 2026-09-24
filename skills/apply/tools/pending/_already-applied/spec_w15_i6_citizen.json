@@ -1,0 +1,18 @@
+{
+ "url": "https://jobs.ashbyhq.com/citizen/fd46b81b-5f40-4679-947f-c8e[id]/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w15_i6_citizen",
+ "texts": {
+  "Full Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "Linkedin Profile": "No LinkedIn account - please see https://tonydzi.github.io/ and https://github.com/tonydzi"
+ },
+ "combos": {
+  "Location (City)": "Palo Alto"
+ },
+ "check_options": {
+  "How did you Hear about this Job": "Citizen Website"
+ },
+ "required_labels": ["Full Name", "Email", "Phone Number", "Resume"]
+}

@@ -16,9 +16,9 @@
 
 Writes consolidated, restorable artifacts to TWO places:
   * Google Drive (OFFSITE / cloud) : account owner.personal@example.com, path resolved per machine
-        by resolve_drive() (hub: machine.env GDRIVE_BACKUP_ROOT=D:\\GoogleDrive2023 mirror;
-        HP17: "E:\\Google Drive on HP Palo Alto"; else any DriveFS letter mount).
-  * Local second disk (C:)         : "C:\\ObsidianBackup"  (separate physical SSD from E:).
+        by resolve_drive() (hub: machine.env GDRIVE_BACKUP_ROOT=[путь владельца] mirror;
+        HP17: "[путь владельца] Drive on HP Palo Alto"; else any DriveFS letter mount).
+  * Local second disk (C:)         : "[путь владельца]"  (separate physical SSD from E:).
 => E: working copy + C: local copy + Google cloud = 3 copies, 2 media, 1 offsite.
 
 What it backs up (NOT a live folder-sync):
@@ -51,7 +51,7 @@ except Exception:
 VAULT     = Path(VAULT)
 ORIGINALS = Path(ORIGINALS)
 IMPORTS   = Path(IMPORTS)
-LOCAL     = Path(r"C:\ObsidianBackup")                 # separate physical disk
+LOCAL     = Path(r"[путь владельца]")                 # separate physical disk
 KEEP_BUNDLES = 14
 # code repos that have local git history but were NOT offsite (added 2026-06-16) ->
 # bundle them too so their history survives a disk death, not just the vault.
@@ -79,19 +79,19 @@ def _machine_env(key):
 def resolve_drive():
     """Find the writable Google Drive (owner.personal@example.com) backup folder on THIS machine.
     Priority: machine.env GDRIVE_BACKUP_ROOT (per-machine override; the hub mirrors a@ into a
-    local folder, e.g. D:\\GoogleDrive2023) -> laptop's known path -> E: glob -> any DriveFS
-    letter mount (G:/H:/I:/... move when Drive re-mounts) that already holds Obsidian-Backup."""
+    local folder, e.g. [путь владельца]) -> laptop's known path -> E: glob -> any DriveFS
+    letter mount ([путь владельца] move when Drive re-mounts) that already holds Obsidian-Backup."""
     root = _machine_env("GDRIVE_BACKUP_ROOT")
     if root and Path(root).exists():
         return Path(root) / "Obsidian-Backup"
-    known = Path(r"E:\Google Drive on HP Palo Alto")
+    known = Path(r"[путь владельца] Drive on HP Palo Alto")
     if known.exists():
         return known / "Obsidian-Backup"
-    for base in Path("E:\\").glob("Google Drive on*"):   # portable-ish fallback
+    for base in Path("[путь владельца]").glob("Google Drive on*"):   # portable-ish fallback
         return base / "Obsidian-Backup"
     for letter in "DEFGHIJKLMNOP":                       # DriveFS letters roam (H: became I:)
         for mount in ("My Drive", "GoogleDrive2023"):
-            cand = Path("%s:\\" % letter) / mount / "Obsidian-Backup"
+            cand = Path("%[путь владельца]" % letter) / mount / "Obsidian-Backup"
             try:
                 if cand.exists():
                     return cand

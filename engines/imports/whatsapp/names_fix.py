@@ -15,7 +15,7 @@
 """Phase 1: ask WhatsApp to refresh contact/LID names, then re-snapshot chat list."""
 import json, subprocess, time, os, io, sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
-IDX = os.path.expanduser(r"~\AppData\Roaming\npm\node_modules\@oss_maintainer\whatsapp-mcp\dist\index.js")
+IDX = os.path.expanduser(r"~\AppData\Roaming\npm\node_modules\[аккаунт]\whatsapp-mcp\dist\index.js")
 OUT = r"%IMPORTS%\whatsapp"; RAW = os.path.join(OUT,"raw_train")
 
 proc = subprocess.Popen(["node", IDX], stdin=subprocess.PIPE, stdout=subprocess.PIPE,

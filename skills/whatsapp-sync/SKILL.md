@@ -1,17 +1,27 @@
 ---
 name: whatsapp-sync
-description: >-
-  Refresh WhatsApp text into an Obsidian vault (data layer, dashboard, group labels, contact
-  notes). Text only, never downloads media, and pulls the recent window the live companion
-  bridge exposes rather than a full multi-year archive. Semi-automatic by design: it drives the
-  live bridge and needs the phone nearby. Triggers: "/whatsapp-sync", "pull whatsapp".
-license: MIT
+description: "On-demand refresh of Anton's WhatsApp text into the Obsidian vault (data layer + dashboard + group labels + contact notes). Trigger on “/whatsapp-sync“, “обнови whatsapp“, “подтяни ватсап“, “забери свежее из whatsapp“, “sync whatsapp“, “разбери ватсап“."
+version: 1.0.0
 ---
+
+> ⛔ **ЭТОТ СКИЛЛ ОПИСЫВАЕТ ОТСТАВЛЕННЫЙ КОНВЕЙЕР (пометка 2026-09-04).**
+> Шаги ниже (`train_pull.py` → `build_db.py` → `names_fix.py` → `build_dash_export.py` →
+> `link_people.py` → `link_apply.py`) поднимают ВТОРОГО писателя на те же цели волта, со
+> своей идемпотентностью: в `[человек]-davos.md` уже лежат три ссылки от разных писателей.
+> Живая труба с 03.09.2026 -- другая: `wa_ingest.py → wa_vault_notes.py → wa_crm_link.py`,
+> база `wa_live.db` (1780 чатов / 148 978 сообщений), ночная рутина `wa_nightly.cmd`
+> (23:35, окно §4.6), тест `_test_wa_ingest.py`, витрины [[_WhatsApp-MOC]] и
+> [[_WhatsApp-People-Index]].
+>
+> **Нужно обновить WhatsApp прямо сейчас** -- запусти живую трубу:
+> `python [путь владельца]` (или три скрипта по очереди).
+> Шаги ниже держим как историю и как playbook по спариванию моста; не исполнять их, пока
+> Антон прямо не попросит именно старый прогон.
 
 OBJECTIVE: Refresh the WhatsApp slice of the Second Brain — pull the recent text the live bridge exposes, rebuild the SQLite+FTS5 data layer, re-resolve names, re-label active groups, rebuild the dashboard, and refresh the vault notes (MOC + groups + optionally contact notes). Fully deterministic except the group-label step (Sonnet). Idempotent: `build_db.py` is a full rebuild from `raw_train/`, so re-runs never duplicate.
 
 CONTEXT:
-- Live bridge = `@oss_maintainer/whatsapp-mcp` (Baileys), main number "Tony PaloAlto ResearchLab" (jid `16213388980@s.whatsapp.net`). Memory [[whatsapp-mcp-integration]] has the full setup + pairing playbook.
+- Live bridge = `[аккаунт]/whatsapp-mcp` (Baileys), main number "Tony PaloAlto ResearchLab" (jid `[id]@s.whatsapp.net`). Memory [[whatsapp-mcp-integration]] has the full setup + pairing playbook.
 - Pipeline home: `$IMPORTS_ROOT/whatsapp/`. Data: `whatsapp_train.db` (SQLite+FTS5) + `raw_train\` (JSON). Vault home: `$OBSIDIAN_VAULT/01-Conversations/WhatsApp/` (`_WhatsApp-MOC.md`, `_WhatsApp-Groups.md`, 9 contact notes). Dashboard: `_Dashboards\WhatsApp-Dashboard.html`.
 - SCOPE: **TEXT ONLY.** Never `download_media`; ignore the `hasMedia` flag.
 - Model routing: the group-label step is grunt classification → **Sonnet subagent** (per [[model-routing-sonnet-grunt]]). Contact-note summaries (CRM intel, not Anton's authorial voice) → Sonnet draft acceptable under the quality gate; escalate to Opus if weak.
@@ -41,17 +51,17 @@ STEPS:
    - `python link_people.py` (0 tokens): phone-join WhatsApp DM jid (=phone `last10`) → `apple-contacts\contacts.db` → `vault_matches` → CRM/person note → `people_matches.json`. Phone match = T1 (trust); name-only = T2 (DO NOT trust — surname-blind false positives).
    - For T2 candidates spawn a **Sonnet judge** (Agent, model:'sonnet') → `people_verified.json` (conservative: confirm only on surname+role match, else null = WA note stays canonical). Identity-critical: a wrong link corrupts the graph.
    - Concepts: create/confirm any NEW topic-concept (windmill-park, etc.) per concept-creation-rules (DUP-CHECK first — e.g. household already = `concept-bible-household`/`concept-bible-staff-hr`).
-   - `python link_apply.py` (idempotent): writes "## 🔗 Graph" into each WA note (verified person/CRM + concepts) + back-links into the 4 rich targets = BIDIRECTIONAL. Run AFTER vault_backup. Verify 0 broken targets.
+   - `python link_apply.py` (idempotent): writes "## 🔗 Граф" into each WA note (verified person/CRM + concepts) + back-links into the 4 rich targets = BIDIRECTIONAL. Run AFTER vault_backup. Verify 0 broken targets.
 7. VAULT (BACKUP FIRST — [[vault-backup-rule]]): `python $IMPORTS_ROOT/vault_backup.py`, then:
    - `python build_groups_note.py` (→ `_WhatsApp-Groups.md`).
    - Refresh `_WhatsApp-MOC.md` counts if chat/msg totals changed. (Contact notes: refresh only if a key chat changed materially — keep open-action-items current; that's the high-value part.)
 8. REINDEX (RAG): rely on the nightly Brain Reindex @04:00, or `python $IMPORTS_ROOT/brain_embed_update.py --wait-gpu 10` if Anton wants it searchable now.
-9. REPORT: chats/msgs pulled, named vs ✎-inferred counts, new/changed open-action-items flagged for Anton, dashboard path. End with a 🧒 In plain words recap (messages TO Anton only).
+9. REPORT: chats/msgs pulled, named vs ✎-inferred counts, new/changed open-action-items flagged for Anton, dashboard path. End with a 🧒 Простыми словами recap (messages TO Anton only).
 
 CONSTRAINTS:
 - WINDOWS cp1252: never print Cyrillic to python stdout (crashes) — scripts write UTF-8 files; keep stdout ASCII (counts only). ([[deterministic-script-gotchas]])
 - The bridge has NO history pagination (`list_messages` limit≤100, no offset) — this refreshes only the recent window, NOT all years. Full archive = separate phone-backup path (variant B, not built). State this honestly; don't imply completeness.
-- Re-applying the server group-subject patch: it lives in node_modules `dist\whatsapp.js` (getChat) — re-apply after any `npm update @oss_maintainer/whatsapp-mcp` (documented in [[whatsapp-mcp-integration]]).
+- Re-applying the server group-subject patch: it lives in node_modules `dist\whatsapp.js` (getChat) — re-apply after any `npm update [аккаунт]/whatsapp-mcp` (documented in [[whatsapp-mcp-integration]]).
 
 ALWAYS-MODEL (Anton 2026-06-16): graph-linking is NOT optional — it is how we ALWAYS work with WhatsApp. Split by cost:
 - **NIGHTLY auto (0 tokens, deterministic): Windows Task "WhatsApp Nightly Sync" @ 03:00 daily** = `nightly_sync.cmd`: `nightly_pull.py` → build_db → apply_group_labels (re-applies persistent `group_labels.json`) → dashboard → groups note → **`link_people.py` → `link_apply.py`** (re-weaves KNOWN verified people from `people_verified.json`, idempotent) → vault_backup. Keeps data + dashboard + known labels + known people-links fresh every night.
@@ -60,18 +70,3 @@ ALWAYS-MODEL (Anton 2026-06-16): graph-linking is NOT optional — it is how we 
 RELATION (do not duplicate):
 - First-time setup + pairing + gotchas + the nightly task: memory [[whatsapp-mcp-integration]] (single source of truth). Automation registry: [[automation-inventory]].
 - Sibling sync skills: [[health-sync]] / [[faaa-sync]] / [[telegram-reimport]] (same on-demand-refresh architecture). Routine policy: [[evaluate-recurring-into-routine]] — nightly cheap data twin + this richer manual LLM path.
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

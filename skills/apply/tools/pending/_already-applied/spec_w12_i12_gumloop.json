@@ -1,0 +1,26 @@
+{
+ "url": "https://jobs.ashbyhq.com/gumloop/94b10dd5-8498-4339-8b23-01bed81b2fc2/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w12_i12_gumloop",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "Share any previous work you're proud of": "I run a production multi-machine Claude agent fleet (6 machines, 100+ automation routines), operated in public: consensus, CRM, persistent memory, published evals. Flagships: claw-consensus (reproducible multi-machine agent consensus, offline demo, FAILURE-MODES.md) and verbatim-citation-gate (zero-token gate that catches fabricated RAG citations, MIT). Before the agent era I built the automation myself: wrote my own CRM (roots: 5 years building ERP/CRM on Salesforce and Microsoft Navision at Merlion) with social enrichment, parsing at scale and lead-to-call pipelines - up to 30 operators worked in it daily; today it is AI-native. Pre-sales muscle: 15+ years founder/BD, 10,000+ founder calls and 2,000+ institutional-investor calls - I can demo, scope and ship the workflow in the same meeting.",
+  "Anything": "US work authorization: active O-1 visa - authorized to work in the US, no sponsorship needed (that is why the visa checkbox above is unchecked). Based between Palo Alto, CA and Lisbon; available immediately and happy to work in person in San Francisco. Links: https://tonydzi.github.io/ and https://github.com/tonydzi (no LinkedIn account - the URL field points to my site)."
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "checkboxes": {
+  "Are you willing work in person with us in San Francisco or Vancouver?": true
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "LinkedIn URL"
+ ],
+ "check_options": {
+  "Do you require a visa?": "No"
+ }
+}

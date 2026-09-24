@@ -42,7 +42,7 @@
 #   python machine_bus.py list            # list streams + new/read state
 #   python machine_bus.py whoami          # show ME + my capabilities + subscribed streams
 #
-# Machine key = env MACHINE_KEY, else COMPUTERNAME.   Bus dir = env MACHINE_BUS_DIR, else vault\_machine-bus.
+# Machine key = env MACHINE_KEY, else COMPUTERNAME.   Bus dir = env MACHINE_BUS_DIR, else vault\[шина].
 # Capability registry = <bus>/machines.json .
 import os, sys, json, datetime, glob, hashlib, subprocess, time, urllib.request, re, base64
 
@@ -132,13 +132,13 @@ except Exception:
     pass
 
 # BUS resolution (canon-proposal MAC1 #c6736b1a): env -> OS-default; on non-Windows
-# the E:\ literal silently wrote into a junk dir inside cwd -> messages lost as from-unknown.
+# the [путь владельца] literal silently wrote into a junk dir inside cwd -> messages lost as from-unknown.
 if os.environ.get("MACHINE_BUS_DIR"):
     BUS = os.environ["MACHINE_BUS_DIR"]
 elif os.name == "nt":
-    BUS = r"%VAULT%\_machine-bus"
+    BUS = r"%VAULT%\[шина]"
 else:
-    BUS = os.path.expanduser("~/Obsidian/Owner-Knowledge/_machine-bus")
+    BUS = os.path.expanduser("~/Obsidian/Owner-Knowledge/[шина]")
 # Canonical machine identity = ONE machine -> ONE bus key. A raw COMPUTERNAME can differ from the
 # friendly bus key (Nina's laptop reports COMPUTERNAME=NAT1 but its bus identity is NAT1-Nina).
 # Without this alias the SAME machine splits into two inbox streams (inbox-NAT1 + inbox-NAT1-Nina)
@@ -386,7 +386,7 @@ def _hb_fresh(key):
     deviceIDs, so the local connections table alone calls every sibling spoke 'unreachable'
     forever (the 2026-07-14 NAT1 false-alarm class). Freshness window covers the heartbeat
     cadence + sync lag; override via BUS_HB_FRESH_SEC.
-    [merged from LAPTOP1 machinebus-hbfix-20260714 into the hub's injection-defense build]"""
+    [merged from LAPTOP1 machinebus-hbfix-[id] into the hub's injection-defense build]"""
     try:
         age = time.time() - os.path.getmtime(os.path.join(BUS, f"_heartbeat-{key}.txt"))
         return age < int(os.environ.get("BUS_HB_FRESH_SEC", "7200"))
@@ -447,7 +447,7 @@ def send(target, text):
         print("BUS FAIL: MACHINE_KEY/COMPUTERNAME unresolved (ME=unknown) -- refusing to send; set MACHINE_KEY")
         sys.exit(2)
     if not os.path.isdir(BUS):
-        print(f"BUS FAIL: bus dir does not exist: {BUS} -- set MACHINE_BUS_DIR to the synced _machine-bus")
+        print(f"BUS FAIL: bus dir does not exist: {BUS} -- set MACHINE_BUS_DIR to the synced [шина]")
         sys.exit(2)
     _ensure()
     stream, note = _resolve_stream(target)

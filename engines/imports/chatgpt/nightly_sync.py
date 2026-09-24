@@ -42,7 +42,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PY = sys.executable or "python"
-VAULT_CONV = Path(r"E:/Obsidian/Owner-Knowledge/01-Conversations/ChatGPT/conversations")
+VAULT_CONV = Path(r"[путь владельца]")
 STAGING_CONV = ROOT / "staging" / "01-Conversations" / "ChatGPT" / "conversations"
 CANON_DB = ROOT / "chatgpt_conversations.db"
 STAGING_DB = ROOT / "staging" / "01-Conversations" / "ChatGPT" / "chatgpt_conversations.db"

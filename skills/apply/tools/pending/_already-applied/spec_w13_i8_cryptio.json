@@ -1,0 +1,36 @@
+{
+ "url": "https://jobs.ashbyhq.com/cryptio/da41b495-db0d-4b57-8062-72f2e94ae07c/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w13_i8_cryptio",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Link to your LinkedIn profile": "https://tonydzi.github.io/ (no LinkedIn account)",
+  "What is the earliest date you can join us?": "Available immediately",
+  "What are your compensation expectations?": "Open / market rate",
+  "If other, specify below": "Company careers page (Ashby job board)",
+  "Why do you want to join Cryptio specifically and what makes you a great fit?": "I have spent a decade at the intersection Cryptio sits on: crypto infrastructure that has to satisfy accountants, banks and regulators. At Everex (Singapore) I was Chief Engineer for Lending & Risk Management and led government/bank relations across SE Asia on structuring crypto payments and stablecoins. As co-founder of Platinum VC & Incubator ($35M under management, portfolio ~70% crypto) I have run partnerships as a system for 11 years: 2,000+ institutional-investor calls, a self-built CRM that up to 30 operators used daily - today automated with AI agents. Growth Owner - Partnerships is the motion I already run every day: map the ecosystem, activate partners one concrete deal at a time, instrument every step. I also bring my own distribution: a 169k-subscriber Telegram channel and a 500+ AI-practitioner community in Palo Alto.",
+  "Which custodians do you have live relationships with?": "Honest answer: no live custodian relationships today. My crypto network was built on the adjacent side - partnerships with hedge funds, market makers and brokers from shipping crypto-exchange infrastructure, plus bank and government relations across SE Asia from Everex (structuring crypto payments and stablecoins). I run partnerships as a CRM-instrumented system with 2,000+ institutional-investor calls behind me, so building a live custodian map (the Fireblocks / BitGo / Copper tier) is my first 90-day sprint, not a cold start.",
+  "Give us one partnership you activated, with a before/after number.": "The Platinum VC syndicate. Before: no fund - deal-by-deal fundraising for portfolio startups. After: $35M under management and a standing syndicate of 250 VCs/angels, fed by 2,000+ qualified institutional-investor calls and a self-built CRM used daily by up to 30 operators. The activation motion each time: qualify, enrich, bring the partner a concrete first deal, then keep them warm on an automated follow-up cadence.",
+  "A partner's gone quiet on referrals. What are your first three moves?": "1) Diagnose before pinging: pull the CRM history - last referral, last touch, what changed on their side (team, priorities, a deal that went sideways). 2) Re-deliver value first: bring them something concrete - a warm intro, a client for them, refreshed materials - so the next touch is a gift, not a chase. 3) Change the channel and the altitude: move from email to a short call or in-person, ask directly what a good referral looks like for them now, and put them on an instrumented cadence so silence gets caught in days, not quarters.",
+  "Is there anything else you'd like us to know about you?": "US O-1 visa active (no sponsorship needed, now or in the future) and EU citizen - the New York role works from either side. Available immediately. I automate my own partnerships work with AI agents (public production fleet at github.com/tonydzi), so you get a partnerships owner who also builds his own tooling."
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "check_options": {
+  "Do you currently have the legal right to work": "Yes",
+  "How did you hear about Cryptio?": "Other"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "Link to your LinkedIn profile",
+  "What is the earliest date",
+  "What are your compensation expectations?",
+  "Why do you want to join Cryptio",
+  "Which custodians",
+  "Give us one partnership"
+ ]
+}

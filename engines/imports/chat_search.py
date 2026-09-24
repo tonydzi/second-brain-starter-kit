@@ -77,7 +77,7 @@ def main():
     def machine_match(m, want):
         """Match by frontmatter `machine:` OR by the _session-md/<dir> folder name.
         Closes the friendly-name vs hostname split (folder=NAT1-Nina,
-        frontmatter=NATALY-WIN-NB) — either spelling finds the chats."""
+        frontmatter=[машина флота]) — either spelling finds the chats."""
         w = want.lower()
         if (m.get('machine') or '').lower() == w:
             return True

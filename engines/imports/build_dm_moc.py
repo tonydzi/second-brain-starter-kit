@@ -55,7 +55,7 @@ tot_msgs = sum(m['total'] for m in idx.values())
 tot_anton = sum(m['acct'] for m in idx.values())
 tot_lead  = sum(m['lead'] for m in idx.values())
 note_pids = [pid for pid in idx if synth.get(pid,{}).get('has_note')]
-anon = [pid for pid in idx if re.fullmatch(r'(?i)lead', re.sub(r'\s*\(tg:\d+\)\s*$','',idx[pid]['name']).strip())]
+[человек] = [pid for pid in idx if re.fullmatch(r'(?i)lead', re.sub(r'\s*\(tg:\d+\)\s*$','',idx[pid]['name']).strip())]
 
 L = []
 L.append("---")
@@ -83,7 +83,7 @@ L.append(f"- **Person-заметок (≥20 сообщений):** {len(note_pid
 L.append(f"- **Архив-переписок (≥5 сообщений):** {n_archived:,}".replace(',', ' '))
 L.append(f"- **Контактов <5 сообщений (только в индексе, без файла):** {n_lt5:,}".replace(',', ' '))
 L.append(f"- **Период:** 2016 → 2026  ·  пик активности — 2019–2021")
-L.append(f"- **Неопознанных контактов:** {len(anon)} (имя в экспорте = «Lead»; где возможно — восстановлено по содержанию)")
+L.append(f"- **Неопознанных контактов:** {len([человек])} (имя в экспорте = «Lead»; где возможно — восстановлено по содержанию)")
 L.append("- Экспорт **текстовый** (без медиа): голосовых/фото/файлов в исходнике нет — потерь голосовой расшифровки нет.")
 L.append("")
 L.append("## По годам")

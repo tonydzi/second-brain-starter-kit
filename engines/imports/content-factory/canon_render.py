@@ -45,7 +45,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import leak_scan
 
 CANON = r"%VAULT%\04-Projects\show-canon"
-OUT   = r"E:\GitHub\the-journey\canon"
+OUT   = r"[путь владельца]"
 
 FOOTER = ("\n---\n*Эта страница — авто-проекция приватного канона истории "
           "(single source of truth). Руками не редактируется; пересборка: `canon_render.py`. "

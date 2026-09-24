@@ -28,11 +28,11 @@ except Exception:
 # ALL account exports (multi-account), chronological
 ACCT_FROM_FILE = re.compile(r'account-(\d+)-(\d{4})\.md$')
 _allfiles = sorted(glob.glob(os.path.expanduser(r"~\Downloads\Telegram Desktop\account-*-*.md")))
-KEEP_ACCOUNTS = {'265315838', '7303193973', '226258979'}   # @work_acct_b + @corp_acct + @work_acct_a (all confirmed)
+KEEP_ACCOUNTS = {'[id]', '[id]', '[id]'}   # [аккаунт] + [аккаунт] + [аккаунт] (all confirmed)
 FILES = [f for f in _allfiles if ACCT_FROM_FILE.search(f) and ACCT_FROM_FILE.search(f).group(1) in KEEP_ACCOUNTS]
 SELF_ACCOUNTS = {ACCT_FROM_FILE.search(f).group(1) for f in FILES}  # Anton's own account ids
 HEADER_RE = re.compile(r'Account:\s*\*\*@?([A-Za-z0-9_]+)\*\*\s*·\s*Telegram ID\s*`?(\d+)`?')
-PRIMARY_ACCT = '265315838'
+PRIMARY_ACCT = '[id]'
 id2handle = {}
 OUT_JSONL = Path(os.path.join(IMPORTS, "dm-archive.jsonl"))
 OUT_INDEX = Path(os.path.join(IMPORTS, "dm-index.json"))

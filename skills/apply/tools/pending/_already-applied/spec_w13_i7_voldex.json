@@ -1,0 +1,19 @@
+{
+  "url": "https://jobs.ashbyhq.com/voldex/fc23b710-a343-41a2-a162-b90fdc2bb113/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+  "out_prefix": "w13_i7_voldex",
+  "texts": {
+    "Preferred first and last name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Website or Portfolio": "https://tonydzi.github.io/",
+    "What is your desired salary for this role?": "Open / market rate",
+    "Where did you hear about the role?": "Company careers page"
+  },
+  "geo": {
+    "Where are you based?": {"type": "Palo Alto", "exact": "Palo Alto, California"}
+  },
+  "options": {
+    "Are you currently authorized to work in the country where you reside?": "Yes"
+  },
+  "required_labels": ["Preferred first and last name", "Email", "Resume", "Website or Portfolio", "What is your desired salary"]
+}

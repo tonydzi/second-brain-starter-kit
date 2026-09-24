@@ -1,0 +1,32 @@
+{
+ "idx": 0,
+ "comp": "palantir",
+ "url": "https://jobs.lever.co/palantir/b57f08e9-546c-4b9b-8d21-db0ebbc11363/apply",
+ "cv": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "steps": [
+  {"kind": "text", "name": "name", "value": "Anton Dziatkovskii"},
+  {"kind": "text", "name": "email", "value": "dzyatkovskiy.a@gmail.com"},
+  {"kind": "text", "name": "phone", "value": "+1 341 222 9178"},
+  {"kind": "location", "name": "location", "value": "Palo Alto, CA"},
+  {"kind": "text", "name": "org", "value": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)"},
+  {"kind": "text", "name": "urls[GitHub]", "value": "https://github.com/tonydzi"},
+  {"kind": "text", "name": "urls[Portfolio]", "value": "https://tonydzi.github.io/"},
+  {"kind": "choice", "name": "cards[a69a985a-eae9-4c14-90fb-b5a4b891523e][field0]", "value": "English (ENG)"},
+  {"kind": "choice", "name": "cards[a69a985a-eae9-4c14-90fb-b5a4b891523e][field0]", "value": "Other"},
+  {"kind": "text", "name": "cards[a69a985a-eae9-4c14-90fb-b5a4b891523e][field1]", "value": "Anton"},
+  {"kind": "choice", "name": "cards[1c719ca9-5069-4afe-9e82-39ca420e0edb][field0]", "value": "Yes"},
+  {"kind": "choice", "name": "cards[1c719ca9-5069-4afe-9e82-39ca420e0edb][field1]", "value": "No"},
+  {"kind": "select", "name": "cards[3da58b41-acf5-40a1-945e-c7f047ef8050][field0]", "value": "School Not Listed"},
+  {"kind": "select", "name": "cards[a6197d84-549e-4a91-8bb0-6af[id]][field0]", "value": "Palantir Website"},
+  {"kind": "choice", "name": "cards[f30bc442-2120-4db9-b5ac-2f9bf563cad9][field0]", "value": "No"},
+  {"kind": "choice", "name": "cards[f30bc442-2120-4db9-b5ac-2f9bf563cad9][field1]", "value": "No"},
+  {"kind": "text", "name": "cards[ce72d538-c9ad-41f3-8e9a-618d40c82e3a][field0]", "value": "Building and operating a production multi-machine Claude agent fleet (6 machines) in public: claw-consensus (reproducible multi-machine agent consensus with an offline demo and published evals) and verbatim-citation-gate (a zero-token gate that catches fabricated RAG citations, MIT). It is my proudest work because it is not a demo - it runs my real CRM, persistent memory and 100+ automation routines every day, and every failure mode is documented publicly (FAILURE-MODES.md)."},
+  {"kind": "text", "name": "cards[ce72d538-c9ad-41f3-8e9a-618d40c82e3a][field1]", "value": "Palantir's forward-deployed model matches how I already work: shipping AI systems inside messy, high-stakes environments and sitting directly with the customer. I have done the compliance-heavy side (structuring crypto payments and stablecoins with banks and governments in SE Asia) and the hands-on infrastructure side (running my own agent fleet end-to-end), and at Palantir those two halves are the actual job."},
+  {"kind": "choice", "name": "cards[73796cde-fc01-4758-9002-c85155f3503d][field0]", "value": "Yes, I consent"},
+  {"kind": "text", "name": "comments", "value": "I deploy AI into messy real-world environments daily: production multi-machine Claude fleet (6 machines) - consensus, CRM, persistent memory, 100+ automation routines - shipped end-to-end by myself (MCP connectors, RAG over a 10-year knowledge base, evals). 15+ years founder/BD background, including compliance-heavy payments work with banks and governments in SE Asia. US O-1 visa active, available immediately. Flagging honestly: I do not hold a US security clearance and am not a US citizen, which I understand may be disqualifying for this specific US Government role."},
+  {"kind": "select", "name": "eeo[veteran]", "value": "I decline to self-identify"},
+  {"kind": "select", "name": "eeo[disability]", "value": "I do not want to answer"},
+  {"kind": "text", "name": "eeo[disabilitySignature]", "value": "Anton Dziatkovskii"},
+  {"kind": "text", "name": "eeo[disabilitySignatureDate]", "value": "2026-09-03"}
+ ]
+}

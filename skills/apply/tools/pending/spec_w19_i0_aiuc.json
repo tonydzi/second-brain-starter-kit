@@ -1,0 +1,27 @@
+{
+ "url": "https://jobs.ashbyhq.com/aiuc/2816bb05-2a1f-4600-8780-deb152ac11ad/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w19_i0_aiuc",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone": "+1 341 222 9178",
+  "Linkedin / Website": "https://tonydzi.github.io/",
+  "Earliest available start date": "Available immediately",
+  "Compensation expectation": "Open / market rate"
+ },
+ "combos": {
+  "Current Location": "Palo Alto, California"
+ },
+ "check_options": {
+  "Are you open to working full-time in-person with us in San Francisco?": "Yes",
+  "Do you require visa sponsorship?": "No"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone",
+  "Resume",
+  "Linkedin / Website"
+ ]
+}

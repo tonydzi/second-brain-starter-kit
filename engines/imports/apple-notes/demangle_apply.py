@@ -23,7 +23,7 @@ import json, re
 from pathlib import Path
 
 OUT = Path(r"%IMPORTS%\apple-notes")
-EXPORT = Path(r"E:\Google Drive on HP Palo Alto\!_Claude_Mac16\Apple Notes Export 2026-06-11")
+EXPORT = Path(r"[путь владельца] Drive on HP Palo Alto\!_Claude_[машина флота]\Apple Notes Export 2026-06-11")
 VN = Path(r"%VAULT%\01-Conversations\Apple-Notes\notes")
 MDIR = OUT / "mangled"
 RDIR = OUT / "repaired"
@@ -66,14 +66,14 @@ def deterministic(md, title):
             frag_ct = sum(1 for h in heads if h.strip() and is_fragment(h))
             if len(heads) >= 3 and frag_ct >= 2:
                 # collapse this run: join fragments, empty head => para break
-                paras, cur = [], []
+                [человек], cur = [], []
                 for h in heads:
                     if h.strip() == '':
-                        if cur: paras.append(''.join(cur)); cur = []
+                        if cur: [человек].append(''.join(cur)); cur = []
                     else:
                         cur.append(h)
-                if cur: paras.append(''.join(cur))
-                out.append(('RUN', paras))
+                if cur: [человек].append(''.join(cur))
+                out.append(('RUN', [человек]))
             else:
                 # not exploded -> keep verbatim
                 for k in range(i, j):
@@ -92,15 +92,15 @@ def deterministic(md, title):
         if tag == 'VERB':
             rendered.append(val)
         else:
-            paras = val[:]
-            if not used_title and paras:
-                p0 = paras[0]
+            [человек] = val[:]
+            if not used_title and [человек]:
+                p0 = [человек][0]
                 if (not title_trunc) and re.sub(r'[\s#]+', '', clean_title) == re.sub(r'[\s#]+', '', p0):
-                    paras[0] = '# ' + clean_title
+                    [человек][0] = '# ' + clean_title
                 else:
-                    paras[0] = '# ' + p0
+                    [человек][0] = '# ' + p0
                 used_title = True
-            rendered.append('\n\n'.join(paras))
+            rendered.append('\n\n'.join([человек]))
     text = '\n'.join(rendered)
     text = re.sub(r'\n{3,}', '\n\n', text).strip('\n')
     return text

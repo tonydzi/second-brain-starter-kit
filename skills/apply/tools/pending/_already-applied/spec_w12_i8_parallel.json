@@ -1,0 +1,26 @@
+{
+ "url": "https://jobs.ashbyhq.com/parallel/fe935559-4209-4736-baa8-6d2478d424ba/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w12_i8_parallel",
+ "texts": {
+  "First and Last Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "A link we should look at": "https://tonydzi.github.io/",
+  "Excited to work in-person?": "Yes - I prefer in-person; I'm regularly in Palo Alto.",
+  "Why Parallel?": "Parallel is building the web layer that agents actually need - I feel this pain daily as an operator: I run a production multi-machine Claude fleet whose routines live and die by the quality of programmatic web access. Cloud partnerships is the seat where that conviction meets my trade: 15+ years of founder/BD work building distribution through platforms and partners, and cloud marketplaces are where AI infrastructure gets bought now. Turning a great API into default infrastructure on the AWS/GCP/Azure shelves is a concrete, winnable distribution game I want to run.",
+  "Why you?": "I have done both halves of this job. Partnerships: 15+ years founder/BD - co-founder of Platinum VC & Incubator, 10,000+ founder calls, enterprise advisory for subsidiaries of Foxconn and ANA Airlines, government/bank relations across SE Asia; I build partner programs end-to-end, from first call to signed terms to operational playbooks. Product side: I am a hands-on agent operator - production multi-machine Claude fleet (6 machines), MCP connectors, RAG over a 10-year knowledge base, 100+ routines, published reliability evals - so I can speak with platform engineers in their language. On an active US O-1 (no sponsorship needed), regularly in Palo Alto, available immediately."
+ },
+ "check_options": {
+  "Are you legally authorized to work in the United States?": "Yes",
+  "Will you now or in the future require employer sponsorship to work in the United States?": "No"
+ },
+ "required_labels": [
+  "First and Last Name",
+  "Email",
+  "Resume",
+  "A link we should look at",
+  "Excited to work in-person?",
+  "Why Parallel?",
+  "Why you?"
+ ]
+}

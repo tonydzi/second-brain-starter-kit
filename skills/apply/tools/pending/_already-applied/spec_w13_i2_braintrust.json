@@ -1,0 +1,25 @@
+{
+ "url": "https://jobs.ashbyhq.com/braintrust/e1bc9095-2460-4cf4-957f-ba076b6cb5ba/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w13_i2_braintrust",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "Additional Information": "No LinkedIn account - my work lives at https://tonydzi.github.io/ and https://github.com/tonydzi. I deploy AI into production daily: 6-machine Claude fleet run in public (MCP connectors, RAG over a 10-year knowledge base, CRM automation, published evals), 15+ years customer-facing founder/BD background. US work authorization: active O-1, no sponsorship needed now or in the future. Available immediately; open to relocation or travel for an East Region territory."
+ },
+ "combos": {
+  "Location": "Palo Alto"
+ },
+ "check_options": {
+  "Will you now or in the future require sponsorship": "No"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone Number",
+  "Resume",
+  "LinkedIn URL"
+ ]
+}

@@ -52,7 +52,7 @@ REPING_AFTER = 3 * 3600        # if a peer stays down, re-nag Anton at most ever
 APIKEY = (os.environ.get("STGUIAPIKEY") or "").strip()
 # --- Layer-2 self-heal: auto-nudge a disconnected peer's robot to restart its Syncthing ---
 GROUP_POST = os.path.join(HOME, ".claude", "scripts", "_shared", "bus_group_post.py")  # 83  # 0-LLM post to the bus GROUP
-BUS_DIR = os.environ.get("MACHINE_BUS_DIR", r"%VAULT%\_machine-bus")
+BUS_DIR = os.environ.get("MACHINE_BUS_DIR", r"%VAULT%\[шина]")
 ME_HUB = "HUB1"       # this (hub) machine's bus key -> nudge sender label
 NUDGE_EVERY = 30 * 60          # space auto group-nudges >= 30 min apart
 NUDGE_MAX = 3                  # ... and at most 3 per down-episode, then rely on the 3h Anton re-ping -> bounded noise

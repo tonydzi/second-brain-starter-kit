@@ -1,0 +1,20 @@
+{"url": "https://jobs.ashbyhq.com/docker/e82afe97-2ce1-4561-8697-8e281849d0a8/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w11_i11_docker",
+ "texts": {
+   "Name": "Anton Dziatkovskii",
+   "Email": "dzyatkovskiy.a@gmail.com",
+   "Linkedin Profile": "https://tonydzi.github.io/ (no LinkedIn account)",
+   "Phone Number": "+1 341 222 9178",
+   "Physical Mailing Address": "Palo Alto, CA, USA (full street address will be provided upon offer)"
+ },
+ "combos": {"Location": "Palo Alto"},
+ "check_options": {
+   "Are you legally authorized to work in the country": "Yes",
+   "Will you now or in the future require sponsorship": "No",
+   "Interview Recording Consent": "Yes, I consent to be recorded",
+   "Gender": "Decline to self-identify",
+   "Race": "Decline to self-identify",
+   "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "required_labels": ["Name", "Email", "Resume", "Linkedin Profile", "Phone Number", "Physical Mailing Address"]}

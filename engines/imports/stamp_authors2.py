@@ -43,8 +43,8 @@ def clean_series(title):
 L = str.lower
 # (predicate, author, corrupted?) — Anton: all NOT his -> external attribution
 NEW = [
-    (lambda k: k.startswith("Lucius Aurelian"), "Lucius Aurelian", False),
-    (lambda k: k.startswith("Paul Cook"), "Paul Cook", False),
+    (lambda k: k.startswith("[человек] Aurelian"), "[человек] Aurelian", False),
+    (lambda k: k.startswith("[человек] [человек]"), "[человек] [человек]", False),
     (lambda k: k.startswith("Sergey Ignatenko"), "Sergey Ignatenko", False),
     (lambda k: k.startswith("One Spark"), "One Spark (consciousness podcast)", False),
     (lambda k: k.startswith("Satori"), "Satori (podcast/channel)", False),
@@ -53,7 +53,7 @@ NEW = [
     (lambda k: k.startswith("История Пи"), "«История Пи» (alt-history YouTube channel)", False),
     (lambda k: k.startswith("Председатель СНТ"), "«Председатель СНТ» (alt-history YouTube channel)", False),
     (lambda k: k.startswith("my lunch Break"), "External YouTube channel (unidentified multi-episode show)", False),
-    (lambda k: "chat" in L(k), "Telegram group chat — multi-author crypto/DAO community (id -1003779381054)", False),
+    (lambda k: "chat" in L(k), "Telegram group chat — multi-author crypto/DAO community (id -[id])", False),
     (lambda k: "cyrillic" in L(k), "External source (Cyrillic title corrupted on import — exact channel unrecoverable)", True),
 ]
 

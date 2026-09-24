@@ -50,7 +50,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 # Scope (what the rule applies to) lives in ONE place -- orphan_scope.py, shared with
 # the PostToolUse hook. Do NOT re-list folders here (that drift is what blocked
-# `_machine-bus/_deploy/payloads/*/MANIFEST.md`).
+# `[шина]/_deploy/payloads/*/MANIFEST.md`).
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from orphan_scope import EXCLUDED_PREFIXES, is_excluded, is_infra  # noqa: E402
 

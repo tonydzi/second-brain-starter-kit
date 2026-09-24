@@ -1,0 +1,18 @@
+{
+  "url": "https://jobs.ashbyhq.com/factory/58d0e05c-6841-4651-9dd8-61037a0876a3/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+  "out_prefix": "w20_i14_factory",
+  "texts": {
+    "Full Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone Number": "+1 341 222 9178",
+    "Current Company": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)",
+    "LinkedIn URL": "https://tonydzi.github.io/ (no LinkedIn account)",
+    "Why are you interested in working at Factory?": "Factory builds the thing I run in production every day: software development agents. I operate a 6-machine Claude agent fleet in public (consensus, CRM, persistent memory, 100+ automation routines) and build its guardrails myself - agent-leash, verbatim-citation-gate (catches fabricated RAG citations), three-circuit homeostatic governance (preprint). MSc in Computer & Information Systems Security (MEPhI, cryptography), smart-contract audit background, and anti-fraud instincts from a decade in adversarial crypto markets. Securing an agent platform that ships code into enterprise engineering orgs is exactly the attack surface I already defend. Onsite SF works: active US O-1, SF Bay Area network."
+  },
+  "geo": {
+    "Location": {"type": "Palo Alto", "exact": "Palo Alto"}
+  },
+  "options": {},
+  "required_labels": ["Full Name", "Email", "Phone Number", "Current Company", "LinkedIn URL", "Resume"]
+}

@@ -1,0 +1,126 @@
+/* СТИЛЬ УЧЁНОГО ЗАДРОТА — canonical stylesheet, Palo Alto AI Research Lab.
+   Extracted 2026-07-29 from the live pages it was invented on:
+   tonydzi.github.io/scholar/ and /contributions/.
+
+   Inline this into <style> in the page. Do NOT link it from a CDN and do NOT
+   split it across files: a page in this style must survive being saved to disk
+   with Ctrl+S and opened ten years later with no network. That is the point.
+
+   Everything below is one screen of CSS on purpose. If you are adding a
+   framework, a build step, or a webfont download, you have left the style. */
+
+/* ---- tokens ------------------------------------------------------------ */
+:root{
+  --paper:#fdfdfd;      /* off-white, never pure #fff — pure white reads as a form */
+  --ink:#111;
+  --muted:#666;         /* metadata, dates, venues, captions */
+  --rule:#e2ded3;       /* warm hairline under section headers and above footers */
+  --hair:#eee9dd;       /* [человек] hairline between list items */
+  --link:#0000ee;       /* the browser default. Deliberate: this is a document, not a brand */
+  --seen:#551a8b;
+}
+
+/* ---- page -------------------------------------------------------------- */
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:"Bitstream Charter","Iowan Old Style",Palatino,Georgia,"Times New Roman",serif;
+  font-size:18px;line-height:1.55;
+  max-width:47rem;margin:0 auto;padding:4rem 1.4rem 6rem;
+}
+p{margin:0 0 1rem;max-width:65ch}
+
+/* ---- links: underline on hover only, visited stays visible ------------- */
+a{color:var(--link);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--link)}
+a:visited{color:var(--seen)}
+a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+
+/* ---- headings ---------------------------------------------------------- */
+h1{font-size:2.1rem;line-height:1.12;margin:0 0 .2rem;font-weight:600;letter-spacing:-.01em}
+h1.sub{font-size:1.7rem;line-height:1.15;margin:0 0 .3rem}   /* inner pages */
+.role{color:var(--muted);font-style:italic;font-size:1.05rem;margin:0 0 1.5rem}
+h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);
+   font-weight:600;margin:2.6rem 0 .8rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule)}
+h3{font-size:1rem;font-weight:600;margin:1.3rem 0 .4rem}
+.crumb{font-size:.9rem;color:var(--muted);margin-bottom:2rem}
+
+/* ---- the list item: the workhorse of every page in this style ---------- */
+.item{padding:.45rem 0;border-bottom:1px solid var(--hair)}
+.item:last-child{border-bottom:none}
+.it-t{font-weight:600}                       /* title of the thing */
+.it-v{color:var(--muted);font-style:italic}  /* venue / journal / where it ran */
+.d{color:var(--muted);font-size:.85rem;margin-right:.6rem;font-variant-numeric:tabular-nums}
+.lk{font-size:.82rem;color:var(--muted)}     /* row of DOI / PDF / repo links */
+.lk a{margin-right:.6rem;text-decoration:underline;text-underline-offset:2px;border-bottom:none}
+b.me{font-weight:600}                        /* our name inside an author list */
+
+/* ---- label / value rows (contact, metadata) ---------------------------- */
+.kv{display:flex;gap:.8rem;margin:.15rem 0}
+.kv .k{width:8.5rem;flex:none;color:var(--muted)}
+
+/* ---- numbers: counts, metrics, tallies --------------------------------- */
+.metrics{font-variant-numeric:tabular-nums}
+.tally{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;margin:0 0 1.2rem;font-variant-numeric:tabular-nums}
+.tally div{white-space:nowrap}
+.tally b{font-size:1.5rem;font-weight:600;margin-right:.35rem}
+.tally span{color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+
+/* ---- status pill: sans-serif on purpose, it is machine state not prose - */
+.st{display:inline-block;min-width:4.2rem;text-align:center;font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.08em;padding:.1rem .4rem;border-radius:3px;border:1px solid;margin-right:.5rem;
+    font-family:-apple-system,"Segoe UI",Roboto,sans-serif}
+.st-ok{color:#1a7f37;border-color:#1a7f37}
+.st-mid{color:#6639ba;border-color:#6639ba}
+.st-off{color:#8b949e;border-color:#8b949e}
+
+/* ---- tables ------------------------------------------------------------ */
+.tw{overflow-x:auto}                          /* wrap every table in this */
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th{text-align:left;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);
+   font-weight:600;border-bottom:1px solid var(--rule);padding:.4rem .6rem .4rem 0}
+td{border-bottom:1px solid var(--hair);padding:.45rem .6rem .45rem 0;vertical-align:top}
+td.num{text-align:right;font-variant-numeric:tabular-nums;padding-right:1.2rem}
+
+/* ---- code and quotes --------------------------------------------------- */
+code{font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:.88em;
+     background:#f4f1e9;padding:.05em .3em;border-radius:2px}
+pre{overflow-x:auto;background:#f7f5ef;border:1px solid var(--rule);border-radius:3px;
+    padding:.8rem 1rem;font:13px/1.5 ui-monospace,Consolas,"Courier New",monospace}
+pre code{background:none;padding:0}
+blockquote{margin:1rem 0;padding-left:1rem;border-left:2px solid var(--rule);color:#333}
+.note{color:var(--muted);font-size:.9rem}
+figure{margin:1.4rem 0}
+figcaption{color:var(--muted);font-size:.85rem;margin-top:.4rem}
+
+/* ---- footer blocks ----------------------------------------------------- */
+.sitenav{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.9rem;line-height:1.9}
+.sitenav a{margin:0 2px}
+.foot{margin-top:3.2rem;padding-top:1rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+
+/* ---- small screens ----------------------------------------------------- */
+@media (max-width:520px){
+  body{padding:2.2rem 1.1rem 4rem;font-size:17px}
+  .kv{flex-direction:column;gap:.05rem}
+  .kv .k{width:auto}
+}
+
+/* ---- print: the page must survive being printed ------------------------ */
+@media print{
+  body{max-width:none;padding:0;font-size:11pt}
+  a{color:#000;border:none}
+  .sitenav{display:none}
+}
+
+/* ---- OPTIONAL dark variant --------------------------------------------
+   The style deliberately commits to paper, and a light-only page is a valid
+   choice here. Paste this block ONLY if the site must follow the OS theme.
+   It keeps the warm paper feel instead of inverting to a cold grey.
+
+@media (prefers-color-scheme: dark){
+  :root{--paper:#12110f;--ink:#e8e4db;--muted:#9a938a;--rule:#3a352d;--hair:#2a2620;
+        --link:#8ab4ff;--seen:#c3a0e8}
+  code{background:#241f19}
+  pre{background:#1a1712}
+  blockquote{color:#cfc9c0}
+}
+------------------------------------------------------------------------ */

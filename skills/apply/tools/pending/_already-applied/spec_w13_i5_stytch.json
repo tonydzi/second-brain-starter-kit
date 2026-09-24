@@ -1,0 +1,16 @@
+{
+  "url": "https://jobs.ashbyhq.com/stytch/451d94a1-183a-4447-ae45-aea772d7e84d/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+  "out_prefix": "w13_i5_stytch",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone": "+1 341 222 9178",
+    "Linkedin (please enter N/A if you don't have one)": "N/A - no LinkedIn account; please see https://tonydzi.github.io/ and https://github.com/tonydzi",
+    "Github": "https://github.com/tonydzi"
+  },
+  "check_options": {
+    "Are you based in the Bay Area": "Yes, based in the Bay Area and ok with hybrid work."
+  },
+  "required_labels": ["Name", "Email", "Phone", "Resume", "Linkedin"]
+}

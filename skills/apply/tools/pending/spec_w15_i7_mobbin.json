@@ -1,0 +1,24 @@
+{
+ "url": "https://jobs.ashbyhq.com/mobbin.com/94fdd9b5-9371-471c-bed6-7ee3d07954a9/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Writer.pdf",
+ "out_prefix": "w15_i7_mobbin",
+ "texts": {
+  "Full name": "Anton Dziatkovskii",
+  "Email address": "dzyatkovskiy.a@gmail.com",
+  "Nationality": "Poland (EU citizen)",
+  "Portfolio or Reels": "Honest note: no video reel. My portfolio is long-form writing and published research: https://tonydzi.github.io/ - 50+ published items, 136 citations (Google Scholar: https://scholar.google.com/citations?user=b8gKHiMAAAAJ) - 110 public repos at https://github.com/tonydzi - currently writing a book on human-AI collaboration (AIBO - The Partner).",
+  "Website URL": "https://tonydzi.github.io/",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "X/Twitter URL": "https://x.com/Tony_Stef_",
+  "Why do you want to work at Mobbin?": "Mobbin sets a high craft bar for design content, and its library is a reference point for product teams. My strength is editorial: turning complex product and research material into clear, engaging content - docs, courses, long-form articles - and I run a 169k-subscriber Telegram channel ([аккаунт]). I would like to apply that editorial sense to Mobbin's YouTube content.",
+  "What is your expected rate?": "Open / market rate",
+  "What is your desired start date?": "Available immediately",
+  "Your availability & preferred working style?": "Full-time or contract availability, remote from Lisbon, Portugal (UTC+0/+1), comfortable overlapping with US and APAC hours; async-first, independent working style.",
+  "Where did you hear about this role?": "Company careers page",
+  "A few lines on a video you'd improve": "Honest note first: I have not yet done a scene-by-scene pass on a specific Mobbin video, so rather than invent one - the pattern I most often fix in product/design videos: slow cold opens. I would cut straight to the product in motion within the first 3 seconds, tighten pacing with jump-cuts, add on-screen captions for sound-off viewing, and end with one concrete CTA instead of a generic outro."
+ },
+ "combos": {
+  "Location": "Lisbon"
+ },
+ "required_labels": ["Full name", "Email address", "Nationality", "Portfolio or Reels", "What is your expected rate?", "What is your desired start date?", "A few lines on a video you'd improve"]
+}

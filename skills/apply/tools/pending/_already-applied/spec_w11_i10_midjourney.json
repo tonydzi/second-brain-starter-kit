@@ -1,0 +1,9 @@
+{"url": "https://jobs.ashbyhq.com/midjourney/2646f700-a562-4e76-8979-ed01776eb745/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w11_i10_midjourney",
+ "texts": {
+   "Name": "Anton Dziatkovskii",
+   "Email": "dzyatkovskiy.a@gmail.com",
+   "Tell us about something amazing you created recently": "I recently built an autonomous multi-agent AI 'fleet' at my lab (Palo Alto AI Research Lab): a small fleet of Macs and PCs running coordinated Claude-based agents that share one knowledge vault, message each other over a machine bus, self-schedule their routines, and ship open-source tooling to GitHub (github.com/tonydzi). It runs research, outreach and content pipelines end-to-end with me as the only human in the loop. More: https://tonydzi.github.io/"
+ },
+ "required_labels": ["Name", "Email", "Resume"]}

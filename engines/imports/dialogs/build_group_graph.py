@@ -48,7 +48,7 @@ TOPIC = [
     ("founders",    r"founder|startup|builder|entrepreneur"),
     ("ai",          r"\bai\b|agent|ml\b|llm|gpt|neural"),
     ("crypto_defi", r"defi|dao|web3|crypto|token|nft|chain|eth|solana"),
-    ("events_geo",  r"event|meetup|summit|conf|miami|france|dubai|singapore|lisbon|london|berlin"),
+    ("events_geo",  r"event|meetup|summit|conf|miami|france|[человек]|singapore|lisbon|london|berlin"),
     ("intro_deal",  r"🤝| <> |<>|deal|intro"),
     ("longevity",   r"longevity|health|biohack|weight|fasting|nootrop"),
     ("ops_team",    r"team|ops|assist|support|admin|staff"),

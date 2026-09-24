@@ -1,0 +1,30 @@
+{
+ "url": "https://jobs.ashbyhq.com/ruby-labs/d4ebc9dc-a05a-4906-8bb7-c26810ae5602/application",
+ "out_prefix": "w10_i14_ruby-labs",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "texts": {
+  "Full Name:": "Anton Dziatkovskii",
+  "Email address:": "dzyatkovskiy.a@gmail.com",
+  "Phone number:": "+1 341 222 9178",
+  "Link to your LinkedIn profile:": "https://tonydzi.github.io/",
+  "What is your availability to start a new role?": "Available immediately",
+  "What is your expected monthly gross wage in euros": "Open / market rate",
+  "Are you currently part of any Discord, YouTube, or Telegram communities?": "Yes - I run the [аккаунт] Telegram channel (169k subscribers) and a community of 500+ AI practitioners in Palo Alto, including Stanford researchers and big-tech engineers. I am also active daily in AI/LLM developer communities on Telegram and Discord.",
+  "Is there anything else you would like to add to support your application?": "10+ years venture founder who ships product with AI agents daily: my lab runs a production fleet of six machines operated by Claude agents (multi-machine consensus, persistent memory, AI-native CRM, 100+ automation routines), built and documented in public across 110 GitHub repos. Before that: co-founded Platinum VC & Incubator (11 years, APAC + Silicon Valley), wrote my own CRM that 30 operators used daily, shipped fintech infrastructure end-to-end (exchange backends, lending/credit scoring, stablecoin design). EU citizen (Poland) based in Lisbon - CET-friendly, available immediately. Portfolio: https://tonydzi.github.io/"
+ },
+ "combos": {
+  "What is your country of residence?": "Portugal"
+ },
+ "check_options": {
+  "How many years of relevant experience do you have?": "More than 10 years",
+  "What is your English proficiency level?": "Advanced (C1)",
+  "Are you located within a": "Yes"
+ },
+ "required_labels": [
+  "Full Name:",
+  "Email address:",
+  "Resume:",
+  "What is your availability to start a new role?",
+  "What is your expected monthly gross wage in euros"
+ ]
+}

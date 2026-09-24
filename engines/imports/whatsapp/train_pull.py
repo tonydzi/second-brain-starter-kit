@@ -14,7 +14,7 @@
 # ---------------------------------------------------------------------------
 """
 WhatsApp TRAINING pull (variant A, live bridge).
-Spawns ONE temporary stdio client against the already-paired @oss_maintainer/whatsapp-mcp
+Spawns ONE temporary stdio client against the already-paired [аккаунт]/whatsapp-mcp
 server, lets history sync, then pulls chats + recent messages into a local archive.
 GENTLE / read-only (telegram-safety analog). No vault writes here -- this is a dry run.
 NEVER run while another whatsapp node is connected (AUTH_KEY_DUPLICATED landmine).
@@ -23,7 +23,7 @@ import json, subprocess, time, os, sys, io
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
-IDX = os.path.expanduser(r"~\AppData\Roaming\npm\node_modules\@oss_maintainer\whatsapp-mcp\dist\index.js")
+IDX = os.path.expanduser(r"~\AppData\Roaming\npm\node_modules\[аккаунт]\whatsapp-mcp\dist\index.js")
 OUT = r"%IMPORTS%\whatsapp"
 RAW = os.path.join(OUT, "raw_train")
 os.makedirs(RAW, exist_ok=True)

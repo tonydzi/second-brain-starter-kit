@@ -33,7 +33,7 @@ WHY (anton 2026-07-27): у /tt уже есть Codex (дефолт) и Grok (в�
 
 ДВИЖОК (⚠️ УСЛОЖНЕНИЕ, обоснованное): две headless-рельсы к одной модели.
   1) REST generativelanguage.googleapis.com -- ДЕФОЛТ, stdlib-urllib, ответ ~5-10 c.
-  2) `gemini -p` (@google/gemini-cli, headless) -- `--engine cli`. ЗАМЕР 27.07: отвечает, но
+  2) `gemini -p` ([аккаунт]/gemini-cli, headless) -- `--engine cli`. ЗАМЕР 27.07: отвечает, но
      при всплеске квоты уходит в ретраи с backoff (один ping растянулся на 435 c) и падает
      с `[object Object]`; REST на том же ключе даёт 9-11 c и внятную ошибку.
 Обе headless и без браузера. Дефолт выбран ЗАМЕРОМ, а не вкусом: ритуал /tt не может ждать
@@ -110,7 +110,7 @@ BREAK_PROMPT = """\
 {context}
 
 Ищи то, что автор не видит сам: краевые случаи и кривой ввод; отсутствующие зависимости;
-Windows-грабли путей (C:/E:, пробелы, кодировки); тихие сбои (exit 0 при нуле работы);
+Windows-грабли путей ([путь владельца] пробелы, кодировки); тихие сбои (exit 0 при нуле работы);
 гонки при параллельном запуске; устаревшие предположения; «работает у автора, умрёт у соседа».
 
 Формат ответа — СТРОГО:
@@ -122,7 +122,7 @@ Windows-грабли путей (C:/E:, пробелы, кодировки); т�
 
 # ---------------------------------------------------------------- ключ и окружение
 def _menv(key):
-    """Пер-машинное значение из ~/.claude/machine.env (канон §10.3: не хардкодим C:/E:)."""
+    """Пер-машинное значение из ~/.claude/machine.env (канон §10.3: не хардкодим [путь владельца])."""
     p = os.path.join(os.path.expanduser("~"), ".claude", "machine.env")
     try:
         if os.path.exists(p):
@@ -163,7 +163,7 @@ def ask_cli(prompt, model, timeout, cwd):
     """Рельса 1: официальный CLI headless. Read-only: --approval-mode plan."""
     exe = shutil.which("gemini") or shutil.which("gemini.cmd")
     if not exe:
-        return None, "gemini CLI не на PATH (npm i -g @google/gemini-cli)"
+        return None, "gemini CLI не на PATH (npm i -g [аккаунт]/gemini-cli)"
     env = dict(os.environ)
     env["GEMINI_API_KEY"] = api_key()
     env["GEMINI_CLI_TRUST_WORKSPACE"] = "true"   # иначе CLI просит доверить папку интерактивно
@@ -415,7 +415,7 @@ def cmd_doctor(args):
     """Жива ли рельса? Зелёное = МОЛЧАЩИЙ ok, красное = имя больного + лечение."""
     ok = True
     exe = shutil.which("gemini") or shutil.which("gemini.cmd")
-    print("CLI на PATH: %s" % (exe if exe else "НЕТ ⛔ -> npm i -g @google/gemini-cli"))
+    print("CLI на PATH: %s" % (exe if exe else "НЕТ ⛔ -> npm i -g [аккаунт]/gemini-cli"))
     ok &= bool(exe)
     key = api_key()
     print("API-ключ: %s" % ("есть (%d симв.) ✅" % len(key) if key
@@ -472,7 +472,7 @@ def main():
     ap.add_argument("--out", default="")
     ap.add_argument("--model", default="", help="по умолчанию цепочка: " + " -> ".join(MODEL_CHAIN))
     ap.add_argument("--engine", default="rest", choices=["rest", "cli"],
-                    help="rest = прямой headless-вызов (дефолт, ~10 c); cli = @google/gemini-cli (медленнее)")
+                    help="rest = прямой headless-вызов (дефолт, ~10 c); cli = [аккаунт]/gemini-cli (медленнее)")
     ap.add_argument("--timeout", type=int, default=300)
     ap.add_argument("--no-log", action="store_true", help="break: не писать вердикт в secondop usage.jsonl")
     args = ap.parse_args()

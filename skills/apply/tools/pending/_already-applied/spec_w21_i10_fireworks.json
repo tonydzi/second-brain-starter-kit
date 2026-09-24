@@ -1,0 +1,47 @@
+{
+ "idx": 10,
+ "url": "https://jobs.ashbyhq.com/fireworks/cd8233f0-e958-40b5-a9a6-e35ecb9a76a4/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-BD-Partnerships.pdf",
+ "out_prefix": "w21_i10_fireworks",
+ "retry_identical": true,
+ "texts": {
+  "Legal Name": "Anton Dziatkovskii",
+  "Preferred Name": "Anton",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "LinkedIn URL": "https://tonydzi.github.io/",
+  "Why are you interested in Fireworks AI?": "Candid disclosure first: this application was prepared by my own Claude agent fleet under my direction, from my verified bio - building and operating that fleet in public is my core work (github.com/tonydzi). Fireworks is the draw because I am your customer profile. I run a production multi-machine agent fleet in Palo Alto and spend my days on inference cost, latency and model choice, so I can talk to an engineering buyer without a script. My pipeline background is literal, not aspirational: 10,000+ founder calls and 2,000+ institutional-investor calls at Platinum VC & Incubator, a self-written CRM that up to 30 operators used daily, and every repeatable outbound motion automated - first with that CRM, today with AI agents. I also run a 169k-subscriber AI channel and a 500+ practitioner community in Palo Alto, which is where developer-led pipeline actually comes from.",
+  "Do you have any initial compensation expectations?": "Open / market rate",
+  "If offered a position, what is your ideal start-date?": "09/15/2026"
+ },
+ "geo": {
+  "Where are you currently located?": {
+   "type": "Palo Alto",
+   "exact": "Palo Alto, California"
+  }
+ },
+ "options": {
+  "Are you authorized to work in the country where the job is located?": "Yes",
+  "Will you now or in the future require visa sponsorship": "No",
+  "Are you open to a hybrid schedule": "Yes",
+  "Interview Recording Consent": "Yes, I consent to be recorded",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "multi_options": {
+  "Which office location(s) are you interested in?": [
+   "San [человек], CA",
+   "Remote, US"
+  ]
+ },
+ "required_labels": [
+  "Legal Name",
+  "Email",
+  "Phone Number",
+  "Resume",
+  "Why are you interested in Fireworks AI?",
+  "If offered a position, what is your ideal start-date?",
+  "Do you have any initial compensation expectations?"
+ ]
+}

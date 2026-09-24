@@ -1,0 +1,25 @@
+{
+ "url": "https://jobs.ashbyhq.com/liquid-ai/e560189f-f3a7-4fc9-8b16-5d05ecefe629/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w11_i9_liquidai",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "LinkedIn URL": "https://tonydzi.github.io/"
+ },
+ "check_options": {
+  "Where are you currently located": "San Francisco / Bay area",
+  "How did you hear about Liquid AI": "Other",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Phone Number",
+  "LinkedIn URL",
+  "Resume"
+ ]
+}

@@ -1,96 +1,154 @@
 ---
 name: fb-reply
-description: >-
-  Read who commented on recent Facebook posts and publish personalized replies through the real
-  logged-in Chrome tab, draft-first, with a daily cap and a minimum gap between replies.
-  Triggers: "/fb-reply", "reply to my facebook comments".
-license: MIT
+description: "Read who commented on Anton's recent Facebook posts and post PERSONALIZED replies through his real logged-in Chrome (Claude-in-Chrome MCP = low-ban-risk live-tab path), draft-first and rate-limit-guarded. Trigger on “/fb-reply“, “ответь на комменты“, “ответь комментаторам“, “разбери комментарии под постами“, “reply to my facebook comments“, “ответь в фейсбуке на комменты“"
+version: 1.0.0
 ---
 
-# /fb-reply — reply to the comments under the owner's posts (safely)
+# /fb-reply — ответить на комментарии под постами Антона (безопасно)
 
-**Why.** Comments pile up under the posts (often valuable — like the counter-thesis one engineer left about tailscale). Replying on your OWN posts is a low-risk task, but Facebook still bans for PACE. So: read safely, write personally in the owner's voice, post one at a time with pauses, under a counter.
+> ⛔ **ЛИЧНОСТЬ БРАУЗЕРА (канон 30.08.2026).** Chrome профиля Default на хабе = личность Антона (claude.ai там под **[рабочий аккаунт]**, всегда).
+> Робот здесь **ЧИТАЕТ и действует, но НЕ ТРОГАЕТ ЛОГИНЫ**: ни logout, ни смены аккаунта, ни «самолечения входа», ни инжекта кук.
+> Увидел «не тот аккаунт» → доложи и работай из робо-профиля (`_chrome_profile_a2`, Firefox-профили). Канон: `reglament-hab-brauzernye-lichnosti-bb-i-roboty`.
 
-**Main rules (from Deep Research #32):**
-- **Pace decides, not "bot vs human".** Every reply passes `fb_guard check reply`: ≤40/day, ≥5 min between replies, no back-to-back series. The guard physically will not let you overshoot.
-- **Every reply is personal and different** (top-tier model, the owner's voice). The same text sent to many people = a spam flag → a ban.
-- **Draft-first:** show the owner a batch of drafts, post only after a `+`.
-- **Account safety:** do NOT click "View more comments" on reshares — it navigates away. Read what already loaded under the original.
+**Зачем.** Под постами копятся комменты (часто ценные — как контр-тезис Алаева про tailscale). Отвечать на СВОИ посты — низко-рисковая задача, но Facebook всё равно банит за ТЕМП. Поэтому: читаем безопасно, пишем персонально голосом Антона, постим по одному с паузами под счётчиком.
+
+**Главные правила (из Deep-Research #32):**
+- **Темп решает, не «бот/человек».** Каждый ответ проходит `fb_guard check reply`: ≤40/день, ≥5 мин между ответами, без серий подряд. Guard физически не даст перебрать.
+- **Каждый ответ персональный и разный** (Opus, голос Антона). Одинаковый текст многим = спам-флаг → бан.
+- **Draft-first:** показываю Антону пачку черновиков, постю только после `+`.
+- **Account safety:** НЕ кликать «View more comments» на репостах — уводит со страницы. Читаем то, что прогрузилось под оригиналом.
 
 ---
 
-## 0. The fuse — status at the start
+## 0. Предохранитель — статус на старте
 ```bash
 python "$USERPROFILE/.claude/scripts/fb_guard.py" status
 ```
-Shows how many replies went out today and whether we are paused. If `reply` is already at the daily limit — tell the owner and defer.
+Покажет, сколько ответов уже сегодня и не на паузе ли. Если `reply` уже на дневном лимите — скажи Антону, отложи.
 
-## 1. Browser + reading the commenters (no risky clicks)
-> Strictly LOCAL, a live tab, we never touch the login. Is the Chrome MCP connected? (`list_connected_browsers`).
-> ⛔ IP gate (owner, 07-16): Facebook commenting happens ONLY from the hub (a stable IP). On another machine do NOT reply — send the task to the hub as text. Canon: `ip-sensitive-actions-hub-only`.
+⭐ **ВТОРОЙ ПРЕДОХРАНИТЕЛЬ (09.09.2026): жива ли САМА FB-сессия.** До захода в браузер:
+```bash
+python "$USERPROFILE/.claude/scripts/_shared/fb_session_check.py" --live
+```
+Флаг `--live` обязателен. Без него прибор читает только НАЛИЧИЕ и СРОК куки с диска и серверную инвалидацию не видит: 07, 08 и 09.09 куки лежали целыми, FB их отвергал, прибор трижды печатал «✅ ЖИВА», сбор приезжал пустым и это читалось как «комментов нет». С `--live` он делает один GET на `/notifications` и различает: `200` = сессия принята · `302` на `index.php` = куки увидели и ОТВЕРГЛИ (экран «Continue as Anton») · `302` на `login.php` = кук нет вовсе. `exit 1` = мертва (нужны руки Антона: Firefox → facebook.com → войти) · `exit 2` = не определил · `exit 3` = **CHECKPOINT**, стоп-кран account-safety: роботом не лечим, не ретраим, сразу к Антону.
 
-1. Open the owner's post (he gives the link, or go to `facebook.com/<profile>` → his latest posts).
-   ⛔ **PITFALL 2026-07-28: the profile wall does NOT hand out permalinks.** Scrolling the profile yields zero `pfbid` links (Facebook populates href only on hover), and the feed is virtualized — a JS scroll outruns lazy loading and the posts stay skeletons. **The working entrance = the notifications feed** `facebook.com/notifications`: every row "X commented on your post" already carries a ready `/posts/pfbid…` and tells you WHO wrote and WHEN. One pass over it replaces the whole wall scroll. The Graph-API path (`fb_posts_poll.py`) is dead for now — there is no `FB_USER_TOKEN`.
-   ⚠️ An open Messenger window pollutes the results: its `div[role="article"]` elements are DM messages, not comments. Close the chat window before collecting.
-2. **Extract the commenters INSIDE THE PAGE ITSELF** (Facebook hides names/links across the MCP boundary → match and filter inside the page, and hand out only safe text). Through `mcp__Claude_in_Chrome__javascript_tool`:
+⭐ **Обход перед «нужны руки» пройден до конца 14.09 — НЕ переоткрывай его каждой сменой (результат воспроизведён, записан):** (1) перебор ВСЕХ поверхностей узла даёт ровно два FF-профиля с `c_user/xs`, живая проба обоим = 302 Continue-as; Chrome/Edge cookie-store залочены процессом и не рельса (приказ 01.09). (2) Экран `deoia=1` несёт карточку «Anton Dziatkovskii / **Continue**» — она НЕ восстанавливает сессию одним кликом: FB отдаёт форму **пароля** (`input[type=password]`), а пароль набирает только Антон. ⛔ Опровергнутая удобная гипотеза: клон профиля сессию НЕ теряет — `_PROFILE_KEEP` тащит `cookies.sqlite` + `-wal` + `-shm`, `c_user/xs` в свежем клоне ЕСТЬ (sqlite-запрос ДО запуска браузера); в браузере они исчезают потому, что их стирает САМ FB своим 302 → **после входа Антона лейн заводится без единой правки кода**. Два мелких капкана того же захода: `fs.driver_for_profile` = контекст-менеджер (только `with ... as d`), а поиск кнопки веди по точному тексту (`normalize-space(text())='Continue'`) — матчер по подстроке хватает «Log In», имя и кнопка это РАЗНЫЕ элементы.
+
+## 1. Браузер + чтение комментаторов (без рискованных кликов)
+> Строго ЛОКАЛЬНО, живая вкладка, логин не трогаем. Chrome-MCP подключён? (`list_connected_browsers`).
+> ⛔ IP-гейт (anton 16.07): комментинг FB — ТОЛЬКО с хаба `[машина флота]` (постоянный IP). На другой машине НЕ отвечать — задачу текстом на хаб. Канон: `reglament-ip-sensitive-deystviya-tolko-s-haba`.
+
+1. Открой нужный пост Антона (он даёт ссылку, или идём по `facebook.com/<профиль>` → его последние посты).
+   ⛔ **ГРАБЛЯ 2026-07-28: стена профиля НЕ отдаёт пермалинки.** Скролл `facebook.com/AntonyDzi` даёт ноль `pfbid`-ссылок (FB populates href только по hover), а лента виртуализована — JS-скролл обгоняет ленивую загрузку и посты остаются скелетонами. **Рабочий вход = лента уведомлений** `facebook.com/notifications`: там каждая строка «X commented on your post» уже несёт готовый `/posts/pfbid…` и говорит, КТО и КОГДА написал. Один проход по ней заменяет весь скролл стены. Graph-API путь (`fb_posts_poll.py`) пока мёртв — нет `FB_USER_TOKEN`.
+   ⚠️ Открытое окно Messenger засоряет выдачу: его `div[role="article"]` = сообщения личек, не комменты. Закрой окно чата перед сбором.
+2. **Извлекай комментаторов В САМОЙ СТРАНИЦЕ** (имена/ссылки FB скрывает через MCP-границу → матчим и фильтруем внутри страницы, наружу отдаём только безопасный текст). Через `mcp__Claude_in_Chrome__javascript_tool`:
    ```js
    const out = [];
    const seen = new Set();
    document.querySelectorAll('div[role="article"][aria-label]').forEach(a => {
      const al = a.getAttribute('aria-label') || '';
-     if (!/^Comment by|^Reply by/i.test(al)) return;                     // comments only
+     if (!/^Comment by|^Ответ от|^Комментар/i.test(al)) return;          // только комменты
      const blocks = [...a.querySelectorAll('div[dir="auto"]')]
        .map(d => (d.innerText || '').trim()).filter(Boolean);
      const text = (blocks.sort((x, y) => y.length - x.length)[0] || '').slice(0, 500);
      if (!text || seen.has(text)) return;
      seen.add(text);
-     const link = a.querySelector('a[role="link"][href]');               // the author's profile
+     const link = a.querySelector('a[role="link"][href]');               // профиль автора
      const handle = link ? (new URL(link.href).pathname.replace(/\//g,'')) : '';
      const hasImg = !!a.querySelector('img[src*="scontent"],img[src*="fbcdn"]');
-     out.push({ handle, text, hasImg });                                  // handle = username, not a display name
+     out.push({ handle, text, hasImg });                                  // handle = username, не имя
    });
    out;
    ```
-   You get back a list of `{handle, text, hasImg}` — no hidden strings, safe to display. (If Facebook runs in another language, add that locale's `aria-label` prefixes to the regex.)
-3. **Virtualization:** if there are few comments, gently scroll the comments area (`computer` scroll down the page, WITHOUT clicking expander buttons) and repeat §1.2. On a RESHARED post do NOT press "View more".
-4. **⚠️ MANDATORY: expand collapsed threads BEFORE choosing "who to reply to" (lesson 2026-07-05):** Facebook hides existing replies under "View N replies" — the owner has often ALREADY replied himself, and from the outside you cannot see it (a duplicate = embarrassment + a spam signal). On YOUR OWN post the inline thread expanders are safe (not to be confused with "View more comments" on reshares). Through JS: click every toggle matching `/View (\d+ )?repl/i`, wait ~3s, then collect `aria-label^="Reply by <owner's name> to <Name>"` → the list of ALREADY answered people; reply only to those not on it. In the 2026-07-05 run this filtered out 7 of 8 "candidates".
+   Вернётся список `{handle, text, hasImg}` — без скрытых строк, можно показывать.
+3. **Виртуализация:** если комментов мало, мягко проскролль область комментов (`computer` scroll вниз по странице, НЕ кликая кнопки-экспандеры) и повтори §1.2. На посте-РЕПОСТЕ кнопку «View more» НЕ жми.
+4. **⚠️ ОБЯЗАТЕЛЬНО разверни свёрнутые ветки ПЕРЕД выбором «кому отвечать» (урок 2026-07-05):** FB прячет существующие ответы под «View N replies» — Антон часто УЖЕ ответил сам, снаружи этого не видно (дубль = позор + спам-сигнал). На СВОЁМ посте инлайн-экспандеры веток безопасны (не путать с «View more comments» на репостах). Через JS: кликнуть все тогглы `/View (\d+ )?repl/i`, подождать ~3с, затем собрать `aria-label^="Reply by Anton Dziatkovskii to <Имя>"` → список УЖЕ отвеченных; отвечать только тем, кого в списке нет. В прогоне 2026-07-05 это отсеяло 7 из 8 «кандидатов».
 
-## 2. Reply drafts (top model, personal)
-For every comment worth answering, write a **separate** short reply in the owner's voice: address the person by name/by the comment's context, no template, every text different. Assemble the batch and show it to the owner:
+## 2. Черновики ответов (Opus, персонально)
+
+⭐⭐ **РЕЖИМ = ПРОВОКАТОР (приказ anton 05.08.2026, голосом: «скилл боится задираться, а это плохо; фейсбук любит срач; задирайся»).** Апгрейд «дерзко-краткого» режима 31.07: тот дал короткие ответы, но ПОДДАКИВАЮЩИЕ. Замер прогона 05.08: из 10 ответов 8 были согласием («так и сделали», «давай сверим», «уже почувствовали кошельком»), тред не разогнался ни разу. Дерзость это не тон вежливой фразы, а **вектор**: спорить, а не соглашаться.
+
+### 2.1 Покрытие: отвечаем на ВСЁ
+Каждый коммент под постом Антона получает ответ. Односложные («Велосипед», «Советую обеими руками», «говорят хорошая») тоже: это не мусор, это открытая дверь для подкола. ⛔ Не отвечаем ТОЛЬКО на: чистый спам/боты · уже отвеченное (дедуп §1.4) · хард-стопы §2.5. «Малоценный коммент» больше НЕ причина молчать: решение «этот не стоит ответа» = та самая трусость, которую чинит этот приказ. Упёрлись в кап `fb_guard` (40/день) → приоритет: спорные > вопросы к нам > односложные; недобранное идёт первым в следующий заход, а не выбрасывается.
+
+### 2.2 Вектор: возражай, не поддакивай
+- **Правило 7 из 10**: минимум семь ответов из десяти несут возражение, встречный вызов или подкол. Согласие разрешено максимум трём, и то с ребром: условие, цена, контрпример. Согласен по сути → всё равно добавь то, с чем собеседник поспорит («да, но у тебя это развалится на N»).
+- **Каждый второй ответ кончается вопросом или вызовом.** Вопрос это топливо треда; утверждение тред закрывает.
+- ⭐ **Сталкивай комментаторов между собой.** Под постом почти всегда есть двое с противоположными тезисами: упомяни второго в ответе первому. Это разгоняет обсуждение сильнее любого нашего остроумия и стоит нам одного ответа вместо двух.
+- ⭐ **Держи ветку 2-3 хода, не сливайся.** Ответили на наш подкол → отвечаем снова. Замер 05.08: Долгов ответил на наш ответ через 50 минут, никто не продолжил, тред умер на втором ходу. Проверять свои вчерашние ветки на новые реплики это ШТАТНАЯ часть прогона, а не «если останется время».
+- ⛔ **Ban-лист мягких формул** (встретил у себя в черновике = переписать): «спасибо», «согласен», «в точку», «хорошая мысль», «интересно», «попробуем», «гляну», «уже сделали» без цифры, любой смайл. Ответ, который собеседнику не хочется оспорить, провален.
+
+### 2.3 Длина
+Потолок прежний: **цель ≤5 слов, максимум 7** (CLAUDE.md §3.3, текст без вычитки Антоном; вопрос входит в эти же 7). Короткая шпилька провоцирует лучше абзаца. Исключение одно: контр-тезис по НАШЕЙ архитектуре, требующий разбора, тогда пишем развёрнуто и по-прежнему спорно, а не вежливо.
+
+### 2.4 Граница: дерзко ≠ хамство
+Бьём по ТЕЗИСУ, по цифре, по позиции. Никогда по человеку: ни внешность, ни возраст, ни нация, ни доход, ни ум («ты дурак» в любой обёртке), ни его семья. Тест перед отправкой: **если убрать его тезис, остаётся ли в моём ответе что-то обидное лично про него? Осталось = переписать.** Второй тест: прочитал бы я это ему в лицо за кофе и остались бы мы в нормальных отношениях?
+⭐ **Калибровка по адресату** (не отменяет дерзость, меняет её остроту): лид из CRM, потенциальный наниматель, инженер под Mission-2 (Симаков, Русавский и подобные) получают дерзость строго по тезису и ноль сарказма про самого себя, мы их зовём работать. Незнакомый задира получает полную мощность.
+⭐ **Личный выпад в наш адрес больше НЕ хард-стоп, а мишень номер один** (отмена практики 04-05.08, где такие комменты молча пропускались). Он даёт треду максимум энергии. Отвечаем коротко, уверенно, без обиды и без зеркального оскорбления. Пример 05.08, пропущенный зря: «Вам нравится использовать людей, не так ли?» → «людей нет, только агенты. завидно?».
+
+### 2.5 Хард-стопы (не тронуты приказом)
+Деньги, сделки, обязательства · юридическое (патенты, претензии, суммы) · медицина, особенно чужие дети · секреты · политика и нация · чужой пост, а не пост Антона. Здесь молчим целиком: подкол в этих зонах стоит дороже любого охвата.
+
+### 2.6 До → после на реальных ответах 05.08
+Те же комменты, что вчера получили поддакивание, в новом режиме:
+
+| коммент | было (поддакнул) | стало (задирается) |
+|---|---|---|
+| «прикрути mem0, будет полный фарш» | фарш свой, но mem0 гляну | mem0 умрёт на пятой тысяче |
+| «нужна автоматизация из 20 шагов» | двадцать шагов уже крутятся | двадцать шагов? покажи свои три |
+| «когда вы уже что-то накодите?» | пока ты писал, накодили | а ты сегодня что зашипил? |
+| «отменили выгодные кодинг-планы» | мы уже почувствовали кошельком | плати или ной, выбирай |
+| «пилим похожее, вектора и граф» | давай сверим графы | граф без цифр это картинка |
+| «БД 194Tb после эмбеддинга» | 194 терабайта, уважаю | 194Tb и какой recall? |
+
+Видно одно: старый вариант закрывает разговор, новый требует ответа.
+
+- Каждый текст уникален (спам-фильтр FB), прогон через ban-лист /ai-slop обязателен (эмодзи, тире, ё в коротком ответе особенно палятся).
+- Плашка Майкрофта на 5-словный коммент НЕ вешается отдельной строкой: это тред под постом Антона, раскрытие живёт на уровне поста и группы (§3.3, тон решает канал).
+
+### 2.7 ⛔ ГЕЙТ ПАЧКИ: прогони черновики через дверь, не через ощущение
+Собрал пачку → до постинга прогони её машинной проверкой (иначе правило §2 остаётся прозой, а проза размякает: замер 05.08 показал 8 согласий из 10 при формально включённом «дерзком» режиме):
+```bash
+python ~/.claude/scripts/fb_reply_gate.py check <batch.json> --coverage-answered <N> --coverage-total <M>
 ```
-1. [<name>, <handle>] comment: "…tailscale…"   →  draft: "spot on. show me how your transport is wired?"
+`batch.json` = `[{"who":"Имя Фамилия","text":"текст ответа"}, ...]`. Коды: 0 PASS · 1 FAIL · 3 кривой ввод.
+Гейт считает: длину ≤7 слов, ban-лист мягких формул, долю поддакиваний ≤30%, долю вопросов ≥50%, переход на личность, дубли, эмодзи и тире, покрытие, пустую пачку. **FAIL = переписать пачку, а не постить.** Зелёный гейт значит «это не поддакивание», НЕ «это остроумно»: вкус по-прежнему на нас, гейт ловит только беззубость. Паспорт: `~/.claude/scripts/docs/fb_reply_gate.md`.
+
+Для каждого коммента напиши **отдельный** ответ по правилам выше: без шаблона, тексты разные. Собери пачку и покажи Антону:
+```
+1. [Денис, deios] коммент: «…tailscale…»   →  черновик: «Денис, в точку. Покажешь, как у тебя транспорт устроен?»
 2. ...
 ```
-Wait for a `+` (or edits). This is the draft-first gate.
+Жди `+` (или правки). Это draft-first gate.
 
-## 3. Posting one at a time, under the counter — THE PROVEN MECHANICS (2026-07-04)
-> Debugged live: the owner's reply to a commenter landed as a threaded reply. The key pitfalls are below — do NOT rediscover them.
+## 3. Постинг по одному, под счётчиком — ПРОВЕРЕННАЯ МЕХАНИКА (2026-07-04)
+> Отлажено вживую: ответ Антона на коммент Alex Kaplunovich лёг как threaded-reply. Ключевые грабли ниже — НЕ обходи их заново.
 
-For EVERY approved reply:
-1. **Guard gate:** `python "$USERPROFILE/.claude/scripts/fb_guard.py" check reply`
-   - `BLOCKED ...` (exit 3) → STOP posting. Tell the owner how long to wait / what is queued. The rest goes later / in the next pass.
-   - `OK reply` → carry on.
-2. **Open the post** at `www.facebook.com/<profile>/posts/<pfbid>` (it renders as a `role="dialog"` modal — that is normal, work inside it).
-   ⚠️ **Verify you actually landed on the right post** (pitfall 2026-07-27): Facebook can drift the tab onto a NEIGHBOURING post while the previous page's comments stay in the DOM, hidden → the target is found, but the reply goes to the wrong place. The cure: after navigating, check `location.href` / `document.title`, and search for the target ONLY among the visible ones (`a.offsetParent!==null`).
-3. **Screenshot** (`computer` screenshot) to see the layout and FIND the "Reply" link WITH YOUR EYES. ⚠️ A screenshot of a heavy modal sometimes hangs ("captureScreenshot timed out / renderer frozen") — just REPEAT the screenshot, it answers every other time, this is not fatal.
-4. **Click the REAL TEXT link "Reply"** in the "Like · Reply · Hide" row under the right comment — BY THE COORDINATE from the screenshot. ⛔ PITFALL: `find` returns a "Reply" ref which, when clicked, moves focus to the modal's CLOSE BUTTON (the inline field does NOT open). Click visually on the coordinate of the "Reply" text, NOT on the find ref.
-5. The inline reply composer opens with an @mention of the author. **Set focus through JS, not with a coordinate click** (lesson 2026-07-20): the modal reflows between the screenshot and the click → the click lands in the comment body and `type` goes nowhere (twice in a row). The working recipe:
+Для КАЖДОГО одобренного ответа:
+1. **Guard-gate:** `python "$USERPROFILE/.claude/scripts/fb_guard.py" check reply`
+   - `BLOCKED ...` (exit 3) → СТОП постить. Скажи Антону, сколько ждать / что в очереди. Остаток — позже/следующим заходом.
+   - `OK reply` → продолжай.
+2. **Открой пост** на `www.facebook.com/<profile>/posts/<pfbid>` (рендерится как модалка `role="dialog"` — это норма, работаем в ней).
+   ⚠️ **Проверь, что реально попал на нужный пост** (грабля 2026-07-27): FB умеет увести вкладку на СОСЕДНИЙ пост, а комменты прошлой страницы остаются висеть в DOM скрытыми → цель находится, а ответ уходит не туда. Лечение: после навигации сверить `location.href`/`document.title`, а цель искать ТОЛЬКО среди видимых (`a.offsetParent!==null`).
+3. **Скриншот** (`computer` screenshot) чтобы увидеть раскладку и НАЙТИ ГЛАЗАМИ ссылку «Reply». ⚠️ Скрин на тяжёлой модалке иногда виснет («captureScreenshot timed out / renderer frozen») — просто ПОВТОРИ скрин, он отвечает через раз, это не фатально.
+4. **Кликни по РЕАЛЬНОЙ ТЕКСТОВОЙ ссылке «Reply»** в строке «Like · Reply · Hide» под нужным комментом — ПО КООРДИНАТЕ из скриншота. ⛔ ГРАБЛЯ: `find` возвращает «Reply»-ref, который при клике уводит фокус на КНОПКУ CLOSE модалки (инлайн-поле НЕ открывается). Кликай визуально по координате текста «Reply», НЕ по find-ref.
+5. Откроется инлайн-композер ответа с @упоминанием автора. **Ставь фокус через JS, не кликом по координате** (урок 2026-07-20): модалка реflow-ит между скриншотом и кликом → клик попадает в тело коммента, `type` уходит в никуда (дважды подряд). Рабочий рецепт:
 
-> ⛔ **INPUT AND SENDING PITFALLS (2026-07-27, proven live — THIS IS NOW THE MAIN PATH):**
-> **(1) `computer type` EATS SPACES AND PERIODS.** "waiting. i'll star it first" landed in the field as `waitingi'llstaritfirst`. Publish that unchecked and it is a public embarrassment under your own post. **Instead of `type`, insert the text through JS** (spaces survive, the @mention stays intact):
+> ⛔ **ГРАБЛИ ВВОДА И ОТПРАВКИ (2026-07-27, доказано вживую — ЭТО ТЕПЕРЬ ОСНОВНОЙ ПУТЬ):**
+> **(1) `computer type` СЪЕДАЕТ ПРОБЕЛЫ И ТОЧКИ.** «жду. звёздочку поставлю первым» легло в поле как `ждузвёздочкупоставлюпервым`. Опубликуй не проверив = позор под своим постом. **Вместо `type` вставляй текст через JS** (пробелы сохраняются, @упоминание цело):
 > ```js
 > f.focus();
 > const r=document.createRange(); r.selectNodeContents(f); r.collapse(false);
 > const s=getSelection(); s.removeAllRanges(); s.addRange(r);
-> document.execCommand('insertText', false, '<the reply text>');
+> document.execCommand('insertText', false, '<текст ответа>');
 > ```
-> **(2) Discrete key presses (`key Return`, `key BackSpace`) DO NOT REACH the composer** — focus is not held between MCP calls, the field keeps its text, nothing is published (and Backspace clears nothing). **Sending depends on the TYPE of composer, and there are TWO:**
-> - **A top-level composer** (a reply to a top-level comment): it has a button — click it from JS:
+> **(2) Дискретные нажатия клавиш (`key Return`, `key BackSpace`) НЕ ДОЛЕТАЮТ до композера** — между MCP-вызовами фокус не держится, поле остаётся с текстом, публикации нет (и Backspace ничего не чистит). **Отправка зависит от ТИПА композера, их ДВА:**
+> - **Композер верхнего уровня** (ответ на top-level коммент): есть кнопка — жми её из JS:
 > ```js
 > let box=f, up=0; while(box && up<8){box=box.parentElement; up++; if(box.querySelector('[aria-label="Post comment"]')) break;}
 > box.querySelector('[aria-label="Post comment"]').click();
 > ```
-> - **A nested-thread composer** (a reply to someone's reply): there is NO `Post comment` button at all (verified by walking 12 levels up — only emoji/GIF/stickers). Sending = a synthetic Enter, **necessarily in the SAME call as `focus()`**, otherwise focus is lost and nothing goes out:
+> - **Композер вложенной ветки** (ответ на чей-то reply): кнопки `Post comment` НЕТ вообще (проверено подъёмом на 12 уровней — только эмодзи/GIF/стикеры). Отправка = синтетический Enter, **обязательно в ОДНОМ вызове с `focus()`**, иначе фокус теряется и ничего не улетит:
 > ```js
 > f.focus();
 > const r=document.createRange(); r.selectNodeContents(f); r.collapse(false);
@@ -100,59 +158,126 @@ For EVERY approved reply:
 > f.dispatchEvent(new KeyboardEvent('keypress',o));
 > f.dispatchEvent(new KeyboardEvent('keyup',o));
 > ```
-> The universal order: look for the button first, no button → a synthetic Enter.
-> **(3) You need to erase what is already typed** — not with Backspace, but with a selection in ONE JS call: caret to the end → `s.modify('extend','backward','character')` × N → check `s.toString().length===N` and that the selection did NOT swallow the name from the @mention (abort if it did) → `execCommand('insertText', ...)` overwrites the selection.
-> **The one-line conclusion:** the whole cycle (open the composer → insert → send) is done through JS; `computer` is needed in this skill only for screenshots.
+> Универсальный порядок: сначала ищем кнопку, нет кнопки → синтетический Enter.
+> **(3) Надо стереть уже набранное** — не Backspace'ом, а выделением в ОДНОМ JS-вызове: каретка в конец → `s.modify('extend','backward','character')` × N → проверить `s.toString().length===N` и что в выделение НЕ попало имя из @упоминания (иначе abort) → `execCommand('insertText', ...)` затрёт выделенное.
+> **Вывод одной строкой:** весь цикл (открыть композер → вставить → отправить) делается через JS; `computer` в этом скилле нужен только для скриншотов.
 
    ```js
    const f=[...document.querySelectorAll('[contenteditable="true"]')]
-     .find(e=>/Reply to <Name>/.test(e.getAttribute('aria-label')||''));
+     .find(e=>/Reply to <Имя>/.test(e.getAttribute('aria-label')||''));
    f.scrollIntoView({block:'center'}); f.focus();
-   const r=document.createRange(); r.selectNodeContents(f); r.collapse(false);   // caret to the end, after the @mention
+   const r=document.createRange(); r.selectNodeContents(f); r.collapse(false);   // каретка в конец, после @упоминания
    const s=getSelection(); s.removeAllRanges(); s.addRange(r);
    ```
-   then insert the joke (≤5–7 words, the owner's voice, top model) via `execCommand('insertText')` — NOT `computer type`, see the pitfalls above. Open the composer through JS as well: inside the right `article`, click the element whose `innerText==='Reply'`.
-6. **Verify through JS** (a screenshot may hang — the DOM is more reliable): among the `[contenteditable="true"]` elements there is a field with `aria-label="Reply to <Name>"` containing your text (the mention + the joke). Only then send.
-7. **Send:** a JS click on `[aria-label="Post comment"]` (see the pitfalls above). ⛔ `computer key Return` does NOT work — it never reaches the field.
-8. **Confirm publication through JS:** a `div[role="article"][aria-label^="Reply by <my name> to <Name>'s comment"]` appeared with your text AND the reply field cleared (`innerText===''`). Only that means "published".
-9. `python "$USERPROFILE/.claude/scripts/fb_guard.py" record reply`
-10. The guard holds a ≥5 min pause before the next one — do NOT work around it by speeding up (pace is the main reason for bans).
-    Wait for the pause like this (a foreground `sleep` is blocked by the harness, and `Start-Sleep` + a command is too):
+   затем вставить шутку (≤5–7 слов, голос Антона/Opus) через `execCommand('insertText')` — НЕ `computer type`, см. грабли выше. Композер открывать тоже через JS: внутри нужного `article` кликнуть элемент с `innerText==='Reply'`.
+6. **Проверь через JS** (скрин может висеть — DOM надёжнее): среди `[contenteditable="true"]` есть поле с `aria-label="Reply to <Имя>"`, и в нём твой текст (упоминание + шутка). Только тогда отправляй.
+7. **Отправь:** JS-клик по `[aria-label="Post comment"]` (см. грабли выше). ⛔ `computer key Return` НЕ работает — не долетает до поля.
+8. **Подтверди публикацию через JS:** появился `div[role="article"][aria-label^="Reply by <моё-имя> to <Имя>'s comment"]` с твоим текстом И поле ответа очистилось (`innerText===''`). Только это = «опубликовано».
+8'. ⚠️ **Проверка ПОСЛЕ релоада требует 2-3 раундов разворачивания веток** (замер 02.08): на свежей загрузке поста вложенный ответ (наш reply на чужой reply) в DOM ОТСУТСТВУЕТ, пока ветка свёрнута — один проход по экспандерам его не достаёт. Прогон 02.08: 4 из 5 нашлись сразу, пятый («дешево, пока не продакшн») проявился только на 2-м раунде кликов. Вывод: «не нашёл после релоада» ≠ «не опубликовалось» — сперва разверни всё, потом делай вывод. Доказательство публикации = наш текст + серверная метка возраста («7m», «29m») в `Reply by Anton Dziatkovskii`.
+8''. ⛔ **ЗЕРКАЛЬНАЯ ГРАБЛЯ (2026-08-03, замер): «текст появился в DOM сразу после Enter» — НЕ доказательство.** Композер очищается и FB рисует оптимистичный ответ ещё до подтверждения сервером; если публикация не прошла, этот узел тихо исчезает при следующей загрузке. Прогон 03.08: ответ Николаю [человек] дважды показывал `inDom:true` через 4с после Enter и дважды отсутствовал после релоада (его коммент на месте, свёрнутых веток под ним нет) — то есть не опубликовался ни разу. **Единственное доказательство = после релоада + разворачивания веток найден `Reply by Anton Dziatkovskii to <Имя>` с нашим текстом И серверной меткой возраста («1m», «6m»).** Вместе с 8' это даёт симметричное правило: до релоада НЕ судим вообще — ни «опубликовалось», ни «не опубликовалось».
+8'''. ⚠️ **Вкладку уводит на чужой пост прямо во время релоада** (повтор граблей 27.07, замер 03.08: `location.reload()` на посте Антона вернул страницу `facebook.com/<чужой-профиль>/posts/...`, а в DOM остались висеть наши комменты с прошлой страницы → проверка «нашёл текст» врала). После КАЖДОГО релоада сверяй `document.title` / `location.pathname`, и если увело — вернись по прямому URL поста и проверяй заново.
+9. `python "$USERPROFILE/.claude/scripts/fb_guard.py" record reply` (⚠️ неудачную попытку тоже записывай: FB её видел, темп она съела).
+10. Guard держит паузу ≥5 мин до следующего — НЕ обходи ускорением (темп = главная причина бана).
+    Ждать паузу так (foreground `sleep` заблокирован харнесом, `Start-Sleep`+команда тоже):
     ```bash
     until python "$USERPROFILE/.claude/scripts/fb_guard.py" check reply >/dev/null 2>&1; do sleep 15; done; echo "GUARD OPEN"
     ```
-    run it through Bash with `run_in_background: true` — a notification arrives exactly when the window opens.
-11. ⛔ **Check the text for long dashes BEFORE sending** (`/[—–]/`) — the rule [[no-long-dashes]] applies to comments too. Caught one in the field → not Backspace, but a backward selection of N characters + `insertText` (§3 pitfall 3); check that the selection did not swallow the @mention.
-12. Element visibility: `offsetParent` inside a Facebook modal is **always null** (position:fixed) → build the "visible" filter on `getBoundingClientRect()` + `checkVisibility()`, otherwise you filter EVERYTHING out and conclude there are no comments.
+    запускать через Bash с `run_in_background: true` — придёт уведомление ровно когда окно открылось.
+11. ⛔ **Проверь текст на длинное тире ПЕРЕД отправкой** (`/[—–]/`) — правило [[no-long-dashes]] действует и на комменты. Поймал в поле → не Backspace, а выделение назад на N символов + `insertText` (§3 грабля 3); проверь, что в выделение не попало @упоминание.
+12. Видимость элементов: `offsetParent` внутри модалки FB **всегда null** (position:fixed) → фильтр «видимый» строй на `getBoundingClientRect()` + `checkVisibility()`, иначе отсеешь ВСЁ и решишь, что комментов нет.
 
-## 4. Report
-What was answered, what is queued (waiting on the pause/limit), how many today `reply N/40`.
+8''''. ⛔ **Уведомления оставляют ФАНТОМНЫЕ комменты в DOM** (замер 05.08). После перехода с `facebook.com/notifications` на пост первые ~4 секунды в дереве висят `role="article"` с ПРОШЛОЙ страницы: прогон 05.08 «нашёл» коммент Alexander [человек] под постом, где на самом деле `No comments yet`. Лечение: ждать ≥6 с после навигации И проверять, что коммент реально виден на странице (`RPL` ищет article заново перед кликом — это и есть встроенный фильтр); «комменты есть» на 4-й секунде = не улика. Второй симптом того же корня: `localStorage` FB подчищает свои ключи, список целей между переходами держать в `window.name` (переживает навигацию в той же вкладке).
+8'''''. ⚠️ **Композер выбирается НЕ по первому `contenteditable`** (замер 05.08, промах вживую): открытые ранее композеры остаются в DOM, и `find(/Reply to/)` отдаёт ЧУЖОЙ — текст для Языкова лёг в поле Дидошика. Правильный отбор: снять список `Reply to`-полей ДО клика, после клика взять РАЗНИЦУ (`fresh`), и только если полей ровно одно — взять его. Проверять надо не `aria-label` поля (у вложенной ветки он = `Reply to Anton Dziatkovskii`, имя адресата там не появится), а @упоминание ВНУТРИ текста: `/Фамилия/.test(f.innerText)`.
+8''''''. ⛔ **Зависший черновик JS не стирается.** `execCommand('insertText','')`, `execCommand('delete')` и `s.modify(...)×N` на композере FB не дают ничего (замер 05.08, три попытки). Работает `computer` triple_click по координате поля + `computer key Delete`. Чистить обязательно: черновик переживает релоад, и завтрашний прогон допишет свой текст к вчерашнему.
+
+## 3-бис. Лайк-хвост (штатно, не спрашивать)
+Голосовая Антона 04.08: «все наши посты и комментарии должны получать лайки — это ничего не стоит, а людям приятно». После того как ответ ПОДТВЕРЖДЁН опубликованным (§3.8, релоад + развёрнутые ветки):
+
+⭐ **На рельсе Лисы это ДВИЖОК, а не проза** (02.09.2026): `python "$USERPROFILE/.claude/scripts/fb_like_tail.py" --urls <пермалинки> --max 5`. Он сам держит guard (check перед каждым лайком, record после), сам сверяет pfbid, сам не трогает `Remove Like` и сам пишет строку в `fb_like_roster.py`. Ручной порядок ниже оставлен как описание механики и запасной путь под Chrome-MCP.
+1. `python "$USERPROFILE/.claude/scripts/fb_guard.py" check like_own` → `BLOCKED` = пропускаем хвост, не обходим.
+2. Like на **комментарий, на который отвечали** (человеку приятно, что его реплику заметили).
+3. Like на **наш собственный ответ**.
+4. Заодно, раз мы уже в этом посте: Like на все остальные комментарии под ним, которые ещё без нашего лайка.
+5. После каждого лайка: `python "$USERPROFILE/.claude/scripts/fb_guard.py" record like_own`; один раз на пост — `python "$USERPROFILE/.claude/scripts/fb_like_roster.py" record --person "<permalink>" --kind own --outcome ok --note "хвост после ответов"`.
+
+⭐ **ЛАЙК СТАВИТСЯ ИЗ JS, координаты и скриншоты не нужны** (замер 05.08, 43 лайка без промаха). Кнопка не имеет текста «Like» — она живёт в атрибуте: `[role="button"][aria-label="Like"]` = НЕ лайкнуто, `aria-label="Remove Like"` = УЖЕ лайкнуто. Отсюда состояние читается детерминированно, и случайное снятие лайка исключено by design:
+```js
+const b=[...art.querySelectorAll('[aria-label]')].find(e=>e.getAttribute('role')==='button'&&e.getAttribute('aria-label')==='Like');
+if(b) b.click();   // "Remove Like" не трогаем никогда
+```
+⚠️ Пауза 4 с между кликами И **не больше 5 лайков за один вызов**: 8 кликов не влезли в лимит CDP 45 с, вызов упал таймаутом уже ПОСЛЕ части кликов (счёт лайков потерян, в guard пришлось писать оценку сверху).
+⛔ **Перед КАЖДОЙ пачкой лайков сверять, что мы на нужном посте** (замер 05.08: переход на пост Антона привёл вкладку на чужой `facebook.com/reel/...`, 4 лайка ушли под чужой ролик). Хэш `location.pathname` сверять и до цикла, и после разворачивания веток; не совпал → abort, а не «ну лайкну что вижу».
+⛔ Ручной путь (если JS-путь когда-то умрёт): кликать `Like` в строке `Like · Reply · Hide` по координате из свежего скриншота, не по `find`-ref (та же грабля, что в §3.4). Полный порядок: `/fb-likes` ЛЕЙН 1.
+
+## 3-трис. Комментарий содержал СОВЕТ → строка в реестр кредита
+Провокатор спорит, но совет по делу — это подарок, и автор обязан дожить до имени в CREDITS.
+По каждому комменту, где человек предложил репо/тул/приём/дельную критику:
+```
+python ~/.claude/scripts/alpha_credit.py add --source fb \
+  --author "<Имя>" --url <permalink коммента> \
+  --advice "<что посоветовал одной фразой>" --kind repo|tool|method|critique \
+  --ref "fb:<comment_id>"
+```
+`--ref` обязателен (этот скилл перечитывает те же посты — без ключа пойдут дубли).
+Дальше — `/alpha-credit`: судить → испытать → публично поблагодарить → вписать имя.
+
+## 4. Доложи
+Что ответили, что в очереди (ждёт паузы/лимита), сколько сегодня `reply N/40` и `like_own N/60`.
+Плюс: сколько советов ушло в реестр кредита (`alpha_credit.py pending`).
 
 ---
 
-## Kill switches (account safety)
-- Any Facebook warning / checkpoint / "too often" → **STOP immediately**, report to the owner, no retry-spam.
-- Do NOT click "View more comments" / navigation buttons on reshares (they navigate away).
-- Do NOT post identical text to different people.
-- We never touch login/2FA.
+## Стоп-краны (account safety)
+- Любое предупреждение FB / checkpoint / «слишком часто» → **немедленно СТОП**, доложи Антону, без ретрай-спама.
+- НЕ кликать «View more comments» / навигационные кнопки на репостах (уводят со страницы).
+- НЕ постить одинаковый текст разным людям.
+- Логин/2FA не трогаем.
 
-## Related
-- `/fb-post` — publishing posts (Phase 1, the same guard).
-- `/fb-dm` — DMs to commenters (Phase 2, strict draft-first; not built yet).
-- The counter: `~/.claude/scripts/fb_guard.py`. The voice: `fb-diary-voice`.
-- Canon: Decision Memo 2026-06-28, `chrome-autonomy-self-drive`, `browser-work-on-peers-not-hub`.
+## ⭐⭐ 3-кватро. ПОСТИНГ ЧЕРЕЗ CHROME-MCP: ПОЛНАЯ МЕХАНИКА (доказана публикацией 20.09.2026)
 
----
+Движок `fb_reply_post.py` ездит на Selenium-Firefox; когда Firefox-рельса мертва (шаг 0), постим
+руками через `claude-in-chrome`. Метод найден 20.09 и доказан опубликованным ответом
+(«Reply by Anton Dziatkovskii to יאנינה וורונצוב's comment a few seconds ago»). Порядок ровно такой:
 
+1. **Открыть композер** JS-кликом: у нужного `div[role="article"]` с `aria-label` = `Comment by <Имя> …`
+   найти внутри `div[role="button"]`/`span` с текстом ровно `Reply` и кликнуть. Проверить, что
+   появился `div[role="textbox"][contenteditable="true"]` с `aria-label` = `Reply to <Имя>`.
+2. ⭐ **ТЕКСТ ЗАНОСИТСЯ ТОЛЬКО РЕАЛЬНОЙ ВСТАВКОЙ** — `Set-Clipboard` в PowerShell, затем реальный
+   `left_click` в поле, затем реальный `ctrl+v`. ⛔ Три НЕ работающих пути (все проверены 20.09):
+   · `document.execCommand('insertText')` — текст ложится символ-в-символ, но ТОЛЬКО в DOM;
+   · синтетический `ClipboardEvent('paste')` с DataTransfer — то же самое, DOM-призрак;
+   · `computer action=type` — режет пробелы и пунктуацию на кириллице (грабля 15.09).
+   Признак, что FB текст ВИДИТ (а не только вы): в форме композера появляется кнопка
+   `aria-label="Post comment"`. Нет кнопки = lexical-модель пуста, отправлять нечего, Enter молчит.
+   Бонус: реальная вставка заставляет lexical перерисоваться и сама стирает прежние DOM-призраки.
+   ⭐⭐ ГРАБЛЯ 21.09 (стоила двух промахов подряд): ОДНОГО КЛИКА В ПОЛЕ НЕ ХВАТАЕТ. Клик ставит
+   каретку НА чип-меншен («Vadim Vilkov» подсвечивается синим), и `ctrl+v` в этом состоянии
+   уходит В НИКУДА: поле остаётся с одним меншеном, ошибки нет, признака нет. Рабочая
+   последовательность из трёх реальных клавиш: `left_click` внутри поля → **`End`** → `ctrl+v`.
+   `End` уводит каретку за чип, и текст ложится символ-в-символ (проверено 3/3 ответа 21.09).
+   Пропуск `End` = тихий промах, который виден только перечитыванием `innerText` (§3.6).
+   ⭐ Масштаб скриншота НЕ константа: 20.09 было 1393×868 при вьюпорте 1040×648 (≈1.34),
+   21.09 — 1568×670 при 1576×673 (≈1.0). Не заучивай коэффициент, считай его на месте
+   (`screenshot_w / window.innerWidth`) или целься по свежему скриншоту.
+3. ⭐ **ОТПРАВКА = КЛИК ПО СИНЕЙ СТРЕЛКЕ, И КООРДИНАТЫ БЕРУТСЯ СО СКРИНШОТА.** `Enter`/`Return`
+   не отправляют (проверено дважды). У `computer` система координат — КАДР ПОСЛЕДНЕГО СКРИНШОТА
+   (замер 20.09: 1393×868), а `getBoundingClientRect()` отдаёт CSS-пиксели вьюпорта (1040×648),
+   масштаб ≈1.34: три клика по кнопке ушли в пустоту, пока не был снят скриншот. Снимай скриншот
+   и целься по нему, либо умножай CSS-координаты на `screenshot_w / window.innerWidth`.
+4. **Доказательство** (§3.8): перечитать `div[role="article"]` и найти `aria-label`,
+   начинающийся с `Reply by Anton Dziatkovskii to …`, плюс серверную метку возраста
+   («a few seconds ago»); композер при успехе пуст. Затем `fb_guard.py record reply`.
+5. Композер RTL, если имя адресата на иврите: текст в поле рисуется справа налево и `?` уезжает
+   влево — это ВЁРСТКА, а не испорченный текст, `innerText` показывает правду.
 
-<!--kit-footer-->
+## Связанное
+- 🗺 **Общая карта FB-рельсы (читать первой при любой FB-задаче):** `~/.claude/scripts/docs/fb-rails.md` — где лежат данные, все капы `fb_guard`, IP-гейт, общие грабли браузера, кто из `fb-*` за что отвечает.
+- `/fb-likes` — лайк-хвост после ответов (§3-бис) и ежедневный обход лидов.
+- `/fb-post` — публикация постов (Фаза 1, тот же guard).
+- `fb-dm` (скилла ещё НЕТ) — личка комментаторам (Фаза 2, строгий draft-first; пока не построен).
+- Счётчик: `~/.claude/scripts/fb_guard.py`. Голос: `fb-diary-voice`.
+- Канон: Decision Memo 2026-06-28, `chrome-autonomy-self-drive`, `browser-work-on-peers-not-hub`.
 
----
+## ⭐ Чёрный юмор обязателен (anton 10.09.2026, голосом)
 
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+Любой текст, который этот скилл отправляет ЖИВОМУ человеку наружу, несёт чёрную самоиронию — ровный служебный тон = дефект, объяснять надо не шутку, а её отсутствие. Строку берёшь через `/mycroft-joke` (полка (д) банка + строки 56-62 под холодное касание), приёмка — `/taste-check` P36. ⛔ Не шутим ровно в трёх зонах, и они не про вкус: строго-научная публикация (arXiv/журнал/JOSS) · юр.обязательство и анкета · красный список банка (чужая иконография угнетённых, псевдо-слуры, отрицание что я ИИ, юмор поверх диагноза/денег/беды собеседника). Одна шутка на тред. Канон: CLAUDE.md §3.3 §Поправка 10.09 + [[dark-humor-default-everywhere-external]].

@@ -1,75 +1,56 @@
 ---
 name: canon-revision
-description: >-
-  Restructure an always-loaded rules file such as CLAUDE.md or MEMORY.md: build a top block of
-  key rules plus numbered categories, move rule bodies verbatim with a script that proves zero
-  byte loss, fold heavy mechanics into trigger-plus-pointer form, then guards, a canary window
-  and fleet rollout. For scheduled maintenance, not ad-hoc trimming. Triggers:
-  "/canon-revision", "revise the canon".
-license: MIT
+description: "Полная структурная РЕВИЗИЯ always-loaded файла правил (CLAUDE.md / MEMORY.md): ТОП-блок самых важных правил + категории §0-§N, тела правил переезжают verbatim (скрипт двигает… Триггеры: /canon-revision, «ревизия claude.md», «переструктурируй клод мд / memory md», «наведи порядок в правилах», «пересобери код мд», а также САМ, когда guard входит в жёлтую зону (100KB) и накопились устаревшие секции"
+version: 1.0.0
 ---
 
-# canon-revision — revising an always-loaded rules file
+# canon-revision — ревизия always-loaded файла правил
 
-The pain: the rules file grows through intake, the structure drifts, and the important parts drown in the middle. The owner's decision (2026-07-22): live in cycles — free growth up to the yellow zone, then a FULL structural revision. This procedure is that revision, battle-tested on CLAUDE.md v2.
+Боль: файл правил растёт интейком, структура плывёт, важное тонет в середине. Решение Антона (22.07): жить циклами — свободный рост до жёлтой зоны, потом ПОЛНАЯ ревизия структуры. Эта процедура = та ревизия, обкатана на CLAUDE.md v2.
 
-Roles: the LLM decides ONLY (a) the mapping of sections into categories, (b) the contents of the TOP block, (c) which sections to fold, plus pinpoint edits from the owner's explicit decisions. The bytes are moved by the SCRIPT, which proves by itself that nothing was lost. Never retype the file by hand.
+Роли: LLM решает ТОЛЬКО (а) маппинг секций по категориям, (б) состав ТОП-блока, (в) какие секции фолдить и точечные правки по явным решениям Антона. Байты двигает СКРИПТ и сам доказывает, что ничего не потерял. Никогда не перепечатывай файл руками.
 
-## Step 0 — RECALL + the frame
-- Memory: [[claude-md-compression-contract]] (the contract: trigger · directive · clauses · pointer; the two-ends pitfall), [[write-service-files-tight-no-recompress]], [[memory-index-hygiene]] (for MEMORY.md), [[declined-decisions]] (word-level re-compression = declined).
-- Thresholds = the defaults in `~/.claude/scripts/claude_md_guard.py` (owner, 07-22: yellow 100KB · red 120KB). The truth is the guard's code, not the notes.
-- A revision = a canon edit → the owner's machine only, in a live session.
+## Шаг 0 — RECALL + рамки
+- Память: [[claude-md-compression-contract]] (контракт: триггер·директива·клаузы·указатель; грабли двух концов), [[write-service-files-tight-no-recompress]], [[memory-index-hygiene]] (для MEMORY.md), [[declined-decisions]] (пере-сжатие слов = declined).
+- Пороги = дефолты `~/.claude/scripts/claude_md_guard.py` (anton 22.07: жёлтая 100KB · красная 120KB). Цифры-истина = код гарда, не заметки.
+- Ревизия = канон-правка → только машина Антона, живая сессия.
 
-## Step 1 — Measure BEFORE
-`python ~/.claude/scripts/claude_md_guard.py` + byte size + section counter (`^## ` / `^### `). Record: bytes, sections, md5.
+## Шаг 1 — Замер ДО
+`python ~/.claude/scripts/claude_md_guard.py` + байты + счётчик секций (`^## `/`^### `). Записать: byte, sections, md5.
 
-## Step 2 — Coordination and safety net
-1. `onair.py check --zone canon-skills` (for MEMORY.md: memory-index) → clear → `onair.py declare --mode exclusive`.
-2. `canon_write_gate.py <file>` → GO + an automatic backup; plus your own `*.bak-<date>-revision`.
-3. ⚠️ The two-ends pitfall (memory compression-contract): before publishing, verify (a) the md5 of the canon base, (b) the diff of the assembled file against YOUR live file — parallel sessions keep appending through intake.
+## Шаг 2 — Координация и страховка
+1. `onair.py check --zone canon-skills` (для MEMORY.md: memory-index) → чисто → `onair.py declare --mode exclusive`.
+2. `canon_write_gate.py <файл>` → GO + авто-бэкап; плюс свой `*.bak-<дата>-revision`.
+3. ⚠️ Грабли двух концов (память compression-contract): перед publish сверь (а) md5 базы канона, (б) diff собранного со СВОИМ живым файлом — параллельные сессии дописывают интейком.
 
-## Step 3 — Assembly (deterministic)
-Take `references/restructure_claude_md.py` (the working sample from 07-22) and adapt the mapping:
-- Split by `^## ` headings; every heading must land in the mapping, an extra/missing one = a loud refusal.
-- Categories `## §N. <name>` + rules `### §N.M <old heading>`; bodies verbatim.
-- The TOP block `## §0. ⭐ TOP-N` — the most important rules by the owner's priorities, one line = a rule + `→ §X.Y`; show the TOP composition to the owner before applying it (or take his previous priorities).
-- Pinpoint edits — only from the owner's explicit decisions, each through an anchored replace with assert count==1.
-- Built-in check: every body is present in the output (BODY LOST = refusal).
+## Шаг 3 — Сборка (детерминированная)
+Взять `references/restructure_claude_md.py` (рабочий образец 22.07), адаптировать маппинг:
+- Разбор по `^## ` заголовкам; каждый заголовок обязан попасть в маппинг, лишний/пропавший = громкий отказ.
+- Категории `## §N. <имя>` + правила `### §N.M <старый заголовок>`; тела verbatim.
+- ТОП-блок `## §0. ⭐ ТОП-N` — самые важные правила по приоритетам Антона, одна строка = правило + `→ §X.Y`; состав ТОПа показать Антону до применения (или взять его прошлые приоритеты).
+- Точечные правки — только по явным решениям Антона, каждая через anchored-replace с assert count==1.
+- Встроенная проверка: каждое тело присутствует в выходе (BODY LOST = отказ).
 
-## Step 4 — Threshold control and folds
-Guard RED / a fat yellow → structurally fold the fattest PROCESS sections (sample `references/fold_four.py`): what remains is trigger + gist + pointer, and the body must ALREADY live in the house rulebook / memory (verify that the canon exists, otherwise write it there first). Do not fold the owner's top rules without showing him a before→after. Do not re-compress at the word level.
+## Шаг 4 — Пороговый контроль и фолды
+Guard RED/жирная жёлтая → структурный фолд самых жирных ПРОЦЕССНЫХ секций (образец `references/fold_four.py`): остаётся триггер+суть+указатель, тело обязано УЖЕ жить в Библии/памяти (проверь, что канон существует, иначе сперва запиши его туда). Топ-правила Антона не фолдить без его до→после. Слова не пере-сжимать.
 
-## Step 5 — Verification (the /tt layer)
-- Counters: sections BEFORE == AFTER (minus those explicitly deleted by the owner's decision), `### ` = N, TOP lines = N, and the §X.Y links in the TOP point to existing numbers.
-- Run the guard again; if it grows past ~87KB — do a live measurement that the harness actually loads the tail (in a FRESH session ask for the contents of the last section; the "89000-byte ceiling" is an unverified legend).
-- Optional: the cold-reader test (the recipe is in compression-contract: a fresh cheap model + trap scenarios).
+## Шаг 5 — Верификация (/tt-слой)
+- Счётчики: секции ДО == ПОСЛЕ (минус явно удалённые по решению Антона), `### ` = N, ТОП-строки = N, ссылки §X.Y в ТОПе указывают на существующие номера.
+- Guard повторно; при росте >87KB — живой замер, что харнес грузит хвост (в СВЕЖЕЙ сессии спросить содержимое последней секции; «потолок 89000б» — непроверенная легенда).
+- По вкусу: cold-reader тест (памятка в compression-contract: свежий Sonnet + trap-сценарии).
 
-## Step 6 — Publication and homes
-1. `publish_canon.py` (for CLAUDE.md); MEMORY.md travels by file sync on its own.
-2. New/changed rules → their homes: memory + a MEMORY.md line (+ the house rulebook if the rule is human-executable); `rule_home_guard.py <slug>`.
-3. `onair close`, then a before→after report to the owner (bytes, sections, what was folded, how to roll back).
+## Шаг 6 — Публикация и дома
+1. `publish_canon.py` (для CLAUDE.md); MEMORY.md едет синком сам.
+2. Новые/изменённые правила → дома: память + MEMORY.md-строка (+ Библия, если правило человеко-исполнимо); `rule_home_guard.py <slug>`.
+3. `onair close`, отчёт Антону до→после (байты, секции, что фолднуто, откат).
 
-## Step 7 — The "did it get worse" sensor + rollout
-- Keep the rollback ready at all times: `Copy-Item <file>.bak-<date>-revision <file>` + `publish_canon.py`.
-- 3 days after the revision: a "did it get worse" sensor — a ONE-OFF shadow script written for this specific revision per [[shadow-first-mvp-pattern]] (written from scratch for 3 days, scheduled at night, removed by the time-box — not a permanent component). Metrics: share of 🧒 blocks, timestamps, md5 integrity; degradation >30% = stop/rollback + root-cause analysis; fine = the rollout is justified, put the reasoning into the report. Precedent: the 07-22 revision — the canary measured the ELI5 rate at 80%→77% (= not worse) → the rollout was justified and the canary was killed on schedule.
-- The fleet receives it over the canon rail; peers ACK per the bus rule.
+## Шаг 7 — Датчик «не стало хуже» + раскат
+- Откат всегда наготове: `Copy-Item <файл>.bak-<дата>-revision <файл>` + `publish_canon.py`.
+- 3 дня после ревизии: датчик «не стало хуже» — ОДНОРАЗОВЫЙ shadow-скрипт под конкретную ревизию по [[shadow-first-mvp-pattern]] (пишется заново на 3 дня, schtasks ночью, выпиливается по time-box — не постоянный компонент). Метрики: доля 🧒-блоков, таймстампы, целостность md5; деградация >30% = стоп/откат + разбор корня; норм = раскат подтверждён, обоснование в отчёт. Прецедент: ревизия 22.07 — пробник canon_v2_watch намерил ELI5-rate 80%→77% (= не хуже) → раскат обоснован, пробник убит по расписанию.
+- Флот получает через канон-рельсу; ACK пиров по правилу шины.
+- ⚠️ Заморозка структуры на бейк (если объявляешь): маркер ОБЯЗАН нести тройку **срок (дата авто-протухания) · владелец-закрыватель · кто перепроверяет условия thaw**. Урок 13.08: CANON-FREEZE.md ревизии 22.07 без этой тройки провисел «АКТИВНА» 3 недели после зелёного датчика (Breakage-Journal 13.08, класс «маркер без TTL»). Закрытие маркера = шаг раската, не отдельная память.
 
-## Boundaries
-- ⛔ Don't run it on other people's machines / outside the owner's live session (the canon gate will block it anyway).
-- ⛔ Don't re-compress words, and don't move bodies into `.claude/rules/` "for auto-loading" — there IS no auto-loading feature (disproved 07-21, memory rule-activation-audit).
-- Canon: [[claude-md-compression-contract]] + the house rulebook entry on optimising always-loaded files; the sister rule for MEMORY.md: [[memory-index-hygiene]].
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Границы
+- ⛔ Не запускать на чужих машинах / не с живой сессии Антона (canon-gate сам заблокирует).
+- ⛔ Не пере-сжимать слова, не выносить тела в `.claude/rules/` «под авто-загрузку» — фичи авто-загрузки НЕТ (опровергнуто 21.07, память rule-activation-audit).
+- Канон: [[claude-md-compression-contract]] + `reglament-optimizatsiya-always-loaded-faylov-claude-md-i-memory-md`; сестра для MEMORY.md: [[memory-index-hygiene]].

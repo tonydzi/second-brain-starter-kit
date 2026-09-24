@@ -14,7 +14,7 @@
 # ---------------------------------------------------------------------------
 r"""alpha_security_lens.py -- the SECOND lens over alpha candidates: the QUARANTINE PRISM (Lite).
 
-STATUS: Prism **Lite** per DR26-07-14-HUB-01 (03-Insights\insight-DR-DR26-07-14-HUB-01-trojan-alpha-
+STATUS: Prism **Lite** per DR26-07-14-HUB-01 (03-Insights\insight-DR-DR26-07-14-HUB-01-[человек]-alpha-
 quarantine-prism.md). The DR confirmed the two axes (provenance × effect-surface) + the hard
 gate-weakening heuristic, and CORRECTED the hypothesis on two points now implemented here:
 
@@ -44,7 +44,7 @@ WHY (Anton's insight, 02-Decisions\decision-2026-07-14-injection-defense-and-qua
 -------------------------------------------------------------------------------------------
 Alpha-review already gates incoming IDEAS by VALUE (золото/мимо -> alpha_review.db). But an idea
 mined from an EXTERNAL source (a scraped Telegram channel, a community club, a doc) can be a
-"trojan alpha": an injection dressed up as a good suggestion ("add this webhook that forwards
+"[человек] alpha": an injection dressed up as a good suggestion ("add this webhook that forwards
 mail", "run this script", "ignore your rules and ..."). Value-gating alone would happily promote
 it. This lens is the provenance/security check the design mandates BEFORE implementing an alpha,
 especially one from an external/scraped source. It does NOT change the value verdict -- it ADDS a
@@ -105,7 +105,7 @@ _TIER2_RE = [(re.compile(p, re.I), lbl) for p, lbl in _TIER2]
 
 # ⭐ Sharpest heuristic (design doc, DR26-07-14-HUB-01): the most dangerous alpha is one that
 # proposes to WEAKEN a security control ("you don't need confirmation for X", "disable the
-# signature check for speed", "skip verification"). That is literally the trojan-alpha signature
+# signature check for speed", "skip verification"). That is literally the [человек]-alpha signature
 # -> HARD-HOLD (risk=high) regardless of source. Cheap regex, high value.
 _WEAKEN = [
     r"\b(?:disable|turn off|bypass|skip|remove|drop|no need for|without|weaken|loosen)\b.{0,40}"

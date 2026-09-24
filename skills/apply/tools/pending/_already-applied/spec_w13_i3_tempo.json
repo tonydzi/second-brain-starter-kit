@@ -1,0 +1,23 @@
+{
+ "url": "https://jobs.ashbyhq.com/tempo-xyz/780137ef-8eb4-4f21-ada2-a7c4b22a911e/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+ "out_prefix": "w13_i3_tempo",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "Twitter/X or Personal Site": "https://tonydzi.github.io/",
+  "Why Tempo?": "Stablecoin payments are where my whole background converges. At Everex (Singapore) I wrote smart contracts and led government/bank relations across SE Asia on structuring crypto payments and stablecoins; at Platinum I designed one of the first detailed frameworks for a national government to issue its own stablecoins (regulatory + token-economic design) and shipped crypto-exchange infrastructure - backends, market-maker engines, high-frequency trading systems. Payments rails are adversarial by default, and I bring anti-fraud instincts from a decade in adversarial crypto markets plus an MSc in Computer & Information Systems Security (cryptography). Today I build guardrails for production AI agent fleets (agent-leash, verbatim-citation-gate) and run the attack surface I defend: a 6-machine Claude fleet operated in public. A payments-first chain needs product security from someone who has both audited the contracts and sat across the table from the banks and regulators who rely on them.",
+  "Provide (2) examples of your exceptional abilities.": "(1) I run the attack surface I defend: a production 6-machine Claude agent fleet operated in public, with published reliability evals - 0/17 high-risk (Tier-2) actions slipped past the human approval gate in recorded runs - plus open-source guardrails (agent-leash, verbatim-citation-gate, MIT). (2) I designed one of the first detailed frameworks for a national government to issue its own stablecoins (regulatory + token-economic design) and led government/bank relations across SE Asia on crypto payments at Everex - security work in maximally adversarial, compliance-heavy environments."
+ },
+ "check_options": {
+  "Will you be able to work in person out of SF or NY": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "Why Tempo",
+  "Provide (2) examples"
+ ]
+}

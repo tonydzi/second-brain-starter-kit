@@ -33,7 +33,7 @@ from pathlib import Path
 sys.path.insert(0, r"%IMPORTS%")
 import whisper_best as wb
 
-OGG_DIR = Path(r"C:\TG-Media\pokupki-voice")
+OGG_DIR = Path(r"[путь владельца]")
 OUT = Path(r"%IMPORTS%\pokupki_voice_transcripts.jsonl")
 GLOSSARY = wb.load_glossary(r"%IMPORTS%\tg_voice\glossary_pokupki.txt")
 

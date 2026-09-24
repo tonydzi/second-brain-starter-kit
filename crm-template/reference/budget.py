@@ -9,7 +9,7 @@ and is deliberately left out here to keep this file readable.
 
 Why a budget module at all, separate from the sender:
   the number "how many messages may this account send today" is the single most
-  important safety dial in an outbound agent, and a human must be able to find it,
+  important safety [человек] in an outbound agent, and a human must be able to find it,
   read it, and change it without understanding async code. So it lives alone, it
   is plain SQLite, and it is testable with no network in the room.
 

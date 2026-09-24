@@ -1,0 +1,18 @@
+{
+ "url": "https://jobs.ashbyhq.com/extend/a28fb488-7c82-4bb5-8876-c20e209d2ac5/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w10_i4_extend",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Linkedin profile": "No LinkedIn account - please see https://tonydzi.github.io/ and https://github.com/tonydzi",
+  "What's a project you're proud of?": "claw-consensus - reproducible multi-machine agent consensus, with an offline demo and published evals. It is part of a production 6-machine Claude fleet I run in public: consensus, CRM automation, persistent memory, 100+ automation routines. The part I am proudest of is the accountability: measured reliability evals published (07.2026) - 0/17 high-risk (Tier-2) actions slipped past the human approval gate in recorded runs - and failure modes documented publicly in FAILURE-MODES.md. Repo: github.com/tonydzi (110 public repos; also verbatim-citation-gate, a zero-token gate that catches fabricated RAG citations).",
+  "Is there anything else you'd like to add": "I am not a classical SWE - I am an operator who ships agent systems end to end (MCP connectors, RAG over a 10-year knowledge base, CRM automation, evals) and can sit in front of a customer: 15+ years founder/BD background, incl. structuring crypto payments and stablecoins with banks and governments in SE Asia. Active US O-1 - authorized to work in the US, no sponsorship needed. Available immediately. https://tonydzi.github.io/"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Linkedin profile",
+  "Resume"
+ ]
+}

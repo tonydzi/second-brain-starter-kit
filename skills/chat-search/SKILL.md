@@ -1,55 +1,35 @@
 ---
 name: chat-search
-description: >-
-  Search inside past agent sessions and continue the one that matters with a single command.
-  Uses a separate episodic session index, so raw chat noise never pollutes the curated RAG.
-  Triggers: "/chat-search", "which chat discussed X", "did we already research X", "search old
-  chats".
-license: MIT
+description: "Поиск ВНУТРИ старых чатов Claude Code (“Книга чатов“ / episodic-индекс) — найти, в каком прошлом чате обсуждали тему, и одной командой продолжить его. Триггеры “/chat-search“, “/книга“, “в каком чате обсуждали X“, “найди чат про X“, “искали ли мы уже X“, “search old chats“, “which chat discussed X“"
+version: 1.0.0
 ---
 
-# /chat-search — the book of chats (search inside old sessions)
+# /chat-search — Книга чатов (поиск внутри старых чатов)
 
-A thin wrapper over `$IMPORTS_ROOT/chat_search.py`. Do NOT reimplement the logic — call the engine and show the result.
+Тонкая обёртка над `$IMPORTS_ROOT/chat_search.py`. НЕ переписывай логику — просто вызови движок и покажи результат.
 
-## When
-- "which chat did we discuss X in?", "have we already looked into this?", "find the old conversation about X".
-- Before starting a new topic — check whether it was already dug into (the twin of RECALL).
+## Когда
+- «в каком чате мы обсуждали X?», «искали ли мы уже это?», «найди прошлый разговор про X».
+- Перед новой темой — проверить, не копали ли уже (пара к RECALL).
 
-## What it is (and what it is NOT)
-- It searches a **separate** session index `_brain_sessions.npy` (21k+ chunks from `_session-md\<machine>\<cli>.md`), built by `brain_sessions_index.py`.
-- It is **NOT** the essence index behind `/ask`: raw chats are deliberately excluded from the sharp "mind" (the essence/evidence decision, 2026-06-26). This is the evidence layer — "where exactly it was discussed" — while `/ask` answers "what I think".
-- HUMAN chats only: service/robot sessions are filtered out at export time (a classifier + a cheap-model judge).
+## Что это (и чем НЕ является)
+- Ищет по **отдельному** индексу сессий `_brain_sessions.npy` (21k+ чанков из `_session-md\<машина>\<cli>.md`), построенному `brain_sessions_index.py`.
+- **НЕ** essence `/ask`: сырые чаты намеренно исключены из острого «ума» (решение essence/evidence 2026-06-26). Это evidence-слой — «где дословно обсуждали», а `/ask` — «что я думаю».
+- Только HUMAN-чаты: служебные/роботные сессии отфильтрованы на экспорте (классификатор + Sonnet-судья).
 
-## How to run
+## Как запускать
 ```
-python "$IMPORTS_ROOT/chat_search.py" "query in your own words"
-python "$IMPORTS_ROOT/chat_search.py" --machine LAPTOP-1 "query"   # one machine only
-python "$IMPORTS_ROOT/chat_search.py" -n 8 "query"                    # top-N (default 10)
+python "$IMPORTS_ROOT/chat_search.py" "запрос своими словами"
+python "$IMPORTS_ROOT/chat_search.py" --machine [машина флота] "запрос"   # только одна машина
+python "$IMPORTS_ROOT/chat_search.py" -n 8 "запрос"                    # top-N (дефолт 10)
 ```
-Every hit: `[rr=score] date · machine · topic` + a snippet + the line `▶ continue: python continue_session.py <cli>`.
+Каждый хит: `[rr=score] дата · машина · тема` + сниппет + строка `▶ продолжить: python continue_session.py <cli>`.
 
-## Continue a chat you found
-Copy the command from the hit (or use `/resume-last` for the most recent one). `continue_session.py <cli>` assembles a seed of the old chat into the clipboard — paste it into a new session.
+## Продолжить найденный чат
+Скопируй команду из хита (или используй `/resume-last` для самого свежего). `continue_session.py <cli>` собирает seed прошлого чата в буфер обмена — вставь в новую сессию.
 
-## Caveats (AK-47)
-- The index is built at night (`run_session_archive.local.cmd` → `brain_sessions_index.py`, incrementally). A fresh chat shows up after the nightly run; to force it: `python brain_sessions_index.py`.
-- Index missing / empty → the engine itself tells you `Run: python brain_sessions_index.py --full`.
-- Reranker scores can be negative — what matters is the ORDER (top-1 = most relevant), not the sign.
-- Siblings: `/ask` (meaning across the vault), `/search` (exact words in Telegram/FB/ChatGPT), `/resume-last` (continue the latest).
-
-
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Оговорки (AK-47)
+- Индекс строится ночью (`run_session_archive.local.cmd` → `brain_sessions_index.py`, инкрементально). Свежий чат появится после ночного прогона; форсировать: `python brain_sessions_index.py`.
+- Индекс не построен / пуст → движок сам скажет `Запусти: python brain_sessions_index.py --full`.
+- Скоры reranker бывают отрицательными — важен ПОРЯДОК (top-1 = релевантнее), не знак.
+- Родня: `/ask` (смысл по волту), `/search` (слова в Telegram/FB/ChatGPT), `/resume-last` (продолжить последний).

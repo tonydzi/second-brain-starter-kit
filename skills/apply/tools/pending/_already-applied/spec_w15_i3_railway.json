@@ -1,0 +1,11 @@
+{
+  "url": "https://jobs.ashbyhq.com/railway/7d42f0e8-15a5-453d-8992-9e[id]/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Writer.pdf",
+  "out_prefix": "w15_i3_railway",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Why Railway?": "I run a production multi-machine Claude fleet (6 machines, 100+ automation routines) and write about it in public: 110 public repos, published evals, reproducible docs, and a book in progress on human-AI collaboration. Growth content that works on developers is exactly this shape - runnable code and honest write-ups, not marketing copy.\n\nRailway's product is developer experience, and the way to grow it is engineer-grade content: templates people can actually deploy, guides written by someone who operates infrastructure daily. I have taught Solidity curricula, published 50+ items (136 citations, h-index 7), and turned messy frontier practice into docs and courses for a 500+ practitioner community. I would do the same for Railway: build real things on the platform and document them so well they become distribution."
+  },
+  "required_labels": ["Name", "Email", "Resume", "Why Railway?"]
+}

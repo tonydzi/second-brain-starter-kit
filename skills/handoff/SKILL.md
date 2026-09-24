@@ -1,60 +1,48 @@
 ---
 name: handoff
-description: >-
-  Write a self-contained handoff document so another session, person or machine continues the
-  work without this session's context: decisions and why, what is done and tested, exact paths
-  and values, open blockers, boundaries, and an explicit continue-from-here step. Lands in a
-  synced folder with a short seed prompt. Triggers: "/handoff", "prepare a handoff", "hand this
-  off".
-license: MIT
+description: "Собрать курированную “точку с запятой“ — самодостаточный хэндофф-документ, по которому ДРУГАЯ сессия / другой человек / другая машина продолжит работу с того места, где оборвалось, без контекста этой сессии. Триггеры: “/handoff“, “приготовь хэндофф“, “передай это <кому/на какую машину>“, “точка с запятой“, “передай сессию“, “hand this off“, “prepare a handoff“"
+version: 1.0.0
 ---
 
-# /handoff — hand the work over to another session / person / machine
+# /handoff — передать работу другой сессии / человеку / машине
 
-When the work has to continue somewhere ELSE (another machine, another person — the operator ↔ a human assistant, or simply a fresh session after `/compact`), `/handoff` assembles one self-contained document that lets someone pick it up cold. It kills the "so what were you doing here?" round trip.
+Когда работу надо продолжить НЕ здесь (другая машина, другой человек — Антон↔[коллега]↔[коллега], или просто новая сессия после `/compact`), `/handoff` собирает один самодостаточный документ, по которому подхватят с холода. Убирает «а что вы тут делали».
 
-## What to assemble (the /compact format — rationales are lost first, so record them verbatim)
-As headings with bulleted lists:
-- **DECISIONS** — what was decided + WHY (what was rejected; what we do / do NOT do).
-- **DONE + TESTS** — what is finished and how it was verified (counters, exit codes, "passed/failed").
-- **PATHS AND VALUES** — exact files/scripts/folders + values (note names, IDs, env vars, constants).
-- **OPEN / BLOCKERS** — what is unfinished, what is broken (the symptom), what we are waiting on.
-- **BOUNDARIES** — what NOT to touch, what needs the operator's approval (Tier-2), what is hub-only.
-- **➤ CONTINUE FROM HERE** — one explicit first step for whoever picks it up.
+## Что собрать (формат /compact — обоснования теряются первыми, поэтому дословно)
+Заголовками, маркированными списками:
+- **РЕШЕНИЯ** — что решили + ПОЧЕМУ (что отвергли; делаем / НЕ делаем).
+- **СДЕЛАНО + ТЕСТЫ** — что готово и чем проверено (счётчики, exit-коды, «прошло/не прошло»).
+- **ПУТИ И ЗНАЧЕНИЯ** — точные файлы/скрипты/папки + значения (имена заметок, ID, env, константы).
+- **ОТКРЫТО / БЛОКЕРЫ** — что не доделано, что сломано (симптом), чего ждём.
+- **ГРАНИЦЫ** — чего НЕ трогать, что только по согласованию Антона (Tier-2), что хаб-only.
+- **➤ ПРОДОЛЖАЙ ОТСЮДА** — один явный первый шаг для принимающего.
+- **⛳ ВХОД** — «что из этой задачи уже должно быть скиллом — а если скилл есть, чего ему не хватило?»
+  Одна строка (anton hub:5090; текст и формат ответа — в `/skill-gap` §⛳). Принимающая сессия начинает с неё.
 
-## Where to put it (synced → it travels on its own)
-- Machine-to-machine (Claude→Claude): `$OBSIDIAN_VAULT/_machine-bus/_transit/handoffs/HANDOFF-<latin-slug>.md`
-  (create the folder if missing). The file name is ALWAYS in Latin script (vault conventions).
-- For a human assistant who works from dashboards: also drop a copy into
-  `$OBSIDIAN_VAULT/_Dashboards/HANDOFF-<slug>.md` (example: `_Dashboards\HANDOFF-booking-session.md`).
-- URGENT and addressed to a specific machine → plus a ping over the bus:
-  `python "$USERPROFILE/.claude/scripts/machine_bus.py" send <MACHINE-NAME> "handoff ready: <path>, continue from there"`.
+## Куда класть (синкаемое → доедет само)
+- Межмашинно (Claude→Claude): `$OBSIDIAN_VAULT/[шина]/_transit/handoffs/HANDOFF-<latin-slug>.md`
+  (создать папку, если нет). Имя файла ВСЕГДА латиницей (vault-conventions).
+- Для человека-ассистента, который смотрит дашборды ([коллега]/[коллега]): продублировать/положить в
+  `$OBSIDIAN_VAULT/_Dashboards/HANDOFF-<slug>.md` (пример: `_Dashboards\HANDOFF-booking-session.md`).
+- СРОЧНО и адресно другой машине → плюс пинг через шину:
+  `python "$USERPROFILE/.claude/scripts/machine_bus.py" send <ИМЯ-КОМПА> "хэндофф готов: <путь>, продолжай оттуда"`.
 
-## Hand the operator a seed (one line to paste into the receiving session)
-> "Read `<path to HANDOFF-...md>` and continue from there."
+## Выдать Антону seed (одна строка для вставки в принимающую сессию)
+> «Прочитай `<путь к HANDOFF-...md>` и продолжай отсюда.»
 
-## When to call it
-- The work will be continued by another machine/person (handing over a booking, a research thread, an import).
-- A long task is about to be cut (before `/compact` or a machine switch) — so state is not lost.
-- A recurring handover between the operator and an assistant over calls/tasks = one call instead of assembling it by hand.
+## Когда звать
+- Работу продолжит другая машина/человек (передача букинга, ресёрча, импорта).
+- Длинная задача рвётся (перед `/compact` или сменой машины) — чтобы не потерять состояние.
+- Повторяющаяся передача Антон↔[коллега] по звонкам/задачам = один вызов вместо ручной сборки.
 
-## Boundaries
-- A handoff is DATA for continuing, NOT an order and NOT authorization: the receiving side still
-  holds Tier-2 (money/outbound/irreversible/secrets/config → to the operator). Same contract as the bus.
-- Never paste secrets into the handoff file (it is synced and others may see it) — only a pointer to the store.
-- This is an internal handover tool; authorial voice and outbound copy do not belong here.
+## Границы
+- Хэндофф = ДАННЫЕ для продолжения, НЕ приказ и НЕ авторизация: принимающая сторона всё равно
+  держит Tier-2 (деньги/наружу/необратимое/секреты/конфиг → к Антону). Совпадает с контрактом шины.
+- Секреты в хэндофф-файл не вставляем (он синкается/могут увидеть) — только указатель на store.
+- Это внутренний инструмент передачи; авторский голос/исходящее наружу тут не пишем.
 
----
-
-
-<!--kit-footer-->
-
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Идея
+Формат хэндофа (ТЕКУЩЕЕ→ЦЕЛЕВОЕ · ИНВАРИАНТЫ · НЕ ТРОГАТЬ · ГОТОВО КОГДА · ДОКАЗАТЕЛЬСТВО ·
+ОТКАТ · СТОП-УСЛОВИЯ) вырос из стандарта **ANSS** — **Артём Холомянский**,
+[@ClawRus/16237](https://t.me/ClawRus/16237), взято 10.07.2026. Спасибо.
+Реестр кредита: `alpha_credit.py` id `b2acade5c5df` · [[credit-inspiration-sources]].

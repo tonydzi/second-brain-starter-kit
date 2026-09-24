@@ -17,7 +17,7 @@ expand_query.py — расширяет ЛЮБОЕ важное слово во �
 Это «мост» от умного отпечатка к обычному поиску по волту и к RAG (brain_ask).
 
   python expand_query.py виктор
-     -> виктор viktor Vlad wiktor ...          (все читаемые варианты)
+     -> виктор viktor Vlad [человек] ...          (все читаемые варианты)
 
   python expand_query.py dbrnjh --grep
      -> прогоняет ripgrep по волту по всем вариантам (что есть в волте)

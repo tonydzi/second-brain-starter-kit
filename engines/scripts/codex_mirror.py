@@ -42,7 +42,7 @@ for _s in (sys.stdout, sys.stderr):
 HOME         = os.path.expanduser("~")
 CLAUDE_DIR   = os.environ.get("CLAUDE_CONFIG_DIR") or os.path.join(HOME, ".claude")
 CODEX_DIR    = os.environ.get("CODEX_HOME") or os.path.join(HOME, ".codex")
-IMPORTS_ROOT = os.environ.get("IMPORTS_ROOT") or os.path.join("E:\\", "Obsidian", "_imports")
+IMPORTS_ROOT = os.environ.get("IMPORTS_ROOT") or os.path.join("[путь владельца]", "Obsidian", "_imports")
 
 CLAUDE_MD  = os.path.join(CLAUDE_DIR, "CLAUDE.md")
 CHANGELOG  = os.path.join(CLAUDE_DIR, "CLAUDE.CHANGELOG.md")

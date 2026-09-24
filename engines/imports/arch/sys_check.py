@@ -108,12 +108,12 @@ def c_vault_backup_fresh():
 
 def c_lint_flags():
     """Surface the lint gates' flag files as a REAL check (adversarial-review nit
-    2026-07-02: the flags had no consumer -- alarm with no bell). Lints run BEFORE
+    2026-07-02: the flags had no consumer -- alarm with no [человек]). Lints run BEFORE
     sys_check in run_architect.cmd so these flags are fresh, not last night's."""
     flags = {"_lint_llm.flag": "NEW LLM call site(s) in _imports",
              "_lint_encoding.flag": "NEW unguarded Cyrillic print site(s)",
              "_lint_vault_walk.flag": "NEW unguarded share-root walk (skips .stversions)",
-             "_lint_path_hardcode.flag": "NEW hardcoded C:\\Users\\<name> path(s)",
+             "_lint_path_hardcode.flag": "NEW hardcoded [путь владельца] path(s)",
              "_lint_approval.flag": "approval-ask routed past approval.py (02-POLICE-first bypassed)",
              "_lint_dangling.flag": "launcher calls a script that does NOT exist (silent-dead gate)",
              "_lint_canon_refs.flag": "canon prose (CLAUDE.md/skills) names a script that does NOT exist (silent-dead gate)",

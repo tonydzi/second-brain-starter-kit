@@ -1,0 +1,22 @@
+{
+  "url": "https://jobs.ashbyhq.com/humatahealth/d0fa2662-7a05-4f7a-b29b-0cbf95f59901/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+  "out_prefix": "w13_i6_humatahealth",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone": "+1 341 222 9178",
+    "What is your desired compensation?": "180000",
+    "Tell us about a small but meaningful object you keep in your workspace and the story behind why it matters to you.": "The most meaningful object in my workspace is a small always-on desktop machine that runs my multi-machine Claude agent fleet. It is nothing photogenic - a plain box that never sleeps - but while I am on calls or asleep it keeps my CRM enriched, my 10-year knowledge base indexed, and 100+ automation routines running. I check its heartbeat every morning the way other people check the news. It matters to me because it is quiet, humming proof that one person plus well-run machines can do the work of a team - and a daily reminder that reliability is something you build and verify, not something you assume."
+  },
+  "geo": {
+    "Location": {"type": "Palo Alto", "exact": "Palo Alto, California"}
+  },
+  "options": {
+    "How did you hear about Humata Health?": "Company Website",
+    "Are you interested in relocating?": "Yes",
+    "Are you legally authorized to work in the United States on a full-time basis?": "Yes",
+    "Will you now or in the future require sponsorship": "No"
+  },
+  "required_labels": ["Name", "Email", "Phone", "What is your desired compensation", "Resume", "Tell us about a small but meaningful object"]
+}

@@ -18,8 +18,8 @@ import csv, json, io, os, re, glob
 from collections import Counter, defaultdict
 csv.field_size_limit(1<<30)
 EXP=r"C:$HOME/!CLAUDE-HP17 May26/crm_export"
-OUT=r"E:/Obsidian/Owner-Knowledge/_Dashboards"; os.makedirs(OUT,exist_ok=True)
-CARDS=r"E:/Obsidian/Owner-Knowledge/04-Projects/crypto/Platinum-CRM/leads"
+OUT=r"[путь владельца]"; os.makedirs(OUT,exist_ok=True)
+CARDS=r"[путь владельца]"
 
 INV=("INVESTOR","VC / Angel / Investor","Подозрение на инвестора")
 tier_c=Counter(); status_c=Counter(); op_c=Counter(); month_c=Counter()

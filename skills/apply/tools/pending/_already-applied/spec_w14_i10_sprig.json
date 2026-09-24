@@ -1,0 +1,16 @@
+{
+ "url": "https://jobs.ashbyhq.com/sprig/629c9736-8d00-4245-9c6c-d0629f35d2bc/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w14_i10_sprig",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "Phone Number": "+1 341 222 9178",
+  "LinkedIn Profile": "https://tonydzi.github.io/"
+ },
+ "check_options": {
+  "This is a hybrid position": "Yes",
+  "Will you now or in the future require sponsorship": "No"
+ },
+ "required_labels": ["Name", "Email", "Resume", "Phone Number", "LinkedIn Profile"]
+}

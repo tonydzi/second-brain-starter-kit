@@ -19,8 +19,8 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-VAULT = Path(r"E:/Obsidian/Owner-Knowledge")
-OUT = Path(r"E:/Obsidian/_imports")
+VAULT = Path(r"[путь владельца]")
+OUT = Path(r"[путь владельца]")
 POK = VAULT / "01-Conversations/Telegram/Pokupki"
 rows = [json.loads(l) for l in (OUT / "pokupki-archive.jsonl").read_text(encoding="utf-8").splitlines()]
 backlinks = json.loads((OUT / "pokupki_backlinks.json").read_text(encoding="utf-8"))

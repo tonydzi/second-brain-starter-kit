@@ -1,57 +1,74 @@
 ---
 name: sync-check
-description: >-
-  Report this machine's file-synchronization state with the whole fleet: peers connected,
-  per-share state and files still needed, folder errors, and how many sync-conflict files piled
-  up, which is the silent sign two machines are fighting over a file. Read-only and zero tokens.
-  Triggers: "/sync-check", "is sync alive", "sync status".
-license: MIT
+description: "READ-ONLY зелёный/красный отчёт о Syncthing-синхронизации ЭТОЙ машины со всем кланом — одна команда вместо ручного дёрганья REST по каждой папке. Триггеры: “/sync-check“, “проверь синк“, “синк жив?“, “syncthing ok?“, “статус синхронизации“, “машины синкаются?“, “sync status“, “did the vault sync“. 0 токенов, ничего не меняет"
+version: 1.0.0
 ---
 
-# /sync-check — is the sync between my machines healthy
+# /sync-check — здоров ли синк между моими машинами
 
-One command answers "did it arrive / are we syncing right now" across ALL Syncthing folders of this machine, without poking the REST API by hand. READ-ONLY, 0 tokens, portable (the API key is read from the local config → it works on any machine of the fleet).
+Одна команда отвечает на вопрос «доехало ли / синкаемся ли мы сейчас» по ВСЕМ Syncthing-папкам этой машины, без ручного дёрганья REST. READ-ONLY, 0 токенов, портативно (ключ API берётся из локального конфига → работает на любой машине клана).
 
-**Engine:** `$IMPORTS_ROOT/sync_check/sync_check.ps1` (git-backed in `_imports`, synced through claude-imports). It now also includes **Device ID drift detection** (live `myID` vs `machines.json` → RED on a mismatch — it would have caught the 2026-06-25 incident).
+**Движок:** `$IMPORTS_ROOT/sync_check/sync_check.ps1` (git-бэкап в `_imports`, синкается через claude-imports). Теперь включает **детект дрейфа Device ID** (live `myID` vs `machines.json` → RED при расхождении — поймал бы инцидент 25.06).
 
-**Cleaning up sync-conflict files** (when the report says "WARN sync-conflict files: N"): `python $IMPORTS_ROOT/sync_check/resolve_conflicts.py` (dry-run) → for each conflict it compares against the live file: `--quarantine` SAFELY moves conflicts of the live tree into `_sync-conflict-archive\<date>\` (a move, not a delete → recoverable; orphans with no live twin are left alone), `--apply` deletes only proven subsets. Already-archived files and `.stversions` are excluded. Canon: the sync-loss incident runbook, §6.
+**Уборка sync-conflict файлов** (когда отчёт показал «WARN sync-conflict files: N»): `python $IMPORTS_ROOT/sync_check/resolve_conflicts.py` (dry-run) → для каждого конфликта сравнивает с живым: `--quarantine` БЕЗОПАСНО переносит конфликты живого дерева в `_sync-conflict-archive\<дата>\` (move, не delete → восстановимо; orphans без живого двойника НЕ трогает), `--apply` удаляет только доказанные подмножества. Исключает уже-архивные/`.stversions`. Канон: [[reglament-chp-poterya-sinka-mezhdu-mashinami]] §6.
 
-## Run
+## Запуск
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File "$IMPORTS_ROOT/sync_check\sync_check.ps1"
 ```
 
-## How to read the output
-- **PEERS** — how many peers are connected. `0 connected` = sync is DEAD (the machine slept / Syncthing is stuck) → start the watchdog `syncthing_watchdog.ps1` (see the migration runbook, the on-wake task `SyncthingWatchdogOnWake`).
-- **per folder** `OK / WARN / RED`:
-  - `OK` + `NEED=0` = the folder is in sync, everything arrived.
-  - `WARN` + `NEED>0` = still downloading (fine briefly; if it is stuck, look at the peers).
-  - `RED` = `state=error` or folder errors → investigate (permissions / disk / conflict).
-- **sync-conflict files** — a separate WARN (it does not turn the report RED). Their growth means two machines are editing the same file (e.g. `settings.json`) → decide "fresher beats older" (the operator decides) and clean up `*.sync-conflict-*`.
-- **EXIT 0** = all green; **EXIT 2** = something is RED.
+## Как читать вывод
+- **PEERS** — сколько пиров подключено. `0 connected` = синк МЁРТВ (машина спала / Syncthing застрял) → запустить сторож `syncthing_watchdog.ps1` (см. реглумент миграции, on-wake задача `SyncthingWatchdogOnWake`).
+- **по каждой папке** `OK / WARN / RED`:
+  - `OK` + `NEED=0` = папка в синке, всё доехало.
+  - `WARN` + `NEED>0` = ещё качается (норм, если ненадолго; зависло — смотреть пиров).
+  - `RED` = `state=error` или есть ошибки папки → разобраться (права/диск/конфликт).
+- **sync-conflict файлы** — обычно WARN, но **ВОЗРАСТ старейшего валит в RED** (порог 3 суток). Их рост = две машины правят один файл (например `settings.json`).
+  ⭐ **RED по возрасту лечит ТА СЕССИЯ, которая его увидела, в этом же заходе** — `resolve_conflicts.py --quarantine` обратим (move в `_sync-conflict-archive\<дата>\`, orphans не трогает), решения Антона не требует и в бэклог не откладывается. К Антону уходит только развилка «свежее бьёт старое» по КОНКРЕТНОМУ файлу, который скрипт пометил `FLAG` (есть уникальное содержимое) — и то строкой в отчёте, а не паузой.
+  ⚠️ Замер 15.09.2026 (хаб): здесь годом раньше стояло «нужно решить (Антон) и почистить» — и никто не чистил, старейший конфликт дожил до **48.6 суток при пороге 3**, 64 живых; вызывателей у движка не было ни одного. Класс `alarm-bez-obyazannogo-deystviya`, 7-й случай с 14.08. Канон: память [[alert-ownership-routing]] §Поправка 15.09, дверь-близнец — `/1` Шаг 2-бис.
+- **EXIT 0** = всё зелёное; **EXIT 2** = есть RED.
 
-## When to call it
-- The operator asks "did it reach the hub / the Mac?", "is sync alive?".
-- BEFORE relying on a fresh file from another machine ("not found" ≠ "does not exist" — it may still be in transit; memory deterministic-script-gotchas).
-- AFTER a sync incident (like the nested-folder D2 case of 2026-06-24/25) — to confirm the bridge is back.
-- Each machine runs its own check (the report is local); to compare the whole fleet, ask every machine via `/inbox` or the bus.
+## Списание/удаление файла на СИНКАЕМОЙ шаре (обязательная проверка, замер 09.08.2026)
+Локальный `mv`/`rm` на шаре — это НЕ списание: отставший пир пушит свою копию обратно, и файл воскресает (06.08 списанный форк `approval_clock.py` вернул laptop-HP17, улика — `modifiedBy` в API). Порядок:
+1. Удалять при ЖИВЫХ пирах (`/rest/system/connections` → `connected: true`), не в офлайне.
+2. Доказать удаление в ГЛОБАЛЬНОМ индексе, а не только у себя:
+   `curl -s -H "X-API-Key: $KEY" "http://127.0.0.1:8384/rest/db/file?folder=<шара>&file=<путь%2Fс%2Fслэшами>"` → `global.deleted=true`.
+3. Доказать ПРИЁМ каждым пиром: `/rest/db/completion?device=<полный-ID>&folder=<шара>` → `needDeletes=0`.
+   Пир стоит (needItems не падает часами) = списание НЕ состоялось → задача пиру по шине, а не «ну и ладно».
+⛔ «Удалил у себя» ничего не доказывает. Правило класса: **папка списанного обязана быть вне зоны сканирования сторожей, а само удаление — доехать до всех пиров.**
 
-## Boundaries
-- Read-only: it fixes nothing and moves nothing. Healing a stuck sync is the watchdog's job (separate).
-- It only sees what the local Syncthing daemon knows; if the daemon is not running it says so (RED).
+## Доехал ли КОНКРЕТНЫЙ файл (единственный честный ответ)
 
+⛔ **Процент `completion` на этот вопрос НЕ отвечает.** Замер 03.09.2026: по шаре `claude-home` он показал 13.7% у обоих Маков, 49.2% у HP17 и 64.4% у узла [коллега] — картина «флот развалился». Проверка по файлам дала обратное: все шесть починенных в тот день скриптов лежали у всех четырёх пиров, а недостача — крупные бинарники и бэкапы, которые пиры исключают своими ignore-правилами.
 
----
+Истину даёт **availability по конкретному файлу**:
 
+```
+python - <<'PY'
+import json, urllib.request, os, io, re
+cfg = os.path.expanduser('~/AppData/Local/Syncthing/config.xml')
+key = re.search(r'<apikey>([^<]+)</apikey>', io.open(cfg, encoding='utf-8', errors='ignore').read()).group(1)
+def api(p):
+    return json.load(urllib.request.urlopen(urllib.request.Request(
+        'http://127.0.0.1:8384' + p, headers={'X-API-Key': key}), timeout=25))
+name = {d['deviceID']: d['name'] for d in api('/rest/system/config')['devices']}
+FILE = 'scripts/proc_patrol.py'   # <- подставь свой
+r = api('/rest/db/file?folder=claude-home&file=' + FILE.replace('/', '%2F'))
+print(FILE, '->', [name.get(a['id'], a['id'][:7]) for a in (r.get('availability') or [])] or 'НИ У КОГО')
+PY
+```
 
-<!--kit-footer-->
+Пусто (кроме нас) = починка НЕ доехала, сколько бы процентов ни показывал дашборд.
 
----
+⭐ Обратный случай того же замера и правило из него: `proc_patrol_allow.txt` (1.9 КБ) оказался только на ОДНОМ узле из четырёх, хотя на хабе не помечен ignored — локальные ignore-правила пиров берут под `/scripts` только `*.py *.cmd *.ps1 *.sh *.md`. Отсюда: **защита, лежащая в data-файле рядом с опасным движком, до пиров не доедет — намордник обязан жить в коде.** Канон: память [[sync-completion-is-a-false-instrument]].
 
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+## Когда звать
+- Антон спрашивает «доехало ли на хаб / Mac», «синк жив?».
+- ПЕРЕД списанием/удалением файла на синкаемой шаре (см. секцию выше) и ПОСЛЕ — доказать доезд delete.
+- ПЕРЕД тем как полагаться на свежий файл с другой машины («не найдено» ≠ «нет файла» — может ещё ехать; память deterministic-script-gotchas).
+- ПОСЛЕ инцидента синка (как nested-folder D2 24-25.06) — подтвердить, что мост восстановлен.
+- На КАЖДОЙ машине свой прогон (отчёт локальный); чтобы сверить весь клан — спросить каждую машину через `/inbox`/шину.
 
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Границы
+- Read-only: ничего не чинит и не двигает. Лечение застрявшего синка = сторож (отдельно).
+- Видит только то, что знает локальный Syncthing-демон; если демон не запущен — так и скажет (RED).

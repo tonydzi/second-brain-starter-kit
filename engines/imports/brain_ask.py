@@ -134,7 +134,7 @@ def looks_like_entity(q):
             return True                              # CamelCase (LobsterDAO, NotebookLM)
         if core[:1].isupper() and (idx > 0 or len(toks) <= 2):
             if not (core.isupper() and len(core) <= 3):   # ignore bare topic-acronyms (AI, RAG, DAO, MCP)
-                return True                          # proper noun (Синклер, Бутерин, Платина)
+                return True                          # proper noun (Синклер, [человек], Платина)
     return False
 
 WIKILINK_RX = re.compile(r'\[\[([^\]\|#]+)')
@@ -183,7 +183,7 @@ def main():
             backend, emb_path, meta_path = 'e5', E5_EMB, E5_META
     meta = pickle.loads(meta_path.read_bytes()); emb = np.load(emb_path)
     # Union peer shards (canon-proposal MAC1 2026-07-14, Anton mandate "не ждать хаб"):
-    # peers embed their own fresh essence notes into <vault>/_machine-bus/_brain-shards/<machine>/;
+    # peers embed their own fresh essence notes into <vault>/[шина]/_brain-shards/<machine>/;
     # e5-space ONLY (openai index is a different space — never mix). Dedup-by-path below already
     # drops duplicates once the hub's nightly reindex catches up with the same note.
     if backend == 'e5':
@@ -192,7 +192,7 @@ def main():
             from _paths import VAULT as _VLT
         except Exception:
             _VLT = r'%VAULT%'
-        _shards_dir = os.path.join(str(_VLT), '_machine-bus', '_brain-shards')
+        _shards_dir = os.path.join(str(_VLT), '[шина]', '_brain-shards')
         for _npy in sorted(_glob.glob(os.path.join(_shards_dir, '*', 'shard.npy'))):
             _mp = Path(_npy).with_name('shard_meta.pkl')
             if not _mp.exists(): continue
@@ -272,7 +272,7 @@ def main():
             sys.stderr.write("entity lane fell back (%s)\n" % e)
     ent_set = set(ent_added)
 
-    # rerank on the matched chunk (precise); fuzzy-entity кандидаты со штрафом (шум Lino Gandola)
+    # rerank on the matched chunk (precise); fuzzy-entity кандидаты со штрафом (шум [человек] [человек])
     ce = CrossEncoder(RERANK_MODEL, device=dev)
     def rerank(cand):
         pairs = [(query, meta[i]['title'] + '. ' + meta[i]['snippet']) for i in cand]

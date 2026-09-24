@@ -1,0 +1,29 @@
+{
+ "idx": 11,
+ "url": "https://jobs.ashbyhq.com/decagon/e31c0645-7325-43b9-9d58-0acc[id]/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+ "out_prefix": "w21_i11_decagon",
+ "retry_identical": true,
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "Phone Number": "+1 341 222 9178",
+  "What college/university did you attend?": "National Research Nuclear University MEPhI (BSc Computer and Information Sciences; MSc Computer and Information Systems Security)",
+  "How did you hear about Decagon?": "Company careers page"
+ },
+ "options": {
+  "Are you legally authorized to work in the United States?": "Yes",
+  "Will you now or in the future require visa sponsorship": "No",
+  "Are you excited to work in-office five days a week": "Yes"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "LinkedIn",
+  "Phone Number",
+  "Resume",
+  "What college/university did you attend?",
+  "How did you hear about Decagon?"
+ ]
+}

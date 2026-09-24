@@ -80,11 +80,11 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 EPI = os.path.join(BASE, "episodes")
 DRAFTS = os.path.join(BASE, "drafts")
 GITHUB_REPO = "github.com/tonydzi/clawrush"  # repo slug stays until Anton renames
-REPO_CLONE = r"E:\GitHub\clawrush"  # local clone for manual gh publish (longreads/ + devlog/)
+REPO_CLONE = r"[путь владельца]"  # local clone for manual gh publish (longreads/ + devlog/)
 GH_SUBDIR = {"longread": "longreads", "dev-log": "devlog"}  # where each tier lands in the repo
 # RU posting target = @ClawRus megagroup. Resolve STRICTLY by this numeric id, never by
 # name: @clawrush (similar name) is a STRANGER's channel we must never post to.
-CLAWRUS_TG_ID = -1006847702008
+CLAWRUS_TG_ID = -[id]
 
 # --- co-founder CTA (standing Anton rule; memory cofounder-cta-public-contact).
 # The WhatsApp number is an EXPLICITLY Anton-authorized PUBLIC contact -> privacy

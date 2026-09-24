@@ -1,0 +1,27 @@
+{
+ "url": "https://jobs.ashbyhq.com/airbyte/cbf66746-9e2a-4b23-a208-a6d78eb5ec63/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w13t_i12_airbyte",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn Profile": "https://tonydzi.github.io/",
+  "How have you used AI in the last 2 weeks?": "Daily - AI is my production environment, not a side tool. In the last two weeks: ran my 6-machine Claude agent fleet (public at github.com/tonydzi) that syncs a 17k-contact CRM through MCP connectors (Telegram, Gmail), answers questions over a 10-year knowledge base with RAG (local embeddings + reranking, deterministic zero-token gates before any LLM call), turns call transcripts into follow-ups, and cross-reviews its own code with a multi-vendor panel (Claude, Codex, Gemini, Grok). Failure modes and evals are published openly (claw-consensus, verbatim-citation-gate). The habit that matters for a Solutions Architect: deterministic extraction first, LLM only for judgment - exactly the discipline messy customer data pipelines need."
+ },
+ "combos": {
+  "Current Location": "Palo Alto"
+ },
+ "check_options": {
+  "Will you now or in the future require sponsorship": "No",
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify for protected veteran status"
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "LinkedIn Profile",
+  "How have you used AI"
+ ]
+}

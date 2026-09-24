@@ -7,7 +7,7 @@
 -- leads — one row per relationship you are actually working
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS leads (
-    lead_slug   TEXT PRIMARY KEY,   -- 'marta-costa' — the join key to the markdown card
+    lead_slug   TEXT PRIMARY KEY,   -- '[человек]-[человек]' — the join key to the markdown card
     title       TEXT,               -- display name
     company     TEXT,
     role        TEXT,

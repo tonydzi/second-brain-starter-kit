@@ -45,7 +45,7 @@ CREATE TABLE topics(topic TEXT PRIMARY KEY, msgs INT, authors INT, first TEXT, l
 """)
 
 authors = {}  # from_id -> dict
-name_handle = {}  # collect @handles mentioned for a name
+name_handle = {}  # collect [аккаунт] mentioned for a name
 HANDLE = re.compile(r'@([A-Za-z][A-Za-z0-9_]{3,31})')
 
 files = sorted(glob.glob(os.path.join(SRC,"Состав*.json")))

@@ -1,0 +1,15 @@
+{
+ "url": "https://jobs.ashbyhq.com/element451/78c5ab67-b84e-4e01-861d-3f062327c1fe/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-FDE.pdf",
+ "out_prefix": "w15_i5_element451",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com"
+ },
+ "check_options": {
+  "Gender": "Decline to self-identify",
+  "Race": "Decline to self-identify",
+  "Veteran Status": "I decline to self-identify"
+ },
+ "required_labels": ["Name", "Email", "Resume"]
+}

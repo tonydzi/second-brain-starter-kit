@@ -1,0 +1,21 @@
+{
+ "url": "https://jobs.ashbyhq.com/tempo-xyz/361eb281-35ee-43ee-b0e6-8dbbe451d2d2/application",
+ "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+ "out_prefix": "w12_i10_tempo",
+ "texts": {
+  "Name": "Anton Dziatkovskii",
+  "Email": "dzyatkovskiy.a@gmail.com",
+  "LinkedIn": "https://tonydzi.github.io/",
+  "Twitter/X or Personal Site": "https://x.com/Tony_Stef_",
+  "Why Tempo?": "I have been building stablecoin infrastructure since before it was a category: at Everex (Singapore, 2017-2018) I was Chief Engineer for Lending & Risk Management, wrote the smart contracts and led government/bank relations across SE Asia on structuring crypto payments and stablecoins. Later I designed one of the first detailed frameworks for a national government to issue its own stablecoins (regulatory + token-economic design). Tempo treats payments as the core workload of the chain, which is exactly the thesis I have worked toward for a decade. On the security side: MSc in Computer & Information Systems Security (MEPhI, cryptography), smart-contract audit background, and anti-fraud instincts from adversarial crypto markets (exchange backends, market-maker engines). Today I build guardrails for production AI-agent fleets (agent-leash, verbatim-citation-gate) - I run the attack surface I defend.",
+  "Provide (2) examples of your exceptional engineering abilities.": "1) claw-consensus: reproducible multi-machine agent consensus across my 6-machine production Claude fleet, with published evals and FAILURE-MODES.md - measured 0/17 high-risk actions slipping past the human approval gate. 2) Everex (Singapore): smart contracts for blockchain credit scoring and stable-value payments, plus crypto-exchange market-maker engines and HFT backends shipped at Platinum."
+ },
+ "required_labels": [
+  "Name",
+  "Email",
+  "Resume",
+  "LinkedIn",
+  "Why Tempo?",
+  "Provide (2) examples"
+ ]
+}

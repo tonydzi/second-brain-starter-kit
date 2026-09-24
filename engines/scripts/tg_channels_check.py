@@ -20,14 +20,14 @@ This is the LOCAL, per-machine self-test (every computer checks ITS OWN two TG r
 Distinct from the hub-only `connector-health-daily` watchdog (centralized).
 
 Two channels:
-  A) Telegram MCP (chigwell, C:\\mcp\\telegram-mcp) -- the rich connector.
+  A) Telegram MCP (chigwell, [путь владельца]) -- the rich connector.
      A script CANNOT truly test the MCP (it's a harness-owned stdio server, only reachable
      by the LLM in-session). So here we give the DETERMINISTIC best-effort signal:
         - is a telegram-mcp python process alive right now?
         - what does the MCP error log say -- most recent FATAL (AuthKeyDuplicated = the root,
           or "Could not find a matching"/TypeNotFound = stale telethon), and how fresh?
      The TRUE MCP verdict is added by the /tg-check SKILL (it calls a cheap MCP tool in-session).
-  B) Telethon rail (@work_acct_a REFRESH session) -- the MCP-INDEPENDENT bus rail.
+  B) Telethon rail ([аккаунт] REFRESH session) -- the MCP-INDEPENDENT bus rail.
      This CAN be tested deterministically & SAFELY: we shell out to tg_bus_read.py --check,
      which uses the SHARED lock `_refresh_work_acct_a.lock` -> no AUTH_KEY_DUPLICATED.
 
@@ -37,7 +37,7 @@ Usage:
   python tg_channels_check.py            # print the per-machine 2-channel matrix
   python tg_channels_check.py --notify   # on RED, also ping the bus (tg_bus_send.py) -- for cron
   python tg_channels_check.py --json      # machine-readable
-Env: TG_MCP_LOG (default C:\\mcp\\telegram-mcp\\mcp_errors.log); BUS_PING_ENV (rail .env)
+Env: TG_MCP_LOG (default [путь владельца]); BUS_PING_ENV (rail .env)
 """
 import os, io, sys, json, subprocess, datetime, re, time
 
@@ -46,8 +46,8 @@ SCRIPTS = os.path.join(_HOME, "scripts")
 _HOST   = (os.environ.get("COMPUTERNAME") or "").upper()
 _LABEL  = {"LAPTOP1": "laptop-HP17", "HUB1": "HUB1"}.get(_HOST, _HOST or "?")
 
-MCP_LOG = os.environ.get("TG_MCP_LOG", r"C:\mcp\telegram-mcp\mcp_errors.log")
-# a fatal log entry younger than this many hours = the MCP is (or was just) actively broken.
+MCP_LOG = os.environ.get("TG_MCP_LOG", r"[путь владельца]")
+# a fatal log entry [человек] than this many hours = the MCP is (or was just) actively broken.
 FRESH_H = float(os.environ.get("TG_MCP_FRESH_HOURS", "48"))
 
 try:

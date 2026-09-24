@@ -164,7 +164,7 @@ def build_context(theme=''):
     out = []
     out.append(f"=== COACH CONTEXT ({today_str()}) ===")
     out.append(f"TONE: {s.get('tone')}  STREAK: {compute_streak(s.get('history',[]))}  CADENCE: {s.get('cadence')}")
-    out.append(f"ACTIVE COMMITMENT (yesterday's rock): {s.get('active_commitment')}")
+    out.append(f"ACTIVE COMMITMENT (yesterday's [человек]): {s.get('active_commitment')}")
     if s.get('history'):
         last = s['history'][-1]
         out.append(f"LAST DAY: {last}")

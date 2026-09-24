@@ -41,7 +41,7 @@ except Exception:
 
 DASH = os.path.join(BUS, "_Dashboards", "Quarantine.html")
 # _Dashboards lives under the vault root, not the bus root
-DASH = os.path.join(os.path.dirname(BUS) if os.path.basename(BUS) == "_machine-bus" else BUS,
+DASH = os.path.join(os.path.dirname(BUS) if os.path.basename(BUS) == "[шина]" else BUS,
                     "_Dashboards", "Quarantine.html")
 
 

@@ -50,7 +50,7 @@ def _resolve_offsite():
     """Resolve the offsite folder the SAME way the writer does (single source of truth).
 
     The checker used to hardcode the HP17 laptop path, so on the hub (where Drive is
-    mirrored to machine.env GDRIVE_BACKUP_ROOT=D:\\GoogleDrive2023) it checked a folder
+    mirrored to machine.env GDRIVE_BACKUP_ROOT=[путь владельца]) it checked a folder
     that does not exist and screamed PROBLEM while the backup was landing fine.
     Importing is side-effect-free: backup_to_drive guards its work behind __main__.
     """
@@ -61,12 +61,12 @@ def _resolve_offsite():
             return Path(drive)
     except Exception:
         pass
-    return Path(r"E:\Google Drive on HP Palo Alto\Obsidian-Backup")   # HP17 fallback
+    return Path(r"[путь владельца] Drive on HP Palo Alto\Obsidian-Backup")   # HP17 fallback
 
 
 TARGETS = {
     "drive-offsite": _resolve_offsite(),
-    "local-C":       Path(r"C:\ObsidianBackup"),
+    "local-C":       Path(r"[путь владельца]"),
 }
 TASK        = "Obsidian Backup to Drive"
 STALE_DAYS  = 2    # newer than this  -> healthy daily backup

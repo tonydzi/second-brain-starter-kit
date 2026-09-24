@@ -30,7 +30,7 @@ to run it. This module is the missing gate (layer 4 of the injection-defense des
 TWO LENSES, ONE MECHANISM (Anton's insight): alpha-review already gates incoming IDEAS by
 VALUE (`alpha_review.db`). Quarantine is the same "staging area" idea with the SECURITY lens
 (provenance). The shared injection scanner here (`scan_injection`) is reused by the alpha
-security lens (`alpha_security_lens.py`) so a "trojan alpha" from an external channel is caught
+security lens (`alpha_security_lens.py`) so a "[человек] alpha" from an external channel is caught
 with the same detector.
 
 SESSION-A SEAM (do not duplicate its core here). The canonical HMAC verifier and the rich
@@ -49,7 +49,7 @@ alert-ownership-routing; decision-2026-07-14-injection-defense-and-quarantine.
 import os, re, json, time, sys
 
 # fleet-shared injection-defense modules (fleet_hmac, injection_detector) live in scripts/_shared/
-# (synced fleet-wide, same path machine_bus.py uses). Add it so our seams find the CANONICAL copies.
+# (synced fleet-wide, same path machine_bus.py uses). Add it so our [человек] find the CANONICAL copies.
 _SHARED = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_shared")
 if _SHARED not in sys.path:
     sys.path.insert(0, _SHARED)
@@ -119,7 +119,7 @@ _SOFT_RE = [re.compile(p, re.I | re.M) for p in _SOFT]
 # tiers so all downstream consumers (classify + the alpha lens) speak one language regardless of
 # which producer answered. FAIL-SAFE: a detector hit whose severity we don't recognize maps to
 # 'hard' (hold), never silently to 'soft' — under-holding is the security risk, over-holding only
-# costs Anton a glance. (Bug caught 2026-07-14: assuming 'hard' shape let a HIGH trojan pass.)
+# costs Anton a glance. (Bug caught 2026-07-14: assuming 'hard' shape let a HIGH [человек] pass.)
 _SEV_MAP = {"hard": "hard", "soft": "soft", "high": "hard", "med": "soft",
             "medium": "soft", "low": "soft"}
 

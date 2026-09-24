@@ -87,7 +87,7 @@ else:
     try:
         head = open(dash, encoding="utf-8", errors="replace").read(2000)
         import re
-        m = re.search(r"arch-source: (\S+) @ (\d{4}-\d\d-\d\d \d\d:\d\d)", head)
+        m = re.search(r"arch-source: (\S+) @ (\d{4}-\d\d-\d\d \d\[путь владельца])", head)
         if m:
             print("Dashboard source: %s @ %s%s" % (m.group(1), m.group(2).strip(),
                   "" if m.group(1) == "HUB1" else "  <-- FOREIGN ENGINE, not hub!"))

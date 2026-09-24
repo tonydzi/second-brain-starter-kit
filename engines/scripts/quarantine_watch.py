@@ -42,7 +42,7 @@ try:
 except Exception:
     pass
 
-POLICE = int(os.environ.get("TG_POLICE_CHAT", "-6491142604"))   # "02 POLICE" clean needs-Anton channel
+POLICE = int(os.environ.get("TG_POLICE_CHAT", "-[id]"))   # "02 POLICE" clean needs-Anton channel
 STATE = os.path.join(DEPLOY, ".quarantine_alerted-%s.json" % ME)
 
 

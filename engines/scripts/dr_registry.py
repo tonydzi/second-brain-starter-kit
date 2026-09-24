@@ -21,7 +21,7 @@ v3 (2026-07-15, мандат Антона «чини корень»): КОРЕН
 _DR-Registry.md = несколько машин дописывали ОДИН синкаемый файл (Syncthing whole-file
 LWW не мержит конкурентные записи; merge_conflicts лечил лишь ПОСЛЕ). Форевер-фикс =
 single-writer протокол (рамка PROPOSAL-MAC1-2026-07-14-ne-zhdat-hab-3-role-split):
-  ПИР : new/update/rescue пишут ТОЛЬКО свой шард _machine-bus/_dr/DR-registry__from-<host>.md
+  ПИР : new/update/rescue пишут ТОЛЬКО свой шард [шина]/_dr/DR-registry__from-<host>.md
         (один писатель на файл => Syncthing-конфликт невозможен by design). Мастер пир НЕ пишет.
   ХАБ : единственный писатель мастера _DR-Registry.md; fold() втягивает шарды на каждой
         команде, выбирая по ID строку с САМЫМ ПРОДВИНУТЫМ статусом (см. merge_cells).
@@ -62,7 +62,7 @@ import re
 import shutil
 import sys
 
-# Портируемость: _paths (machine.env) -> env CLAUDE_VAULT_ROOT -> E:\ (Windows) -> ~/Obsidian.
+# Портируемость: _paths (machine.env) -> env CLAUDE_VAULT_ROOT -> [путь владельца] (Windows) -> ~/Obsidian.
 try:
     from _paths import VAULT as _PV          # machine-aware: reads ~/.claude/machine.env (hub/Mac/Якорёк)
     VAULT = str(_PV)
@@ -72,7 +72,7 @@ except Exception:
              or (_WIN_VAULT if os.path.isdir(_WIN_VAULT) else os.path.expanduser("~/Obsidian/Owner-Knowledge")))
 if os.environ.get("CLAUDE_VAULT_ROOT"):      # явный env всегда главнее (нужно тестам и нестандартным узлам)
     VAULT = os.environ["CLAUDE_VAULT_ROOT"]
-BUS = os.environ.get("MACHINE_BUS_DIR") or os.path.join(VAULT, "_machine-bus")
+BUS = os.environ.get("MACHINE_BUS_DIR") or os.path.join(VAULT, "[шина]")
 REGISTRY = os.path.join(VAULT, "_DR-Registry.md")
 SHARD_DIR = os.path.join(BUS, "_dr")
 CONFLICT_ARCHIVE = os.path.join(VAULT, "_sync-conflict-archive")

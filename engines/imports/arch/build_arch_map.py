@@ -131,7 +131,7 @@ HTML = """<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Syst
  svg{{display:block;margin:0 auto;background:#0c0e12}}
  .band.b0{{fill:#11141a}} .band.b1{{fill:#0e1116}} .bandlbl{{fill:#5a6473;font-size:13px;font-weight:700;letter-spacing:.05em}}
  .edge{{stroke:#2b3140;stroke-width:1}} .edge.e-runs{{stroke:#e67e2255}} .edge.e-writes{{stroke:#2ecc7144}}
- .edge.e-reads{{stroke:#9b59b644}} .edge.e-uses{{stroke:#e8439344}} .edge.e-calls{{stroke:#34405044}}
+ .edge.e-reads{{stroke:#9b59b644}} .edge.e-uses{{stroke:#e8439344}} .edge.e-calls{{stroke:#[id]}}
  .node circle{{cursor:pointer;transition:r .1s}} .node:hover circle{{stroke:#fff;stroke-width:2}}
  .lbl{{fill:#aeb6c2;font-size:10px;text-anchor:middle;pointer-events:none}}
  .node.hide{{display:none}}

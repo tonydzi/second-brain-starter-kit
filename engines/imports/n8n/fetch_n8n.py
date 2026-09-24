@@ -23,7 +23,7 @@ audit_profiles.json + audit_summary.md to out/.
 import json, os, sys, urllib.request, urllib.error, re
 from collections import Counter, defaultdict
 
-BASE = "E:/Obsidian/_imports/n8n"
+BASE = "[путь владельца]"
 ENV = "C:$HOME/.claude/secrets/n8n.env"
 
 def load_env():

@@ -19,11 +19,11 @@ The loop Anton wanted to SEE working:
     -> THIS script posts the approved piece to Telegram.
 
 AK-47 by design:
-- stdlib only; reuses the already-proven bus_ping rail (shared @work_acct_a Telethon
+- stdlib only; reuses the already-proven bus_ping rail (shared [аккаунт] Telethon
   session, shared lock -> never AUTH_KEY_DUPLICATED).
 - ONLY publishes `type: content-factory-draft` files. Plans (content-factory-plan)
   are working docs, never posted.
-- INTERIM TARGET = chat 03 (the family/clan bus group -996940094), NOT Saved.
+- INTERIM TARGET = chat 03 (the family/clan bus group -[id]), NOT Saved.
   CANON 2026-06-28 [[cc-alerts-to-chat-03]]: "вообще ВСЁ → чат 03", Saved is NO
   LONGER a send target (content-plan/diary/coach all preview in 03). So an approved
   draft previews in 03 where Anton + family see it, same as the daily plan relay.
@@ -115,7 +115,7 @@ def chunk(text, n=TG_LIMIT):
 
 
 def send_03(text):
-    """Post to chat 03 via the proven bus_ping rail (--post = group -996940094,
+    """Post to chat 03 via the proven bus_ping rail (--post = group -[id],
     canon 2026-06-28). Returns True on success."""
     if not os.path.exists(BUS_PING):
         print("  ! bus_ping.py not found at %s -- cannot send" % BUS_PING)
@@ -137,7 +137,7 @@ def main():
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--register", default="tg", choices=["tg", "fb", "x"])
     ap.add_argument("--target", default="chat03",
-                    help="Telegram target. Only 'chat03' (the -996940094 bus group, "
+                    help="Telegram target. Only 'chat03' (the -[id] bus group, "
                          "canon 2026-06-28) is wired in Phase 2a; a real PUBLIC channel "
                          "is a Tier-2 outbound step, Phase 2b.")
     args = ap.parse_args()

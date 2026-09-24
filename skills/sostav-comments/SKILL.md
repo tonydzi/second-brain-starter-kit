@@ -1,80 +1,65 @@
 ---
 name: sostav-comments
-description: >-
-  Draft short, in-voice reply candidates to a fresh community shortlist: read the nightly
-  detector report, pick posts in safe or opinion topics, pull a grounding snippet from the local
-  corpus, and write the drafts. Drafts only, and the owner posts. Triggers: "/sostav-comments",
-  "draft replies to the shortlist".
-license: MIT
+description: "Draft short, in-voice reply candidates for Anton to a fresh СОСТАВ alpha shortlist — read the nightly detector report, pick posts in SAFE/opinion topics, pull a relevant grounding snippet from the YouTube-Data-API corpus (the only working comment corpus — all socials are login-walled),… Trigger on “/sostav-comments“, “черновики ответов по составу“, “ответь на альфу состава“, “draft sostav replies“"
+version: 1.0.0
 ---
 
-# /sostav-comments — draft replies to the fresh club shortlist (the owner's voice, draft-first)
+# /sostav-comments — черновики ответов на свежую альфу СОСТАВ (голос Антона, draft-first)
 
-**Why.** When the owner goes through the fresh nightly shortlist, he usually wants ready-made draft replies for the interesting club threads. This skill does it in one pass: read the detector report → pick the safe posts → write short answers in his voice → show them. **It sends nothing** — the owner copies whatever he likes.
+**Зачем.** Когда Антон разбирает свежий ночной shortlist, он часто хочет готовые черновики реплаев в интересные треды клуба. Скилл делает это за один заход: читает отчёт детектора → отбирает безопасные посты → пишет короткие ответы его голосом → показывает. **Ничего не отправляет** — Антон копирует что нравится.
 
-**The main rules:**
-- **Draft-first, never publishes.** The skill only writes drafts into the chat. Posting into the club is done by the owner, by hand.
-- **Safe-topic gate.** Draft only in opinion/knowledge threads (Knowledge, Lectures, Business, Investing, Travel, Health, General-on-topic). ⛔ NEVER draft in the Crypto / Dating / Off-topic-flood threads, or in any grey-financial or personal thread — those are data, not a place to reply.
-- **Short text, tone set by the channel** ([[short-text-when-unreviewed]]): a meaningful answer in messenger register (not a 5-word Facebook joke — here you need context and knowledge of who the person is; pull the `person-sostav-*` card if the member is a ⭐).
-- **The owner's voice (Opus).** No "positioned" replies, no showing off. On topic, to the point, without making someone else's announcement about yourself.
-- **Anti-leak** ([[reglament-anti-leak-na-vyhode]]): drafts stay in the private layer; nothing sensitive from the club leaks into other channels.
+**Главные правила:**
+- **Draft-first, никогда не публикует.** Скилл только пишет черновики в чат. Отправку в клуб делает сам Антон руками.
+- **Safe-topic gate.** Черновики только в тредах-мнениях/знаниях (Знания, Лекции, Бизнес, Инвестиции, Путешествия, Здоровье, Общий-по-делу). ⛔ НИКОГДА не драфтить в Крипта/Девушки/Флудильня и в любые серо-финансовые/личные треды — это данные, не площадка для реплая.
+- **Короткий текст, тон по каналу** ([[short-text-when-unreviewed]]): осмысленный ответ в мессенджер-регистре (не FB-шутка на 5 слов — тут нужен контекст и знание, кто человек; подними карточку `person-sostav-*` если участник ⭐).
+- **Голос Антона (Opus).** Не «позиционированные» ответы, не выскочка. По делу, по теме, без «я-я-я» на чужих анонсах.
+- **Anti-leak** ([[reglament-anti-leak-na-vyhode]]): черновики остаются в приватном слое; ничего чувствительного из клуба не утекает в другие каналы.
 
 ---
 
-## 0. A fresh shortlist
-The latest detector report:
+## 0. Свежий shortlist
+Последний отчёт детектора:
 ```
-ls $IMPORTS_ROOT/alpha\candidates\sostav-*-report.md   # take the newest one by date
+ls $IMPORTS_ROOT/alpha\candidates\sostav-*-report.md   # взять самый свежий по дате
 ```
-If there is none / it is stale — refresh the corpus first (the nightly path): `python $IMPORTS_ROOT/sostav\nightly_run.py` (idempotent, it backfills).
+⏱ Возраст корпуса проверяй ДВЕРЬЮ, не на глаз: `python $IMPORTS_ROOT/sostav\corpus_fresh.py --max-age-h 24` (exit 4 = база старая, черновики по ней не пишем). Своё окно детектора — скользящее: `sostav_alpha.run(None,None,25,'<тег>',hours=24,stamp_key='comments')`. ⏱ Окно везде СКОЛЬЗЯЩЕЕ (последние N часов от СЕЙЧАС), календарные даты в СОСТАВ-рутинах не используем — anton 28.08, голосом: «для него день это последние двадцать четыре часа».
+Если свежего нет / устарел — сначала обнови корпус (ночной путь): `python $IMPORTS_ROOT/sostav\nightly_run.py` (идемпотентно, дозаберёт).
 
-## 1. Pick the posts worth answering
-From the shortlist keep only those where:
-- the topic is **safe** (see the gate above);
-- the post is an opinion/question/piece of knowledge where a meaningful answer belongs (not an announcement, not an intro, not a grey request);
-- a ⭐ author → open `$OBSIDIAN_VAULT/07-People\person-sostav-<slug>.md` for the "who is this" context.
+## 1. Отбор постов под ответ
+Из shortlist оставь только те, где:
+- топик **safe** (см. gate выше);
+- пост — мнение/вопрос/знание, где осмысленный ответ уместен (не объявление, не интро, не серый запрос);
+- ⭐-автор → подними `$OBSIDIAN_VAULT/07-People\person-sostav-<slug>.md` для контекста «кто это».
 
-## 2. A grounding snippet (when it helps)
-If the answer benefits from specifics (a quote/fact/example), take a relevant chunk from the working corpus — the **YouTube Data API** (the only pool that still works; the social networks are behind login walls), via `$IMPORTS_ROOT/sostav\daily_safe_fetch.py` (safe-only gate). Lift 1-2 fragments verbatim; don't paraphrase.
+## 2. Grounding-сниппет (по необходимости)
+Если ответ выигрывает от конкретики (цитата/факт/пример), возьми релевантный кусок из рабочего корпуса — **YouTube Data API** (единственный работающий пул; соцсети заблокированы login-wall'ами), через `$IMPORTS_ROOT/sostav\daily_safe_fetch.py` (safe-only гейт). Verbatim-lift 1–2 фрагмента, не пересказ.
 
-## 3. The drafts (Opus, personal, all different)
-For each selected post — a **separate** short answer in the owner's voice. Assemble the batch:
+## 3. Черновики (Opus, персонально, разные)
+Для каждого отобранного поста — **отдельный** короткий ответ голосом Антона. Собери пачку:
 ```
-1. [Knowledge · Author X] post: "…the claim…"
-   → draft: "…a meaningful, on-topic answer in the owner's voice…"
+1. [Знания · Автор X] пост: «…тезис…»
+   → черновик: «…осмысленный ответ по делу, голос Антона…»
 2. ...
 ```
-Different texts, on topic, no template. Voice quality ≥ Opus ([[content-Mei-style]] — an influence, not a copy).
+Тексты разные, по теме, без шаблона. Голос ≥ Opus ([[content-gershuni-style]] — влияние, не копия).
 
-## 4. Hand it to the owner
-Show the batch of drafts in the chat + note which ⭐ contacts you pulled cards for. **Stop there** — the owner sends them himself.
-
----
-
-## Stop valves
-- ⛔ Post/send nothing — drafts into the chat only.
-- ⛔ Don't draft in grey/personal/crypto threads (the safe gate).
-- ⛔ Nothing from the club leaks into other channels ([[reglament-anti-leak-na-vyhode]]).
-- Money/commitments/secrets inside a draft → cut them, that is Tier-2.
-
-## Related
-- Detector / nightly path: `$IMPORTS_ROOT/sostav\nightly_run.py`, `sostav_alpha.py`.
-- The reply corpus: `daily_safe_fetch.py` (YouTube Data API, `secrets/youtube.env`).
-- Voice: [[short-text-when-unreviewed]], [[content-Mei-style]], `/speak-as`.
-- Sibling skills: `/fb-reply` (Facebook comments), `/mine-channel`, `/alpha-judge`.
-- Canon: memory `sostav-community-import`, [[reglament-anti-leak-na-vyhode]].
+## 4. Отдай Антону
+Покажи пачку черновиков в чат + пометь, у каких ⭐-контактов поднимал карточку. **Стоп на этом** — отправляет Антон сам.
 
 ---
 
+## Стоп-краны
+- ⛔ Ничего не постить/не отправлять — только черновики в чат.
+- ⛔ Не драфтить в серые/личные/крипто-треды (safe-gate).
+- ⛔ Ничего из клуба не утекает в другие каналы ([[reglament-anti-leak-na-vyhode]]).
+- Деньги/обязательства/секреты в черновике → вырезать, это Tier-2.
 
-<!--kit-footer-->
+## Связанное
+- Детектор/ночной путь: `$IMPORTS_ROOT/sostav\nightly_run.py`, `sostav_alpha.py`.
+- Корпус реплаев: `daily_safe_fetch.py` (YouTube Data API, `secrets/youtube.env`).
+- Голос: [[short-text-when-unreviewed]], [[content-gershuni-style]], `/speak-as`.
+- Родственные скиллы: `/fb-reply` (FB-комменты), `/mine-channel`, `/alpha-judge`.
+- Канон: memory `sostav-community-import`, [[reglament-anti-leak-na-vyhode]].
 
----
-
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
-
-Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
-
-Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
-
-**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
+## Анти-слоп гейт (anton 14.08)
+Любой ИИ-написанный текст наружу из этого скилла перед отправкой - финальный проход `/ai-slop` (ban-лист + ритм). Исключения ровно три: текст с плашкой Майкрофта (§3.3) · машиночитаемое (GitHub/техдока/dev-log/journey-machine) · текст, написанный Антоном руками. Канон: `reglament-posty-ot-lica-antona-tolko-cherez-ai-slop`.

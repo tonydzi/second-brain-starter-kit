@@ -1,0 +1,22 @@
+{
+  "url": "https://jobs.ashbyhq.com/resend/8c290ac4-22b4-4072-86e0-b6f5a97213d6/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Security.pdf",
+  "out_prefix": "w12_i11_resend",
+  "texts": {
+    "Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Github": "https://github.com/tonydzi",
+    "LinkedIn": "https://tonydzi.github.io/",
+    "Twitter/X": "https://x.com/Tony_Stef_",
+    "Other": "https://scholar.google.com/citations?user=b8gKHiMAAAAJ",
+    "Why do you want to join us?": "I am a security engineer who runs what he defends: a production multi-machine Claude agent fleet (6 machines, 100+ automation routines), operated in public, with guardrails I build myself - agent-leash, verbatim-citation-gate (MIT, catches fabricated RAG citations), three-circuit homeostatic governance (preprint). Resend sits at the intersection I care about: a developer-first platform with a genuinely adversarial abuse surface - email is where fraud lives. My background is a decade in adversarial crypto markets (exchange backends, market-maker engines, smart-contract audits) plus an MSc in Computer & Information Systems Security (MEPhI, cryptography). I am based in Lisbon, Portugal - EU citizen, fully in European time.",
+    "Tell us about how you uniquely raise the security bar of an organization.": "Three ways. 1) I build deterministic, zero-token gates instead of policy documents: verbatim-citation-gate catches fabricated citations with a burden-of-proof judge; agent-leash constrains what production agents may do. In recorded evals of my agent fleet, 0/17 high-risk (Tier-2) actions slipped past the human approval gate - and the failure modes are documented in public (FAILURE-MODES.md). 2) I bring anti-fraud instincts from adversarial crypto markets - smart-contract audit background, exchange infrastructure, market-maker engines - environments where an attacker is always live. 3) I make security legible to the whole organization: I publish the evals and write the operating manual day by day, so the bar rises for everyone, not just for the security team."
+  },
+  "combos": {
+    "What country are you based in?": "Portugal"
+  },
+  "checkboxes": {
+    "Are you in an European time zone?": true
+  },
+  "required_labels": ["Name", "Email", "Resume", "Why do you want", "Tell us about how", "Github", "LinkedIn"]
+}

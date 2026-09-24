@@ -33,7 +33,7 @@ receive-only, whitelist открывает CLAUDE.md -> у каждого вед
 Использование:
   python persona_build.py --list
   python persona_build.py --person Nina --node NAT
-  python persona_build.py --person Nina --node NAT --out D:\\packages\\Nina
+  python persona_build.py --person Nina --node NAT --out [путь владельца]
   python persona_build.py --person _template --node _template --print
   python persona_build.py --check <путь к собранному CLAUDE.md>
 
@@ -87,7 +87,7 @@ LEAK_PATTERNS = [
     (r"/(?:home|root|Users)/[A-Za-z0-9_.-]+", "абсолютный unix-путь с именем пользователя"),
     (r"%(?:USERPROFILE|LOCALAPPDATA|APPDATA)%|\$env:USERPROFILE", "путь через переменную профиля"),
     (r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}", "почтовый адрес"),
-    (r"owner|Dziatkovskii|corp_acct|bbplatinum", "личный идентификатор Антона"),
+    (r"owner|Dziatkovskii|corp_acct|[рабочий аккаунт]", "личный идентификатор Антона"),
     (r"\bsk-[A-Za-z0-9_-]{8,}|\bghp_[A-Za-z0-9]{8,}|\bAKIA[0-9A-Z]{8,}", "похоже на ключ/токен"),
     (r"ANTHROPIC_API_KEY|OPENAI_API_KEY|api[_-]?key\s*[:=]|\bBEGIN [A-Z ]*PRIVATE KEY\b", "похоже на ключ/токен"),
     (r"\b\d{8,10}:[A-Za-z0-9_-]{30,}", "токен телеграм-бота"),

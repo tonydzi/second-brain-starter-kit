@@ -1,0 +1,32 @@
+{
+  "url": "https://jobs.ashbyhq.com/pinecone/7e7c824d-17a6-44ea-9485-6f04ceea5f29/application",
+  "resume": "/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01/Anton-Dziatkovskii-CV-Product.pdf",
+  "out_prefix": "w15_i1_pinecone",
+  "texts": {
+    "Full Name": "Anton Dziatkovskii",
+    "Email": "dzyatkovskiy.a@gmail.com",
+    "Phone": "+1 341 222 9178",
+    "Linkedin": "https://tonydzi.github.io/ (no LinkedIn account)"
+  },
+  "combos": {
+    "Location": "Palo Alto"
+  },
+  "check_options": {
+    "Preferred Pronouns": "did not provide",
+    "Will you now, or in the future, require sponsorship": "No",
+    "Are you currently engage": "Yes"
+  },
+  "contains_options": {
+    "Are you a veteran or active member": "I don't wish to answer",
+    "Do you have a disability or chronic condition": "I don't wish to answer",
+    "Do you identify as transgender?": "I don't wish to answer",
+    "How would you describe your sexual orientation": "I don't wish to answer",
+    "How would you describe your racial/ethnic background": "I don't wish to answer",
+    "How would you describe your gender identity": "I don't wish to answer",
+    "Gender": "Decline to self-identify",
+    "Race": "Decline to self-identify",
+    "Veteran Status": "I decline to self-identify"
+  },
+  "redump_after": false,
+  "required_labels": ["Full Name", "Email", "Resume", "Phone"]
+}
