@@ -78,8 +78,12 @@ python3 -c "import sys; print('python', sys.version.split()[0], sys.executable)"
 
 ## Шаг 3 — Claude Code и Codex
 
+Ты сам, скорее всего, уже работаешь внутри Claude Code — тогда второй экземпляр не нужен
+(две копии в PATH = недетерминированный `claude`). Ставь только если команды нет:
+
 ```bash
-npm install -g @anthropic-ai/claude-code && claude --version
+command -v claude >/dev/null || npm install -g @anthropic-ai/claude-code
+claude --version
 ```
 
 Codex ставь тем способом, который вендор считает текущим **на сегодня**: сперва спроси
@@ -116,10 +120,16 @@ find kit/skills -maxdepth 1 -type d | wc -l    # ожидаем ~260
 mkdir -p ~/.claude
 cp ~/lab/kit/law/CORE.md ~/.claude/CLAUDE.md
 cp ~/lab/kit/law/FLOOR.md ~/.claude/FLOOR.md
+# CORE.md — шаблон: в нём остались сборочные плейсхолдеры {{FLOOR}}, {{PROFILE_PERSON}},
+# {{PROFILE_NODE}}, {{RIGHTS}}. Мёртвые mustache-токены в always-loaded файле — мусор,
+# который каждая сессия будет читать вечно. Вычисти их:
+sed -i '' -E 's/\{\{[A-Z_]+\}\}//g' ~/.claude/CLAUDE.md
 # CLAUDE.md грузится сам, а соседние файлы — нет: нужна ссылка, иначе половина свода
 # лежит мёртвым грузом и никто этого не замечает
 grep -q '@~/.claude/FLOOR.md' ~/.claude/CLAUDE.md || printf '\n@~/.claude/FLOOR.md\n' >> ~/.claude/CLAUDE.md
-grep -c "FLOOR" ~/.claude/CLAUDE.md && tail -1 ~/.claude/CLAUDE.md
+# Доказательство шага: плейсхолдеров ноль, последняя строка — точная ссылка на пол
+grep -c '{{' ~/.claude/CLAUDE.md   # должно быть 0
+tail -1 ~/.claude/CLAUDE.md        # должно быть @~/.claude/FLOOR.md
 ```
 
 Дальше допиши в начало `~/.claude/CLAUDE.md` короткий блок про своего человека: кто он,
@@ -173,7 +183,7 @@ python3 ~/lab/kit/tools/crm_schema_kit.py --verify ~/lab/crm && echo "гейт: 
 | 1 | инструменты | цикл из шага 2 без «ОТСУТСТВУЕТ», `python3` не системный |
 | 2 | Claude отвечает | `claude -p` вернул текст |
 | 3 | Codex отвечает | `codex --help` отработал (или честно «рельса мимо») |
-| 4 | закон на месте | `grep -c FLOOR ~/.claude/CLAUDE.md` > 0 и последняя строка — ссылка на пол |
+| 4 | закон на месте | плейсхолдеров `{{` ноль И последняя строка = `@~/.claude/FLOOR.md` |
 | 5 | скиллы | `ls ~/.claude/skills \| wc -l` совпало с числом в наборе |
 | 6 | волт | папки созданы, шаблоны на месте |
 | 7 | CRM | `--verify` вернул exit 0 |
@@ -184,14 +194,17 @@ python3 ~/lab/kit/tools/crm_schema_kit.py --verify ~/lab/crm && echo "гейт: 
 Скан чужих следов:
 
 ```bash
-rg -n --no-ignore -e '\b[0-9]{9,15}\b' -e '\bsk-[A-Za-z0-9_-]*[0-9][A-Za-z0-9_-]{16,}' \
+rg -n --no-ignore -g '!rowmap.json' -g '!projects' \
+      -e '\b[0-9]{9,15}\b' -e '\bsk-[A-Za-z0-9_-]*[0-9][A-Za-z0-9_-]{16,}' \
       -e '\bghp_[A-Za-z0-9]*[0-9][A-Za-z0-9]{16,}' -e 't\.me/(joinchat/|\+)[A-Za-z0-9_-]{8,}' \
       -e '\-\-\-\-\-BEGIN [A-Z ]*PRIVATE KEY' ~/.claude ~/lab/kit 2>/dev/null | head -20
 ```
 
-Пусто = чисто. Шаблоны узкие намеренно: широкие ловят сами себя — `sk-` без границы слова
-находит слово «task-», а длинные числа живут в обычных текстах. Скан, который кричит
-всегда, перестают читать.
+Пусто = чисто. Два исключения осознанные: `rowmap.json` — служебный файл набора с
+build-таймстампом (длинное число, не секрет), `projects` — транскрипты ТВОИХ ЖЕ сессий.
+Нашлось что-то ещё — суди глазами: секрет это ключ/токен/ID с контекстом, а не любое
+длинное число. Шаблоны узкие намеренно: широкие ловят сами себя — `sk-` без границы слова
+находит слово «task-». Скан, который кричит всегда, перестают читать.
 
 ## Грабли macOS — зашей в голову
 
@@ -204,6 +217,12 @@ rg -n --no-ignore -e '\b[0-9]{9,15}\b' -e '\bsk-[A-Za-z0-9_-]*[0-9][A-Za-z0-9_-]
 7. **Скачанные файлы в карантине Gatekeeper** — первый запуск может молча отказать.
 8. **Машина может быть общей**: за ней работает живой человек, долгие прогоны не должны
    съедать её на весь вечер.
+
+## Дальше
+
+Windows-версия этого рунбука — [ONBOARDING-WINDOWS.md](ONBOARDING-WINDOWS.md).
+Машина подключается к существующему флоту как доверенный семейный узел —
+после шага 4 продолжай по [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md).
 
 ## Отчёт в конце
 

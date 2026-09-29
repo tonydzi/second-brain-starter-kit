@@ -32,6 +32,17 @@ It is MIT, it costs nothing, and nothing here phones home. Take what you need, d
 and open an issue if a skill breaks on your machine. Paths are documented in
 [docs/PATHS.md](docs/PATHS.md).
 
+## Onboarding a whole machine
+
+Setting up a brand-new computer, not just adding skills? There is a full runbook a fresh
+Claude Code session can execute end to end — the human says one sentence, the agent does the rest:
+
+- **macOS** → [ONBOARDING-MAC.md](ONBOARDING-MAC.md)
+- **Windows** → [ONBOARDING-WINDOWS.md](ONBOARDING-WINDOWS.md)
+- joining an existing fleet as a trusted **family node** (sync, shared memory, message bus) →
+  [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md) — method only; fleet coordinates travel over the
+  encrypted sync channel after the owner approves the device, never through this repo.
+
 ## Start here — 25 skills worth your first hour
 Every one of them ran in production before it was published. One command each.
 

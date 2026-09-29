@@ -31,6 +31,17 @@ npx skills add tonydzi/second-brain-starter-kit
 MIT, бесплатно, никуда не звонит. Берите нужное, лишнее удаляйте, а если скилл сломался на вашей
 машине — заводите issue. Пути описаны в [docs/PATHS.md](docs/PATHS.md).
 
+## Онбординг целой машины
+
+Разворачиваете новый компьютер, а не добавляете скиллы? Есть рунбук, который свежая сессия
+Claude Code исполняет от начала до конца — человек говорит одну фразу, остальное делает агент:
+
+- **macOS** → [ONBOARDING-MAC.md](ONBOARDING-MAC.md)
+- **Windows** → [ONBOARDING-WINDOWS.md](ONBOARDING-WINDOWS.md)
+- подключение к СВОЕМУ флоту как доверенный **семейный узел** (синк, общая память, шина) →
+  [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md) — только метод; координаты флота едут по
+  зашифрованному синк-каналу после одобрения устройства владельцем, а не через этот репозиторий.
+
 ## Start here — 25 skills worth your first hour
 Every one of them ran in production before it was published. One command each.
 
