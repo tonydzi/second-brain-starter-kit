@@ -88,12 +88,18 @@ GET http://127.0.0.1:8384/rest/system/status  → поле myID
 `CLAUDE.md`/`FLOOR.md` из `~/.claude` перенеси в `~/lab/backup-starter-law/`. Иначе на
 машине столкнутся два закона.
 
+Порядок внутри шага жёсткий: **сначала `.stignore` для claude-home (блок ниже), потом
+приём папок** — приём запускает скан немедленно, ignore, положенный «после», опаздывает.
+
 Для каждой входящей папки при приёме задай **локальный путь сам** — дефолт уводит всё в
 `~/Sync/...`, и половина системы будет смотреть в пустоту. У робота нет GUI — принимай
 через REST: `GET /rest/cluster/pending/folders` покажет, что предложил хаб, дальше на
 каждую папку `POST /rest/config/folders` с объектом `{"id": "<id-как-у-хаба>",
-"label": "...", "path": "<локальный путь из таблицы>", "type": "receiveonly",
-"devices": [{"deviceID": "<ID-хаба>"}, {"deviceID": "<твой-ID>"}]}`:
+"label": "...", "path": "<локальный путь из таблицы>", "type": "<ТИП>",
+"devices": [{"deviceID": "<ID-хаба>"}, {"deviceID": "<твой-ID>"}]}`.
+`<ТИП>` = `receiveonly` для всех claude-папок и секретов, но **`sendreceive` для волта** —
+внутри него шина, в которую ты обязан писать; волт, принятый receive-only, молча откатывает
+твои исходящие сообщения, и хаб их никогда не видит:
 
 | Папка | macOS | Windows |
 |---|---|---|
@@ -104,7 +110,8 @@ GET http://127.0.0.1:8384/rest/system/status  → поле myID
 | claude-skills | `~/.claude/skills` | `%USERPROFILE%\.claude\skills` |
 | секреты | `~/.claude/secrets` | `%USERPROFILE%\.claude\secrets` |
 
-🔴 **Прежде чем дать `claude-home` синкаться — положи `.stignore`.** В `~/.claude` уже
+🔴 **`.stignore` пишется ДО POST-а, принимающего `claude-home` — не «до первого синка», а
+до самого приёма: скан стартует в момент добавления папки.** В `~/.claude` уже
 лежат ТВОИ живые `.claude.json` и `.credentials.json` (логин Claude этой машины) и рабочие
 каталоги сессий. В receive-only папке всё локальное, что НЕ прикрыто ignore, первый же
 revert удалит или откатит. Это ignore-список (перечисляем защищаемое), не вайтлист;
@@ -127,6 +134,8 @@ statsig
 logs
 history.jsonl
 scheduled-tasks
+plugins
+cache
 ```
 
 `settings.json` здесь не случайно: он machine-local (пути и env ЭТОЙ машины), хабовский
@@ -203,7 +212,9 @@ setx MACHINE_BUS_DIR "$env:USERPROFILE\Obsidian\<имя-волта>\_machine-bus
 1. **Инбокс-робот** — каждые ~20 минут читает шину, исполняет подписанные Tier-1 посылки,
    на остальное отвечает планом. macOS: LaunchAgent (`launchctl load -w`), env экспортируй
    ПРЯМО в лаунчере — launchd не читает `~/.zshrc`. Windows: Task Scheduler; ⚠️ задача под
-   S4U/Password живёт в «сессии 0» — окон не видит, PATH минимальный, пути в команде полные.
+   S4U/Password живёт в «сессии 0» — окон не видит, PATH минимальный, пути в команде полные,
+   и переменные из `setx` (F3) туда могут не доехать — env задавай в самой команде задачи
+   (обёртка `.cmd`/`.ps1`, экспортирующая всё нужное), как на Mac в лаунчере.
 2. **Сторож Syncthing** — каждые ~10 минут проверяет, что синк жив, и поднимает его.
    macOS: `brew services restart syncthing`. Windows: перезапуск процесса/задачи.
 
