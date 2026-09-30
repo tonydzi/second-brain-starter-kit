@@ -29,7 +29,7 @@ CHAT_ID = [id]
 # С 29.07 он снова может: слоты почищены, он введён в группу и промоутнут админом.
 # [рабочий аккаунт] остаётся владельцем группы и запасным привратником: GATEKEEPER_ACCOUNT=[рабочий аккаунт]
 ACCOUNT = os.environ.get('GATEKEEPER_ACCOUNT', 'TONYDZI')
-VAULT = os.environ.get('OBSIDIAN_VAULT', os.path.expanduser('~/Obsidian/Anton-Knowledge'))
+VAULT = os.environ.get('OBSIDIAN_VAULT', os.path.expanduser('~/Obsidian/<vault>'))
 LOG = os.path.expanduser('~/.claude/gatekeeper_log.jsonl')
 
 # --- Касание 1: приветствие ДО одобрения. Варианты — чтобы не слать пачкой один текст ---

@@ -641,7 +641,7 @@ The principle existed; the **per-source machine spec did not** → the bug. This
 | genuinely ambiguous | `gdrive-personal-mixed` | — |
 
 **Hard guards (both learned 2026-06-13):**
-1. **Don't match "Anton" in the full disk path** — the vault root is `Anton-Knowledge\`, so check
+1. **Don't match "Anton" in the full disk path** — the vault root is `<vault>\`, so check
    `source_path`, not the absolute path, when deciding "is this Anton's own".
 2. **Don't classify candidate CVs by the word `cv`/`резюме` in a filename** — "резюме звонка" = a CALL
    SUMMARY (Anton's own), and the "SELF PRESENTING REZUMEs" folder holds his self-pitch material.

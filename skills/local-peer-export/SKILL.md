@@ -24,7 +24,7 @@ description: >-
 
 ## Пути (реальные, на этом Маке)
 - **Корень экспорта:** `/Users/<имя>/Obsidian/PaloAlto-AI-Research-Lab-Knowledge/` (вне синка приватного волта)
-- **Приватный источник:** `~/Obsidian/Anton-Knowledge` (read-only при сборке)
+- **Приватный источник:** `~/Obsidian/<vault>` (read-only при сборке)
 - **Классификатор:** `~/CLAUDE-Mac-2019/audit-peer-export/peer_classify.py` → `classification.json` (+ `batches/judge-NN.json` для судей)
 - **Скраб/сборка:** `~/CLAUDE-Mac-2019/peer-export-tools/`
 - **Техстатус/счётчики:** `PaloAlto-AI-Research-Lab-Knowledge/EXPORT-STATUS.md`

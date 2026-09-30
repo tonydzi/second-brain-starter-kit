@@ -39,14 +39,14 @@ python3 ~/.claude/scripts/bible_leads.py --grep <тема>   # срез
 **Перелинковка = я дописываю НОВЫХ в тот самый `Advisor-Funnel.html`, из которого outreach-daily берёт следующих.** Ничего параллельного не создаю.
 
 ## Движок (0 токенов, детерминизм — грунт на Sonnet)
-`~/Obsidian/Anton-Knowledge/_outreach/advisor_mine.py`
+`~/Obsidian/<vault>/_outreach/advisor_mine.py`
 - `scan [--min-score N] [--limit N] [--json]` — прочёсывает 07-People, ловит сигнал (роль 1 строит агентов/Claude Code · роль 2 B2B-продажи/GTM · роль 3 DevRel/контент), отсеивает активных лидов Platinum (`status` negotiating/qualifying/proposed/won) и штрафует чистых sales-`lead`, дедупит по воронке+журналу, ранжирует НОВЫХ.
 - `append <slug1> <slug2> …` — дописывает отобранных в `Advisor-Funnel.html` как `candidate`-строки.
 
 ## Маршрут (детерминизм → суждение → запись)
 
 **1. RECALL + грунт-скан (Sonnet/0-токенов).**
-- `python3 ~/Obsidian/Anton-Knowledge/_outreach/advisor_mine.py scan --min-score 6 --json` — база кандидатов из 07-People.
+- `python3 ~/Obsidian/<vault>/_outreach/advisor_mine.py scan --min-score 6 --json` — база кандидатов из 07-People.
 - (опц.) добери живые рельсы, если Антон просит глубже:
   - **TG-сообщества**: MCP `search_contacts` / `get_common_chats` по AI-группам (AI Agents Founders, OpenClaw/SanFranciscoAI automation, On vAIbe) — кто активно строит на Claude/LLM.
   - **FB-комментаторы**: кто комментит посты Антона про Claude/автоматизации (pubmetrics / fb-корпус) — тёплая техно-аудитория.
@@ -60,7 +60,7 @@ python3 ~/.claude/scripts/bible_leads.py --grep <тема>   # срез
 - Проверь доказательства в `07-People/<slug>.md` (grep claude/agent/devrel/relationship) — 2 доказательства на кандидата.
 
 **3. Дедуп (обязательно перед записью).** Для каждого финалиста:
-`python3 ~/Obsidian/Anton-Knowledge/_outreach/outreach_log.py check "<Имя>"` → должно быть `CLEAN`. Скан уже дедупит по воронке+журналу, это финальная страховка.
+`python3 ~/Obsidian/<vault>/_outreach/outreach_log.py check "<Имя>"` → должно быть `CLEAN`. Скан уже дедупит по воронке+журналу, это финальная страховка.
 
 **4. Запись.** Бэкап воронки (`cp Advisor-Funnel.html Advisor-Funnel.html.bak-…`), затем
 `python3 advisor_mine.py append <slug…>` — дописывает НОВЫХ в воронку.

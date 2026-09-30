@@ -47,7 +47,7 @@ python3 ~/.claude/scripts/bible_leads.py --grep <тема>   # срез
 
 ## Шаг 1 — Собрать радар (детерминированно, 0 LLM)
 ```
-python3 ~/Obsidian/Anton-Knowledge/_outreach/lead_radar.py
+python3 ~/Obsidian/<vault>/_outreach/lead_radar.py
 ```
 Строит `_Dashboards/Lead-Radar.html` и печатает сводку. Группы:
 - 🔴 **Ждут Антона лично** — ответил-без-followup · остывающий gold-лид · нужен звонок/решение. Рука Антона.
@@ -62,7 +62,7 @@ python3 ~/Obsidian/Anton-Knowledge/_outreach/lead_radar.py
 Перед предложением хода подними контекст (не пиши вслепую):
 - CRM-Lite карточка: `~/Obsidian/PaloAlto-AI-Research-Lab-Knowledge/crm-lite/leads/<slug>.md` (org/role/next step).
 - История TG: тред лида (Telegram MCP, аккаунт из журнала; см. `telegram-howto`) — читать на неотвеченное.
-- Журнал: `python3 ~/Obsidian/Anton-Knowledge/_outreach/outreach_log.py check <имя>` — что уже слали.
+- Журнал: `python3 ~/Obsidian/<vault>/_outreach/outreach_log.py check <имя>` — что уже слали.
 
 ## Шаг 3 — Подготовить черновики (draft-first) на «+»
 Для 🟡 (и 🔴, где уместен текст) — по одному черновику след.шага:

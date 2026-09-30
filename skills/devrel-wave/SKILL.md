@@ -70,7 +70,7 @@ python3 ~/.claude/scripts/bible_leads.py --full     # тела must-правил
 ```bash
 python3 - <<'PY'
 import json,glob,datetime,collections
-rows=[json.loads(l) for p in glob.glob('/Users/<имя>/Obsidian/Anton-Knowledge/_outreach/ledger/outreach-log-*.jsonl') for l in open(p,encoding='utf-8') if l.strip()]
+rows=[json.loads(l) for p in glob.glob('/Users/<имя>/Obsidian/<vault>/_outreach/ledger/outreach-log-*.jsonl') for l in open(p,encoding='utf-8') if l.strip()]
 d=[r for r in rows if 'devrel' in str(r.get('campaign',''))]  # ловит и devrel-*, и evals-devrel
 last={}
 for r in sorted(d,key=lambda r:r.get('ts','')): last[r.get('person')]=r
@@ -183,7 +183,7 @@ PY
 ⚠️ Одна проверка по одному написанию = ложный CLEAN → дубль живому человеку (грабли 26.07:
 журнал латиницей, сессия искала кириллицей). Прогнать `check` по КАЖДОМУ из того, что знаем:
 ```bash
-L=~/Obsidian/Anton-Knowledge/_outreach/outreach_log.py
+L=~/Obsidian/<vault>/_outreach/outreach_log.py
 for id in "Имя Фамилия" "Фамилия" "Имя" "@handle" "handle" "email@домен" "вендор"; do
   echo "--- $id"; python3 $L check "$id"
 done
@@ -263,7 +263,7 @@ quote-post, repost с комментарием, mention в своём треде
 «DM физически ушёл, а `register` упал» оставляет журнал CLEAN — и следующий запуск шлёт дубль
 живому человеку.
 ```bash
-L=~/Obsidian/Anton-Knowledge/_outreach/outreach_log.py
+L=~/Obsidian/<vault>/_outreach/outreach_log.py
 # (1) ДО отправки — намерение (переживёт падение чего угодно):
 python3 $L register --person "<Имя>" --handle <@handle> --channel x-dm \
   --account <аккаунт> --campaign devrel-<вендор> --status queued --note "<анкер-линк + дата анкера>"

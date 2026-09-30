@@ -26,7 +26,7 @@ This skill is the operational runbook for Anton's vault data-safety system. The 
 | Scripts | `$IMPORTS_ROOT/{archive_original,backup_to_drive,backup_healthcheck}.py` (+ `backup_to_drive.cmd`, log `backup_to_drive.log`, verdicts in `backup_health\`) |
 | **Offsite copy (cloud)** | `[путь владельца] Drive on HP Palo Alto\Obsidian-Backup\` — Google account **dzyatkovskiy.a@gmail.com** (G: shortcut → this folder; Google uploads to cloud) |
 | **Local copy (2nd disk)** | `[путь владельца]` |
-| Each copy holds | `vault\Anton-Knowledge-<date>.bundle` (last 14 kept) · `_originals\` · `MIGRATE.md` · `last-backup.txt` |
+| Each copy holds | `vault\<vault>-<date>.bundle` (last 14 kept) · `_originals\` · `MIGRATE.md` · `last-backup.txt` |
 
 Path is machine-specific (`Google Drive on HP Palo Alto`); on another machine, `backup_to_drive.py` auto-detects `[путь владельца] Drive on*`.
 
@@ -64,12 +64,12 @@ Disable-ScheduledTask -TaskName 'Obsidian Backup to Drive'   # pause
 
 ## Restore & migrate (the disaster runbook)
 
-The backup folder (Drive **or** C:) is self-describing — it contains `MIGRATE.md`. The vault lives entirely inside the newest `vault\Anton-Knowledge-<date>.bundle` (full git history in one file).
+The backup folder (Drive **or** C:) is self-describing — it contains `MIGRATE.md`. The vault lives entirely inside the newest `vault\<vault>-<date>.bundle` (full git history in one file).
 
 **Migrate the whole vault to a NEW computer:**
 1. Install Git + Obsidian. Sign into Google Drive `dzyatkovskiy.a@gmail.com` so `Obsidian-Backup\` syncs down (or copy it from `[путь владельца]`).
 2. Take the **newest** bundle in `Obsidian-Backup\vault\`.
-3. `git clone "Anton-Knowledge-<date>.bundle" Anton-Knowledge` → the result is the full vault repo with history.
+3. `git clone "<vault>-<date>.bundle" <vault>` → the result is the full vault repo with history.
 4. Open that folder as an Obsidian vault. Copy `_originals\` across too (it's just files).
 
 **Restore a single file / folder:**

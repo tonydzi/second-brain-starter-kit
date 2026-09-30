@@ -36,7 +36,7 @@ HOME = os.path.expanduser("~")
 SCRIPTS = os.path.join(HOME, ".claude", "scripts")
 REGISTRY = os.path.join(HOME, ".claude", "fleet_nodes.json")
 TRANSIT_CANDIDATES = [
-    os.path.join(HOME, "Obsidian", "Anton-Knowledge", "[шина]", "_transit"),
+    os.path.join(HOME, "Obsidian", "<vault>", "[шина]", "_transit"),
     os.path.join(os.environ.get("OBSIDIAN_VAULT", ""), "[шина]", "_transit"),
 ]
 

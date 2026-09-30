@@ -16,7 +16,7 @@ TG-хендлом из формы и Meet-ссылкой. Антон: «перв
 **Закон скилла:** имя без брони = НЕ идентификация. Сначала бронь → ключи (email · телефон · TG-хендл
 из формы) → только по КЛЮЧУ ищем человека в волте/CRM/Telegram. Совпадение по имени не считается.
 
-Пути: `VAULT=${OBSIDIAN_VAULT:-$HOME/Obsidian/Anton-Knowledge}`, `IMP=${IMPORTS_ROOT:-$HOME/Obsidian/_imports}`.
+Пути: `VAULT=${OBSIDIAN_VAULT:-$HOME/Obsidian/<vault>}`, `IMP=${IMPORTS_ROOT:-$HOME/Obsidian/_imports}`.
 
 ## Шаг 1. Двери брони — строго по порядку, первая живая даёт истину
 

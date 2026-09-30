@@ -16,7 +16,7 @@ const WAVE_FILE = `[машина флота]_wave${WAVE_N}.json`
 // args.model — необязательный override (напр. 'sonnet', когда недельный all-models бак закрыт, §6.3)
 // 08.09.2026 (приказ Антона «на тупые модели»): дефолт = sonnet — заполнение форм по канону ответов, суждения нет; args.model='opus' возвращает умную. Замер 06–07.09: 940 вызовов субагентов на Fable = 15% недельного бака.
 const MODEL = A.model || 'sonnet'
-const CVDIR = A.cv || '/Users/<имя>/Obsidian/Anton-Knowledge/04-Projects/Pipe-A-Batches/sent-2026-09-01'
+const CVDIR = A.cv || '/Users/<имя>/Obsidian/<vault>/04-Projects/Pipe-A-Batches/sent-2026-09-01'
 
 
 const SCHEMA = {

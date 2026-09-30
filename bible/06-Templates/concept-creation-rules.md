@@ -244,7 +244,7 @@ summary: "Bridge: {term} -> {Canonical} [internal]"
 ```bash
 python3 -c "
 import yaml; from pathlib import Path
-for f in Path('Anton-Knowledge/06-Concepts').glob('*.md'):
+for f in Path('<vault>/06-Concepts').glob('*.md'):
     try:
         c = f.read_text(encoding='utf-8')
         fm_text = c.split('---')[1]

@@ -134,7 +134,7 @@ description: Довести тёплого лида ДО ЗВОНКА — нед
 
 ## Порядок (8 шагов)
 
-1. **ЖУРНАЛ + дедуп.** `python3 ~/Obsidian/Anton-Knowledge/_outreach/outreach_log.py check "<имя/handle>"` —
+1. **ЖУРНАЛ + дедуп.** `python3 ~/Obsidian/<vault>/_outreach/outreach_log.py check "<имя/handle>"` —
    что уже писали, сколько касаний, есть ли долг ответа С НАШЕЙ стороны ([[outreach-relationship-debt-gate]]).
 2. **RECALL контекст.** Карточка `07-People/person-*.md` + живой тред (Telegram MCP get_history
    по самому тёплому аккаунту). Найти РЕАЛЬНЫЙ повод для звонка из истории, не шаблон.

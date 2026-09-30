@@ -39,7 +39,7 @@ import io
 import os
 import re
 
-VAULT = os.path.expanduser("~/Obsidian/Anton-Knowledge")
+VAULT = os.path.expanduser("~/Obsidian/<vault>")
 PEOPLE_DIR = os.path.join(VAULT, "07-People")
 
 STAGES = [

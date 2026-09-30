@@ -54,7 +54,7 @@ python3 ~/.claude/scripts/bible_leads.py --grep ответ
 
 ### 1. Прерывание-чек по журналу (0 токенов, до браузера)
 ```bash
-python3 ~/Obsidian/Anton-Knowledge/_outreach/outreach_log.py report 20 | grep -i "x-dm\|x-reply"
+python3 ~/Obsidian/<vault>/_outreach/outreach_log.py report 20 | grep -i "x-dm\|x-reply"
 ```
 Кому мы писали в X и когда → это список, чьего ответа ждём. Пусто → вахта всё равно идёт
 (mentions приходят и без нашего исходящего).
@@ -180,7 +180,7 @@ X API v2 нашего app при этом даёт `403 client-not-enrolled` (fr
 Ответ получен → зафиксировать (статус исходящего обязан флипнуться, иначе ответы «глотаются»
 — [[outreach-queued-status-swallows-replies]]):
 ```bash
-python3 ~/Obsidian/Anton-Knowledge/_outreach/outreach_log.py register \
+python3 ~/Obsidian/<vault>/_outreach/outreach_log.py register \
   --person "<Имя>" --handle <@handle> --channel x-dm|x-reply --account <handle Антона> \
   --campaign evals-devrel --status replied|suppressed --note "<суть ответа + дата>"
 ```
