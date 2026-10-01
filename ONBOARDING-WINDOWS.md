@@ -1,7 +1,7 @@
 # ONBOARDING — развернуть систему на новом Windows-компьютере
 
 > **Человеку.** Тебе нужно сделать ровно одно: открыть Claude Code и сказать ему:
-> «Прочитай https://github.com/tonydzi/second-brain-starter-kit/blob/main/ONBOARDING-WINDOWS.md
+> «Прочитай https://github.com/tonydzi/second-brain-starter-kit/blob/HEAD/ONBOARDING-WINDOWS.md
 > и сделай всё, что там написано». Дальше он ведёт сам и зовёт тебя четыре раза.
 >
 > **Роботу.** Этот файл — твоя задача целиком. Исполняй по шагам, после каждого печатай
