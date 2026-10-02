@@ -24,7 +24,7 @@ This skill is the operational runbook for Anton's vault data-safety system. The 
 | Vault (git repo) | `$OBSIDIAN_VAULT` |
 | Originals (permanent) | `$OBSIDIAN_ROOT/_originals/` (+ `README.txt`) |
 | Scripts | `$IMPORTS_ROOT/{archive_original,backup_to_drive,backup_healthcheck}.py` (+ `backup_to_drive.cmd`, log `backup_to_drive.log`, verdicts in `backup_health\`) |
-| **Offsite copy (cloud)** | `[путь владельца] Drive on HP Palo Alto\Obsidian-Backup\` — Google account **dzyatkovskiy.a@gmail.com** (G: shortcut → this folder; Google uploads to cloud) |
+| **Offsite copy (cloud)** | `[путь владельца] Drive on HP Palo Alto\Obsidian-Backup\` — Google account **you@example.com** (G: shortcut → this folder; Google uploads to cloud) |
 | **Local copy (2nd disk)** | `[путь владельца]` |
 | Each copy holds | `vault\<vault>-<date>.bundle` (last 14 kept) · `_originals\` · `MIGRATE.md` · `last-backup.txt` |
 
@@ -67,7 +67,7 @@ Disable-ScheduledTask -TaskName 'Obsidian Backup to Drive'   # pause
 The backup folder (Drive **or** C:) is self-describing — it contains `MIGRATE.md`. The vault lives entirely inside the newest `vault\<vault>-<date>.bundle` (full git history in one file).
 
 **Migrate the whole vault to a NEW computer:**
-1. Install Git + Obsidian. Sign into Google Drive `dzyatkovskiy.a@gmail.com` so `Obsidian-Backup\` syncs down (or copy it from `[путь владельца]`).
+1. Install Git + Obsidian. Sign into Google Drive `you@example.com` so `Obsidian-Backup\` syncs down (or copy it from `[путь владельца]`).
 2. Take the **newest** bundle in `Obsidian-Backup\vault\`.
 3. `git clone "<vault>-<date>.bundle" <vault>` → the result is the full vault repo with history.
 4. Open that folder as an Obsidian vault. Copy `_originals\` across too (it's just files).
@@ -102,7 +102,7 @@ git -C tmp_restore restore --source <hash> -- "<path>"
   (Registering a scheduled task needs Anton's explicit OK — it can trip the persistence guard.)
 - **Bundle FAILED `git bundle verify` (corruption)** → do NOT trust it. Keep the older good bundles (we retain 14), check the vault repo health (`git -C $OBSIDIAN_VAULT fsck`), then run a fresh `backup_to_drive.py`. Don't delete the bad bundle until a good one exists.
 - **`_originals` lagging in a target** → re-run `backup_to_drive.py` (robocopy is copy-only, it'll catch up).
-- **Drive not uploading** → confirm Google Drive for Desktop is running and signed into `dzyatkovskiy.a@gmail.com`; the local `Obsidian-Backup\` is on E: and syncs from there.
+- **Drive not uploading** → confirm Google Drive for Desktop is running and signed into `you@example.com`; the local `Obsidian-Backup\` is on E: and syncs from there.
 
 ## Invariants (never violate)
 

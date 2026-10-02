@@ -4,7 +4,7 @@
 import os, re, json, sqlite3, plistlib, datetime
 
 APPLE = [id]
-GD = os.path.expanduser("~/Library/CloudStorage/GoogleDrive-dzyatkovskiy.a@gmail.com/My Drive/!_Claude_[машина флота]")
+GD = os.path.expanduser("~/Library/CloudStorage/GoogleDrive-you@example.com/My Drive/!_Claude_[машина флота]")
 
 def ts(core):
     if core is None: return ""

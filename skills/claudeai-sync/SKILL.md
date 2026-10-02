@@ -6,7 +6,7 @@ version: 1.0.0
 
 # claudeai-sync — подтянуть новое из claude.ai в волт
 
-Аккаунт **dzyatkovskiy.a2@gmail.com** (Claude Max). Чаты claude.ai НЕ лежат на диске — тянутся живьём через залогиненную сессию (Claude-in-Chrome). Полуавтомат: **PULL** (шаг 1) делаю я при открытой сессии; всё остальное — детерминированно и идемпотентно.
+Аккаунт **you.assistants@example.com** (Claude Max). Чаты claude.ai НЕ лежат на диске — тянутся живьём через залогиненную сессию (Claude-in-Chrome). Полуавтомат: **PULL** (шаг 1) делаю я при открытой сессии; всё остальное — детерминированно и идемпотентно.
 
 Скрипты: `$IMPORTS_ROOT/claude-ai/` · оригиналы → `$OBSIDIAN_ROOT/_originals/claude-ai-export/` · живой слой → `01-Conversations/Claude-AI/`.
 
@@ -14,7 +14,7 @@ version: 1.0.0
 Артефакты видны API **ТОЛЬКО** при `rendering_mode=messages`. `raw`/`default` молча отдают 0 артефактов. Всегда messages + verify счётчик артефактов.
 
 ## ⚠️ Anti-recents (ручной поиск конкретного чата)
-Ищешь ОДИН конкретный чат руками (не полный PULL) — НИКОГДА не заключай «чата нет» из беглого списка recents: (1) встроенный ПОИСК «Search chats…» по ключам; (2) Projects/архив/pinned; (3) подтверди активный АККАУНТ по email в меню профиля (a2 = `dzyatkovskiy.a2@gmail.com`, в UI = «[коллега] & Anton»). Ещё надёжнее — полный API-список `chat_conversations?limit=1000` (шаг PULL) вместо чтения /recents глазами. Канон: память [[web-ui-search-not-recents]] (инцидент Woom 2026-07-23).
+Ищешь ОДИН конкретный чат руками (не полный PULL) — НИКОГДА не заключай «чата нет» из беглого списка recents: (1) встроенный ПОИСК «Search chats…» по ключам; (2) Projects/архив/pinned; (3) подтверди активный АККАУНТ по email в меню профиля (a2 = `you.assistants@example.com`, в UI = «[коллега] & Anton»). Ещё надёжнее — полный API-список `chat_conversations?limit=1000` (шаг PULL) вместо чтения /recents глазами. Канон: память [[web-ui-search-not-recents]] (инцидент Woom 2026-07-23).
 
 ## Шаги
 

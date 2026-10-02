@@ -23,7 +23,7 @@ python "%IMPORTS_ROOT%\chatgpt\token_heal.py"     # PowerShell: use [путь в
 Note: nightly_sync.py already calls L1 automatically on pull exit 7 and retries the pull. So most of the time you never run this by hand — this skill is for when L1 itself returns 5 (cookie dead) and a human-in-the-loop Chrome step is needed, or when Anton runs `/chatgpt-token-heal` directly.
 
 ### L2 — Chrome re-harvest of the session cookie (only when L1 exits 5)
-Needs a Chrome logged into chatgpt.com on account **dzyatkovskiy.a2@gmail.com** + the Claude-in-Chrome MCP (load via ToolSearch if deferred). Do it ON THE HUB.
+Needs a Chrome logged into chatgpt.com on account **you.assistants@example.com** + the Claude-in-Chrome MCP (load via ToolSearch if deferred). Do it ON THE HUB.
 1. `list_connected_browsers` → confirm a local Chrome. `navigate` a tab to `https://chatgpt.com/api/auth/session`.
 2. `get_page_text` on that tab → JSON. (On the hub this reads the token directly; the old Blob-download [человек] is NOT needed here.)
 3. From that JSON take BOTH fields and write them to secrets (single line, no trailing newline, back up the old first):

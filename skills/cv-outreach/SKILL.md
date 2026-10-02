@@ -44,7 +44,7 @@ python [путь владельца] today --n 8
 
 ## Шаг 0.5 — проверить РЕЛЬСУ, прежде чем обещать порцию
 
-Полоса `apply` требует браузера с ЖИВОЙ сессией luma (`dzyatkovskiy.a2@gmail.com`, вход
+Полоса `apply` требует браузера с ЖИВОЙ сессией luma (`you.assistants@example.com`, вход
 Passkey либо Google). Замер 28.08: во встроенном браузере приложения luma **разлогинена**, а
 `claude-in-chrome` на хабе показывал только чужой macOS-узел — то есть полоса apply в тот
 момент физически не ехала.
@@ -243,7 +243,7 @@ provide AI/ML services» — мы ровно это и делаем, исклю�
    `curl -H "User-Agent: Mozilla/5.0" "https://api.lu.ma/url?url=<slug>" | jq '.data.registration_questions[] | {question_type, required, label}'`
    Оттуда же `ticket_types` (цена в центах), `calendar.is_blocked`, `event.geo_address_info`.
 
-2. **`question_type: linkedin` БЬЁТ ПОДМЕНУ НА GITHUB — и делает это МОЛЧА.** Сабмит не даёт НИЧЕГО: POST на `api.luma.com/event/register` вообще не уходит, у полей ноль подсветок, в консоли только посторонние 403, страница просто остаётся в `Request to Join`. Выглядит как «кнопка не работает», а это провалившаяся клиентская валидация. Адрес Антона, который публикует его собственный лендинг (`04-Projects/scholar-homepage/site/index.html`): `https://www.linkedin.com/in/anton-dzyatkovskiy` — брать его, не выдумывать и не подставлять github. Аккаунт забанен, но поле требует ФОРМАТ, а не живую страницу.
+2. **`question_type: linkedin` БЬЁТ ПОДМЕНУ НА GITHUB — и делает это МОЛЧА.** Сабмит не даёт НИЧЕГО: POST на `api.luma.com/event/register` вообще не уходит, у полей ноль подсветок, в консоли только посторонние 403, страница просто остаётся в `Request to Join`. Выглядит как «кнопка не работает», а это провалившаяся клиентская валидация. Адрес Антона, который публикует его собственный лендинг (`04-Projects/scholar-homepage/site/index.html`): `https://www.linkedin.com/in/anton-youraccount` — брать его, не выдумывать и не подставлять github. Аккаунт забанен, но поле требует ФОРМАТ, а не живую страницу.
    `question_type: github` хочет ЮЗЕРНЕЙМ (`tonydzi`), не URL; `twitter` — хэндл без собаки.
 
 3. **Комбобокс НЕЛЬЗЯ искать по `placeholder === 'Select an option'`** — placeholder остаётся в атрибуте и ПОСЛЕ выбора, поэтому цикл по кругу открывает первый же комбо и до остальных не доходит (потерял 4 вызова). Брать строго по id (`_r_e_`, `_r_s_`, `_r_13_`), а `.value` перечитывать ОТДЕЛЬНЫМ вызовом: в том же вызове, где кликнул опцию, React ещё не обновил значение.

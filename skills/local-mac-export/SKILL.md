@@ -39,7 +39,7 @@ description: >-
 # 1) КОПИЯ базы в tmp (иначе читаешь устаревший снимок — WAL не влит)
 cp "<db>" "<db>-wal" "<db>-shm" /tmp/mac-export/ 2>/dev/null
 # 2) прогнать адаптер источника (contacts проверен):
-python3 "/Users/<имя>/Library/CloudStorage/GoogleDrive-dzyatkovskiy.a@gmail.com/My Drive/!_Obsidian/[машина флота]usa-Apr26/Contacts/_tools/extract_contacts.py"
+python3 "/Users/<имя>/Library/CloudStorage/GoogleDrive-you@example.com/My Drive/!_Obsidian/[машина флота]usa-Apr26/Contacts/_tools/extract_contacts.py"
 # 3) для нового источника — склонировать структуру extract_contacts.py под его SQLite-схему
 ```
 После прогона: положить/обновить `README_FOR_CLAUDE.md` (что за источник, сколько записей, схема frontmatter) → это и есть хэндофф следующей сессии. Идемпотентно: перезапуск перетирает выход (для contacts — чистит `People/`).

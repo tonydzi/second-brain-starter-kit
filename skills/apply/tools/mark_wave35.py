@@ -21,7 +21,7 @@ DATE = "2026-09-08"
 MAP = {"applied": "applied", "closed": "closed", "blocked-question": "blocked-question",
        "blocked-captcha": "blocked-captcha", "error": "blocked-error"}
 JOURNAL = ("/Users/<имя>/.claude/projects/-Users-anton-Library-CloudStorage-GoogleDrive-"
-           "dzyatkovskiy-a-gmail-com-My-Drive---Claude-[машина флота]/190a8859-0456-4cf5-b341-da29febfa4bb/"
+           "you-example-com-My-Drive---Claude-[машина флота]/190a8859-0456-4cf5-b341-da29febfa4bb/"
            "subagents/workflows/wf_9e8153d3-bd7/journal.jsonl")
 
 

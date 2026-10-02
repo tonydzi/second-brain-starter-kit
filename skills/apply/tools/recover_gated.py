@@ -108,7 +108,7 @@ for n, spath in enumerate(specs, 1):
                 if not code_announced:
                     code_announced = True
                     print(f"🔑 ЖДУ КОД ({name}): смотри окно Firefox — введи 8-символьный код "
-                          f"из свежего письма на dzyatkovskiy.a@gmail.com и подтверди. Жду до 12 минут.", flush=True)
+                          f"из свежего письма на you@example.com и подтверди. Жду до 12 минут.", flush=True)
                 continue  # code-gate на экране — ждём Антона, form-errors не проверяем
             if any(p in low for p in ERROR_PHRASES):
                 outcome = "form-errors"

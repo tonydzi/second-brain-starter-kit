@@ -69,23 +69,23 @@ consumer: "Антон (/teach-podcast, «сделай подкаст про …�
 - **[машина флота]:** `~/.local/bin/notebooklm` (uv tool, `notebooklm-py[browser,cookies]` 0.8.2, Python 3.12 внутри).
   Хаб: `[путь владельца]`. Аккаунт **a2@** (NotebookLM PRO).
 - **Auth протухает раз в несколько недель.** `notebooklm auth check` красный →
-  `notebooklm login --browser-cookies firefox --account dzyatkovskiy.a2@gmail.com`
+  `notebooklm login --browser-cookies firefox --account you.assistants@example.com`
   (Firefox должен быть залогинен в a2@; на [машина флота] профиль `default-release`). CLI подхватил не тот профиль →
   `python3 ~/.claude/scripts/_shared/firefox_cookies.py --profile <папка профиля> --domain google.com --export ~/.notebooklm/profiles/default/storage_state.json`.
 - **Фолбэк:** Chrome-MCP на `notebook.google.com` под a2@: Add sources → Websites (URL построчно) → Insert →
   Studio → Audio «>» → язык русский, промпт → Generate. Так был сделан Lambda-эпизод 16.09.
-- ⚠️⚠️ **ЛИМИТ = СМЕНИ БАК, А НЕ ЖДИ СУТОК (приказ Антона 21.09.2026, голосом, tg:-[id]).** Дословно: «когда у нас кончаются лимиты dzyatkovskiy.a2 в Gmail'е… Иди на другой аккаунт, на dzyatkovskiy.a и генери там подкасты». С 02.09 у Google лимит «вычислительный» НА АККАУНТ, обновляется каждые 5 часов; CLI отвечает `RateLimitError … Audio generation rate limited by Google`. Прослушивание готового не лимитируется. **Аккаунт = бак; баков три, и они независимы:**
+- ⚠️⚠️ **ЛИМИТ = СМЕНИ БАК, А НЕ ЖДИ СУТОК (приказ Антона 21.09.2026, голосом, tg:-[id]).** Дословно: «когда у нас кончаются лимиты youraccount.a2 в Gmail'е… Иди на другой аккаунт, на youraccount.a и генери там подкасты». С 02.09 у Google лимит «вычислительный» НА АККАУНТ, обновляется каждые 5 часов; CLI отвечает `RateLimitError … Audio generation rate limited by Google`. Прослушивание готового не лимитируется. **Аккаунт = бак; баков три, и они независимы:**
   | профиль CLI | почта | состояние 21.09 |
   |---|---|---|
-  | `default` (= `dzyatkovskiy-a2`) | dzyatkovskiy.a2@gmail.com, AI Pro | рабочий, в лимите с ~08:34 |
+  | `default` (= `youraccount-a2`) | you.assistants@example.com, AI Pro | рабочий, в лимите с ~08:34 |
   | `[рабочий аккаунт]` | [рабочий аккаунт]@gmail.com | **рабочий, проверен боем 21.09 12:15** |
-  | `dzyatkovskiy-a` | Dzyatkovskiy.a@gmail.com, AI Pro | **ЖИВОЙ с 21.09 15:33** — проверен боем, вытащил урок 16 RU, когда оба соседа были в лимите |
+  | `youraccount-a` | you@example.com, AI Pro | **ЖИВОЙ с 21.09 15:33** — проверен боем, вытащил урок 16 RU, когда оба соседа были в лимите |
   Порядок работы: блокнот принадлежит a2@, поэтому чужой бак надо сперва впустить —
   `notebooklm share add <почта> --permission editor -n <id>` (шаринг лимитом не режется). Дальше
   `notebooklm -p <профиль> generate audio … -n <id>`: артефакт ложится в ТОТ ЖЕ блокнот, счёт идёт на бак того,
   кто нажал. Ссылка для телефона — с `?authuser=<почта>`.
-- ⭐ **a@ СТАЛ БАКОМ 21.09 15:33 — прежняя строка «сессии у CLI нет» ОТМЕНЕНА.** Она описывала ТОЛЬКО путь через Chrome (App-Bound Encryption, `rookie-rs: CryptUnprotectData returned a null pointer`). Firefox-путь работает: `notebooklm --profile a login --browser-cookies firefox --all-accounts` → «Found 1 accounts → dzyatkovskiy-a → dzyatkovskiy.a@gmail.com». Дальше `notebooklm -p dzyatkovskiy-a generate audio ... -n <id>`.
-  - ⚠️⚠️ **ИМЯ ПРОФИЛЯ = `dzyatkovskiy-a`, НЕ `a`.** В `~/.notebooklm/profiles/` лежат пять папок, и две из них — мёртвые двойники: `a/` и `dzyatkovskiy-a2/` держат протухшие куки и падают «Authentication expired or invalid. Redirected to accounts.google.com». Живых три: `default` (=a2@) · `[рабочий аккаунт]` · `dzyatkovskiy-a`. Перепутал имя → получишь ложное «бак мёртв» и уйдёшь ждать сутки на ровном месте.
+- ⭐ **a@ СТАЛ БАКОМ 21.09 15:33 — прежняя строка «сессии у CLI нет» ОТМЕНЕНА.** Она описывала ТОЛЬКО путь через Chrome (App-Bound Encryption, `rookie-rs: CryptUnprotectData returned a null pointer`). Firefox-путь работает: `notebooklm --profile a login --browser-cookies firefox --all-accounts` → «Found 1 accounts → youraccount-a → you@example.com». Дальше `notebooklm -p youraccount-a generate audio ... -n <id>`.
+  - ⚠️⚠️ **ИМЯ ПРОФИЛЯ = `youraccount-a`, НЕ `a`.** В `~/.notebooklm/profiles/` лежат пять папок, и две из них — мёртвые двойники: `a/` и `youraccount-a2/` держат протухшие куки и падают «Authentication expired or invalid. Redirected to accounts.google.com». Живых три: `default` (=a2@) · `[рабочий аккаунт]` · `youraccount-a`. Перепутал имя → получишь ложное «бак мёртв» и уйдёшь ждать сутки на ровном месте.
   - ⭐ **Правило вместо вывода «все баки пусты»:** сперва прогнать `login --browser-cookies firefox --all-accounts` ЗАНОВО. Список аккаунтов в браузере меняется без нашего участия (21.09 a@ появился между 15:02 и 15:33). «Баков нет» — claim, и он протухает за полчаса ([[ban-is-a-claim-recheck-before-workaround]]).
   - Апгрейд тарифа = деньги = Tier-2, жмёт Антон.
 - ⛔⭐ **СРОЧНЫЙ ЭПИЗОД ИДЁТ МИМО ОЧЕРЕДИ (замер 21.09 15:22–15:30).** `teach_backlog.py run --loop` работает строго FIFO, приоритета у него НЕТ. 21.09 он молотил баки заданиями Hugging Face и выжег bb@, пока готовился урок под звонок, до которого оставалось два часа; встань эпизод в очередь — он был бы девятым. Правило: эпизод под звонок/дедлайн сегодня гонится **напрямую** `generate audio -p <живой бак>`, очередь остаётся для фонового потока. Кто держит бак: `tail -3 ~/.claude/state/teach_backlog.log`.
@@ -142,7 +142,7 @@ consumer: "Антон (/teach-podcast, «сделай подкаст про …�
 ## Шаг 5. Генерация (CLI)
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
-notebooklm auth check || notebooklm login --browser-cookies firefox --account dzyatkovskiy.a2@gmail.com
+notebooklm auth check || notebooklm login --browser-cookies firefox --account you.assistants@example.com
 notebooklm create "Учёба: <тема>" --use
 notebooklm source add "<packet.md>" --type file --title "Разбор: <тема>"
 notebooklm source add "<url>"            # по одному, только живые
@@ -172,16 +172,16 @@ python ~/.claude/scripts/_shared/teach_backlog.py status    # что готов�
 на сломанной ветке RATE_PATTERNS).
 
 ⭐⭐ **ПРИОРИТЕТ БАКОВ НАЗВАН АНТОНОМ ГОЛОСОМ 23.09.2026 И ВШИТ В ДЕФОЛТ.** Дословно: «если на одном
-аккаунте закончились время, ты идёшь генерировать другой аккаунт… сначала dzyatkovskiy.a2, потом
-dzyatkovskiy.a, потом [рабочий аккаунт]». Порядок = `DEFAULT_ACCOUNTS` в `teach_backlog.py`, флаг `--accounts`
+аккаунте закончились время, ты идёшь генерировать другой аккаунт… сначала youraccount.a2, потом
+youraccount.a, потом [рабочий аккаунт]». Порядок = `DEFAULT_ACCOUNTS` в `teach_backlog.py`, флаг `--accounts`
 теперь можно НЕ писать:
 
 | приоритет | профиль CLI | почта | состояние 23.09 |
 |---|---|---|---|
-| 1 | `default` | dzyatkovskiy.a2@gmail.com (AI Pro) | ✅ живой |
-| 2 | `dzyatkovskiy-a` | dzyatkovskiy.a@gmail.com | ✅ живой |
+| 1 | `default` | you.assistants@example.com (AI Pro) | ✅ живой |
+| 2 | `youraccount-a` | you@example.com | ✅ живой |
 | 3 | `[рабочий аккаунт]` | [рабочий аккаунт]@gmail.com | ✅ живой |
-| ⛔ | `a`, `dzyatkovskiy-a2` | — | мёртвые двойники, куки протухли |
+| ⛔ | `a`, `youraccount-a2` | — | мёртвые двойники, куки протухли |
 
 Проверено прогоном `notebooklm -p <профиль> list` 23.09; два двойника отвечают «Authentication expired
 or invalid». Класть их в `--accounts` = получить ложное «бак мёртв» и уйти ждать сутки на ровном месте.
@@ -206,7 +206,7 @@ or invalid». Класть их в `--accounts` = получить ложное 
 `until grep -qE "DONE bytes|FAIL" <лог первого>; do sleep 20; done; teach_gen_one.sh <второй>`).
 И перед тем как объявить эпизод провалившимся — **сверь `artifact list -n <id>`**: артефакт может быть
 готов, а провалилось только слежение за ним. Пять эпизодов последовательно = примерно час, это нормальная цена. Ссылка для телефона:
-`https://notebook.google.com/notebook/<id>?authuser=dzyatkovskiy.a2@gmail.com` — Антон слушает в приложении
+`https://notebook.google.com/notebook/<id>?authuser=you.assistants@example.com` — Антон слушает в приложении
 NotebookLM под a2@, файл нужен для волта и YouTube. Расширение честное: `.m4a` (внутри AAC).
 
 ## Шаг 6. Доставка и учёт (тем же заходом)

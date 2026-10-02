@@ -1,6 +1,6 @@
 ---
 name: gmail
-description: "Check / search / digest Anton's Gmail on demand across his 3 mailboxes (a = dzyatkovskiy.a personal, a2 = dzyatkovskiy.a2 assistants, bb = [рабочий аккаунт] work) via his own OAuth connector… Trigger on “/gmail“, “проверь почту“, “что нового в почте“, “есть важные письма“, “найди письмо про <X>“, “что в bb / в личной / в a2“, “сделай дайджест почты“, “check my email“, “search my gmail for <X>“"
+description: "Check / search / digest Anton's Gmail on demand across his 3 mailboxes (a = youraccount.a personal, a2 = youraccount.a2 assistants, bb = [рабочий аккаунт] work) via his own OAuth connector… Trigger on “/gmail“, “проверь почту“, “что нового в почте“, “есть важные письма“, “найди письмо про <X>“, “что в bb / в личной / в a2“, “сделай дайджест почты“, “check my email“, “search my gmail for <X>“"
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ Anton's own Gmail connector — read/search/send across 3 mailboxes. Full projec
 ## The connector (single source of truth)
 - Folder: `$USERPROFILE/!CLAUDE-HP17 May26\gmail\` — `gmail_check.py` (read/search/send), `gmail_auth.py` (authorize a box), tokens in `tokens\`, secret in `secrets\`. Имя папки историческое (по ноуту), но путь верный и на хабе, и на ноуте: `$USERPROFILE` резолвится в `[путь владельца]` на обеих Windows-машинах. ⚠️ В Bash пиши `$USERPROFILE`, НЕ `%USERPROFILE%` (Git Bash не раскрывает `%VAR%` → exit 2).
 - ⛔ **ЕДИНСТВЕННАЯ папка коннектора — эта.** На хабе с 2026-06 живёт ВТОРАЯ копия `[путь владельца]`: тот же `gmail_check.py` (md5 совпадает), но СВОЙ `tokens\` и `secrets\`. Два независимых OAuth-состояния на один аккаунт = тихий развал авторизации, когда одну сторону ре-авторизовали, а вторая осталась со старым refresh-token. Ходить туда запрещено; удаление дубля — решение Антона (05.08.2026 ждёт его «+»).
-- Mailbox labels: **`a`** = dzyatkovskiy.a@gmail.com (Anton's PERSONAL), **`a2`** = dzyatkovskiy.a2@gmail.com (ASSISTANTS), **`bb`** = [рабочий аккаунт]@gmail.com (Platinum/WORK). See [[telegram-account-identities]] / [[gdrive-index]] for which box owns what.
+- Mailbox labels: **`a`** = you@example.com (Anton's PERSONAL), **`a2`** = you.assistants@example.com (ASSISTANTS), **`bb`** = [рабочий аккаунт]@gmail.com (Platinum/WORK). See [[telegram-account-identities]] / [[gdrive-index]] for which box owns what.
 - ⚠️ У одного ящика два имени. `sendAs.displayName` (строка From ушедших писем) и имя аккаунта Google (myaccount → Name: first/last, nickname, «display name as») не совпадают. Замер 23.09, ящик `a`: From = `Anton.D`, аккаунт = Punk / Crypto, показ `Punk Crypto (CryptoPunk #1348)`. Вердикт «Криптопанка нет» только по `in:sent` ложный. Этот токен имя не меняет: на `sendAs.patch` приходит 403, нет scope `gmail.settings.basic`.
 - ⚠️ EVERY Bash call here needs `dangerouslyDisableSandbox:true` — the sandbox has no network, OAuth/API fail with SSL/DNS errors otherwise ([[deterministic-script-gotchas]]).
 

@@ -52,7 +52,7 @@ python3 ~/.claude/scripts/bible_leads.py --grep <тема>   # срез
 что сторожит.
 
 ## Пути ([машина флота])
-- WORKDIR: `$HOME/Library/CloudStorage/GoogleDrive-dzyatkovskiy.a@gmail.com/My Drive/!_Claude_[машина флота]`
+- WORKDIR: `$HOME/Library/CloudStorage/GoogleDrive-you@example.com/My Drive/!_Claude_[машина флота]`
 - **Трекер: `$OBSIDIAN_VAULT/_outreach/tracker.json`** ⚠️ переехал из workdir 27.07: launchd-агент
   не имеет Full Disk Access → macOS даёт `Operation not permitted` на GDrive, и робот трижды умер
   в HARD-STOP. Копия в workdir — мёртвый снимок, не читать и не писать.

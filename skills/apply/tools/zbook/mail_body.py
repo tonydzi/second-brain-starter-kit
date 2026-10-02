@@ -8,7 +8,7 @@ for line in open(os.environ.get("GMAIL_A_SECRET", os.path.join(os.environ.get("C
     if line.startswith("GMAIL_A_APP_PASSWORD="):
         pw = line.split("=", 1)[1].strip()
 M = imaplib.IMAP4_SSL("imap.gmail.com")
-M.login("dzyatkovskiy.a@gmail.com", pw)
+M.login("you@example.com", pw)
 M.select("INBOX", readonly=True)
 typ, data = M.search(None, '(SINCE "03-Sep-2026")')
 for mid in data[0].split():

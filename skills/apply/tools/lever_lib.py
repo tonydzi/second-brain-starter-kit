@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import Select
 
 CANON = {
     "name": "Anton Dziatkovskii",
-    "email": "dzyatkovskiy.a@gmail.com",
+    "email": "you@example.com",
     "phone": "+1 341 222 9178",
     "org": "Palo Alto AI Research Lab (Founder); Platinum VC & Incubator (Co-Founder)",
     "github": "https://github.com/tonydzi",

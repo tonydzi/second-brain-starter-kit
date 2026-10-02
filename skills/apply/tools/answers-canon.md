@@ -1,7 +1,7 @@
 # Канон ответов для форм (из apply-playbook, вердикты Антона 01.09)
 
 - Name: Anton Dziatkovskii (First: Anton, Last: Dziatkovskii)
-- Email: dzyatkovskiy.a@gmail.com (a@platinum.fund НЕ использовать)
+- Email: you@example.com (a@platinum.fund НЕ использовать)
 - Phone: +1 341 222 9178 · Country для телефона: United States
 - Location: US-роль → Palo Alto, CA; EU-роль → Lisbon, Portugal
 - Website: https://tonydzi.github.io/ · GitHub: https://github.com/tonydzi

@@ -18,7 +18,7 @@ version: 1.0.0
 
 ## Аккаунт
 
-Логин luma — `dzyatkovskiy.a2@gmail.com` (аккаунт **a2**), вход через **Passkey** либо через
+Логин luma — `you.assistants@example.com` (аккаунт **a2**), вход через **Passkey** либо через
 **Google тем же адресом**. Пароль символами не набираем — подаёт Chrome/Passkey сам
 (память `one-chrome-account-all-machines`). Профиль ответов: `cv-events/apply_profile.json`.
 

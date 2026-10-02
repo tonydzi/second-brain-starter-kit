@@ -133,7 +133,7 @@ Gmail-поиск: `subject:(application OR applying) -subject:verify -subject:co
 - Карточка задачи в `$OBSIDIAN_VAULT\10-Tasks\` обновлена (evidence + счётчики); onair close.
 
 ## После подачи
-Ответы рекрутёров падают на dzyatkovskiy.a@gmail.com → рутины `pipe-a-inbox-watch` (хаб) и `pipe-a-inbox-watch-[машина флота]`; ручной двойник и канон разбора = скилл **`/job-inbox`**. Назначено собеседование → **`/interview-prep`** (компания, питч, дверь в их GitHub).
+Ответы рекрутёров падают на you@example.com → рутины `pipe-a-inbox-watch` (хаб) и `pipe-a-inbox-watch-[машина флота]`; ручной двойник и канон разбора = скилл **`/job-inbox`**. Назначено собеседование → **`/interview-prep`** (компания, питч, дверь в их GitHub).
 
 **Труба найма целиком (anton 15.09):** `/apply` подаём → `/job-inbox` ловим ответ и записываемся в ИХ календарь → `/interview-prep` готовим питч и коммитим в GitHub работодателя до звонка → `/fa` после.
 

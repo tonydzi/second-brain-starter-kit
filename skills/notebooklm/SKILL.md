@@ -13,8 +13,8 @@ NotebookLM = the **artifact/explanation layer** (Audio Overview, study guide, mi
 ## Rail = CLI (verified 2026-07-04, ADOPT — H16)
 Programmatic CLI `[человек]-lin/notebooklm-py` (17k⭐, MIT). No Chrome window, no DOM, no truncation. Works on Anton's consumer `a2@` PRO (no Enterprise API).
 - **CLI binary:** `[путь владельца]` (venv, v0.7.3). Set `NB="[путь владельца]"`.
-- **Auth:** browser-cookies from Firefox (Chrome/Edge blocked by App-Bound Encryption + Chrome 146 DBSC, TPM-bound — Firefox does neither, see `02-Decisions\decision-2026-07-16-browser-automation-layer.md`). Stored `[путь владельца]`, account `dzyatkovskiy.a2@gmail.com`.
-- **Cookies expire ~every few weeks** → on any `auth`/`401` failure, RE-LOGIN: Anton opens NotebookLM in **Firefox** (a2@), then `"$NB" login --browser-cookies firefox --account dzyatkovskiy.a2@gmail.com`. Verify with `"$NB" auth check`.
+- **Auth:** browser-cookies from Firefox (Chrome/Edge blocked by App-Bound Encryption + Chrome 146 DBSC, TPM-bound — Firefox does neither, see `02-Decisions\decision-2026-07-16-browser-automation-layer.md`). Stored `[путь владельца]`, account `you.assistants@example.com`.
+- **Cookies expire ~every few weeks** → on any `auth`/`401` failure, RE-LOGIN: Anton opens NotebookLM in **Firefox** (a2@), then `"$NB" login --browser-cookies firefox --account you.assistants@example.com`. Verify with `"$NB" auth check`.
 - **⚠️ Fallback if `login --browser-cookies firefox` picks the WRONG profile or fails to find the session** (the CLI's cookie-reader can hit the same class of bug as generic browser_cookie3-style libs: it may grab a stale `[ProfileN] Default=1` profile instead of the one Firefox actually launches — fixed once already in our own helper, see [[deterministic-script-gotchas]]): build `storage_state.json` directly with the fleet-shared, /tt-tested helper instead of fighting the CLI's own extractor:
   ```bash
   python "$env:USERPROFILE\.claude\scripts\_shared\firefox_cookies.py" --domain google.com --export "[путь владельца]"
