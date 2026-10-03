@@ -1,0 +1,38 @@
+# gates.tsv: гейты onboard-intel-mac.sh данными. Столбцы через табуляцию. Каждая строка = гейт, у каждого есть сценарий отказа в tests/kill_gates.sh.
+# id	фаза	что защищает (инвариант)	как подложить отказ	сценарий в tests/kill_gates.sh
+G-PROFILE	старт	без файла профиля, с образцом (CHANGE_ME) или с профилем из git скрипт не стартует; личных значений по умолчанию нет	не передать профиль; передать profile.example.env; закоммитить профиль	s_profile_missing s_profile_placeholder s_profile_tracked
+G-PROFILE-KEYS	любая	фаза не начинается без своих ключей профиля	убрать ключ из профиля (GIT_EMAIL, BUS_LAYOUT)	s_profile_keys s_bus_layout
+G-INTEL	старт	вендорные x86-бинарники не ставятся на Apple Silicon и под Rosetta	uname -m = arm64	s_intel
+G-HASH-VENDOR	tools	архив с хэшем, не равным вендорскому, не распаковывается и откладывается	испортить строку в файле сумм вендора	s_hash_vendor
+G-HASH-PIN	tools	архив с хэшем, не равным закреплённому в скрипте, не распаковывается (подмена артефакта вместе с файлом сумм)	дать архив и согласованный с ним файл сумм, отличные от закреплённого	s_hash_pin
+G-SHARED	github syncthing law	учётка macOS не становится учёткой оператора без SHARED_ACCOUNT_OK=1	не задавать SHARED_ACCOUNT_OK	s_shared s_park
+G-GH-ACCOUNT	github	gh вошёл именно тем аккаунтом, который назван в профиле	войти другим аккаунтом	s_gh_account
+G-TG-FIRST	telegram	без первой сессии не пишется plist демона и не логинится рельса	первый вход завершается отказом	s_tg_first
+G-TG-RAIL	telegram	сбой входа рельсы = фаза не засчитана	второй вход завершается отказом	s_tg_rail
+G-TG-PIN	telegram	патч накладывается только на закреплённый коммит апстрима	клон апстрима на другом коммите	s_tg_pin
+G-PARK	syncthing law	стартовый закон не увезён = ни одна папка не принимается	оставить стартовый CLAUDE.md без SHARED_ACCOUNT_OK	s_park
+G-STIGNORE	syncthing	шара принимается только после записи .stignore и его обратного чтения; .stignore-симлинк не пишется (файл за ним не трогается)	каталог без права записи; .stignore уже существует как каталог; .stignore = симлинк на чужой файл	s_stignore_write s_stignore_readback s_stignore_symlink
+G-HOME-PROBE	syncthing	первый приём claude-home идёт с фильтром «*»; whitelist встаёт только с CLAUDE_HOME_WHITELIST_OK=1	первый запуск; повтор без согласия	s_home_probe s_home_flag
+G-HOME-WHITELIST	syncthing	whitelist = поимённые строки и завершающая *; звёздочки и пути с секретами не разрешаются	вписать в CLAUDE_HOME_ALLOW projects или *.json	s_home_whitelist
+G-FOLDER-PATH	syncthing verify	папка, принятая в другой путь или с другим типом, = отказ; verify сверяет путь и тип, а не id	в конфиге Syncthing папка с тем же id и чужим путём	s_folder_path_accept s_folder_path_verify
+G-MERGE	syncthing	sendreceive-папка не принимается в непустой каталог без MERGE_OK=1	положить файл в каталог волта	s_merge
+G-SYNC-DIR	syncthing	ничего не принимается в ~/Sync	VAULT_ROOT внутри ~/Sync	s_sync_dir
+G-HUB-ID	syncthing	Device ID хаба проверяется по форме до любого POST	строка, не похожая на Device ID	s_hub_id
+G-BUS-EXCLUDE	syncthing	раскладка шины только из профиля; при separate-share исключение шины стоит в фильтре волта до приёма	убрать BUS_LAYOUT; сверить обе раскладки	s_bus_layout s_bus_separate s_bus_inside
+G-PENDING	syncthing	папка, которую хаб не предложил, = SKIP, итог не зелёный	убрать папку (в том числе волт) из списка предложенных	s_pending s_pending_vault
+G-ST-POST	syncthing	сбой REST-запроса = отказ	REST отвечает ошибкой на POST	s_post_fail
+G-STEP	любая	сбой записи файла или команды шага останавливает фазу (дальше ни записи, ни следующей папки, ни квитанции); сквозь симлинк не пишется; у симлинка в бэкап идёт и содержимое цели	каталог LaunchAgents без права записи; хэш node не равен закреплённому; .stignore первой папки не пишется; ~/.zprofile = симлинк; ~/.gitconfig = симлинк	s_plist_write s_tools_stop s_syncthing_stop s_zprofile_link s_gitconfig_link
+G-F3	law	блок env F3: каждая из четырёх переменных равна профилю; путь волта сохраняется как есть	~/.zshrc только с одной переменной; волт в нестандартном пути	s_f3 s_vault_root
+G-MEMLINK	law	линк памяти смотрит на шару; линк не туда заменяется, чужой каталог не трогается	линк памяти на другой каталог	s_memlink
+G-VERIFY-LLM	law verify	пропущенная проверка = SKIP и итог INCOMPLETE, не зелёный	VERIFY_LLM=0	s_law_llm_skip s_verify_skip
+G-SECOND-PASS	verify	строка «19 повтор verify» зелёная только по записи прошлого зелёного verify в <NODE_DIR>/verify-history.log; флаг окружения не в счёт	SECOND_PASS=1 без журнала; журнал с записью	s_second_pass
+G-PHASE	поток	отказ фазы останавливает следующие фазы	первая из двух фаз отказывает	s_phase_stop
+G-EXIT	код	точка выхода одна; ни один гейт не стоит справа от «|» (подоболочка теряет счётчики); список гейтов равен скрипту; ключ REST не идёт аргументом процесса	статическая проверка текста скрипта и журнал подставного curl	s_single_exit s_no_gate_in_pipe s_gates_table s_key_argv
+G-HANDS	tools claude	нет того, что ставит только человек (Xcode CLT, Python с python.org, jq, Homebrew для cask): фаза не засчитана	-	- сценария нет: проверяются абсолютные системные пути, подставной командой их не закрыть
+G-ORDER	claude syncthing	фаза не начинается без результата предыдущей (нет npm, нет бинарника syncthing)	-	- сценария нет: фаза claude в песочнице не гоняется (абсолютный путь brew)
+G-LOGIN	claude github	вход не доказан словом «работает» или gh auth login завершился отказом	-	- сценария нет: фаза claude в песочнице не гоняется
+G-SIGNATURE	tailscale	Tailscale.app без подписи Developer ID Tailscale Inc. не копируется в /Applications	-	- сценария нет: фаза tailscale пишет в /Applications, в песочнице не гоняется
+G-TG-PATCH	telegram	патч 0002 ложится только чисто (без --3way); файл с маркерами конфликта = фаза остановлена	дописать маркеры конфликта в messages.py; сам git apply --check на закреплённых коммитах делает tools/runbook_smoke.sh (проверка patches)	s_tg_conflict
+G-TG-ROOM	telegram	TGBUS_ROOM не задан = видимость комнаты не проверена, SKIP	-	- сценария нет: ветка печатает SKIP, код выхода 4 доказан сценариями G-PENDING и G-HOME-PROBE
+G-MEMORY-WAIT	law	шара памяти ещё не приехала = линк не ставится, SKIP	-	- сценария нет: та же механика SKIP, что у G-PENDING
+G-LAW-LOAD	law	headless claude -p не процитировал строку ВЕРСИЯ = канон или память не грузятся	-	- сценария нет: нужен настоящий вход в Claude

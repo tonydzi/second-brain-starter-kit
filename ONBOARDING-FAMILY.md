@@ -3,7 +3,7 @@
 > **Человеку.** Это второй этаж. Сначала машина проходит базовый разворот —
 > [ONBOARDING-MAC.md](ONBOARDING-MAC.md) или [ONBOARDING-WINDOWS.md](ONBOARDING-WINDOWS.md),
 > шаги 1–4 (инструменты, Claude Code, клон набора). Потом открой Claude Code и скажи:
-> «Прочитай https://github.com/tonydzi/second-brain-starter-kit/blob/main/ONBOARDING-FAMILY.md
+> «Прочитай https://github.com/tonydzi/second-brain-starter-kit/blob/HEAD/ONBOARDING-FAMILY.md
 > и сделай всё, что там написано. Режим: семья. Оператор: <имя>. Имя узла: <ИМЯ-МАШИНЫ>».
 >
 > **Роботу.** Этот файл — твоя задача целиком. После каждого шага печатай квитанцию

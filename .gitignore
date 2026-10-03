@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 crm.db
+
+# заполненные профили онбординга (координаты флота) в репозиторий не попадают; образец: tools/intel-mac/profile.example.env
+*.profile.env
+onboard-profile*.env
