@@ -33,12 +33,12 @@ applied = 0; log = []
 conv = V / "01-Conversations"
 
 # 1. Handle collection folders
-for [человек]_name, (prim, origin, authored_by) in COLLECTION_MAP.items():
-    [человек]_dirs = [p for p in conv.rglob([человек]_name) if p.is_dir()]
-    for [человек]_dir in [человек]_dirs:
+for coll_name, (prim, origin, authored_by) in COLLECTION_MAP.items():
+    coll_dirs = [p for p in conv.rglob(coll_name) if p.is_dir()]
+    for coll_dir in coll_dirs:
         # Only touch files directly in this folder (transcript-parent files),
         # not nested episode files (those were handled by integrate_transcripts2.py)
-        for fpath in list([человек]_dir.glob("*.md")) + list([человек]_dir.rglob("*.md")):
+        for fpath in list(coll_dir.glob("*.md")) + list(coll_dir.rglob("*.md")):
             try:
                 t = open(fpath, encoding="utf-8", errors="ignore").read()
             except: continue

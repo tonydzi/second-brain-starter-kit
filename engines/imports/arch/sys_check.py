@@ -108,7 +108,7 @@ def c_vault_backup_fresh():
 
 def c_lint_flags():
     """Surface the lint gates' flag files as a REAL check (adversarial-review nit
-    2026-07-02: the flags had no consumer -- alarm with no [человек]). Lints run BEFORE
+    2026-07-02: the flags had no consumer -- alarm with no bell). Lints run BEFORE
     sys_check in run_architect.cmd so these flags are fresh, not last night's."""
     flags = {"_lint_llm.flag": "NEW LLM call site(s) in _imports",
              "_lint_encoding.flag": "NEW unguarded Cyrillic print site(s)",

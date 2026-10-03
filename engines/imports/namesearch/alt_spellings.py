@@ -70,16 +70,16 @@ def _lat_variants(lat):
 
 
 # --- «уверенно славянское имя?» — чтобы иностранцам НЕ лепить кириллицу (вариант 1) ---
-RU_FIRST = set('''sergey [человек] viktor Vlad [человек] alexander [человек] [человек]
-ivan [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] vladimir
-anton pavel roman denis [человек] [человек] [человек] [человек] igor [человек] [человек] [человек] artiom
-[человек] [человек] [человек] alexey [человек] [человек] [человек] [человек] vadim [человек] [человек] [человек] [человек]
-[человек] [человек] [человек] [человек] [человек] [человек] [человек] german [человек] [человек] [человек]
-Alina elena yelena [человек] Nina Nina [человек] maria [человек] marya [человек] ekaterina
-[человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек] kseniya
-polina [человек] sofya alina [человек] [человек] [человек] [человек] lyudmila oksana [человек] julia
-nina raisa zinaida [человек] lidia lidiya [человек] [человек] [человек] [человек] [человек]
-mikhailo [человек] [человек] [человек] [человек] [человек] [человек] [человек] [человек]'''.split())
+RU_FIRST = set('''sergey sergei viktor Vlad aleksandr alexander aleksandra alexandra
+ivan dmitry dmitrii dmitriy andrey andrei mikhail mihail nikolay nikolai vladimir
+anton pavel roman denis maxim maksim konstantin oleg igor kirill artem artyom artiom
+evgeny evgenii evgeniy alexey aleksey yuri yury yuriy vadim vasily vasiliy boris gleb
+stanislav stas vyacheslav valery valeriy ruslan timur german arseny arseniy fedor
+Alina elena yelena olga Nina Nina nataliya maria mariya marya irina ekaterina
+katerina tatiana tatyana svetlana daria darya dasha viktoria victoria ksenia kseniya
+polina sofia sofya alina marina galina vera nadezhda lyudmila oksana yulia julia
+nina raisa zinaida valentina lidia lidiya alla angelina veronika kristina karina
+mikhailo bogdan taras ostap petro mykola oleksandr oleksiy volodymyr'''.split())
 RU_SUFFIX = ('ov', 'ova', 'ev', 'eva', 'iev', 'ieva', 'yev', 'yeva', 'in', 'ina',
              'yn', 'yna', 'sky', 'skiy', 'skii', 'skaya', 'ski', 'tsky', 'tskaya',
              'enko', 'chenko', 'uk', 'yuk', 'chuk', 'ich', 'ovich', 'evich', 'ovna',

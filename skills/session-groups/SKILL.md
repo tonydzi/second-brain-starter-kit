@@ -1,6 +1,6 @@
 ---
 name: session-groups
-description: Пометить КАЖДУЮ сессию Claude Desktop (Code tab) ИКОНКОЙ её группы прямо в заголовке — «⚙️ Имя», «💰 Р+ Имя». Пока сайдбар-инструмент ccd_sidebar заперт серверным флагом (anthropics/claude-code#92621), иконка в имени = единственная видимая группировка. Триггеры "/session-groups", "/sg", "проставь группы сессиям", "разложи сессии по группам", "иконки сессий", "группы в заголовки", а также САМ на СТАРТЕ сессии, как только ясна тема (приказ Антона 10.09.2026: «мало пикселей на экране, нужна иконка»), и на /retro шаг 6a-кватер как перепроверка. Движок session_groups.py (0 LLM) строит план, переименовывает сессия через MCP set_session_title. НЕ путать с /sessions (что сейчас крутится) и /retro (закрытие).
+description: "Пометить КАЖДУЮ сессию Claude Desktop (Code tab) ИКОНКОЙ её группы прямо в заголовке — «⚙️ Имя», «💰 Р+ Имя». Пока сайдбар-инструмент ccd_sidebar заперт серверным флагом (anthropics/claude-code#92621), иконка в имени = единственная видимая группировка. Триггеры \"/session-groups\", \"/sg\", \"проставь группы сессиям\", \"разложи сессии по группам\", \"иконки сессий\", \"группы в заголовки\", а также САМ на СТАРТЕ сессии, как только ясна тема (приказ Антона 10.09.2026: «мало пикселей на экране, нужна иконка»), и на /retro шаг 6a-кватер как перепроверка. Движок session_groups.py (0 LLM) строит план, переименовывает сессия через MCP set_session_title. НЕ путать с /sessions (что сейчас крутится) и /retro (закрытие)."
 version: 2.0.0
 ---
 
@@ -40,3 +40,15 @@ version: 2.0.0
 - Правка `claude_desktop_config.json` руками ⛔: приложение файл живьём не перечитывает и перепишет из памяти.
 - Мусор Антона в начале имени («!!!», «+++») — его приоритет-сигнал, не срезать: иконка встаёт после него.
 - Канон: память `session-group-at-retro`; дверь в /retro 6a-кватер; публичная копия — репозиторий tonydzi/clawrush.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

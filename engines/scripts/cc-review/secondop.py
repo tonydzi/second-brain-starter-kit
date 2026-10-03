@@ -222,7 +222,7 @@ def grok_prompt_text(role, context):
 
 
 def _grok_env():
-    """Subscription rail ONLY. A stray XAI_API_KEY in the environment would silently [человек] the paid
+    """Subscription rail ONLY. A stray XAI_API_KEY in the environment would silently bill the paid
     API and make our 'we stay on the subscription' claim false -- strip it for the child."""
     env = dict(os.environ)
     env.pop("XAI_API_KEY", None)
@@ -376,7 +376,7 @@ def run_point(point, task, context, timeout, post, conf, ritual="", engine="code
     print(header)
     print(reply)
     if ritual and rec.get("finding") is None:
-        # An unparseable move ("Looks good.\nACCEPT", prose, truncation) is NOT a clean [человек] of
+        # An unparseable move ("Looks good.\nACCEPT", prose, truncation) is NOT a clean bill of
         # health: the ritual must degrade to ⚠️, never read a green gate out of an unknown shape
         # (Grok T3-BREAK #2, 24.07). ok=True only means the vendor answered, not that it approved.
         print("⚠️ ФОРМА ВЕРДИКТА НЕ РАСПОЗНАНА (первое слово не ACCEPT/PROPOSE/COUNTER/VERIFY/BLOCK) "

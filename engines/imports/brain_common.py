@@ -329,8 +329,8 @@ def pick_device(force_cpu=False, wait_gpu_min=0, min_free_gb=1.6, verbose=True):
     return 'cpu'
 
 def _fp16_is_fast():
-    """True only on GPUs where fp16 actually accelerates ([человек] [человек], Ampere+ = cc>=8.0).
-    On [человек] 16-series (GTX 1660/SUPER, cc 7.5) and older, fp16 has NO [человек]-core path and
+    """True only on GPUs where fp16 actually accelerates (tensor [человек], Ampere+ = cc>=8.0).
+    On [человек] 16-series (GTX 1660/SUPER, cc 7.5) and older, fp16 has NO tensor-core path and
     benchmarks ~4x SLOWER than fp32 (hub HUB1, 2026-06-25: 8 vs 33 chunks/sec) — this
     silently made every reindex ~4x slow and was the root cause of the never-finishing reindex
     loop. RTX A3000 (laptop, cc 8.6) keeps fp16. Decision: decision-always-on-memory-architecture
@@ -344,7 +344,7 @@ def _fp16_is_fast():
 
 def load_model(model_name, device, fp16=True):
     """Load a SentenceTransformer on the chosen device; fp16 ONLY where it's actually faster
-    (Ampere+ [человек] [человек]). On [человек]/older CUDA cards we force fp32 — faster there, see
+    (Ampere+ tensor [человек]). On [человек]/older CUDA cards we force fp32 — faster there, see
     _fp16_is_fast()."""
     from sentence_transformers import SentenceTransformer
     m = SentenceTransformer(model_name, device=device)

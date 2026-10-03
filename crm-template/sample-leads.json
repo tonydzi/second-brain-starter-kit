@@ -26,7 +26,7 @@
   "_generated": "2026-07-28",
   "cards": [
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "no-show",
@@ -53,7 +53,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "[человек] Foundry",
       "status": "stale",
@@ -80,7 +80,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "ivan-[человек]",
+      "lead_slug": "ivan-silva",
       "title": "Ivan [человек]",
       "company": "",
       "status": "stale",
@@ -107,7 +107,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "cold",
@@ -134,7 +134,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "dana-[человек]",
+      "lead_slug": "dana-sokolov",
       "title": "Dana [человек]",
       "company": "",
       "status": "cold",
@@ -161,7 +161,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "lena-[человек]",
+      "lead_slug": "lena-klein",
       "title": "Lena [человек]",
       "company": "[человек] Research",
       "status": "negotiating",
@@ -188,7 +188,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "alex-[человек]",
+      "lead_slug": "alex-tanaka",
       "title": "Alex [человек]",
       "company": "",
       "status": "no-show",
@@ -215,7 +215,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "ivan-[человек]",
+      "lead_slug": "ivan-silva",
       "title": "Ivan [человек]",
       "company": "Kestrel Research",
       "status": "new",
@@ -242,7 +242,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "new",
@@ -269,7 +269,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-larsen",
+      "lead_slug": "tomas-larsen",
       "title": "[человек] Larsen",
       "company": "Kestrel Foundry",
       "status": "negotiating",
@@ -296,7 +296,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Northwind Foundry",
       "status": "new",
@@ -323,7 +323,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "hugo-[человек]",
+      "lead_slug": "hugo-haddad",
       "title": "Hugo [человек]",
       "company": "Solstice Markets",
       "status": "cold",
@@ -350,7 +350,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "hugo-[человек]",
+      "lead_slug": "hugo-haddad",
       "title": "Hugo [человек]",
       "company": "",
       "status": "stale",
@@ -377,7 +377,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-larsen",
+      "lead_slug": "tomas-larsen",
       "title": "[человек] Larsen",
       "company": "Northwind Studio",
       "status": "new",
@@ -404,7 +404,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "elif-[человек]",
+      "lead_slug": "elif-silva",
       "title": "Elif [человек]",
       "company": "Quanta Ventures",
       "status": "stale",
@@ -431,7 +431,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-larsen",
+      "lead_slug": "tomas-larsen",
       "title": "[человек] Larsen",
       "company": "Onyx Analytics",
       "status": "stale",
@@ -458,7 +458,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Harbor Studio",
       "status": "new",
@@ -485,7 +485,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-lind",
+      "lead_slug": "priya-lind",
       "title": "[человек] Lind",
       "company": "Beacon Research",
       "status": "stale",
@@ -512,7 +512,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Tessera Network",
       "status": "stale",
@@ -539,7 +539,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "new",
@@ -566,7 +566,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-lind",
+      "lead_slug": "priya-lind",
       "title": "[человек] Lind",
       "company": "Tessera Partners",
       "status": "stale",
@@ -593,7 +593,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Onyx Ventures",
       "status": "stale",
@@ -647,7 +647,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "pavel-[человек]",
+      "lead_slug": "pavel-ivanova",
       "title": "Pavel [человек]",
       "company": "Solstice Markets",
       "status": "new",
@@ -674,7 +674,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Acme Ventures",
       "status": "cold",
@@ -701,7 +701,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-nasser",
+      "lead_slug": "omar-nasser",
       "title": "[человек] Nasser",
       "company": "Lumen Analytics",
       "status": "qualifying",
@@ -728,7 +728,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "cold",
@@ -755,7 +755,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "hugo-[человек]",
+      "lead_slug": "hugo-haddad",
       "title": "Hugo [человек]",
       "company": "",
       "status": "cold",
@@ -782,7 +782,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "cold",
@@ -809,7 +809,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "vlad-[человек]",
+      "lead_slug": "vlad-tanaka",
       "title": "Vlad [человек]",
       "company": "Cobalt Data Labs",
       "status": "cold",
@@ -836,7 +836,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Tessera Research",
       "status": "cold",
@@ -890,7 +890,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "elif-[человек]",
+      "lead_slug": "elif-silva",
       "title": "Elif [человек]",
       "company": "Tessera Research",
       "status": "qualifying",
@@ -917,7 +917,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "lena-[человек]",
+      "lead_slug": "lena-klein",
       "title": "Lena [человек]",
       "company": "Riverstone Markets",
       "status": "qualifying",
@@ -944,7 +944,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "pavel-[человек]",
+      "lead_slug": "pavel-ivanova",
       "title": "Pavel [человек]",
       "company": "Halcyon Studio",
       "status": "contacted",
@@ -971,7 +971,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "negotiating",
@@ -1025,7 +1025,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Northwind Data Labs",
       "status": "qualifying",
@@ -1106,7 +1106,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "mei-[человек]",
+      "lead_slug": "mei-chen",
       "title": "Mei [человек]",
       "company": "Tessera Analytics",
       "status": "cold",
@@ -1133,7 +1133,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "hugo-[человек]",
+      "lead_slug": "hugo-haddad",
       "title": "Hugo [человек]",
       "company": "",
       "status": "interested",
@@ -1160,7 +1160,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "vlad-[человек]",
+      "lead_slug": "vlad-tanaka",
       "title": "Vlad [человек]",
       "company": "",
       "status": "cold",
@@ -1187,7 +1187,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "",
       "status": "cold",
@@ -1214,7 +1214,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "[человек]-ozturk",
+      "lead_slug": "marta-ozturk",
       "title": "[человек] Ozturk",
       "company": "",
       "status": "qualifying",
@@ -1241,7 +1241,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "mei-[человек]",
+      "lead_slug": "mei-chen",
       "title": "Mei [человек]",
       "company": "",
       "status": "cold",
@@ -1268,7 +1268,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "ivan-[человек]",
+      "lead_slug": "ivan-silva",
       "title": "Ivan [человек]",
       "company": "Harbor Markets",
       "status": "cold",
@@ -1295,7 +1295,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Lumen Ventures",
       "status": "qualifying",
@@ -1322,7 +1322,7 @@
       "needs_review": 1
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Meridian Research",
       "status": "lost",
@@ -1349,7 +1349,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Acme Foundry",
       "status": "refund",
@@ -1376,7 +1376,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "nora-[человек]",
+      "lead_slug": "nora-costa",
       "title": "Nora [человек]",
       "company": "Onyx Network",
       "status": "lost",
@@ -1403,7 +1403,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "[человек]-[человек]",
+      "lead_slug": "priya-novak",
       "title": "[человек] [человек]",
       "company": "Quanta Analytics",
       "status": "lost",
@@ -1457,7 +1457,7 @@
       "needs_review": 0
     },
     {
-      "lead_slug": "hugo-[человек]",
+      "lead_slug": "hugo-haddad",
       "title": "Hugo [человек]",
       "company": "",
       "status": "lost",

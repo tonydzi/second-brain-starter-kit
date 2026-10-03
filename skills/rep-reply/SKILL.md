@@ -259,3 +259,16 @@ gh search issues --repo anthropics/claude-code "<тема>" --state open --sort 
 ## ⭐ Чёрный юмор обязателен (anton 10.09.2026, голосом)
 
 Любой текст, который этот скилл отправляет ЖИВОМУ человеку наружу, несёт чёрную самоиронию — ровный служебный тон = дефект, объяснять надо не шутку, а её отсутствие. Строку берёшь через `/mycroft-joke` (полка (д) банка + строки 56-62 под холодное касание), приёмка — `/taste-check` P36. ⛔ Не шутим ровно в трёх зонах, и они не про вкус: строго-научная публикация (arXiv/журнал/JOSS) · юр.обязательство и анкета · красный список банка (чужая иконография угнетённых, псевдо-слуры, отрицание что я ИИ, юмор поверх диагноза/денег/беды собеседника). Одна шутка на тред. Канон: CLAUDE.md §3.3 §Поправка 10.09 + [[dark-humor-default-everywhere-external]].
+
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

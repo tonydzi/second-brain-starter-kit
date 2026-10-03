@@ -119,3 +119,16 @@ python3 ~/.claude/skills/ai-slop/evals/slop_detect.py --file <файл> [--long-
 
 ## Провенанс
 DR26-07-30-MACANTON-01-1456 (fanout 4 вендора, запускал Антон 30.07 ~03:43-03:50; собраны ВСЕ 4, консенсус по ядру 4/4). Оригиналы: `_originals/deep-research/DR26-07-30-MACANTON-01-1456-antislop-humanizer-{chatgpt,gemini,grok,claudeai}.md`. Самый доказательный — claudeai (Kobak et al. Science Advances 2025: 379 excess-слов, delves x28; [человек] et al. 2023: детекторы ложно метят не-носителей в 61.3%; протект-лист из kjmagnan1s/anti-slop; точка в конце = резкость, Gunraj et al. 2016; EU AI Act ст. 50). Голос-в-Whisper = лучшее живое сырьё (диктовка даёт естественную парцелляцию — модель не возвращается к своему стилю). ТЗ Антона голосом — в шапке chatgpt-оригинала. Связано: [[tg-slop-markers-measured]], [[fake-it-courage-not-fake-numbers]], [[mycroft-voice-disclosure]], `spec-anti-slop-content-pipeline`, `Slop-Gate-Passport`.
+
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

@@ -5,6 +5,17 @@ earlier were written from the tags and release notes that already existed, so th
 after the fact rather than backdated to look contemporaneous. From here on, every noticeable
 change ships as a release and the journal is written in the same commit as the release.
 
+## v0.6.0 - 2026-10-03
+
+**The v0.5.0 onboarding commit had quietly undone the catalog grooming. This release puts it back.**
+
+- **The 100 groomed skills are groomed again.** Commit 2784cb2 overwrote them with raw working copies: English descriptions and `license: MIT` were gone and every CTA footer was stripped. The groomed SKILL.md files from v0.3.0 are restored, with the later mailbox and chat-id scrubs re-applied, and the footer is back on every skill.
+- **The scrubber had eaten ordinary words.** A name list ran as a substring filter, so `battle-tested`, `img.shields.io` (every README badge), and Python variables such as `paras`, `chan` and `dele` became `[человек]`. One engine no longer compiled and others would have hit a NameError at runtime. 146 lines across 35 files are restored; real-name scrubs are left as they were. Every tracked `.py` compiles again.
+- **The footer template itself was scrubbed** (`wa.me/[id]`, `X [[аккаунт]]`). It is fixed, so the contact links work again.
+- **Not ours, so out:** the vendored `gstack` skills (careful, freeze, guard, skillify, unfreeze) and 17 machine-local `local-*` skills that should never have left the fleet.
+- **New skill: `/continue`**, which drives the current task to a verified result instead of stopping at a plausible report.
+- **141 raw imports** stay public (secret-scan clean) and are listed separately in `skills/INDEX.md`. A nightly routine grooms about ten a night.
+
 ## v0.5.0 - 2026-10-02
 
 **A stranger's machine can now install this kit, and the kit no longer carries our accounts.**

@@ -460,7 +460,7 @@ def _v2_classify(subject, details, tier, reversible, tripwire_hit):
 
 
 def _v2_shadow_observe(ev, subject, details, tier, reversible, tripwire_hit, cfg=None):
-    """Dark S2 sensor. Wrapped so a bug here can NEVER break a live propose (the whole [человек]
+    """Dark S2 sensor. Wrapped so a bug here can NEVER break a live propose (the whole raison
     d'etre of shadow-first: dark code in the live engine must fail silently, not brick it)."""
     try:
         cfg = cfg or _cfg()

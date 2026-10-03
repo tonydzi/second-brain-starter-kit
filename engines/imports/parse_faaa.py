@@ -111,19 +111,19 @@ def is_our_side(chunk):
     c = chunk.lower().strip(" -—:&.,\t\"❗️✨")
     if not c:
         return True
-    if re.search(r'platinum|incubator|\bb2b\b|[человек]\s*&\s*solidity', c):
+    if re.search(r'platinum|incubator|\bb2b\b|rust\s*&\s*solidity', c):
         return True
     if re.search(r'\bvc\b.*\bai\b|\bai incubator\b', c):
         return True
     # our principals: Anton Dziatkovskii / Tony / Malika (NOT a lead named "Anton X")
-    if re.search(r'(anton|[человек]|tony)\w*[\s,].{0,25}(dziat|dzyat|diatkov|from|vc|platinum|incubator|malika)', c):
+    if re.search(r'(anton|antony|tony)\w*[\s,].{0,25}(dziat|dzyat|diatkov|from|vc|platinum|incubator|malika)', c):
         return True
-    if c in ("anton", "[человек]", "tony", "malika", "platinum team",
+    if c in ("anton", "antony", "tony", "malika", "platinum team",
              "tony + malika", "anton dz", "anton from", "tony frm",
-             "anton Dziatkovskii", "[человек] dzyatkovskii",
+             "anton Dziatkovskii", "antony dzyatkovskii",
              # Platinum team principals who appear in later-era call names as our side
              "azam", "azam shaghaghi", "[человек]", "[человек] ash",
-             "malika [человек]", "zeta", "polina"):
+             "malika daulet", "zeta", "polina"):
         return True
     if re.search(r'\btony,|tony \+|✨\s*tony|✨\s*anton', c):
         return True
@@ -134,7 +134,7 @@ def extract_lead_name(call_name):
     if not call_name:
         return None
     cn = re.sub(r'[!❗️✨]+', ' ', call_name)               # strip priority/decoration
-    cn = re.sub(r'\([человек]\s*&\s*solidity\)', '', cn, flags=re.I)
+    cn = re.sub(r'\(rust\s*&\s*solidity\)', '', cn, flags=re.I)
     cn = re.sub(r'^\s*\d+\s*[\.\)]\s*', '', cn)            # leading "3."
     parts = [p.strip(" -—:&.,\t\"'<>") for p in CONNECTOR_RE.split(cn)]
     lead_parts = [p for p in parts if p and not is_our_side(p)
@@ -216,7 +216,7 @@ for m in msgs:
     # English "Short follow-up" format (2024 H2 -> 2026): Thank you for the call /
     # Short follow-up / Participants: <lead @handle>, Platinum VC: ... / Promised
     is_eng_fa = (("thank you for the call" in low) or ("short follow-up" in low)
-                 or ("short followup" in low) or ("\U0001F463" in txt)   # 👣 [человек]
+                 or ("short followup" in low) or ("\U0001F463" in txt)   # 👣 footprints
                  or ("follow-up of our call" in low) or ("follow up of our call" in low)
                  or ("фоллоуап" in low) or ("фоллоу-ап" in low) or ("фоллоу ап" in low)
                  or (("participants:" in low or "участник" in low)

@@ -90,7 +90,7 @@ KEEP_MARKERS = [
 ]
 # ---- Признаки шума (понижают балл, но НЕ решают в одиночку) ----
 NOISE_WORDS = [
-    "airdrop", "pump", "[человек]", "drops", "nft", "yup", "doge", "meme",
+    "airdrop", "pump", "koin", "drops", "nft", "yup", "doge", "meme",
     "kol", "kols", "influencer", "crypto wolf",   # "trade"/"signal" убраны: бьют по легитимным бизнес-группам
 ]
 # по границам слова: подстрокой "kol" ловилась "Kolkata", "trade" -- "Trade Finance"

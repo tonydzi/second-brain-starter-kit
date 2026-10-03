@@ -209,7 +209,7 @@ Its closest neighbours in the **memory** layer: [`sqlite-graph-memory`](https://
 <!-- CONTACT-FOOTER -->
 ## About & contact
 
-Built and [человек]-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
 running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
 production use before publication.
 

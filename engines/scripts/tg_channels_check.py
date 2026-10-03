@@ -47,7 +47,7 @@ _HOST   = (os.environ.get("COMPUTERNAME") or "").upper()
 _LABEL  = {"LAPTOP1": "laptop-HP17", "HUB1": "HUB1"}.get(_HOST, _HOST or "?")
 
 MCP_LOG = os.environ.get("TG_MCP_LOG", r"[путь владельца]")
-# a fatal log entry [человек] than this many hours = the MCP is (or was just) actively broken.
+# a fatal log entry younger than this many hours = the MCP is (or was just) actively broken.
 FRESH_H = float(os.environ.get("TG_MCP_FRESH_HOURS", "48"))
 
 try:
