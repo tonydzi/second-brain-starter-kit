@@ -1,6 +1,7 @@
 ---
 name: link-rot
-description: "Прочесать ВСЕ внешние указатели Антона после переименования (репо, организации, домена, хэндла, аккаунта) и починить мёртвые. Триггеры “/link-rot“, “/lr“, “проверь ссылки“, “прочеши профили“, “после переименования“, “битые ссылки на профилях“, “куда ведут наши визитки“, “link rot“, а также САМ — сразу после любого переименования публичного артефакта и раз в квартал профилактикой"
+description: "Sweep every external pointer to you (profiles, READMEs, bios, link pages) after a rename of a repo, org, domain, handle or account, and fix the dead ones. Use right after any public rename and once a quarter as hygiene. Triggers: /link-rot, /lr, check links, broken profile links, after the rename, link rot."
+license: MIT
 version: 1.1.0
 ---
 
@@ -93,6 +94,7 @@ curl публичной страницы с `grep -c <старый адрес>` 
 ## Шаг 6 — вердикт о скилле (§9.3-бис)
 Прогнал скилл — одной строкой: `🔧 обновляю` (что споткнулось) · `📝 обновлю не сейчас` (куда легла
 строка) · `✅ не надо` (почему именно). Пустое «не надо» вердиктом не является.
+
 
 
 <!--kit-footer-->

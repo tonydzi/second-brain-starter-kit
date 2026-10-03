@@ -1,6 +1,7 @@
 ---
 name: fake-it
-description: "СЛОЙ ПРОДАЖИ: усилить рамку артефакта до масштаба, который он на самом деле заслуживает, НЕ тронув ни одной цифры. Триггеры: '/fake-it', '/fi', 'приукрась', 'продай это', 'усиль рамку', 'сделай громче', 'подай красиво', 'sell it', а также САМ перед любым исходящим наружу (пост, питч, README, CV, PR-коммент, лендинг, заявка, DM лиду, Show HN, письмо в лабу) и перед показом Антону готового артефакта"
+description: "Sell layer: raise the framing of an artifact to the scale it actually deserves without touching a single number. Use before anything goes outbound (post, pitch, README, CV, PR comment, landing page, application, DM) or before showing a finished artifact. Triggers: /fake-it, /fi, sell it, make it louder, strengthen the frame."
+license: MIT
 version: 1.0.0
 ---
 
@@ -69,6 +70,7 @@ python ~/.claude/scripts/paragraph_lint.py <усиленный-файл>
 
 ## Дверь работает, если её зовут
 Вызывается САМ (без просьбы Антона) на каждом исходящем артефакте — это и есть «частенько использовать». Точки автовызова: `/taste-check` (P35), `/social-daily`, `/episode`, `/pack`, `/cv`, `/fa`, `/pr-reply`, `/apply`.
+
 
 
 <!--kit-footer-->

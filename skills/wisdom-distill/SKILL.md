@@ -30,13 +30,14 @@ tags: [insight, weekly-wisdom, anton-original], summary. Link the sources
 (no-orphan-notes-rule); if beliefs are touched, link the matching belief-* note. NO 🧒 block inside the note.
 
 ## Scheduled twin
-Cron `wisdom-distill-weekly`: Sunday 23:20 Lisbon (routines-run-at-night). Gatherer ->
+Cron `wisdom-distill-weekly`: Sunday 23:20 local time (routines-run-at-night). Gatherer ->
 distillation (top-model subagent) -> note -> announcement in the fleet log chat (bus_ping.py --post).
 The manual twin is this skill. Single source of truth = wisdom_week_gather.py.
 
 ## Related
 Active-brain map A-E: item D · /five-hard (monthly) · /precedent (decisions) · recurring_scan.py
 (the whole corpus) · vault-backup-rule · model-routing (synthesis -> top model).
+
 
 
 <!--kit-footer-->

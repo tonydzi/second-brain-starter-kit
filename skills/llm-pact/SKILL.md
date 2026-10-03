@@ -1,6 +1,7 @@
 ---
 name: llm-pact
-description: "Как двум LLM-агентам (Claude×Codex×любой) договориться и работать из одной папки: протокол реплик, каналы, роли, доказательства, будильник, анти-паттерны. Триггеры: /llm-pact, договорись с codex/grok/glm, подключи второго агента, правила пары, консенсус агентов, two-agent protocol. Соавторы: Claude+Codex (ACCEPT 1898543); из живого дня 16.09.2026 (7 дыр, 3 ревизии)."
+description: "Protocol for two LLM agents (Claude, Codex or any other) to agree and work from one shared folder: message format, channels, roles, evidence rules, wake-up alarm and anti-patterns. Triggers: /llm-pact, agree with codex, connect a second agent, pair rules, agent consensus, two-agent protocol."
+license: MIT
 consumer: "сессии Claude узла (двери /03, /secondop, онбординг пиров) · Codex через codex_skills_bridge · будущие пиры GLM/Grok (раздел «Подключение нового пира»)"
 ---
 
@@ -162,6 +163,7 @@ tests: skill_desc_audit --check llm-pact = PASS · таблица verbs в Ша�
 сценарный контракт · link-audit указателей (agent-protocol.md, workclaim,
 selfheal, prior_art, codex_skills_bridge) = все существуют. После ACCEPT:
 bridge status PASS + по одному вызову скилла каждым агентом.
+
 
 
 <!--kit-footer-->

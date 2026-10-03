@@ -1,6 +1,7 @@
 ---
 name: read-with-ai
-description: "Виджет «ПРОЧИТАТЬ С ИИ» под нашим контентом: кнопка «скопировать промпт» + диплинки, открывающие материал уже загруженным в агента (Codex · ChatGPT · Claude). Триггеры: /read-with-ai, «кнопки с ИИ», «прочитать с ИИ», «добавь ИИ-кнопки», «виджет под статью», «read with AI»"
+description: "Add a 'Read with AI' widget under published content: a copy-the-prompt button plus deep links that open the material already loaded into an agent (Codex, ChatGPT, Claude). Triggers: /read-with-ai, read with AI buttons, add AI buttons, widget under the article."
+license: MIT
 version: 1.0.0
 ---
 
@@ -88,6 +89,7 @@ python ~/.claude/scripts/_killrun_read_with_ai.py   # kill-list: 7 мутаци�
 ## Замер при рождении (20.09.2026)
 49 публичных репо с виджетом (47 создано волной + 2 канарейки), 0 ошибок;
 8 страниц tonydzi.github.io, живое подтверждено curl'ом после деплоя.
+
 
 
 <!--kit-footer-->

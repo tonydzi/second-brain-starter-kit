@@ -1,6 +1,7 @@
 ---
 name: deflate
-description: "«Меньше тепла и шума» на ЭТОМ узле — аудит фоновой нагрузки (задачи планировщика по запускам/час, автозапуск, держатели GPU, режим питания, топ CPU) → план кандидатов на выключение/растяжку → решение ПОСТРОЧНО С ОПЕРАТОРОМ → применение только одобренных строк… Триггеры: /deflate, «шумит вентилятор», «ноут греется», «что можно выключить», «потуши фон», «машина тормозит от фона», «deflate this node»"
+description: "Cut background heat and noise on this machine: audit scheduled tasks by runs per hour, autostart entries, GPU holders, power plan and top CPU, then propose disable or stretch candidates, decide line by line with the operator and apply only approved lines. Triggers: /deflate, fan is loud, laptop runs hot, what can I turn off, machine slow from background load."
+license: MIT
 version: 1.0.0
 ---
 
@@ -32,6 +33,7 @@ version: 1.0.0
 
 ## Что мерить, чтобы не соврать
 До и после: запусков/час · CPU °C и обороты · dGPU °C без опроса nvidia-smi (карта спит = температура ≈ комнатная на EC-сенсоре). Замер ZBOOKG8 08.09: 136 → 62 → ~45 запусков/час, CPU 92 → 70 °C, dGPU 77 → 25 °C.
+
 
 
 <!--kit-footer-->

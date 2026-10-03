@@ -1,6 +1,7 @@
 ---
 name: promises
-description: "КОНТРОЛЬ И КОЛЛЕКШН ОБЕЩАНИЙ: каждое обещание (их нам И наше им) фиксируется в реестре с датой и источником, напоминается в срок и закрывается с evidence. Триггеры: “/promises“, “/обещания“, «зафиксируй обещание», «кто нам что обещал», «что мы обещали», «просроченные обещания», «свод обещаний», «collect promises», «promise tracker»"
+description: "Track and collect promises: every promise, theirs to us and ours to them, goes into a registry with date and source, gets a reminder when due and is closed with evidence. Triggers: /promises, log this promise, who promised us what, what did we promise, overdue promises, promise tracker."
+license: MIT
 version: 1.0.0
 ---
 
@@ -63,6 +64,7 @@ grep -rl "promise" "$OBSIDIAN_VAULT/10-Tasks" --include="task-*.md" -i
 ## Связано
 `/comment-to-call` (шаг 5 — обещания из воронки) · `/fa` (Promised после звонка) ·
 `/triage` (обещания из лички) · Библия `reglament-kollekti-obeshchaniya-vsegda`.
+
 
 
 <!--kit-footer-->

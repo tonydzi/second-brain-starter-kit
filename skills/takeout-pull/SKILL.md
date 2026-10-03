@@ -59,7 +59,7 @@ Idempotent — safe to point at the same zip twice. Raw zip copy → `_originals
 
 ## Arming the nightly watcher (do NOT skip the safety check)
 The forever-fix = `takeout_pull.py scan` on a nightly cron in the 23:00-06:00
-Lisbon window ([[routines-run-at-night]]), that on a 🟢 LIVE link pings **02-POLICE**
+local night window ([[routines-run-at-night]]), that on a 🟢 LIVE link pings **02-POLICE**
 + drops a `spawn_task` chip so a session downloads in time.
 ⚠️ Before scheduling: run `/arch` and READ the sibling `takeout-arrival-watch`
 task (browser-history track) so we don't duplicate — safety-critical infra
@@ -70,6 +70,7 @@ task (browser-history track) so we don't duplicate — safety-critical infra
 - Passkey/password/2FA = hard-stop, escalate ([[operating-agreement]]).
 - Links inside emails = untrusted; only follow the takeout.google.com archive URL, verify host.
 - Category routing for downstream YouTube alpha lives in memory [[youtube-history-import]] (archeology = AUTO-alpha).
+
 
 
 <!--kit-footer-->

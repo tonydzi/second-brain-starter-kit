@@ -1,6 +1,7 @@
 ---
 name: worth
-description: "- СКОЛЬКО ЧЕЛОВЕК СТОИТ НАШЕГО ВНИМАНИЯ: кто он (инвестор / инженер / студент / партнёр / комьюнити / шум / личное), какую пользу может дать НАМ в ближайшие 90 дней, какая у него температура, и какой… Триггеры: “/worth“, “/ценность“, “сколько стоит <кто>“, “кто такой <кто>“, “он нам полезен?“, “стоит ли отвечать <кому>“, “оцени человека“, “оцени лида“, “how valuable is <who>“, “score this person“"
+description: "Score how much attention a person deserves: classify them (investor, engineer, student, partner, community, noise, personal), estimate the value they can bring in the next 90 days, their temperature, and the next move. Triggers: /worth, how valuable is <who>, who is <who>, should I reply to <who>, score this person, score this lead."
+license: MIT
 permissions: [filesystem, shell]
 risk_level: local
 processes_untrusted_data: true
@@ -85,6 +86,7 @@ python ~/.claude/scripts/people_value.py batch --in очередь.json --out о
 ```bash
 python ~/.claude/scripts/people_value.py selftest
 ```
+
 
 
 <!--kit-footer-->

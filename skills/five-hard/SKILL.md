@@ -36,7 +36,7 @@ Frontmatter: title, date, `type: five-hard`, `source: claude-session`,
 if they changed position, propose a diff to the belief/bible note with `supersedes:` (via `/intake`). NO 🧒 block inside the note.
 
 ## Scheduled twin
-Cron `five-hard-monthly`: 1st of the month, 05:25 Lisbon (the briefing window, `routines-run-at-night`).
+Cron `five-hard-monthly`: 1st of the month, 05:25 local time (the briefing window, `routines-run-at-night`).
 Picker -> questions (top-model subagent) -> **the fleet log chat** via `python $USERPROFILE/.claude/scripts/bus_ping.py --post "..."`
 (canon: alerts go to the fleet log chat, never to Saved Messages) + "answer by voice or text, I will file it into the vault".
 The manual twin is this skill; the single source of truth is the picker.
@@ -44,6 +44,7 @@ The manual twin is this skill; the single source of truth is the picker.
 ## Related
 [[self-bible-identity-layer]] · [[bible-as-prompt]] · [[epistemic-neutrality]] · /coach (daily) vs
 /five-hard (monthly). Active-brain map A-E: item B. ⚠️ Restored 2026-07-04 after the 2026-06-24 migration wipe.
+
 
 
 <!--kit-footer-->

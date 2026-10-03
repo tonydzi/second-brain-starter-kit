@@ -1,6 +1,7 @@
 ---
 name: five-whys
-description: "Расследует корень повторного или системного дефекта по серии случаев. Триггеры: «а опять почему?», «пять почему», «чини корень», 3-й рецидив. Не использовать для 1-2 рядовых случаев, уже доказанной простой причины или единичного внешнего сбоя."
+description: "Investigate the root cause of a recurring or systemic defect across a series of incidents, not a single one. Use on the third recurrence, or when someone asks 'why again?', 'five whys', 'fix the root'. Skip for one or two ordinary cases, an already proven simple cause, or a one-off external outage. Triggers: /five-whys, five whys, fix the root."
+license: MIT
 consumer: "/tt · /retro · отдельная сессия разбора повторяющегося Claude↔Codex ping-pong"
 ---
 
@@ -185,6 +186,7 @@ carve-out (если есть), что уже проверено и что зап
   **реального** исхода записать ровно один вызов:
   `python "$HOME/.claude/scripts/_shared/skill_usage_log.py" --log five-whys --outcome ok --kind skill`.
   Синтетические/static/mutation-тесты боевой счётчик не трогают.
+
 
 
 <!--kit-footer-->

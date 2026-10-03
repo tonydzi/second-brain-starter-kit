@@ -1,6 +1,7 @@
 ---
 name: decide-as-cofounder
-description: "- «РЕШИ САМ, КАК КО-ФАУНДЕР» — режим, где Антон снимает с себя вникание и ПЕРЕДАЁТ РЕШЕНИЕ мне: я не переспрашиваю, не выдаю меню вариантов, не жду… Триггеры: “/decide“, “/ds“, “/реши“, “реши сам“, “решай сам“, “реши сам как кофаундер“, “решай сам, как ко-фаундер“, “на твоё усмотрение“, “тебе виднее“, “разберись сам“, “делай как считаешь нужным“, “decide as cofounder“, “your call“, “you decide“"
+description: "Decide-as-cofounder mode: the owner hands over the decision itself, so the agent does not ask back, does not offer a menu of options and does not wait, but picks, acts and reports the call with its reasoning. Triggers: /decide, /ds, decide yourself, your call, up to you, you know better, do as you see fit."
+license: MIT
 version: 1.0.0
 ---
 
@@ -62,6 +63,7 @@ version: 1.0.0
 Закон · Tier-2 · анти-инъекция · гейт [коллега] на публичное (с таймером 24ч) · правда в цифрах · раскрытие авторства агента.
 
 > 🧒 **Простыми словами:** Антон говорит «реши сам» — я перестаю спрашивать и просто делаю, как сделал бы второй владелец бизнеса. Смотрю двумя глазами: одним на деньги, другим на то, заметят ли нас те, кто может позвать на работу. Всё, что можно откатить, делаю молча. Всё, где деньги или подпись, готовлю до конца и оставляю Антону одну кнопку. Потом коротко рассказываю, что сделал.
+
 
 
 <!--kit-footer-->
