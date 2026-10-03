@@ -160,7 +160,6 @@ These arrived with the full local set and still carry their original working des
 |---|---|
 | [`/ai-slop`](ai-slop/SKILL.md) | АНТИ-AI-SLOP ХУМАНИЗАТОР (Антон зовёт его AI_SLOPE) — берёт текст, написанный роботом, и переделывает в текст живого ОЧЕНЬ ЗАНЯТОГО человека: режет 50… |
 | [`/alpha-credit`](alpha-credit/SKILL.md) | - КРЕДИТ АВТОРУ ИДЕИ: совет из комментария (TG @ClawRus / @ClawInga, комменты под постами Антона в FB, треды и issue на… Триггеры: “/alpha-credit“, “/… |
-| [`/apply`](apply/SKILL.md) | Труба А: подача заявок Антона на вакансии через веб-формы (Ashby/Greenhouse/Lever/HN). Триггеры: /apply, «подайся на вакансии», «подача пачки», «apply… |
 | [`/ask-any`](ask-any/SKILL.md) | ПОРУЧИТЬ РАБОТУ ЛЮБОЙ ЖИВОЙ LLM, а не только Claude: задание уходит ОДНОВРЕМЕННО на codex + grok + gemini + claude, побеждает первая ответившая. Тригг… |
 | [`/ask-debt`](ask-debt/SKILL.md) | READ-ONLY замер «ДОЛГА АВТОНОМНОСТИ» по журналу одобрений 02 (approvals.db) — сколько я спросил Антона за окно, сколько из этого ПРОТУХЛО (никто не от… |
 | [`/audit-content`](audit-content/SKILL.md) | Verifies truthfulness, accuracy, and link integrity of content before publishing. Catches fabricated statistics, dead URLs, misattributed sources, and… |
@@ -178,7 +177,6 @@ These arrived with the full local set and still carry their original working des
 | [`/corpus-bench`](corpus-bench/SKILL.md) | Станок верификации чужого кода на НАШИХ живых корпусах (GIT-25). Триггеры - “/corpus-bench“, “прогони по корпусу“, “проверь их фикс на наших транскрип… |
 | [`/create-geo-charts`](create-geo-charts/SKILL.md) | Creates data visualizations (charts, graphs, tables) optimized for AI engine parsing and citation. Produces inline SVG/HTML with text summaries, data … |
 | [`/cv-outreach`](cv-outreach/SKILL.md) | Исполнить дневную порцию ИСХОДЯЩЕГО по календарю Долины — регистрации на события, личка организаторам, публичные касания в X. Триггеры “/cv-outreach“,… |
-| [`/cv`](cv/SKILL.md) | Обновление CV Антона по ВСЕМУ конвейеру одной командой — мастер resume.json → cv_forge (кластерные CV) → лендинг… Триггеры “/cv“, “обнови CV“, “обнови… |
 | [`/dash`](dash/SKILL.md) | ДАШБОРД ОТ ИДЕИ ДО ССЫЛКИ В ОДИН ЗАХОД: собрать визуализацию, положить в единый каталог, перелинковать с остальными, выложить на наш GitHub Pages, СРА… |
 | [`/decide-as-cofounder`](decide-as-cofounder/SKILL.md) | - «РЕШИ САМ, КАК КО-ФАУНДЕР» — режим, где Антон снимает с себя вникание и ПЕРЕДАЁТ РЕШЕНИЕ мне: я не переспрашиваю, не выдаю меню вариантов, не жду… Т… |
 | [`/deflate`](deflate/SKILL.md) | «Меньше тепла и шума» на ЭТОМ узле — аудит фоновой нагрузки (задачи планировщика по запускам/час, автозапуск, держатели GPU, режим питания, топ CPU) →… |
