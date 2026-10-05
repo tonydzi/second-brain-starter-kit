@@ -1,6 +1,7 @@
 ---
 name: pr-reply
-description: "- ОТВЕТИТЬ РЕВЬЮЕРУ на НАШЕМ пул-реквесте в чужом репозитории: найти треды, где мяч у нас, отделить живого человека от бота, сделать ровно то,… Триггеры: “/pr-reply“, “/prr“, “ответь ревьюерам“, “кто ждёт нашего ответа“, “долги по ревью“, “мяч у нас“, “разгреби PR“, “answer the reviewers“, “who is waiting on us“, а также САМ в начале любой сессии про GitHub и при алярме pr_watch про новое ревью"
+description: "Answer reviewers on your own pull requests in other people's repos: find threads where the ball is on your side, tell humans from bots, do exactly what was asked and reply with evidence. Use at the start of any GitHub session or on a new-review alert. Triggers: /pr-reply, /prr, answer the reviewers, who is waiting on us."
+license: MIT
 version: 1.1.0
 ---
 

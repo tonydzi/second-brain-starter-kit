@@ -1,6 +1,7 @@
 ---
 name: retro-lost
-description: "Ретро для БРОШЕННОЙ сессии (>24ч без касания = потеряшка, anton 02.09; ретро не делалось) — переработанный /retro под холодный контекст. Триггеры: “/retro-lost“, “ретро брошенной сессии“, “догони ретро“, “закрой хвост сессии <id>“, а также рутина auto-hub-260811-retro-lost-nightly (10 сессий/ночь, Opus)"
+description: "Run a retrospective for an abandoned agent session (untouched for over 24 hours, never closed with a retro): rebuild context cold from the transcript, list what was built, sort Keep/Drop/Try and file the durable parts. Use from a nightly routine or on demand. Triggers: /retro-lost, retro for an abandoned session."
+license: MIT
 consumer: "рутина auto-hub-260811-retro-lost-nightly · Антон/агент по команде /retro-lost · /retro шаг 6a-бис"
 version: 1.0.0
 ---

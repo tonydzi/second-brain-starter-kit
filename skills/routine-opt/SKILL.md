@@ -1,6 +1,7 @@
 ---
 name: routine-opt
-description: "Аудит и УДЕШЕВЛЕНИЕ парка рутин узла: кто сколько жрёт за прогон, какой рычаг применить (модель · декомпозиция · частота · префикс · утиль) и как доказать экономию замером, а не… Триггеры: “/routine-opt“, “/ropt“, “аудит рутин“, “рутины дорого жрут“, “переведи рутины на sonnet“, “запускай рутины реже“, “оптимизируй рутины“, “почему фон съел больше меня“, “routine audit“, “cheaper routines“"
+description: "Audit and cut the cost of a machine's scheduled routines: measure tokens per run, pick a lever (cheaper model, split, lower frequency, shorter prefix, retire) and prove the saving with a before-and-after measurement. Use when background routines burn more than interactive work. Triggers: /routine-opt, /ropt, routine audit, cheaper routines."
+license: MIT
 version: 1.1.0
 ---
 

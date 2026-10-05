@@ -161,6 +161,16 @@ day; personal data in the examples is replaced with plausible fictional stand-in
 | [`/elephant`](elephant/SKILL.md) | Eat the elephant one bite at a time: turn a large list-shaped job into a finite routine that chews a small batch every night, detects when it is… |
 | [`/decide-as-cofounder`](decide-as-cofounder/SKILL.md) | Decide-as-cofounder mode: the owner hands over the decision itself, so the agent does not ask back, does not offer a menu of options and does not… |
 | [`/llm-pact`](llm-pact/SKILL.md) | Protocol for two LLM agents (Claude, Codex or any other) to agree and work from one shared folder: message format, channels, roles, evidence rules,… |
+| [`/memory-tidy`](memory-tidy/SKILL.md) | Tidy an agent's always-loaded memory index (MEMORY.md) on macOS or Linux: trim long lines, move closed entries to an archive, fold domains into hub files,… |
+| [`/ai-slop`](ai-slop/SKILL.md) | Rewrite machine-written text so it reads like a busy human wrote it: cut 50-70%, break the even rhythm, drop AI-tell words and filler, keep facts and… |
+| [`/consumer-hunt`](consumer-hunt/SKILL.md) | After shipping a repo, release or feature, find who on GitHub actually needs it: search issues, discussions and catalogs for the symptom, rank live threads… |
+| [`/share-fix`](share-fix/SKILL.md) | Turn a fix you made for a whole class of bugs into help for others: reverse-search GitHub for people hitting the same symptom, pick the 3-5 best live… |
+| [`/red-first-review`](red-first-review/SKILL.md) | Review someone else's pull request by measuring which of its own guards its own test suite actually catches, via a small mutation matrix. Use when reviewing… |
+| [`/routine-opt`](routine-opt/SKILL.md) | Audit and cut the cost of a machine's scheduled routines: measure tokens per run, pick a lever (cheaper model, split, lower frequency, shorter prefix,… |
+| [`/bold-followup`](bold-followup/SKILL.md) | Write a bold, value-adding follow-up when your own outbound message got silence: check the thread, pick a second channel, add new value instead of a bare… |
+| [`/borrowed-audience`](borrowed-audience/SKILL.md) | Get external links to your repos through other people's curated surfaces: awesome-lists, tool catalogs and vendor showcases. Measures each list's merge… |
+| [`/pr-reply`](pr-reply/SKILL.md) | Answer reviewers on your own pull requests in other people's repos: find threads where the ball is on your side, tell humans from bots, do exactly what was… |
+| [`/retro-lost`](retro-lost/SKILL.md) | Run a retrospective for an abandoned agent session (untouched for over 24 hours, never closed with a retro): rebuild context cold from the transcript, list… |
 
 ## Raw imports, grooming in progress
 
@@ -168,20 +178,16 @@ These arrived with the full local set and still carry their original working des
 
 | Skill | Original description |
 |---|---|
-| [`/ai-slop`](ai-slop/SKILL.md) | АНТИ-AI-SLOP ХУМАНИЗАТОР (Антон зовёт его AI_SLOPE) — берёт текст, написанный роботом, и переделывает в текст живого ОЧЕНЬ ЗАНЯТОГО человека: режет 50… |
 | [`/alpha-credit`](alpha-credit/SKILL.md) | - КРЕДИТ АВТОРУ ИДЕИ: совет из комментария (TG @ClawRus / @ClawInga, комменты под постами Антона в FB, треды и issue на… Триггеры: “/alpha-credit“, “/… |
 | [`/ask-any`](ask-any/SKILL.md) | ПОРУЧИТЬ РАБОТУ ЛЮБОЙ ЖИВОЙ LLM, а не только Claude: задание уходит ОДНОВРЕМЕННО на codex + grok + gemini + claude, побеждает первая ответившая. Тригг… |
 | [`/ask-debt`](ask-debt/SKILL.md) | READ-ONLY замер «ДОЛГА АВТОНОМНОСТИ» по журналу одобрений 02 (approvals.db) — сколько я спросил Антона за окно, сколько из этого ПРОТУХЛО (никто не от… |
 | [`/audit-content`](audit-content/SKILL.md) | Verifies truthfulness, accuracy, and link integrity of content before publishing. Catches fabricated statistics, dead URLs, misattributed sources, and… |
 | [`/audit-website-aeo`](audit-website-aeo/SKILL.md) | Audits a live website for AI-engine discoverability (AEO/GEO). Crawls the site, runs 16 deterministic checks plus a 6-dimension content evaluation, an… |
-| [`/bold-followup`](bold-followup/SKILL.md) | Наглый фоллоуап, когда НАШЕ исходящее молчит. Триггеры “/bold-followup“, “/bump“, “наглый аутрич“, “письмо молчит“, “тишина от лида“, “фоллоуап по тиш… |
-| [`/borrowed-audience`](borrowed-audience/SKILL.md) | Добыть ВНЕШНИЕ ССЫЛКИ на наши репо через чужие курируемые поверхности — awesome-lists, каталоги тулов, вендорские showcase. Триггеры “/borrowed-audien… |
 | [`/brain-onboard`](brain-onboard/SKILL.md) | Onboard a NEW human peer ([коллега], [коллега], [коллега], future family/colleagues/clients) into building THEIR OWN Second Brain — the HUMAN layer th… |
 | [`/build-backlinks`](build-backlinks/SKILL.md) | Finds free backlink and brand mention opportunities across Hacker News, Quora, GitHub, directories, and niche communities. Outputs a prioritized actio… |
 | [`/build-resource-pages`](build-resource-pages/SKILL.md) | Takes existing content markdown files and builds production-final resource center pages on client websites using their existing tech stack and design … |
 | [`/chip`](chip/SKILL.md) | ЧИП ТОЛЬКО ПО ПРЯМОМУ ЗАПРОСУ ЮЗЕРА (anton 14.08): сделать ЧИПЫ (spawn_task), которые юзер нажмёт сам. |
 | [`/comment-to-call`](comment-to-call/SKILL.md) | ВОРОНКА «ПОЛЕЗНЫЙ ЧЕЛОВЕК → ДИАЛОГ → ЗВОНОК»: каждый, кто дал нам пользу / написал качественный коммент / покритиковал по-доброму / поделился знанием … |
-| [`/consumer-hunt`](consumer-hunt/SKILL.md) | - ВЫПУСТИЛ ФУНКЦИОНАЛ → НАЙДИ ЕГО ПОТРЕБИТЕЛЕЙ НА GITHUB И ПРИДИ К НИМ. Триггеры: “/consumer-hunt“, “/ch“, “кому это нужно“, “найди потребителей“, “ку… |
 | [`/contrib-watch`](contrib-watch/SKILL.md) | - СТОРОЖ ВХОДЯЩЕГО ФИДБЭКА: кто из посторонних инженеров пришёл к НАШИМ репозиториям, что написал, сколько часов ждёт… Триггеры: “/contrib-watch“, “/c… |
 | [`/corpus-bench`](corpus-bench/SKILL.md) | Станок верификации чужого кода на НАШИХ живых корпусах (GIT-25). Триггеры - “/corpus-bench“, “прогони по корпусу“, “проверь их фикс на наших транскрип… |
 | [`/create-geo-charts`](create-geo-charts/SKILL.md) | Creates data visualizations (charts, graphs, tables) optimized for AI engine parsing and citation. Produces inline SVG/HTML with text summaries, data … |
@@ -223,25 +229,20 @@ These arrived with the full local set and still carry their original working des
 | [`/ledger`](ledger/SKILL.md) | «Что было в тот день» — мгновенный ответ из дневного леджера, который роботы собирают каждую ночь из бесплатных следов… Триггеры: “/ledger“, “/день“, … |
 | [`/llll`](llll/SKILL.md) | /LLLL = короткий алиас /LLMs: решить текущий вопрос через адресный ограниченный консенсус других LLM. Триггеры: /LLLL, llll, четыре l. Вся логика живё… |
 | [`/llms`](llms/SKILL.md) | /LLMs решает текущий вопрос через ограниченный консенсус Claude, Codex, Cursor, Grok и других пиров. Передаёт тему и контекст сессии, читает только ад… |
-| [`/memory-tidy`](memory-tidy/SKILL.md) | Привести в порядок всегда-загружаемый индекс памяти MEMORY.md на этой машине (macOS/Linux) — подрезать, унести закрытое в архив, сложить домены в хабы… |
 | [`/mycroft-joke`](mycroft-joke/SKILL.md) | Дверь к банку шуток Майкрофта: подобрать строку раскрытия/ответку/гэг под конкретный текст и канал. Триггеры: '/mycroft-joke', '/mj', 'шутка майкрофта… |
 | [`/nsr`](nsr/SKILL.md) | NEW SESSION IN ROUTINE: я САМ поднимаю новую ВИДИМУЮ сессию через запланированную задачу — Антону жать нечего, но в списке он её видит и может продолж… |
 | [`/outbound-gate`](outbound-gate/SKILL.md) | ГЕЙТ ЛЮБОГО ИСХОДЯЩЕГО (PR/issue-коммент/DM/инвайт/пост/заявка/аутрич): исходящее обязано закрывать ЧЬЮ-ТО живую просьбу (анкер), выстрел в пустоту = … |
 | [`/pack`](pack/SKILL.md) | 📦 УПАКОВКА КОНТРИБЬЮШЕНА КАК ПРОДУКТА (декрет Антона 24.08.2026: «нам нужно всегда делать КАЧЕСТВЕННО... Триггеры: “/pack“, “/упакуй“, “упакуй как про… |
 | [`/pattern-of-life-from-socials`](pattern-of-life-from-socials/SKILL.md) | - Deep-dive a subject's social media presence — profile metadata, follower and mutual network, content analysis, and posting-time pattern of life acro… |
 | [`/peer-onboard`](peer-onboard/SKILL.md) | Онбординг КЛОДА нового внешнего лида/пира в наш Second Brain — вся цепочка одной командой: оформить TG-комнату (название по формуле,… Триггеры: “/peer… |
-| [`/pr-reply`](pr-reply/SKILL.md) | - ОТВЕТИТЬ РЕВЬЮЕРУ на НАШЕМ пул-реквесте в чужом репозитории: найти треды, где мяч у нас, отделить живого человека от бота, сделать ровно то,… Тригге… |
 | [`/pult`](pult/SKILL.md) | 📱 ПУЛЬТ — ежедневная ПУСТАЯ сессия с Remote Control на каждом узле Антона, чтобы он мог управлять машиной с ТЕЛЕФОНА без AnyDesk. Триггеры “/pult“, “/… |
 | [`/raise-sourcing`](raise-sourcing/SKILL.md) | - СОРСИНГ ПОД РЕЙЗ в два трека: инвесторы из нашего VC-графа (leads.db) и покупатели-пилоты, найденные ПО СИМПТОМУ в интернете (GitHub issues, Hacker … |
 | [`/read-deleted-pages`](read-deleted-pages/SKILL.md) | - Recover deleted, edited or historical web content using the Wayback Machine and its CDX API, archive.today, Common Crawl… Use when a page is deleted… |
 | [`/recon-a-domain-passively`](recon-a-domain-passively/SKILL.md) | - End-to-end passive reconnaissance for a domain, website or IP — builds an asset inventory covering registration, DNS, subdomains, infrastructure, te… |
-| [`/red-first-review`](red-first-review/SKILL.md) | Review someone else's pull request by measuring which of its own guards its own test suite actually catches. Use when reviewing a PR, auditing test co… |
 | [`/reddit-opportunity-research`](reddit-opportunity-research/SKILL.md) | Researches Reddit using a brand's Brand DNA to find promotable pain-point discussions, target subreddits, and real user search language. Produces a pr… |
 | [`/rep-reply`](rep-reply/SKILL.md) | Найти ЖИВЫЕ чужие треды (GitHub issues/discussions) по темам, где у нас есть РЕАЛЬНЫЙ боевой опыт и артефакты, и ответить в них нашим опытом — прокачк… |
 | [`/research-brand`](research-brand/SKILL.md) | Researches a company from its URL and produces a Brand DNA file covering positioning, audience, competitors, voice, and messaging. Use when starting w… |
 | [`/research-keywords`](research-keywords/SKILL.md) | Finds high-value SEO and GEO keywords using web search, AI analysis, and optionally paid tools like Ahrefs or Semrush. Produces a validated keywords.c… |
-| [`/retro-lost`](retro-lost/SKILL.md) | Ретро для БРОШЕННОЙ сессии (>24ч без касания = потеряшка, anton 02.09; ретро не делалось) — переработанный /retro под холодный контекст. Триггеры: “/r… |
-| [`/routine-opt`](routine-opt/SKILL.md) | Аудит и УДЕШЕВЛЕНИЕ парка рутин узла: кто сколько жрёт за прогон, какой рычаг применить (модель · декомпозиция · частота · префикс · утиль) и как дока… |
 | [`/scholar-nerd-style`](scholar-nerd-style/SKILL.md) | СТИЛЬ УЧЁНОГО ЗАДРОТА — фирменный визуальный язык наших сайтов-документов: рукописный HTML в один файл, шрифт с… Триггеры “/scholar-nerd-style“, “/ner… |
 | [`/screenpipe-api`](screenpipe-api/SKILL.md) | Query the user's local and synced-device data via the screenpipe REST API at localhost:3030 — recordings, audio, UI, meetings, connected services, and… |
 | [`/screenpipe-cli`](screenpipe-cli/SKILL.md) | Set up and operate screenpipe from the terminal, including always-on recording, service modes, capture health, storage, local search, pipes, and conne… |
@@ -257,7 +258,6 @@ These arrived with the full local set and still carry their original working des
 | [`/secrets-in-git-history`](secrets-in-git-history/SKILL.md) | - Mine GitHub, GitLab and git history for identities, infrastructure and leaked credentials using commit author emails, GitHub code search, the commit… |
 | [`/session-groups`](session-groups/SKILL.md) | Пометить КАЖДУЮ сессию Claude Desktop (Code tab) ИКОНКОЙ её группы прямо в заголовке — «⚙️ Имя», «💰 Р+ Имя». Пока сайдбар-инструмент ccd_sidebar запер… |
 | [`/sessions`](sessions/SKILL.md) | Показать одним экраном, ЧТО СЕЙЧАС ДЕЛАЮТ сессии Claude на этой машине: сколько работает и над чем, сколько закрылось за 12ч, что ЖДЁТ решения Антона … |
-| [`/share-fix`](share-fix/SKILL.md) | - 🌍 ПОЧИНИЛ — РАЗДАЙ МИРУ (декрет Антона 24.08.2026, голосом): переносимая починка КЛАССА / добытый результат → в том же заходе найти страдальцев на G… |
 | [`/slot`](slot/SKILL.md) | РЕЕСТР ПЕРЕИСПОЛЬЗУЕМЫХ СЕССИЙ + выдача слота: породить ВИДИМУЮ Антону фоновую сессию БЕЗ апрув-окна, переиспользовав… Триггеры: /slot, /слот, «дай сл… |
 | [`/social-daily`](social-daily/SKILL.md) | Единый вход публикации контент-фабрики на все живые площадки: Facebook, X, Telegram-каналы, Threads, Instagram. Публикую САМ. Триггеры: /social-daily,… |
 | [`/sostav-dm`](sostav-dm/SKILL.md) | Личка и реплаи лидам клуба СОСТАВ в стиле Антона: два текста на лида (reply в группе под его свежим сообщением + личка), удочка без подсечки на первом… |

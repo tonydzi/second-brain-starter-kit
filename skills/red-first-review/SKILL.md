@@ -1,6 +1,7 @@
 ---
 name: red-first-review
-description: "Review someone else's pull request by measuring which of its own guards its own test suite actually catches. Use when reviewing a PR, auditing test coverage of a fix, checking whether a regression test is real, or when asked “is this change actually tested?“, “review this PR“, “does this test do anything“, “mutation test this“."
+description: "Review someone else's pull request by measuring which of its own guards its own test suite actually catches, via a small mutation matrix. Use when reviewing a PR, checking whether a regression test is real, or asked 'is this change actually tested?', 'does this test do anything', 'mutation test this'."
+license: MIT
 version: 1.0.0
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: bold-followup
-description: "Наглый фоллоуап, когда НАШЕ исходящее молчит. Триггеры “/bold-followup“, “/bump“, “наглый аутрич“, “письмо молчит“, “тишина от лида“, “фоллоуап по тишине“, “second channel“, “добей лида“"
+description: "Write a bold, value-adding follow-up when your own outbound message got silence: check the thread, pick a second channel, add new value instead of a bare bump. Use when an email, DM or PR comment went unanswered. Triggers: /bold-followup, /bump, follow up on silence, second channel."
+license: MIT
 version: 1.0.0
 ---
 

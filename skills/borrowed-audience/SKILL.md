@@ -1,6 +1,7 @@
 ---
 name: borrowed-audience
-description: "Добыть ВНЕШНИЕ ССЫЛКИ на наши репо через чужие курируемые поверхности — awesome-lists, каталоги тулов, вендорские showcase. Триггеры “/borrowed-audience“, “/ba“, “заёмная аудитория“, “куда положить наши репо“, “добудь внешние ссылки“, “подай в awesome-листы“, “найди курируемые списки“, “где нас разместить“, “borrowed audience“, “get external links“"
+description: "Get external links to your repos through other people's curated surfaces: awesome-lists, tool catalogs and vendor showcases. Measures each list's merge queue before submitting, so nothing goes into a dead queue. Triggers: /borrowed-audience, /ba, borrowed audience, get external links, submit to awesome lists."
+license: MIT
 version: 1.0.0
 ---
 
@@ -115,7 +116,7 @@ gh pr create --repo <upstream> --base main --head tonydzi:<ветка> --title .
 ## Шаг 6. СТОРОЖ
 `git push` ≠ ссылка добыта. Ссылка добыта только на мерже. Ставим одноразовую проверку через 3 дня:
 ```
-mcp__scheduled-tasks__create_scheduled_task, fireAt = +3 дня, 05:30 Лиссабона (ночное окно §4.6)
+mcp__scheduled-tasks__create_scheduled_task, fireAt = +3 дня, 05:30 локального времени (ночное окно §4.6)
 ```
 Промпт задачи: замерить каждый PR → разложить на смержен / ответил мейнтейнер / закрыт / тишина. **Ответил мейнтейнер = отвечаем САМИ и сразу** (§4.7, молчание в живом треде = провал). Тишина <14 дней — не пинговать, это спам.
 

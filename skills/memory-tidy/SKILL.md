@@ -1,6 +1,7 @@
 ---
 name: memory-tidy
-description: "Привести в порядок всегда-загружаемый индекс памяти MEMORY.md на этой машине (macOS/Linux) — подрезать, унести закрытое в архив, сложить домены в хабы, вернуть выпавшие пины, накрыть сирот указателями. Триггеры “/memory-tidy“, “/mt“, “прибери память“, “прибери индекс“, “почисти MEMORY.md“, “память распухла“, “индекс памяти“, “сироты в памяти“, “tidy memory“"
+description: "Tidy an agent's always-loaded memory index (MEMORY.md) on macOS or Linux: trim long lines, move closed entries to an archive, fold domains into hub files, restore dropped pins and add pointers for orphan memory files. Use when the index is over budget or has orphans. Triggers: /memory-tidy, /mt, tidy memory."
+license: MIT
 version: 1.0.0
 ---
 
@@ -16,7 +17,7 @@ version: 1.0.0
 * сторож сказал RED (`memory_guard.py`);
 * индекс подошёл к мягкой черте (15 КБ / 110 строк);
 * руками — когда захотелось порядка;
-* ночью само: launchd `ai.paloalto.memory-tidy`, 01:10 и 05:40 по Лиссабону.
+* ночью само: launchd `ai.paloalto.memory-tidy`, 01:10 и 05:40 по локальному времени.
 
 ## Шаг 0 — ВЛАДЕНИЕ (пропустить = устроить sync-conflict)
 ```bash

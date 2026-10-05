@@ -1,6 +1,7 @@
 ---
 name: consumer-hunt
-description: "- ВЫПУСТИЛ ФУНКЦИОНАЛ → НАЙДИ ЕГО ПОТРЕБИТЕЛЕЙ НА GITHUB И ПРИДИ К НИМ. Триггеры: “/consumer-hunt“, “/ch“, “кому это нужно“, “найди потребителей“, “куда это подать“, “кто потребитель нашего функционала“, “разнеси по каталогам“, “find consumers“, “where to submit“, а также САМ сразу после того, как любой наш артефакт стал публичным (новый репозиторий, релиз, заметная фича)"
+description: "After shipping a repo, release or feature, find who on GitHub actually needs it: search issues, discussions and catalogs for the symptom, rank live threads and draft one precise reply per consumer. Use right after any artifact goes public. Triggers: /consumer-hunt, /ch, find consumers, where to submit."
+license: MIT
 version: 1.0.0
 ---
 

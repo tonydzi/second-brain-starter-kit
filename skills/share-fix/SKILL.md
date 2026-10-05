@@ -1,6 +1,7 @@
 ---
 name: share-fix
-description: "- 🌍 ПОЧИНИЛ — РАЗДАЙ МИРУ (декрет Антона 24.08.2026, голосом): переносимая починка КЛАССА / добытый результат → в том же заходе найти страдальцев на GitHub реверс-поиском по… Триггеры: “/share-fix“, “/sf“, “раздай миру“, “раздай лечилку“, “мировой потребитель“, “🌍“, а также АВТОМАТИЧЕСКИ из /tt Шаг 5 (вердикт ✅ на починке класса) и /retro Connect (закрытые классы Breakage-Journal без вердикта 🌍)"
+description: "Turn a fix you made for a whole class of bugs into help for others: reverse-search GitHub for people hitting the same symptom, pick the 3-5 best live threads and post one tailored answer or gist each, no copy-paste fan-out. Use after a verified class fix. Triggers: /share-fix, /sf, share the fix."
+license: MIT
 version: 1.0.0
 ---
 

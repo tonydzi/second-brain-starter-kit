@@ -1,6 +1,7 @@
 ---
 name: ai-slop
-description: "АНТИ-AI-SLOP ХУМАНИЗАТОР (Антон зовёт его AI_SLOPE) — берёт текст, написанный роботом, и переделывает в текст живого ОЧЕНЬ ЗАНЯТОГО человека: режет 50-70%, ломает ровный… Триггеры: “/ai-slop“, “/ai_slope“, “/aislope“, “/slop“, “слоп“, “очеловечь“, “убери нейрослог“, “убери нейрояз“, “анти-слоп“, “сделай короче и живее“, “перепиши как занятый человек“, “humanize“, “anti-slop“ (регистр не важен)"
+description: "Rewrite machine-written text so it reads like a busy human wrote it: cut 50-70%, break the even rhythm, drop AI-tell words and filler, keep facts and protected terms. Use before publishing any post, reply or email drafted by a model. Triggers: /ai-slop, /slop, humanize, anti-slop, make it shorter and alive."
+license: MIT
 version: 1.0.0
 ---
 
