@@ -1,6 +1,7 @@
 ---
 name: scholar-nerd-style
-description: "СТИЛЬ УЧЁНОГО ЗАДРОТА — фирменный визуальный язык наших сайтов-документов: рукописный HTML в один файл, шрифт с… Триггеры “/scholar-nerd-style“, “/nerd“, “/задрот“, “стиль учёного задрота“, “стиль задрота“, “сделай в нашем стиле“, “как на scholar“, “как страница публикаций“, “сверстай страницу“, “новый сайт в нашем стиле“, “сайт лабы“, “проверь стиль страницы“, “nerd style“, “scholar style“"
+description: "Apply a scholarly 'nerd' visual style to single-file handwritten HTML document sites: publication-list look, restrained typography, no frameworks. Use when building or reviewing a lab site, a publications page or any new page that should match this house style. Triggers: /scholar-nerd-style, /nerd, nerd style, scholar style, build a page in our style, check page style."
+license: MIT
 version: 1.0.0
 ---
 
@@ -139,6 +140,7 @@ python scripts/_test_style_check.py
 - `references/page-template.html` — скелет страницы
 - `scripts/style_check.py` — гейт
 - `scripts/_test_style_check.py` — тест гейта
+
 
 
 <!--kit-footer-->

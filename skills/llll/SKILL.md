@@ -1,8 +1,9 @@
 ---
 name: llll
-description: "/LLLL = короткий алиас /LLMs: решить текущий вопрос через адресный ограниченный консенсус других LLM. Триггеры: /LLLL, llll, четыре l. Вся логика живёт только в /llms"
+description: "Short alias for /llms: settle the current question through a targeted, bounded consensus of other LLMs. Use when you want outside models to agree or disagree with a plan before acting. All logic lives in the llms skill. Triggers: /LLLL, llll."
+license: MIT
 version: 1.0.0
-consumer: "Антон как короткая команда /LLLL · Claude/Codex через общую полку скиллов"
+consumer: "anyone asked to repair the app; Claude, Codex and Cursor agents"
 ---
 
 # /LLLL — алиас для /LLMs
@@ -14,6 +15,7 @@ consumer: "Антон как короткая команда /LLLL · Claude/Cod
 
 Не копируй сюда шаги консенсуса. Единственный источник механики — `/llms`; общая state machine
 агентов остаётся в `/llm-pact`.
+
 
 
 <!--kit-footer-->

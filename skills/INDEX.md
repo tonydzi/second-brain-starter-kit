@@ -1,4 +1,4 @@
-# Skill map: all 230 skills
+# Skill map: all 232 skills
 
 One skill = one `/name` command for Claude Code. This is the full set the lab runs every
 day; personal data in the examples is replaced with plausible fictional stand-ins
@@ -171,6 +171,16 @@ day; personal data in the examples is replaced with plausible fictional stand-in
 | [`/borrowed-audience`](borrowed-audience/SKILL.md) | Get external links to your repos through other people's curated surfaces: awesome-lists, tool catalogs and vendor showcases. Measures each list's merge… |
 | [`/pr-reply`](pr-reply/SKILL.md) | Answer reviewers on your own pull requests in other people's repos: find threads where the ball is on your side, tell humans from bots, do exactly what was… |
 | [`/retro-lost`](retro-lost/SKILL.md) | Run a retrospective for an abandoned agent session (untouched for over 24 hours, never closed with a retro): rebuild context cold from the transcript, list… |
+| [`/claude-repair`](claude-repair/SKILL.md) | Diagnose and restore the Claude Desktop app when it will not start, crashes, or runs with no visible window. Use for Windows MSIX launch failures, 'Not main… |
+| [`/cursor-repair`](cursor-repair/SKILL.md) | Repair the Cursor editor when it crashes, fails to launch, or new Agent chats break. Use with a Request ID, fresh logs, CursorRule.parse_error or invalid… |
+| [`/scholar-nerd-style`](scholar-nerd-style/SKILL.md) | Apply a scholarly 'nerd' visual style to single-file handwritten HTML document sites: publication-list look, restrained typography, no frameworks. Use when… |
+| [`/windowless`](windowless/SKILL.md) | Stop black console windows (cmd, PowerShell, Windows Terminal) from flashing and stealing focus on a Windows machine. Use when scheduled tasks, hooks or… |
+| [`/corpus-bench`](corpus-bench/SKILL.md) | Verify someone else's code fix against your own live corpora (agent transcripts, sessions, memory files) before trusting or merging it. Use when an external… |
+| [`/hyper-research`](hyper-research/SKILL.md) | Send one research question to as many independent LLMs as possible at once, each in its strongest reasoning mode with proof of that mode, then synthesize.… |
+| [`/dash`](dash/SKILL.md) | Build a dashboard from idea to live link in one pass: create the visualization, file it in one shared catalog, cross-link it with the others, publish to… |
+| [`/firefox`](firefox/SKILL.md) | Default to Firefox for browser automation and decide when Chrome is truly required. Use before any task that needs a browser: fetching a page, grabbing… |
+| [`/hk`](hk/SKILL.md) | Show what maintenance robots already did today before you repair anything by hand: backups, reindexes, guards, quotas and what went stale. Use when deciding… |
+| [`/llll`](llll/SKILL.md) | Short alias for /llms: settle the current question through a targeted, bounded consensus of other LLMs. Use when you want outside models to agree or… |
 
 ## Raw imports, grooming in progress
 
@@ -189,9 +199,7 @@ These arrived with the full local set and still carry their original working des
 | [`/chip`](chip/SKILL.md) | ЧИП ТОЛЬКО ПО ПРЯМОМУ ЗАПРОСУ ЮЗЕРА (anton 14.08): сделать ЧИПЫ (spawn_task), которые юзер нажмёт сам. |
 | [`/comment-to-call`](comment-to-call/SKILL.md) | ВОРОНКА «ПОЛЕЗНЫЙ ЧЕЛОВЕК → ДИАЛОГ → ЗВОНОК»: каждый, кто дал нам пользу / написал качественный коммент / покритиковал по-доброму / поделился знанием … |
 | [`/contrib-watch`](contrib-watch/SKILL.md) | - СТОРОЖ ВХОДЯЩЕГО ФИДБЭКА: кто из посторонних инженеров пришёл к НАШИМ репозиториям, что написал, сколько часов ждёт… Триггеры: “/contrib-watch“, “/c… |
-| [`/corpus-bench`](corpus-bench/SKILL.md) | Станок верификации чужого кода на НАШИХ живых корпусах (GIT-25). Триггеры - “/corpus-bench“, “прогони по корпусу“, “проверь их фикс на наших транскрип… |
 | [`/create-geo-charts`](create-geo-charts/SKILL.md) | Creates data visualizations (charts, graphs, tables) optimized for AI engine parsing and citation. Produces inline SVG/HTML with text summaries, data … |
-| [`/dash`](dash/SKILL.md) | ДАШБОРД ОТ ИДЕИ ДО ССЫЛКИ В ОДИН ЗАХОД: собрать визуализацию, положить в единый каталог, перелинковать с остальными, выложить на наш GitHub Pages, СРА… |
 | [`/devrel-wave`](devrel-wave/SKILL.md) | - МУЛЬТИКАНАЛЬНАЯ ЛЕСТНИЦА КАСАНИЙ к DevRel/research-людям топ-LLM лабов: 1 прицельный человек = 1 вендор, касания идут по 2-3 каналам, а не одним DM … |
 | [`/dig-through-data-brokers`](dig-through-data-brokers/SKILL.md) | - Use people-search aggregators and primary public records to find addresses, phone numbers, relatives, age and background on a person, and to audit a… |
 | [`/dr-teasers`](dr-teasers/SKILL.md) | ДР-ПОЛОСА — превратить наши дипресёрчи в 10 тизеров в день и разослать их по каналам лаборатории. Триггеры “/dr-teasers“, “/dr-lane“, “тизеры по ресёр… |
@@ -204,7 +212,6 @@ These arrived with the full local set and still carry their original working des
 | [`/find-leaks-in-the-wild`](find-leaks-in-the-wild/SKILL.md) | - Find leaked or mentioned selectors circulating in pastes, leak forums, Telegram channels and dump markets, and judge whether a claimed leak is genui… |
 | [`/find-person`](find-person/SKILL.md) | Найти человека и его каналы связи по нашим ЖЕ данным: архив ТГ 16.7 млн сообщений, CRM, книга чатов, почта, досье. Триггеры: /find-person, найди хэндл… |
 | [`/find-the-original-image`](find-the-original-image/SKILL.md) | - Reverse image search across Yandex, Google Lens, Bing Visual Search, TinEye and Baidu to find where a picture came from and who published… Use when … |
-| [`/firefox`](firefox/SKILL.md) | БРАУЗЕР ПО УМОЛЧАНИЮ = FIREFOX (решение Антона 2026-07-30, канон decision-2026-07-16-browser-automation-layer). Триггеры: /firefox, /ff, «через firefo… |
 | [`/follow-the-crypto`](follow-the-crypto/SKILL.md) | - Trace cryptocurrency addresses and transactions on public blockchains using block explorers including Etherscan, Blockchair, mempool.space and Block… |
 | [`/geo-content-planning`](geo-content-planning/SKILL.md) | Reads existing brand DNA, keywords.csv, and prompts.csv, then produces a plan.csv — a strictly-schema'd content architecture telling the next pipeline… |
 | [`/geo-content-research`](geo-content-research/SKILL.md) | Researches what prompts people ask AI engines (ChatGPT, Gemini, Perplexity, Claude) about a product category and produces a prompts.csv artifact — a p… |
@@ -218,16 +225,13 @@ These arrived with the full local set and still carry their original working des
 | [`/graph-the-network`](graph-the-network/SKILL.md) | - Build an entity-relationship link-analysis graph of an investigation — nodes, typed edges carrying source and confidence, aliases, and temporal vali… |
 | [`/grok-sync`](grok-sync/SKILL.md) | Pull Anton's Grok (grok.com / SuperGrok) conversation history into the Obsidian vault from an official Grok data export (prod-grok-backend.json). Trig… |
 | [`/guide`](guide/SKILL.md) | Вечнозелёный ГАЙД по «формуле Юницкого» — обучающий лонгформ для не-технарей (Дзен-урок-сшивка, GitHub гайд-хаб, LJ), собранный из НАШЕЙ живой фактуры… |
-| [`/hk`](hk/SKILL.md) | «Что уже сделали роботы сегодня» — экран состояния обслуживания ПЕРЕД тем, как чинить руками. Триггеры: “/hk“, “/housekeeping“, “/уборка“, “что сегодн… |
 | [`/hubrun`](hubrun/SKILL.md) | Прогнать PowerShell-скрипт или команду на удалённом узле флота (дефолт: хаб [машина флота]) и получить вывод назад ОДНОЙ командой. Trigger on «/hubrun… |
 | [`/hunt-a-handle`](hunt-a-handle/SKILL.md) | - Enumerate a username across hundreds of platforms with sherlock, maigret and WhatsMyName, then correlate and confirm which accounts genuinely belong… |
-| [`/hyper-research`](hyper-research/SKILL.md) | ГИПЕР-РЕСЁРЧ: один вопрос уходит в максимум НЕЗАВИСИМЫХ LLM разом (рельса = вендор#аккаунт: Claude x3 бака, ChatGPT x2, Gemini, Grok, GLM, Mistral), к… |
 | [`/improve-aeo-geo`](improve-aeo-geo/SKILL.md) | Audits a website codebase and makes code changes so AI engines (ChatGPT, Claude, Perplexity, Google AI Overviews) can better discover, parse, quote, a… |
 | [`/investigate-anything`](investigate-anything/SKILL.md) | - Start-here router and tradecraft baseline for any investigation into a person, company, domain, image or selector. |
 | [`/investigate-without-getting-made`](investigate-without-getting-made/SKILL.md) | - Investigator OPSEC — threat-model who might notice you, control your attribution surface across IP, ASN, browser and TLS fingerprint, timing and log… |
 | [`/is-this-photo-real`](is-this-photo-real/SKILL.md) | - Verify whether an image or video is authentic, original and correctly captioned — provenance checks, error level analysis, noise and JPEG compressio… |
 | [`/ledger`](ledger/SKILL.md) | «Что было в тот день» — мгновенный ответ из дневного леджера, который роботы собирают каждую ночь из бесплатных следов… Триггеры: “/ledger“, “/день“, … |
-| [`/llll`](llll/SKILL.md) | /LLLL = короткий алиас /LLMs: решить текущий вопрос через адресный ограниченный консенсус других LLM. Триггеры: /LLLL, llll, четыре l. Вся логика живё… |
 | [`/llms`](llms/SKILL.md) | /LLMs решает текущий вопрос через ограниченный консенсус Claude, Codex, Cursor, Grok и других пиров. Передаёт тему и контекст сессии, читает только ад… |
 | [`/mycroft-joke`](mycroft-joke/SKILL.md) | Дверь к банку шуток Майкрофта: подобрать строку раскрытия/ответку/гэг под конкретный текст и канал. Триггеры: '/mycroft-joke', '/mj', 'шутка майкрофта… |
 | [`/nsr`](nsr/SKILL.md) | NEW SESSION IN ROUTINE: я САМ поднимаю новую ВИДИМУЮ сессию через запланированную задачу — Антону жать нечего, но в списке он её видит и может продолж… |
@@ -243,7 +247,6 @@ These arrived with the full local set and still carry their original working des
 | [`/rep-reply`](rep-reply/SKILL.md) | Найти ЖИВЫЕ чужие треды (GitHub issues/discussions) по темам, где у нас есть РЕАЛЬНЫЙ боевой опыт и артефакты, и ответить в них нашим опытом — прокачк… |
 | [`/research-brand`](research-brand/SKILL.md) | Researches a company from its URL and produces a Brand DNA file covering positioning, audience, competitors, voice, and messaging. Use when starting w… |
 | [`/research-keywords`](research-keywords/SKILL.md) | Finds high-value SEO and GEO keywords using web search, AI analysis, and optionally paid tools like Ahrefs or Semrush. Produces a validated keywords.c… |
-| [`/scholar-nerd-style`](scholar-nerd-style/SKILL.md) | СТИЛЬ УЧЁНОГО ЗАДРОТА — фирменный визуальный язык наших сайтов-документов: рукописный HTML в один файл, шрифт с… Триггеры “/scholar-nerd-style“, “/ner… |
 | [`/screenpipe-api`](screenpipe-api/SKILL.md) | Query the user's local and synced-device data via the screenpipe REST API at localhost:3030 — recordings, audio, UI, meetings, connected services, and… |
 | [`/screenpipe-cli`](screenpipe-cli/SKILL.md) | Set up and operate screenpipe from the terminal, including always-on recording, service modes, capture health, storage, local search, pipes, and conne… |
 | [`/screenpipe-durable-learning`](screenpipe-durable-learning/SKILL.md) | Turn a verified correction or repeated workflow into a reusable local learning. |
@@ -280,7 +283,6 @@ These arrived with the full local set and still carry their original working des
 | [`/who-owns-this-domain`](who-owns-this-domain/SKILL.md) | - Establish who registered and who operates a domain using WHOIS, RDAP and DNS. Use when running a whois lookup, querying RDAP, digging A, AAAA, MX, N… |
 | [`/who-really-owns-it`](who-really-owns-it/SKILL.md) | - Research companies, directors, shareholders and ultimate beneficial ownership in official corporate registries, filings and offshore datasets — Open… |
 | [`/whose-number-is-this`](whose-number-is-this/SKILL.md) | - Investigate a phone number — E.164 normalisation with libphonenumber, phoneinfoga scanning, carrier and line-type identification, VoIP and burner de… |
-| [`/windowless`](windowless/SKILL.md) | Убрать мелькающие ЧЁРНЫЕ КОНСОЛЬНЫЕ ОКНА (cmd/powershell/Windows Terminal) на любом Windows-узле флота: найти все три источника уликами, погасить обра… |
 | [`/write-seo-geo-content`](write-seo-geo-content/SKILL.md) | Writes product-led content pages optimized for both search engines and AI engine citations. Produces markdown files with frontmatter, following page-t… |
 | [`/write-the-intel-brief`](write-the-intel-brief/SKILL.md) | - Turn findings into a defensible intelligence product — BLUF key judgements, standardised estimative probability language, per-claim sourcing with ti… |
 | [`/x-inbox-watch`](x-inbox-watch/SKILL.md) | - ВАХТА ИНБОКСА X (Twitter) — периодически проверяю DM (включая папку Requests), mentions и reply-тред Антона через его живой залогиненный Chrome, что… |

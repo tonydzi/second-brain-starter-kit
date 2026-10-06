@@ -1,6 +1,7 @@
 ---
 name: windowless
-description: "Убрать мелькающие ЧЁРНЫЕ КОНСОЛЬНЫЕ ОКНА (cmd/powershell/Windows Terminal) на любом Windows-узле флота: найти все три источника уликами, погасить обратимо, доказать цифрой «до → после». Триггеры: “/windowless“, “/окошки“, “чёрные окна“, “чёрные окошки“, “мигают окна“, “лезут окна“, “мелькает консоль“, “окна воруют фокус“, “black windows“, “console windows popping“"
+description: "Stop black console windows (cmd, PowerShell, Windows Terminal) from flashing and stealing focus on a Windows machine. Use when scheduled tasks, hooks or background scripts pop up consoles: finds all three sources with evidence, silences them reversibly and proves the before and after count. Triggers: /windowless, black windows, console windows popping, windows steal focus."
+license: MIT
 version: 1.0.0
 ---
 
@@ -126,6 +127,7 @@ UAC на каждой машине** — доставка ≠ применени
 (история флипа, mapped-drive карв-аут), [[s4u-needs-uac-preregister-interactive]] (почему
 UAC), [[deterministic-script-gotchas]] (BOM, хардкоды).
 Канон: §5.5 сторож не живёт в том, что сторожит · §7.3-бис раскатка на весь флот · §2.4 глазами.
+
 
 
 <!--kit-footer-->

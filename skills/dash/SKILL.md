@@ -1,6 +1,7 @@
 ---
 name: dash
-description: "ДАШБОРД ОТ ИДЕИ ДО ССЫЛКИ В ОДИН ЗАХОД: собрать визуализацию, положить в единый каталог, перелинковать с остальными, выложить на наш GitHub Pages, СРАЗУ дать живую ссылку и открыть панель в правой части… Триггеры: /dash, /дашборд, «сделай дашборд», «покажи визуально», «нарисуй табличку», «выложи дашборд», «дай ссылку на дашборд», «опубликуй панель», «build a dashboard», «publish the dashboard»"
+description: "Build a dashboard from idea to live link in one pass: create the visualization, file it in one shared catalog, cross-link it with the others, publish to GitHub Pages and return the working URL right away. Use when results carry more than one fact to decide on. Triggers: /dash, build a dashboard, show it visually, publish the dashboard, give me the dashboard link."
+license: MIT
 version: 1.0.0
 ---
 
@@ -105,6 +106,7 @@ git add -A && git commit -m "новый дашборд: <имя>" && git push or
 - Секреты не публикуем никогда, детектор жёсткий.
 - Правило про то, ЧТО строить по умолчанию — `prefer-visual-dashboards` (§2.4). Этот скилл
   про полный путь от сборки до экрана человека.
+
 
 
 <!--kit-footer-->

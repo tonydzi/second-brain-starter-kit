@@ -1,6 +1,7 @@
 ---
 name: corpus-bench
-description: "Станок верификации чужого кода на НАШИХ живых корпусах (GIT-25). Триггеры - “/corpus-bench“, “прогони по корпусу“, “проверь их фикс на наших транскриптах“, “corpus bench“, “верифицируй на корпусе“, а также САМ внутри заходов GIT-S5/S8/S9, когда чужой PR/фикс трогает чтение транскриптов, сессий, памяти агентов"
+description: "Verify someone else's code fix against your own live corpora (agent transcripts, sessions, memory files) before trusting or merging it. Use when an external PR or patch touches how transcripts, sessions or agent memory are read. Triggers: /corpus-bench, run it on our corpus, verify the fix on our transcripts, corpus bench."
+license: MIT
 version: 1.0.0
 ---
 
@@ -50,6 +51,7 @@ JSONL-логи** — всё, для чего у нас есть живой ко�
   писателями — тот самый класс гонок, что уже сжёг pub_ledger/approval_ledger/voice-registry.
 - Плагин НЕ печатает содержимое транскриптов — только счётчики (приватность).
 - Selftest: `... selftest` (7 оффлайн-кейсов). Crash-guard: exit 4 = станок упал сам.
+
 
 
 <!--kit-footer-->

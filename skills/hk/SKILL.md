@@ -1,6 +1,7 @@
 ---
 name: hk
-description: "«Что уже сделали роботы сегодня» — экран состояния обслуживания ПЕРЕД тем, как чинить руками. Триггеры: “/hk“, “/housekeeping“, “/уборка“, “что сегодня уже сделано“, “надо ли гонять бэкап“, “почему заблокировали команду“, “покажи квоты“, “что протухло“, “housekeeping status“"
+description: "Show what maintenance robots already did today before you repair anything by hand: backups, reindexes, guards, quotas and what went stale. Use when deciding whether to rerun a backup, or when a command was blocked by a once-a-day gate. Triggers: /hk, /housekeeping, what was done today, should I run the backup, why was this blocked, show quotas, housekeeping status."
+license: MIT
 version: 1.0.0
 ---
 
@@ -84,6 +85,7 @@ python3 ~/.claude/scripts/claude_token_sync.py --status
 - Скилл **ничего не запускает** сам. Хочешь прогнать вне очереди — это осознанный `--force` + строка Антону зачем.
 - Диагностику (статус Syncthing, MCP-демоны, логи) квота не трогает: читать можно всегда.
 - Не путать с `/arch` (карта системы), `/tt` (проверка того, что сам собрал) и `/retro` (итоги сессии).
+
 
 
 <!--kit-footer-->

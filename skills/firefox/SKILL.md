@@ -1,6 +1,7 @@
 ---
 name: firefox
-description: "БРАУЗЕР ПО УМОЛЧАНИЮ = FIREFOX (решение Антона 2026-07-30, канон decision-2026-07-16-browser-automation-layer). Триггеры: /firefox, /ff, «через firefox», «открой в фаерфоксе», «забери страницу», «сними куки», «нужен браузер», «зайди на сайт», «headless браузер», «какой браузер брать», «браузерная автоматизация», а также САМ перед любым действием, требующим браузера"
+description: "Default to Firefox for browser automation and decide when Chrome is truly required. Use before any task that needs a browser: fetching a page, grabbing cookies, headless runs, logging into a site. Includes a matrix of which tasks must stay on Chromium and why. Triggers: /firefox, /ff, via firefox, need a browser, headless browser, which browser to use, browser automation."
+license: MIT
 version: 1.0.0
 ---
 
@@ -288,6 +289,7 @@ python3 ~/.claude/scripts/_shared/browser_usage_log.py --report --days 14
 ⚠️ **Битый `continue=`** (`...identifier?continue=...&Email=...`) даёт Google **Error 400**, а не форму — бери голый `https://accounts.google.com/`, без своих query.
 ⚠️ **VPN в тулбаре** — Google злее к новым входам, попроси Антона снять до ввода.
 Пароль вводит Антон (робот пароли не набирает, §3.4). Проверка успеха = не глаз, а куки на диске: `has_rotating_session(autoff)` + `SID/__Secure-1PSID/__Secure-1PSIDTS` в копии `cookies.sqlite` ([[done-is-a-claim-recheck-twice]]).
+
 
 
 <!--kit-footer-->
