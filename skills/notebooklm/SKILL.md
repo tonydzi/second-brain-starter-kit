@@ -29,12 +29,15 @@ Programmatic CLI `teng-lin/notebooklm-py` (17k⭐, MIT). No Chrome window, no DO
 ## Access reality check (verified 2026-10-06)
 - **There is no public consumer API.** You cannot pick up a NotebookLM API key from a settings page and script your own notebooks.
 - **The official API is Enterprise-only** — now branded *Gemini Notebook Enterprise*, shipped inside Gemini Enterprise on Google Cloud. It does expose REST endpoints for notebooks, sources and audio overviews, with regional endpoints, VPC Service Controls and CMEK, but it is sold to organisations, not to individuals. The older standalone Podcast API is deprecated and is not allowlisting new customers.
-- **There is no official MCP server** as of October 2026. Community ones exist (for example `julianoczkowski/notebooklm-mcp-2026`), and they are worth knowing about if you want *other* agents to reach NotebookLM — but they wrap the same unofficial rail this skill already uses: cookies plus internal endpoints, or a driven browser. One more layer, same terms-of-service surface.
+- **There is no official MCP server** as of October 2026. Community ones exist (for example `julianoczkowski/notebooklm-mcp-2026`), and they are worth knowing about if you want *other* agents to reach NotebookLM — but every one we looked at wraps the same unofficial rail this skill already uses: cookies plus internal endpoints, or a driven browser. One more layer, same terms-of-service surface. Check the specific server before you trust it; we did not audit all of them.
 - So on a consumer account the CLI below is the rail. Budget for the cookie expiry, not for an API key.
+- Check these claims yourself before you build on them, because Google moves this product often: the Enterprise
+  surface and its deprecations are documented in the Gemini Enterprise release notes
+  (`docs.cloud.google.com/gemini/enterprise/docs/release-notes`). Dates above are when we last read them.
 
 ## Three generation defaults (these move output quality more than the prompt does)
 1. **Always maximum length** — `--length long`. Go shorter only when explicitly asked, and say why in the report.
-2. **Two languages, one after the other** — run `--language ru`, download it, then re-run `--language en` on the SAME notebook. Parallel generations on one notebook break the CLI poller, so this is sequential by necessity, not by taste.
+2. **Two languages, one after the other** — run `--language ru`, download it, then re-run `--language en` on the SAME notebook. As of October 2026 parallel generations on one notebook break the CLI poller, so this is sequential by necessity, not by taste. It is an unofficial client, so re-test rather than assume.
 3. **Put clarifying questions in the prompt itself.** Two blocks earn their keep: "ask each other a smart beginner's questions and answer them immediately", and "ground every claim in the sources and name where the fact came from". Without them the hosts stay pleasant and shallow.
 4. **Feed 10-15+ sources.** Your own curated packet counts as ONE. Give it a single source and NotebookLM just paraphrases you back at you in a nicer voice. Verify each URL returns 200 with live code before `source add`; top up the pool with `source add-research "<query>" --import-all --cited-only --timeout 1800`.
 
