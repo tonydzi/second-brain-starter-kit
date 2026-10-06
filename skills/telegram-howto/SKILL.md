@@ -40,7 +40,7 @@ license: MIT
 2. **Page the dialog list:** `get_chats(page=N, page_size≤100)` and match locally.
 
 ## 1) Resolved chat ids (this account; verify before destructive use)
-- **Saved Messages** = `226258979` (the operator's own user id, @work_acct_a). Use the NUMBER, not `"me"` (this MCP rejects "me"). Mixed clipboard: lead @handles, links, forwards, auto-reports, FB-diary drafts. Voice here is rare and NOT auto-transcribed.
+- **Saved Messages** = `<tg-id>` (the operator's own user id, @work_acct_a). Use the NUMBER, not `"me"` (this MCP rejects "me"). Mixed clipboard: lead @handles, links, forwards, auto-reports, FB-diary drafts. Voice here is rare and NOT auto-transcribed.
 - **Telegram service** = `777000` — login codes / OTP land here. **Fetch the code YOURSELF**, don't ask the operator (you're already connected to the account): `get_history(777000, account=<acct>, limit=1)` → parse `Login code: NNNNN`. Codes are short-lived → fetch + use immediately. The **only** thing to ask for is the **2FA cloud password** (not message-fetchable; NEVER store it). Canon: vault `reglament-kody-vhoda-i-otp-assistent-dostaet-sam-iz-sluzhebnogo-chata`, memory `telegram-otp-self-fetch`.
 - **Content hub** = `<YOUR_CHAT_ID>` — a private Supergroup used as the voice/text archive for anything that may become a post. The operator's personal dictation dump for content. **Auto-transcribed** (see §2).
 - (Distinct from the vault's `Arhiv-Golosa` = the *content-team* group — a different chat.)
@@ -78,7 +78,7 @@ In `<YOUR_CHAT_ID>`, each the operator **voice** message gets two auto-replies f
 - **Find a chat by title:** `search_dialogs("name fragment")`.
 - **Read a chat's recent activity:** `get_history(chat_id, limit=N)` (newest-first).
 - **Pull today's content dictations:** `get_history(<YOUR_CHAT_ID>, limit~40)` → keep the operator's text msgs + "Personal Audio Summary" transcripts dated today.
-- **Send the operator a draft:** `send_message(226258979, "<text>")` (plain; no parse_mode for Cyrillic bodies).
+- **Send the operator a draft:** `send_message(<tg-id>, "<text>")` (plain; no parse_mode for Cyrillic bodies).
 - **Get a login/OTP code (self-serve):** `get_history(777000, account=<acct>, limit=1)` → take `Login code: NNNNN`. Don't ask the operator; only the 2FA password is theirs to provide (and is never stored).
 - **Download a voice note (chat without the bot):** `download_media(chat_id, message_id, file_path)` → faster-whisper.
 

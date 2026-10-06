@@ -17,7 +17,7 @@
 
 Closes the CLASS of formatting bypasses: numbers/handles are matched on a
 NORMALIZED shadow copy of each line (spaces/dashes/dots/parens stripped), so
-"+1 341 222 9178" and "-548 501 2790" match the same as compact forms.
+"+1 341 222 9178" and "-555 000 3333" match the same as compact forms.
 
 Usage:  python leak_scan.py <dir|file> [...] [--profile freeschool|book]
         git diff --cached | python leak_scan.py --stdin --profile book
@@ -53,7 +53,7 @@ for _s in (sys.stdout, sys.stderr):   # cp1252 console -> force UTF-8 so non-ASC
 # --- tokens that must NEVER leave (compact digit forms; matched on normalized text)
 SECRET_NUMBERS = [
     "182355026", "4074838102", "6634998361", "9095182014", "9232703764",
-    "1000941603212", "1007588357707", "226258979", "5966672828",
+    "1000941603212", "1007588357707", "<tg-id>", "5966672828",
     "9110567260", "970102884", "7179668356",
     "355388751851", "96863211225", "963308162378", "79010892080",
 ]
@@ -67,7 +67,7 @@ PERSON_NAMES = [
 # "work_acct_b" внутри публичного permalink facebook.com/OwnerProfile и давал 165 ложняков на живой
 # книге (2026-07-27). Публичный профиль в ссылке на пост - не секрет; @хэндл в мессенджере - да.
 IDENTIFIER_WORDS = [
-    "HUB1", "LAPTOP1", "NAT1", "10.0.0.10", "owner.personal",
+    "HUB1", "LAPTOP1", "NAT1", "203.0.113.140", "owner.personal",
 ]
 SECRET_WORDS = PERSON_NAMES + IDENTIFIER_WORDS   # kept for backwards compatibility
 SECRET_REGEX = [
@@ -109,13 +109,13 @@ MACHINE_RULES = [
     ("device-id",       r"\b[A-Z0-9]{7}-[A-Z0-9]{7}-[A-Z0-9]{7}[A-Z0-9-]*", "<device-id>"),
     ("tg-chat-id",      r"-100\d{6,}|(?<![\d.])-\d{9,}\b",         "<chat-id>"),
     # Положительный user-id идёт без минуса, поэтому правилом выше не ловился и уехал в
-    # публичный артефакт («своя сессия @… id 7303193973», найдено глазами 2026-07-27).
+    # публичный артефакт («своя сессия @… id <tg-id>», найдено глазами 2026-07-27).
     # Голое 10-значное число ловить нельзя (ложняки), поэтому якорим по слову-контексту.
     ("tg-user-id",      r"(?i)\b(?:user_?id|chat_?id|peer_?id|id)[\s:=]+\d{8,}", "id <tg-id>"),
     ("bot-handle",      r"@[A-Za-z0-9_]{2,}_?bot\b",               "служебный бот"),
     ("our-domain",      r"\b(?:[a-z0-9-]+\.)*palo-alto\.ai\b",     "наш сайт"),
-    ("infra-domain",    r"\b(?:[a-z0-9-]+\.)*star-alliance\.io\b", "наш сервис"),
-    ("hoster-acct",     r"btcnext[a-z]*|\b1685279\b",              "аккаунт хостера"),
+    ("infra-domain",    r"\b(?:[a-z0-9-]+\.)*internal-git\.example\b", "наш сервис"),
+    ("hoster-acct",     r"hostacct[a-z]*|\b1234567\b",              "аккаунт хостера"),
     ("api-key-name",    r"N8N_API_KEY|ANTHROPIC_API_KEY|OPENAI_API_KEY", "<key-var>"),
     # Только реальный ПУТЬ к стору (backslash или файл с расширением), а не слово "secrets"
     # в перечислении папок: "skills/secrets/engines" — это не утечка (ложняк 2026-07-27).
@@ -126,6 +126,30 @@ MACHINE_COMPILED = [(k, re.compile(p), r) for k, p, r in MACHINE_RULES]
 # IPv4 needs a value check: "2026.07.26.1" is a version, not an address.
 IPV4 = re.compile(r"(?<![\d.])(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})(?![\d.])")
 IP_ALLOW = {"0.0.0.0", "127.0.0.1", "255.255.255.255", "8.8.8.8", "1.2.3.4"}
+# RFC 5737 (TEST-NET-1/2/3) and RFC 3849 (2001:db8::/32) exist ONLY for documentation: IANA
+# never assigns them to a host, so an address from these blocks cannot identify your machine.
+# Blocking them made every public runbook that prints an example address permanently red -- 24
+# hits on this very kit, 2026-10-06 -- and a permanently-red gate is one people stop reading.
+# BOUNDARY: private ranges are NOT here. 10/8, 192.168/16 and 100.64/10 are addresses people
+# really run, so they stay secret. Near-misses (203.0.114.x) stay secret too.
+DOC_IP_PREFIXES = ("192.0.2.", "198.51.100.", "203.0.113.")
+DOC_IPV6_PREFIXES = ("2001:db8:", "2001:0db8:")
+
+
+def _is_doc_ip(s):
+    return s.startswith(DOC_IP_PREFIXES)
+
+
+def _is_doc_ipv6(s):
+    return s.strip("[]").lower().startswith(DOC_IPV6_PREFIXES)
+
+
+def _is_version(m):
+    """`v1.0.0.0` is a build number, not an address -- SxS/DLL errors print them that way.
+    A bare 1.0.0.0 is NOT allowed (1/8 is live APNIC space): the tell is a `v` touching
+    the first octet, and the regex left-anchor already guarantees no digit or dot there."""
+    i = m.start()
+    return i > 0 and m.string[i - 1] in "vV"
 # IPv6: наш VPS отвечает и по нему, а правило было только под v4 (нашёл внешний ревьюер
 # Codex 2026-07-27 — «попробуй [2001:db8::1]»; проверено: не ловилось). Требуем 2+ групп
 # и хотя бы одно "::" или 4+ групп, чтобы не ловить обычный текст с двоеточиями.
@@ -144,12 +168,18 @@ def _is_ipv6(s):
     except ValueError:
         return False
 
-EXT = {".md", ".py", ".json", ".txt", ".yml", ".yaml"}
+# Widened 2026-10-06: dashboards, CRM templates and schemas live in .html/.csv/.sql, and
+# an instrument that skips whole file types is blind where exports actually land.
+EXT = {".md", ".py", ".json", ".txt", ".yml", ".yaml",
+       ".html", ".js", ".mjs", ".csv", ".sql", ".css", ".cff"}
 NORM = re.compile(r"[\s\-\.\(\) ]+")
 
 
 def _real_ip(m):
-    return all(int(g) <= 255 for g in m.groups()) and m.group(0) not in IP_ALLOW
+    return (all(int(g) <= 255 for g in m.groups())
+            and m.group(0) not in IP_ALLOW
+            and not _is_doc_ip(m.group(0))
+            and not _is_version(m))
 
 
 def scan_text(text, profile="freeschool"):
@@ -191,7 +221,8 @@ def scan_text(text, profile="freeschool"):
             if _real_ip(m):
                 add("ip:" + m.group(0), line.strip()[:80], n, m.group(0))
         for m in IPV6.finditer(line):
-            if _is_ipv6(m.group(0)) and m.group(0) not in IPV6_ALLOW:
+            if (_is_ipv6(m.group(0)) and m.group(0) not in IPV6_ALLOW
+                    and not _is_doc_ipv6(m.group(0))):
                 add("ipv6:" + m.group(0), line.strip()[:80], n, m.group(0))
     return fails, infos
 
@@ -205,7 +236,8 @@ def scrub(text):
     for _, rx, repl in MACHINE_COMPILED:
         text = rx.sub(lambda m: m.group(0) if _keep(m) else repl, text)
     text = IPV6.sub(lambda m: "адрес узла" if _is_ipv6(m.group(0))
-                    and m.group(0) not in IPV6_ALLOW else m.group(0), text)
+                    and m.group(0) not in IPV6_ALLOW
+                    and not _is_doc_ipv6(m.group(0)) else m.group(0), text)
     return IPV4.sub(lambda m: "адрес узла" if _real_ip(m) and not _keep(m) else m.group(0), text)
 
 
@@ -219,15 +251,22 @@ def scan_file(path, profile="freeschool"):
 
 def _self_test():
     """The gate must catch what actually leaked on 2026-07-27 and stay quiet on safe text."""
-    must_catch = ["ssh 192.0.2.145", "узел 198.51.100.5", "host ANCHOR1",
+    # Address fixtures are REAL-shaped on purpose. They used to be RFC 5737/3849
+    # documentation addresses, which made this kill-list DEMAND that examples be
+    # blocked -- the test encoded the bug. Private ranges are what actually leaks.
+    must_catch = ["ssh 10.0.0." + "10", "узел 192.168.1." + "140", "host ANCHOR1",
                   # хендл и id собраны конкатенацией: фикстура гейта не должна САМА быть целью
                   # скраба публикаторов — цельные литералы дважды калечились при выкладке (30.09)
                   "@example" + "_wake_bot пингует", "хост HUB1", "чат -100" + "8317" + "706981",
                   "ssh ANCHOR1.tail1234.ts.net", "ключ sk-abcdefghijklmnopqrst",
-                  "ssh [2001:db8::1] порт 22",        # IPv6 — дыру нашёл Codex T3 2026-07-27
-                  "своя сессия id 7303" + "193973"]   # положительный tg user-id
+                  "ssh [2a01:4f8:c17:d00d::1] порт 22",   # IPv6 — Codex T3 2026-07-27
+                  "своя сессия id 5550" + "003333"]   # положительный tg user-id
     # Tailscale/Syncthing как ПРОДУКТЫ обсуждать можно: гейт ловит идентификаторы, не темы.
     must_pass_book = ["версия 2026.07.26.1", "счёт 15/15 ссылок", "Нина решила сама",
+                      "curl http://203.0.113.10:8384/rest/system/status",
+                      "подсеть-пример 203.0.113.0/24", "пир отвечает на 192.0.2.145",
+                      "релей на 198.51.100.5", "v6-двойник [2001:db8::1] тоже жив",
+                      "SxS: mozglue v1.0.0.0 could not be found",
                       "Дмитрий Глеб ответил", "loopback 127.0.0.1", "5 из 5 за 48 секунд",
                       "поставили Tailscale на все машины", "Syncthing держит один волт"]
     bad = 0
@@ -242,7 +281,7 @@ def _self_test():
     # freeschool profile must still block person names (backwards compatibility)
     if not scan_text("Нина решила сама", "freeschool")[0]:
         print("  REGRESSION: freeschool stopped blocking person names"); bad += 1
-    sample = "хост HUB1 по адресу 192.0.2.145 пингует @example" + "_wake_bot"
+    sample = "хост HUB1 по адресу 10.0.0." + "145 пингует @example" + "_wake_bot"
     scrubbed = scrub(sample)
     if scan_text(scrubbed, "book")[0]:
         print("  SCRUB LEFT A HIT:", scrubbed); bad += 1

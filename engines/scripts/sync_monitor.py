@@ -112,7 +112,7 @@ def _group_nudge(buskey, down_min):
     Best-effort -- rail may be absent on a peer, never blocks the monitor."""
     mid = os.urandom(4).hex()
     text = ("\U0001F916 [%s -> %s] AUTO sync-link down ~%dmin -- your Syncthing is NOT connected to the hub "
-            "(EEAETB6, hub healthy). Restart your Syncthing via your watchdog task, then it self-reconnects. #%s"
+            "(AAAAAAA, hub healthy). Restart your Syncthing via your watchdog task, then it self-reconnects. #%s"
             % (ME_HUB, buskey, down_min, mid))
     try:
         subprocess.run([sys.executable, GROUP_POST, text], timeout=90)

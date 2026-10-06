@@ -69,7 +69,7 @@ python ~/.claude/scripts/geo_measure.py --all --verbose
 ### Автоматически: prompt-panel (сначала — она дешевле рук)
 
 Стадию «цитата» БОЛЬШЕ НЕ начинаем с рук. Прибор `~/.claude/scripts/prompt_panel.py`
-(ZBOOKG8, вс 03:00, OS-задача `prompt-panel-weekly`) гоняет 25 тематических запросов
+(LAPTOP-1, вс 03:00, OS-задача `prompt-panel-weekly`) гоняет 25 тематических запросов
 EN+RU по подписочным рельсам и пишет `mention`/`urls` в
 `~/.claude/prompt_panel/<дата>.jsonl`. Ноль LLM в логике, денег не тратит.
 

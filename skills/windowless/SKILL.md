@@ -33,7 +33,7 @@ ssh-keygen). Отличие от №2 по улике: заголовок окн
 Флип родительской задачи в S4U эти окна тоже гасит, но НЕ лечит класс — тот же скрипт из
 живой сессии (источник №1) снова мигает. Корень чинится в коде:
 `creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0` на каждый
-`subprocess.run` консольного exe. Починено в `fleet_sign.py` 10.08 (ZBOOKG8), selftest PASS;
+`subprocess.run` консольного exe. Починено в `fleet_sign.py` 10.08 (LAPTOP-1), selftest PASS;
 файл разъезжается синком, но проверяй на узле фактом (§7.3-бис).
 
 ## 2. Порядок работы

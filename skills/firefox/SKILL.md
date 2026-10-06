@@ -118,7 +118,7 @@ python3 ~/.claude/scripts/rail_sweep.py orcid     # академические �
    ```
 3. ☐ **Обе идентичности — username И email.** Запись часто лежит под почтой, и на одном сайте их бывает несколько.
 
-**Замер 11.08 (хаб): 1901 сохранённая запись.** Кейс: `gitlab.star-alliance.io` не подставился на username `TonyD`, сессия объявила блок и дёрнула Антона — он выбрал запись **по email** руками, пароль был на месте. Запрос из п.2 закрывал вопрос за секунду и сразу показал бы `gitlab.star-alliance.io/users/sign_in | [рабочий аккаунт]@gmail.com`. Канон: `reglament-[человек]-chrome-na-vseh-mashinah-loginsya-cherez-nego` §«Три проверки», память [[one-chrome-account-all-machines]].
+**Замер 11.08 (хаб): 1901 сохранённая запись.** Кейс: `gitlab.example.io` не подставился на username `TonyD`, сессия объявила блок и дёрнула Антона — он выбрал запись **по email** руками, пароль был на месте. Запрос из п.2 закрывал вопрос за секунду и сразу показал бы `gitlab.example.io/users/sign_in | [рабочий аккаунт]@gmail.com`. Канон: `reglament-[человек]-chrome-na-vseh-mashinah-loginsya-cherez-nego` §«Три проверки», память [[one-chrome-account-all-machines]].
 
 ### Тест на развилке
 > «Это действие **от лица Антона** на площадке, где за роботов банят?»

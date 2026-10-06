@@ -30,7 +30,7 @@ tags: [fleet, performance, optimization, multi-machine]
 7. **Отчёт**: RAM до/после · топ-потребители · что отключил · что требует ОК оператора.
 
 ## Per-OS
-- **Windows** (хаб [машина флота], [коллега] MYOWNPC): Task Manager → Автозагрузка; services.msc; скан дублей python/node MCP.
+- **Windows** (хаб [машина флота], [коллега] NAT-1): Task Manager → Автозагрузка; services.msc; скан дублей python/node MCP.
 - **Mac** ([машина флота], [коллега]): System Settings → General → Login Items; Activity Monitor (RAM/CPU); дубли node/python MCP; обычно нет двойного AV.
 - **VPS-Маяк** (Linux headless): runaway python/node, дубли MCP, systemd-службы, память; это якорь — эссеншелы не трогать.
 

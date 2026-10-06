@@ -11,9 +11,9 @@ license: MIT
 # telegram-watch — the watch shift (@corp_acct)
 
 > Decided by the operator 2026-06-11: **no BotFather bots.** The assistant lives on their
-> own second user-account **@corp_acct** (label `corp_acct`, id 7303193973,
+> own second user-account **@corp_acct** (label `corp_acct`, id <tg-id>,
 > Premium, on its own real SIM). The operator himself = @work_acct_a (label `default`,
-> id 226258979). Separate StringSession per account → no AUTH_KEY_DUPLICATED
+> id <tg-id>). Separate StringSession per account → no AUTH_KEY_DUPLICATED
 > (see memory `telegram-eventloop-listener`).
 
 > ⚙️ **LIVE ENGINE (2026-06-15): standalone daemon, not this in-session loop.**
@@ -22,7 +22,7 @@ license: MIT
 > @corp_acct authorization (NOT the MCP's session → no AUTH_KEY_DUPLICATED), with
 > a **singleton lock** (port 47921) so it can never double-run. It catches the operator's
 > task event in seconds, **reads the n8n transcript** (bot "Personal Audio Summary"
-> id 5305064675 replies to their voice — we do NOT run our own whisper, the operator
+> id <tg-id> replies to their voice — we do NOT run our own whisper, the operator
 > 2026-06-15), grounds via `brain_ask`, makes ONE `claude -p` (subscription path),
 > and DMs the operator a DRAFT. Canon = `02-Decisions\decision-always-on-telegram-assistant-daemon`.
 > The loop below is the design/fallback; the daemon is the running thing.
@@ -31,7 +31,7 @@ license: MIT
 
 ## Prerequisites (check before looping)
 1. `mcp__telegram__list_accounts` shows **both** `default` (@work_acct_a, the operator himself)
-   and `corp_acct` (@corp_acct, id 7303193973 — the operator's second/lead account, the
+   and `corp_acct` (@corp_acct, id <tg-id> — the operator's second/lead account, the
    helper identity). If `corp_acct` is missing → `.env` needs
    `TELEGRAM_SESSION_STRING_CORP_ACCT` (generate via
    `<TELEGRAM_MCP_DIR>\login_corp_acct.py`, see its header) + MCP restart.
@@ -58,7 +58,7 @@ whitelisted team chat, advise their team HOW to do it — grounded in chat histo
 Bible + vault, **CHEAP on tokens**. The events.py patch raises `kind=task` ONLY
 for the operator's own messages in these chats — PRINCIPAL_IDS = **5966672828**
 (the operator's own display name — their real dictation account in these chats, verified
-live 2026-06-13) + 226258979 (@work_acct_a) fallback — so the watcher sleeps free
+live 2026-06-13) + <tg-id> (@work_acct_a) fallback — so the watcher sleeps free
 until they actually give a task (no LLM spend while idle).
 
 Whitelisted chats (match by ID; titles are keyword-soup):
@@ -95,7 +95,7 @@ Procedure on a `kind=task` settled burst:
 ## Mode 1b — direct mention — `kind=mention`, `account=corp_acct`
 Someone @-mentions @corp_acct in a whitelisted chat → same procedure, but the
 "task" is their question; `reply_to_message` the mention. Mentions OUTSIDE the
-whitelist → don't reply; one-line note to Saved Messages (226258979).
+whitelist → don't reply; one-line note to Saved Messages (<tg-id>).
 
 ⚠️ **Membership prerequisite:** @corp_acct must be a MEMBER of each whitelisted
 chat — its client only receives messages for chats it's IN, and can only post
@@ -115,7 +115,7 @@ chat isn't found there, the operator must add @corp_acct to it.
   content between chats. Full list = the telegram-assistant skill, "Hard NEVERS".
 
 ## Mode 2 — DM assistant (`kind=dm`, `account=corp_acct`)
-- Sender **is the operator** (id 226258979 / @work_acct_a, or their other own accounts) →
+- Sender **is the operator** (id <tg-id> / @work_acct_a, or their other own accounts) →
   answer their question with EVERYTHING available: vault RAG
   (`$IMPORTS_ROOT/brain_ask.py` / skill `ask`), memory, Bible, general
   knowledge. Their language, direct, no preamble. There are no "stupid questions" —

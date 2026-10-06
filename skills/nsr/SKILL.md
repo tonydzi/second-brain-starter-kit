@@ -94,7 +94,7 @@ create_scheduled_task(
     fireAt  = "<ТОЛЬКО из двери: `python ~/.claude/scripts/_shared/fireat_now.py --in 15`>",  # разовая
     notifyOnCompletion = true)   # ⛔ но НЕ из рутинной сессии, см. ниже
 ```
-⚠️ **`notifyOnCompletion` из сессии-рутины отбивается** (замер 13.09.2026, ZBOOKG8): «Can't
+⚠️ **`notifyOnCompletion` из сессии-рутины отбивается** (замер 13.09.2026, LAPTOP-1): «Can't
 subscribe a scheduled-task run session to completion notifications — it ends when the run does».
 Поднимаешь сессию ИЗ прогона scheduled-task — поле просто **опусти**, иначе весь вызов падает
 целиком и время `fireAt` успевает протухнуть, пока пересобираешь промпт. Из живой сессии

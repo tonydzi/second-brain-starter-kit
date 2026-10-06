@@ -12,7 +12,7 @@ license: MIT
 
 An active runbook for the "sync lost" incident (full canon + the why = the house rule [[reglament-chp-poterya-sinka-mezhdu-mashinami]]). The principle: **ground truth comes from the hub's LIVE API, never from memory and never from one peer's claim** (a peer can be holding a stale record — that is how the laptop once confidently insisted "restore 2KPYBY4", which would have broken the peer that was already working).
 
-The messaging account/group and the API key come from `~/.claude/tg_bus.json` (Telegram) and the env var `STGUIAPIKEY` (Syncthing API). Hub on the LAN = `10.0.0.10:22000`.
+The messaging account/group and the API key come from `~/.claude/tg_bus.json` (Telegram) and the env var `STGUIAPIKEY` (Syncthing API). Hub on the LAN = `203.0.113.140:22000`.
 
 ## Step 0 — Detect (where does it hurt)
 ```bash
@@ -23,7 +23,7 @@ curl -s -H "X-API-Key: $APIKEY" "http://127.0.0.1:8384/rest/system/connections" 
 
 ## Step 1 — Ground truth AT THE HUB (facts, not memory)
 ```bash
-# the hub's myID (must match machines.json HUB-1 = EEAETB6...)
+# the hub's myID (must match machines.json HUB-1 = AAAAAAA...)
 curl -s -H "X-API-Key: $APIKEY" "http://127.0.0.1:8384/rest/system/status" | python -c "import sys,json;print('myID=',json.load(sys.stdin)['myID'])"
 # is the daemon serving the REAL vault? (paths under %VAULT_ROOT%\..., data present)
 curl -s -H "X-API-Key: $APIKEY" "http://127.0.0.1:8384/rest/config/folders" | python -c "import sys,json;[print(f['id'],'->',f['path']) for f in json.load(sys.stdin)]"
@@ -37,7 +37,7 @@ Compare the live `myID` with `_machine-bus/machines.json` (the hub's `deviceID` 
 ## Step 3 — Publish the hub's VERIFIED device ID onto the bus (out-of-band proof)
 Via the Telegram MCP (`chat_id`/`account` from `tg_bus.json`):
 ```
-🤖 [<hub> -> ALL] hub <name> = <EEAETB6-full-ID>, addr tcp://10.0.0.10:22000. VERIFIED against the live API (it serves the whole vault). Peers: write this ID in, delete the stale one, restart the daemon, report connected.
+🤖 [<hub> -> ALL] hub <name> = <AAAAAAA-full-ID>, addr tcp://203.0.113.140:22000. VERIFIED against the live API (it serves the whole vault). Peers: write this ID in, delete the stale one, restart the daemon, report connected.
 ```
 This clears the peer's Tier-2 gate ("writing in someone else's ID = handing over the vault") — the peer now has proof from the hub itself.
 

@@ -16,7 +16,7 @@ Turns a live GitBook space into atomic vault notes. Proven on the Palo Alto / AA
 **Pipeline home:** `$IMPORTS_ROOT/gitbook/live/` — `slugs.py` (derive page URLs from TOC titles) + `build_live.py` (per-page notes + nav + concept links → `live\md\`). ⚠️ Both are **TEMPLATED for the Palo-Alto / AAA space** (org+space IDs, page-title list, `pa-gitbook-NN` slug, concepts, `origin`, MOC name are hardcoded; they do NOT read the `<url>`). So this command's clean path is **refreshing the Palo-Alto GitBook**. A **different** space = first edit those constants in the two scripts (or hand the raw pages to [[obsidian-ingest]]). There is **no** MOC-builder or copy-to-vault script — those steps are manual (see Steps 5–6).
 
 ## Credential boundary (Anton must clear it once)
-GitBook login is a boundary I can't pass alone. Anton logs into the GitBook org in Chrome (the Palo Alto org = **bbplatinum** Google acct), THEN I scrape. If not logged in → escalate per [[chrome-autonomy-self-drive]] (open the login page in its own window, ask Anton to sign in, then continue). Don't try to brute the login.
+GitBook login is a boundary I can't pass alone. Anton logs into the GitBook org in Chrome (the Palo Alto org = **corp_svc** Google acct), THEN I scrape. If not logged in → escalate per [[chrome-autonomy-self-drive]] (open the login page in its own window, ask Anton to sign in, then continue). Don't try to brute the login.
 
 ## Steps
 1. **Resolve pages:** from the space URL, get the TOC; `python $IMPORTS_ROOT/gitbook/live/slugs.py` derives per-page URLs. **GitBook slug rules:** lowercase, space→`-`, `&`→`and`, `(`/`)`→`-`, apostrophes/quotes/`$`→dropped (`$`→`usd` once), keep `.`/`+`/digits. Wrong slug → 404 → recover via the "Next"-link walk from the prior good page.
