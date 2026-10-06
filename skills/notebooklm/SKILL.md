@@ -26,6 +26,18 @@ Programmatic CLI `teng-lin/notebooklm-py` (17k⭐, MIT). No Chrome window, no DO
   Then `"$NB" auth check` to confirm. Canon: `02-Decisions\decision-2026-07-16-browser-automation-layer.md`, DR26-07-16-HUB-01. (Note: fb-post/x-post/fb-reply do NOT use this path — they drive Anton's live logged-in Chrome tab via Claude-in-Chrome MCP, a deliberate anti-ban choice; `firefox_cookies.py`/`firefox_login.py` are for API-style clients like this one, not for social posting.)
 - **Anti-abuse:** run from the hub (residential IP), **no VPN**.
 
+## Access reality check (verified 2026-10-04)
+- **There is no public consumer API.** You cannot pick up a NotebookLM API key from a settings page and script your own notebooks.
+- **The official API is Enterprise-only** — now branded *Gemini Notebook Enterprise*, shipped inside Gemini Enterprise on Google Cloud. It does expose REST endpoints for notebooks, sources and audio overviews, with regional endpoints, VPC Service Controls and CMEK, but it is sold to organisations, not to individuals. The older standalone Podcast API is deprecated and is not allowlisting new customers.
+- **There is no official MCP server** as of October 2026. Community ones exist (for example `julianoczkowski/notebooklm-mcp-2026`), and they are worth knowing about if you want *other* agents to reach NotebookLM — but they wrap the same unofficial rail this skill already uses: cookies plus internal endpoints, or a driven browser. One more layer, same terms-of-service surface.
+- So on a consumer account the CLI below is the rail. Budget for the cookie expiry, not for an API key.
+
+## Three generation defaults (these move output quality more than the prompt does)
+1. **Always maximum length** — `--length long`. Go shorter only when explicitly asked, and say why in the report.
+2. **Two languages, one after the other** — run `--language ru`, download it, then re-run `--language en` on the SAME notebook. Parallel generations on one notebook break the CLI poller, so this is sequential by necessity, not by taste.
+3. **Put clarifying questions in the prompt itself.** Two blocks earn their keep: "ask each other a smart beginner's questions and answer them immediately", and "ground every claim in the sources and name where the fact came from". Without them the hosts stay pleasant and shallow.
+4. **Feed 10-15+ sources.** Your own curated packet counts as ONE. Give it a single source and NotebookLM just paraphrases you back at you in a nicer voice. Verify each URL returns 200 with live code before `source add`; top up the pool with `source add-research "<query>" --import-all --cited-only --timeout 1800`.
+
 ## digest (default) — vault → audio
 1. **RECALL + curate a NARROW packet** ([[vault-data-architecture]]): `brain_ask.py`/`/ask` + grep to pull ONLY the relevant slice. Write it to a clean `.txt`/`.md` packet.
 2. **Create + add source + generate (CLI):**
