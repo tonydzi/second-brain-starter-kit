@@ -26,7 +26,7 @@ Programmatic CLI `teng-lin/notebooklm-py` (17k⭐, MIT). No Chrome window, no DO
   Then `"$NB" auth check` to confirm. Canon: `02-Decisions\decision-2026-07-16-browser-automation-layer.md`, DR26-07-16-HUB-01. (Note: fb-post/x-post/fb-reply do NOT use this path — they drive Anton's live logged-in Chrome tab via Claude-in-Chrome MCP, a deliberate anti-ban choice; `firefox_cookies.py`/`firefox_login.py` are for API-style clients like this one, not for social posting.)
 - **Anti-abuse:** run from the hub (residential IP), **no VPN**.
 
-## Access reality check (verified 2026-10-04)
+## Access reality check (verified 2026-10-06)
 - **There is no public consumer API.** You cannot pick up a NotebookLM API key from a settings page and script your own notebooks.
 - **The official API is Enterprise-only** — now branded *Gemini Notebook Enterprise*, shipped inside Gemini Enterprise on Google Cloud. It does expose REST endpoints for notebooks, sources and audio overviews, with regional endpoints, VPC Service Controls and CMEK, but it is sold to organisations, not to individuals. The older standalone Podcast API is deprecated and is not allowlisting new customers.
 - **There is no official MCP server** as of October 2026. Community ones exist (for example `julianoczkowski/notebooklm-mcp-2026`), and they are worth knowing about if you want *other* agents to reach NotebookLM — but they wrap the same unofficial rail this skill already uses: cookies plus internal endpoints, or a driven browser. One more layer, same terms-of-service surface.
