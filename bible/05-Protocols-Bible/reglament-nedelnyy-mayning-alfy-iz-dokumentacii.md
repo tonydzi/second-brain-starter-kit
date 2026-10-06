@@ -26,7 +26,7 @@ confidence: 0.9
 - `doc_alpha_watch.py` — детерминированная часть (0 токенов): `raw`-источники (плоский changelog, напр. Claude Code CHANGELOG) диффит построчно и выдаёт НОВЫЕ строки; `hash`/динамические HTML-страницы помечает «еженедельно перечитать» (в них нонсы → хеш флапает, честно не притворяемся, что детектим). Использует certifi (свежий trust-store, проверку НЕ отключаем).
 - Задача `doc-alpha-weekly` (scheduled, Вс 05:42 Лиссабон) — суждение: гоняет скрипт, WebFetch'ит review-источники, RECALL нашего стека, майнит альфу (что·почему-нам·действие·уверенность), пишет дайджест `05-Resources\Doc-Alpha\doc-alpha-<дата>.md`, реиндексит, пингует Антона в чат 03 (Tier-2 → плюс 02 POLICE). Чистая неделя тоже репортится (молчание = инцидент).
 
-**Стек на сегодня (что сканируем):** Claude Code (CLI+Desktop+Remote Control+tmux-ферма Маяка), VS Code (Tunnels на Маяк), Tailscale, Hetzner Cloud, OpenAI embeddings (RAG), Anthropic API/модели. Новый инструмент в обиходе → добавить источник в `doc_sources.json`.
+**Стек на сегодня (что сканируем):** Claude Code (CLI+Desktop+Remote Control+tmux-ферма Якорьа), VS Code (Tunnels на Якорь), Tailscale, Hetzner Cloud, OpenAI embeddings (RAG), Anthropic API/модели. Новый инструмент в обиходе → добавить источник в `doc_sources.json`.
 
 **Границы / AK-47.** Детерминизм (фетч+диф) — код, 0 токенов; LLM только судит релевантность (грунт на Sonnet). Не плодить дубль-скрипты на каждый источник — один движок + список URL (generalize-after-third-repeat [internal]). Упавший источник = дефект (чинить URL/скрипт), не «ничего нового». Дом рутины — машинный слой (scheduled-task), Библия хранит правило.
 
