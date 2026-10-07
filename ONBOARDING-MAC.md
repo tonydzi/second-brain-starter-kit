@@ -1,7 +1,7 @@
 # ONBOARDING — развернуть систему на новом Маке
 
 > **Человеку.** Тебе нужно сделать ровно одно: открыть Claude Code и сказать ему:
-> «Прочитай https://github.com/tonydzi/second-brain-starter-kit/blob/main/ONBOARDING-MAC.md
+> «Прочитай https://github.com/tonydzi/second-brain-starter-kit/blob/HEAD/ONBOARDING-MAC.md
 > и сделай всё, что там написано». Дальше он ведёт сам и зовёт тебя четыре раза.
 >
 > **Роботу.** Этот файл — твоя задача целиком. Исполняй по шагам, после каждого печатай
@@ -37,6 +37,8 @@
 sw_vers && uname -m && sysctl -n machdep.cpu.brand_string
 scutil --get ComputerName; whoami; df -h / | tail -1
 ```
+
+⛔ **`uname -m` показал `x86_64` (Intel)? Стоп: этот рунбук не для тебя.** На Intel `brew install` из шага 2 собирает из исходников часами и может упасть. Иди в [ONBOARDING-MAC-INTEL.md](ONBOARDING-MAC-INTEL.md).
 
 `uname -m` решает путь Homebrew: `arm64` → `/opt/homebrew`, `x86_64` → `/usr/local`.
 Перепутанный путь — самая частая тихая поломка на Маках: команда «есть», но лежит не там,
@@ -221,6 +223,7 @@ build-таймстампом (длинное число, не секрет), `pr
 ## Дальше
 
 Windows-версия этого рунбука — [ONBOARDING-WINDOWS.md](ONBOARDING-WINDOWS.md).
+Intel-версия (Homebrew без бутылок, вендорные бинарники, профиль оператора вместо значений по умолчанию, deny-by-default для claude-home) — [ONBOARDING-MAC-INTEL.md](ONBOARDING-MAC-INTEL.md) + скрипт [tools/intel-mac/onboard-intel-mac.sh](tools/intel-mac/onboard-intel-mac.sh).
 Машина подключается к существующему флоту как доверенный семейный узел —
 после шага 4 продолжай по [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md).
 
