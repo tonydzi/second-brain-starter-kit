@@ -559,7 +559,6 @@ All statistics in this skill are from verifiable, peer-reviewed or large-scale p
 | 85% of AI Overview citations from last 2 years | Seer Interactive, 2025 |
 | ChatGPT drives 87.4% of AI referral traffic | Conductor, Nov 2025 — 13.7K domains, 3.3B sessions |
 
-
 <!--kit-footer-->
 
 ---

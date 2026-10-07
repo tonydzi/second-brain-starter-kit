@@ -117,7 +117,6 @@ python "$USERPROFILE/.claude/scripts/fb_audience.py" status
 - `/fb-reply` §1.2 — готовый рецепт извлечения людей со страницы через `javascript_tool`.
 - Паспорт движка: `~/.claude/scripts/docs/fb_audience.md`.
 
-
 <!--kit-footer-->
 
 ---

@@ -64,7 +64,6 @@ One line: what was published + link/screenshot + "posts today N/8".
 - Texts: `content-factory`, `facebook-diary`, `episode`; the voice — `fb-diary-voice`.
 - Canon: Decision Memo 2026-06-28 (the Facebook skill set), `chrome-autonomy-self-drive`, `browser-work-on-peers-not-hub`.
 
-
 <!--kit-footer-->
 
 ---

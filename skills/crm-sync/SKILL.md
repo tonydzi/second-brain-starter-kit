@@ -83,7 +83,6 @@ pull, see what changed, update only the notes that map to the changed code.
 On demand (after Anton hears the CRM changed), or as a light routine. Pairs with the
 `crm-gitlab` DD-audit and the `decision-crm-keep-cc-drop-decide` open items.
 
-
 <!--kit-footer-->
 
 ---

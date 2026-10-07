@@ -230,7 +230,6 @@ All statistics above are from verifiable primary research:
 | 76% of ChatGPT's most-cited pages updated within 30 days; AI cites content 25.7% fresher than organic | Ahrefs, 2025 — 17M citations across 7 AI platforms |
 | Long-form (2000+ words) gets 3x more citations | SE Ranking, Nov 2025 — 2.3M pages, 295K domains |
 
-
 <!--kit-footer-->
 
 ---

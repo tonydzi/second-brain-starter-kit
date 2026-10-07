@@ -158,7 +158,6 @@ Read all the collected reports → a table of "agreed / disagreed / unique to ea
 ## /tt — how to test v2 (after FLEE-01 lands, or when editing)
 Don't run a live DR just to test (it burns quota). Test in parts: (1) the probe logic — on an already-open tab, verify that mode + length detection works WITHOUT pressing Send; (2) extraction — run the parser over an ALREADY collected past DR (backend JSON / innerText) and compare against the saved `_originals`; (3) the ledger + dr_collect — run them against an existing DR-ID. A live end-to-end run only when the research is genuinely needed.
 
-
 <!--kit-footer-->
 
 ---

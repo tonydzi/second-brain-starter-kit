@@ -300,7 +300,6 @@ python "[путь владельца]" --peer <tg_id> --account <с какого
 - Канон: [[cold-pr-into-silent-queue]] (4-е неотвеченное = спам), §1.5 (спам ≠ громкость),
   §1.5-бис (пинг кому угодно), [[declined-decisions]], [[crm-lead-full-provenance]].
 
-
 <!--kit-footer-->
 
 ---

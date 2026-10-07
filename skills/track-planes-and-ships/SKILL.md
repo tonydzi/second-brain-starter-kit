@@ -245,7 +245,6 @@ a private individual's aircraft, as opposed to a company's or a public figure's
 in their public capacity, sits close to the line — have a defensible objective
 before you start.
 
-
 <!--kit-footer-->
 
 ---

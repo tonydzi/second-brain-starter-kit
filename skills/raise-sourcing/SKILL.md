@@ -78,7 +78,6 @@ python ~/.claude/scripts/raise_sourcing_sheet.py --publish <файл.json>
 - Голос личных касаний: волт `08-Templates/style-anton-dm-register.md`.
 - Соседи: `/triage`, `/pipeline`, `/issue-match`, `/consumer-hunt`, `/fa`, `/bold-followup`.
 
-
 <!--kit-footer-->
 
 ---

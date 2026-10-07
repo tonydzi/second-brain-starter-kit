@@ -47,7 +47,6 @@ Report: the link + the screenshot + "x today N/6".
 ## Related
 `/fb-post` (the pattern this follows) · `/tg-post` · `/episode` (tiers: EN teaser → X) · the gate `scripts\_shared\social_guard.py` · the registry `00-System\Channels-Registry.md`.
 
-
 <!--kit-footer-->
 
 ---

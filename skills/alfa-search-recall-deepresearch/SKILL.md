@@ -67,7 +67,6 @@ Only AFTER the Decision Memo do we start implementation.
 - The DR prompt template is the single source — if it changes, edit the vault template file, not a copy.
 - This skill is SEARCH+STRUCTURE; the deep-research harness skill (`deep-research`) is the in-session web variant the operator can opt into, but his default flow is the external hand-off above.
 
-
 <!--kit-footer-->
 
 ---

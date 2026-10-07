@@ -97,7 +97,6 @@ Hand off to `write-the-intel-brief`.
 - **Treating a sparse footprint as concealment.** It usually means a private person, a
   non-English footprint, or closed registries.
 
-
 <!--kit-footer-->
 
 ---

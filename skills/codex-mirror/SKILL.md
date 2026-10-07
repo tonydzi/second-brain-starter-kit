@@ -65,7 +65,6 @@ python %USERPROFILE%\.claude\scripts\codex_mirror.py publish
 - The cap and the anchors are the truth inside the engine's code (`CAP`, `ANCHORS`); a mismatch between code and this text is a bug in the code.
 - Relatives: `/arch` (the nightly rail where the watchdog lives) · `/secondop` (Codex as reviewer) · `/canon-revision` (revising the canon itself) · `/follower-onboard` (a new node).
 
-
 <!--kit-footer-->
 
 ---

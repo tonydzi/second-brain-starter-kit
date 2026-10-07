@@ -10,7 +10,6 @@ Save a concise reusable method, not a transcript, private identity, credential, 
 Use skill_manage when available. Read first, preserve user/imported skills, and use the current hash for an agent-owned patch. Creating a skill requires the user’s explicit request or an enabled task whose stated scope authorizes it. No new permissions, outbound actions, or recursive agents.
 A no-change result is valid. Assess the next relevant use before claiming improvement.
 
-
 <!--kit-footer-->
 
 ---

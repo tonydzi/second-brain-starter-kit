@@ -93,7 +93,6 @@ What was agreed · with whom · the verdict (✅ committed+verified / ⏳ waitin
 - Failure modes (a byzantine peer, an auto-loop, a false VERIFY) are an open DR; until it closes we keep Phase 1 conservative.
 - The engine is the single source of truth for state (`_machine-bus/_decisions/log-<MACHINE>.jsonl`); I don't duplicate its logic, I only call its verbs.
 
-
 <!--kit-footer-->
 
 ---

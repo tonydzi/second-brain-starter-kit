@@ -133,7 +133,6 @@ python "$IMPORTS_ROOT/content-factory/_test_dr_teaser_gate.py"
 
 11 ловушек: каждая — заведомо плохой тизер, тест падает, если гейт его пропустил.
 
-
 <!--kit-footer-->
 
 ---

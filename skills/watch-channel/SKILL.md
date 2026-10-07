@@ -45,7 +45,6 @@ If the task already exists - the registry simply got updated, and the new channe
 ## Boundaries
 READING the channel only, never send anything into it. The detector is generic (KW/PROMO/BANTER in `mine_channel.py`); per-channel tuning happens there too. Sensitive channels → `#private`, never outbound. The judge (LLM) - ON DEMAND ONLY, never in the nightly cron (token economy).
 
-
 <!--kit-footer-->
 
 ---

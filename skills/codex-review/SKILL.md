@@ -45,7 +45,6 @@ Historical context (the machine where it was built, 2026-06-22): WSL2 Ubuntu-24.
 ## Extension — the reverse side is READY (the hub has been fully two-way since 2026-07-14)
 The reverse side (Codex reviews Claude) is built = `codex_review.py` (see the "two-way hetero pair" block), native `codex exec` on Windows. The Codex CLI was installed on the hub 2026-07-14 (`npm i -g @openai/codex`, v0.144.4, login via the ChatGPT subscription) and the smoke test passed — the hetero pair works in both directions. The same day it was also deployed to the anchor VPS (headless: `auth.json` is copied over with scp, no browser OAuth needed; both engines + smoke ✅) — the anchor is an extra node, and live duo tests still run from the hub in the review chat.
 
-
 <!--kit-footer-->
 
 ---

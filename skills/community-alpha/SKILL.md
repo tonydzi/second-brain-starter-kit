@@ -31,7 +31,6 @@ Example: `/community-alpha sostav 2026-06`. No month given → the previous full
 - Judge honestly: reference cards, intro blurbs and restatements are 🗑 — never stretch a ✅ to pad the counter.
 - This skill writes nothing into the vault; moving gold into home notes is a separate step behind the Tier-2 gate (the "→ to home" queue on the screen).
 
-
 <!--kit-footer-->
 
 ---

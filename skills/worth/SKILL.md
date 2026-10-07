@@ -87,8 +87,6 @@ python ~/.claude/scripts/people_value.py batch --in очередь.json --out о
 python ~/.claude/scripts/people_value.py selftest
 ```
 
-
-
 <!--kit-footer-->
 
 ---

@@ -124,7 +124,6 @@ pricing_and_worth_it,p3,trust,resources,guides,"Is GEO Worth It? A Data-Backed A
 
 Then emit the CSV. Nothing else.
 
-
 <!--kit-footer-->
 
 ---

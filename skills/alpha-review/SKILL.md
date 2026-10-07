@@ -34,7 +34,6 @@ The engine is already built (2026-06-18/20). This skill is launch + summary; it 
 - An empty screen is not the same as no data: first check that the harvest actually ran (`alpha_harvest.py` prints counters) and that you are looking at the right drive (E:, not C:).
 - 🔒 Community-sourced cards are HIGH sensitivity: never screenshot the screen outside, and approach contacts value-first only (standing rule for elite crypto communities: zero cold DMs, value first).
 
-
 <!--kit-footer-->
 
 ---

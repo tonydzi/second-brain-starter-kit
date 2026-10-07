@@ -227,7 +227,6 @@ Where the objective is asset recovery or a criminal referral, preserve the
 chain of custody: record block heights, transaction IDs and capture
 timestamps, not screenshots of an explorer.
 
-
 <!--kit-footer-->
 
 ---

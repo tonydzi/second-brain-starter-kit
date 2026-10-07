@@ -12,7 +12,6 @@ Never infer who spoke from the wording of a transcript. Speaker separation is an
 Write the outcome, decisions, owners, due dates explicitly mentioned, and open questions. Do not invent owners or dates. Include a source link and flag gaps in recording.
 Draft a short follow-up when requested. Check the user’s current casing and punctuation preferences. Sending, updating external systems, or creating calendar events requires the user’s explicit request.
 
-
 <!--kit-footer-->
 
 ---

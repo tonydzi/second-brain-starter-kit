@@ -136,7 +136,6 @@ mcp__scheduled-tasks__create_scheduled_task, fireAt = +3 дня, 05:30 лока�
 ## Анти-слоп гейт (anton 14.08)
 Любой ИИ-написанный текст наружу из этого скилла перед отправкой - финальный проход `/ai-slop` (ban-лист + ритм). Исключения ровно три: текст с плашкой Майкрофта (§3.3) · машиночитаемое (GitHub/техдока/dev-log/journey-machine) · текст, написанный Антоном руками. Канон: `reglament-posty-ot-lica-antona-tolko-cherez-ai-slop`.
 
-
 <!--kit-footer-->
 
 ---

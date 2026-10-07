@@ -208,7 +208,6 @@ python3 ~/.claude/scripts/_test_session_mode.py
 `/chip` — кнопка остаётся у Антона. `/slot` — механика пула и история обхода.
 `/sessions` — что работает сейчас.
 
-
 <!--kit-footer-->
 
 ---

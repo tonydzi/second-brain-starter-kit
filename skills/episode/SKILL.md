@@ -51,7 +51,6 @@ LIMITS:
 - Don't invent facts — write from the real source material.
 - Old bundles (4-file / interim) are still read by `list/show/check/export` through meta (backward compatibility).
 
-
 <!--kit-footer-->
 
 ---

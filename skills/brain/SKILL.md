@@ -34,7 +34,6 @@ Writes a dashboard `$OBSIDIAN_VAULT/_Dashboards/Brain-Health.html` (the operator
 ## What it does NOT do
 It doesn't fix anything and doesn't write to the vault. It's a diagnostic. Fixing is a separate explicit step (the "read before you fix" rule, [[verify-existing-before-proposing]]).
 
-
 <!--kit-footer-->
 
 ---

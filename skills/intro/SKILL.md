@@ -60,7 +60,6 @@ Pause and ask the operator when an intro carries money, a commitment, secrets, o
 ## Report to the operator
 Short summary of what was created plus the group title and who is in it, then a `🧒 In plain words` recap. No long dashes.
 
-
 <!--kit-footer-->
 
 ---

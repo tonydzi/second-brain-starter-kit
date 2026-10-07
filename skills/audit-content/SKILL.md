@@ -168,7 +168,6 @@ All other claims that checked out. List count per article, not individual items.
 - It does not evaluate whether the content strategy is good
 - It does not check for plagiarism (though obvious copy-paste from sources should be flagged)
 
-
 <!--kit-footer-->
 
 ---

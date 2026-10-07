@@ -45,7 +45,6 @@ license: MIT
 - Secrets (cap table, amounts) stay internal and do NOT leak into outbound/public/always-loaded layers ([[credential-store]] anti-leak).
 - The end of a report to the operator = the 🧒 recap (but not inside the cofounder's own lines).
 
-
 <!--kit-footer-->
 
 ---

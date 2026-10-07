@@ -220,8 +220,6 @@ python ~/.claude/scripts/routine_cost_audit.py --days 7
 - не трогает модель там, где идёт авторский голос Антона;
 - не верит счётчику вызовов вместо счётчика пользы ([[counter-measures-the-call-not-the-use]]).
 
-
-
 <!--kit-footer-->
 
 ---

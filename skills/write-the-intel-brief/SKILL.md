@@ -229,7 +229,6 @@ custody it never had. Breach-derived material carries its own handling
 constraints — see `what-leaked-about-you` — and quoting credentials into a
 report can itself be unlawful processing.
 
-
 <!--kit-footer-->
 
 ---

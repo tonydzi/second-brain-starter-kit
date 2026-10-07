@@ -68,7 +68,6 @@ If Google rotates endpoints and the CLI errors (and a re-login doesn't fix it), 
 ## Output
 Notebook created/used · artifact type + where saved · index updated. Then 🧒 recap. Routine candidate: weekly "audio digest of my brain" — see /skill-gap and [[evaluate-recurring-into-routine]]. Decision: `02-Decisions\decision-notebooklm-claude-code-artifact-layer`.
 
-
 <!--kit-footer-->
 
 ---

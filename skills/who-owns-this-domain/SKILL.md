@@ -229,7 +229,6 @@ GDPR: you need a lawful basis, and the minimization rules in
 [../../ETHICS.md](../../ETHICS.md) apply. AXFR without written authorization can
 constitute unauthorized access.
 
-
 <!--kit-footer-->
 
 ---

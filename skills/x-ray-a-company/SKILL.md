@@ -249,7 +249,6 @@ bulk products rather than scraping. Officer residential addresses and dates of
 birth are protected in many registers, and deliberately re-identifying a
 protected address is an offence in some jurisdictions.
 
-
 <!--kit-footer-->
 
 ---

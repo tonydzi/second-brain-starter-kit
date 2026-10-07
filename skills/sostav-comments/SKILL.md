@@ -64,7 +64,6 @@ Show the batch of drafts in the chat + note which ⭐ contacts you pulled cards 
 - Sibling skills: `/fb-reply` (Facebook comments), `/mine-channel`, `/alpha-judge`.
 - Canon: memory `sostav-community-import`, [[reglament-anti-leak-na-vyhode]].
 
-
 <!--kit-footer-->
 
 ---

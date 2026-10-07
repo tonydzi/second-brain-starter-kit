@@ -57,7 +57,6 @@ Because the Bible is now a prompt, never load or emit secrets (passwords, access
 ## How to write a rule (dual-reader)
 Verbatim from Anton · imperative `WHEN → DO` · self-contained + example · frontmatter (`type`, altitude, `audience`, `theme`, `origin`, `authored_by`, `date_established`, `status`, `confidence`, plus `supersedes` / `superseded_by` on replacement). Full standard: vault note `protocol-bible-as-prompt`. **Step-by-step playbook with examples (even for a weak LLM): vault note `protocol-bible-rule-authoring`.**
 
-
 <!--kit-footer-->
 
 ---

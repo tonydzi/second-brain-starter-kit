@@ -113,8 +113,6 @@ python ~/.claude/scripts/dr_latecomer_sweep.py --apply    # добрать
 **Нужен Claude**: Шаг 2 в живом режиме опирается на Chrome-MCP. Ноги `cli` и `ff` работают у
 любого агента (§9.3-тер, пишем для любого агента).
 
-
-
 <!--kit-footer-->
 
 ---

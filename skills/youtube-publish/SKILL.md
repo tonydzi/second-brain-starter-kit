@@ -202,7 +202,6 @@ python ~/.claude/scripts/youtube_publish.py manifest --limit 5
 Память: [[teach-anton-by-podcast-default]], [[youtube-publish-channel-and-rails]],
 [[everything-becomes-content]], [[outbound-signature]].
 
-
 <!--kit-footer-->
 
 ---

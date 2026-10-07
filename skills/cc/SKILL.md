@@ -46,7 +46,6 @@ the window at a task boundary rather than close the session.
 - When to fire it: at a task boundary around 60% of the window; don't wait for the auto-compact at 95% (that loses more).
 - Don't confuse: `/tt` = test what was built · `/rr` = full retro · `/cc` = quick compact handoff · `/1` = resurrection after a crash.
 
-
 <!--kit-footer-->
 
 ---

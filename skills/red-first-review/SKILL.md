@@ -145,7 +145,6 @@ human read it before it posted.
   themselves can fail. A test suite that has never been shown red does not get to
   certify anyone else's.
 
-
 <!--kit-footer-->
 
 ---

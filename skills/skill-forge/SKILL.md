@@ -66,7 +66,6 @@ A follower does NOT write the shared set itself (it is receiveonly) — it prepa
 🧒 In plain words: this is a workbench for inventing your own tool at home, checking that it breaks
 nobody else's and hides no secret, and then handing it to the "master smith" who distributes it to everyone.
 
-
 <!--kit-footer-->
 
 ---

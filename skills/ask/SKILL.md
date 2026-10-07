@@ -34,7 +34,6 @@ Returns top-K chunks (chunked + tagged + edit-aware index); may flag `⚠ STALE`
 ## Note
 The index is kept fresh by the reindex routine. If results feel stale right after a big import, mention a reindex may be due (`brain_embed_update.py`) — but don't reindex unprompted.
 
-
 <!--kit-footer-->
 
 ---

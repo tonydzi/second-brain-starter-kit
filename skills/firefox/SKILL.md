@@ -290,8 +290,6 @@ python3 ~/.claude/scripts/_shared/browser_usage_log.py --report --days 14
 ⚠️ **VPN в тулбаре** — Google злее к новым входам, попроси Антона снять до ввода.
 Пароль вводит Антон (робот пароли не набирает, §3.4). Проверка успеха = не глаз, а куки на диске: `has_rotating_session(autoff)` + `SID/__Secure-1PSID/__Secure-1PSIDTS` в копии `cookies.sqlite` ([[done-is-a-claim-recheck-twice]]).
 
-
-
 <!--kit-footer-->
 
 ---

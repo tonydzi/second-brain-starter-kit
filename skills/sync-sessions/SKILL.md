@@ -54,7 +54,6 @@ wscript "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Claude-Sessions
 - Чаты на сайте claude.ai этим не переносятся: они лежат в облаке того
   аккаунта, под которым их писали.
 
-
 <!--kit-footer-->
 
 ---

@@ -187,8 +187,6 @@ carve-out (если есть), что уже проверено и что зап
   `python "$HOME/.claude/scripts/_shared/skill_usage_log.py" --log five-whys --outcome ok --kind skill`.
   Синтетические/static/mutation-тесты боевой счётчик не трогают.
 
-
-
 <!--kit-footer-->
 
 ---

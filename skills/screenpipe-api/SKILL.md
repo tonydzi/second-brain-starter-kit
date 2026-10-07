@@ -652,7 +652,6 @@ Reference real moments with clickable links (only IDs/timestamps from actual res
 
 Show a search result's `file_path` as inline code to make it a playable video: `` `/Users/<имя>/.screenpipe/data/monitor_1_..._10-30-00.mp4` ``.
 
-
 <!--kit-footer-->
 
 ---

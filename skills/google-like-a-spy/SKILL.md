@@ -249,7 +249,6 @@ De-indexing requests also make material deliberately absent from European result
 sets while present elsewhere, so compare regions before concluding anything is
 gone. Minimise per [../../ETHICS.md](../../ETHICS.md).
 
-
 <!--kit-footer-->
 
 ---

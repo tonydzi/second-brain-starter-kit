@@ -181,6 +181,12 @@ day; personal data in the examples is replaced with plausible fictional stand-in
 | [`/firefox`](firefox/SKILL.md) | Default to Firefox for browser automation and decide when Chrome is truly required. Use before any task that needs a browser: fetching a page, grabbing… |
 | [`/hk`](hk/SKILL.md) | Show what maintenance robots already did today before you repair anything by hand: backups, reindexes, guards, quotas and what went stale. Use when deciding… |
 | [`/llll`](llll/SKILL.md) | Short alias for /llms: settle the current question through a targeted, bounded consensus of other LLMs. Use when you want outside models to agree or… |
+| [`/display-mode`](display-mode/SKILL.md) | Change a Mac's main display resolution in one command: real pixels instead of 4K HiDPI so remote desktop (AnyDesk), screen recording and Screenpipe… |
+| [`/ask-any`](ask-any/SKILL.md) | Hand a task to whichever LLM is alive, not only Claude: the prompt goes to Codex, Grok, Gemini and Claude CLIs at the same time and the first valid… |
+| [`/ask-debt`](ask-debt/SKILL.md) | Read-only measurement of an agent's autonomy debt from its approvals log: how many times it asked the human for permission in a window, how many asks… |
+| [`/ledger`](ledger/SKILL.md) | Answer 'what happened on that day' instantly from a daily ledger that night robots assemble from free traces (git commits, session logs, vault writes,… |
+| [`/pack`](pack/SKILL.md) | Package a contribution (gist, script, fix or skill) as a product instead of a bare snippet: README with problem and result, install steps, a test,… |
+| [`/guide`](guide/SKILL.md) | Write an evergreen teaching longform for non-technical readers built from your own real material (systems you run, dated failures, numbers), structured… |
 
 ## Raw imports, grooming in progress
 
@@ -189,8 +195,6 @@ These arrived with the full local set and still carry their original working des
 | Skill | Original description |
 |---|---|
 | [`/alpha-credit`](alpha-credit/SKILL.md) | - КРЕДИТ АВТОРУ ИДЕИ: совет из комментария (TG @ClawRus / @ClawInga, комменты под постами Антона в FB, треды и issue на… Триггеры: “/alpha-credit“, “/… |
-| [`/ask-any`](ask-any/SKILL.md) | ПОРУЧИТЬ РАБОТУ ЛЮБОЙ ЖИВОЙ LLM, а не только Claude: задание уходит ОДНОВРЕМЕННО на codex + grok + gemini + claude, побеждает первая ответившая. Тригг… |
-| [`/ask-debt`](ask-debt/SKILL.md) | READ-ONLY замер «ДОЛГА АВТОНОМНОСТИ» по журналу одобрений 02 (approvals.db) — сколько я спросил Антона за окно, сколько из этого ПРОТУХЛО (никто не от… |
 | [`/audit-content`](audit-content/SKILL.md) | Verifies truthfulness, accuracy, and link integrity of content before publishing. Catches fabricated statistics, dead URLs, misattributed sources, and… |
 | [`/audit-website-aeo`](audit-website-aeo/SKILL.md) | Audits a live website for AI-engine discoverability (AEO/GEO). Crawls the site, runs 16 deterministic checks plus a 6-dimension content evaluation, an… |
 | [`/brain-onboard`](brain-onboard/SKILL.md) | Onboard a NEW human peer ([коллега], [коллега], [коллега], future family/colleagues/clients) into building THEIR OWN Second Brain — the HUMAN layer th… |
@@ -224,19 +228,16 @@ These arrived with the full local set and still carry their original working des
 | [`/google-like-a-spy`](google-like-a-spy/SKILL.md) | - Craft advanced search-engine queries and Google dorks to surface hidden files, documents and mentions. Use when building a Google dork, hunting a le… |
 | [`/graph-the-network`](graph-the-network/SKILL.md) | - Build an entity-relationship link-analysis graph of an investigation — nodes, typed edges carrying source and confidence, aliases, and temporal vali… |
 | [`/grok-sync`](grok-sync/SKILL.md) | Pull Anton's Grok (grok.com / SuperGrok) conversation history into the Obsidian vault from an official Grok data export (prod-grok-backend.json). Trig… |
-| [`/guide`](guide/SKILL.md) | Вечнозелёный ГАЙД по «формуле Юницкого» — обучающий лонгформ для не-технарей (Дзен-урок-сшивка, GitHub гайд-хаб, LJ), собранный из НАШЕЙ живой фактуры… |
 | [`/hubrun`](hubrun/SKILL.md) | Прогнать PowerShell-скрипт или команду на удалённом узле флота (дефолт: хаб [машина флота]) и получить вывод назад ОДНОЙ командой. Trigger on «/hubrun… |
 | [`/hunt-a-handle`](hunt-a-handle/SKILL.md) | - Enumerate a username across hundreds of platforms with sherlock, maigret and WhatsMyName, then correlate and confirm which accounts genuinely belong… |
 | [`/improve-aeo-geo`](improve-aeo-geo/SKILL.md) | Audits a website codebase and makes code changes so AI engines (ChatGPT, Claude, Perplexity, Google AI Overviews) can better discover, parse, quote, a… |
 | [`/investigate-anything`](investigate-anything/SKILL.md) | - Start-here router and tradecraft baseline for any investigation into a person, company, domain, image or selector. |
 | [`/investigate-without-getting-made`](investigate-without-getting-made/SKILL.md) | - Investigator OPSEC — threat-model who might notice you, control your attribution surface across IP, ASN, browser and TLS fingerprint, timing and log… |
 | [`/is-this-photo-real`](is-this-photo-real/SKILL.md) | - Verify whether an image or video is authentic, original and correctly captioned — provenance checks, error level analysis, noise and JPEG compressio… |
-| [`/ledger`](ledger/SKILL.md) | «Что было в тот день» — мгновенный ответ из дневного леджера, который роботы собирают каждую ночь из бесплатных следов… Триггеры: “/ledger“, “/день“, … |
 | [`/llms`](llms/SKILL.md) | /LLMs решает текущий вопрос через ограниченный консенсус Claude, Codex, Cursor, Grok и других пиров. Передаёт тему и контекст сессии, читает только ад… |
 | [`/mycroft-joke`](mycroft-joke/SKILL.md) | Дверь к банку шуток Майкрофта: подобрать строку раскрытия/ответку/гэг под конкретный текст и канал. Триггеры: '/mycroft-joke', '/mj', 'шутка майкрофта… |
 | [`/nsr`](nsr/SKILL.md) | NEW SESSION IN ROUTINE: я САМ поднимаю новую ВИДИМУЮ сессию через запланированную задачу — Антону жать нечего, но в списке он её видит и может продолж… |
 | [`/outbound-gate`](outbound-gate/SKILL.md) | ГЕЙТ ЛЮБОГО ИСХОДЯЩЕГО (PR/issue-коммент/DM/инвайт/пост/заявка/аутрич): исходящее обязано закрывать ЧЬЮ-ТО живую просьбу (анкер), выстрел в пустоту = … |
-| [`/pack`](pack/SKILL.md) | 📦 УПАКОВКА КОНТРИБЬЮШЕНА КАК ПРОДУКТА (декрет Антона 24.08.2026: «нам нужно всегда делать КАЧЕСТВЕННО... Триггеры: “/pack“, “/упакуй“, “упакуй как про… |
 | [`/pattern-of-life-from-socials`](pattern-of-life-from-socials/SKILL.md) | - Deep-dive a subject's social media presence — profile metadata, follower and mutual network, content analysis, and posting-time pattern of life acro… |
 | [`/peer-onboard`](peer-onboard/SKILL.md) | Онбординг КЛОДА нового внешнего лида/пира в наш Second Brain — вся цепочка одной командой: оформить TG-комнату (название по формуле,… Триггеры: “/peer… |
 | [`/pult`](pult/SKILL.md) | 📱 ПУЛЬТ — ежедневная ПУСТАЯ сессия с Remote Control на каждом узле Антона, чтобы он мог управлять машиной с ТЕЛЕФОНА без AnyDesk. Триггеры “/pult“, “/… |
@@ -272,7 +273,6 @@ These arrived with the full local set and still carry their original working des
 | [`/thread-clean`](thread-clean/SKILL.md) | Чистка спамных личных переписок перед повторным касанием: детерминированный план (какие НАШИ веерные рассылки и неотвеченные залпы стереть из диалога)… |
 | [`/track-planes-and-ships`](track-planes-and-ships/SKILL.md) | - Track aircraft and vessels from public ADS-B and AIS broadcasts using ADS-B Exchange, Flightradar24, FlightAware,… Use when following a tail number … |
 | [`/triage`](triage/SKILL.md) | - РАЗБОР ВХОДЯЩЕГО от живых людей: кто написал нам в Telegram (личка + упоминания в группах), WhatsApp и другие мессенджеры, сколько часов ждёт, кто о… |
-| [`/tt-probe`](tt-probe/SKILL.md) | E2E-проба конвейера fleet-skill-autonomy (создан на [машина флота] 2026-07-16 для verify #41ac669a). Не вызывать - это тестовый маркер, после верифика… |
 | [`/useosint`](useosint/SKILL.md) | - Entry point for open-source intelligence, investigation and verification work. Use when asked to investigate, research, verify, vet, check out, look… |
 | [`/vibe-teach`](vibe-teach/SKILL.md) | Ежедневная обучающая серия «Claude Code / Codex для не-кодеров» — сгенерировать и опубликовать 1-3 поста дня (тизер + средний FB-пост) для аудитории «… |
 | [`/voice-sessions`](voice-sessions/SKILL.md) | Нарезать голосовые Антона из чата «00 Архив ГОЛОСА» на ОТДЕЛЬНЫЕ ВИДИМЫЕ СЕССИИ: одна голосовая = одна сессия, всегда. Триггеры «/voice-sessions», «/v… |

@@ -34,7 +34,6 @@ RELATION (do not duplicate):
 - /ask = semantic meaning (RAG e5+reranker) over curated vault. /find = exact person names (names.db). /search = exact words across ALL conversations (this).
 - Vector/RRF/reranker lane + refresh routine: see memory `unified-search-layer` + decision note.
 
-
 <!--kit-footer-->
 
 ---

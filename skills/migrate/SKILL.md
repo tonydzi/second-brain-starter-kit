@@ -36,7 +36,6 @@ This is the **single command** over the migration project that several sessions 
 ## Output
 One-liner status + what's fresh/stale/blocked + the exact next command. Then 🧒 recap. Don't duplicate logic that lives in the scripts — point at them.
 
-
 <!--kit-footer-->
 
 ---

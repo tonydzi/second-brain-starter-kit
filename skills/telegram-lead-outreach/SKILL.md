@@ -71,7 +71,6 @@ Record each real lead under `04-Projects/crypto/Platinum-CRM/` linked to `[[conc
 - Positioning: "We are from Silicon Valley — engineers, Angels, VC, co-founders of the Palo Alto AI Research Laboratory." Met leads at events (Proof-of-Talk, ETH conferences).
 - Current campaign: **Canton ecosystem fund** — backing early projects on Canton Network.
 
-
 <!--kit-footer-->
 
 ---

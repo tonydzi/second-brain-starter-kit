@@ -46,7 +46,6 @@ Show the operator: the final text + the channel (handle + id) + the account → 
 ## Related
 `/fb-post` (the Chrome rail) · `/x-post` · `/episode` (tiers and cross-links) · the gate `scripts\_shared\social_guard.py` · the registry `00-System\Channels-Registry.md`.
 
-
 <!--kit-footer-->
 
 ---

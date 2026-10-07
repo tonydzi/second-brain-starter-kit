@@ -107,7 +107,6 @@ This is the operator's PERSONAL warmed account (not a bot). Operate gently:
 - **New tools need a connector restart** to appear (not mid-session).
 - **Permanent fix (optional):** PR these upstream so they ship in the package and survive upgrades.
 
-
 <!--kit-footer-->
 
 ---

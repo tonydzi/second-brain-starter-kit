@@ -1,6 +1,7 @@
 ---
 name: ledger
-description: "«Что было в тот день» — мгновенный ответ из дневного леджера, который роботы собирают каждую ночь из бесплатных следов… Триггеры: “/ledger“, “/день“, “что было вчера“, “что мы делали 3 августа“, “что делали на той неделе“, “чем занимались в понедельник“, “покажи день“, “what did we do yesterday“, “итоги дня“. 0 токенов LLM на выборку: скрипт печатает готовую выжимку"
+description: "Answer 'what happened on that day' instantly from a daily ledger that night robots assemble from free traces (git commits, session logs, vault writes, bus messages), with zero LLM tokens spent on retrieval. Use when asked what was done yesterday, on a given date or during a week. Triggers: /ledger, what did we do yesterday, what happened on <date>, show the day, daily summary."
+license: MIT
 version: 1.0.0
 ---
 
@@ -60,7 +61,6 @@ python "$IMPORTS_ROOT\brain_ask.py" "когда мы чинили счётчик
 - **Провизорный день** (моложе 2 суток) ещё пересоберётся: поздние коммиты и следы с пиров
   доезжают по синку.
 - Каждое обращение считается: `python ~/.claude/scripts/_shared/skill_usage_log.py --report --kind part`.
-
 
 <!--kit-footer-->
 

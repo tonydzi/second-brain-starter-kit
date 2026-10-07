@@ -167,7 +167,6 @@ Write a clean note to `$OBSIDIAN_VAULT/01-Conversations/Claude/Retros/retro-<YYY
 - Internal build-retro only. NOT the public Facebook diary (`facebook-diary-daily`) and NOT the preference scanner (`preference-sweep-daily`).
 - If a session built nothing durable, say so plainly — skip the ceremony (but still offer the `/compact` block if the chat got long).
 
-
 <!--kit-footer-->
 
 ---

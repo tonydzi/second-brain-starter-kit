@@ -73,7 +73,6 @@ Append every AUTOSENT reply to `$IMPORTS_ROOT/tg_assistant_log.jsonl`:
 ## What success looks like
 The operator's assistants get correct, on-policy answers in seconds, in their voice, straight from their own Bible — while every decision that actually matters (money, commitments, anything unknown) still lands on the operator's desk. They review a clean log, not a mess.
 
-
 <!--kit-footer-->
 
 ---

@@ -36,7 +36,6 @@ OUTPUT: the pull counters (new) + the distill counters (distilled/commitments) +
 
 RELATION (do not duplicate): the other call rail = skill [[granola-sync]]; the comparison of the two rails + the "where content lands" map = the vault `00-System` note / task RUSL-1; the alpha screen = `/alpha-review`.
 
-
 <!--kit-footer-->
 
 ---

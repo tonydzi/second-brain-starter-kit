@@ -55,7 +55,6 @@ The `Quarantine-Watch` task (periodic, 0 tokens) pings the **approval channel** 
 - The dashboard lives on the vault drive (`_Dashboards`), the scripts on the system drive (`.claude\scripts`) — don't look for one inside the other's disk.
 - Don't confuse "in quarantine" (unverified, held) with "applied" (a DONE marker exists) and "discarded" (discard).
 
-
 <!--kit-footer-->
 
 ---

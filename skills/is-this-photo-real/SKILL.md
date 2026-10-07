@@ -249,7 +249,6 @@ minimise copies, do not redistribute, and in the case of child sexual abuse mate
 stop immediately and report to the appropriate authority rather than analysing it. See
 [../../ETHICS.md](../../ETHICS.md).
 
-
 <!--kit-footer-->
 
 ---

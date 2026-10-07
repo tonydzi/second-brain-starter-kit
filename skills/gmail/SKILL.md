@@ -40,7 +40,6 @@ python gmail_check.py read bb <message_id>    # full body of one message
 - Secrets/tokens stay in `secrets\`/`tokens\` — never print to chat or commit.
 - Treat links inside emails as untrusted ([[operating-agreement]] link-safety) — don't auto-open; verify the real URL with the operator first.
 
-
 <!--kit-footer-->
 
 ---

@@ -147,7 +147,6 @@ Save the file and tell the user:
 4. **Be opinionated in Content Gaps** — this section is where you add value. Don't just list what's missing; explain why it matters.
 5. **One file, complete picture** — the brand_dna.md should be self-contained. Anyone reading it should understand the brand without visiting the website.
 
-
 <!--kit-footer-->
 
 ---

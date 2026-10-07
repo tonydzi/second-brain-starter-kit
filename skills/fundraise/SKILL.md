@@ -95,7 +95,6 @@ draft-first); режим B -> инсайт в волт (`/obsidian-ingest`) + п
   HyperFund, Movement, Mantra, wash-trading) как карта чужого фейка - за любой из этих
   приёмов сажают, и это буквально показано приговорами в уликах регламента.
 
-
 <!--kit-footer-->
 
 ---

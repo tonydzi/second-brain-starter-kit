@@ -51,7 +51,6 @@ consult (load slice) → coach (run the loop in the current tone) → **write ba
 ## Delivery
 1. **Live:** `/coach` (or `/coach evening`) here. 2. **Dashboard:** `_Dashboards/_Coach.html` (their preferred glance). 3. **Telegram:** scheduled morning+evening routines compose via this skill and send to their Saved Messages, then fold their replies into the next journal entry.
 
-
 <!--kit-footer-->
 
 ---

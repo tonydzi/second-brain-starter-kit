@@ -75,7 +75,6 @@ health ping (arch/sync/mcp) + the previous session's full history into the buffe
   ([[away-mode-45-days]], BIOS "Restore on AC Power Loss").
 - The folder name is `reboot`; `/restart` is a text trigger for the same skill (case does not matter).
 
-
 <!--kit-footer-->
 
 ---

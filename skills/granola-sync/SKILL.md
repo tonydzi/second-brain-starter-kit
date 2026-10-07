@@ -35,7 +35,6 @@ OUTPUT: the new/updated/errors counters + the period; if empty, "no new meetings
 
 RELATION (do not duplicate): the Fireflies rail (auto-recording, real speaker names) = skill [[fireflies-sync]]; access and history = memory [[granola-mcp-integration]]; the architecture decision = the vault note `decision-granola-extraction-official-api`; the post-call follow-up SOP = memory [[call-followup-group-sop]] (a separate pipeline); the FAAA sync goes the other way (finished follow-ups out of Telegram).
 
-
 <!--kit-footer-->
 
 ---

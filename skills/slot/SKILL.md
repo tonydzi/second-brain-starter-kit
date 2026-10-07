@@ -232,7 +232,6 @@ python ~/.claude/scripts/_test_session_slot.py      # ждём "ВСЁ ЗЕЛЕ�
 где взять место под **новую** сессию. Паспорт детали:
 `00-System/Session-Slots-Passport.md`.
 
-
 <!--kit-footer-->
 
 ---

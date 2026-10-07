@@ -215,7 +215,6 @@ to `find-anyone`; posting accounts to `hunt-a-handle` and
 **Done when** the brief is delivered, the case file retains the original hash and the
 derivative chain, and data you no longer need for the stated objective is deleted.
 
-
 <!--kit-footer-->
 
 ---

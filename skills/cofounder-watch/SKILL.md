@@ -39,7 +39,6 @@ A deterministic `signal-dispatcher` (0 tokens, stdlib only): reads the live funn
 - Phase 1: + urgent VC email + calendar conflicts (same mailbox + ledger).
 - To extend it, add a source to the SAME dispatcher; do NOT breed watchers ([[telegram-eventloop-listener]]: one live client, the AUTH_KEY pitfall).
 
-
 <!--kit-footer-->
 
 ---

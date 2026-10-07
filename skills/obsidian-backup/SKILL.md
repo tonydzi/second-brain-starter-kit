@@ -110,7 +110,6 @@ git -C tmp_restore restore --source <hash> -- "<path>"
 - Don't sync the live vault folder (or live `.git`) into Drive directly — we back up the *bundle*, on purpose (avoids corruption / conflict copies / ransomware propagation).
 - The standing rules are in memory ([[preserve-originals-rule]], [[vault-offsite-backup]]); reference them, don't fork them.
 
-
 <!--kit-footer-->
 
 ---

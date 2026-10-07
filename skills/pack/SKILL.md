@@ -1,6 +1,7 @@
 ---
 name: pack
-description: "📦 УПАКОВКА КОНТРИБЬЮШЕНА КАК ПРОДУКТА (декрет Антона 24.08.2026: «нам нужно всегда делать КАЧЕСТВЕННО... Триггеры: “/pack“, “/упакуй“, “упакуй как продукт“, “сделай качественно“, “package this properly“, а также АВТОМАТИЧЕСКИ из /share-fix Шаг 3 (перед созданием gist) и /release-slice (перед выкладкой)"
+description: "Package a contribution (gist, script, fix or skill) as a product instead of a bare snippet: README with problem and result, install steps, a test, license, honest limits and a clear entry point. Use before publishing a gist, sharing a fix or releasing a slice of internal tooling. Triggers: /pack, package this properly, make it a product, ship it with quality."
+license: MIT
 version: 1.0.0
 ---
 
@@ -72,7 +73,6 @@ version: 1.0.0
 ## ⭐ Чёрный юмор обязателен (anton 10.09.2026, голосом)
 
 Любой текст, который этот скилл отправляет ЖИВОМУ человеку наружу, несёт чёрную самоиронию — ровный служебный тон = дефект, объяснять надо не шутку, а её отсутствие. Строку берёшь через `/mycroft-joke` (полка (д) банка + строки 56-62 под холодное касание), приёмка — `/taste-check` P36. ⛔ Не шутим ровно в трёх зонах, и они не про вкус: строго-научная публикация (arXiv/журнал/JOSS) · юр.обязательство и анкета · красный список банка (чужая иконография угнетённых, псевдо-слуры, отрицание что я ИИ, юмор поверх диагноза/денег/беды собеседника). Одна шутка на тред. Канон: CLAUDE.md §3.3 §Поправка 10.09 + [[dark-humor-default-everywhere-external]].
-
 
 <!--kit-footer-->
 

@@ -228,7 +228,6 @@ precise location can endanger the people in the frame or make them a target. Bot
 of these are judgement calls you must make explicitly and record. See
 [../../ETHICS.md](../../ETHICS.md).
 
-
 <!--kit-footer-->
 
 ---

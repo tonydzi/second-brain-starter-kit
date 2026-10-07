@@ -70,7 +70,6 @@ a bus/Saved ping on RED. That is a local watchdog (deterministic, no LLM); the h
 - Canon: the house rule `reglament-shina-telegram-bez-mcp-i-svoya-sessiya-na-mashinu`, memory
   `machine-bus-telegram-rail`, `connector-health-watchdog`, `mcp-health-check`.
 
-
 <!--kit-footer-->
 
 ---

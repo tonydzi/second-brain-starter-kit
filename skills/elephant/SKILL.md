@@ -172,8 +172,6 @@ python worker.py run --n 12             # конечная половина: п�
 - память `finite-routines-eat-the-elephant`, `yt-watch-history-drip`, `deterministic-script-gotchas`
 - `/retro` Шаг 4★ — ловит слонов задним числом, на разборе сессии; этот скилл ловит их **на входе**
 
-
-
 <!--kit-footer-->
 
 ---

@@ -27,7 +27,6 @@ OUTPUT: a short list of relevant refusals, or a registry summary. It writes NOTH
 
 RELATION (do not duplicate): the source registry = memory [[declined-decisions]]; the nightly scan = `declined_scan.py`; the rule for humans = the Bible entry on recording rejected decisions.
 
-
 <!--kit-footer-->
 
 ---

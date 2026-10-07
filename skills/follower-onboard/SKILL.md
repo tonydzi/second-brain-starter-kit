@@ -88,7 +88,6 @@ NEVER ship `claude-secrets`/`claude-config`/`.claude.json`/connectors. Canon nev
 ## Don't duplicate
 `/migrate` = full HUB move (different job). `/inbox` = the bus the (mandatory, locally-installed) inbox-robot rides. One markdown procedure + one tested generator + the kit scripts — no server, no DB.
 
-
 <!--kit-footer-->
 
 ---

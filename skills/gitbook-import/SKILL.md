@@ -31,7 +31,6 @@ GitBook login is a boundary I can't pass alone. Anton logs into the GitBook org 
 ## Output
 Pages imported · notes + MOC created · concepts added · links 0-broken/0-orphan confirmed. Then 🧒 recap. Re-import of an already-imported space = idempotent rebuild (md5 source vs `_originals` first, like [[crypto-essays-reimport-idempotent]]).
 
-
 <!--kit-footer-->
 
 ---

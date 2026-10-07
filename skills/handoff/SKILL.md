@@ -44,7 +44,6 @@ As headings with bulleted lists:
 - Never paste secrets into the handoff file (it is synced and others may see it) — only a pointer to the store.
 - This is an internal handover tool; authorial voice and outbound copy do not belong here.
 
-
 <!--kit-footer-->
 
 ---

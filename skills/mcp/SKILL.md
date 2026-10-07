@@ -32,7 +32,6 @@ Use the registry tools: `mcp__mcp-registry__suggest_connectors` (for a stated ne
 ## Output
 Per-server 🟢/🔴 (alive + authed) + any down one with its fix command; for discover, a short ranked shortlist. Then 🧒 recap. Setup detail: [[telegram-mcp-connector]], [[whatsapp-mcp-integration]], [[n8n-stack]].
 
-
 <!--kit-footer-->
 
 ---

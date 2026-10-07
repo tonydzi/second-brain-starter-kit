@@ -164,8 +164,6 @@ tests: skill_desc_audit --check llm-pact = PASS · таблица verbs в Ша�
 selfheal, prior_art, codex_skills_bridge) = все существуют. После ACCEPT:
 bridge status PASS + по одному вызову скилла каждым агентом.
 
-
-
 <!--kit-footer-->
 
 ---

@@ -50,7 +50,6 @@ FALLBACK when the Telegram MCP is red on this machine: don't go silent — send 
 
 BOUNDARIES: draft-first outbound until the "+" (one "+" covers the teasers + channels of this episode; Facebook always keeps its own gate). Money/commitments/secrets in the text = stop. Privacy: no amounts and no third-party names. Teaser 240–370 chars HARD. One episode = one milestone.
 
-
 <!--kit-footer-->
 
 ---

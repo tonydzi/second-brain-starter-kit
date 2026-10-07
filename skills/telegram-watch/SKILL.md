@@ -152,7 +152,6 @@ Append every action to `$IMPORTS_ROOT/tg_assistant_log.jsonl`:
 - ELI5 recaps: only in messages TO the operator (DMs to them, Saved Messages). NEVER
   in team-chat replies — those keep the assistant's working voice.
 
-
 <!--kit-footer-->
 
 ---

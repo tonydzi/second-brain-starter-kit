@@ -207,7 +207,6 @@ and delete on a schedule you wrote down at the start. If you are working for a
 subject on their own data, that is the cleanest footing available — and it is
 the only footing on which testing a password is ever appropriate.
 
-
 <!--kit-footer-->
 
 ---

@@ -155,7 +155,6 @@ skill-файлов и один forward-test: две соседние темы в
 на свою. После независимого `ACCEPT` — `codex_skills_bridge.py sync/status` и уведомление
 Claude, Codex, Cursor и Grok с точными путями и границей `/llms` vs `/llm-pact`.
 
-
 <!--kit-footer-->
 
 ---

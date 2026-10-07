@@ -58,7 +58,6 @@ The owner says "<who> replied to the post about X" → `intention_mine.py respon
 ## Boundaries
 Draft-first is HARD — nothing goes outbound without the owner's explicit "publish". Don't post asks on article platforms. AK-47: don't spawn platforms beyond the decided set. Tier-2 (outbound/money) is not waived.
 
-
 <!--kit-footer-->
 
 ---

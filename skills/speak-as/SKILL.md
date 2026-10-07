@@ -56,7 +56,6 @@ A clean post block (ready to copy) + one line: role model · platform · length 
 - Top model for the writing; groundwork on the cheap model. Draft-first; publication = Tier-2 (the owner himself).
 - The reference palette · the core-ideas insight note · the voice [[fb-diary-voice]] · the pipeline [[content-factory]] · the person dossier.
 
-
 <!--kit-footer-->
 
 ---

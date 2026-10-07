@@ -40,7 +40,6 @@ RELATION (do not duplicate):
 - Canon + gotchas + token how-to: memory [[chatgpt-export-pipeline]].
 - Sibling sync skills: [[health-sync]], [[faaa-sync]], [[claudeai-sync]], [[whatsapp-sync]].
 
-
 <!--kit-footer-->
 
 ---

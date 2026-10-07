@@ -45,7 +45,6 @@ The parser is verified on a synthetic fixture matching the DR-documented schema 
 - Siblings: [[chatgpt-sync]], [[gemini-sync]], [[claudeai-sync]], [[whatsapp-sync]].
 - Full architecture + build order: [[insight-DR-DR26-07-15-HUB-01-grok-gemini-export-architecture]].
 
-
 <!--kit-footer-->
 
 ---

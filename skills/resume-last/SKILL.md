@@ -51,7 +51,6 @@ python "$IMPORTS_ROOT/claude_sessions/continue_session.py" <cliSessionId>
 - It is the twin of the SessionStart hook `session_resume_hook` (that one SHOWS the previous session at
   startup; this one PICKS IT UP with a single command).
 
-
 <!--kit-footer-->
 
 ---

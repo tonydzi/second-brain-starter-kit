@@ -36,7 +36,6 @@ defuddle parse <url> --markdown --frontmatter --output "<path>.md"
 ## When NOT to use defuddle
 A `.md` URL → fetch it directly; JS-heavy SPAs, paywalls, logins → a regular web fetch or live-browser automation.
 
-
 <!--kit-footer-->
 
 ---

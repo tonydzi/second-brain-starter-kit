@@ -237,7 +237,6 @@ public, and scraping disputes turn on authorization and contract, not on
 whether the page was visible. Never authenticate to, probe, or send traffic at
 systems belonging to the subject without written authorization.
 
-
 <!--kit-footer-->
 
 ---

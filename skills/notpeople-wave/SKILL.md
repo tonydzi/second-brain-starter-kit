@@ -77,7 +77,6 @@ Operator-facing: N sent + N/N delivered (with ids), N dropped (dups/dead handles
 - Offer: $600K pre-seed SAFE · deck `notpeople.ai/pitch` · Calendly `https://calendly.com/paloaltolab/1-on-1`.
 - GEN-ERR-659 = dead/changed handle. machine_bus relay target = `HUB-1`.
 
-
 <!--kit-footer-->
 
 ---

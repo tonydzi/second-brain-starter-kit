@@ -54,7 +54,6 @@ license: MIT
 ## Links
 Canon for the rule: memory [[teaser-crosspost-clawrus]] + the house rulebook entry on teaser cross-posting. Relatives: [[fb-skill-set]] (/fb-post, /fb-reply, fb_guard), [[content-factory]] (the Distribute stage), [[short-text-when-unreviewed]]. The routine twin: the scheduled task `fb-watch-daily` (1×/day, daytime).
 
-
 <!--kit-footer-->
 
 ---

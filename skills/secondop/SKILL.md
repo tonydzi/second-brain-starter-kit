@@ -36,7 +36,6 @@ Drops a request file onto the machine bus (`_machine-bus/_secondop/`); the hub's
 - Quota exhausted → queue until the next window, do NOT switch to a paid API (prefer included subscription limits).
 - Raising/disabling the gate = edit secondop.json, not the code.
 
-
 <!--kit-footer-->
 
 ---

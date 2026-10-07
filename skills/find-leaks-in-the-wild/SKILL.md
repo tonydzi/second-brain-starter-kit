@@ -249,7 +249,6 @@ item was necessary. Under GDPR and equivalent regimes this is personal data and
 often special-category data, and processing it needs a lawful basis. See
 [../../ETHICS.md](../../ETHICS.md).
 
-
 <!--kit-footer-->
 
 ---

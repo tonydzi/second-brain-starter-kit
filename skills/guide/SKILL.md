@@ -1,6 +1,7 @@
 ---
 name: guide
-description: "Вечнозелёный ГАЙД по «формуле Юницкого» — обучающий лонгформ для не-технарей (Дзен-урок-сшивка, GitHub гайд-хаб, LJ), собранный из НАШЕЙ живой фактуры (флот, второй мозг, CRM, факапы с датами). Триггеры: “/guide“, “сделай гайд“, “собери урок“, “дзен-урок“, “гайд-хаб“, “оформи как Юницкий“, “evergreen guide“"
+description: "Write an evergreen teaching longform for non-technical readers built from your own real material (systems you run, dated failures, numbers), structured as a stitched lesson that can live as a blog post, a GitHub guide hub and a newsletter issue. Use when turning lived engineering experience into a durable how-to. Triggers: /guide, make a guide, build a lesson, evergreen guide."
+license: MIT
 version: 1.0.0
 ---
 
@@ -36,7 +37,6 @@ version: 1.0.0
 ## Шаг 4. Хвост
 - Гайд = вечнозелёный: ссылка на него добавляется в перелинковку будущих постов серии.
 - Заметка-копия в волт (§8.3), связать с [[project-vibe-teach]] и [[everything-becomes-content]].
-
 
 <!--kit-footer-->
 

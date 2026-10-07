@@ -40,7 +40,6 @@ Each item is one line + a link. No filler. Mark confidence where it matters.
 ## Boundaries
 Read-only and **PRIVATE** (Second-Brain layer) — the engine only reads the databases and writes a digest file; nothing goes outward. The scoring is a mechanical detector (engagement + keywords), not "smart" — the smart filtering is step 3. Freshness comes from the nightly `watch_run.py`; suspect it's stale → `--refresh`. Topic outside those 8 channels → lean on step 2 (WebSearch), don't invent.
 
-
 <!--kit-footer-->
 
 ---

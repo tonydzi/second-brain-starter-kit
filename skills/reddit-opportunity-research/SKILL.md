@@ -205,7 +205,6 @@ When you deliver the file, include:
    - `write-seo-geo-content` to build the guides/comparisons Reddit users need
    - `build-backlinks` to expand from Reddit into other community mention opportunities
 
-
 <!--kit-footer-->
 
 ---

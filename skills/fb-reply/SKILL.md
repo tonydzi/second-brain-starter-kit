@@ -142,7 +142,6 @@ What was answered, what is queued (waiting on the pause/limit), how many today `
 - The counter: `~/.claude/scripts/fb_guard.py`. The voice: `fb-diary-voice`.
 - Canon: Decision Memo 2026-06-28, `chrome-autonomy-self-drive`, `browser-work-on-peers-not-hub`.
 
-
 <!--kit-footer-->
 
 ---

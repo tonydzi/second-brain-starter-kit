@@ -59,7 +59,6 @@ An event → a BEAT into the canon (template `beats\_TEMPLATE-beat.md`) → `/re
 - Privacy: secrets OUT; respect the `reveal` axis (never burn live_hold/spoiler_until in outbound recaps). Serialization comes from REAL beats, never from invention.
 - AK-47: one SKILL.md, no separate store any more (the canon IS the store). Canon laws: `decision-single-canon-story-state` + `_SHOW-CANON.md`.
 
-
 <!--kit-footer-->
 
 ---

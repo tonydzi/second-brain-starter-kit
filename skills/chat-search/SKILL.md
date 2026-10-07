@@ -38,7 +38,6 @@ Copy the command from the hit (or use `/resume-last` for the most recent one). `
 - Reranker scores can be negative — what matters is the ORDER (top-1 = most relevant), not the sign.
 - Siblings: `/ask` (meaning across the vault), `/search` (exact words in Telegram/FB/ChatGPT), `/resume-last` (continue the latest).
 
-
 <!--kit-footer-->
 
 ---

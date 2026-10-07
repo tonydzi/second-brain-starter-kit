@@ -187,7 +187,6 @@ CRM пополнен · заявленные цифры перепроверен
 память: [[github-inbound-watch]], [[github-communication-autonomous]], [[engineer-acquisition-enrichment-not-scraping]] ·
 соседи: `/consumer-hunt`, `/issue-match`, `/github-growth`, `/local-engineer-outreach`
 
-
 <!--kit-footer-->
 
 ---

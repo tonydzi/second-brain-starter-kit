@@ -248,7 +248,6 @@ After executing actions, come back and update:
 6. **Be honest about limitations.** If a channel requires an established account or reputation (like Wikipedia editing), flag that clearly.
 7. **Focus on the user's time budget.** If they said 30 min/week, the Quick Wins section should fit in 30 minutes. Don't overwhelm.
 
-
 <!--kit-footer-->
 
 ---

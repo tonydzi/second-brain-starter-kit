@@ -141,8 +141,6 @@ python scripts/_test_style_check.py
 - `scripts/style_check.py` — гейт
 - `scripts/_test_style_check.py` — тест гейта
 
-
-
 <!--kit-footer-->
 
 ---

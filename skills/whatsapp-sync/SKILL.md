@@ -61,7 +61,6 @@ RELATION (do not duplicate):
 - First-time setup + pairing + gotchas + the nightly task: memory [[whatsapp-mcp-integration]] (single source of truth). Automation registry: [[automation-inventory]].
 - Sibling sync skills: [[health-sync]] / [[faaa-sync]] / [[telegram-reimport]] (same on-demand-refresh architecture). Routine policy: [[evaluate-recurring-into-routine]] — nightly cheap data twin + this richer manual LLM path.
 
-
 <!--kit-footer-->
 
 ---

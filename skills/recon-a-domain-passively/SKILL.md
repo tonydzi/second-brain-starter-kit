@@ -248,7 +248,6 @@ or the relevant CERT and nothing else. And in due diligence, confirm you hold th
 client's written authority for the scope you are running: "our client is buying
 them" is not authorization from the target.
 
-
 <!--kit-footer-->
 
 ---

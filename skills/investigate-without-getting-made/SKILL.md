@@ -249,7 +249,6 @@ to collect on living people, and the persona's own conduct is attributable to
 your organisation. See [../../ETHICS.md](../../ETHICS.md). If you cannot justify
 the persona in writing, do not create it.
 
-
 <!--kit-footer-->
 
 ---

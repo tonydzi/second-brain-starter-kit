@@ -232,7 +232,6 @@ For self-defense, run this workflow on yourself, use the opt-out guidance in
 `dig-through-data-brokers`, and use `investigate-without-getting-made` so the
 searching itself does not create new exposure.
 
-
 <!--kit-footer-->
 
 ---

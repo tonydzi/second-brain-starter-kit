@@ -42,7 +42,6 @@ CADENCE: tagged releases on Monday and Thursday; small commits every day as thin
 
 BOUNDARIES: money/commitments/secrets = stop + ask the owner. Vault writes = run `vault_backup.py` first. A slice is cut by value, not for the sake of slicing. The queue of pains and the "what we never open" list (connector logic, the governance protocols of the private half, the persona codex) live in the canon decision.
 
-
 <!--kit-footer-->
 
 ---

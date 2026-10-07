@@ -258,7 +258,6 @@ Before delivering, verify every item. **Do not ship if any item fails.**
 8. **Structured data must be correct** — validate JSON-LD, ensure metadata is complete, flag missing frontmatter fields rather than silently skipping them
 9. **Typography and data presentation matter** — tables, FAQs, blockquotes, and lists must be styled to the same standard as the rest of the site. Unstyled markdown elements are not acceptable in production.
 
-
 <!--kit-footer-->
 
 ---

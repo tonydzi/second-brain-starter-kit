@@ -61,7 +61,6 @@ A short summary to the operator (Telegram Saved Messages works fine): "claude.ai
 - **Binaries** (images/docs, 524 of them in the manifest) — the operator asked NOT to pull those (2026-06-12).
 - **Auto mode**: the nightly Windows task `Claude-AI Sync Daily` runs the back half over any fresh export; the PULL stays in-session. Full headless ("it downloads itself") = moving to a dedicated Chrome profile + Playwright + a deterministic RAG linker — deferred (the operator chose the safe semi-automatic path).
 
-
 <!--kit-footer-->
 
 ---

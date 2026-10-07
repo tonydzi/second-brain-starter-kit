@@ -245,7 +245,6 @@ skill: legitimate in due diligence, fraud and authorized investigation, and the 
 material of stalking. If the only outcome of extracting a GPS tag is knowing where
 a private individual sleeps, stop. See [../../ETHICS.md](../../ETHICS.md).
 
-
 <!--kit-footer-->
 
 ---

@@ -315,7 +315,6 @@ Then emit the CSV. Nothing else.
 7. **Output is actionable** — the deliverable should be directly usable for content planning without further analysis
 8. **Integrate paid tools when available** — Ahrefs/Semrush data is always better than guessing. Offer to integrate it. But the skill works without it too.
 
-
 <!--kit-footer-->
 
 ---

@@ -38,7 +38,6 @@ First check the API key is still alive: compare today's date to `N8N_KEY_EXPIRES
 ## Output
 RED/FLAKY/IDLE counts + the worst offender with its proven error + suggested fix. Then 🧒 recap. Related: [[platinum-crm-import]] (CHARM CRM engine), [[automation-inventory]] (that = LOCAL jobs; this = REMOTE n8n).
 
-
 <!--kit-footer-->
 
 ---

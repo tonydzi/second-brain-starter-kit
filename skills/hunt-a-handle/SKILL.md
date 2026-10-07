@@ -203,7 +203,6 @@ the handles produced.
 **Done when** every candidate in the table carries a grade and a source, and no
 enumeration hit appears without one.
 
-
 <!--kit-footer-->
 
 ---

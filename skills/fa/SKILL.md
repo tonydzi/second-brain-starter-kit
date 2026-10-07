@@ -151,7 +151,6 @@ After sending, in the same pass ([[always-archive-artifacts-to-vault]]):
 - **Too fast.** A follow-up sent the same minute as the call reads as an automaton. The norm is between half an hour and the next morning.
 - **A second call with the same person:** write the follow-up from the LATEST call, but check that what was promised after the previous one is closed — otherwise the first item of the follow-up must acknowledge that.
 
-
 <!--kit-footer-->
 
 ---

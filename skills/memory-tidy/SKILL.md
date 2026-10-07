@@ -112,7 +112,6 @@ python3 ~/.claude/scripts/memory_focus.py        # обязан 0 missing pins
 python3 ~/.claude/scripts/_test_memory_tidy.py   # 11 проверок, ~1 с, без LLM
 ```
 
-
 <!--kit-footer-->
 
 ---

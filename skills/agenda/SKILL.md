@@ -27,7 +27,6 @@ Read-only. Never send a message, book, or commit from here — hand off to /pipe
 ## Output
 A short ranked agenda (≤~8 lines): ⏰ time-bound first, then context. Then 🧒 recap. Visual option: the Life-OS / Coach dashboards already render the day by eye ([[prefer-visual-dashboards]]).
 
-
 <!--kit-footer-->
 
 ---

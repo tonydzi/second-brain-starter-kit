@@ -583,7 +583,6 @@ Record: Does your brand appear? Which pages are cited? What is said?
 | Page Word Count | Medium | 1,500+ words for authority pages, 800+ for use case pages |
 | HTTPS + Technical | Low | Required baseline but not a differentiator |
 
-
 <!--kit-footer-->
 
 ---

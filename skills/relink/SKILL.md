@@ -109,7 +109,6 @@ The DR suggested, and we declined for AK-47: a Local REST API + MCP plugin (Edit
 - [concept-creation-rules.md]($OBSIDIAN_VAULT/08-Templates/concept-creation-rules.md) §1 (when) + §11 (integration) — the canon.
 - skill `ask` (RAG engine), `dedup` (dupes), `obsidian-ingest` (first-time save of a raw dump), `obsidian-backup` (backup runbook).
 
-
 <!--kit-footer-->
 
 ---

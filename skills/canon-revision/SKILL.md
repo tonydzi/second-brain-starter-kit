@@ -59,7 +59,6 @@ Guard RED / a fat yellow → structurally fold the fattest PROCESS sections (sam
 - ⛔ Don't re-compress words, and don't move bodies into `.claude/rules/` "for auto-loading" — there IS no auto-loading feature (disproved 07-21, memory rule-activation-audit).
 - Canon: [[claude-md-compression-contract]] + the house rulebook entry on optimising always-loaded files; the sister rule for MEMORY.md: [[memory-index-hygiene]].
 
-
 <!--kit-footer-->
 
 ---

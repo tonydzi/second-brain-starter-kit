@@ -226,7 +226,6 @@ retention rules as the rest of the case per [../../ETHICS.md](../../ETHICS.md).
 Hosted graph platforms mean uploading the case to a third party — check that is
 permitted before you paste a subject's selectors into a cloud transform.
 
-
 <!--kit-footer-->
 
 ---

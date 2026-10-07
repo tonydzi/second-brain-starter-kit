@@ -89,7 +89,6 @@ python ~/.claude/scripts/brain_kit.py receipt --root "<её папка>" --out r
 - Волт Антона у пира = receive-only справка, не дом. Канон-предложения — через `_transit/canon-proposals`.
 - Не пере-дроблю ([[ak47-simplicity]]): один источник за раз, простые скрипты, всё чинимо самим пиром.
 
-
 <!--kit-footer-->
 
 ---

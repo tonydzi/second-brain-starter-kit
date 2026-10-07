@@ -64,7 +64,6 @@ Briefly to the owner: **WHAT** the rule is · **THE HOMES MATRIX from Step 4★*
 - The canon of this procedure = memory `rules-intake-channel` (this skill is its executable form). The mirror is `capture-rules-into-bible` (which catches rules in ANY chat; intake = the dedicated channel + the always-loaded-layer mechanics).
 - Secrets (passwords/access/financial figures/"grey" techniques) — NEVER in the loaded layer (`CLAUDE.md`/`MEMORY.md`/the Bible); their home is `secrets\` (memory `credential-store`).
 
-
 <!--kit-footer-->
 
 ---

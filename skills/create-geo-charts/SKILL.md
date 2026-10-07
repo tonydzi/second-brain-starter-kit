@@ -397,7 +397,6 @@ Before delivering any chart, verify:
 - [ ] Internal links planned: chart ↔ related content pages
 - [ ] **VISUAL QA PASSED**: Chart opened in browser, verified no text overflow, clipping, overlap, or misalignment. All elements have 20px+ margin from viewBox edges.
 
-
 <!--kit-footer-->
 
 ---

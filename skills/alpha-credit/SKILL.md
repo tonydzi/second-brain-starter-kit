@@ -125,7 +125,6 @@ python ~/.claude/scripts/alpha_credit.py trial   <id> --criterion "что счи
 Библия `reglament-vklady-dokumentiruem-gromko-vezde`, `reglament-publichnaya-pohvala-posle-razbora-chuzhogo-tula`;
 задача `10-Tasks/task-2026-08-06-contributor-credit-engine.md`.
 
-
 <!--kit-footer-->
 
 ---

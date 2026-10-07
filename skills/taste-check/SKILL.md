@@ -91,7 +91,6 @@ Not checked: P17-P19 (not outbound)
 - Only the owner calibrates the weights (same as in the source review: the agent collects signals, the human calibrates the patterns).
 - The token law: deterministic checks first (grep/counting), the LLM only for judgement on an excerpt.
 
-
 <!--kit-footer-->
 
 ---

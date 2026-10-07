@@ -71,8 +71,6 @@ task (browser-history track) so we don't duplicate — safety-critical infra
 - Links inside emails = untrusted; only follow the takeout.google.com archive URL, verify host.
 - Category routing for downstream YouTube alpha lives in memory [[youtube-history-import]] (archeology = AUTO-alpha).
 
-
-
 <!--kit-footer-->
 
 ---

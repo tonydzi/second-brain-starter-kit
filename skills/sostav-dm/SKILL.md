@@ -109,7 +109,6 @@ Tier-2 (деньги · обязательства · секреты · масс
 Скрипты: `_imports\sostav\_demand_slice.py`, `sostav_renewal_sheet.py`. Соседи: `/sostav-reply`, `/triage`, `/fa`.
 Потребитель: Антон (сессии по лидам клуба) + чип task_a1a3cd7e (те же правила для других групп).
 
-
 <!--kit-footer-->
 
 ---

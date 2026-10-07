@@ -29,7 +29,6 @@ Finds the gap between what the operator DOES (recurring manual work across sessi
 ## Daily routine
 Scheduled twin `skill-gap-daily` runs this read-only and updates the dashboard + drops a one-line note if a NEW gap appeared since yesterday (don't nag if nothing changed). Grunt drafting → Sonnet; the judgment/ranking → keep on the session model ([[model-routing-sonnet-grunt]]).
 
-
 <!--kit-footer-->
 
 ---

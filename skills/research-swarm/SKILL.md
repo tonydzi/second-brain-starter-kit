@@ -63,7 +63,6 @@ Default = 5 lenses, single pass. For a big/important hypothesis the operator can
 ## Relation
 Operational arm of vault `protocol-epistemic-neutrality-fringe-research` · memory [[epistemic-neutrality]]. Pairs with `/alfa-search-recall-deepresearch` (R+DR — recall→gap→deep-research→synthesis; the swarm is the multi-lens synthesis engine). Distinct from `/ask` (single recall) and `/deep-research` (web fan-out, single perspective). Serves [[main-goals]] goal #1 — the twin reasons like the operator-the-researcher.
 
-
 <!--kit-footer-->
 
 ---

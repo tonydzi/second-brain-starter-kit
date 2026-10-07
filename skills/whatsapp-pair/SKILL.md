@@ -117,7 +117,6 @@ python "$USERPROFILE\.claude\scripts\wa_probe.py" --json
 Канон: память [[whatsapp-mcp-integration]] (стек, пути, патчи), [[whatsapp-dead-since-july-and-watchdog-lied]]
 (почему сторож молчал), [[hub-connectors]]; CLAUDE.md §2.5 (покажи экран), §5.5 (сторож), §5.8 (тест+док+счётчик).
 
-
 <!--kit-footer-->
 
 ---

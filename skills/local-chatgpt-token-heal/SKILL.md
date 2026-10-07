@@ -54,7 +54,6 @@ then tail `%IMPORTS%\chatgpt\_nightly_sync-HUB-1.log` → confirm `exit=0`. Repo
 - Auto-heal loop: `nightly_sync.py` calls L1 on pull exit 7, retries pull, and bus-TASKs the hub (L2) if L1 exits 5.
 - Canon: memory [[chatgpt-export-pipeline]], [[credential-store]]; sibling skill `/chatgpt-sync`.
 
-
 <!--kit-footer-->
 
 ---

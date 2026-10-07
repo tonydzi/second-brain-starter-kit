@@ -63,7 +63,6 @@ This is not a one-off cleanup, it is a trade. Every time a work account joins a 
 - **Output is buffered** when redirected to a file: run it in the background and poll the file, "empty" ≠ "broken". To check the process is alive: `Get-CimInstance Win32_Process -Filter "Name like '%python%'" | ? { $_.CommandLine -like '*tg_group_slots*' }`.
 - There is a 2s pause between departures plus `FloodWait` handling — Telegram dislikes a burst of leaves.
 
-
 <!--kit-footer-->
 
 ---

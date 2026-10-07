@@ -40,7 +40,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "$IMPORTS_ROOT/sync_check\sy
 - Read-only: it fixes nothing and moves nothing. Healing a stuck sync is the watchdog's job (separate).
 - It only sees what the local Syncthing daemon knows; if the daemon is not running it says so (RED).
 
-
 <!--kit-footer-->
 
 ---

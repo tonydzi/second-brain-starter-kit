@@ -65,8 +65,6 @@ grep -rl "promise" "$OBSIDIAN_VAULT/10-Tasks" --include="task-*.md" -i
 `/comment-to-call` (шаг 5 — обещания из воронки) · `/fa` (Promised после звонка) ·
 `/triage` (обещания из лички) · Библия `reglament-kollekti-obeshchaniya-vsegda`.
 
-
-
 <!--kit-footer-->
 
 ---

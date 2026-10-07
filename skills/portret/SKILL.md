@@ -40,7 +40,6 @@ Merge recall + DR → a Decision Memo `03-Insights\insight-*` ("what to adopt / 
 - Grunt work (collecting profiles, frequency analysis of a corpus) can run on cheap-model subagents; the synthesis and the map of thinking need the top model.
 - Reference precedent: an earlier dossier built exactly this way (see the matching `person-*` and `insight-*` notes).
 
-
 <!--kit-footer-->
 
 ---

@@ -119,7 +119,6 @@ Evidence (output/counter/screenshot) is mandatory — without it a "✅" doesn't
 - read-only/dry-run where side effects exist; vault writes — backup-first ([[vault-backup-rule]]).
 - If the session built nothing — say plainly "nothing to test", no ceremony.
 
-
 <!--kit-footer-->
 
 ---

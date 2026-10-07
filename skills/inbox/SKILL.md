@@ -40,7 +40,6 @@ Shows only what is NEW for THIS machine (matched by hostname) and marks it read.
 - "Fresher beats older": edit conflicts are resolved by the operator (Syncthing leaves `*.sync-conflict-*` files).
 - Delivery is not instant: Claude is not a daemon; the letter waits until a session opens on that machine (or a routine fires).
 
-
 <!--kit-footer-->
 
 ---

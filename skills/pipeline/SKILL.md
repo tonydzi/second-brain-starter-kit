@@ -40,7 +40,6 @@ Deeper history per lead: `04-Projects\crypto\Platinum-CRM\_Platinum-CRM-MOC.md` 
 - Money / commitments / credentials → escalate, never autonomous.
 - If `tg_followups.json` is empty/stale → say so; offer to rebuild from recent Telegram via telegram-lead-outreach ("find + capture").
 
-
 <!--kit-footer-->
 
 ---

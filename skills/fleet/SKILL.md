@@ -38,7 +38,6 @@ The operator runs an autonomous fleet (Claude Desktop "Cowork" app → many head
 ## Output
 Tight one-liner + detail: "N agents (master PID …) · building: <themes> · writing now: <k> files · flags: 🟢/🟡/🔴 …". Then 🧒 recap. If you spotted something durable they built that isn't captured, mention it (or note `/retro` / the daily sweep will catch it).
 
-
 <!--kit-footer-->
 
 ---

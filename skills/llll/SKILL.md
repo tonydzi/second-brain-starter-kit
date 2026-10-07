@@ -16,8 +16,6 @@ consumer: "anyone asked to repair the app; Claude, Codex and Cursor agents"
 Не копируй сюда шаги консенсуса. Единственный источник механики — `/llms`; общая state machine
 агентов остаётся в `/llm-pact`.
 
-
-
 <!--kit-footer-->
 
 ---

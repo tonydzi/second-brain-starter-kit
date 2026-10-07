@@ -208,7 +208,6 @@ flag, and the owner attribution with its confidence grade and sources.
 **Done when** no carrier claim appears without its lookup method, and every
 interactive check is labelled as one.
 
-
 <!--kit-footer-->
 
 ---

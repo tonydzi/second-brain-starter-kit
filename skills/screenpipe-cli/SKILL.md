@@ -287,7 +287,6 @@ screenpipe pipe publish <pipe-name>
 
 Reads `~/.screenpipe/pipes/<pipe-name>/pipe.md`, extracts title/description/icon/category from YAML frontmatter, and publishes to the screenpipe pipe store. Requires auth (SCREENPIPE_API_KEY env var or `~/.screenpipe/auth.json`).
 
-
 <!--kit-footer-->
 
 ---

@@ -46,7 +46,6 @@ A short verdict, not a dump:
 - It does not duplicate the Alpha Protocol — it is that protocol's narrow sub-step "is there already a
   verdict"; a full strategy still needs `R+DR`.
 
-
 <!--kit-footer-->
 
 ---

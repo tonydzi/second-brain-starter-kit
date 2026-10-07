@@ -231,7 +231,6 @@ their data, so quote findings in a report rather than republishing the dataset.
 Screenshots and banners containing personal data fall under the minimization
 rules in [../../ETHICS.md](../../ETHICS.md).
 
-
 <!--kit-footer-->
 
 ---

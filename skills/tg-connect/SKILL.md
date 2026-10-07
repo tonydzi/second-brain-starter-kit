@@ -122,7 +122,6 @@ python "$USERPROFILE\.claude\scripts\tg_channels_check.py"
 Соседи: `/tg-check` (диагноз обеих рельс) · `/telegram-howto` (что уметь после подключения) ·
 `/whatsapp-pair` (та же задача для WhatsApp) · `/raise-sync` (если лежит синк, а не телега).
 
-
 <!--kit-footer-->
 
 ---

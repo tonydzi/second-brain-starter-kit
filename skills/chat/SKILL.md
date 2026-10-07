@@ -56,7 +56,6 @@ If a brand-new chat is missing, run that refresh or fall back to live `search_di
 `build_group_digest.py` + Sonnet classifier → `group_class` · `build_groups_dashboard.py`.
 All under `$IMPORTS_ROOT/dialogs/`. See memory [[telegram-chat-index]].
 
-
 <!--kit-footer-->
 
 ---

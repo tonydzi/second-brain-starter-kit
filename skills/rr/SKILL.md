@@ -23,7 +23,6 @@ Do not copy the retro steps here — the single source is the `retro` skill (the
 **Boundaries:** the folder name is `rr`, so `/rr` works natively; wrong-keyboard-layout variants are
 text triggers — on recognizing them, run this same skill. Case-insensitive ([[commands-case-insensitive]]).
 
-
 <!--kit-footer-->
 
 ---

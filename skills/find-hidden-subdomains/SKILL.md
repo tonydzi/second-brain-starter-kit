@@ -237,7 +237,6 @@ argued as unauthorized activity; keep them inside written scope per
 [../../ETHICS.md](../../ETHICS.md). Discovering a dangling CNAME or an exposed
 staging host obliges you to report it, not to test it.
 
-
 <!--kit-footer-->
 
 ---

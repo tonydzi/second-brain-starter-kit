@@ -46,7 +46,6 @@ license: MIT
 - The task owner is a person ([[task-assignment-by-machine]]); their Claude is the hands.
 - ID case does not matter ([[commands-case-insensitive]]).
 
-
 <!--kit-footer-->
 
 ---

@@ -249,7 +249,6 @@ purpose, but characterising a named person as wrongdoing on the basis of a leak
 entry alone is both an evidential and a defamation problem. Corroborate, and
 write carefully.
 
-
 <!--kit-footer-->
 
 ---

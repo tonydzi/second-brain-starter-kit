@@ -417,7 +417,6 @@ Map each article to its folder using the `section` and `subsection` from the con
 4. Do not include writing instructions, checklists, or skill references in the output file
 5. Create the folder if it does not exist
 
-
 <!--kit-footer-->
 
 ---

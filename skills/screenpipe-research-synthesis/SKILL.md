@@ -9,7 +9,6 @@ Confirm the source set and research question. Extract observations with source p
 For each theme, state the supporting evidence, counterexamples, confidence, and practical implication. Separate observed behavior from preferences and hypotheses. Do not force consensus or invent prevalence.
 Recommend a small next experiment with an observable success criterion. Use role labels in shareable output and avoid identifying quotes unless explicitly requested.
 
-
 <!--kit-footer-->
 
 ---

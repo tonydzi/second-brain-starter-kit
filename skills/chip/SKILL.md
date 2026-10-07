@@ -91,7 +91,6 @@ python3 ~/.claude/scripts/_test_session_mode.py
 `/nsr` — я поднимаю видимую сессию сам (обратная команда).
 `/slot` — где взять место под сессию. `/task` — реестр задач.
 
-
 <!--kit-footer-->
 
 ---

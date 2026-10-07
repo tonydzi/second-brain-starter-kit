@@ -249,7 +249,6 @@ a published report is a separate copyright question from using it as evidence.
 Bulk retrieval strains a nonprofit's infrastructure: rate-limit enumeration and
 raw fetches, and pull the index once rather than repeatedly.
 
-
 <!--kit-footer-->
 
 ---

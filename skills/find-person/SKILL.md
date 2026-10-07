@@ -71,7 +71,6 @@ consumer: "Антон (ТГ-хэндлы лидов) · рутина enrichment 
 `_shared/skill_usage_log.py` · память `foreign-skill-pack-install-gotchas`,
 `engineer-acquisition-enrichment-not-scraping`, `crm-lead-full-provenance`.
 
-
 <!--kit-footer-->
 
 ---

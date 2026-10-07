@@ -52,7 +52,6 @@ python "$IMPORTS_ROOT/arch/arch_status.py" dead
 ## Canon
 Memory [[system-architect]] · decision `decision-architect-system-platform` · the Bible rule "check the map before changing the system" (for human assistants and LLMs alike). Related: [[verify-existing-before-proposing]], [[automation-inventory]], [[vault-data-architecture]].
 
-
 <!--kit-footer-->
 
 ---

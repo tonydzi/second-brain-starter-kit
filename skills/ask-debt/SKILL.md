@@ -1,6 +1,7 @@
 ---
 name: ask-debt
-description: "READ-ONLY замер «ДОЛГА АВТОНОМНОСТИ» по журналу одобрений 02 (approvals.db) — сколько я спросил Антона за окно, сколько из этого ПРОТУХЛО (никто не ответил), по каким классам (машинный шум / логин-2FA / UAC-физика / деньги… Триггеры: “/ask-debt“, “долг автономности“, “сколько я спрашиваю“, “замер асков“, “что протухло в 02“, “ложные аски“, “почему я столько спрашиваю“, “autonomy debt“, “ask debt“"
+description: "Read-only measurement of an agent's autonomy debt from its approvals log: how many times it asked the human for permission in a window, how many asks expired unanswered, and which classes they fall into (machine noise, login or 2FA, physical UAC, money). Use to find asks the agent should have decided itself and to cut needless interruptions. Triggers: /ask-debt, autonomy debt, how often do I ask, expired asks."
+license: MIT
 version: 1.0.0
 ---
 
@@ -78,7 +79,6 @@ python ~/.claude/scripts/ask_debt.py --days 30
 - Классификатор — регулярки по тексту, не LLM: аск с двумя блокерами попадёт в один класс (первый по приоритету). Цифры — оценка формы журнала, не приговор конкретному аску.
 - Замер по ЭТОЙ машине: у каждого узла свой `approvals.db`.
 - Два одновременных прогона не бьют файл снимков (tmp уникален по pid), но при совпадении момента один снимок может потеряться — на дельту это не влияет (снимки — история, не источник цифр).
-
 
 <!--kit-footer-->
 

@@ -80,7 +80,6 @@ Provenance defaults are fixed per source in `source-adapters.md` — relay-foote
 
 End every re-import with the standard report (rule 8 of obsidian-ingest): new ledgers, new posts/cards, new rules/leads, links validated (0 broken), and the curation hand-off list. The vault should get *more* connected, not just bigger.
 
-
 <!--kit-footer-->
 
 ---

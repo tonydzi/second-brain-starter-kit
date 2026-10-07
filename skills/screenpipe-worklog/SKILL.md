@@ -9,7 +9,6 @@ Resolve the local dates and timezone. Read screenpipe-api and start with the act
 Verify important outcomes with narrow source queries. Separate planned work, observed work, and externally verified completion. Do not count background agent runs as human effort.
 Return useful outcomes, unfinished work, and a few source links. Label estimates and coverage gaps. Keep raw chats, private identifiers, and unrelated activity out of the summary.
 
-
 <!--kit-footer-->
 
 ---

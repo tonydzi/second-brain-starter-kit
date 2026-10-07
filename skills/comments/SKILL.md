@@ -51,7 +51,6 @@ An active commenter with no CRM card = a candidate. Create the card (CRM), run a
 ## Related
 The morning auto-ping of unanswered items into the fleet log chat (05:35, task "Pub-Comments-Morning") and the nightly collection (03:40, `collect_pub_metrics.cmd`) — this skill is the manual, on-demand twin of those routines. Canon: `00-System\Pub-Metrics-Registry.md`, memory `content-pub-registry`.
 
-
 <!--kit-footer-->
 
 ---

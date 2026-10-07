@@ -58,7 +58,6 @@ Then a 🧒 "In plain words" line (memory [[eli5-always]]).
 ## Canon
 Memory [[crash-recovery-command]]. Building blocks: [[turnstate-ledger]] (the black box), [[claude-desktop-sessions-per-account]] (continue_session), [[system-architect]] (/arch), `syncthing-desktop-laptop-sync` (/sync-check), [[mcp-health-check]] (/mcp). Paired with the SessionStart hook `session_resume_hook` (that one shows the previous session at startup on its own — this one gathers recall + health + full history on command).
 
-
 <!--kit-footer-->
 
 ---

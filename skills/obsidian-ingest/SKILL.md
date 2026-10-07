@@ -158,7 +158,6 @@ The operator's standing rule: for any heavy/accelerable compute (embeddings, mod
 
 A reader (or future the operator) lands on the Cross-MOC, navigates by month/theme/person, clicks into an atomic note, sees its provenance and its concept, and follows `[[links]]` to related ideas — with zero broken links and zero duplicated raw text. The vault gets *more* navigable with every import, not just bigger.
 
-
 <!--kit-footer-->
 
 ---

@@ -59,7 +59,6 @@ Config: `~/.claude/issue_match.json`. Exit codes: `0` measurement done · `2` ba
 🟢 → a comment in the thread → the maintainer answers → a PR referencing the issue → `pr_watch.py` watches for a reaction → a scheduled bump.
 🔴 → don't push into this repo; the cold PRs already sitting there get **warmed up** (tie each one to the issue it answers) instead of adding a ninth.
 
-
 <!--kit-footer-->
 
 ---

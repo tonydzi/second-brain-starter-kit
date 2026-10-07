@@ -45,8 +45,6 @@ The manual twin is this skill; the single source of truth is the picker.
 [[self-bible-identity-layer]] · [[bible-as-prompt]] · [[epistemic-neutrality]] · /coach (daily) vs
 /five-hard (monthly). Active-brain map A-E: item B. ⚠️ Restored 2026-07-04 after the 2026-06-24 migration wipe.
 
-
-
 <!--kit-footer-->
 
 ---

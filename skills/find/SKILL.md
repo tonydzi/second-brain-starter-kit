@@ -38,7 +38,6 @@ A name written in its native script produces a clean query; a wrong-layout or ty
 ## Do not confuse
 `/ask` = by meaning (RAG, embeddings). `/find` = by spelling (a deterministic fingerprint). Canon memory [[smart-name-search]].
 
-
 <!--kit-footer-->
 
 ---

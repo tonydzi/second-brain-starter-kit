@@ -35,7 +35,6 @@ BOUNDARIES (keep it simple and repairable):
 - Grunt work (detection/classification) = Sonnet; the authored post text = Opus (and that happens in /episode, not here).
 - This is the manual twin of the nightly `content-miner-nightly`; the archive backlog was closed in one pass on 2026-07-09 (`miner\debt-log.md`).
 
-
 <!--kit-footer-->
 
 ---

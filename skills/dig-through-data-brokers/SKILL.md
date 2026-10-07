@@ -248,7 +248,6 @@ before you start. This category is the raw material of doxxing and stalking, and
 the same lookup is legitimate or criminal depending entirely on the objective you
 wrote down at the start.
 
-
 <!--kit-footer-->
 
 ---

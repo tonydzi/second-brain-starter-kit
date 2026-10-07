@@ -93,7 +93,6 @@ python ~/.claude/scripts/sessions_now.py --post
   (обычно хук/headless-прогон), это не поломка.
 - Самопроверка: `python ~/.claude/scripts/sessions_now.py --self-test` → 14 ok, 0 fail.
 
-
 <!--kit-footer-->
 
 ---

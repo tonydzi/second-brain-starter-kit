@@ -135,7 +135,6 @@ python "$USERPROFILE/.claude/scripts/fb_like_roster.py" status --days 30
 - Паспорт: `~/.claude/scripts/docs/fb_like_roster.md`.
 - Канон: голосовая hub:5087 04.08.2026, CLAUDE.md §7.2, память `fb-skill-set`, `comment-to-call-funnel`.
 
-
 <!--kit-footer-->
 
 ---

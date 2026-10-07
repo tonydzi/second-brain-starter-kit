@@ -37,7 +37,6 @@ license: MIT
 ## Step 5 — Backup + verify + report
 `vault_backup.py` before edits; after, grep-count `^status: superseded` to verify the number; commit. Report BEFORE→AFTER on real notes + 🧒 recap. Flag anything left for the operator (e.g. money conflicts).
 
-
 <!--kit-footer-->
 
 ---

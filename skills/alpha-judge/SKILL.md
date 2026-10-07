@@ -50,7 +50,6 @@ The alpha-extraction engine = **cheap deterministic detector (0 tokens) → LLM 
 ## Not this skill
 Building/refining a DETECTOR script = direct work in `_imports\alpha\` (not here). Running the deterministic scan = the miner's own `.py` / weekly task. This skill is ONLY the judge + home-feed stage.
 
-
 <!--kit-footer-->
 
 ---

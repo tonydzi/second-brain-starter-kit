@@ -90,8 +90,6 @@ python ~/.claude/scripts/_killrun_read_with_ai.py   # kill-list: 7 мутаци�
 49 публичных репо с виджетом (47 создано волной + 2 канарейки), 0 ошибок;
 8 страниц tonydzi.github.io, живое подтверждено curl'ом после деплоя.
 
-
-
 <!--kit-footer-->
 
 ---

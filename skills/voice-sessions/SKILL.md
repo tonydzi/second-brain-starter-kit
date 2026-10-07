@@ -346,7 +346,6 @@ python ~/.claude/scripts/_test_voice_sessions.py
 Соседняя лейна: рутина `voice-triage` на хабе (сортировка 🔧/💎/📝 в очередь) — она про
 инбокс, этот скилл про исполнителей.
 
-
 <!--kit-footer-->
 
 ---

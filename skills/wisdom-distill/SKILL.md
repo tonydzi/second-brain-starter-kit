@@ -38,8 +38,6 @@ The manual twin is this skill. Single source of truth = wisdom_week_gather.py.
 Active-brain map A-E: item D · /five-hard (monthly) · /precedent (decisions) · recurring_scan.py
 (the whole corpus) · vault-backup-rule · model-routing (synthesis -> top model).
 
-
-
 <!--kit-footer-->
 
 ---

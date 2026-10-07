@@ -177,7 +177,6 @@ Plus with your eyes: OTP/2FA/credentials, device IDs (the 7-character Syncthing-
 
 The canon and the project's full journal: `memory\book-the-journey.md`.
 
-
 <!--kit-footer-->
 
 ---

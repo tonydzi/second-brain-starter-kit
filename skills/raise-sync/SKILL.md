@@ -57,7 +57,6 @@ Repeat Step 0: everyone `connected:true`, the backlog draining (`needFiles` goin
 - The dead-man switch `sync_monitor.py` (the "Claude Sync Monitor" task) pings the operator when a peer drops → `/raise-sync` often starts FROM that ping.
 - Canon: [[reglament-chp-poterya-sinka-mezhdu-mashinami]], [[machine-bus-telegram-rail]], [[syncthing-v21-gotchas]].
 
-
 <!--kit-footer-->
 
 ---

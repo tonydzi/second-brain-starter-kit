@@ -123,7 +123,6 @@ python ~/.claude/scripts/sessions_now.py    # свежая "[Антон] 📱 П
 - Реестр задач: `%APPDATA%/Claude/claude-code-sessions/<org>/<acct>/scheduled-tasks.json` (Win), `~/Library/Application Support/Claude/...` (macOS). Ключ записи — `id`.
 - Модели у задачи нет: планировщик поле не принимает, Антон переключает вручную.
 
-
 <!--kit-footer-->
 
 ---

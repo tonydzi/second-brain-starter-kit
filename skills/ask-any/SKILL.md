@@ -1,6 +1,7 @@
 ---
 name: ask-any
-description: "ПОРУЧИТЬ РАБОТУ ЛЮБОЙ ЖИВОЙ LLM, а не только Claude: задание уходит ОДНОВРЕМЕННО на codex + grok + gemini + claude, побеждает первая ответившая. Триггеры: «/ask-any», «/любой», «/раздай», «спроси всех», «спроси кого угодно», «дай это другой ллм», «claude кончился», «бак пуст», «спроси параллельно», «у кого спросить», «ask any», «race the rails»"
+description: "Hand a task to whichever LLM is alive, not only Claude: the prompt goes to Codex, Grok, Gemini and Claude CLIs at the same time and the first valid answer wins. Use when Claude's quota is exhausted, a vendor is down, or you want a quick parallel answer from other models. Triggers: /ask-any, ask anyone, give this to another LLM, quota empty, ask in parallel, race the rails."
+license: MIT
 version: 1.0.0
 ---
 
@@ -83,7 +84,6 @@ python claude_run.py <timeout> --extfallback codex-agent --stdin <файл> -- c
 
 Канон: память `other-llm-rails-were-review-only`, `green-exit-on-spent-bucket`,
 CLAUDE.md §6.3 «выгребай лимиты».
-
 
 <!--kit-footer-->
 

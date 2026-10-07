@@ -37,7 +37,6 @@ python $IMPORTS_ROOT/alpha/mine_channel.py --channel <name|id> --slug <slug> [--
 ## Boundaries
 The detector is generic (AI / tool / deal / startup keywords); per-channel keyword and promo filters are tuned inside `mine_channel.py`. Sensitivity: closed / adult / personal channels → `#private`, never surfaced outside. Read the channel only, never post into it.
 
-
 <!--kit-footer-->
 
 ---

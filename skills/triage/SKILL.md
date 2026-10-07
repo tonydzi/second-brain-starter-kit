@@ -322,7 +322,6 @@ python ~/.claude/scripts/_test_inbound_cta_short.py
 
 Канон-страница: `$OBSIDIAN_VAULT/04-Projects/sales-touch-canon.md`. Память: `anton-reads-every-outbound-thread`, `thread-clean-before-recontact`.
 
-
 <!--kit-footer-->
 
 ---

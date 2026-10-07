@@ -65,7 +65,6 @@ Flags: `--range "HEAD~1 HEAD"` · `--diff <patch>` · `--task <task.md>` (what w
 - Installing on a new machine: `npm i -g @google/gemini-cli` (only needed for `--engine cli`),
   `gemini.env` arrives through the secrets-store sync, `~/.gemini/settings.json` = auth `gemini-api-key`.
 
-
 <!--kit-footer-->
 
 ---

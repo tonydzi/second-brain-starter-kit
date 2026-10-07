@@ -231,7 +231,6 @@ location and routine meets the statutory definition of stalking in many
 jurisdictions, and sourcing it publicly is not a defence. Authorization, a
 written objective and a stop condition are what make this work lawful.
 
-
 <!--kit-footer-->
 
 ---

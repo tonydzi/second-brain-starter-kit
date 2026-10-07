@@ -176,7 +176,6 @@ github-audition-queue.md` -- разведка боли, которую умее�
 Правила и own_pain: `~/.claude/registry/github-universe/domain.json` (0 LLM; тест `_test_github_targets_domain.py`).
 Метод (репро · красный тест · мутации · ревью объектом Review) не меняется — сужены только мишени.
 
-
 <!--kit-footer-->
 
 ---

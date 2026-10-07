@@ -248,7 +248,6 @@ querying are rate-limited and can breach terms. Commit emails are personal data
 under GDPR and equivalent regimes whatever the repository's status — collect the
 minimum and set a retention period.
 
-
 <!--kit-footer-->
 
 ---
