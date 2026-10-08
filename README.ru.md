@@ -193,8 +193,7 @@ Issues.
 
 ## 🧩 One piece of a working system
 
-This repository is one piece lifted out of a live operation: one non-technical founder, an AI
-cofounder, and a fleet of machines that reach consensus with each other and wake the human only
+This repository is one piece lifted out of a live operation: one engineer running operations and a fleet of Claude Code agents and machines that reach consensus with each other and wake the human only
 for money or the irreversible. It was extracted after it survived production, not written as a
 demo — and it runs on its own: nothing here phones home to the rest.
 
