@@ -2,9 +2,11 @@
 
 Bring one machine. Keep control of it. Run one real mission. Return a receipt. Improve the kit.
 
-This is a **federated contributor network**, not access to Anton's trusted family fleet. You do not hand over remote access, passwords, private files, contacts, CRM records, vault notes, or message-bus keys. The public kit stays on your machine and does not phone home.
+This is a **federated contributor network**, not access to Anton's trusted family fleet. You do not hand over remote access, passwords, private files, contacts, CRM records, vault notes, or message-bus keys. No remote access or registration is required for the first mission. Review the repository before running anything.
 
-## Your first 15 minutes
+## Start here
+
+Prerequisites: Git and Python 3.
 
 1. Clone the kit and enter the folder:
 
@@ -19,12 +21,15 @@ This is a **federated contributor network**, not access to Anton's trusted famil
    python crm-template/reference/demo.py
    ```
 
-3. Open [the first public canary mission](https://github.com/tonydzi/second-brain-starter-kit/issues/2) and comment `claiming this`.
+   A successful run exits with code 0 and ends with `invariants OK: every priority in 0..100, every band known.`
 
-4. Follow the README literally on your own machine. Report a small evidence table:
+3. Open [the first public canary mission](https://github.com/tonydzi/second-brain-starter-kit/issues/2). Multiple canaries on different operating systems are welcome, so a claim is not exclusive. Comment `claiming this - <OS>`.
+
+4. Follow the README literally on your own machine. Report a sanitized evidence table:
 
    | field | value |
    |---|---|
+   | anonymous node label | |
    | OS and version | |
    | Python version | |
    | command | |
@@ -32,13 +37,15 @@ This is a **federated contributor network**, not access to Anton's trusted famil
    | actual | |
    | exit code | |
 
-5. If something breaks, open an issue with the smallest reproducer. If you can fix it, open a pull request and link the issue.
+   Remove usernames, hostnames, home-directory paths, tokens, account identifiers, customer data, and private file contents before posting.
 
-No polished success story is required. A precise failure report is a contribution.
+5. If something breaks, open an issue with the smallest reproducer on synthetic data. If you can fix it, open a pull request and link the issue.
+
+No polished success story is required. A precise failure report is a contribution. It finds portability failures the maintainers cannot reproduce on their own machines and makes the kit safer for every agent and operating system.
 
 ## What "active node" means
 
-A public node is active when it completed a real kit routine or test in the last 7 days and returned reproducible evidence: command, output, exit code, and machine context. A clone, star, promise, or online heartbeat does not count.
+The smoke test is onboarding evidence, not active-node status. A public node becomes active after it completes a bounded public mission in the last 7 days and returns reproducible, sanitized evidence: command, output, exit code, and operating-system context. A clone, star, promise, or online heartbeat does not count.
 
 The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet.
 
@@ -51,7 +58,7 @@ The target is to prove the protocol with **5 external canaries first**, then gro
 - machine onboarding runbooks
 - public issues, reviews, and missions
 
-Start with [the 30-minute route](docs/ONBOARDING.md). Read [what is shared](docs/WHAT-IS-SHARED.md) before copying material into another system.
+Continue with [the 30-minute route](docs/ONBOARDING.md). Read [what is shared](docs/WHAT-IS-SHARED.md) before copying material into another system.
 
 ## What stays private
 
