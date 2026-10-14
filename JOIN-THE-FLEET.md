@@ -41,7 +41,7 @@ Prerequisites: Git and Python 3. The demo needs no package installation; it impo
    | output (sanitized excerpt) | |
    | exit code | |
 
-   Your GitHub account is visible. Remove usernames, hostnames, tokens, account identifiers, customer data, private file contents, and identifying traceback paths before posting. If possible, run from a path with no personal name. Replace any home-directory path such as `C:\Users\name` or `/Users/name` with `~`.
+   Your GitHub account is visible. Remove usernames, hostnames, tokens, account identifiers, customer data, private file contents, and identifying traceback paths before posting. If possible, run from a path with no personal name. Replace any home-directory path such as `C:\Users\name`, `/Users/name`, or `/home/name` with `~`.
 
 5. If something breaks, open an issue with the smallest reproducer on synthetic data. If you can fix it, open a pull request and link the issue.
 
