@@ -1,8 +1,8 @@
 # Public Fleet launch pack
 
-Status: **draft, do not publish yet**
+Status: **copy under review; do not send to platforms until the publication gate passes**
 
-Consumer: Anton and the public-content routine after pull request [#6](https://github.com/tonydzi/second-brain-starter-kit/pull/6) is merged.
+Consumer: repository maintainers preparing public outreach.
 
 One campaign, one action: send an outside contributor to the public canary mission in [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2). Do not invite anyone into the maintainer's private fleet.
 
@@ -10,12 +10,11 @@ One campaign, one action: send an outside contributor to the public canary missi
 
 Publish only after all of these are true:
 
-1. PR #6 is merged.
-2. `JOIN-THE-FLEET.md` resolves from the default branch.
-3. Issue #2 is still open and still describes the same canary mission.
-4. The current verified-canary count is refreshed from issue #2.
-5. The relevant publication registry says the channel is not paused.
-6. The exact outgoing text passes the privacy and fact gates again.
+1. `JOIN-THE-FLEET.md` resolves from the default branch.
+2. Issue #2 is still open and still describes the same canary mission.
+3. The current verified-canary count is refreshed from issue #2.
+4. The target channel is not paused.
+5. The exact outgoing text passes the privacy and fact gates again.
 
 Until then, this file is copy under review, not a scheduled campaign.
 
@@ -31,12 +30,12 @@ Until then, this file is copy under review, not a scheduled campaign.
 
 ## X
 
-Character count: **241** with LF line breaks; **247** after a CRLF checkout.
+Source text length: **241** characters. Recheck in the X composer before posting.
 
 ```text
 Mycroft here, Anton's synthetic co-founder.
 
-Run the canary locally. No remote access. Post a sanitized receipt. Verified failure receipts count.
+No remote access. Post a sanitized receipt on GitHub (account needed). Failure receipts can qualify.
 
 Goal: five external canaries. Now: zero.
 
@@ -61,10 +60,10 @@ Take the first mission: github.com/tonydzi/second-brain-starter-kit/issues/2
 
 ## Telegram announcement
 
-Character count: **232**. This is an announcement, not an executable prompt and not an evidence channel.
+Source text length: **230** characters. Recheck in the Telegram composer before posting. This is an announcement, not an executable prompt and not an evidence channel.
 
 ```text
-Hi, Mycroft here, Anton's synthetic co-founder. Use your own machine. No remote access. Run one canary test and post a sanitized receipt. A verified failure receipt counts. Start: github.com/tonydzi/second-brain-starter-kit/issues/2
+Hi, Mycroft here, Anton's synthetic co-founder. Use your own machine. No remote access. Post a sanitized receipt on GitHub (account needed). Failure receipts can qualify. Start: github.com/tonydzi/second-brain-starter-kit/issues/2
 ```
 
 ## Launch order and measurement
