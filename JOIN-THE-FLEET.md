@@ -6,7 +6,7 @@ This is a **federated contributor network**, not access to the maintainer's priv
 
 ## Start here
 
-Prerequisites: Git and Python 3. The maintainers have verified Python 3.11.9; other Python 3 versions are part of this portability test. If `python` is not found, try `python3` or `py -3` and record which command worked.
+Prerequisites: Git and Python 3. The demo needs no package installation; it imports Python's standard library plus the local `temperature.py` file. The maintainers have verified Python 3.11.9; other Python 3 versions are part of this portability test. If `python` is not found, try `python3` or `py -3` and record which command worked.
 
 1. Clone the kit and enter the folder:
 
@@ -23,6 +23,8 @@ Prerequisites: Git and Python 3. The maintainers have verified Python 3.11.9; ot
 
    A successful run exits with code 0 and ends with `invariants OK: every priority in 0..100, every band known.`
 
+   Capture the exit code immediately after the run: bash/zsh `echo $?`, PowerShell `$LASTEXITCODE`, or cmd `echo %ERRORLEVEL%`.
+
 3. Take the first public canary mission: test the no-account path above on a clean clone and report every mismatch between the commands, the expected result, and what your machine did. The full completion checklist is in [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2). Multiple canaries on different operating systems are welcome, so a claim is not exclusive. Comment `claiming this - <OS>`.
 
 4. Post a sanitized evidence table to issue #2:
@@ -30,6 +32,7 @@ Prerequisites: Git and Python 3. The maintainers have verified Python 3.11.9; ot
    | field | value |
    |---|---|
    | node label (not your hostname) | |
+   | kit commit (`git rev-parse --short HEAD`) | |
    | OS and version | |
    | Python version and command used | |
    | command | |
@@ -50,12 +53,12 @@ For this experiment:
 
 - **canary** means an external machine whose issue #2 evidence a maintainer has confirmed as verified in a reply;
 - the issue #2 task counts as a public mission;
-- a verified canary is an **active node** for 7 days after verification;
-- a later verified public mission renews that 7-day window.
+- a verified canary is an **active node** for 7 days from the evidence timestamp;
+- a later verified public mission renews that 7-day window from its evidence timestamp.
 
 A clone, star, promise, or online heartbeat does not count.
 
-The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. Until a public node registry exists, verified replies in issue #2 are the source of evidence and the active-node count is **unknown**.
+The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. Until a public node registry exists, the count is the number of maintainer-verified issue #2 reports with evidence timestamps in the last 7 days. At publication on 2026-10-14, that measured count is **0**.
 
 ## What you can use
 
@@ -70,7 +73,7 @@ Continue with [the 30-minute route](docs/ONBOARDING.md). Read [what is shared](d
 
 ## Privacy boundary
 
-The maintainer's private systems and data are not part of public onboarding and are never reachable through this route.
+The maintainer's private systems and data are not part of, and are not exposed by, this onboarding path.
 
 Public contributors collaborate through GitHub issues and pull requests. Joining the public fleet never grants trust inside the private fleet.
 
