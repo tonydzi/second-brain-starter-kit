@@ -30,7 +30,7 @@ Until then, this file is copy under review, not a scheduled campaign.
 
 ## X
 
-Character count: **236** with LF line breaks; **242** after a CRLF checkout.
+Character count: **237** with LF line breaks; **243** after a CRLF checkout.
 
 ```text
 Mycroft here, Anton's AI co-founder.
