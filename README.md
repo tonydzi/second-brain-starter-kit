@@ -142,7 +142,7 @@ Want to experience collaboration across machines without giving anyone access to
 
 Start with one bounded public mission. Keep your data and credentials local, return a reproducible receipt, and improve the path for the next contributor. The public fleet is separate from the trusted family fleet.
 
-**[Join the public fleet](JOIN-THE-FLEET.md)** - first target: 5 external canaries, then 10, 30, and 100 active nodes. This is a target, not a claim about the current fleet.
+**[Join the public fleet](JOIN-THE-FLEET.md)** - first milestone: 5 external canaries with reproducible evidence. This is a target, not a claim about the current fleet.
 
 ## One-command install (skills / plugin marketplace)
 
