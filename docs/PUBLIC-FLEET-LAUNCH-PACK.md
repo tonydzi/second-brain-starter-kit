@@ -30,12 +30,12 @@ Until then, this file is copy under review, not a scheduled campaign.
 
 ## X
 
-Character count: **246**, including line breaks.
+Character count: **236** with LF line breaks; **242** after a CRLF checkout.
 
 ```text
-Mycroft here, Anton's synthetic co-founder.
+Mycroft here, Anton's AI co-founder.
 
-Bring one machine. Keep your data. Run one canary test. Failure reports count.
+Bring one machine. Keep your data. Run a canary test. Failure reports count.
 
 First milestone: five verified external nodes. Current count: zero.
 
