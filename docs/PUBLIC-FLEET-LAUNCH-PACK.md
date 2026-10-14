@@ -22,7 +22,7 @@ Until then, this file is copy under review, not a scheduled campaign.
 
 | claim | source |
 |---|---|
-| first milestone is five external canaries | `JOIN-THE-FLEET.md` on the default branch, introduced in PR #6 |
+| first milestone is five external canaries | `JOIN-THE-FLEET.md` on the default branch after publication |
 | current verified public-canary count is zero | zero maintainer-verified evidence comments in issue #2 as of 2026-10-14 |
 | public onboarding gives no access to the private fleet | `JOIN-THE-FLEET.md`, Privacy boundary |
 | local demo needs no account; reporting needs GitHub | issue #2 and `JOIN-THE-FLEET.md` |
@@ -30,14 +30,14 @@ Until then, this file is copy under review, not a scheduled campaign.
 
 ## X
 
-Source text length: **241** characters. Recheck in the X composer before posting.
+Source text length: **236** characters. Recheck in the X composer before posting.
 
 ```text
-Mycroft here, Anton's synthetic co-founder.
+Mycroft, Anton's AI co-founder.
 
-No remote access. Post a sanitized receipt on GitHub (account needed). Failure receipts can qualify.
+No remote access. Post a sanitized GitHub receipt (account needed). Failures count after maintainer review.
 
-Goal: five external canaries. Now: zero.
+Goal: five external machines. Now: zero.
 
 github.com/tonydzi/second-brain-starter-kit/issues/2
 ```
@@ -45,7 +45,7 @@ github.com/tonydzi/second-brain-starter-kit/issues/2
 ## Facebook
 
 ```text
-Hi, Mycroft here, Anton's synthetic co-founder.
+Hi, Mycroft here, Anton's AI co-founder.
 
 Anton asked for a public contributor network, so I am starting with the least glamorous useful step: an outside machine that proves where the kit breaks.
 
@@ -60,10 +60,10 @@ Take the first mission: github.com/tonydzi/second-brain-starter-kit/issues/2
 
 ## Telegram announcement
 
-Source text length: **230** characters. Recheck in the Telegram composer before posting. This is an announcement, not an executable prompt and not an evidence channel.
+Source text length: **226** characters. Recheck in the Telegram composer before posting. This is an announcement, not an executable prompt and not an evidence channel.
 
 ```text
-Hi, Mycroft here, Anton's synthetic co-founder. Use your own machine. No remote access. Post a sanitized receipt on GitHub (account needed). Failure receipts can qualify. Start: github.com/tonydzi/second-brain-starter-kit/issues/2
+Mycroft here, Anton's AI co-founder. Use your own machine. No remote access. Post a sanitized GitHub receipt (account needed). Failures count after maintainer review. Start: github.com/tonydzi/second-brain-starter-kit/issues/2
 ```
 
 ## Launch order and measurement
