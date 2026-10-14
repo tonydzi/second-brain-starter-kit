@@ -2,11 +2,11 @@
 
 Bring one machine. Keep control of it. Run one real mission. Return a receipt. Improve the kit.
 
-This is a **federated contributor network**, not access to the maintainer's private fleet. You do not hand over remote access, passwords, or private data. No remote access or registration is required for the first mission. Read the exact script used in the first test, [demo.py](crm-template/reference/demo.py), before running it.
+This is a **federated contributor network**, not access to the maintainer's private fleet. You do not hand over remote access, passwords, or private data. No remote access or fleet registration is required. Running the demo needs no account; reporting evidence needs a GitHub account, which is public. Read the exact script used in the first test, [demo.py](crm-template/reference/demo.py), before running it.
 
 ## Start here
 
-Prerequisites: Git and Python 3. The demo needs no package installation; it imports Python's standard library plus the local `temperature.py` file. The maintainers have verified Python 3.11.9; other Python 3 versions are part of this portability test. If `python` is not found, try `python3` or `py -3` and record which command worked.
+Prerequisites: Git and Python 3. The demo needs no package installation; it imports Python's standard library plus the local `temperature.py` file. The maintainers have verified Python 3.11.9; other Python 3 versions are part of this portability test. If `python` is not found, try `python3` or `py -3` and record which command worked. On Windows, if `python` opens the Microsoft Store or exits 9009, use `py -3`.
 
 1. Clone the kit and enter the folder:
 
@@ -41,7 +41,7 @@ Prerequisites: Git and Python 3. The demo needs no package installation; it impo
    | output (sanitized excerpt) | |
    | exit code | |
 
-   Your GitHub account is visible. Remove usernames, hostnames, tokens, account identifiers, customer data, and private file contents before posting. Replace any home-directory path such as `C:\Users\name` or `/Users/name` with `~`.
+   Your GitHub account is visible. Remove usernames, hostnames, tokens, account identifiers, customer data, private file contents, and identifying traceback paths before posting. If possible, run from a path with no personal name. Replace any home-directory path such as `C:\Users\name` or `/Users/name` with `~`.
 
 5. If something breaks, open an issue with the smallest reproducer on synthetic data. If you can fix it, open a pull request and link the issue.
 
@@ -58,7 +58,9 @@ For this experiment:
 
 A clone, star, promise, or online heartbeat does not count.
 
-The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. Until a public node registry exists, the count is the number of maintainer-verified issue #2 reports with evidence timestamps in the last 7 days. At publication on 2026-10-14, that measured count is **0**.
+The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. The 5-canary milestone is cumulative. The 10, 30, and 100 targets are 7-day active counts. Each distinct machine counts once, regardless of how many reports it submits.
+
+Until a public node registry exists, the active count is the number of maintainer-verified issue #2 reports with evidence timestamps in the last 7 days. The measured count was **0 on 2026-10-14**; [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2) is the live evidence source.
 
 ## What you can use
 
@@ -81,7 +83,7 @@ Public contributors collaborate through GitHub issues and pull requests. Joining
 
 - Work and evidence: [GitHub issues](https://github.com/tonydzi/second-brain-starter-kit/issues)
 - Contribution rules: [HOW-TO-CONTRIBUTE.md](docs/HOW-TO-CONTRIBUTE.md)
-- Public updates: [@ClawEng](https://t.me/ClawEng)
+- Maintainer-run public updates: [@ClawEng](https://t.me/ClawEng) (not an evidence channel)
 
 ## The invitation
 
