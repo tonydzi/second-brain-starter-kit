@@ -138,11 +138,11 @@ Full map of all 234 → [skills/INDEX.md](skills/INDEX.md)
 
 ## Join the public fleet
 
-One command from your own machine can expose a portability bug and improve the kit for everyone.
+One short local test on your own machine can expose a portability bug and improve the kit for everyone.
 
 Start with one bounded public mission. Keep your data and credentials local, return a reproducible receipt, and improve the path for the next contributor. The public fleet is separate from the maintainer's private fleet.
 
-**[Join the public fleet](JOIN-THE-FLEET.md)** - first milestone: 5 external canaries with reproducible evidence. This is a target, not a claim about the current fleet.
+**[Join the public fleet](JOIN-THE-FLEET.md)** - first milestone: 5 external canaries with maintainer-verified evidence. This is a target, not a claim about the current fleet.
 
 ## One-command install (skills / plugin marketplace)
 
