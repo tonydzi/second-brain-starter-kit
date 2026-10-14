@@ -136,6 +136,14 @@ Full map of all 234 → [skills/INDEX.md](skills/INDEX.md)
 
 📖 **Repository wiki:** [what is actually in here](https://github.com/tonydzi/second-brain-starter-kit/wiki) · [architecture (4 layers)](https://github.com/tonydzi/second-brain-starter-kit/wiki/Architecture) · [your first week](https://github.com/tonydzi/second-brain-starter-kit/wiki/First-week) · [adapting it to your machine](https://github.com/tonydzi/second-brain-starter-kit/wiki/Adapting-it-to-your-machine)
 
+## Join the public fleet
+
+Want to experience collaboration across machines without giving anyone access to yours?
+
+Start with one bounded public mission. Keep your data and credentials local, return a reproducible receipt, and improve the path for the next contributor. The public fleet is separate from the trusted family fleet.
+
+**[Join the public fleet in 15 minutes](JOIN-THE-FLEET.md)** - first target: 5 external canaries, then 10, 30, and 100 active nodes. This is a target, not a claim about the current fleet.
+
 ## One-command install (skills / plugin marketplace)
 
 Don't need the whole kit? Install just the skills, straight into your Claude Code:
