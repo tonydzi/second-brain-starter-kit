@@ -2,7 +2,7 @@
 
 Bring one machine. Keep control of it. Run one real mission. Return a receipt. Improve the kit.
 
-This is a **federated contributor network**, not access to the maintainer's trusted private fleet. You do not hand over remote access, passwords, or private data. No remote access or registration is required for the first mission. Review the repository before running anything.
+This is a **federated contributor network**, not access to the maintainer's private fleet. You do not hand over remote access, passwords, or private data. No remote access or registration is required for the first mission. Read the exact script used in the first test, [demo.py](crm-template/reference/demo.py), before running it.
 
 ## Start here
 
@@ -38,17 +38,24 @@ Prerequisites: Git and Python 3. The maintainers have verified Python 3.11.9; ot
    | output (sanitized excerpt) | |
    | exit code | |
 
-   Your GitHub account is visible. Remove usernames, hostnames, home-directory paths, tokens, account identifiers, customer data, and private file contents before posting.
+   Your GitHub account is visible. Remove usernames, hostnames, tokens, account identifiers, customer data, and private file contents before posting. Replace any home-directory path such as `C:\Users\name` or `/Users/name` with `~`.
 
 5. If something breaks, open an issue with the smallest reproducer on synthetic data. If you can fix it, open a pull request and link the issue.
 
-No polished success story is required. A precise failure report is a contribution. It finds portability failures the maintainers cannot reproduce on their own machines and makes the kit more portable. Your public issue or pull request is credited through GitHub history, and you keep copyright to your contribution under the repository's existing terms.
+No polished success story is required. A precise failure report is a contribution. It finds portability failures the maintainers cannot reproduce on their own machines and makes the kit more portable. Contributions are licensed under the repository's [MIT License](LICENSE).
 
-## What "active node" means
+## Canary and active-node status
 
-The smoke test alone is onboarding evidence, not active-node status. A public node becomes active after it completes a bounded public mission in the last 7 days and returns reproducible, sanitized evidence: command, output, exit code, and operating-system context. A clone, star, promise, or online heartbeat does not count.
+For this experiment:
 
-The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. Until a public node registry exists, evidence lives in issue #2 and the active-node count is **unknown**.
+- **canary** means an external machine whose issue #2 evidence a maintainer has confirmed as verified in a reply;
+- the issue #2 task counts as a public mission;
+- a verified canary is an **active node** for 7 days after verification;
+- a later verified public mission renews that 7-day window.
+
+A clone, star, promise, or online heartbeat does not count.
+
+The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. Until a public node registry exists, verified replies in issue #2 are the source of evidence and the active-node count is **unknown**.
 
 ## What you can use
 
