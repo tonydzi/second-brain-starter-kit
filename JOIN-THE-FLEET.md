@@ -2,7 +2,7 @@
 
 Bring one machine. Keep control of it. Run one real mission. Return a receipt. Improve the kit.
 
-This is a **federated contributor network**, not access to the maintainer's private fleet. You do not hand over remote access, passwords, or private data. No remote access or fleet registration is required. Running the demo needs no account; reporting evidence needs a GitHub account, which is public. Read the exact script used in the first test, [demo.py](crm-template/reference/demo.py), before running it.
+This is a **federated contributor network**, not access to the maintainer's private fleet. You do not hand over remote access, passwords, or private data, and no fleet registration is required. Running the demo needs no account; reporting evidence needs a GitHub account, which is public. Before running the test, read [demo.py](crm-template/reference/demo.py) and its local module [temperature.py](crm-template/reference/temperature.py).
 
 ## Start here
 
@@ -31,7 +31,7 @@ Prerequisites: Git and Python 3. The demo needs no package installation; it impo
 
    | field | value |
    |---|---|
-   | node label (not your hostname) | |
+   | node label (not your hostname; choose once and reuse it for this machine) | |
    | kit commit (`git rev-parse --short HEAD`) | |
    | OS and version | |
    | Python version and command used | |
@@ -52,6 +52,8 @@ No polished success story is required. A precise failure report is a contributio
 For this experiment:
 
 - **canary** means an external machine whose issue #2 evidence a maintainer has confirmed as verified in a reply;
+- **verified** means all evidence-table fields are present, the cited commit exists, and the output is consistent with the exit code;
+- **evidence timestamp** means the GitHub timestamp of the evidence comment;
 - the issue #2 task counts as a public mission;
 - a verified canary is an **active node** for 7 days from the evidence timestamp;
 - a later verified public mission renews that 7-day window from its evidence timestamp.
@@ -60,7 +62,7 @@ A clone, star, promise, or online heartbeat does not count.
 
 The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. The 5-canary milestone is cumulative. The 10, 30, and 100 targets are 7-day active counts. Each distinct machine counts once, regardless of how many reports it submits.
 
-Until a public node registry exists, the active count is the number of maintainer-verified issue #2 reports with evidence timestamps in the last 7 days. The measured count was **0 on 2026-10-14**; [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2) is the live evidence source.
+Until a public node registry exists, the active count is the number of distinct self-reported node labels with at least one maintainer-verified issue #2 report whose evidence timestamp is in the last 7 days. The measured count was **0 on 2026-10-14**; [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2) is the live evidence source.
 
 ## What you can use
 
@@ -69,7 +71,7 @@ Until a public node registry exists, the active count is the number of maintaine
 - note and decision templates
 - the privacy-scrubbed CRM demo
 - runbooks for setting up your own machines
-- public issues, reviews, and missions
+- the public canary mission in issue #2
 
 Continue with [the 30-minute route](docs/ONBOARDING.md). Read [what is shared](docs/WHAT-IS-SHARED.md) before copying material into another system.
 
