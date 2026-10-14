@@ -45,7 +45,7 @@ Prerequisites: Git and Python 3. The demo needs no package installation; it impo
 
 5. If something breaks, open an issue with the smallest reproducer on synthetic data. If you can fix it, open a pull request and link the issue.
 
-No polished success story is required. A precise failure report is a contribution. It finds portability failures the maintainers cannot reproduce on their own machines and makes the kit more portable. Contributions are licensed under the repository's [MIT License](LICENSE).
+No polished success story is required. A precise failure report is a contribution. It finds portability failures the maintainers cannot reproduce on their own machines and makes the kit more portable. Code contributions submitted by pull request are licensed under the repository's [MIT License](LICENSE).
 
 ## Canary and active-node status
 
@@ -63,7 +63,7 @@ A clone, star, promise, or online heartbeat does not count.
 
 The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. The 5-canary milestone is cumulative. The 10, 30, and 100 targets are 7-day counts of active public node labels, not claims of independently audited physical machines. Each distinct node label counts once, regardless of how many reports it submits. Labels are self-reported and are not independent proof of distinct physical machines; maintainers may decline an apparent duplicate.
 
-Until a public node registry exists, the active count is the number of distinct self-reported node labels with at least one maintainer-verified issue #2 report whose evidence timestamp is in the last 7 days. The measured count was **0 on 2026-10-14**; [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2) is the live evidence source.
+Until a public node registry exists, the active count is the number of distinct external self-reported node labels with at least one maintainer-verified issue #2 report whose evidence timestamp is in the last 7 days. The measured count was **0 on 2026-10-14**; [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2) is the live evidence source.
 
 ## What you can use
 
