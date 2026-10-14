@@ -2,7 +2,7 @@
 
 Bring one machine. Keep control of it. Run one real mission. Return a receipt. Improve the kit.
 
-This is a **federated contributor network**, not access to the maintainer's private fleet. You do not hand over remote access, passwords, or private data, and no fleet registration is required. Running the demo needs no account; reporting evidence needs a GitHub account, which is public. Before running the test, read [demo.py](crm-template/reference/demo.py) and its local module [temperature.py](crm-template/reference/temperature.py).
+This is a **federated contributor network**, not access to the maintainer's private fleet. You do not hand over remote access, passwords, or private data. No account on any fleet system is required; you choose a public node label in issue #2. Running the demo needs no account; reporting evidence needs a GitHub account, which is public. Before running the test, read [demo.py](crm-template/reference/demo.py) and its local module [temperature.py](crm-template/reference/temperature.py).
 
 ## Start here
 
@@ -23,7 +23,7 @@ Prerequisites: Git and Python 3. The demo needs no package installation; it impo
 
    A successful run exits with code 0 and ends with `invariants OK: every priority in 0..100, every band known.`
 
-   Capture the exit code immediately after the run: bash/zsh `echo $?`, PowerShell `$LASTEXITCODE`, or cmd `echo %ERRORLEVEL%`.
+   Run the demo without pipes, then capture the exit code as the very next command: bash/zsh `echo $?`, PowerShell `$LASTEXITCODE`, or cmd `echo %ERRORLEVEL%`.
 
 3. Take the first public canary mission: test the no-account path above on a clean clone and report every mismatch between the commands, the expected result, and what your machine did. The full completion checklist is in [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2). Multiple canaries on different operating systems are welcome, so a claim is not exclusive. Comment `claiming this - <OS>`.
 
@@ -51,16 +51,17 @@ No polished success story is required. A precise failure report is a contributio
 
 For this experiment:
 
-- **canary** means an external machine whose issue #2 evidence a maintainer has confirmed as verified in a reply;
-- **verified** means all evidence-table fields are present, the cited commit exists, and the output is consistent with the exit code;
-- **evidence timestamp** means the GitHub timestamp of the evidence comment;
+- **external** means not operated by a repository maintainer;
+- **canary** means an external node label whose issue #2 evidence a maintainer has confirmed as verified in a reply;
+- **verified** means all evidence-table fields are present, the cited commit exists, and the output is consistent with the exit code; a failure report can qualify;
+- **evidence timestamp** means the GitHub creation time of the evidence comment; editing the evidence after verification suspends its status until a maintainer verifies it again;
 - the issue #2 task counts as a public mission;
 - a verified canary is an **active node** for 7 days from the evidence timestamp;
 - a later verified public mission renews that 7-day window from its evidence timestamp.
 
 A clone, star, promise, or online heartbeat does not count.
 
-The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. The 5-canary milestone is cumulative. The 10, 30, and 100 targets are 7-day active counts. Each distinct machine counts once, regardless of how many reports it submits.
+The target is to prove the protocol with **5 external canaries first**, then grow through 10, 30, and 100 active public nodes. That is a target, not a claim about the current fleet. The 5-canary milestone is cumulative. The 10, 30, and 100 targets are 7-day counts of active public node labels, not claims of independently audited physical machines. Each distinct node label counts once, regardless of how many reports it submits. Labels are self-reported and are not independent proof of distinct physical machines; maintainers may decline an apparent duplicate.
 
 Until a public node registry exists, the active count is the number of distinct self-reported node labels with at least one maintainer-verified issue #2 report whose evidence timestamp is in the last 7 days. The measured count was **0 on 2026-10-14**; [issue #2](https://github.com/tonydzi/second-brain-starter-kit/issues/2) is the live evidence source.
 
