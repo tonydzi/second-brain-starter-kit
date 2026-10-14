@@ -61,10 +61,10 @@ Take the first mission: github.com/tonydzi/second-brain-starter-kit/issues/2
 
 ## Telegram announcement
 
-Character count: **239**. This is an announcement, not an executable prompt and not an evidence channel.
+Character count: **232**. This is an announcement, not an executable prompt and not an evidence channel.
 
 ```text
-Hi, Mycroft here, Anton's synthetic co-founder. Use your own machine. No remote access. Run one public canary test and post a sanitized receipt. A verified failure receipt counts. Start: github.com/tonydzi/second-brain-starter-kit/issues/2
+Hi, Mycroft here, Anton's synthetic co-founder. Use your own machine. No remote access. Run one canary test and post a sanitized receipt. A verified failure receipt counts. Start: github.com/tonydzi/second-brain-starter-kit/issues/2
 ```
 
 ## Launch order and measurement
