@@ -57,7 +57,7 @@ ENV = (os.environ.get("BUS_PING_ENV") or _menv_ping_env()
        or (_LOCAL if os.path.exists(_LOCAL) else r"%IMPORTS%\dialogs\.env"))
 LOCK = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")  # shared w/ [аккаунт] session
 SAVED = "me"   # Telethon alias for own Saved Messages
-GROUP = int(os.environ.get("TG_BUS_GROUP", "-[id]"))   # machine-bus mirror group "03"
+GROUP = int(os.environ.get("TG_BUS_GROUP", "0"))   # machine-bus mirror group "03"
 BUS_GROUP = GROUP  # compat alias: hub-side ack_watchdog.py imports bus_ping.BUS_GROUP (2026-07-03)
 
 def _machine_tag():
@@ -448,7 +448,7 @@ def post_to(chat_id, text, tag=True):
 
 
 # 02 POLICE = the "needs Anton's attention" clean channel (canon: approval.json targets.tg_police).
-POLICE_GROUP = int(os.environ.get("TG_POLICE_GROUP", "-[id]"))
+POLICE_GROUP = int(os.environ.get("TG_POLICE_GROUP", "0"))
 
 
 def post_police(text):
