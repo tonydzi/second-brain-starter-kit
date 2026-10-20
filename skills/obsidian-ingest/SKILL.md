@@ -156,7 +156,7 @@ The operator's standing rule: for any heavy/accelerable compute (embeddings, mod
 
 ## Dry-run first on anything bigger than a handful
 
-Before a batch import (or any run that touches more than ~5 existing notes), do one pass that writes nothing and lists the plan: every note you would **create** (path), every note you would **update** (path + what changes), every note you would mark **superseded**, every `[[link]]` you would add. Show it, then commit the vault as it is, then run for real. Skip notes with `maintained_by: human` in frontmatter: those get new links appended and questions flagged, never rewritten. To undo a run, `git revert` its commit; `git checkout <rev> -- folder/` leaves behind every note the run created.
+Before a batch import (or any run that touches more than ~5 existing notes), do one pass that writes nothing and lists the plan: every note you would **create** (path), every note you would **update** (path + what changes), every note you would mark **superseded**, every `[[link]]` you would add. Show it, then commit the vault as it is, then run for real. Notes with `maintained_by: human` in frontmatter are never rewritten. With the owner in the session you may append `[[links]]` and add questions under their open-questions heading; in an unattended run you write nothing into them at all and list the links you would have added under `Proposed for human notes` in the receipt. To undo a run, `git revert` its commit; `git checkout <rev> -- folder/` leaves behind every note the run created.
 
 ## The receipt: end every run with exactly this block
 
@@ -170,6 +170,7 @@ Links added:     <n>  (both directions counted once per pair)
 Contradictions:  <none | note: old claim vs new claim, both kept>
 Gaps:            <[[links]] to notes that do not exist yet, or none>
 orphan-check:    <n> created · <n> back-linked · 0 orphaned
+Proposed for human notes: <[[note]] -> [[link]] pairs not written because the note is maintained_by: human, or none>
 ```
 
 A field you could not fill is written as `not checked: <why>`, never left out. `Gaps` is not a failure: a linked-but-missing note is a to-do, and listing it is what keeps it from rotting into a broken link.

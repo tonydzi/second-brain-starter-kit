@@ -41,7 +41,7 @@ Run that check from a different scheduler than the job it watches (a phone short
 ## Before the first scheduled run
 
 - Do the same run by hand, with a dry-run first (list what would change, write nothing), and read the diff.
-- Notes with `maintained_by: human` in frontmatter are skipped by every unattended run.
+- Notes with `maintained_by: human` in frontmatter get no writes at all from an unattended run, not even appended links: the run lists what it would have linked in its report, and the owner decides. Appending links is allowed only with the owner in the session.
 - Give the run write access to the vault folder only, not your home directory.
 
 Related: the receipt shape a run reports in is in [`skills/obsidian-ingest/SKILL.md`](../skills/obsidian-ingest/SKILL.md); merges go through the dry-run in [`skills/dedup/SKILL.md`](../skills/dedup/SKILL.md).
