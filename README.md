@@ -7,10 +7,17 @@ plugin marketplace, a memory server you can attach with one manifest, a working 
 vault templates. It is the system [Palo Alto AI Research Lab](https://github.com/tonydzi) runs
 every day, stripped of personal data and cut down to a portable core: **the method, not the data**.
 
-**New to this? Start with [the light onboarding guide](ONBOARDING-LITE.md).**
-Download a folder, open it in Claude Code or Codex, and try one useful task. No terminal,
-GitHub account, shared vault, sync service, or background updater is needed for this route.
-The kit is a reference you receive; your work stays in a separate local folder.
+**Pick your door:**
+
+- **New to this?** Start with [the light onboarding guide](ONBOARDING-LITE.md). Download a folder,
+  open it in Claude Code or Codex, and try one useful task. No terminal, GitHub account, shared
+  vault, sync service, or background updater is needed; your work stays in a separate local folder.
+- **Already have an Obsidian vault?** Take the habits that keep it from rotting without the rest:
+  the [concept template](templates/concept-note.md) with a `maintained_by: human` flag so agents
+  never rewrite your notes, three [read-only subagents](docs/SUBAGENTS.md) that review and propose,
+  and the [contract for unattended runs](docs/SCHEDULED-RUNS.md).
+- **Already running agents across machines?** Read [HANDOVER.md](HANDOVER.md): a snapshot of the
+  whole system and a map of our repos, written for you and your model.
 
 ## Later: the full kit after your first useful task
 
