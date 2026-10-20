@@ -35,7 +35,8 @@ The dangerous failure is not a crash, it is a run that stopped firing, or fires 
 VAULT="${VAULT:-$HOME/brain}"   # set VAULT to your vault folder
 RUN="${RUN:-ingest}"           # the commit-message prefix your run uses
 [ -d "$VAULT/.git" ] || { echo "not a git vault: $VAULT"; exit 2; }
-last=$(git -C "$VAULT" log -1 --format=%ct --grep="^$RUN ") || last=0
+# match the prefix as plain text, not a regex: RUN=".*" must not count every commit
+last=$(git -C "$VAULT" log --format='%ct %s' | awk -v p="$RUN " 'index(substr($0, index($0, " ") + 1), p) == 1 { print $1; exit }')
 [ $(( $(date +%s) - ${last:-0} )) -lt 108000 ]
 ```
 

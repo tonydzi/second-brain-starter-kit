@@ -23,6 +23,7 @@ READ_ONLY = {"Read", "Glob", "Grep"}
 
 
 def frontmatter(text: str) -> dict[str, str]:
+    text = text.replace("\r\n", "\n")  # a Windows checkout with autocrlf must not read as "no frontmatter"
     m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
     if not m:
         return {}
@@ -35,7 +36,7 @@ def frontmatter(text: str) -> dict[str, str]:
 
 
 def agent_files() -> list[Path]:
-    return sorted(AGENTS.glob("*.md"))
+    return sorted(p for p in AGENTS.glob("*.md") if p.is_file())
 
 
 class AgentsTest(unittest.TestCase):
@@ -54,7 +55,10 @@ class AgentsTest(unittest.TestCase):
                 self.assertFalse(extra, f"{p.name}: write-capable tools {sorted(extra)}; agents/ is read-only")
 
     def test_agents_dir_holds_only_agents(self):
-        stray = sorted(p.name for p in AGENTS.iterdir() if p.suffix != ".md" or not frontmatter(p.read_text(encoding="utf-8")).get("name"))
+        stray = sorted(
+            p.name for p in AGENTS.iterdir()
+            if not p.is_file() or p.suffix != ".md" or not frontmatter(p.read_text(encoding="utf-8")).get("name")
+        )
         self.assertFalse(stray, f"non-agent files in agents/ would load as agents: {stray}")
 
     def test_readme_table_matches_files(self):
