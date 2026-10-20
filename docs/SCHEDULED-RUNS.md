@@ -20,7 +20,7 @@ Commit the vault before the run and once after it, with the run in the message (
 git revert <commit of the run>
 ```
 
-Not `git checkout <rev> -- folder/` and not `git reset --hard`: both leave behind every note the run created, which then stays in the index and in search.
+`git revert` keeps history and removes the notes the run created. `git checkout <rev> -- folder/` does not: every note the run created stays, and with it stays in the index and in search. `git reset --hard <before>` does remove the run's committed notes, but rewrites history and leaves any file the run wrote without committing.
 
 ## 3. One line to you
 
@@ -32,7 +32,9 @@ The dangerous failure is not a crash, it is a run that stopped firing, or fires 
 
 ```bash
 # exits 1 when the nightly ingest has not committed in the last 30 hours
-last=$(git -C ~/brain log -1 --format=%ct --grep='^nightly-ingest') || last=0
+VAULT="${VAULT:-$HOME/brain}"   # set VAULT to your vault folder
+[ -d "$VAULT/.git" ] || { echo "not a git vault: $VAULT"; exit 2; }
+last=$(git -C "$VAULT" log -1 --format=%ct --grep='^nightly-ingest') || last=0
 [ $(( $(date +%s) - ${last:-0} )) -lt 108000 ]
 ```
 

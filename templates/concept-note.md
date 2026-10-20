@@ -3,6 +3,7 @@ title: "<% tp.file.title %>"
 aliases: []
 tags: [concept]
 date: <% tp.date.now("YYYY-MM-DD") %>
+updated: <% tp.date.now("YYYY-MM-DD") %>  # агент обновляет при каждой содержательной правке
 type: concept
 stage: merged
 language: <% tp.file.cursor(1) %>
