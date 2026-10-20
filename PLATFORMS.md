@@ -1,6 +1,6 @@
 # Platforms and their owners
 
-The skill shelf in this kit (232 `SKILL.md` files under `skills/`) is plain Markdown, so many agents
+The skill shelf in this kit (234 `SKILL.md` files under `skills/`) is plain Markdown, so many agents
 can read it. We only run it every day on one of them. Everywhere else, "it works" is a guess until
 someone who lives on that platform runs it and shows the output.
 

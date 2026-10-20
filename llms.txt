@@ -1,6 +1,6 @@
 # Second Brain Starter Kit
 
-> A second brain and persistent memory for Claude Code and Codex: 232 skills shipped as a plugin marketplace, an opt-in memory server (sqlite-graph-memory over your own markdown notes), a markdown CRM engine with demo data, vault templates and a seed message for the first session. The method, not the data: every example is fictional. MIT, no telemetry.
+> A second brain and persistent memory for Claude Code and Codex: 234 skills shipped as a plugin marketplace, an opt-in memory server (sqlite-graph-memory over your own markdown notes), a markdown CRM engine with demo data, vault templates and a seed message for the first session. The method, not the data: every example is fictional. MIT, no telemetry.
 
 Who it is for: someone who wants an agent that keeps habits and memory across months, and an agent bootstrapping such a system for its own operator on a machine the authors have never seen. Not a hosted product; everything runs locally.
 
@@ -40,7 +40,7 @@ Who it is for: someone who wants an agent that keeps habits and memory across mo
 - [/intake](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/intake/SKILL.md): one pass routes a new rule into every home it needs, so parallel sessions see it on their own
 - [/mcp](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/mcp/SKILL.md): health-check your MCP servers and scout new ones before any integration work
 
-Full map of all 232: [skills/INDEX.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/INDEX.md)
+Full map of all 234: [skills/INDEX.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/INDEX.md)
 
 ## Principles
 

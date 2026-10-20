@@ -24,6 +24,9 @@ license: MIT
 - **Complementary** (different facets/recipients) → **LEAVE**. Merging loses nuance (e.g. "notify the operator" vs "notify teacher" vs "notify nanny" = 3 rules, not 1).
 - **Money / sensitive / ambiguous** → do NOT merge; **FLAG for the operator**.
 
+## Step 2b — Dry-run the merge plan (writes nothing)
+Before Step 3, print the full plan and stop: for each cluster, the canonical note, every loser that becomes `superseded`, the nuances grafted, and every index/MOC line that changes. Notes with `maintained_by: human` are never losers and never get their body rewritten: flag them for the operator instead. Commit the vault as it is, then apply.
+
 ## Step 3 — Apply the merge (truth layer)
 - Canonical note: add `audience`, `supersedes: "[[loser]]"`, graft nuances into the body.
 - Loser note: `status: active` → `superseded`; add `superseded_by: "[[canonical]]"`; add body marker `> ⊘ Merged into [[canonical]] — <reason>`. **NEVER delete** (git-reversible; nothing lost).
@@ -35,7 +38,7 @@ license: MIT
 - ⚠️ **GRABLI:** deleting MULTIPLE adjacent list-lines via batched `\n`-anchored Edits JOINS neighbor lines. To remove several lines, use a SCRIPT that filters by slug (like `fix_pokupki_moc.py`), or `git checkout <good-commit> -- <file>` then re-script. NEVER batch-Edit list deletions.
 
 ## Step 5 — Backup + verify + report
-`vault_backup.py` before edits; after, grep-count `^status: superseded` to verify the number; commit. Report BEFORE→AFTER on real notes + 🧒 recap. Flag anything left for the operator (e.g. money conflicts).
+`vault_backup.py` before edits; after, grep-count `^status: superseded` to verify the number; commit. Undo is `git revert <merge commit>`: `git checkout <rev> -- folder/` would leave any note the merge created. Report BEFORE→AFTER on real notes + 🧒 recap. Flag anything left for the operator (e.g. money conflicts).
 
 <!--kit-footer-->
 

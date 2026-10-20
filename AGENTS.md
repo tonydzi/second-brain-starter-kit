@@ -6,7 +6,7 @@ Written for AI coding agents, and equally readable by a human contributor. Short
 ## What this repo is
 
 A working "Claude Code as a second brain + working assistant" setup, stripped of personal data and
-cut down to a portable core: **the method, not the data.** 100 skills, a CRM engine with sample
+cut down to a portable core: **the method, not the data.** 234 skills, a CRM engine with sample
 data, vault templates, engine passports, and the seed message that starts the first session.
 
 The primary reader is **someone else's agent**, bootstrapping a system for its own operator. That

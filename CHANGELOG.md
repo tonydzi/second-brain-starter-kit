@@ -24,7 +24,21 @@ separate plugin because a plugin's stdio server starts in every session and the 
 about 2 GB. Checked on a two-note index: `memory_recall` returned the note with a unique token, and the
 same call on an empty index came back as an error. New [`llms.txt`](llms.txt) (one page for LLM readers)
 and [`RED-PROOF.md`](RED-PROOF.md) (a drop-in rule: a check counts only after you saw it fail). The
-README now says 232 skills, the real count, instead of 100.
+The README now says the real skill count instead of 100: 234 since `/loop` and `/restart` were added.
+
+**Hand-written notes stay yours, and night runs leave a trail.** A note with `maintained_by: human`
+in frontmatter is never rewritten: with the owner in the session an agent may only append links and
+questions, and an unattended run writes nothing into it and lists the links it would have added. The
+concept template asks which kind of note you are creating (no answer means `human`) and gains an
+`updated` date and a Position / Contested / Superseded section, so a disagreement is kept with dates
+and sources instead of overwritten. `obsidian-ingest` now does a dry-run first, commits its result
+with an `ingest ` prefix, and ends with one fixed receipt that is rule 8's report line for line;
+`dedup` dry-runs the merge plan. New [`agents/`](docs/SUBAGENTS.md): reviewer, curator and
+graph-analyst, read-only by design, with a test that fails if one gains a write tool. New
+[`docs/SCHEDULED-RUNS.md`](docs/SCHEDULED-RUNS.md): every unattended run leaves a log line, one
+commit and one line to the owner, plus a watchdog on the age of the last run commit. Ideas picked up
+from [undefined-ui/second-brain-os](https://github.com/undefined-ui/second-brain-os) (MIT), our own
+wording. (#21)
 
 ## v0.9.0 - 2026-10-16
 
