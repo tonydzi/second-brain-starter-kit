@@ -10,8 +10,10 @@ The table is generated. Do not edit it by hand; run
 python scripts/conformance_report.py --write
 ```
 
-and commit the result. `--check` is what CI runs: it rebuilds the table in memory and exits 1 if
-the committed one is stale. A red ❌ in the table does not fail CI. A table that hides a ❌ does.
+and commit the result. On a pull request CI runs `--check`: it rebuilds the table in memory and
+fails if the committed one is stale. On a push to master CI does not fail, it regenerates the board
+and commits it as its own commit, so a writer that skipped `--write` still leaves a true board and
+the drift shows up as a separate diff. A red ❌ in the table never fails CI. A stale table does.
 
 ## What each column checks
 
@@ -47,17 +49,17 @@ python scripts/conformance_report.py --write
 
 <!-- conformance:start -->
 
-Skills on the shelf: **232**. Cannot judge **5 of 49** cells (every unknown is an exam cell: the static checks always run).
+Skills on the shelf: **234**. Cannot judge **5 of 49** cells (every unknown is an exam cell: the static checks always run).
 
 | Platform | Manifest | Frontmatter name+description | Description one line, ≤400 | Name = folder | Paths resolve | OS branch | Exam (latest run) | Verdict |
 |---|---|---|---|---|---|---|---|---|
-| Claude Code | ok | 232/232 | 219/232 | 232/232 | 198/232 | 13/43 | cannot judge: no exam rail | ❌ |
-| Codex CLI | ok | 232/232 | 219/232 | 232/232 strict | 198/232 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
-| Cursor | ok | 232/232 | 219/232 | 232/232 strict | 198/232 | 13/43 | cannot judge: no exam rail | ❌ |
-| Gemini CLI | ok | 232/232 | 219/232 | 232/232 strict | 198/232 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
-| Antigravity | ok | 232/232 | 219/232 | 232/232 strict | 198/232 | 13/43 | cannot judge: no exam rail | ❌ |
-| OpenCode | ok | 232/232 | 219/232 | 232/232 strict | 198/232 | 13/43 | cannot judge: no exam rail | ❌ |
-| Grok | ok | 232/232 | 219/232 | 232/232 strict | 198/232 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Claude Code | ok | 234/234 | 221/234 | 234/234 | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| Codex CLI | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Cursor | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| Gemini CLI | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
+| Antigravity | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| OpenCode | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| Grok | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
 
 ### What fails
 
