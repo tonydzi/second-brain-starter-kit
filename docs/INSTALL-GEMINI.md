@@ -87,7 +87,7 @@ their own computer — their notes stay theirs.
 ## If something breaks
 - `npm` / `node` not found → reinstall Node.js (Step 1), then close and reopen the terminal.
 - `gemini` not found → close and reopen the terminal; still broken → repeat Step 2.
-- Permission error on Mac during `npm install -g` → run `sudo npm install -g @google/gemini-cli`
+- Permission error on Mac during `npm install -g`: fix npm's global folder instead of using `sudo` (install Node through a version manager such as `nvm` or `fnm`, or set `npm config set prefix ~/.npm-global` and add `~/.npm-global/bin` to `PATH`)
   and type your Mac password.
 - `cd` says "no such file or directory" → the unzipped folder has a different name;
   type `cd ~/Documents/second` and press Tab to auto-complete it.

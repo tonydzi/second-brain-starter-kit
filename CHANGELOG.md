@@ -11,6 +11,11 @@ the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONT
 
 ## Unreleased
 
+**First outside contributions, all three merged.** Thanks to @slopggobblercobbler81: the Gemini CLI
+install command had a scrubbed package name (#17, closes #11), the "Start here" block of
+`README.ru.md` is now in Russian (#18, closes #15), and a Windows and PowerShell setup guide landed
+as [`docs/windows-setup.md`](docs/windows-setup.md) (#19).
+
 **A way to join that does not need our permission.** New [`PLATFORMS.md`](PLATFORMS.md): one row per
 agent or system the shelf should run on (8 agents, Windows, macOS on Intel), each with an owner who
 uses it daily and pastes real output after changes. Claude Code is ours; the other 9 rows are open.
@@ -23,8 +28,7 @@ MCP server (`sgm-mcp`, pinned to `>=0.3.1,<0.4`) and asks for one setting, your 
 separate plugin because a plugin's stdio server starts in every session and the embeddings stack is
 about 2 GB. Checked on a two-note index: `memory_recall` returned the note with a unique token, and the
 same call on an empty index came back as an error. New [`llms.txt`](llms.txt) (one page for LLM readers)
-and [`RED-PROOF.md`](RED-PROOF.md) (a drop-in rule: a check counts only after you saw it fail). The
-The README now says the real skill count instead of 100: 234 since `/loop` and `/restart` were added.
+and [`RED-PROOF.md`](RED-PROOF.md) (a drop-in rule: a check counts only after you saw it fail). The README now says the real skill count instead of 100: 234 since `/loop` and `/restart` were added.
 
 **Hand-written notes stay yours, and night runs leave a trail.** A note with `maintained_by: human`
 in frontmatter is never rewritten: with the owner in the session an agent may only append links and
