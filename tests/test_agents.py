@@ -1,10 +1,11 @@
-"""Guards for agents/: every subagent here is read-only and listed in agents/README.md.
+"""Guards for agents/: every subagent here is read-only and listed in docs/SUBAGENTS.md.
 
 Passport
-  input:   agents/*.md (Claude Code subagent files) and agents/README.md
+  input:   agents/*.md (Claude Code subagent files) and docs/SUBAGENTS.md
   checks:  frontmatter has name, description, tools; name matches the file; tools are a
-           subset of the read-only set; every agent appears in the README table; the
-           README table names no agent that does not exist
+           subset of the read-only set; every agent appears in the docs table; the
+           table names no agent that does not exist; agents/ holds nothing but agents
+           (the plugin loader treats every .md there as an agent)
   called:  by CI (python3 -m unittest discover -s tests), and by hand after editing agents/
   breaks:  if Claude Code renames its read-only tools, update READ_ONLY below
   stdlib only.
@@ -17,6 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 AGENTS = ROOT / "agents"
+DOC = ROOT / "docs" / "SUBAGENTS.md"
 READ_ONLY = {"Read", "Glob", "Grep"}
 
 
@@ -33,7 +35,7 @@ def frontmatter(text: str) -> dict[str, str]:
 
 
 def agent_files() -> list[Path]:
-    return sorted(p for p in AGENTS.glob("*.md") if p.name != "README.md")
+    return sorted(AGENTS.glob("*.md"))
 
 
 class AgentsTest(unittest.TestCase):
@@ -51,11 +53,15 @@ class AgentsTest(unittest.TestCase):
                 extra = tools - READ_ONLY
                 self.assertFalse(extra, f"{p.name}: write-capable tools {sorted(extra)}; agents/ is read-only")
 
+    def test_agents_dir_holds_only_agents(self):
+        stray = sorted(p.name for p in AGENTS.iterdir() if p.suffix != ".md" or not frontmatter(p.read_text(encoding="utf-8")).get("name"))
+        self.assertFalse(stray, f"non-agent files in agents/ would load as agents: {stray}")
+
     def test_readme_table_matches_files(self):
-        readme = (AGENTS / "README.md").read_text(encoding="utf-8")
-        listed = set(re.findall(r"\[`([a-z0-9-]+)`\]\(\1\.md\)", readme))
+        doc = DOC.read_text(encoding="utf-8")
+        listed = set(re.findall(r"\[`([a-z0-9-]+)`\]\(\.\./agents/\1\.md\)", doc))
         present = {p.stem for p in agent_files()}
-        self.assertEqual(listed, present, f"README lists {sorted(listed)}, files are {sorted(present)}")
+        self.assertEqual(listed, present, f"docs/SUBAGENTS.md lists {sorted(listed)}, files are {sorted(present)}")
 
 
 if __name__ == "__main__":

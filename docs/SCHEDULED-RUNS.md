@@ -14,7 +14,7 @@ Without it, the morning question "what happened overnight" has no answer except 
 
 ## 2. One commit, named after the run
 
-Commit the vault before the run and once after it, with the run in the message (`nightly-ingest 2026-10-20: 4 new, 7 updated`). One commit per run is what makes a bad night revertible in one command:
+Commit the vault before the run and once after it, with the run in the message (`ingest raw/ 2026-10-20: 4 new, 7 updated`, the same `ingest ` prefix the [obsidian-ingest](../skills/obsidian-ingest/SKILL.md) skill uses, so the watchdog below finds both scheduled and hand runs). Stage only the files the run created or changed (`git add <paths>`), never `git add -A`: otherwise reverting the run also reverts whatever else was lying uncommitted in the vault. One commit per run is what makes a bad night revertible in one command:
 
 ```
 git revert <commit of the run>
@@ -33,8 +33,9 @@ The dangerous failure is not a crash, it is a run that stopped firing, or fires 
 ```bash
 # exits 1 when the nightly ingest has not committed in the last 30 hours
 VAULT="${VAULT:-$HOME/brain}"   # set VAULT to your vault folder
+RUN="${RUN:-ingest}"           # the commit-message prefix your run uses
 [ -d "$VAULT/.git" ] || { echo "not a git vault: $VAULT"; exit 2; }
-last=$(git -C "$VAULT" log -1 --format=%ct --grep='^nightly-ingest') || last=0
+last=$(git -C "$VAULT" log -1 --format=%ct --grep="^$RUN ") || last=0
 [ $(( $(date +%s) - ${last:-0} )) -lt 108000 ]
 ```
 

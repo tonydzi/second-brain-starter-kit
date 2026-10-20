@@ -1,4 +1,4 @@
-# agents
+# Subagents (`agents/`)
 
 Three subagents for Claude Code. Copy them into `.claude/agents/` of your vault (or `~/.claude/agents/` for every project) and call them by name: "ask the curator what to merge".
 
@@ -6,10 +6,10 @@ All three are **read-only by design**: their `tools` line gives them `Read, Glob
 
 | Agent | Writes | When | Hands off to |
 |---|---|---|---|
-| [`reviewer`](reviewer.md) | no | weekly | you: three next moves |
-| [`curator`](curator.md) | no | quarterly, or after a big import | `dedup` skill, or you |
-| [`graph-analyst`](graph-analyst.md) | no | monthly, or when answers get worse | `curator` for hubs and orphans |
+| [`reviewer`](../agents/reviewer.md) | no | weekly | you: three next moves |
+| [`curator`](../agents/curator.md) | no | quarterly, or after a big import | `dedup` skill, or you |
+| [`graph-analyst`](../agents/graph-analyst.md) | no | monthly, or when answers get worse | `curator` for hubs and orphans |
 
 Writing stays with the skills, which have narrower instructions, a dry-run step and a fixed receipt. Notes marked `maintained_by: human` are treated as yours by all three: reported on, never proposed for rewriting.
 
-`tests/test_agents.py` fails if an agent here gains a write tool, loses its frontmatter, or is missing from this table.
+`agents/` holds only the agent files, nothing else: Claude Code's plugin loader treats every `.md` there as an agent. `tests/test_agents.py` fails if an agent gains a write tool, loses its frontmatter, is missing from this table, or if a non-agent file appears in `agents/`.

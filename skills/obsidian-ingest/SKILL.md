@@ -156,17 +156,23 @@ The operator's standing rule: for any heavy/accelerable compute (embeddings, mod
 
 ## Dry-run first on anything bigger than a handful
 
-Before a batch import (or any run that touches more than ~5 existing notes), do one pass that writes nothing and lists the plan: every note you would **create** (path), every note you would **update** (path + what changes), every note you would mark **superseded**, every `[[link]]` you would add. Show it, then commit the vault as it is, then run for real. Notes with `maintained_by: human` in frontmatter are never rewritten. With the owner in the session you may append `[[links]]` and add questions under their open-questions heading; in an unattended run you write nothing into them at all and list the links you would have added under `Proposed for human notes` in the receipt. After validation passes, commit again with the run in the message (`ingest <source> <date>: N new, M updated`) before reporting done: that commit is what makes the run undoable with `git revert <commit>`. `git checkout <rev> -- folder/` would leave behind every note the run created.
+Before a batch import (or any run that touches more than ~5 existing notes), do one pass that writes nothing and lists the plan: every note you would **create** (path), every note you would **update** (path + what changes), every note you would mark **superseded**, every `[[link]]` you would add. Show it, then commit the vault as it is, then run for real. Notes you create get `maintained_by: agent`; notes with `maintained_by: human` in frontmatter are never rewritten. With the owner in the session you may append `[[links]]` and add questions under their open-questions heading; in an unattended run you write nothing into them at all and list the links you would have added under `Proposed for human notes` in the receipt. After validation passes, stage only the files this run created or changed (`git add <paths>`, never `git add -A`) and commit with the run in the message, always starting with `ingest ` (`ingest <source> <date>: N new, M updated`; the watchdog in docs/SCHEDULED-RUNS.md looks for that prefix) before reporting done: that commit is what makes the run undoable with `git revert <commit>`. `git checkout <rev> -- folder/` would leave behind every note the run created.
 
 ## The receipt: end every run with exactly this block
 
-Rule 8 says what to check; this is the shape to report it in, so two runs can be compared line by line and a scheduled run can be audited the next morning:
+Rule 8 says what to check; this block is rule 8's report, every line of it, so two runs can be compared line by line and a scheduled run can be audited the next morning:
 
 ```
 Ingested:        <source name, path or URL>
 New notes:       <n>  (paths)
 Updated notes:   <n>  (paths)
 Links added:     <n>  (both directions counted once per pair)
+Broken links:    0  (rule 8; any other number means the run is not finished)
+Tags added:      <list, or none>
+Concepts mapped: <note -> [[concept]] pairs>
+Duplicates:      <resolved: kept -> superseded pairs, or none>
+Flagged:         <anything left for the owner, or none>
+Candidate new concepts: <only for #anton-original material: considered / created / folded into [[concept-…]] and why>
 Contradictions:  <none | note: old claim vs new claim, both kept>
 Gaps:            <plain-text names of notes worth creating (no [[brackets]], so rule 8 stays at 0 broken links), or none>
 orphan-check:    <n> created · <n> back-linked · 0 orphaned
