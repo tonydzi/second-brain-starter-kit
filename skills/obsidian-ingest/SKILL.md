@@ -154,6 +154,26 @@ The operator's standing rule: for any heavy/accelerable compute (embeddings, mod
 - **Filenames: transliterate Cyrillic → latin kebab**, date-prefix (`YYYY-MM-DD-slug.md`) so they sort chronologically; de-dup collisions with a numeric suffix.
 - **Escaped pipes in tables:** inside a markdown table, write `[[target\|alias]]` (escaped pipe) so the table doesn't break; Obsidian still resolves it.
 
+## Dry-run first on anything bigger than a handful
+
+Before a batch import (or any run that touches more than ~5 existing notes), do one pass that writes nothing and lists the plan: every note you would **create** (path), every note you would **update** (path + what changes), every note you would mark **superseded**, every `[[link]]` you would add. Show it, then commit the vault as it is, then run for real. Skip notes with `maintained_by: human` in frontmatter: those get new links appended and questions flagged, never rewritten. To undo a run, `git revert` its commit; `git checkout <rev> -- folder/` leaves behind every note the run created.
+
+## The receipt: end every run with exactly this block
+
+Rule 8 says what to check; this is the shape to report it in, so two runs can be compared line by line and a scheduled run can be audited the next morning:
+
+```
+Ingested:        <source name, path or URL>
+New notes:       <n>  (paths)
+Updated notes:   <n>  (paths)
+Links added:     <n>  (both directions counted once per pair)
+Contradictions:  <none | note: old claim vs new claim, both kept>
+Gaps:            <[[links]] to notes that do not exist yet, or none>
+orphan-check:    <n> created · <n> back-linked · 0 orphaned
+```
+
+A field you could not fill is written as `not checked: <why>`, never left out. `Gaps` is not a failure: a linked-but-missing note is a to-do, and listing it is what keeps it from rotting into a broken link.
+
 ## What success looks like
 
 A reader (or future the operator) lands on the Cross-MOC, navigates by month/theme/person, clicks into an atomic note, sees its provenance and its concept, and follows `[[links]]` to related ideas — with zero broken links and zero duplicated raw text. The vault gets *more* navigable with every import, not just bigger.

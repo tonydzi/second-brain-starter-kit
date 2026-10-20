@@ -1,4 +1,4 @@
-# Skill map: all 232 skills
+# Skill map: all 234 skills
 
 One skill = one `/name` command for Claude Code. This is the full set the lab runs every
 day; personal data in the examples is replaced with plausible fictional stand-ins

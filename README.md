@@ -2,7 +2,7 @@
 
 *Read this in other languages: [Русский](README.ru.md)*
 
-A second brain and persistent memory for **Claude Code and Codex**: 232 skills shipped as a
+A second brain and persistent memory for **Claude Code and Codex**: 234 skills shipped as a
 plugin marketplace, a memory server you can attach with one manifest, a working CRM engine and
 vault templates. It is the system [Palo Alto AI Research Lab](https://github.com/tonydzi) runs
 every day, stripped of personal data and cut down to a portable core: **the method, not the data**.
@@ -21,7 +21,7 @@ A single skill is a trick. What makes an agent useful over months is the set of 
 a gate that refuses to say "done" without evidence, a retrospective that files what you learned
 where the next session will actually find it, a registry of decisions you already rejected so
 nobody re-pitches them, a handoff that survives a crash. Those only work together, which is why
-they ship as one kit rather than as 232 separate downloads.
+they ship as one kit rather than as 234 separate downloads.
 
 Install it whole and you get a working second brain on day one:
 
@@ -107,7 +107,7 @@ If one of these saved you an hour, a star is the thanks we would ask for: it is 
 | [llm-spend-audit](https://github.com/tonydzi/llm-spend-audit) | where your LLM subscription budget actually goes |
 | [agent-runtime-integrity-bench](https://github.com/tonydzi/agent-runtime-integrity-bench) | replay, idempotency and consensus-integrity scenarios from real incidents |
 
-Full map of all 232 → [skills/INDEX.md](skills/INDEX.md)
+Full map of all 234 → [skills/INDEX.md](skills/INDEX.md)
 
 ## What's inside
 
@@ -116,10 +116,12 @@ Full map of all 232 → [skills/INDEX.md](skills/INDEX.md)
 | `SEED.en.md` / `SEED.md` | The opening message for your FIRST Claude Code session (English / Russian) — everything starts here |
 | `BOOTSTRAP-CLAUDE.md` | Instructions for Claude itself: how to install and adapt the kit |
 | `CLAUDE-EXTERNAL.md` | Our working principles (assistant behavior) — the base for your own CLAUDE.md |
-| `skills/` | **All 232 skill commands** the system runs on every day, map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
+| `skills/` | **All 234 skill commands** the system runs on every day, map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
 | `templates/` | Second-brain note templates (concepts, decisions, weekly/monthly reviews) |
 | `crm-template/` | CRM: markdown "one card = one file" + an [engine](crm-template/ENGINE.md) with warmth scoring and safe outbound, with demo data |
 | `docs/` | How to use CLAUDE.md, onboarding, what is shared |
+| [`agents/`](agents/README.md) | Three read-only subagents (reviewer, curator, graph-analyst): they report and propose, never write |
+| [`docs/SCHEDULED-RUNS.md`](docs/SCHEDULED-RUNS.md) | The contract every unattended run follows: a log line, one commit, one line to you, and how to catch a run that silently stopped |
 | [`RED-PROOF.md`](RED-PROOF.md) / [`llms.txt`](llms.txt) | A drop-in rule for any CLAUDE.md or AGENTS.md: a check counts only after you saw it fail / a one-page summary of this repo for LLM readers |
 | [`HANDOVER.md`](HANDOVER.md) | **Already running your own agent fleet?** A snapshot of the whole system and a map of our repos — the entry point for you and your model |
 
@@ -167,7 +169,7 @@ Using Gemini CLI instead of Claude? → [docs/INSTALL-GEMINI.md](docs/INSTALL-GE
 ## Roadmap
 
 **Now: [v0.9.0](https://github.com/tonydzi/second-brain-starter-kit/releases/tag/v0.9.0).**
-232 skills, 247 engine scripts under `engines/`, note templates, a CRM engine with warmth
+234 skills, 247 engine scripts under `engines/`, note templates, a CRM engine with warmth
 scoring and safe outbound, `SEED.md` + `BOOTSTRAP-CLAUDE.md` for the first session, and
 `HANDOVER.md` for people who already run their own agent fleet.
 
@@ -261,7 +263,7 @@ Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude C
 running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
 production use before publication.
 
-- 📦 All 232 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 📦 All 234 skills: https://github.com/tonydzi/second-brain-starter-kit
 - 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/[id]) · X [[аккаунт]](https://x.com/Tony_Stef_)
 - 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
 
