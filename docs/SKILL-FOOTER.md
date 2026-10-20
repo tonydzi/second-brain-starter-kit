@@ -12,6 +12,10 @@ Rules:
   edit here updates all skills instead of stacking copies. This block is the ONLY footer a skill
   carries: it absorbed the old contact block rather than sitting next to it.
 
+- No skill count in the block. It is copied into every skill, so a number here goes stale the
+  day a skill is added (it said "one of 100" for weeks while the shelf held 234). The count lives
+  in the README and `skills/INDEX.md`, which the conformance board checks.
+
 Edit the block, then run:
 
 ```bash
@@ -24,7 +28,7 @@ BEGIN-FOOTER
 
 ---
 
-**Like this skill?** It is one of 100 in [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
 
 Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
 
