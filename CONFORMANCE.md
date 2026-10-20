@@ -49,20 +49,23 @@ python scripts/conformance_report.py --write
 
 <!-- conformance:start -->
 
-Skills on the shelf: **234**. Cannot judge **5 of 49** cells (every unknown is an exam cell: the static checks always run).
+Skills on the shelf: **235**. Cannot judge **5 of 49** cells (every unknown is an exam cell: the static checks always run).
 
 | Platform | Manifest | Frontmatter name+description | Description one line, ≤400 | Name = folder | Paths resolve | OS branch | Exam (latest run) | Verdict |
 |---|---|---|---|---|---|---|---|---|
-| Claude Code | ok | 234/234 | 221/234 | 234/234 | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Codex CLI | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
-| Cursor | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Gemini CLI | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
-| Antigravity | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| OpenCode | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Grok | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Claude Code | **3 problem(s)** | 235/235 | 222/235 | 235/235 | 201/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| Codex CLI | **1 problem(s)** | 235/235 | 222/235 | 235/235 strict | 201/235 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Cursor | **1 problem(s)** | 235/235 | 222/235 | 235/235 strict | 201/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| Gemini CLI | **1 problem(s)** | 235/235 | 222/235 | 235/235 strict | 201/235 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
+| Antigravity | **1 problem(s)** | 235/235 | 222/235 | 235/235 strict | 201/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| OpenCode | **1 problem(s)** | 235/235 | 222/235 | 235/235 strict | 201/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| Grok | **1 problem(s)** | 235/235 | 222/235 | 235/235 strict | 201/235 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
 
 ### What fails
 
+- Claude Code plugin manifest: marketplace.json says 234 skills, shelf has 235
+- Claude Code plugin manifest: plugin.json says 234 skills, shelf has 235
+- Shelf (skills/ and INDEX.md): INDEX.md misses 1: zz-proof
 - description not one line or over 400 chars: ask-debt (413 chars), brain-onboard (404 chars), claude-repair (412 chars), display-mode (493 chars), fa (464 chars), peer-onboard (410 chars), retro (467 chars), secondop (460 chars), session-groups (708 chars), sostav-dm (464 chars), sostav-reply (409 chars), spawn-bridge (402 chars), tt (467 chars)
 - `borrowed-audience` paths that do not resolve: `docs/leash-8.md`
 - `dig-through-data-brokers` paths that do not resolve: `../../ETHICS.md`
