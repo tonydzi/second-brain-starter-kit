@@ -288,3 +288,5 @@ These arrived with the full local set and still carry their original working des
 | [`/x-inbox-watch`](x-inbox-watch/SKILL.md) | - ВАХТА ИНБОКСА X (Twitter) — периодически проверяю DM (включая папку Requests), mentions и reply-тред Антона через его живой залогиненный Chrome, что… |
 | [`/x-ray-a-company`](x-ray-a-company/SKILL.md) | - Corporate due-diligence workflow — resolve a brand or website to its registered legal entity, map group structure and beneficial ownership, profile … |
 | [`/youtube-publish`](youtube-publish/SKILL.md) | Публикует готовый контент на личный YouTube-канал Антона [аккаунт]: вычерпывает новое из NotebookLM и очереди, рендерит аудио в видео, пишет описание … |
+| [`/loop`](loop/SKILL.md) | Keep working until a verified result via the shared continue skill; a work cycle, not a timer. |
+| [`/restart`](restart/SKILL.md) | Controlled restart of a named app, browser or service with context kept and the new instance verified. |
