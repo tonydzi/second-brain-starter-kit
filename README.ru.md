@@ -62,52 +62,52 @@ Claude Code исполняет от начала до конца — челов�
   [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md) — только метод; координаты флота едут по
   зашифрованному синк-каналу после одобрения устройства владельцем, а не через этот репозиторий.
 
-## Start here — 25 skills worth your first hour
-Every one of them ran in production before it was published. One command each.
+## С чего начать — 25 скиллов, стоящих первого часа
+Каждый из них работал в проде до публикации. Каждый запускается одной командой.
 
-| skill | what it gives you in 60 seconds |
+| скилл | что даёт за 60 секунд |
 |---|---|
-| [`/secondop`](skills/secondop/SKILL.md) | a second opinion from a PANEL of external LLMs (Codex + Grok + Gemini) on any plan or diff — a model never reviews itself |
-| [`/tt`](skills/tt/SKILL.md) | the quality gate after every build: run it live, break it on purpose, prove it with a counter — only then say "done" |
-| [`/retro`](skills/retro/SKILL.md) | end-of-session retrospective that routes every durable artifact to its home and hands you a compact handoff |
-| [`/handoff`](skills/handoff/SKILL.md) | a self-contained "semicolon" so another session, person or machine continues exactly where you stopped |
-| [`/skill-gap`](skills/skill-gap/SKILL.md) | audits your sessions for repeated manual patterns and tells you which skill to install or build next |
-| [`/precedent`](skills/precedent/SKILL.md) | before you decide anything structural: did we already decide it, and did we already reject it? |
-| [`/declined`](skills/declined/SKILL.md) | the registry of rejected ideas, so the agent stops re-pitching what you already said no to |
-| [`/issue-match`](skills/issue-match/SKILL.md) | measures a target repo's queue before you spend a PR: how many of the last closed PRs were actually merged |
-| [`/research-swarm`](skills/research-swarm/SKILL.md) | turns any hypothesis into an argument map from 5 independent lenses — never a verdict |
-| [`/last30days`](skills/last30days/SKILL.md) | deterministic "what changed in the last 30 days on topic X" before a strategic call |
-| [`/ask`](skills/ask/SKILL.md) | semantic search over your curated vault — the smallest relevant slice, not a corpus dump |
-| [`/search`](skills/search/SKILL.md) | full-text search across every conversation you ever had, locally, 0 tokens |
-| [`/chat-search`](skills/chat-search/SKILL.md) | find which past Claude Code session discussed a thing — and resume it |
-| [`/resume-last`](skills/resume-last/SKILL.md) | continue the previous chat after a crash, even on another machine where native resume can't reach |
-| [`/1`](skills/1/SKILL.md) | hard-crash recovery: where were we + is everything alive + restore the history, in one command |
-| [`/arch`](skills/arch/SKILL.md) | the deterministic map of everything your system is made of, and what fell off it |
-| [`/brain`](skills/brain/SKILL.md) | one-glance health of a memory/RAG stack so failures stop being silent |
-| [`/sync-check`](skills/sync-check/SKILL.md) | green/red report on file sync across a machine fleet, including the silent sync-conflict count |
-| [`/quarantine`](skills/quarantine/SKILL.md) | holds unsigned or unverified incoming deliverables instead of applying them — fail-closed |
-| [`/obsidian-ingest`](skills/obsidian-ingest/SKILL.md) | universal import pipeline: any source becomes well-linked atomic notes with provenance |
-| [`/defuddle`](skills/defuddle/SKILL.md) | clean web→markdown without ads or nav — 40-60% fewer tokens than a raw fetch |
-| [`/dedup`](skills/dedup/SKILL.md) | find and merge near-duplicate notes with a supersede-not-delete policy |
-| [`/taste-check`](skills/taste-check/SKILL.md) | a content quality gate: is this fit to show, before anyone sees it |
-| [`/intake`](skills/intake/SKILL.md) | one pass routes a new rule into every home it needs, so parallel sessions see it on their own |
-| [`/mcp`](skills/mcp/SKILL.md) | health-check your MCP servers and scout new ones before any integration work |
+| [`/secondop`](skills/secondop/SKILL.md) | второе мнение от ПАНЕЛИ внешних LLM (Codex + Grok + Gemini) по любому плану или диффу — модель никогда не ревьюит сама себя |
+| [`/tt`](skills/tt/SKILL.md) | гейт качества после каждого билда: запустить вживую, специально сломать, доказать счётчиком — и только тогда сказать «готово» |
+| [`/retro`](skills/retro/SKILL.md) | ретроспектива в конце сессии: раскладывает долгоживущие артефакты по местам и отдаёт компактный хендофф |
+| [`/handoff`](skills/handoff/SKILL.md) | самодостаточная «точка с запятой», чтобы другая сессия, человек или машина продолжили ровно там, где вы остановились |
+| [`/skill-gap`](skills/skill-gap/SKILL.md) | аудит сессий на повторяющиеся ручные паттерны: подскажет, какой скилл установить или создать следующим |
+| [`/precedent`](skills/precedent/SKILL.md) | перед любым структурным решением: решали ли мы это раньше и не отвергли ли уже? |
+| [`/declined`](skills/declined/SKILL.md) | реестр отклонённых идей, чтобы агент перестал заново предлагать то, чему уже сказали «нет» |
+| [`/issue-match`](skills/issue-match/SKILL.md) | оценивает очередь целевого репозитория перед отправкой PR: сколько из последних закрытых PR было реально смержено |
+| [`/research-swarm`](skills/research-swarm/SKILL.md) | превращает любую гипотезу в карту аргументов с 5 независимых ракурсов — никакого навязанного вердикта |
+| [`/last30days`](skills/last30days/SKILL.md) | детерминированное «что изменилось за последние 30 дней по теме X» перед стратегическим созвоном |
+| [`/ask`](skills/ask/SKILL.md) | семантический поиск по вашему волту: минимальный релевантный срез, а не дамп всего корпуса |
+| [`/search`](skills/search/SKILL.md) | полнотекстовый поиск по всем прошлым диалогам: локально и за 0 токенов |
+| [`/chat-search`](skills/chat-search/SKILL.md) | найти, в какой прошлой сессии Claude Code обсуждалась тема, и возобновить её |
+| [`/resume-last`](skills/resume-last/SKILL.md) | продолжить предыдущий чат после сбоя даже на другой машине, куда нативный resume не достаёт |
+| [`/1`](skills/1/SKILL.md) | восстановление после жёсткого сбоя: где мы были + всё ли живо + восстановить историю — в одну команду |
+| [`/arch`](skills/arch/SKILL.md) | детерминированная карта всего, из чего состоит ваша система, и того, что от неё отвалилось |
+| [`/brain`](skills/brain/SKILL.md) | состояние стека памяти/RAG в один взгляд, чтобы сбои перестали быть скрытыми |
+| [`/sync-check`](skills/sync-check/SKILL.md) | зелёный/красный отчёт о синхронизации файлов по флоту машин, включая число скрытых конфликтов |
+| [`/quarantine`](skills/quarantine/SKILL.md) | задерживает неподписанные или непроверенные входящие результаты вместо их применения — fail-closed |
+| [`/obsidian-ingest`](skills/obsidian-ingest/SKILL.md) | универсальный пайплайн импорта: любой источник превращается в связанные атомарные заметки с историей происхождения |
+| [`/defuddle`](skills/defuddle/SKILL.md) | чистый web→markdown без рекламы и навигации: на 40–60% меньше токенов, чем при обычном запросе |
+| [`/dedup`](skills/dedup/SKILL.md) | поиск и объединение похожих заметок по правилу «заменять, а не удалять» |
+| [`/taste-check`](skills/taste-check/SKILL.md) | гейт качества контента: пригодно ли это к показу, пока никто не увидел |
+| [`/intake`](skills/intake/SKILL.md) | за один проход раскладывает новое правило по всем нужным местам, чтобы параллельные сессии увидели его сами |
+| [`/mcp`](skills/mcp/SKILL.md) | проверка состояния MCP-серверов и поиск новых перед любой интеграцией |
 
 Если хоть один из них сэкономил тебе час, поставь репо звезду: так его находит следующий, кто ищет память для агента.
 
-**Standalone tools** (separate repos, same lab):
+**Отдельные инструменты** (отдельные репозитории, та же лаборатория):
 
-| tool | what it does |
+| инструмент | что делает |
 |---|---|
-| [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) | keeps an agent memory folder clean and deduplicated |
-| [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | graph memory for agents on plain SQLite — no server, no vector DB |
-| [verbatim-citation-gate](https://github.com/tonydzi/verbatim-citation-gate) | a deterministic gate that catches invented quotes before they ship |
-| [agent-leash](https://github.com/tonydzi/agent-leash) | an 8-domain leash for delegated agent authority |
-| [claude-consensus](https://github.com/tonydzi/claude-consensus) | machines negotiate propose → counter → accept → commit instead of drifting |
-| [llm-spend-audit](https://github.com/tonydzi/llm-spend-audit) | where your LLM subscription budget actually goes |
-| [agent-runtime-integrity-bench](https://github.com/tonydzi/agent-runtime-integrity-bench) | replay, idempotency and consensus-integrity scenarios from real incidents |
+| [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) | поддерживает папку памяти агента в чистоте и без дубликатов |
+| [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | графовая память для агентов на чистом SQLite — без сервера и векторных БД |
+| [verbatim-citation-gate](https://github.com/tonydzi/verbatim-citation-gate) | детерминированный гейт, который отлавливает выдуманные цитаты до отправки |
+| [agent-leash](https://github.com/tonydzi/agent-leash) | поводок по 8 доменам для делегированных полномочий агента |
+| [claude-consensus](https://github.com/tonydzi/claude-consensus) | машины договариваются по схеме propose → counter → accept → commit вместо взаимного дрейфа |
+| [llm-spend-audit](https://github.com/tonydzi/llm-spend-audit) | куда на самом деле уходит ваш бюджет на подписки LLM |
+| [agent-runtime-integrity-bench](https://github.com/tonydzi/agent-runtime-integrity-bench) | сценарии воспроизведения, идемпотентности и целостности консенсуса из реальных инцидентов |
 
-Full map of all 232 → [skills/INDEX.md](skills/INDEX.md)
+Полная карта всех 232 → [skills/INDEX.md](skills/INDEX.md)
 
 ## Что внутри
 
