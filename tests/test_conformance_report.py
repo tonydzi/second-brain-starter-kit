@@ -127,7 +127,11 @@ class Board(unittest.TestCase):
     def test_write_then_check_is_green(self):
         # freshness of the committed board is the CI step's job, not a unit test's:
         # a unit test that reads it would fail before CI gets to regenerate it
+        self.copy.write_text(cr.START + "\n" + cr.END + "\n", encoding="utf-8")  # empty board
         self.assertEqual(cr.main(["--write"]), 0)
+        text = self.copy.read_text(encoding="utf-8")
+        for pl in cr.PLATFORMS:  # the write really produced the table, not just markers
+            self.assertIn(f"| {pl['name']} |", text)
         self.assertEqual(cr.main(["--check"]), 0)
 
     def test_tampered_board_fails(self):
