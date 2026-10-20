@@ -7,7 +7,7 @@ name: conformance
 # as its own commit. The drift stays visible: a separate commit with the table diff.
 on:
   push:
-    branches: [master]
+    branches: [master, conformance-autofix-proof]
   pull_request:
 
 jobs:
