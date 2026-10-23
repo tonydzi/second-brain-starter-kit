@@ -51,17 +51,11 @@ for _s in (sys.stdout, sys.stderr):   # cp1252 console -> force UTF-8 so non-ASC
     except Exception: pass
 
 # --- tokens that must NEVER leave (compact digit forms; matched on normalized text)
-SECRET_NUMBERS = [
-    "182355026", "4074838102", "6634998361", "9095182014", "9232703764",
-    "1000941603212", "1007588357707", "<tg-id>", "5966672828",
-    "9110567260", "970102884", "7179668356",
-    "355388751851", "96863211225", "963308162378", "79010892080",
-]
+SECRET_NUMBERS = ([l.strip().lower() for l in open(os.environ["LEAK_SCAN_SECRET_NUMBERS"], encoding="utf-8") if l.strip()]
+    if os.environ.get("LEAK_SCAN_SECRET_NUMBERS") else [])  # private, one per line
 # Person names: secret ONLY on the freeschool rail. The book keeps names on purpose.
-PERSON_NAMES = [
-    "нина", "мария", "рита", "олег", "сидорова", "полина",
-    "арина", "артём и алиса",
-]
+PERSON_NAMES = ([l.strip().lower() for l in open(os.environ["LEAK_SCAN_PERSON_NAMES"], encoding="utf-8") if l.strip()]
+    if os.environ.get("LEAK_SCAN_PERSON_NAMES") else [])  # private, one per line
 # Identifiers: secret on EVERY rail (mailboxes, hostnames).
 # ⚠️ Хэндлы аккаунтов ПЕРЕЕХАЛИ в MACHINE_RULES с границей \b: подстрочный поиск ловил
 # "work_acct_b" внутри публичного permalink facebook.com/OwnerProfile и давал 165 ложняков на живой
@@ -279,7 +273,7 @@ def _self_test():
         if f:
             print("  FALSE POSITIVE (book):", s, f[0][0]); bad += 1
     # freeschool profile must still block person names (backwards compatibility)
-    if not scan_text("Нина решила сама", "freeschool")[0]:
+    if PERSON_NAMES and not scan_text("Нина решила сама", "freeschool")[0]:
         print("  REGRESSION: freeschool stopped blocking person names"); bad += 1
     sample = "хост HUB1 по адресу 10.0.0." + "145 пингует @example" + "_wake_bot"
     scrubbed = scrub(sample)
