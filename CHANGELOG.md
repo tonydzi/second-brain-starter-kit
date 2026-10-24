@@ -9,7 +9,7 @@ change ships as a release and the journal is written in the same commit as the r
 GitHub handle, in the entry of the release that ships it. An idea taken from a closed PR is credited
 the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Unreleased
+## v0.10.0 - 2026-10-24
 
 **First outside contributions, all three merged.** Thanks to @slopggobblercobbler81: the Gemini CLI
 install command had a scrubbed package name (#17, closes #11), the "Start here" block of
