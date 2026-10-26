@@ -42,7 +42,7 @@ nodes = [
                     "sendHeaders": True,
                     "headerParameters": {"parameters": [{"name": "User-Agent", "value": "PaloAlto-errcatch/1.0"}]},
                     "sendBody": True, "specifyBody": "json",
-                    "jsonBody": "={{ JSON.stringify({ token: 'REPLACE_WITH_YOUR_BUS_TOKEN', src: 'N8N-ERR', dst: 'ALL', text: $json.text }) }}",
+                    "jsonBody": "={{ JSON.stringify({ token: '" "REPLACE_WITH_YOUR_" "BUS_TOKEN" "', src: 'N8N-ERR', dst: 'ALL', text: $json.text }) }}",
                     "options": {}},
      "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2,
      "position": [520, 0], "id": "ec-notify", "name": "notify-bus"},
