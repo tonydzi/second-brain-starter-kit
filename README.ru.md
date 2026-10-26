@@ -215,7 +215,7 @@ Issues.
 Вопросы, истории с полей или хотите развернуть это у себя:
 
 - 💬 WhatsApp: **+1 341 222 9178**
-- 🐦 X: [[аккаунт]](https://x.com/Tony_Stef_)
+- 🐦 X: [@Tony_Stef_](https://x.com/Tony_Stef_)
 - 📣 Telegram: [@ClawRus](https://t.me/ClawRus) (RU) · [@ClawEng](https://t.me/ClawEng) (EN)
 - 🌐 [palo-alto.ai](https://palo-alto.ai) · [Palo Alto AI Research Lab](https://github.com/tonydzi)
 
@@ -252,5 +252,5 @@ running 24/7 as a second brain and synthetic cofounder. Every skill here survive
 production use before publication.
 
 - 📦 All 234 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/[id]) · X [[аккаунт]](https://x.com/Tony_Stef_)
+- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
 - 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
