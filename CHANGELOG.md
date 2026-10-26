@@ -11,7 +11,7 @@ the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONT
 
 ## v0.10.0 - 2026-10-24
 
-**First outside contributions, all three merged.** Thanks to @slopggobblercobbler81: the Gemini CLI
+**First outside contributions, all three merged.** Thanks to [@slopgobblercobbler](https://github.com/slopgobblercobbler): the Gemini CLI
 install command had a scrubbed package name (#17, closes #11), the "Start here" block of
 `README.ru.md` is now in Russian (#18, closes #15), and a Windows and PowerShell setup guide landed
 as [`docs/windows-setup.md`](docs/windows-setup.md) (#19).
