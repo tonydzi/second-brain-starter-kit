@@ -1,0 +1,6 @@
+second-brain-starter-kit
+Copyright (c) 2026 Palo Alto AI Research Lab, MIT License (see LICENSE).
+
+Third-party content keeps its own licence. Each source is listed in LICENSES/:
+
+- LICENSES/UseOSINT-Skills.txt: the OSINT skills taken from UseOSINT/Skills (MIT), and ETHICS.md.

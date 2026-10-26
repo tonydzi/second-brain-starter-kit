@@ -53,51 +53,26 @@ Skills on the shelf: **234**. Cannot judge **5 of 49** cells (every unknown is a
 
 | Platform | Manifest | Frontmatter name+description | Description one line, ≤400 | Name = folder | Paths resolve | OS branch | Exam (latest run) | Verdict |
 |---|---|---|---|---|---|---|---|---|
-| Claude Code | ok | 234/234 | 221/234 | 234/234 | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Codex CLI | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
-| Cursor | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Gemini CLI | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
-| Antigravity | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| OpenCode | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Grok | ok | 234/234 | 221/234 | 234/234 strict | 200/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Claude Code | ok | 234/234 | 221/234 | 234/234 | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| Codex CLI | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Cursor | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| Gemini CLI | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
+| Antigravity | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| OpenCode | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
+| Grok | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
 
 ### What fails
 
 - description not one line or over 400 chars: ask-debt (413 chars), brain-onboard (404 chars), claude-repair (412 chars), display-mode (493 chars), fa (464 chars), peer-onboard (410 chars), retro (467 chars), secondop (460 chars), session-groups (708 chars), sostav-dm (464 chars), sostav-reply (409 chars), spawn-bridge (402 chars), tt (467 chars)
 - `borrowed-audience` paths that do not resolve: `docs/leash-8.md`
-- `dig-through-data-brokers` paths that do not resolve: `../../ETHICS.md`
-- `find-anyone` paths that do not resolve: `../../ETHICS.md`
-- `find-exposed-servers` paths that do not resolve: `../../ETHICS.md`
-- `find-hidden-subdomains` paths that do not resolve: `../../ETHICS.md`
-- `find-leaks-in-the-wild` paths that do not resolve: `../../ETHICS.md`
 - `firefox` paths that do not resolve: `scripts/_test_browser_usage_log.py`, `scripts/firefox_selenium.py`
-- `geolocate-from-pixels` paths that do not resolve: `../../ETHICS.md`
-- `google-like-a-spy` paths that do not resolve: `../../ETHICS.md`
-- `graph-the-network` paths that do not resolve: `../../ETHICS.md`
-- `hunt-a-handle` paths that do not resolve: `../../ETHICS.md`
-- `investigate-anything` paths that do not resolve: `../../ETHICS.md`
-- `investigate-without-getting-made` paths that do not resolve: `../../ETHICS.md`
-- `is-this-photo-real` paths that do not resolve: `../../ETHICS.md`
 - `llm-pact` paths that do not resolve: `docs/agent-protocol.md`
 - `llms` paths that do not resolve: `docs/agent-protocol.md`
 - `nsr` paths that do not resolve: `scripts/_shared/expected_exit_codes.json`, `scripts/runbooks.json`
 - `outbound-gate` paths that do not resolve: `scripts/_test_outbound_fact_lint.py`
-- `pattern-of-life-from-socials` paths that do not resolve: `../../ETHICS.md`
 - `pult` paths that do not resolve: `scripts/_shared/green_gap.py`
-- `read-deleted-pages` paths that do not resolve: `../../ETHICS.md`
-- `recon-a-domain-passively` paths that do not resolve: `../../ETHICS.md`
 - `scholar-nerd-style` paths that do not resolve: `tools/build_site.py`
-- `secrets-in-file-metadata` paths that do not resolve: `../../ETHICS.md`
-- `secrets-in-git-history` paths that do not resolve: `../../ETHICS.md`
-- `useosint` paths that do not resolve: `../../ETHICS.md`
 - `voice-sessions` paths that do not resolve: `scripts/docs/voice_sessions.md`
-- `what-an-email-reveals` paths that do not resolve: `../../ETHICS.md`
-- `what-leaked-about-you` paths that do not resolve: `../../ETHICS.md`
-- `where-was-this-taken` paths that do not resolve: `../../ETHICS.md`
-- `who-owns-this-domain` paths that do not resolve: `../../ETHICS.md`
-- `whose-number-is-this` paths that do not resolve: `../../ETHICS.md`
-- `write-the-intel-brief` paths that do not resolve: `../../ETHICS.md`
-- `x-ray-a-company` paths that do not resolve: `../../ETHICS.md`
 - one OS only, no branch or portability line: 03, 1, alpha-review, codex-mirror, contrib-watch, declined, firefox, fleet, follower-onboard, gemini, health-sync, hubrun, local-chatgpt-token-heal, notebooklm, notpeople-wave, obsidian-backup, pack, pult, quarantine, raise-sync, research-swarm, routine-opt, secondop, share-fix, sostav-dm, sync-check, taste-check, tt, voice-sessions, x-inbox-watch
 
 <!-- conformance:end -->
