@@ -9,6 +9,16 @@ change ships as a release and the journal is written in the same commit as the r
 GitHub handle, in the entry of the release that ships it. An idea taken from a closed PR is credited
 the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Unreleased
+
+**The skill count can no longer lie quietly.** It was typed by hand into more than twenty places, and
+every new skill updated some of them and left the rest: on 19.10 seven files still said 100 on a
+232-skill shelf, and by 26.10 AGENTS.md, HANDOVER.md, both onboarding runbooks, docs/PATHS.md and
+engines/README.md said 100, 101 or 261 on 234. New `tests/test_doc_counts.py` fails CI when a doc
+states a skill count the shelf does not have, and when README.md, README.ru.md and `llms.txt` list
+different "Start here" skills. Where the number was not needed it is gone; two lines that describe
+the past keep their old number with a `<!-- count-ok: history -->` marker.
+
 ## v0.10.0 - 2026-10-24
 
 **First outside contributions, all three merged.** Thanks to @slopggobblercobbler81: the Gemini CLI

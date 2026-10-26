@@ -18,7 +18,7 @@ this repo, on a machine you know nothing about.
 - `SEED.md` — the first message a user pastes into Claude Code. Everything starts here.
 - `BOOTSTRAP-CLAUDE.md` — instructions to the installing agent.
 - `CLAUDE-EXTERNAL.md` — the working principles that become the user's own `CLAUDE.md`.
-- `skills/` — 100 skill commands, mapped in `skills/INDEX.md`.
+- `skills/` — the skill commands, mapped in `skills/INDEX.md`.
 - `crm-template/` — markdown "card = file" CRM plus the scoring engine and demo data.
 - `engines/` — the published engines; `engines/PASSPORTS.md` is their catalogue.
 - `templates/`, `docs/` — note templates, onboarding, and what is/isn't shared.

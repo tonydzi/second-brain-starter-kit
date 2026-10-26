@@ -34,5 +34,5 @@ a pull request is welcome.
 
 ## Skills are the portable part
 
-The 100 `skills/*/SKILL.md` files are the product. They describe procedure, gates and verdicts, and
+The `skills/*/SKILL.md` files are the product. They describe procedure, gates and verdicts, and
 most of them touch no absolute path at all.

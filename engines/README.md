@@ -2,7 +2,7 @@
 
 The python the skills actually run.
 
-Until now this kit shipped 101 skills and 17 scripts. Skills said things like "run
+Until now this kit shipped 101 skills and 17 scripts. Skills said things like "run <!-- count-ok: history -->
 `brain_ask.py`" and the file was not in the box — 87 of the 101 pointed at something that
 did not exist here. This directory closes that gap: **246 engines**, every one of them
 cited by a published skill or document.
