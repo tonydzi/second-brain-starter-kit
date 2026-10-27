@@ -61,40 +61,40 @@ and open an issue if a skill breaks on your machine. Paths are documented in
 ## Onboarding a whole machine
 
 Setting up a brand-new computer, not just adding skills? There is a full runbook a fresh
-Claude Code session can execute end to end — the human says one sentence, the agent does the rest:
+Claude Code session can execute end to end, the human says one sentence, the agent does the rest:
 
 - **macOS** → [ONBOARDING-MAC.md](ONBOARDING-MAC.md)
 - **Windows** → [ONBOARDING-WINDOWS.md](ONBOARDING-WINDOWS.md)
 - joining an existing fleet as a trusted **family node** (sync, shared memory, message bus) →
-  [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md) — method only; fleet coordinates travel over the
+  [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md), method only; fleet coordinates travel over the
   encrypted sync channel after the owner approves the device, never through this repo.
 
-## Start here — 25 skills worth your first hour
+## Start here: 25 skills worth your first hour
 Every one of them ran in production before it was published. One command each.
 
 | skill | what it gives you in 60 seconds |
 |---|---|
-| [`/secondop`](skills/secondop/SKILL.md) | a second opinion from a PANEL of external LLMs (Codex + Grok + Gemini) on any plan or diff — a model never reviews itself |
-| [`/tt`](skills/tt/SKILL.md) | the quality gate after every build: run it live, break it on purpose, prove it with a counter — only then say "done" |
+| [`/secondop`](skills/secondop/SKILL.md) | a second opinion from a PANEL of external LLMs (Codex + Grok + Gemini) on any plan or diff, a model never reviews itself |
+| [`/tt`](skills/tt/SKILL.md) | the quality gate after every build: run it live, break it on purpose, prove it with a counter, only then say "done" |
 | [`/retro`](skills/retro/SKILL.md) | end-of-session retrospective that routes every durable artifact to its home and hands you a compact handoff |
 | [`/handoff`](skills/handoff/SKILL.md) | a self-contained "semicolon" so another session, person or machine continues exactly where you stopped |
 | [`/skill-gap`](skills/skill-gap/SKILL.md) | audits your sessions for repeated manual patterns and tells you which skill to install or build next |
 | [`/precedent`](skills/precedent/SKILL.md) | before you decide anything structural: did we already decide it, and did we already reject it? |
 | [`/declined`](skills/declined/SKILL.md) | the registry of rejected ideas, so the agent stops re-pitching what you already said no to |
 | [`/issue-match`](skills/issue-match/SKILL.md) | measures a target repo's queue before you spend a PR: how many of the last closed PRs were actually merged |
-| [`/research-swarm`](skills/research-swarm/SKILL.md) | turns any hypothesis into an argument map from 5 independent lenses — never a verdict |
+| [`/research-swarm`](skills/research-swarm/SKILL.md) | turns any hypothesis into an argument map from 5 independent lenses, never a verdict |
 | [`/last30days`](skills/last30days/SKILL.md) | deterministic "what changed in the last 30 days on topic X" before a strategic call |
-| [`/ask`](skills/ask/SKILL.md) | semantic search over your curated vault — the smallest relevant slice, not a corpus dump |
+| [`/ask`](skills/ask/SKILL.md) | semantic search over your curated vault, the smallest relevant slice, not a corpus dump |
 | [`/search`](skills/search/SKILL.md) | full-text search across every conversation you ever had, locally, 0 tokens |
-| [`/chat-search`](skills/chat-search/SKILL.md) | find which past Claude Code session discussed a thing — and resume it |
+| [`/chat-search`](skills/chat-search/SKILL.md) | find which past Claude Code session discussed a thing, and resume it |
 | [`/resume-last`](skills/resume-last/SKILL.md) | continue the previous chat after a crash, even on another machine where native resume can't reach |
 | [`/1`](skills/1/SKILL.md) | hard-crash recovery: where were we + is everything alive + restore the history, in one command |
 | [`/arch`](skills/arch/SKILL.md) | the deterministic map of everything your system is made of, and what fell off it |
 | [`/brain`](skills/brain/SKILL.md) | one-glance health of a memory/RAG stack so failures stop being silent |
 | [`/sync-check`](skills/sync-check/SKILL.md) | green/red report on file sync across a machine fleet, including the silent sync-conflict count |
-| [`/quarantine`](skills/quarantine/SKILL.md) | holds unsigned or unverified incoming deliverables instead of applying them — fail-closed |
+| [`/quarantine`](skills/quarantine/SKILL.md) | holds unsigned or unverified incoming deliverables instead of applying them, fail-closed |
 | [`/obsidian-ingest`](skills/obsidian-ingest/SKILL.md) | universal import pipeline: any source becomes well-linked atomic notes with provenance |
-| [`/defuddle`](skills/defuddle/SKILL.md) | clean web→markdown without ads or nav — 40-60% fewer tokens than a raw fetch |
+| [`/defuddle`](skills/defuddle/SKILL.md) | clean web→markdown without ads or nav, 40-60% fewer tokens than a raw fetch |
 | [`/dedup`](skills/dedup/SKILL.md) | find and merge near-duplicate notes with a supersede-not-delete policy |
 | [`/taste-check`](skills/taste-check/SKILL.md) | a content quality gate: is this fit to show, before anyone sees it |
 | [`/intake`](skills/intake/SKILL.md) | one pass routes a new rule into every home it needs, so parallel sessions see it on their own |
@@ -107,7 +107,7 @@ If one of these saved you an hour, a star is the thanks we would ask for: it is 
 | tool | what it does |
 |---|---|
 | [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) | keeps an agent memory folder clean and deduplicated |
-| [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | graph memory for agents on plain SQLite — no server, no vector DB |
+| [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | graph memory for agents on plain SQLite, no server, no vector DB |
 | [verbatim-citation-gate](https://github.com/tonydzi/verbatim-citation-gate) | a deterministic gate that catches invented quotes before they ship |
 | [agent-leash](https://github.com/tonydzi/agent-leash) | an 8-domain leash for delegated agent authority |
 | [claude-consensus](https://github.com/tonydzi/claw-consensus) | machines negotiate propose → counter → accept → commit instead of drifting |
@@ -120,9 +120,9 @@ Full map of all 234 → [skills/INDEX.md](skills/INDEX.md)
 
 | Folder / file | What it is |
 |---|---|
-| `SEED.en.md` / `SEED.md` | The opening message for your FIRST Claude Code session (English / Russian) — everything starts here |
+| `SEED.en.md` / `SEED.md` | The opening message for your FIRST Claude Code session (English / Russian), everything starts here |
 | `BOOTSTRAP-CLAUDE.md` | Instructions for Claude itself: how to install and adapt the kit |
-| `CLAUDE-EXTERNAL.md` | Our working principles (assistant behavior) — the base for your own CLAUDE.md |
+| `CLAUDE-EXTERNAL.md` | Our working principles (assistant behavior), the base for your own CLAUDE.md |
 | `skills/` | **All 234 skill commands** the system runs on every day, map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
 | `templates/` | Second-brain note templates (concepts, decisions, weekly/monthly reviews) |
 | `crm-template/` | CRM: markdown "one card = one file" + an [engine](crm-template/ENGINE.md) with warmth scoring and safe outbound, with demo data |
@@ -130,7 +130,7 @@ Full map of all 234 → [skills/INDEX.md](skills/INDEX.md)
 | [`agents/`](docs/SUBAGENTS.md) | Three read-only subagents (reviewer, curator, graph-analyst): they report and propose, never write |
 | [`docs/SCHEDULED-RUNS.md`](docs/SCHEDULED-RUNS.md) | The contract every unattended run follows: a log line, one commit, one line to you, and how to catch a run that silently stopped |
 | [`RED-PROOF.md`](RED-PROOF.md) / [`llms.txt`](llms.txt) | A drop-in rule for any CLAUDE.md or AGENTS.md: a check counts only after you saw it fail / a one-page summary of this repo for LLM readers |
-| [`HANDOVER.md`](HANDOVER.md) | **Already running your own agent fleet?** A snapshot of the whole system and a map of our repos — the entry point for you and your model |
+| [`HANDOVER.md`](HANDOVER.md) | **Already running your own agent fleet?** A snapshot of the whole system and a map of our repos, the entry point for you and your model |
 
 📖 **Repository wiki:** [what is actually in here](https://github.com/tonydzi/second-brain-starter-kit/wiki) · [architecture (4 layers)](https://github.com/tonydzi/second-brain-starter-kit/wiki/Architecture) · [your first week](https://github.com/tonydzi/second-brain-starter-kit/wiki/First-week) · [adapting it to your machine](https://github.com/tonydzi/second-brain-starter-kit/wiki/Adapting-it-to-your-machine)
 
@@ -154,7 +154,7 @@ npx skills add tonydzi/second-brain-starter-kit
 1. A Claude Pro or Max subscription → install Claude Code:
    `npm install -g @anthropic-ai/claude-code` (no npm? Mac: `brew install node`, Windows: nodejs.org).
 2. Run `claude` and log in with your subscription.
-3. Install [Obsidian](https://obsidian.md) — to look at your second brain with your own eyes.
+3. Install [Obsidian](https://obsidian.md), to look at your second brain with your own eyes.
 4. Clone this repository: `git clone https://github.com/tonydzi/second-brain-starter-kit.git`
    (or Code → Download ZIP).
 5. Open [`SEED.en.md`](SEED.en.md), put your name in, and paste the text as the first message to Claude Code.
@@ -169,7 +169,7 @@ Using Gemini CLI instead of Claude? → [docs/INSTALL-GEMINI.md](docs/INSTALL-GE
 - **AK-47 rule:** the simplest solution the owner can repair themselves.
 - **Receipts:** the assistant proves it saved something ("recorded X → note Y") instead of saying
   "understood".
-- **A routine repeated twice becomes a skill** — a `/name` command.
+- **A routine repeated twice becomes a skill**, a `/name` command.
 - **Privacy:** everything lives locally on your machine; money, deletion and anything leaving the
   house happen only on your explicit OK.
 
@@ -186,23 +186,23 @@ scoring and safe outbound, `SEED.md` + `BOOTSTRAP-CLAUDE.md` for the first sessi
   skills, engines, templates and CRM demo; report any step that does not work on your machine.
 - **A "clone it and it works" check on someone else's machine.** Right now the only proof is that we
   use this ourselves every day. That is usage, not a test: no third-party machine has ever been seen.
-- **Localized READMEs** for non-English venues (Chinese, Japanese, Korean, Spanish) — the skill
+- **Localized READMEs** for non-English venues (Chinese, Japanese, Korean, Spanish), the skill
   bodies stay English, the docs get localized.
 
 Every notable change ships as a release, so the
 [releases feed](https://github.com/tonydzi/second-brain-starter-kit/releases) is an honest record of
-what is actually in the kit — unlike a commit history.
+what is actually in the kit, unlike a commit history.
 
 ## Which AI worked here
 
 This project is built by a human + AI team, and the commit history shows it: Claude writes most of
 the code, Codex and Grok review it, Gemini brings research. A model is credited in a commit **only
-if its output actually changed that commit's content** — no decorative signatures. Lab-wide rule:
+if its output actually changed that commit's content**, no decorative signatures. Lab-wide rule:
 [AI-CONTRIBUTORS.md](https://github.com/tonydzi/.github/blob/main/AI-CONTRIBUTORS.md).
 
 ## License and provenance
 
-The method is open — take it, adapt it, share it. There are no secrets and no personal data in the
+The method is open, take it, adapt it, share it. There are no secrets and no personal data in the
 kit (it goes through an automated secret scanner). Questions and ideas → Issues.
 
 ## Get in touch
@@ -218,7 +218,7 @@ Questions, war stories, or you want to run this yourself:
 
 <!--we-ask:start-->
 
-## Contributors welcome — and here is what we are missing
+## Contributors welcome: and here is what we are missing
 
 We spend a lot of time answering other people's issues. It was fair to say out loud
 what we have not built ourselves:
@@ -227,10 +227,10 @@ what we have not built ourselves:
 - [Localize the README (Chinese, Japanese, Korean or Spanish)](https://github.com/tonydzi/second-brain-starter-kit/issues/3)
 
 Issues labelled [`accepted`](https://github.com/tonydzi/second-brain-starter-kit/issues?q=is%3Aissue+is%3Aopen+label%3Aaccepted) are scoped, free to take, and nobody is on them.
-Comment **"claiming this"** — no permission needed — and it is yours for 7 days.
+Comment **"claiming this"**, no permission needed, and it is yours for 7 days.
 New here? Start with [`good first issue`](https://github.com/tonydzi/second-brain-starter-kit/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
-**You keep the copyright to your code.** No CLA, no assignment, ever — your contribution goes
+**You keep the copyright to your code.** No CLA, no assignment, ever, your contribution goes
 in under this repo's existing license, the same terms as ours. We answer every issue and PR
 within 48 hours, including "no, and here is why"; our silence is our bug, so ping the thread.
 
@@ -252,7 +252,7 @@ claim one. How we review and credit contributions in this repo: [CONTRIBUTING.md
 This repository is one piece lifted out of a live operation: one engineer running a fleet of
 machines, built with Claude as implementation collaborator; the machines reach consensus with
 each other and wake the human only for money or the irreversible. It was extracted after it
-survived production, not written as a demo — and it runs on its own: nothing here phones home
+survived production, not written as a demo, and it runs on its own: nothing here phones home
 to the rest.
 
 **See how the whole thing fits together → [SYSTEM.md](https://github.com/tonydzi/tonydzi/blob/main/SYSTEM.md)**
@@ -266,13 +266,13 @@ Its closest neighbours in the **memory** layer: [`voice2brain`](https://github.c
 <!-- CONTACT-FOOTER -->
 ## About & contact
 
-Built and battle-tested at **Palo Alto AI Research Lab** — a fleet of Claude Code machines
+Built and battle-tested at **Palo Alto AI Research Lab**, a fleet of Claude Code machines
 running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
 production use before publication.
 
 - 📦 All 234 skills: https://github.com/tonydzi/second-brain-starter-kit
-- 👤 Author: **Anton Dziatkovskii** — Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
-- 🧪 **Engineers: want to test-drive this setup?** Message me — I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
+- 👤 Author: **Anton Dziatkovskii**: Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
+- 🧪 **Engineers: want to test-drive this setup?** Message me, I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
 
 <!-- READ-WITH-AI:START (generated by read_with_ai.py - do not hand-edit) -->
 
@@ -291,6 +291,6 @@ Read this repo: https://github.com/tonydzi/second-brain-starter-kit (“second-b
 
 </details>
 
-<sub>— TonyDzi, Palo Alto AI Research Lab · second brain, agent coordination, persistent memory: github.com/tonydzi</sub>
+<sub>, TonyDzi, Palo Alto AI Research Lab · second brain, agent coordination, persistent memory: github.com/tonydzi</sub>
 
 <!-- READ-WITH-AI:END -->

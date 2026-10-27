@@ -1,15 +1,15 @@
 # Как использовать наш CLAUDE-EXTERNAL.md
 
-> **EN summary:** Three adoption strategies for our [CLAUDE-EXTERNAL.md](../CLAUDE-EXTERNAL.md): take it whole, cherry-pick the best blocks, or merge with your own. The most portable blocks: AK-47 simplicity, fix-the-root-cause, before→after previews, RECALL-first, token economy. Anton-specific blocks (multi-machine bus, Telegram rails, personal routing) — read for ideas, don't copy.
+> **EN summary:** Three adoption strategies for our [CLAUDE-EXTERNAL.md](../CLAUDE-EXTERNAL.md): take it whole, cherry-pick the best blocks, or merge with your own. The most portable blocks: AK-47 simplicity, fix-the-root-cause, before→after previews, RECALL-first, token economy. Anton-specific blocks (multi-machine bus, Telegram rails, personal routing), read for ideas, don't copy.
 
-У вас уже есть свой CLAUDE.md и память — это нормально и учтено. Наш
-[CLAUDE-EXTERNAL.md](../CLAUDE-EXTERNAL.md) — не замена по умолчанию, а донор.
+У вас уже есть свой CLAUDE.md и память, это нормально и учтено. Наш
+[CLAUDE-EXTERNAL.md](../CLAUDE-EXTERNAL.md), не замена по умолчанию, а донор.
 
 ## Три стратегии
 
 **1. Забрать целиком.** Скопировать как свой `~/.claude/CLAUDE.md`.
 Подходит, если своего почти нет или хочется пожить в чужой системе, чтобы понять её изнутри.
-Цена: часть правил про нашу инфраструктуру у вас будет мёртвым грузом — вычистите за неделю.
+Цена: часть правил про нашу инфраструктуру у вас будет мёртвым грузом, вычистите за неделю.
 
 **2. Взять лучшее.** Скопировать 3–7 блоков, которые закрывают ваши боли, в свой CLAUDE.md.
 Рекомендуемый дефолт: дешевле всего и сразу работает.
@@ -38,17 +38,17 @@
 
 ## Специфика Антона (читать как идеи, не копировать)
 
-- Мульти-машинная шина, консенсус машин, heartbeat, Telegram-рельсы — требуют нашего парка машин.
+- Мульти-машинная шина, консенсус машин, heartbeat, Telegram-рельсы, требуют нашего парка машин.
 - Маршрутизация задач по конкретным компьютерам и людям (имена, hostname'ы).
 - Личные каналы одобрений, ночные окна рутин, персональный стиль общения (ELI5-recap).
-- Пути к дискам/папкам — везде наши; при копировании любых блоков замените пути на свои.
+- Пути к дискам/папкам: везде наши; при копировании любых блоков замените пути на свои.
 
 ## Как проверить, что блок прижился
 
 Скопировали блок → в следующей рабочей сессии спровоцируйте его триггер и посмотрите, сработал ли.
-Не сработал — блок сформулирован не под ваш стиль: перепишите своими словами (стратегия 3 в миниатюре).
+Не сработал, блок сформулирован не под ваш стиль: перепишите своими словами (стратегия 3 в миниатюре).
 
 ---
-🧒 Простыми словами: наш CLAUDE.md — как чужой набор кухонных правил. Можно повесить весь
+🧒 Простыми словами: наш CLAUDE.md, как чужой набор кухонных правил. Можно повесить весь
 список на свой холодильник, можно переписать пять лучших пунктов, а можно смешать со своим.
-Пять пунктов в таблице — самые вкусные, их берут все.
+Пять пунктов в таблице, самые вкусные, их берут все.
