@@ -58,7 +58,7 @@ def _menv_ping_env():
 
 ENV   = os.environ.get("BUS_PING_ENV") or _menv_ping_env() or r"%IMPORTS%\dialogs\.env"
 LOCK  = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")   # shared w/ [аккаунт] session
-GROUP = int(os.environ.get("TG_BUS_GROUP", "-[id]"))
+GROUP = int(os.environ.get("TG_BUS_GROUP", "0"))
 LIMIT = int(os.environ.get("TG_BUS_LIMIT", "25"))
 
 # this machine's friendly label + the substrings the BUS uses to address it.

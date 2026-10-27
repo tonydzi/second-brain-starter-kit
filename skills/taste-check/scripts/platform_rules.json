@@ -1,0 +1,281 @@
+{
+ "_version": "1.1.1",
+ "_source": "CLAUDE.md §3.2 «МАТРИЦА ПЛОЩАДОК» (origin: anton, голосом 30.07 11:24 + 31.07 02:58) + reglament-matritsa-ploshchadok-chto-kuda-postim",
+ "_authored": "2026-08-02 [машина флота] (хаб = единственный писатель этого конфига)",
+ "_note": "FAIL-CLOSED: площадка, которой здесь нет, ЗАПРЕЩЕНА. Длины тиров берёт episode_adapter.TIER_LEN, здесь только потолки площадки.",
+ "platforms": {
+  "tg-chat": {
+   "kind": "chat",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser"
+   ],
+   "max_chars": 250,
+   "note": "Чат = только тизер до 250 знаков. Лонгрид и средний в чат — запрещены."
+  },
+  "discord-chat": {
+   "kind": "chat",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser"
+   ],
+   "max_chars": 250,
+   "note": "Чат = только тизер до 250."
+  },
+  "whatsapp-chat": {
+   "kind": "chat",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser"
+   ],
+   "max_chars": 250,
+   "note": "Чат = только тизер до 250."
+  },
+  "slack-chat": {
+   "kind": "chat",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser"
+   ],
+   "max_chars": 250,
+   "note": "Чат = только тизер до 250."
+  },
+  "tg-channel": {
+   "kind": "channel",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser",
+    "medium"
+   ],
+   "note": "RU-канал @ClawRus. Лонгрид ЦЕЛИКОМ в TG-канал запрещён — только тизер + ссылка.",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ: «я майкрофт, синтетический кофаундер антона»"
+  },
+  "x": {
+   "kind": "social",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser"
+   ],
+   "max_chars": 250,
+   "note": "EN-полоса каскада. Дефолт — тизер, потолок 250. Premium Longer post = 25000 символов (консенсус 4/4 рельс, DR26-08-10-MACANTON-03-2231, 14.08.2026) — но длинное сюда идёт только явным решением, дефолт не меняется.",
+   "premium_max_chars": 25000,
+   "premium_plus_max_chars": 25000,
+   "thread_max_posts": 8,
+   "thread_max_posts_basis": "editorial_low_confidence; платформенный максимум X НЕ подтверждён (25/50 — вторичные источники). 8 = консервативное внутреннее правило.",
+   "disclosure_in_body": false,
+   "disclosure_note": "механизм раскрытия у X свой: аккаунт помечен label Automated (§3.3, DR-701). Строка в теле НЕ требуется и съедает лимит 250 знаков"
+  },
+  "habr": {
+   "kind": "longform",
+   "status": "active",
+   "allowed_tiers": [
+    "longread"
+   ],
+   "note": "RU лонгрид-площадка: длинные тексты идут сюда (GEO/SEO), где их реально читают.",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ"
+  },
+  "facebook": {
+   "kind": "social",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser",
+    "medium"
+   ],
+   "note": "Полоса medium каскада. Лонгрид в FB запрещён. IP-чувствительно: постим только с хаба (§7.2). 2000 = внутренний потолок medium (не замеренный optimum). 63206 = технический максимум площадки. Точки «See more» фиксированной НЕТ (зависит от устройства/ширины/медиа) — проверять по ней нельзя, 125 = mobile-first ориентир для хука. DR26-08-10-MACANTON-03-2231, 14.08.2026. | ⭐ 26.08.2026: добавлено машинное поле footer_in_first_comment. Канон _STYLE-footer.md («medium: на FB весь футер в 1-м КОММЕНТАРИИ, тело без ссылок») жил только прозой, поэтому счётчик длины считал футер телом и держал 19 законных постов. Поле читает platform_gate.post_chars: где true — блок за разделителем «· · ·» в длину не идёт.",
+   "max_chars": 2000,
+   "hard_platform_max_chars": 63206,
+   "truncation_point_chars": null,
+   "truncation_mode": "dynamic",
+   "hook_target_chars": 125,
+   "footer_in_first_comment": true,
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ (лента читается людьми без служебных меток)"
+  },
+  "medium": {
+   "kind": "longform",
+   "status": "active",
+   "allowed_tiers": [
+    "medium",
+    "longread"
+   ],
+   "note": "Лонгрид-площадка: сюда идут длинные тексты (GEO/SEO), там их реально читают.",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ"
+  },
+  "github": {
+   "kind": "longform",
+   "status": "active",
+   "allowed_tiers": [
+    "longread",
+    "dev-log"
+   ],
+   "note": "EN-лонгрид и dev-log. GitHub выведен из-под гейта [коллега] (§4.7), но не из-под этой матрицы.",
+   "disclosure_in_body": false,
+   "disclosure_note": "механизм раскрытия у GitHub свой: трейлер Assisted-by: в коммите/PR (§3.3, DR-701), не строка в теле"
+  },
+  "devto": {
+   "kind": "longform",
+   "status": "active",
+   "allowed_tiers": [
+    "medium",
+    "longread",
+    "dev-log"
+   ],
+   "note": "EN dev-комьюнити. Добавлено 06.08.2026 по прямому слову Антона (HP17). Обязателен canonical_url на первоисточник (GitHub/Medium). Стиль = _STYLE-devto.md.",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ: статья читается людьми, служебной метки нет"
+  },
+  "reddit": {
+   "kind": "social",
+   "status": "blocked",
+   "allowed_tiers": [],
+   "note": "Аккаунт заблокирован (канон §3.2). Не постим ничего."
+  },
+  "substack": {
+   "kind": "longform",
+   "status": "active",
+   "allowed_tiers": [
+    "medium",
+    "longread"
+   ],
+   "note": "«+» Антона 14.08.2026 на формат §3 решения decision-2026-08-10-substack-format-i-voronka: гибрид English-first (1 оригинальная вещь 600-1000 слов + 2-3 аннотированных тизера + 1 CTA), раз в неделю фиксированным днём, один выпуск — один язык. ⛔ НЕ дайджест ссылок, ⛔ НЕ полная копия лонгрида (canonical — подсказка, а не директива: уведёт GEO у GitHub), ⛔ не зеркало каскада. Суд по 8 выпускам, критерии в решении. Нет топлива на оригинальный кусок — выпуск НЕ выходит, затычки запрещены.",
+   "max_chars": null,
+   "leads_to": "github / продукт",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ"
+  },
+  "threads": {
+   "kind": "social",
+   "status": "active",
+   "allowed_tiers": [
+    "teaser"
+   ],
+   "open_question": "Матрица §3.2 площадку не описывает. Разблокировать вместе с посылкой social-autopost-3lanes (ждёт «+» Антона): какие тиры и потолок?",
+   "note": "Fail-closed до явного решения Антона. | 21.08.2026: активирована приказом Антона под серию vibe-teach (RU, короткие посты). Рельса браузерная (Chrome, хаб-only §7.2).",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ, механизм как у FB"
+  },
+  "instagram": {
+   "kind": "social",
+   "status": "research",
+   "allowed_tiers": [],
+   "open_question": "Матрица §3.2 площадку не описывает; IG требует карточку-картинку. Разблокировать вместе с social-autopost-3lanes.",
+   "note": "Fail-closed до явного решения Антона."
+  },
+  "vcru": {
+   "kind": "longform",
+   "status": "active",
+   "allowed_tiers": [
+    "longread"
+   ],
+   "note": "RU лонгрид-площадка (Библия §1). Восстановлена 14.08: пропала при переписывании правил в v1.1.0, из-за чего 30 готовых лонгридов встали на fail-closed.",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ"
+  },
+  "livejournal": {
+   "kind": "blog",
+   "status": "active",
+   "allowed_tiers": [
+    "medium",
+    "longread"
+   ],
+   "max_chars": null,
+   "hard_platform_max_chars": null,
+   "truncation_point_chars": null,
+   "truncation_mode": null,
+   "hook_target_chars": null,
+   "note": "RU лонгформ-площадка. Заведена 21.08.2026 приказом Антона под серию vibe-teach. Автопостинг-рельсы НЕТ — публикация браузерной работой с хаба; построить рельсу = отдельная задача. Лимиты знаков не замеряли (null = не знаем, не «нет лимита»).",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ"
+  },
+  "dzen": {
+   "kind": "blog",
+   "status": "active",
+   "allowed_tiers": [
+    "medium",
+    "longread"
+   ],
+   "max_chars": null,
+   "hard_platform_max_chars": null,
+   "truncation_point_chars": null,
+   "truncation_mode": null,
+   "hook_target_chars": null,
+   "note": "RU лонгформ-площадка (Дзен). Заведена 21.08.2026 приказом Антона под серию vibe-teach. Автопостинг-рельсы НЕТ — браузерная работа с хаба. Лимиты не замеряли.",
+   "disclosure_in_body": true,
+   "disclosure_note": "раскрытие строкой В ТЕЛЕ"
+  }
+ },
+ "aliases": {
+  "tg": "tg-chat",
+  "telegram": "tg-chat",
+  "tg-post": "tg-channel",
+  "tg-channel-clawrus": "tg-channel",
+  "clawrus": "tg-channel",
+  "@clawrus": "tg-channel",
+  "twitter": "x",
+  "x-post": "x",
+  "fb": "facebook",
+  "fb-post": "facebook",
+  "gh": "github",
+  "discord": "discord-chat",
+  "whatsapp": "whatsapp-chat",
+  "wa": "whatsapp-chat",
+  "slack": "slack-chat",
+  "ig": "instagram",
+  "dev.to": "devto",
+  "dev-to": "devto",
+  "devto.com": "devto",
+  "vc.ru": "vcru",
+  "vcru": "vcru",
+  "вс.ру": "vcru",
+  "хабр": "habr",
+  "habr.com": "habr",
+  "claweng": "tg-channel",
+  "@claweng": "tg-channel",
+  "[аккаунт]": "tg-channel"
+ },
+ "daily_lanes": {
+  "question_of_day": {
+   "mandatory": true,
+   "max_chars": 240,
+   "note": "Вопрос дня: открытый вопрос комьюнити про боль, которая жгла сегодня. Факты только из артефактов суток."
+  },
+  "fail_of_day": {
+   "mandatory": true,
+   "max_chars": 240,
+   "note": "Факап дня: наш реальный провал суток — что сломалось · корень · что чиним. Выдумывать запрещено."
+  },
+  "insight_of_day": {
+   "mandatory": true,
+   "max_chars": 240,
+   "note": "Инсайт дня."
+  },
+  "audience_question": {
+   "mandatory": true,
+   "max_chars": 500,
+   "note": "Вопрос к аудитории из боли суток; из ответов майним альфу."
+  },
+  "life_post": {
+   "mandatory": false,
+   "note": "Пост про жизнь, 1/день из банка. Банк пуст — полоса молчит, это норма."
+  }
+ },
+ "hard_rules": [
+  "Лонгрид в ЛЮБОЙ чат (TG/Discord/WhatsApp/Slack) — ЗАПРЕЩЕНО.",
+  "Средний (medium) в чат — ЗАПРЕЩЕНО.",
+  "Лонгрид в Facebook — ЗАПРЕЩЕНО.",
+  "Лонгрид целиком в TG-канал — ЗАПРЕЩЕНО, только тизер + ссылка.",
+  "Reddit — ЗАПРЕЩЕНО (аккаунт заблокирован).",
+  "Substack — гибридный выпуск раз в неделю (1 оригинальная вещь 600-1000 слов + 2-3 аннотированных тизера + 1 CTA), English-first; ⛔ дайджест ссылок и полная копия лонгрида ЗАПРЕЩЕНЫ (решение 10.08, «+» Антона 14.08).",
+  "Чат — только тизер до 240 знаков.",
+  "Площадки нет в этом файле — публикация ЗАПРЕЩЕНА (fail-closed, молчаливого «наверное можно» нет).",
+  "Эта матрица НЕ отменяет гейт [коллега] (§3.2) и Tier-2: она отвечает только на вопрос «туда ли несём»."
+ ],
+ "_teaser_len_note": "⭐ 06.08.2026, Антон голосом: тизер = 200-250 знаков (влезает в X, не лень читать). Потолки чатов подняты 240 -> 250 под этот контракт. Единственная истина длины тира = episode_adapter.TIER_LEN, здесь только потолок площадки.",
+ "_changelog": [
+  "1.1.0 (2026-08-14): применён синтез DR26-08-10-MACANTON-03-2231 (X Premium 25000, thread_max_posts 8 low-confidence, FB 63206/2000/dynamic/125); substack research→active по «+» Антона на формат гибрида."
+ ],
+ "_disclosure_doc": "Механизм раскрытия авторства РАЗНЫЙ у разных площадок (§3.3 + поправка DR-701): где true -- строка «я майкрофт, синтетический кофаундер антона» обязана быть В ТЕЛЕ поста и распределитель отбивает пост без неё (fail-closed, необратимость отправки). Где false -- у площадки СВОЙ механизм, названный в disclosure_note, и требовать строку в теле значит съедать лимит знаков ради дубля. Поля нет вообще -> гейт НЕ применяется (не выдумываем правило за площадку). Заведено 27.08.2026 после того, как 10 постов уехали в [аккаунт] без раскрытия."
+}
