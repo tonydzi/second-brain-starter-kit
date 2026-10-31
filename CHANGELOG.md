@@ -9,7 +9,7 @@ change ships as a release and the journal is written in the same commit as the r
 GitHub handle, in the entry of the release that ships it. An idea taken from a closed PR is credited
 the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Unreleased
+## v0.10.1 - 2026-10-31
 
 **The skill count can no longer lie quietly.** It was typed by hand into more than twenty places, and
 every new skill updated some of them and left the rest: on 19.10 seven files still said 100 on a
@@ -18,6 +18,8 @@ engines/README.md said 100, 101 or 261 on 234. New `tests/test_doc_counts.py` fa
 states a skill count the shelf does not have, and when README.md, README.ru.md and `llms.txt` list
 different "Start here" skills. Where the number was not needed it is gone; two lines that describe
 the past keep their old number with a `<!-- count-ok: history -->` marker.
+
+**Also in this release.** The OSINT skills now ship the `ETHICS.md` they link to plus the upstream MIT notice, CI fails when a scrubber placeholder lands inside a link, a credit gate and a dash lint run on every PR, and the README contact links the publish scrubber had broken are restored.
 
 ## v0.10.0 - 2026-10-24
 
