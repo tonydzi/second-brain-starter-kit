@@ -58,6 +58,8 @@ It is MIT, it costs nothing, and nothing here phones home. Take what you need, d
 and open an issue if a skill breaks on your machine. Paths are documented in
 [docs/PATHS.md](docs/PATHS.md).
 
+**Already running Claude Code or Codex?** Follow the [existing-setup guide in Russian](docs/EXISTING-SETUP.ru.md): preserve your settings, add local memory, and verify recall in a fresh chat. It also explains the boundary between the legacy engine snapshots and the standalone memory product.
+
 ## Onboarding a whole machine
 
 Setting up a brand-new computer, not just adding skills? There is a full runbook a fresh

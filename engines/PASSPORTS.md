@@ -1,5 +1,7 @@
 # Engine passports
 
+**Snapshot boundary (1 November 2026).** These are exported engine snapshots, not a complete copy of the lab's current internal runtime. In particular, `imports/brain_ask.py` does not include the newer internal layered-recall pipeline and its dependency closure. For a new portable memory install, use [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) and the [existing-setup guide](../docs/EXISTING-SETUP.ru.md). A cited engine name is not evidence that all its runtime dependencies ship here.
+
 One entry per published engine: what it does, what goes in and out, who calls it, and - where it has been written - what breaks and how to fix it.
 
 **What / input / output / config / called by** are read straight from the source, so they stay true as the source changes.
