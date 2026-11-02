@@ -363,7 +363,7 @@ def cmd_lint(args: argparse.Namespace) -> int:
         print("⛔ нечего судить: ни одного файла по заданным путям")
         return 1
 
-    outbound = {Path(p).resolve() for p in (args.outbound or [])}
+    outbound = {f.resolve() for f in _iter_targets(list(args.outbound or []))}
     ok: list[Path] = []
     missing: list[Path] = []
     lying: list[tuple[Path, str]] = []

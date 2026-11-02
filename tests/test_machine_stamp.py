@@ -138,6 +138,14 @@ class Lint(Tmp):
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         self.assertIn("не могу судить 1 из 1", r.stdout)
 
+    def test_outbound_directory_covers_its_files(self):
+        d = self.dir / "letters"
+        d.mkdir()
+        (d / "a.md").write_text("a letter with no stamp\n", encoding="utf-8")
+        r = self.run_(STAMP, "lint", "--outbound", d)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("не могу судить 1 из 1", r.stdout)
+
     def test_json_without_a_stamp_is_unjudged_not_missing(self):
         p = self.file("a.json", '{"ok": true}\n')
         r = self.run_(STAMP, "lint", p)
