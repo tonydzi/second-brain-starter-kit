@@ -9,6 +9,18 @@ change ships as a release and the journal is written in the same commit as the r
 GitHub handle, in the entry of the release that ships it. An idea taken from a closed PR is credited
 the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## v0.11.1 - 2026-11-02
+
+**The core peer-lite skills now run on a stranger's fresh clone.** They called 13 scripts the kit did not ship, and the first attempt at shipping them passed `--help` and still died on first use. Split into four pull requests, with every review finding answered in its thread.
+
+- **Content gates** (`slop_gate`, `platform_gate`, `vanilla_scan`, `slop_detect`): `slop_gate` failed every input because its limits module died at import. The limits now live in `skills/ai-slop/scripts/content_tiers.py`.
+- **`-[id]` placeholders** in 13 lines of tracked code crashed at import. They are now `0`, and a test goes red on that shape in any tracked `.py`.
+- **`machine_stamp`, `paragraph_lint`:** JSON and notebooks are never corrupted, prose named `Machine:` is not a stamp, an invented node is "cannot judge" without a registry.
+- **`tg_doorbell` and the bus scripts:** the human sender comes from `TG_DOORBELL_HUMAN`, the ack token stays out of the process list, doors work on Mac and Linux and outlive the tick. `quarantine_watch.py` still needs `deploy_lib`, which the kit does not ship.
+- **`brain_kit`:** the privacy boundary is judged by active rules for the full set, and `fix` keeps the recorded owner.
+- **five-whys, llms:** script roots compare by path component, `gaps` runs on a fresh install, transcript events keep their own day.
+- Skill counts and `CONFORMANCE.md` follow the shelf again (235).
+
 ## v0.10.1 - 2026-10-31
 
 **The skill count can no longer lie quietly.** It was typed by hand into more than twenty places, and

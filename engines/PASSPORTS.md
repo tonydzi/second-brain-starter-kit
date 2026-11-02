@@ -5,7 +5,7 @@
 One entry per published engine: what it does, what goes in and out, who calls it, and - where it has been written - what breaks and how to fix it.
 
 **What / input / output / config / called by** are read straight from the source, so they stay true as the source changes.
-**What breaks / how to tell / how to fix** is judgement and is written by hand. 64 of 249 engines have it so far; the rest say so plainly instead of guessing.
+**What breaks / how to tell / how to fix** is judgement and is written by hand. 66 of 251 engines have it so far; the rest say so plainly instead of guessing.
 
 Engines are ordered by how many published documents cite them, so the ones you are most likely to reach for are at the top.
 
@@ -3916,5 +3916,31 @@ Engines are ordered by how many published documents cite them, so the ones you a
 **Called by.** `scripts/tg_doorbell.py`.
 
 **What breaks / how to tell / how to fix.** Too short a deadline on a slow connection looks like a dead rail. Raise the timeout in the caller.
+
+## `scripts/machine_stamp.py`
+
+**What it does.** One form of the "which machine wrote this" line: `line` prints it, `apply` inserts it, `lint` checks it, `sig` prints the short signature for a message.
+
+**Input.** command line: `line`, `apply <paths>`, `lint <paths>`, `sig`, with `--agent`, `--operator`, `--day`, `--force`, `--dry-run`, `--allow-missing`, `--expect-here`, `--outbound`. Optional `fleet_nodes.py` next to it, as the node registry.
+
+**Output.** edits the named text files; prints a receipt per file and a coverage line ("cannot judge N of M").
+
+**Called by.** `skills/taste-check/SKILL.md`, `skills/pr-reply/SKILL.md`, and by hand.
+
+**What breaks / how to tell / how to fix.** No registry is the normal fresh state: your own machine name is checked, any other name is "cannot judge" and `lint` exits 2. Add `fleet_nodes.py` if you run several machines. `.json`, `.jsonl` and `.csv` have no comment syntax, so `apply` refuses them and leaves them untouched. A stamp from another machine reads `foreign(...)`: if you edited the text here, `apply --force`.
+
+---
+
+## `scripts/paragraph_lint.py`
+
+**What it does.** Finds prose paragraphs longer than three sentences. 0 tokens, no network.
+
+**Input.** command line: file paths or stdin, `--max`, `--json`.
+
+**Output.** prints each violation with its line; exit 1 if any.
+
+**Called by.** `skills/taste-check/SKILL.md`, `skills/ai-slop/SKILL.md`.
+
+**What breaks / how to tell / how to fix.** It counts sentences by punctuation, so abbreviations can raise the count. Code blocks, tables, lists, headings and frontmatter are out of scope. To fix a hit, add a blank line where the thought changes; do not rewrite the words.
 
 ---
