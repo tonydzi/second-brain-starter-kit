@@ -558,7 +558,12 @@ def main(argv=None):
         # 26.08 у footer_in_first_comment: два числа на один вопрос.
         chars = body_chars(a.file, platform=platform, rules=rules)
 
-    verdict, findings = check(platform, tier, chars, rules)
+    # Коридор тира судит авторский текст, потолок площадки судит то, что уходит: два числа, как в библиотеке.
+    author_chars = None
+    if a.chars is None and a.file:
+        with open(a.file, encoding="utf-8") as fh:
+            author_chars = tier_chars(fh.read(), platform=platform, rules=rules)
+    verdict, findings = check(platform, tier, chars, rules, tier_chars=author_chars)
     if a.json:
         print(json.dumps({
             "verdict": verdict, "platform": platform, "tier": tier, "chars": chars,
