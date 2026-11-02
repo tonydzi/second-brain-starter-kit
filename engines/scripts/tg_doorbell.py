@@ -1363,7 +1363,8 @@ def _door_for(target, doors):
     """Fail-closed: helper закреплён за target; иных дверей нет (#6, #7).
     Тестовые helpers инжектятся тестом в HELPERS/ALLOWED_DOOR как атрибуты
     модуля — production env-двери не существует."""
-    door = doors.get(target) or {}
+    door = doors.get(target)
+    door = door if isinstance(door, dict) else {}
     name = door.get("helper", "")
     if ALLOWED_DOOR.get(target) == name and name in HELPERS:
         return door, HELPERS[name]
@@ -1389,7 +1390,8 @@ def _door_selector(door, mid):
 
 def _door_plan(target, doors, mid):
     """Validate/select on the raw door before resolving any capability."""
-    door = doors.get(target) or {}
+    door = doors.get(target)
+    door = door if isinstance(door, dict) else {}   # битый профиль = нет двери, а не падение тика
     selector, selector_err = _door_selector(door, mid)
     if selector != "match":
         return door, None, selector, selector_err

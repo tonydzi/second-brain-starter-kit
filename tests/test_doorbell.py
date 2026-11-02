@@ -105,6 +105,18 @@ class Doorbell(unittest.TestCase):
         if os.name != "nt":
             self.assertIn("mode 0o600", p.stdout)
 
+    def test_non_dict_door_profile_is_a_gap_not_a_crash(self):
+        p = self.py("""
+            d.migrate(); con = d._db()
+            con.execute("INSERT INTO inbox(chat,id,sender,dst,admitted,body_sha) VALUES(5,1,1,'Codex',1,'x')")
+            con.execute("INSERT INTO delivery(chat,id,target,status,attempts,event_uuid) VALUES(5,1,'Codex','pending',0,'u')")
+            con.commit()
+            for bad in ("a string", 5, ["x"]):
+                print(d._door_plan("Codex", {"Codex": bad}, 1)[2])
+            print(d._deliver_locked(con, 5, {"Codex": "a string"})["gap"])
+        """, TG_DOORBELL_CHAT="5", TG_DOORBELL_SENDERS="1")
+        self.assertEqual(p.stdout.split(), ["missing", "missing", "missing", "1"], p.stdout + p.stderr)
+
     def test_worker_accepts_a_unix_codex_binary(self):
         bin_dir = Path(self.t.name) / "bin"
         bin_dir.mkdir()
