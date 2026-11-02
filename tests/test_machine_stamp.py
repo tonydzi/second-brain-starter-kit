@@ -99,6 +99,13 @@ class Apply(Tmp):
         self.assertEqual(self.run_(STAMP, "apply", p2, "--agent", "Codex", "--force").returncode, 0)
         self.assertIn("OTHER-BOX", p2.read_text(encoding="utf-8"), "prose was rewritten")
 
+    def test_yaml_document_markers_are_not_frontmatter(self):
+        p = self.file("a.yaml", "---\na: 1\n---\nb: 2\n")
+        self.assertEqual(self.run_(STAMP, "apply", p, "--agent", "Codex").returncode, 0)
+        text = p.read_text(encoding="utf-8")
+        self.assertNotIn("machine:", text)
+        self.assertIn("# Machine:", text)
+
     def test_notebook_is_never_corrupted(self):
         p = self.file("a.ipynb", '{"cells": []}\n')
         self.assertEqual(self.run_(STAMP, "apply", p, "--agent", "Codex").returncode, 1)
@@ -124,6 +131,12 @@ class Lint(Tmp):
         self.assertEqual(self.run_(STAMP, "apply", p, "--agent", "Codex").returncode, 0)
         r = self.run_(STAMP, "lint", p)
         self.assertEqual(r.returncode, 0, r.stdout)
+
+    def test_outbound_file_alone_is_judged_as_unjudged(self):
+        p = self.file("a.md", "a letter with no stamp\n")
+        r = self.run_(STAMP, "lint", "--outbound", p)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("не могу судить 1 из 1", r.stdout)
 
     def test_json_without_a_stamp_is_unjudged_not_missing(self):
         p = self.file("a.json", '{"ok": true}\n')

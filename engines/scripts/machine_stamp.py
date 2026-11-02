@@ -318,7 +318,8 @@ def apply_stamp(path: Path, agent: str = "", operator: str = "",
         return "already"
 
     lines = text.splitlines()
-    bounds = _frontmatter_bounds(lines)
+    # В YAML `---` это граница документа, а не шапка: поле там стало бы данными. Шапка бывает только у заметки.
+    bounds = _frontmatter_bounds(lines) if path.suffix.lower() in {".md", ".markdown"} else None
     if bounds is not None:
         # В артефакте с frontmatter метка живёт полем `machine` -- тем же, что уже
         # ставит импортёр заметок волта. Один контракт, разные места размещения.
@@ -357,7 +358,7 @@ def _iter_targets(paths: list[str], stampable_only: bool = False) -> list[Path]:
 
 def cmd_lint(args: argparse.Namespace) -> int:
     """Читает ФАКТ. Печатает покрытие -- прибор не имеет права быть слепым."""
-    targets = _iter_targets(args.paths)
+    targets = _iter_targets(list(args.paths) + list(args.outbound or []))
     if not targets:
         print("⛔ нечего судить: ни одного файла по заданным путям")
         return 1
@@ -582,7 +583,7 @@ def main(argv: list[str] | None = None) -> int:
     pa.set_defaults(func=cmd_apply)
 
     ll = sub.add_parser("lint", help="читает факт: есть ли метка и не врёт ли она")
-    ll.add_argument("paths", nargs="+")
+    ll.add_argument("paths", nargs="*")
     ll.add_argument("--outbound", nargs="*", default=[],
                     help="файлы, уезжающие НАРУЖУ: метка в теле запрещена, судить нельзя")
     ll.add_argument("--allow-missing", action="store_true",
