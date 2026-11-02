@@ -88,6 +88,13 @@ class ContentGates(unittest.TestCase):
         p = run(SLOP_GATE, "--file", draft(body), "--tier", "teaser", "--degraded", "--json")
         self.assertIn("HB5-no-canonical", p.stdout)
 
+    def test_cli_does_not_count_the_link_block_as_author_text(self):
+        # 240 characters of author text fit a teaser (200-250); the trailing block is not the author's
+        text = "а" * 240 + "\n\n· · ·\nПодробнее: https://example.com/a-long-canonical-link-that-is-not-author-text\n"
+        p = run(PLATFORM_GATE, "--file", draft(text), "--tier", "teaser", "--platform", "tg-channel", "--json")
+        self.assertNotIn("P6", p.stdout, p.stdout + p.stderr)
+        self.assertNotIn("P7", p.stdout, p.stdout + p.stderr)
+
     def test_crlf_frontmatter_is_not_counted_as_text(self):
         sys.path.insert(0, str(VANILLA.parent))
         import vanilla_scan
