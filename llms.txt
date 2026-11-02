@@ -1,6 +1,6 @@
 # Second Brain Starter Kit
 
-> A second brain and persistent memory for Claude Code and Codex: 234 skills shipped as a plugin marketplace, an opt-in memory server (sqlite-graph-memory over your own markdown notes), a markdown CRM engine with demo data, vault templates and a seed message for the first session. The method, not the data: every example is fictional. MIT, no telemetry.
+> A second brain and persistent memory for Claude Code and Codex: 235 skills shipped as a plugin marketplace, an opt-in memory server (sqlite-graph-memory over your own markdown notes), a markdown CRM engine with demo data, vault templates and a seed message for the first session. The method, not the data: every example is fictional. MIT, no telemetry.
 
 Who it is for: someone who wants an agent that keeps habits and memory across months, and an agent bootstrapping such a system for its own operator on a machine the authors have never seen. Not a hosted product; everything runs locally.
 

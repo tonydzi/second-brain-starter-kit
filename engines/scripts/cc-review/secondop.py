@@ -60,7 +60,7 @@ BUS_SECONDOP = os.environ.get("SECONDOP_BUS") or os.path.join(
     os.environ.get("MACHINE_BUS", r"%VAULT%\[шина]"), "_secondop")
 # bus_ping (TG mirror) lives in a different dir per node -- try each known layout.
 SCRIPT_DIRS = [SCRIPTS, "$HOME/hub-scripts-fresh/scripts"]
-CHAT_04 = -[id]  # "04 AI-DUO Claude×Codex" -- human-visible mirror
+CHAT_04 = 0  # "04 AI-DUO Claude×Codex" -- human-visible mirror
 HOST = os.environ.get("COMPUTERNAME", socket.gethostname())
 STALE_MIN_DEFAULT = 15  # standby takes over when every other broker beat is older than this
 RITUAL_TIMEOUT = 90     # hard budget for a call made from inside a ritual (/tt): never hang the gate

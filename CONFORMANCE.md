@@ -49,17 +49,17 @@ python scripts/conformance_report.py --write
 
 <!-- conformance:start -->
 
-Skills on the shelf: **234**. Cannot judge **5 of 49** cells (every unknown is an exam cell: the static checks always run).
+Skills on the shelf: **235**. Cannot judge **5 of 49** cells (every unknown is an exam cell: the static checks always run).
 
 | Platform | Manifest | Frontmatter name+description | Description one line, ≤400 | Name = folder | Paths resolve | OS branch | Exam (latest run) | Verdict |
 |---|---|---|---|---|---|---|---|---|
-| Claude Code | ok | 234/234 | 221/234 | 234/234 | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Codex CLI | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
-| Cursor | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Gemini CLI | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
-| Antigravity | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| OpenCode | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | cannot judge: no exam rail | ❌ |
-| Grok | ok | 234/234 | 221/234 | 234/234 strict | 225/234 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Claude Code | ok | 235/235 | 222/235 | 235/235 | 226/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| Codex CLI | ok | 235/235 | 222/235 | 235/235 strict | 226/235 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
+| Cursor | ok | 235/235 | 222/235 | 235/235 strict | 226/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| Gemini CLI | ok | 235/235 | 222/235 | 235/235 strict | 226/235 | 13/43 | cannot judge: `gemini` blind 12/12 | ❌ |
+| Antigravity | ok | 235/235 | 222/235 | 235/235 strict | 226/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| OpenCode | ok | 235/235 | 222/235 | 235/235 strict | 226/235 | 13/43 | cannot judge: no exam rail | ❌ |
+| Grok | ok | 235/235 | 222/235 | 235/235 strict | 226/235 | 13/43 | 12/12 routed right (11 skills, run 20261019-204026) | ❌ |
 
 ### What fails
 

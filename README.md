@@ -2,7 +2,7 @@
 
 *Read this in other languages: [Русский](README.ru.md)*
 
-A second brain and persistent memory for **Claude Code and Codex**: 234 skills shipped as a
+A second brain and persistent memory for **Claude Code and Codex**: 235 skills shipped as a
 plugin marketplace, a memory server you can attach with one manifest, a working CRM engine and
 vault templates. It is the system [Palo Alto AI Research Lab](https://github.com/tonydzi) runs
 every day, stripped of personal data and cut down to a portable core: **the method, not the data**.
@@ -125,7 +125,7 @@ Full map of all 234 → [skills/INDEX.md](skills/INDEX.md)
 | `SEED.en.md` / `SEED.md` | The opening message for your FIRST Claude Code session (English / Russian), everything starts here |
 | `BOOTSTRAP-CLAUDE.md` | Instructions for Claude itself: how to install and adapt the kit |
 | `CLAUDE-EXTERNAL.md` | Our working principles (assistant behavior), the base for your own CLAUDE.md |
-| `skills/` | **All 234 skill commands** the system runs on every day, map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
+| `skills/` | **All 235 skill commands** the system runs on every day, map: [`skills/INDEX.md`](skills/INDEX.md). Personal data in examples is replaced with fictional stand-ins ([how exactly](docs/WHAT-IS-SHARED.md)) |
 | `templates/` | Second-brain note templates (concepts, decisions, weekly/monthly reviews) |
 | `crm-template/` | CRM: markdown "one card = one file" + an [engine](crm-template/ENGINE.md) with warmth scoring and safe outbound, with demo data |
 | `docs/` | How to use CLAUDE.md, onboarding, what is shared |
@@ -186,7 +186,7 @@ Using Gemini CLI instead of Claude? → [docs/INSTALL-GEMINI.md](docs/INSTALL-GE
 ## Roadmap
 
 **Now: [v0.9.0](https://github.com/tonydzi/second-brain-starter-kit/releases/tag/v0.9.0).**
-234 skills, 247 engine scripts under `engines/`, note templates, a CRM engine with warmth
+235 skills, 247 engine scripts under `engines/`, note templates, a CRM engine with warmth
 scoring and safe outbound, `SEED.md` + `BOOTSTRAP-CLAUDE.md` for the first session, and
 `HANDOVER.md` for people who already run their own agent fleet.
 
@@ -280,7 +280,7 @@ Built and battle-tested at **Palo Alto AI Research Lab**, a fleet of Claude Code
 running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
 production use before publication.
 
-- 📦 All 234 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 📦 All 235 skills: https://github.com/tonydzi/second-brain-starter-kit
 - 👤 Author: **Anton Dziatkovskii**: Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
 - 🧪 **Engineers: want to test-drive this setup?** Message me, I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
 
@@ -296,7 +296,7 @@ One click and an agent reads the repo, pulls out the patterns and helps you appl
 <summary>Copy the prompt (works in any agent: Gemini, Grok, a local model, your own CLI)</summary>
 
 ```text
-Read this repo: https://github.com/tonydzi/second-brain-starter-kit (“second-brain-starter-kit” - Claude Code as a second brain: 234 battle-tested skills, a working CRM engine, vault templates and the handover map. Method, not data. MIT). Work out what problem it actually solves, pull out the reusable patterns and help me apply them to my own setup. Start by asking what I am working on.
+Read this repo: https://github.com/tonydzi/second-brain-starter-kit (“second-brain-starter-kit” - Claude Code as a second brain: 235 battle-tested skills, a working CRM engine, vault templates and the handover map. Method, not data. MIT). Work out what problem it actually solves, pull out the reusable patterns and help me apply them to my own setup. Start by asking what I am working on.
 ```
 
 </details>
