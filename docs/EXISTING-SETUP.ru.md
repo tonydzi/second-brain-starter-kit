@@ -25,7 +25,7 @@
 
 ```text
 Подключи мне личный второй мозг по этой инструкции:
-https://github.com/tonydzi/second-brain-starter-kit/blob/main/docs/EXISTING-SETUP.ru.md
+https://github.com/tonydzi/second-brain-starter-kit/blob/master/docs/EXISTING-SETUP.ru.md
 
 Сначала прочитай инструкцию и проверь, что у меня уже есть: ОС, агент, Python/uv,
 папка заметок, MCP и мои рабочие правила. Существующие настройки сохрани с резервной
