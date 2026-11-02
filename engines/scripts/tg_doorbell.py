@@ -965,8 +965,8 @@ def _resolve_executable(kind, cfg):
     configured = str(cfg.get("exe", "")).strip()
     if configured:
         path = os.path.abspath(os.path.expandvars(os.path.expanduser(configured)))
-        allowed = {"claude": ("claude.exe",),
-                   "grok": ("grok.exe",)}.get(kind, ("codex.cmd", "codex.exe"))
+        allowed = {"claude": ("claude.exe", "claude"),
+                   "grok": ("grok.exe", "grok")}.get(kind, ("codex.cmd", "codex.exe", "codex"))
         if os.path.basename(path).lower() not in allowed or not os.path.isfile(path):
             raise ValueError("invalid %s executable" % kind)
         return path
@@ -976,10 +976,10 @@ def _resolve_executable(kind, cfg):
                  if os.path.isfile(p)]
         if found:
             return max(found, key=lambda p: os.path.getmtime(p))
-        path = shutil.which("claude.exe")
+        path = shutil.which("claude.exe") or shutil.which("claude")
     elif kind == "grok":
         home = os.path.join(os.path.expanduser("~"), ".grok", "bin", "grok.exe")
-        path = home if os.path.isfile(home) else shutil.which("grok.exe")
+        path = home if os.path.isfile(home) else (shutil.which("grok.exe") or shutil.which("grok"))
     else:
         from codex_defaults import resolve_binary, ClientProbeTransient
         try:
@@ -1225,7 +1225,7 @@ def _start_codex_worker(payload, timeout):
                           stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
                           stderr=subprocess.DEVNULL, cwd=payload["cwd"],
                           text=True, encoding="utf-8", errors="replace",
-                          creationflags=flags)
+                          creationflags=flags, start_new_session=os.name != "nt")
             proc.stdin.write(json.dumps(work, ensure_ascii=False) + "\n")
             proc.stdin.flush()
             proc.stdin.close()
@@ -1299,7 +1299,10 @@ def _helper_grok_cli(cfg, chat, mid, target, text):
         "ответь сам через: python tg_bus_send.py "
         "--workroom --raw \"[Grok\u2192<адресат>][<corr_id>][<глагол>] ...\". "
         "Правила: AGENTS.md набора. Письмо:\n" + (text or ""))
-    creationflags = (getattr(subprocess, "CREATE_NO_WINDOW", 0)
+    # Grok думает минутами, а тик живёт секунды: процесс обязан пережить тик.
+    creationflags = ((getattr(subprocess, "CREATE_NO_WINDOW", 0)
+                      | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+                      | getattr(subprocess, "DETACHED_PROCESS", 0))
                      if os.name == "nt" else 0)
     try:
         # В письме ack-токен, а argv виден в списке процессов. Файл с правами 0600, как stdin у
@@ -1308,7 +1311,7 @@ def _helper_grok_cli(cfg, chat, mid, target, text):
         proc = _POPEN([exe, "--always-approve", "--prompt-file", prompt_file],
                       stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL, cwd=cwd,
-                      creationflags=creationflags)
+                      creationflags=creationflags, start_new_session=os.name != "nt")
     except (OSError, ValueError) as exc:
         return ("fail", "grok_cli spawn failed: %s" % str(exc)[:160])
     # Grok thinks for minutes; the door only proves the process came up.  Wait
@@ -1327,6 +1330,7 @@ def _private_prompt_file(prompt):
     """Записать промпт в файл только для владельца; файлы старше часа убрать."""
     spool = os.path.join(os.path.expanduser("~"), ".claude", "doorbell_prompts")
     os.makedirs(spool, mode=0o700, exist_ok=True)
+    os.chmod(spool, 0o700)                # папка могла уже быть с другими правами
     for name in os.listdir(spool):
         path = os.path.join(spool, name)
         try:
@@ -2303,7 +2307,7 @@ def _codex_worker_main():
             return 2
         payload["cwd"] = cwd
         codex_bin = os.path.abspath(str(payload.get("codex_bin", "")))
-        if (os.path.basename(codex_bin).lower() not in ("codex.cmd", "codex.exe")
+        if (os.path.basename(codex_bin).lower() not in ("codex.cmd", "codex.exe", "codex")
                 or not os.path.isfile(codex_bin)):
             return 2
         payload["codex_bin"] = codex_bin

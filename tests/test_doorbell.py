@@ -84,6 +84,7 @@ class Doorbell(unittest.TestCase):
                 def wait(self, timeout=None): return 0
             def fake(args, **kw):
                 seen["argv"] = args
+                seen["kw"] = kw
                 path = args[args.index("--prompt-file") + 1]
                 seen["text"] = open(path, encoding="utf-8").read()
                 seen["mode"] = stat.S_IMODE(os.stat(path).st_mode)
@@ -96,11 +97,32 @@ class Doorbell(unittest.TestCase):
             print("argv-clean", not any("SECRET-TOKEN-123" in a for a in seen["argv"]))
             print("in-file", "SECRET-TOKEN-123" in seen["text"])
             print("mode", oct(seen["mode"]))
+            print("detached", seen["kw"].get("start_new_session") is True or seen["kw"].get("creationflags", 0) != 0)
         """)
         self.assertIn("argv-clean True", p.stdout, p.stdout + p.stderr)
         self.assertIn("in-file True", p.stdout)
+        self.assertIn("detached True", p.stdout)
         if os.name != "nt":
             self.assertIn("mode 0o600", p.stdout)
+
+    def test_worker_accepts_a_unix_codex_binary(self):
+        bin_dir = Path(self.t.name) / "bin"
+        bin_dir.mkdir()
+        exe = bin_dir / "codex"
+        exe.write_text("#!/bin/sh\n", encoding="utf-8")
+        p = self.py("""
+            import io, json, os
+            bad = {"called": False}
+            def run(payload):
+                bad["called"] = True
+                return 0
+            d._codex_worker_run = run
+            ok = dict(thread_id="00000000-0000-4000-8000-000000000000", cwd=".", codex_bin=%r, text="DOORBELL x", worker_timeout_sec=900,
+                      callback_port=1234, callback_token="0" * 32)
+            sys.stdin = io.StringIO(json.dumps(ok) + "\\n")
+            print("rc", d._codex_worker_main(), bad["called"])
+        """ % str(exe))
+        self.assertIn("True", p.stdout, p.stdout + p.stderr)
 
 
 if __name__ == "__main__":
