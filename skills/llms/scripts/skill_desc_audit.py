@@ -111,10 +111,11 @@ def cmd_report(as_json=False):
         "saving_chars": saving, "saving_tokens": int(round(saving / CHARS_PER_TOKEN)),
         "worst": [(r["chars"], r["skill"]) for r in sorted(over, key=lambda x: -x["chars"])[:10]],
     }
+    unquoted = [r for r in rows if not r["quoted"]]
+    res["unquoted"] = len(unquoted)
     if as_json:
         print(json.dumps(res, ensure_ascii=False, indent=2))
-        return 3 if over else 0
-    unquoted = [r for r in rows if not r["quoted"]]
+        return 3 if (over or unquoted) else 0
     folded = [r for r in rows if r["folded"]]
     print("ОПИСАНИЯ СКИЛЛОВ · %s" % SKILLS)
     print("  своих скиллов %d · описаний %d симв ~= %d ток/сессия"

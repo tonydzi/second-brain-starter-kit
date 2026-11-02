@@ -115,5 +115,43 @@ class UsageLog(Base):
         self.assertIn("2020-01-05", p.stdout, p.stdout)
 
 
+class LlmsTools(Base):
+    BRIDGE = ROOT / "skills/llms/scripts/codex_skills_bridge.py"
+    AUDIT = ROOT / "skills/llms/scripts/skill_desc_audit.py"
+
+    def run_(self, script, *args):
+        return subprocess.run([sys.executable, str(script), *args], env=self.env(), capture_output=True,
+                              text=True, encoding="utf-8", errors="replace", timeout=60)
+
+    def test_gaps_is_a_no_op_for_a_vendor_without_a_shelf(self):
+        r = self.run_(self.BRIDGE, "gaps", "--vendor", "grok")
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+
+    def test_gaps_runs_on_a_fresh_install_without_the_lease_module(self):
+        r = self.run_(self.BRIDGE, "gaps")
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+
+    def test_counter_keeps_the_vendor_name(self):
+        p = self.py("""
+            import sys, json
+            sys.path.insert(0, %r)
+            sys.argv = ["x"]
+            import codex_skills_bridge as b, inspect
+            b._count("status", "ok", {"vendor": 3, "other": 1})
+            print(json.loads(open(b.COUNTER, encoding="utf-8").read().splitlines()[-1])["vendor"])
+        """ % str(self.BRIDGE.parent))
+        self.assertIn(p.stdout.strip().split("\\n")[-1], ("codex",), p.stdout + p.stderr)
+
+    def test_json_audit_fails_on_unquoted_descriptions(self):
+        shelf = self.home / ".claude" / "skills" / "a"
+        shelf.mkdir(parents=True)
+        (shelf / "SKILL.md").write_text("---\nname: a\ndescription: not quoted\n---\nbody\n", encoding="utf-8")
+        text = self.run_(self.AUDIT)
+        as_json = self.run_(self.AUDIT, "--json")
+        self.assertEqual(text.returncode, 3, text.stdout + text.stderr)
+        self.assertEqual(as_json.returncode, 3, as_json.stdout + as_json.stderr)
+        self.assertEqual(json.loads(as_json.stdout)["unquoted"], 1)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

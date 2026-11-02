@@ -178,6 +178,9 @@ def _count(event, outcome, extra=None):
     }
     if extra:
         row.update(extra)
+        row["vendor"] = VENDOR       # в scan-строке `vendor` = число чужих папок; имя агента важнее
+        if "vendor" in extra:
+            row["foreign_folders"] = extra["vendor"]
     with io.open(COUNTER, "a", encoding="utf-8") as f:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
@@ -396,7 +399,12 @@ def take_mutation_lease(action):
     """Serialize junction/gaps mutations; rc=7 when another actor owns DST."""
     try:
         import workspace_write_lease
-
+    except ModuleNotFoundError:
+        # Модуль замков есть только там, где несколько агентов пишут в одну папку. Его отсутствие
+        # значит «делить не с кем», а не «занято»: иначе команда не работает ни на одной свежей установке.
+        print("LEASE: no workspace_write_lease here, running without a lock")
+        return None, "no-lease"
+    try:
         outer_sid = os.environ.get("CODEX_SESSION_ID") or os.environ.get("CODEX_THREAD_ID")
         sid = outer_sid or "codex-skills-bridge:%s:%s" % (socket.gethostname(), os.getpid())
         # ⚠️ DST -- КАТАЛОГ, и acquire_many требует для каталога ЯВНЫЙ опт-ин
@@ -448,6 +456,7 @@ def write_gaps():
         "Measured %s: %d of %d skills." % (_now()[:10], len(names), total),
         "",
     ] + ["- `/%s`" % name for name in names] + [""]
+    os.makedirs(os.path.dirname(GAPS) or ".", exist_ok=True)
     io.open(GAPS, "w", encoding="utf-8", newline="").write("\n".join(body))
     return len(names)
 
@@ -658,6 +667,9 @@ def main(argv=None):
             print(args.json_out)
         else:
             print(payload)
+        return 0
+    if not mounts_here():
+        print("vendor %s reads the shelf natively: no gaps file" % VENDOR)
         return 0
     held = take_mutation_lease("gaps")
     if not held:
