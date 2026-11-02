@@ -17,6 +17,6 @@ concept: "[[concept-bible-communications]]"
 
 > Формализованный регламент из доски Trello. Тело правила — в карточке.
 
-**Открыть в Trello:** [правило запросов gpt]([ссылка-приглашение])
+**Карточка в Trello:** правило запросов gpt
 
 **Тема:** [[concept-bible-communications|Библия — Коммуникации и протокол]]  ·  **Свод:** [[concept-bible-platinum]]
