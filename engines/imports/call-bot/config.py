@@ -20,7 +20,7 @@ import os
 
 # --- Telegram ---------------------------------------------------------------
 # Team chat «Календарь» where a lead's Calendly link is dropped.
-CALENDAR_CHAT_ID = -[id]
+CALENDAR_CHAT_ID = 0
 
 # Who may request a booking / approve with "+" (numeric IDs, not [аккаунт]).
 # Polina ([аккаунт]) and [человек] ([аккаунт]) were REMOVED 2026-06-23.
@@ -72,7 +72,7 @@ LOG_PATH = os.path.join(BASE_DIR, "booking_daemon.log")
 # (TIMEZONE/WINDOW/BOOKING_ALLOWLIST/BOT_ACCOUNT/Telethon env/OAuth) — single source.
 #
 # Team chat «CALLS 889 MAIN FA FAAAA follow up» where the monitor reports/drafts.
-CALLS_CHAT_ID = -[id]
+CALLS_CHAT_ID = 0
 # The calendar the monitor WATCHES for call events. BB Platinum ONLY
 # (Anton 2026-06-25: A2 is NOT read by the monitor — that's the booking module).
 MONITOR_CALENDAR = "owner.calendar@example.com"
