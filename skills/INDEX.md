@@ -290,3 +290,4 @@ These arrived with the full local set and still carry their original working des
 | [`/youtube-publish`](youtube-publish/SKILL.md) | Публикует готовый контент на личный YouTube-канал Антона [аккаунт]: вычерпывает новое из NotebookLM и очереди, рендерит аудио в видео, пишет описание … |
 | [`/loop`](loop/SKILL.md) | Keep working until a verified result via the shared continue skill; a work cycle, not a timer. |
 | [`/restart`](restart/SKILL.md) | Controlled restart of a named app, browser or service with context kept and the new instance verified. |
+| [`/hdd-storage-cleaning`](hdd-storage-cleaning/SKILL.md) | Audit a full disk and free space safely: measure first, prove a restore path, show exact objects, delete only what the user approved. |
