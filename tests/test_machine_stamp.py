@@ -82,6 +82,28 @@ class Apply(Tmp):
         self.assertIn("would-restamp", r.stdout)
         self.assertEqual(p.read_text(encoding="utf-8"), text)
 
+    def test_restamp_keeps_the_html_comment_closed(self):
+        p = self.file("a.md", "text\n\n<!-- Machine: OTHER-BOX · Agent: Codex · 2026-10-14 -->\n")
+        self.assertEqual(self.run_(STAMP, "apply", p, "--agent", "Codex", "--force").returncode, 0)
+        text = p.read_text(encoding="utf-8")
+        self.assertNotIn("OTHER-BOX", text)
+        self.assertEqual(text.count("-->"), 1, text)
+        self.assertTrue(text.rstrip().endswith("-->"), text)
+
+    def test_prose_mentioning_a_stamp_does_not_drive_the_verdict(self):
+        here = self.run_(STAMP, "line", "--agent", "Codex").stdout.strip()
+        p = self.file("a.md", "The format looks like Machine: OTHER-BOX · Agent: Codex · 2026-10-14 here.\n\n<!-- %s -->\n" % here)
+        r = self.run_(STAMP, "apply", p, "--agent", "Codex")
+        self.assertIn("already", r.stdout, r.stdout)
+        p2 = self.file("b.md", "The format looks like Machine: OTHER-BOX · Agent: Codex · 2026-10-14 here.\n\n<!-- %s -->\n" % here)
+        self.assertEqual(self.run_(STAMP, "apply", p2, "--agent", "Codex", "--force").returncode, 0)
+        self.assertIn("OTHER-BOX", p2.read_text(encoding="utf-8"), "prose was rewritten")
+
+    def test_notebook_is_never_corrupted(self):
+        p = self.file("a.ipynb", '{"cells": []}\n')
+        self.assertEqual(self.run_(STAMP, "apply", p, "--agent", "Codex").returncode, 1)
+        self.assertEqual(p.read_text(encoding="utf-8"), '{"cells": []}\n')
+
     def test_restamp_touches_the_stamp_not_the_prose(self):
         p = self.file("a.md", "Machine: selects the build worker\n\n<!-- Machine: OTHER-BOX · Agent: Codex · 2026-10-14 -->\n")
         self.assertEqual(self.run_(STAMP, "apply", p, "--agent", "Codex", "--force").returncode, 0)

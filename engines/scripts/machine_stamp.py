@@ -82,21 +82,23 @@ except Exception:  # pragma: no cover - реестр недоступен
 # проштампованное не читалось как нарушение. Новое пишется всегда `Machine:`.
 # Метка = вся каноничная форма, ключ с `· Agent:`. Голый `Machine:` бывает обычной прозой
 # («Machine: selects the build worker»): такой файл не считается проштампованным.
-_STAMP_LINE = r"(?:Machine|written[-_]on)\s*:\s*\"?[^\n]*?·\s*Agent\s*:[^\n]*"
-MARKER_RE = re.compile(r"^[\s#>*<!-]*" + _STAMP_LINE, re.IGNORECASE | re.MULTILINE)
+# Метка стоит в начале строки (упоминание посреди прозы меткой не считается) и кончается до `-->`.
+_STAMP_PREFIX = r"^[ \t#>*<!-]*"
+_STAMP_LINE = r"(?:Machine|written[-_]on)\s*:\s*\"?[^\n]*?·\s*Agent\s*:.*?(?=\s*-->|$)"
+MARKER_RE = re.compile(_STAMP_PREFIX + _STAMP_LINE, re.IGNORECASE | re.MULTILINE)
 # ⚠️ MULTILINE обязателен. Без него `$` совпадает только в конце ВСЕГО текста, и
 # метка, лежащая полем frontmatter в середине файла, извлекалась с ПУСТЫМ именем
 # узла -- то есть законная метка объявлялась врущей. Живой прогон 08.10 поймал
 # это на 4 реальных артефактах; ложноположительный вердикт хуже пропуска.
 STAMP_RE = re.compile(
-    r"(?:Machine|written[-_]on)\s*:\s*\"?(?P<machine>[^·\n\"(]+?)\s*(?:\([^\n]*?\))?\s*·\s*Agent\s*:",
+    _STAMP_PREFIX + r"(?:Machine|written[-_]on)\s*:\s*\"?(?P<machine>[^·\n\"(]+?)\s*(?:\([^\n]*?\))?\s*·\s*Agent\s*:",
     re.IGNORECASE | re.MULTILINE,
 )
 
 # Расширения, которые вообще имеет смысл судить.
 TEXT_SUFFIXES = {".md", ".txt", ".html", ".json", ".jsonl", ".csv", ".yml", ".yaml"}
 # В этих форматах комментария нет: строка-метка ломает файл, поэтому метку в них не ставим.
-NO_COMMENT_SUFFIXES = {".json", ".jsonl", ".csv"}
+NO_COMMENT_SUFFIXES = {".json", ".jsonl", ".csv", ".ipynb"}
 
 
 def host() -> str:
@@ -305,11 +307,11 @@ def apply_stamp(path: Path, agent: str = "", operator: str = "",
                 else:
                     repl = line
                 new = re.sub(
-                    _STAMP_LINE,
-                    repl.replace("\\", "\\\\"),
+                    "(" + _STAMP_PREFIX + ")" + _STAMP_LINE,
+                    lambda m: m.group(1) + repl,
                     text,
                     count=1,
-                    flags=re.IGNORECASE,
+                    flags=re.IGNORECASE | re.MULTILINE,
                 )
                 path.write_text(new, encoding="utf-8")
             return "restamped"
