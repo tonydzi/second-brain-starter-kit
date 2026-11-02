@@ -234,6 +234,10 @@ def cmd_fix(root, person):
     удалять их нельзя — человек мог закрыть что-то ещё."""
     if not os.path.exists(root):
         print("НЕТ ВОЛТА: %s — сначала init" % root); return 2
+    try:                                         # владелец записан в волте; --person по умолчанию не он
+        person = json.load(io.open(os.path.join(root, MARKER), encoding="utf-8")).get("person") or person
+    except (OSError, ValueError):
+        pass
     cmd_init(root, person)                       # вернёт на место пропавшие папки и файлы
     st = os.path.join(root, ".stignore")
     text = io.open(st, encoding="utf-8", errors="replace").read() if os.path.exists(st) else ""

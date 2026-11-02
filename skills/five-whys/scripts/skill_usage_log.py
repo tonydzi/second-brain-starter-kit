@@ -171,8 +171,9 @@ def log(skill: str, outcome: str = "ok", args_len: int = 0,
     wrote = False
     # Пишем в шину И в локальный запас: шард в шине может быть недоступен (нет синка),
     # а потерянный вызов уже не восстановить. Дедуп при чтении по (ts, machine, skill).
-    for root in (roots(for_write=True, kind=kind)
-                 + [os.path.expanduser(os.path.join("~/.claude", subdir_of(kind)))]):
+    # dict.fromkeys: без шины первый корень и есть локальный, и строка писалась бы дважды.
+    for root in dict.fromkeys(roots(for_write=True, kind=kind)
+                              + [os.path.expanduser(os.path.join("~/.claude", subdir_of(kind)))]):
         try:
             os.makedirs(root, exist_ok=True)
             with open(_shard(root, row["machine"]), "a", encoding="utf-8") as fh:
@@ -356,8 +357,8 @@ def scan_transcripts(days: int = 60, root: str | None = None,
         return summary
 
     written = 0
-    for troot in (roots(for_write=True, kind="skill")
-                  + [os.path.expanduser(os.path.join("~/.claude", subdir_of("skill")))]):
+    for troot in dict.fromkeys(roots(for_write=True, kind="skill")
+                               + [os.path.expanduser(os.path.join("~/.claude", subdir_of("skill")))]):
         try:
             os.makedirs(troot, exist_ok=True)
             with open(_shard(troot, _machine()), "a", encoding="utf-8") as fh:

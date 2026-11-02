@@ -31,7 +31,9 @@ class Base(unittest.TestCase):
         self.home = Path(self.t.name)
 
     def env(self, **extra):
-        return dict(os.environ, HOME=str(self.home), USERPROFILE=str(self.home), PYTHONIOENCODING="utf-8", **extra)
+        env = dict(os.environ, HOME=str(self.home), USERPROFILE=str(self.home), PYTHONIOENCODING="utf-8", **extra)
+        env.pop("MACHINE_BUS_DIR", None)      # a real bus on this machine must never receive test rows
+        return env
 
     def py(self, code, **extra):
         return subprocess.run([sys.executable, "-c", textwrap.dedent(code)], env=self.env(**extra), cwd=str(WHYS),
@@ -64,6 +66,16 @@ class PrivacyBoundary(Base):
         self.assertEqual(self.brain("check", "--root", root).returncode, 0, st.read_text(encoding="utf-8"))
 
 
+class Owner(Base):
+    def test_fix_restores_files_for_the_recorded_owner(self):
+        root = self.home / "brain"
+        self.brain("init", "--root", root, "--person", "Dana")
+        hit = [p for p in root.rglob("*.md") if "owner: Dana" in p.read_text(encoding="utf-8")][0]
+        hit.unlink()
+        self.brain("fix", "--root", root)
+        self.assertIn("owner: Dana", hit.read_text(encoding="utf-8"))
+
+
 class SelfHeal(Base):
     def test_prefix_named_sibling_is_not_the_allowed_root(self):
         allowed = self.home / ".claude"
@@ -87,6 +99,15 @@ class SelfHeal(Base):
 
 
 class UsageLog(Base):
+    def test_one_event_is_one_line_without_a_bus(self):
+        p = self.py("""
+            import glob, os, skill_usage_log as u
+            u.log("retro")
+            rows = sum(sum(1 for _ in open(f, encoding="utf-8")) for f in glob.glob(os.path.expanduser("~/.claude/**/*.jsonl"), recursive=True))
+            print("lines", rows)
+        """)
+        self.assertIn("lines 1", p.stdout, p.stdout + p.stderr)
+
     def test_windows_machine_name_is_read(self):
         p = self.py("""
             import os, skill_usage_log as u
