@@ -1,7 +1,7 @@
 """Guard against links the publish scrubber broke.
 
 Passport
-  input:   every tracked *.md outside bible/ and skills/ (README, docs, engines, templates)
+  input:   every tracked *.md in the repo
   checks:  no markdown link carries a scrubber placeholder ([id], [аккаунт], [человек], ...)
            as its text or inside its URL: `X [[аккаунт]](...)`, `(https://wa.me/[id])`
   why:     the publisher's leak scrubber turned the owner's public contacts into
@@ -10,8 +10,6 @@ Passport
            explain them); a placeholder inside a link is a dead link for every reader.
   called:  by CI (python3 -m unittest discover -s tests), and by hand after a publish
   breaks:  if the scrubber gets a new placeholder word, add it to PLACEHOLDER
-  scope:   bible/ and skills/ are left out: they still hold older broken links that
-           need their own cleanup (MOC links to renamed notes, Trello invites)
   stdlib only.
 """
 from __future__ import annotations
@@ -28,7 +26,6 @@ BROKEN_LINK = re.compile(
     r"\[\[%s\]\]\(" % PLACEHOLDER                    # link text is a placeholder
     + r"|\]\([^)\s]*\[%s\][^)\s]*\)" % PLACEHOLDER   # placeholder inside the URL
 )
-SKIP_PREFIX = ("bible/", "skills/")
 
 
 def broken_links(text: str) -> list[str]:
@@ -51,8 +48,6 @@ class ScrubPlaceholderTest(unittest.TestCase):
         files = subprocess.check_output(["git", "ls-files", "*.md"], cwd=ROOT, text=True).split()
         bad = []
         for rel in files:
-            if rel.startswith(SKIP_PREFIX):
-                continue
             for n, line in enumerate((ROOT / rel).read_text(encoding="utf-8").splitlines(), 1):
                 for hit in broken_links(line):
                     bad.append(f"{rel}:{n}: {hit}")

@@ -159,7 +159,7 @@ summary: "Статическая навигация по своду реглам
 - [правило коммуникации с денисом по рабочим чатам](../05-Protocols-Bible/reglament-card-pravilo-kommunikatsii-s-denisom-po-rabochim-chatam.md)
 - [правило контролировать отчеты риты по общественным работам](../05-Protocols-Bible/reglament-card-pravilo-kontrolirovat-otchety-rity-po-obschestvennym-ra.md)
 - [правило начинать день с плана и заканчивать отчетом](../05-Protocols-Bible/reglament-card-pravilo-nachinat-den-s-plana-i-zakanchivat-otchetom.md)
-- [правило о приоритете связи по задачам через звонок](../05-Protocols-Bible/reglament-card-pravilo-o-prioritete-svyazi-po-zadacham-cherez-[человек].md)
+- правило о приоритете связи по задачам через звонок
 - [правило о рабочих звонках митах с антоном](../05-Protocols-Bible/reglament-card-pravilo-o-rabochih-zvonkah-mitah-s-antonom.md)
 - [правило о суммарном учете времени в отчете](../05-Protocols-Bible/reglament-card-pravilo-o-summarnom-uchete-vremeni-v-otchete.md)
 - [правило обогащения голосовых сообщений в чатах](../05-Protocols-Bible/reglament-card-pravilo-obogascheniya-golosovyh-soobscheniy-v-chatah.md)
@@ -193,7 +193,7 @@ summary: "Статическая навигация по своду реглам
 - [Если требуется получить от Антона срочную информацию, необходимо дозваниваться](../05-Protocols-Bible/reglament-esli-trebuetsya-poluchit-ot-antona-srochnuyu-informatsi.md) · 2026-03-25
 - [Исходящее от лица Антона — его голосом, без детского ELI5-пересказа](../05-Protocols-Bible/reglament-ishodyaschie-golosom-antona-bez-detskogo-eli5.md) · 2026-06-10
 - [Каждое утро мы должны прослушать и прочитать все сообщения, накопившиеся со](../05-Protocols-Bible/reglament-kazhdoe-utro-my-dolzhny-proslushat-i-prochitat-vse-soob.md) · 2025-04-10
-- [Каждый день Оксана или [коллега] созваниваются с Денисом, проходят по задачам,](../05-Protocols-Bible/reglament-kazhdyy-den-oksana-ili-[человек]-sozvanivayutsya-s-den.md) · 2026-02-10
+- Каждый день Оксана или [коллега] созваниваются с Денисом, проходят по задачам, · 2026-02-10
 - [Каждый раз, когда Антон дал какую-то задачу, нужно изучать её и решение через](../05-Protocols-Bible/reglament-kazhdyy-raz-kogda-anton-dal-kakuyu-to-zadachu-nuzhno-iz.md) · 2025-06-27
 - [Каждый раз, когда нужно пингануть лида (под сдачу Антона или для себя), всегда](../05-Protocols-Bible/reglament-kazhdyy-raz-kogda-nuzhno-pinganut-lida-pod-sdachu-anton.md) · 2025-04-11
 - [Каждый раз, когда пишем в личку, дублируем информацию в чатах.](../05-Protocols-Bible/reglament-kazhdyy-raz-kogda-pishem-v-lichku-dubliruem-informatsiy.md) · 2025-12-02
@@ -206,11 +206,11 @@ summary: "Статическая навигация по своду реглам
 - [Текст без проверки Антоном → ≤5 (макс 7) слов, тон по каналу (FB-шутка / Telegram-осмысленно)](../05-Protocols-Bible/reglament-korotkiy-tekst-bez-proverki-ton-po-kanalu.md) · 2026-07-04
 - [Любое правило в Библию писать максимально дословно со слов Антона, чтобы было](../05-Protocols-Bible/reglament-lyuboe-pravilo-v-bibliyu-pisat-maksimalno-doslovno-so-s.md) · 2026-02-25
 - [Не выносить наружу чужие приватные данные — даже если они в контексте](../05-Protocols-Bible/reglament-ne-utekat-chuzhie-privatnye-dannye-naruzhu.md) · 2026-06-10
-- [О звонках предупреждают Катя и [коллега] по очереди. Если звонки ранним утром —](../05-Protocols-Bible/reglament-o-zvonkah-preduprezhdayut-[человек]-i-[коллега]-po-ocheredi-e.md) · 2026-03-18
+- О звонках предупреждают Катя и [коллега] по очереди. Если звонки ранним утром — · 2026-03-18
 - [Объяснять и отчитываться Антону простыми словами (как пятилетнему) — без жаргона](../05-Protocols-Bible/reglament-obyasnyat-i-otchityvatsya-antonu-prostymi-slovami-eli5.md) · 2026-06-14
 - [Одна база лидов · каждый оператор пишет со СВОЕЙ машины · читай живой тред перед отправкой · предупреждай, не блокируй](../05-Protocols-Bible/reglament-odna-baza-lidov-kazhdyy-pishet-so-svoey-mashiny-chitay-tred.md) · 2026-06-27
 - [Осознанное согласие — объясни ЗАЧЕМ перед действием (особенно связывание машин); вожак тоже осознанно понимает ведомого и не творит ереси](../05-Protocols-Bible/reglament-osoznannoe-soglasie-obyasni-zachem-pered-svyazyvaniem-mashin.md) · 2026-06-26
-- [Telegram от лица Антона — аккаунт по самому ТЁПЛОМУ треду (личный @… + рабочие @…/@… = голос Антона; @… = компания/служебное); текст не согласуем](../05-Protocols-Bible/reglament-ot-litsa-antona-v-telegram-rabotaem-s-[рабочий аккаунт].md) · 2026-06-15
+- Telegram от лица Антона — аккаунт по самому ТЁПЛОМУ треду (личный @… + рабочие @…/@… = голос Антона; @… = компания/служебное); текст не согласуем · 2026-06-15
 - [Отвечать контакту на ЕГО языке (как он написал), не по умолчанию](../05-Protocols-Bible/reglament-otvechat-kontaktu-na-ego-yazyke.md) · 2026-06-10
 - [Перед необратимым/важным — предупреди и жди; перед «готово» — перепроверь себя](../05-Protocols-Bible/reglament-pered-neobratimym-vazhnym-predupredi-i-zhdi-pered-gotovo-pereproveris.md) · 2026-06-14
 - [Планёрки обязательны, и на это время нельзя назначать никаких встреч.](../05-Protocols-Bible/reglament-planerki-obyazatelny-i-na-eto-vremya-nelzya-naznachat-n.md) · 2025-01-16
@@ -307,12 +307,12 @@ summary: "Статическая навигация по своду реглам
 - [Реглумент — декомпозируй сложную задачу на параллельные сессии + выдай seed-промпты](../05-Protocols-Bible/reglament-dekompozitsiya-zadachi-na-parallelnye-sessii.md) · 2026-06-29
 - [Регламент: по минимуму нагружать НОУТ, по максимуму использовать ДЕСКТОП](../05-Protocols-Bible/reglament-desktop-max-laptop-min-resources.md) · 2026-06-22
 - [Реглумент — снесло с главной цели → сорняки выгружай в соседние сессии (seed-промпты), сам держи главную линию](../05-Protocols-Bible/reglament-drift-ot-glavnoy-tseli-sornyaki-v-sosednie-sessii.md) · 2026-07-03
-- [Голосовые расшифровки Антона — ВСЕГДА максимальное качество модели](../05-Protocols-Bible/reglament-golosovye-rasshifrovki-antona-vsegda-[человек]-kachestvo.md) · 2026-06-26
+- Голосовые расшифровки Антона — ВСЕГДА максимальное качество модели · 2026-06-26
 - [Реглумент: ХАБ = ДЕСКТОП = PaloAlto PC = Вожак — это ОДНА машина, наш мастер](../05-Protocols-Bible/reglament-hab-master-mashina-vse-imena-odno.md) · 2026-06-22
 - [Реглумент: всегда лечим КОРЕНЬ проблемы, а не симптом (+ AK-47 в каждом решении)](../05-Protocols-Bible/reglament-lechim-koren-problemy-ne-simptomy.md) · 2026-06-25
 - [Машинно-специфичное (паспорт машины) — держим ЛОКАЛЬНО, не шарим: оно ЛОМАЕТСЯ](../05-Protocols-Bible/reglament-mashinno-spetsifichnoe-lokalno-ne-sharim.md) · 2026-06-28
 - [Реглумент: миграция на новую машину — playbook + грабли](../05-Protocols-Bible/reglament-migratsiya-mashin-playbook.md) · 2026-06-21
-- [Реглумент: [коллега] и [коллега] = наши co-founder, отношение партнёрское](../05-Protocols-Bible/reglament-natasha-i-[коллега]-nashi-cofoundery.md) · 2026-07-03
+- Реглумент: [коллега] и [коллега] = наши co-founder, отношение партнёрское · 2026-07-03
 - [Регламент — нервная система машин = всегда без LLM; тупой детектор первым, LLM только на мышление](../05-Protocols-Bible/reglament-nervnaya-sistema-mashin-bez-llm-tupoy-detektor-pervym.md) · 2026-06-26
 - [Онбординг-питч «второй мозг» — победа до питча, доказательства вместо лозунгов](../05-Protocols-Bible/reglament-onboarding-pitch-vtoroy-mozg.md) · 2026-07-07
 - [Регламент — перед изменением системы сверься с картой (/arch)](../05-Protocols-Bible/reglament-pered-izmeneniem-sistemy-sverstis-s-kartoy-arch.md) · 2026-06-21

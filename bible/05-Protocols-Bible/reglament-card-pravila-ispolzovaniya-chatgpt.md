@@ -17,6 +17,6 @@ concept: "[[concept-bible-communications]]"
 
 > Формализованный регламент из доски Trello. Тело правила — в карточке.
 
-**Открыть в Trello:** [правила использования chatgpt]([ссылка-приглашение])
+**Карточка в Trello:** правила использования chatgpt
 
 **Тема:** [[concept-bible-communications|Библия — Коммуникации и протокол]]  ·  **Свод:** [[concept-bible-platinum]]
