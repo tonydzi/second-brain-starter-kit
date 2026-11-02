@@ -5,7 +5,7 @@
 One entry per published engine: what it does, what goes in and out, who calls it, and - where it has been written - what breaks and how to fix it.
 
 **What / input / output / config / called by** are read straight from the source, so they stay true as the source changes.
-**What breaks / how to tell / how to fix** is judgement and is written by hand. 63 of 248 engines have it so far; the rest say so plainly instead of guessing.
+**What breaks / how to tell / how to fix** is judgement and is written by hand. 66 of 251 engines have it so far; the rest say so plainly instead of guessing.
 
 Engines are ordered by how many published documents cite them, so the ones you are most likely to reach for are at the top.
 
@@ -3876,6 +3876,46 @@ Engines are ordered by how many published documents cite them, so the ones you a
 **What breaks / how to tell / how to fix.** Not yet written. Read the source before relying on this engine - do not assume it is safe to re-run.
 
 ---
+
+## `scripts/tg_doorbell.py`
+
+**What it does.** Wakes a named agent when a bus message addressed to it lands in the workroom chat: a 60-second tick reads new messages, stores them in local SQLite, and rings the agent's door with a one-time ack token.
+
+**Input.** command line: see `--help`. Environment: `TG_DOORBELL_CHAT`, `TG_DOORBELL_SENDERS` (comma list of numeric account ids), `TG_DOORBELL_HUMAN` (the name your own messages carry in `[Name→Agent]`), optional `DOORBELL_DB`. Doors: `~/.claude/doorbell_doors.json`.
+
+**Output.** SQLite state; a count line per tick. Prompts for the Grok door sit in `~/.claude/doorbell_prompts/` with owner-only rights and are removed after an hour.
+
+**Called by.** a scheduler you set up, every 60 seconds.
+
+**What breaks / how to tell / how to fix.** With no senders configured nothing is admitted: every message is stored with `admitted=0` and nobody is woken. Set `TG_DOORBELL_SENDERS`. `delivered` means the door was rung, not that the agent acted: only an ack closes a row, so `delivered` rows that stay are the ones to chase. A human who is not named in `TG_DOORBELL_HUMAN` does not match the envelope, and their message is ignored.
+
+---
+
+## `scripts/codex_defaults.py`
+
+**What it does.** One place for the Codex model and effort, the CLI arguments that carry them, and finding a compatible `codex` binary.
+
+**Input.** imported by other engines; `--help` for the command line.
+
+**Output.** values and argument lists; no files.
+
+**Called by.** `scripts/tg_doorbell.py`.
+
+**What breaks / how to tell / how to fix.** A Codex release can rename a model or flag. The door then reports a spawn failure rather than a silent loss. Update the constants at the top of the file.
+
+---
+
+## `scripts/rail_deadline.py`
+
+**What it does.** Bounded Telegram reads and disconnects: a hard timeout so one stuck connection cannot hang a tick forever.
+
+**Input.** imported by other engines.
+
+**Output.** the wrapped call's result, or an exit on timeout.
+
+**Called by.** `scripts/tg_doorbell.py`.
+
+**What breaks / how to tell / how to fix.** Too short a deadline on a slow connection looks like a dead rail. Raise the timeout in the caller.
 
 ## `scripts/machine_stamp.py`
 

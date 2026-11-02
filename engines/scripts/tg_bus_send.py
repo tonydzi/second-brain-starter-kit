@@ -47,7 +47,7 @@ def _menv_ping_env():
 
 ENV   = os.environ.get("BUS_PING_ENV") or _menv_ping_env() or r"%IMPORTS%\dialogs\.env"
 LOCK  = os.path.join(os.path.dirname(ENV), "_refresh_work_acct_a.lock")
-GROUP = int(os.environ.get("TG_BUS_GROUP", "-[id]"))
+GROUP = int(os.environ.get("TG_BUS_GROUP", "0"))
 _HOST = (os.environ.get("COMPUTERNAME") or "").upper()
 _LABEL = {"LAPTOP1": "laptop-HP17", "HUB1": "HUB1"}.get(_HOST, _HOST or "?")
 
