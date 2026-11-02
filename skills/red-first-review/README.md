@@ -141,7 +141,7 @@ The author's reply:
 > PR. All three findings confirmed and fixed, verified the same way you found
 > them (neutering each call site and checking the suite).
 
-— [prasanna8585, 1 Sep 2026](https://github.com/google/adk-python/pull/6957#issuecomment-[id])
+— [prasanna8585, 1 Sep 2026](https://github.com/google/adk-python/pull/6957#issuecomment-5489421299)
 
 That review was hand-rolled. This repository is that procedure made repeatable.
 
