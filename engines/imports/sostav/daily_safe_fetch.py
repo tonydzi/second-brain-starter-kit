@@ -38,12 +38,12 @@ API_HASH = os.environ["TELEGRAM_API_HASH"]
 SS = os.environ["TELEGRAM_SESSION_STRING_PERSONAL_ACCT"]
 
 SAFE = [
-    ("Puteshestviya", -[id]),
-    ("Zdorovie",      -[id]),
-    ("SemyaDom",      -[id]),
-    ("Znaniya",       -[id]),
-    ("Lekcii",        -[id]),
-    ("Obshchiy",      -[id]),
+    ("Puteshestviya", 0),
+    ("Zdorovie",      0),
+    ("SemyaDom",      0),
+    ("Znaniya",       0),
+    ("Lekcii",        0),
+    ("Obshchiy",      0),
 ]
 
 async def main():

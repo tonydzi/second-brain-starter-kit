@@ -84,7 +84,7 @@ REPO_CLONE = r"[путь владельца]"  # local clone for manual gh publi
 GH_SUBDIR = {"longread": "longreads", "dev-log": "devlog"}  # where each tier lands in the repo
 # RU posting target = @ClawRus megagroup. Resolve STRICTLY by this numeric id, never by
 # name: @clawrush (similar name) is a STRANGER's channel we must never post to.
-CLAWRUS_TG_ID = -[id]
+CLAWRUS_TG_ID = 0
 
 # --- co-founder CTA (standing Anton rule; memory cofounder-cta-public-contact).
 # The WhatsApp number is an EXPLICITLY Anton-authorized PUBLIC contact -> privacy

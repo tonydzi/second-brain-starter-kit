@@ -2,7 +2,7 @@
 
 *Читать на других языках: [English](README.md)*
 
-Второй мозг и постоянная память для **Claude Code и Codex**: 234 скилла в виде маркетплейса
+Второй мозг и постоянная память для **Claude Code и Codex**: 235 скилла в виде маркетплейса
 плагинов, сервер памяти, который подключается одной строкой манифеста, рабочий CRM-движок и
 шаблоны волта. Это система, которой [Palo Alto AI Research Lab](https://github.com/tonydzi)
 пользуется каждый день, очищенная от личных данных и урезанная до переносимого ядра:
@@ -123,7 +123,7 @@ Claude Code исполняет от начала до конца, человек
 | `SEED.md` / `SEED.en.md` | Стартовое сообщение для ПЕРВОЙ сессии Claude Code (рус / англ), с него всё начинается |
 | `BOOTSTRAP-CLAUDE.md` | Инструкция для самого Claude: как установить и адаптировать набор |
 | `CLAUDE-EXTERNAL.md` | Наши рабочие принципы (стиль работы ассистента), основа для твоего CLAUDE.md |
-| `skills/` | **Все 234 скилл-команды**, которыми система работает каждый день, карта: [`skills/INDEX.md`](skills/INDEX.md). Личные данные в примерах заменены на вымышленные ([как именно](docs/WHAT-IS-SHARED.md)) |
+| `skills/` | **Все 235 скилл-команды**, которыми система работает каждый день, карта: [`skills/INDEX.md`](skills/INDEX.md). Личные данные в примерах заменены на вымышленные ([как именно](docs/WHAT-IS-SHARED.md)) |
 | `templates/` | Шаблоны заметок второго мозга (концепты, решения, ревью недели/месяца) |
 | `crm-template/` | CRM: markdown «карточка = файл» + [движок](crm-template/ENGINE.md) со скорингом теплоты и безопасным исходящим, с демо-данными |
 | `docs/` | Как пользоваться CLAUDE.md, онбординг, что шарится |
@@ -177,7 +177,7 @@ npx skills add tonydzi/second-brain-starter-kit
 ## Дорожная карта
 
 **Сейчас: [v0.9.0](https://github.com/tonydzi/second-brain-starter-kit/releases/tag/v0.9.0).**
-234 скилла, 247 скриптов движков в `engines/`, шаблоны заметок, CRM-движок
+235 скилла, 247 скриптов движков в `engines/`, шаблоны заметок, CRM-движок
 со скорингом теплоты и безопасным исходящим, `SEED.md` + `BOOTSTRAP-CLAUDE.md` для первой
 сессии и `HANDOVER.md` для тех, у кого уже есть свой флот агентов.
 
@@ -251,6 +251,6 @@ Built and battle-tested at **Palo Alto AI Research Lab**, a fleet of Claude Code
 running 24/7 as a second brain and synthetic cofounder. Every skill here survived real
 production use before publication.
 
-- 📦 All 234 skills: https://github.com/tonydzi/second-brain-starter-kit
+- 📦 All 235 skills: https://github.com/tonydzi/second-brain-starter-kit
 - 👤 Author: **Anton Dziatkovskii**: Telegram [@tonydzi](https://t.me/tonydzi) · WhatsApp [+1 341 222 9178](https://wa.me/13412229178) · X [@Tony_Stef_](https://x.com/Tony_Stef_)
 - 🧪 **Engineers: want to test-drive this setup?** Message me, I hand out free starter seeds to engineers who test and report back. Custom skill requests welcome.
