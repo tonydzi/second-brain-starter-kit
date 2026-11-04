@@ -67,6 +67,20 @@ class AgentsTest(unittest.TestCase):
         present = {p.stem for p in agent_files()}
         self.assertEqual(listed, present, f"docs/SUBAGENTS.md lists {sorted(listed)}, files are {sorted(present)}")
 
+    def test_graph_analyst_pins_average_degree(self):
+        # "links per note" alone let one vault read 1.73 ("no better than search") or 3.07 ("working").
+        text = (AGENTS / "graph-analyst.md").read_text(encoding="utf-8")
+        line = next(l for l in text.splitlines() if "**Average degree**" in l)
+        self.assertIn("2 x distinct source-to-target links / notes", line)
+
+    def test_link_counting_agents_resolve_aliases(self):
+        # A link through an alias was lost by curator and reviewer: a note with 7 inbound links read as 6,
+        # and curator's "five or more" limit depends on that count.
+        for name in ("curator", "reviewer", "graph-analyst"):
+            with self.subTest(agent=name):
+                text = (AGENTS / f"{name}.md").read_text(encoding="utf-8")
+                self.assertIn("aliases", text.split("---", 2)[2], f"{name} must count links made through aliases")
+
 
 if __name__ == "__main__":
     unittest.main()

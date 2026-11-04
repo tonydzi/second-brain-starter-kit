@@ -10,7 +10,7 @@ Scope: notes whose frontmatter `date` or `updated` falls in the last seven days,
 
 Report, in this order and nothing else:
 
-1. **Added** - how many notes, by type, with the three most connected new ones as `[[links]]`.
+1. **Added** - how many notes, by type, with the three most connected new ones as `[[links]]`. Count links through a note's frontmatter `aliases` as well as its file name.
 2. **Attention** - the two or three topics that got most of the week, judged by notes and links, not by your taste.
 3. **Open contradictions** - every "Contested" entry still unresolved, with both sources and dates.
 4. **Next** - three concrete moves: a source worth ingesting, a gap note worth writing, a merge worth proposing to `curator`.
