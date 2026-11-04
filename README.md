@@ -52,7 +52,7 @@ marketplace, because its embeddings stack downloads about 2 GB on first start:
 
 It registers the [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) MCP
 server (`sgm-mcp`) and asks for one setting, the index folder (`BRAIN_INDEX_DIR`) you built with
-`uvx --from 'sqlite-graph-memory[embeddings]' sgm-index <your notes folder>`.
+`uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]' sgm-index <your notes folder>`.
 
 It is MIT, it costs nothing, and nothing here phones home. Take what you need, delete the rest,
 and open an issue if a skill breaks on your machine. Paths are documented in
