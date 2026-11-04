@@ -8,7 +8,7 @@ Who it is for: someone who wants an agent that keeps habits and memory across mo
 
 - Any agent that reads skills: `npx skills add tonydzi/second-brain-starter-kit`
 - Claude Code: `/plugin marketplace add tonydzi/second-brain-starter-kit`, then `/plugin install second-brain-skills@second-brain`
-- Memory (optional, about 2 GB on first start): `/plugin install second-brain-memory@second-brain`. It registers the `sgm-mcp` MCP server and asks for `BRAIN_INDEX_DIR`, the folder built by `uvx --from 'sqlite-graph-memory[embeddings]' sgm-index <notes folder>`.
+- Memory (optional, about 2 GB on first start): `/plugin install second-brain-memory@second-brain`. It registers the `sgm-mcp` MCP server and asks for `BRAIN_INDEX_DIR`, the folder built by `uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]' sgm-index <notes folder>`.
 - First time, no terminal: [ONBOARDING-LITE.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/ONBOARDING-LITE.md), a receive-only folder with four plain-text skills.
 - Verify offline: `cd crm-template/reference && python demo.py` scores the shipped sample. The priority column is expected not to reproduce exactly (three signals are not in the export); that gap is documented, not a bug.
 
