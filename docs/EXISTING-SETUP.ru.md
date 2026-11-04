@@ -73,18 +73,18 @@ macOS/Linux, в терминале:
 
 ```bash
 export BRAIN_INDEX_DIR="$PWD/.sgm-index"
-uvx --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-index ./notes
-uvx --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-ask --ab "What decision is recorded in the sample notes?"
-claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$BRAIN_INDEX_DIR" -- uvx --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-mcp
+uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-index ./notes
+uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-ask --ab "What decision is recorded in the sample notes?"
+claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$BRAIN_INDEX_DIR" -- uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-mcp
 ```
 
 Windows PowerShell, в терминале:
 
 ```powershell
 $env:BRAIN_INDEX_DIR = Join-Path (Get-Location) '.sgm-index'
-uvx --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-index ./notes
-uvx --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-ask --ab 'What decision is recorded in the sample notes?'
-claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$env:BRAIN_INDEX_DIR" -- uvx --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-mcp
+uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-index ./notes
+uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-ask --ab 'What decision is recorded in the sample notes?'
+claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$env:BRAIN_INDEX_DIR" -- uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-mcp
 ```
 
 Последняя команда только для Claude Code: область `local` относится к текущему проекту. Новый проверочный чат открывайте **в этой же папке**, затем выполните `claude mcp list` и проверьте подключение. В среде только с Codex последнюю строку пропустите. Для Codex добавьте **одну** запись в существующий `~/.codex/config.toml` (или конфиг, указанный настройками вашего запуска), сохранив остальные настройки:
@@ -96,7 +96,7 @@ claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$env:BRAIN_INDEX
 ```toml
 [mcp_servers.sqlite-graph-memory]
 command = "uvx"
-args = ["--from", "sqlite-graph-memory[embeddings]==0.3.5", "sgm-mcp"]
+args = ["--python", "3.12", "--from", "sqlite-graph-memory[embeddings]==0.3.5", "sgm-mcp"]
 env = { BRAIN_INDEX_DIR = "/absolute/path/to/.sgm-index" }
 ```
 

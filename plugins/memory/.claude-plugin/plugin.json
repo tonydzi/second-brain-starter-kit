@@ -12,7 +12,7 @@
     "index_dir": {
       "type": "directory",
       "title": "Index directory",
-      "description": "The folder `sgm-index` wrote for your notes (BRAIN_INDEX_DIR). Build it once with: uvx --from 'sqlite-graph-memory[embeddings]' sgm-index <your notes folder>",
+      "description": "The folder `sgm-index` wrote for your notes (BRAIN_INDEX_DIR). Build it once with: uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]' sgm-index <your notes folder>",
       "required": true
     }
   },
@@ -20,6 +20,8 @@
     "sgm-mcp": {
       "command": "uvx",
       "args": [
+        "--python",
+        "3.12",
         "--with",
         "sqlite-graph-memory[embeddings]>=0.3.1,<0.4",
         "sqlite-graph-memory"

@@ -53,7 +53,7 @@ npx skills add tonydzi/second-brain-starter-kit
 
 Плагин регистрирует MCP-сервер [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory)
 (`sgm-mcp`) и спрашивает одну настройку: папку индекса (`BRAIN_INDEX_DIR`), собранную командой
-`uvx --from 'sqlite-graph-memory[embeddings]' sgm-index <папка с заметками>`.
+`uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]' sgm-index <папка с заметками>`.
 
 MIT, бесплатно, никуда не звонит. Берите нужное, лишнее удаляйте, а если скилл сломался на вашей
 машине, заводите issue. Пути описаны в [docs/PATHS.md](docs/PATHS.md).
