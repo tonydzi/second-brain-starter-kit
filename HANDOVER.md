@@ -17,7 +17,7 @@
 
 | Слой | Боль | Где лежит |
 |---|---|---|
-| **Оркестрация флота** | несколько машин с общим состоянием разъезжаются молча | [claude-consensus](https://github.com/tonydzi/claude-consensus) |
+| **Оркестрация флота** | несколько машин с общим состоянием разъезжаются молча | [claw-consensus](https://github.com/tonydzi/claw-consensus) |
 | **Единая память** | агент не помнит вчера; вспоминание стоит токенов | [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) + этот репозиторий |
 | **CRM и исходящее** | агент, который умеет писать людям, однажды напишет плохо | `crm-template/` в этом репозитории |
 
@@ -33,12 +33,12 @@
 Если ты модель и человек сказал «разберись, что у них есть» — читай в этом порядке,
 он выстроен по убыванию переносимой пользы, а не по красоте.
 
-1. **[claude-consensus/FOR-ROBOTS.md](https://github.com/tonydzi/claude-consensus/blob/main/FOR-ROBOTS.md)**
+1. **[claw-consensus/FOR-ROBOTS.md](https://github.com/tonydzi/claw-consensus/blob/main/FOR-ROBOTS.md)**
    — карта многомашинного слоя, уже написанная для агента. Десять пунктов альфы,
    отранжированные. Начинай отсюда.
-2. **claude-consensus/docs/BUS.md** — шина: два рельса, ACK-дисциплина, три слоя
+2. **claw-consensus/docs/BUS.md** — шина: два рельса, ACK-дисциплина, три слоя
    самолечения синка.
-3. **claude-consensus/docs/PROTOCOL.md** — консенсус между машинами: propose → counter →
+3. **claw-consensus/docs/PROTOCOL.md** — консенсус между машинами: propose → counter →
    accept → commit, независимая верификация, детект split-brain.
 4. **`crm-template/ENGINE.md`** (здесь) — CRM: модель теплоты с экспоненциальным
    затуханием + единственная дверь наружу с бюджетом и аудитом. С демо-данными.
