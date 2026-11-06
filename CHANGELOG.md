@@ -9,6 +9,13 @@ change ships as a release and the journal is written in the same commit as the r
 GitHub handle, in the entry of the release that ships it. An idea taken from a closed PR is credited
 the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## v0.11.2 - 2026-11-06
+
+- **Security:** private ids and a colleague's name were removed from published pages.
+- Install docs and `llms` pin Python 3.12 in the `sqlite-graph-memory` uvx lines, so a fresh
+  install no longer picks an interpreter the package does not support.
+- The existing-setup guide follows the merged guide and PyPI 0.3.5.
+
 ## v0.11.1 - 2026-11-02
 
 **The core peer-lite skills now run on a stranger's fresh clone.** They called 13 scripts the kit did not ship, and the first attempt at shipping them passed `--help` and still died on first use. Split into four pull requests, with every review finding answered in its thread.
