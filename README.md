@@ -7,6 +7,8 @@ plugin marketplace, a memory server you can attach with one manifest, a working 
 vault templates. It is the system [Palo Alto AI Research Lab](https://github.com/tonydzi) runs
 every day, stripped of personal data and cut down to a portable core: **the method, not the data**.
 
+It follows [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) (April 2026): the agent reads and writes an Obsidian vault of linked markdown notes, steered by a schema file (`CLAUDE.md` / `AGENTS.md`), with one deliberate difference: notes marked `maintained_by: human` stay yours, and agents only propose changes to them. Independent project, not affiliated with or endorsed by him.
+
 **Pick your door:**
 
 - **New to this?** Start with [the light onboarding guide](ONBOARDING-LITE.md). Download a folder,

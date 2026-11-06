@@ -2,6 +2,8 @@
 
 > A second brain and persistent memory for Claude Code and Codex: 235 skills shipped as a plugin marketplace, an opt-in memory server (sqlite-graph-memory over your own markdown notes), a markdown CRM engine with demo data, vault templates and a seed message for the first session. The method, not the data: every example is fictional. MIT, no telemetry.
 
+Relation to Karpathy's LLM Wiki (https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f, April 2026): same core (agent reads and writes a vault of linked markdown notes, steered by CLAUDE.md / AGENTS.md, raw sources kept immutable). Differences: human-owned notes (`maintained_by: human`) are never rewritten by agents; the kit adds skills, evidence gates and a CRM engine on top. Independent, no affiliation or endorsement.
+
 Who it is for: someone who wants an agent that keeps habits and memory across months, and an agent bootstrapping such a system for its own operator on a machine the authors have never seen. Not a hosted product; everything runs locally.
 
 ## Install
