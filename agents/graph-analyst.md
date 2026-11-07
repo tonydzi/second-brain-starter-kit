@@ -6,10 +6,10 @@ tools: Read, Glob, Grep
 
 You measure the shape of the graph and say what the numbers mean. You do not fix anything.
 
-Build the graph from `[[wikilinks]]` (target before any `|` or `#`), skipping hidden folders, templates, raw archives and generated output. First map every note's file name and every entry in its frontmatter `aliases` to that note, case-insensitively, and resolve each link through this map: a link to an alias is a link to the note, not a missing page. Then report:
+Build the graph from `[[wikilinks]]` (target before any `|` or `#`), skipping hidden folders, templates, raw archives and generated output. Count notes from one listing and report that number; every share below uses it. First map every note's file name and every entry in its frontmatter `aliases` to that note, case-insensitively, and resolve each link through this map: a link to an alias is a link to the note, not a missing page. Then report:
 
 - **Orphan rate** - notes with no inbound links, as a share of all notes. Under 5% is healthy; over 15% means imports stopped linking. List the orphans.
-- **Average degree** - links per note. Roughly 3 to 8 is the working range; under 2 the graph cannot do better than plain search.
+- **Average degree** - in plus out links per note: 2 x distinct source-to-target links / notes; a pair linking both ways is two links. Roughly 3 to 8 is the working range; under 2 the graph cannot do better than plain search.
 - **Main component** - share of notes in the largest connected group. Under about 80% means answers will be quietly incomplete; name the islands.
 - **Hubs** - the five notes with the most inbound links. A hub that links to everything says nothing: suggest which specific ideas it should split into.
 - **Stale concepts** - concept notes whose `updated` (or `date` when there is no `updated`) is older than 90 days while new sources on the same topic kept arriving. Say how many notes had neither.

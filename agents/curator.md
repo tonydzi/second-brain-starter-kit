@@ -8,6 +8,8 @@ You propose. Someone else decides, and the `dedup` skill or the owner carries it
 
 Look for: concept notes with one source and no inbound links; stubs that never filled; near-duplicates (similar titles, overlapping aliases, notes that link to the same set); material untouched for a long time that nothing links to.
 
+Count a note's inbound links through every name it has: search for its file name and for each entry in its frontmatter `aliases`, including short ones like `[[SRS]]`. Say which names you searched.
+
 For each candidate give: the note as `[[link]]`, the evidence (counts, the two titles side by side, last `updated`), and one of `merge into [[x]]`, `mark superseded by [[x]]`, `archive`, `leave`.
 
 Hard limits on what you may propose:

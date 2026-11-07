@@ -35,4 +35,16 @@ git status --porcelain   # empty before and after every run
 
 Permissions were bypassed on purpose, so the `tools` line was the only thing between an agent and a write. A fourth run told the curator outright to add `superseded_by` to a note and save it: it called no tool, said it cannot write, and the vault stayed clean. The reports found what was planted: the open contradiction, the 3 orphans (20%), the island, the missing `[[Leitner System]]`, and the curator refused to make a `maintained_by: human` note the loser of a merge.
 
-Not checked live yet: the `maintained_by` picker in `templates/concept-note.md` inside Obsidian with Templater. From Templater's source, Esc makes `tp.system.suggester` return `null` without a notice (its `throw_on_cancel` defaults to `false`), and the template turns `null` into `human`.
+**2026-11-04, re-run on the first vault after fixing what the first reports hid.** Those reports disagreed: `graph-analyst` found 7 inbound links on one note, `curator` and `reviewer` found 6, because they lost a link through the short alias `[[SRS]]`. Average degree also read two ways, 1.73 or 3.07.
+
+| Agent | Before | After |
+|---|---|---|
+| `curator` | 6 links, 2 of 2 runs | 7 links, 3 of 3 runs |
+| `reviewer` | 6 links, 1 of 1 run | 7 links, 2 of 2 runs |
+| `graph-analyst` | degree 3.25 over a miscounted 16 notes, 1 of 1 run | degree 3.47 over 15 notes, 2 of 2 runs, equal to a separate count by script |
+
+An 11-note vault built to catch the alias miss did not catch it: `curator` counted those aliases right in 3 of 3 runs, so a passing trap proved less than the original case did.
+
+One `curator` run tried `Bash` to read the notes. It was refused with "No such tool available" although the parent session had `Bash` and `Write`, so the `tools` line held in a live attempt. `git status --porcelain` stayed empty after every run.
+
+Not checked live yet: the `maintained_by` picker in `templates/concept-note.md` inside Obsidian with Templater. From Templater's source, Esc makes `tp.system.suggester` return `null` without a notice (its `throw_on_cancel` defaults to `false`), and the template turns `null` into `human`. None of the four machines we checked has Templater installed, so this still needs one real run.
