@@ -56,7 +56,7 @@ Forever:
 The core job (the operator 2026-06-11): when **the operator dictates/types a task** in a
 whitelisted team chat, advise their team HOW to do it — grounded in chat history +
 Bible + vault, **CHEAP on tokens**. The events.py patch raises `kind=task` ONLY
-for the operator's own messages in these chats — PRINCIPAL_IDS = **5966672828**
+for the operator's own messages in these chats — PRINCIPAL_IDS = **[tg-id]**
 (the operator's own display name — their real dictation account in these chats, verified
 live 2026-06-13) + <tg-id> (@work_acct_a) fallback — so the watcher sleeps free
 until they actually give a task (no LLM spend while idle).
