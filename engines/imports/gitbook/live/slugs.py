@@ -65,7 +65,7 @@ titles = [
 "4.9. Autonomous Al-Agent Workflow Diagram",
 "5. Tokenomics, Token Sale, Nodes sale","5.1. FAIR LAUNCH","5.2. For VCs: Token Buy",
 "5.3. For VCs: Equity Sale","5.4. Designed for Tier-1 CEXs","5.5. $AAA Token Utility",
-"5.6. [человек] Launch","5.6. TGE — Q3","5.7. Tokenomics","5.8. [человек] Hands Distribution Program",
+"5.6. Genesis Launch","5.6. TGE — Q3","5.7. Tokenomics","5.8. [человек] Hands Distribution Program",
 "5.9. Revenue Share, Token Burning & Buyback Program","5.10. Inflation & Deflation",
 "5.11. [человек] Economy for Token Growth","5.12. Monetization",
 "5.13. AI Agents as NFTs: Ownership, Privacy & Profit Sharing",

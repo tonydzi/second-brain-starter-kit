@@ -7,6 +7,8 @@ Code actually useful for my work, not just for code." This file is your map.
 import their messages, or send anything on their behalf. The kit is built around a human who
 approves; keep it that way.
 
+**Works with Codex and Claude Code.** Setup for both agents is in the [README](README.md).
+
 Note: `README.md` is in Russian. This file is the English map to the same kit.
 
 ## What this repo is

@@ -1,6 +1,7 @@
 ---
 name: five-whys
-description: "Расследует корень повторного или системного дефекта по серии случаев. Триггеры: «а опять почему?», «пять почему», «чини корень», 3-й рецидив. Не использовать для 1-2 рядовых случаев, уже доказанной простой причины или единичного внешнего сбоя."
+description: "Investigate the root cause of a recurring or systemic defect across a series of incidents, not a single one. Use on the third recurrence, or when someone asks 'why again?', 'five whys', 'fix the root'. Skip for one or two ordinary cases, an already proven simple cause, or a one-off external outage. Triggers: /five-whys, five whys, fix the root."
+license: MIT
 consumer: "/tt · /retro · отдельная сессия разбора повторяющегося Claude↔Codex ping-pong"
 ---
 
@@ -185,3 +186,15 @@ carve-out (если есть), что уже проверено и что зап
   **реального** исхода записать ровно один вызов:
   `python "$HOME/.claude/scripts/_shared/skill_usage_log.py" --log five-whys --outcome ok --kind skill`.
   Синтетические/static/mutation-тесты боевой счётчик не трогают.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

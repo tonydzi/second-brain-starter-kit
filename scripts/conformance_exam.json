@@ -1,0 +1,45 @@
+{
+  "source": "skill_xvendor_run.py exam (route layer: does the model pick the right skill)",
+  "rails": {
+    "codex": {
+      "run": "20261019-204026",
+      "probes": 12,
+      "ok": 12,
+      "miss": 0,
+      "blind": 0,
+      "skills": 11
+    },
+    "gemini": {
+      "run": "20261019-204026",
+      "probes": 12,
+      "ok": 0,
+      "miss": 0,
+      "blind": 12,
+      "skills": 11
+    },
+    "glm": {
+      "run": "20261019-103636",
+      "probes": 0,
+      "ok": 0,
+      "miss": 0,
+      "blind": 0,
+      "skills": 0
+    },
+    "grok": {
+      "run": "20261019-204026",
+      "probes": 12,
+      "ok": 12,
+      "miss": 0,
+      "blind": 0,
+      "skills": 11
+    },
+    "mistral": {
+      "run": "20261019-103636",
+      "probes": 0,
+      "ok": 0,
+      "miss": 0,
+      "blind": 0,
+      "skills": 0
+    }
+  }
+}

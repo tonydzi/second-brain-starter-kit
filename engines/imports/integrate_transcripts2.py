@@ -119,11 +119,11 @@ def get_mapping(subfolder_name):
         return EXPLICIT[subfolder_name]
     # Heuristic fallback
     n = subfolder_name.lower()
-    if any(k in n for k in ["randall", "[человек]", "foerster", "[человек]", "aurelian", "megali", "biglino", "masterov"]):
+    if any(k in n for k in ["randall", "levi", "foerster", "lucius", "aurelian", "megali", "biglino", "masterov"]):
         return ("concept-alternative-history", "external", "ai")
     if any(k in n for k in ["lobster", "dao"]):
         return ("concept-dao", "external", "ai")
-    if any(k in n for k in ["biohack", "beloveshkin", "health", "huberman", "[человек]"]):
+    if any(k in n for k in ["biohack", "beloveshkin", "health", "huberman", "levin"]):
         return ("concept-biohacking-nutrition", "external", "ai")
     if any(k in n for k in ["crypto", "token", "blockchain", "defi"]):
         return ("concept-blockchain", "external", "ai")

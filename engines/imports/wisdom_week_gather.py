@@ -65,7 +65,7 @@ def main():
             continue
         # prune ANY dot-dir (.stversions Syncthing history, .git, etc.) and stray
         # *.sync-conflict-* copies -- else the digest fills with duplicate ghosts
-        # ([[stversions-scan-class]] vault-[человек] gotcha).
+        # ([[stversions-scan-class]] vault-walker gotcha).
         if any(part.startswith(".") for part in p.parts) or ".sync-conflict-" in p.name:
             continue
         # cheap mtime pre-filter: skip files untouched since cutoff (a note edited

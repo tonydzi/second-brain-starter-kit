@@ -1,0 +1,72 @@
+# Second Brain Starter Kit
+
+> A second brain and persistent memory for Claude Code and Codex: 235 skills shipped as a plugin marketplace, an opt-in memory server (sqlite-graph-memory over your own markdown notes), a markdown CRM engine with demo data, vault templates and a seed message for the first session. The method, not the data: every example is fictional. MIT, no telemetry.
+
+Relation to Karpathy's LLM Wiki (https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f, April 2026): same core (agent reads and writes a vault of linked markdown notes, steered by CLAUDE.md / AGENTS.md, raw sources kept immutable). Differences: human-owned notes (`maintained_by: human`) are never rewritten by agents; the kit adds skills, evidence gates and a CRM engine on top. Independent, no affiliation or endorsement.
+
+Who it is for: someone who wants an agent that keeps habits and memory across months, and an agent bootstrapping such a system for its own operator on a machine the authors have never seen. Not a hosted product; everything runs locally.
+
+## Install
+
+- Any agent that reads skills: `npx skills add tonydzi/second-brain-starter-kit`
+- Claude Code: `/plugin marketplace add tonydzi/second-brain-starter-kit`, then `/plugin install second-brain-skills@second-brain`
+- Memory (optional, about 2 GB on first start): `/plugin install second-brain-memory@second-brain`. It registers the `sgm-mcp` MCP server and asks for `BRAIN_INDEX_DIR`, the folder built by `uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]' sgm-index <notes folder>`.
+- First time, no terminal: [ONBOARDING-LITE.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/ONBOARDING-LITE.md), a receive-only folder with four plain-text skills.
+- Verify offline: `cd crm-template/reference && python demo.py` scores the shipped sample. The priority column is expected not to reproduce exactly (three signals are not in the export); that gap is documented, not a bug.
+
+## Start here: 25 skills
+
+- [/secondop](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/secondop/SKILL.md): a second opinion from a PANEL of external LLMs (Codex + Grok + Gemini) on any plan or diff: a model never reviews itself
+- [/tt](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/tt/SKILL.md): the quality gate after every build: run it live, break it on purpose, prove it with a counter: only then say "done"
+- [/retro](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/retro/SKILL.md): end-of-session retrospective that routes every durable artifact to its home and hands you a compact handoff
+- [/handoff](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/handoff/SKILL.md): a self-contained "semicolon" so another session, person or machine continues exactly where you stopped
+- [/skill-gap](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/skill-gap/SKILL.md): audits your sessions for repeated manual patterns and tells you which skill to install or build next
+- [/precedent](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/precedent/SKILL.md): before you decide anything structural: did we already decide it, and did we already reject it?
+- [/declined](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/declined/SKILL.md): the registry of rejected ideas, so the agent stops re-pitching what you already said no to
+- [/issue-match](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/issue-match/SKILL.md): measures a target repo's queue before you spend a PR: how many of the last closed PRs were actually merged
+- [/research-swarm](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/research-swarm/SKILL.md): turns any hypothesis into an argument map from 5 independent lenses: never a verdict
+- [/last30days](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/last30days/SKILL.md): deterministic "what changed in the last 30 days on topic X" before a strategic call
+- [/ask](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/ask/SKILL.md): semantic search over your curated vault: the smallest relevant slice, not a corpus dump
+- [/search](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/search/SKILL.md): full-text search across every conversation you ever had, locally, 0 tokens
+- [/chat-search](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/chat-search/SKILL.md): find which past Claude Code session discussed a thing: and resume it
+- [/resume-last](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/resume-last/SKILL.md): continue the previous chat after a crash, even on another machine where native resume can't reach
+- [/1](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/1/SKILL.md): hard-crash recovery: where were we + is everything alive + restore the history, in one command
+- [/arch](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/arch/SKILL.md): the deterministic map of everything your system is made of, and what fell off it
+- [/brain](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/brain/SKILL.md): one-glance health of a memory/RAG stack so failures stop being silent
+- [/sync-check](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/sync-check/SKILL.md): green/red report on file sync across a machine fleet, including the silent sync-conflict count
+- [/quarantine](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/quarantine/SKILL.md): holds unsigned or unverified incoming deliverables instead of applying them: fail-closed
+- [/obsidian-ingest](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/obsidian-ingest/SKILL.md): universal import pipeline: any source becomes well-linked atomic notes with provenance
+- [/defuddle](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/defuddle/SKILL.md): clean web→markdown without ads or nav: 40-60% fewer tokens than a raw fetch
+- [/dedup](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/dedup/SKILL.md): find and merge near-duplicate notes with a supersede-not-delete policy
+- [/taste-check](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/taste-check/SKILL.md): a content quality gate: is this fit to show, before anyone sees it
+- [/intake](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/intake/SKILL.md): one pass routes a new rule into every home it needs, so parallel sessions see it on their own
+- [/mcp](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/mcp/SKILL.md): health-check your MCP servers and scout new ones before any integration work
+
+Full map of all 234: [skills/INDEX.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/skills/INDEX.md)
+
+## Principles
+
+- Method, not data: no real names, chat ids, paths, machine names or credentials anywhere in the repo.
+- AK-47: the simplest thing that works and that a non-engineer can repair. A simplification that removes a rule without losing anything is the most valuable change.
+- Receipts, not "understood": a skill proves what it saved ("wrote X to note Y").
+- A test that never went red proves nothing: break a copy, watch the check fail, then say "done". Drop-in spec: [RED-PROOF.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/RED-PROOF.md).
+- Every engine has a passport (what it does, input, output, who calls it, what breaks, how to fix): [engines/PASSPORTS.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/engines/PASSPORTS.md).
+- Portable paths only, no drive letters.
+- Money, deletion and anything leaving the machine happen only on the operator's explicit OK.
+
+## Key files
+
+- [README.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/README.md): overview and install
+- [SEED.en.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/SEED.en.md): the first message to paste into a new Claude Code session
+- [BOOTSTRAP-CLAUDE.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/BOOTSTRAP-CLAUDE.md): instructions to the installing agent
+- [CLAUDE-EXTERNAL.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/CLAUDE-EXTERNAL.md): working principles that become the user's own CLAUDE.md
+- [AGENTS.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/AGENTS.md): how to work in this repo and verify a change
+- [HANDOVER.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/HANDOVER.md): entry point for readers who already run a fleet of agents
+- [crm-template/](https://github.com/tonydzi/second-brain-starter-kit/blob/master/crm-template): "card = file" CRM with a scoring engine and demo data
+- [docs/WHAT-IS-SHARED.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/docs/WHAT-IS-SHARED.md): exactly what is and is not published
+- [CHANGELOG.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/CHANGELOG.md): what shipped, in plain words
+
+## Related
+
+- [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory): the memory server behind the optional plugin, on PyPI and in the MCP Registry
+- Author: Anton Dziatkovskii, Palo Alto AI Research Lab, https://github.com/tonydzi

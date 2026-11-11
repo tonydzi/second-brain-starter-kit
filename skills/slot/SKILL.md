@@ -1,7 +1,8 @@
 ---
 name: slot
-description: "РЕЕСТР ПЕРЕИСПОЛЬЗУЕМЫХ СЕССИЙ + выдача слота: породить ВИДИМУЮ Антону фоновую сессию БЕЗ апрув-окна, переиспользовав… Триггеры: /slot, /слот, «дай слот», «покажи слоты», «реестр сессий», «какие сессии можно переиспользовать», «запусти сессию в фоне», «нужна отдельная сессия», «сколько слотов осталось», «верни рутину назад», «slot», «reuse a session»."
-version: 1.0.0
+description: "Registry of reusable agent sessions and slot allocation: claim a free scheduled-task slot instead of creating a new session, set its prompt and fire time, and release it when done. Use when you need to spawn or reuse a visible background session."
+version: 1.1.0
+license: MIT
 ---
 
 # /slot — реестр переиспользуемых сессий
@@ -60,22 +61,52 @@ update_scheduled_task(
 Выход один: `update_scheduled_task` проходит **молча**. Значит новую видимую сессию мы не
 создаём, а **переиспользуем задачу, которая уже отработала**. Пул таких задач и есть реестр.
 
-## ⚠️ Сколько слотов ты РЕАЛЬНО видишь (поправка 2026-08-20, замер [машина флота])
+## ⚠️ Пул ≠ достижимость: 👻 НЕДОСТИЖИМЫЕ слоты (поправка 08.10.2026)
 
-Прежде чем поверить числу из `--list`: движок берёт **один** стор —
-`max(files, key=os.path.getmtime)` (`session_slot.py:108`), а задачи приложения лежат
-в **нескольких** сторах разными наборами. Замер на [машина флота] 20.08: свежий по mtime стор — 6 задач,
-второй — 73, объединение — 79. Классификация по одному стору: **5 свободных**, по объединению:
-**61**. То есть `--list` может показать пустой пул там, где слотов десятки, и ты без нужды
-уйдёшь в `create_scheduled_task`.
+Этот раздел переписан дважды, и оба прежних совета мертвы. Для ясности — что когда:
 
-**Что делать сейчас:** увидел «слотов нет / мало» — не верь, пересчитай объединением:
+* **20.08.2026** движок брал ОДИН стор по `mtime` и показывал пустой пул там, где слотов
+  десятки. **Починено в тот же день** (`_shared/task_store.py`, объединение всех сторов).
+  Прежний совет «пересчитай объединением руками через `routine_registry_collect.py`»
+  больше не нужен: `--list` уже читает объединение.
+* **08.10.2026** вскрылась ВТОРАЯ половина, из-за которой семья
+  `slot-registry-points-to-deleted-tasks` набрала **шесть** случаев (26.08 · 08.09 · 30.09 ·
+  01.10 · 03.10 · 07.10). Объединение отвечает на вопрос «что вообще **зарегистрировано**»,
+  а `update_scheduled_task` достаёт **только стор ОТКРЫТОГО профиля**. Замер 08.10 на Mac16:
+  объединение **110** задач из 7 сторов, активный стор — **85**, значит **25 ПРИЗРАКОВ**:
+  папка `scheduled-tasks/<id>/SKILL.md` на диске жива, записи в реестре активного профиля
+  НЕТ. По такому id `update` отвечает `not found`.
+
+**Что делать сейчас: ничего руками.** Фильтрует код, а не глаз (починка 05.10 печатала тег
+стора — и 07.10 призрака всё равно взял БЕЗЛЮДНЫЙ прогон, глаз там нет).
+
+`--list` теперь всегда печатает две строки поля зрения:
 ```
-python ~/.claude/scripts/routine_registry_collect.py   # читает ВСЕ сторы, дедуп по lastRunAt
+активный стор: d1376d09/7f07033b (достижимо для update: 85 задач)
+НЕДОСТИЖИМЫХ слотов: 24 (чужие профили приложения; update -> 'not found', в пул --claim не идут)
 ```
-и сверься с `[шина]/routine-registry/<узел>.jsonl` (поле `schedule`/`last7`).
-Починка самого движка — задача `task-2026-08-20-session-slot-store-union`.
-Канон: память `task-registrations-live-in-disk-stores`, `00-System/Session-Slots-Passport.md` §Поправка 20.08.
+и отдельный блок `👻 НЕДОСТИЖИМЫЕ` с их именами. В пул `--claim` они **не попадают**.
+
+**Коды выхода `--claim`:**
+
+| rc | что значит | что делать |
+|---|---|---|
+| 0 | слот выдан и ДОСТИЖИМ | `update_scheduled_task` |
+| 3 | пул пуст | **один** `create` с диалогом, гейт пропустит |
+| 3 + `pool_empty_active_store` | свободное есть, но всё — призраки чужих профилей | **один** `create`, не угадывать |
+| 4 | активный стор определить не смог (рядом нет `local_*.json`) | открыть приложение и повторить, либо `create`, либо осознанно `--any-store` |
+
+Осознанный обход: `--any-store` — выдаст слот из чужого стора и прямо напечатает, что
+`not found` **ожидаем**. Нужен, чтобы обход оставался в журнале заявок, а не делался руками.
+
+Как определяется активный стор: сперва аккаунт, который **приложение объявило само**
+(`config.json:lastKnownAccountUuid`), затем org — по свежести `local_*.json` рядом со
+стором. `mtime` самого стора не используется: он отвечает «куда писали последним».
+
+Сторож: `python3 ~/.claude/scripts/_test_session_slot_active_store.py` (16 проверок).
+Канон: память `task-registrations-live-in-disk-stores`, дверь семьи в `prior_art.py`
+(`FAMILY_DOORS["slot-registry-points-to-deleted-tasks"]`),
+`00-System/Session-Slots-Passport.md` §Поправка 20.08.
 
 ## Реестр — что в пуле
 
@@ -114,7 +145,12 @@ python ~/.claude/scripts/session_slot.py --claim "<суть сессии>"
 ```
 Слот бронируется атомарно (файл с `O_EXCL`) — два одновременных `--claim` не получат один
 и тот же слот. Пул пуст → `exit 3`: тогда честный путь — **один** `create` с диалогом, и
-гейт сам его пропустит.
+гейт сам его пропустит. `exit 4` → активный профиль неопределим, слот НЕ выдан
+(см. таблицу кодов выше): это отказ по делу, а не поломка.
+
+⛔ Выданный слот всегда из **активного** стора — призраки чужих профилей в пул не идут
+(поправка 08.10 выше). Увидел `not found` на свежем `--claim` — это не «как обычно»,
+а новый дефект: прогони `--list` и сторож `_test_session_slot_active_store.py`.
 
 Не трогать выключенные рутины вовсе: `--no-convert`.
 
@@ -125,8 +161,8 @@ python ~/.claude/scripts/auto_session_name.py "<суть>"
 ```
 
 ⛔ **ВРЕМЯ ДЛЯ `fireAt` РУКАМИ НЕ ПИШЕТСЯ НИКОГДА** (forever-fix 10.09.2026, класс из 6 случаев
-11.08-09.09, узлы HP17/[машина флота]/хаб). Причина доказана: `fireAt` судят часы ПРИЛОЖЕНИЯ, а шелл
-врал то на 73 мин (HP17 31.08), то на 11 ч ([машина флота] 08.09), то на 7 ч (ноут спал между ходами
+11.08-09.09, узлы HP17/Mac16/хаб). Причина доказана: `fireAt` судят часы ПРИЛОЖЕНИЯ, а шелл
+врал то на 73 мин (HP17 31.08), то на 11 ч (Mac16 08.09), то на 7 ч (ноут спал между ходами
 09.09) — приложение было право ВСЕ 6 раз. Дверь читает самую свежую метку, которую записало
 САМО приложение, и считает от неё:
 ```
@@ -231,3 +267,15 @@ python ~/.claude/scripts/_test_session_slot.py      # ждём "ВСЁ ЗЕЛЕ�
 `/sessions` — что работает **сейчас** (read-only, телефонный формат). Этот скилл про другое:
 где взять место под **новую** сессию. Паспорт детали:
 `00-System/Session-Slots-Passport.md`.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

@@ -1,0 +1,41 @@
+name: Platform run report
+description: You ran the kit or a skill on some agent or OS. Paste what you typed and what came back.
+title: "Run report: <platform> <what you ran>"
+body:
+  - type: input
+    id: platform
+    attributes:
+      label: Platform and version
+      placeholder: "Gemini CLI 0.x on Ubuntu 24.04"
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Kit commit
+      description: Output of `git rev-parse --short HEAD` in your clone.
+    validations:
+      required: true
+  - type: textarea
+    id: transcript
+    attributes:
+      label: Commands and output
+      description: Exactly what you typed and what it printed. Pasted, not summarised.
+      render: text
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - Worked as the docs say
+        - Worked, but the docs were wrong somewhere
+        - Broke
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: What differed from the docs (optional)
+      description: File and line if you can, for example docs/INSTALL-GEMINI.md line 28.

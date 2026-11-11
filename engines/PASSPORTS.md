@@ -1,9 +1,11 @@
 # Engine passports
 
+**Snapshot boundary (1 November 2026).** These are exported engine snapshots, not a complete copy of the lab's current internal runtime. In particular, `imports/brain_ask.py` does not include the newer internal layered-recall pipeline and its dependency closure. For a new portable memory install, use [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) and the [existing-setup guide](../docs/EXISTING-SETUP.ru.md). A cited engine name is not evidence that all its runtime dependencies ship here.
+
 One entry per published engine: what it does, what goes in and out, who calls it, and - where it has been written - what breaks and how to fix it.
 
 **What / input / output / config / called by** are read straight from the source, so they stay true as the source changes.
-**What breaks / how to tell / how to fix** is judgement and is written by hand. 61 of 246 engines have it so far; the rest say so plainly instead of guessing.
+**What breaks / how to tell / how to fix** is judgement and is written by hand. 66 of 251 engines have it so far; the rest say so plainly instead of guessing.
 
 Engines are ordered by how many published documents cite them, so the ones you are most likely to reach for are at the top.
 
@@ -3397,7 +3399,7 @@ Engines are ordered by how many published documents cite them, so the ones you a
 
 **What it does.** season_state.py — season-bible контент-фабрики v2 (S3 reality-show континьюити-слой).
 
-**Input.** command line: `--arc`, `--[человек]`, `--episode`, `--id`, `--json`, `--name`, `--text`, `--title`
+**Input.** command line: `--arc`, `--cliff`, `--episode`, `--id`, `--json`, `--name`, `--text`, `--title`
 
 **Output.** writes files (see the paths near the top of the source)
 
@@ -3875,3 +3877,70 @@ Engines are ordered by how many published documents cite them, so the ones you a
 
 ---
 
+## `scripts/tg_doorbell.py`
+
+**What it does.** Wakes a named agent when a bus message addressed to it lands in the workroom chat: a 60-second tick reads new messages, stores them in local SQLite, and rings the agent's door with a one-time ack token.
+
+**Input.** command line: see `--help`. Environment: `TG_DOORBELL_CHAT`, `TG_DOORBELL_SENDERS` (comma list of numeric account ids), `TG_DOORBELL_HUMAN` (the name your own messages carry in `[Name→Agent]`), optional `DOORBELL_DB`. Doors: `~/.claude/doorbell_doors.json`.
+
+**Output.** SQLite state; a count line per tick. Prompts for the Grok door sit in `~/.claude/doorbell_prompts/` with owner-only rights and are removed after an hour.
+
+**Called by.** a scheduler you set up, every 60 seconds.
+
+**What breaks / how to tell / how to fix.** With no senders configured nothing is admitted: every message is stored with `admitted=0` and nobody is woken. Set `TG_DOORBELL_SENDERS`. `delivered` means the door was rung, not that the agent acted: only an ack closes a row, so `delivered` rows that stay are the ones to chase. A human who is not named in `TG_DOORBELL_HUMAN` does not match the envelope, and their message is ignored.
+
+---
+
+## `scripts/codex_defaults.py`
+
+**What it does.** One place for the Codex model and effort, the CLI arguments that carry them, and finding a compatible `codex` binary.
+
+**Input.** imported by other engines; `--help` for the command line.
+
+**Output.** values and argument lists; no files.
+
+**Called by.** `scripts/tg_doorbell.py`.
+
+**What breaks / how to tell / how to fix.** A Codex release can rename a model or flag. The door then reports a spawn failure rather than a silent loss. Update the constants at the top of the file.
+
+---
+
+## `scripts/rail_deadline.py`
+
+**What it does.** Bounded Telegram reads and disconnects: a hard timeout so one stuck connection cannot hang a tick forever.
+
+**Input.** imported by other engines.
+
+**Output.** the wrapped call's result, or an exit on timeout.
+
+**Called by.** `scripts/tg_doorbell.py`.
+
+**What breaks / how to tell / how to fix.** Too short a deadline on a slow connection looks like a dead rail. Raise the timeout in the caller.
+
+## `scripts/machine_stamp.py`
+
+**What it does.** One form of the "which machine wrote this" line: `line` prints it, `apply` inserts it, `lint` checks it, `sig` prints the short signature for a message.
+
+**Input.** command line: `line`, `apply <paths>`, `lint <paths>`, `sig`, with `--agent`, `--operator`, `--day`, `--force`, `--dry-run`, `--allow-missing`, `--expect-here`, `--outbound`. Optional `fleet_nodes.py` next to it, as the node registry.
+
+**Output.** edits the named text files; prints a receipt per file and a coverage line ("cannot judge N of M").
+
+**Called by.** `skills/taste-check/SKILL.md`, `skills/pr-reply/SKILL.md`, and by hand.
+
+**What breaks / how to tell / how to fix.** No registry is the normal fresh state: your own machine name is checked, any other name is "cannot judge" and `lint` exits 2. Add `fleet_nodes.py` if you run several machines. `.json`, `.jsonl` and `.csv` have no comment syntax, so `apply` refuses them and leaves them untouched. A stamp from another machine reads `foreign(...)`: if you edited the text here, `apply --force`.
+
+---
+
+## `scripts/paragraph_lint.py`
+
+**What it does.** Finds prose paragraphs longer than three sentences. 0 tokens, no network.
+
+**Input.** command line: file paths or stdin, `--max`, `--json`.
+
+**Output.** prints each violation with its line; exit 1 if any.
+
+**Called by.** `skills/taste-check/SKILL.md`, `skills/ai-slop/SKILL.md`.
+
+**What breaks / how to tell / how to fix.** It counts sentences by punctuation, so abbreviations can raise the count. Code blocks, tables, lists, headings and frontmatter are out of scope. To fix a hit, add a blank line where the thought changes; do not rewrite the words.
+
+---

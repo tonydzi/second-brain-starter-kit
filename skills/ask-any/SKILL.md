@@ -1,6 +1,7 @@
 ---
 name: ask-any
-description: "ПОРУЧИТЬ РАБОТУ ЛЮБОЙ ЖИВОЙ LLM, а не только Claude: задание уходит ОДНОВРЕМЕННО на codex + grok + gemini + claude, побеждает первая ответившая. Триггеры: «/ask-any», «/любой», «/раздай», «спроси всех», «спроси кого угодно», «дай это другой ллм», «claude кончился», «бак пуст», «спроси параллельно», «у кого спросить», «ask any», «race the rails»"
+description: "Hand a task to whichever LLM is alive, not only Claude: the prompt goes to Codex, Grok, Gemini and Claude CLIs at the same time and the first valid answer wins. Use when Claude's quota is exhausted, a vendor is down, or you want a quick parallel answer from other models. Triggers: /ask-any, ask anyone, give this to another LLM, quota empty, ask in parallel, race the rails."
+license: MIT
 version: 1.0.0
 ---
 
@@ -83,3 +84,15 @@ python claude_run.py <timeout> --extfallback codex-agent --stdin <файл> -- c
 
 Канон: память `other-llm-rails-were-review-only`, `green-exit-on-spent-bucket`,
 CLAUDE.md §6.3 «выгребай лимиты».
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

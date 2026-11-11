@@ -1,6 +1,7 @@
 ---
 name: retro-lost
-description: "Ретро для БРОШЕННОЙ сессии (>24ч без касания = потеряшка, anton 02.09; ретро не делалось) — переработанный /retro под холодный контекст. Триггеры: “/retro-lost“, “ретро брошенной сессии“, “догони ретро“, “закрой хвост сессии <id>“, а также рутина auto-hub-260811-retro-lost-nightly (10 сессий/ночь, Opus)"
+description: "Run a retrospective for an abandoned agent session (untouched for over 24 hours, never closed with a retro): rebuild context cold from the transcript, list what was built, sort Keep/Drop/Try and file the durable parts. Use from a nightly routine or on demand. Triggers: /retro-lost, retro for an abandoned session."
+license: MIT
 consumer: "рутина auto-hub-260811-retro-lost-nightly · Антон/агент по команде /retro-lost · /retro шаг 6a-бис"
 version: 1.0.0
 ---
@@ -205,15 +206,15 @@ mark-done всем её сессиям — так ночь закрывает 20
 
 **Почему децентрализация вообще возможна и обязана быть — ЗАМЕР 22.08:** транскрипты
 `~/.claude/projects/*/*.jsonl` НЕ синкаются между узлами (строка `/projects` в `~/.claude/.stignore`;
-проверено — в общих project-папках на хабе и на Маяке по 0 `.jsonl`), маркеры done в
+проверено — в общих project-папках на хабе и на Якорье по 0 `.jsonl`), маркеры done в
 `~/.claude/logs/` тоже не в whitelist синка. Значит: узел физически видит ТОЛЬКО свои сессии,
 хаб чужие потеряшки разобрать не может НИКОГДА, два узла не подерутся за одну сессию и общий
 реестр маркеров не нужен (single-writer-shard не требуется — шард и так один на узел).
-Очереди на 22.08: хаб 627, Маяк 88 при 0 маркеров (то есть 88 сессий Маяка не разбирал никто).
+Очереди на 22.08: хаб 627, Якорь 88 при 0 маркеров (то есть 88 сессий Якорьа не разбирал никто).
 
 ⚠️ **ИСКЛЮЧЕНИЕ, найдено 10.09.2026 (хаб, прогон ночной догонялки): проекты `ssh-*` видны ДВУМ
-узлам.** Сессия `b1398d37` работала на Маяке в `/root/Obsidian/…`, а её транскрипт лежит на хабе
-в проекте `ssh-b1398d37-…`, потому что ssh-сессию открыли отсюда. Маяк разобрал её 23.08 и
+узлам.** Сессия `b1398d37` работала на Якорье в `/root/Obsidian/…`, а её транскрипт лежит на хабе
+в проекте `ssh-b1398d37-…`, потому что ssh-сессию открыли отсюда. Якорь разобрал её 23.08 и
 поставил СВОЙ локальный маркер, хаб об этом маркере не знает и получил её в очередь снова
 17 дней спустя. Значит утверждение «два узла не подерутся» верно для обычных проектов и НЕВЕРНО
 для `ssh-*`: там от дубля спасает только RECALL (шаг 2), поэтому у кандидата с проектом `ssh-*`
@@ -265,3 +266,15 @@ RECALL по слову из первого промпта в `01-Conversations/C
 - ⛔ Узел коллеги разбирает СВОИ сессии; чужое личное в общий волт не выносить (обобщённо).
 - Ноутбук ночью спит → слот дневной (Антон: «или там днём, учитывая, что в ноутбуке у кого-то
   ночью спят»). Слот выбирает узел под своего человека, не хаб.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

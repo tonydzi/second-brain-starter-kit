@@ -1,6 +1,7 @@
 ---
 name: windowless
-description: "Убрать мелькающие ЧЁРНЫЕ КОНСОЛЬНЫЕ ОКНА (cmd/powershell/Windows Terminal) на любом Windows-узле флота: найти все три источника уликами, погасить обратимо, доказать цифрой «до → после». Триггеры: “/windowless“, “/окошки“, “чёрные окна“, “чёрные окошки“, “мигают окна“, “лезут окна“, “мелькает консоль“, “окна воруют фокус“, “black windows“, “console windows popping“"
+description: "Stop black console windows (cmd, PowerShell, Windows Terminal) from flashing and stealing focus on a Windows machine. Use when scheduled tasks, hooks or background scripts pop up consoles: finds all three sources with evidence, silences them reversibly and proves the before and after count. Triggers: /windowless, black windows, console windows popping, windows steal focus."
+license: MIT
 version: 1.0.0
 ---
 
@@ -33,7 +34,7 @@ ssh-keygen). Отличие от №2 по улике: заголовок окн
 Флип родительской задачи в S4U эти окна тоже гасит, но НЕ лечит класс — тот же скрипт из
 живой сессии (источник №1) снова мигает. Корень чинится в коде:
 `creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0` на каждый
-`subprocess.run` консольного exe. Починено в `fleet_sign.py` 10.08 (ZBOOKG8), selftest PASS;
+`subprocess.run` консольного exe. Починено в `fleet_sign.py` 10.08 (LAPTOP-1), selftest PASS;
 файл разъезжается синком, но проверяй на узле фактом (§7.3-бис).
 
 ## 2. Порядок работы
@@ -126,3 +127,15 @@ UAC на каждой машине** — доставка ≠ применени
 (история флипа, mapped-drive карв-аут), [[s4u-needs-uac-preregister-interactive]] (почему
 UAC), [[deterministic-script-gotchas]] (BOM, хардкоды).
 Канон: §5.5 сторож не живёт в том, что сторожит · §7.3-бис раскатка на весь флот · §2.4 глазами.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

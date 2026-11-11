@@ -66,14 +66,14 @@ def deterministic(md, title):
             frag_ct = sum(1 for h in heads if h.strip() and is_fragment(h))
             if len(heads) >= 3 and frag_ct >= 2:
                 # collapse this run: join fragments, empty head => para break
-                [человек], cur = [], []
+                paras, cur = [], []
                 for h in heads:
                     if h.strip() == '':
-                        if cur: [человек].append(''.join(cur)); cur = []
+                        if cur: paras.append(''.join(cur)); cur = []
                     else:
                         cur.append(h)
-                if cur: [человек].append(''.join(cur))
-                out.append(('RUN', [человек]))
+                if cur: paras.append(''.join(cur))
+                out.append(('RUN', paras))
             else:
                 # not exploded -> keep verbatim
                 for k in range(i, j):
@@ -92,15 +92,15 @@ def deterministic(md, title):
         if tag == 'VERB':
             rendered.append(val)
         else:
-            [человек] = val[:]
-            if not used_title and [человек]:
-                p0 = [человек][0]
+            paras = val[:]
+            if not used_title and paras:
+                p0 = paras[0]
                 if (not title_trunc) and re.sub(r'[\s#]+', '', clean_title) == re.sub(r'[\s#]+', '', p0):
-                    [человек][0] = '# ' + clean_title
+                    paras[0] = '# ' + clean_title
                 else:
-                    [человек][0] = '# ' + p0
+                    paras[0] = '# ' + p0
                 used_title = True
-            rendered.append('\n\n'.join([человек]))
+            rendered.append('\n\n'.join(paras))
     text = '\n'.join(rendered)
     text = re.sub(r'\n{3,}', '\n\n', text).strip('\n')
     return text

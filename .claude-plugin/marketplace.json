@@ -1,6 +1,6 @@
 {
   "name": "second-brain",
-  "description": "[человек]-tested Claude Code skills from a live second-brain and AI-cofounder operation at Palo Alto AI Research Lab: quality gates, retrospectives, memory and recall, fleet coordination. Method, not data.",
+  "description": "Battle-tested Claude Code skills from a live second-brain and AI-cofounder operation at Palo Alto AI Research Lab: quality gates, retrospectives, memory and recall, fleet coordination. Method, not data.",
   "owner": {
     "name": "Anton Dziatkovskii / Palo Alto AI Research Lab",
     "url": "https://github.com/tonydzi"
@@ -9,8 +9,17 @@
     {
       "name": "second-brain-skills",
       "source": "./",
-      "description": "100 [человек]-tested Claude Code skills from a live second-brain + assistant operation: quality gates (/tt), retrospectives (/retro), CRM sync, vault ingest, multi-model second opinions, fleet coordination and more. Method, not data - personal examples replaced with fictional ones.",
-      "version": "0.3.0",
+      "description": "235 battle-tested Claude Code skills (187 with catalog-ready descriptions, the rest groomed nightly) from a live second-brain + assistant operation: quality gates (/tt), retrospectives (/retro), CRM sync, vault ingest, multi-model second opinions, fleet coordination and more. Method, not data - personal examples replaced with fictional ones.",
+      "version": "0.11.1",
+      "author": {
+        "name": "Anton Dziatkovskii / Palo Alto AI Research Lab"
+      }
+    },
+    {
+      "name": "second-brain-memory",
+      "source": "./plugins/memory",
+      "description": "Opt-in persistent memory: registers the sqlite-graph-memory MCP server (sgm-mcp) over your own notes. Install it only if you want recall across sessions; first start downloads the embeddings stack (about 2 GB).",
+      "version": "0.1.0",
       "author": {
         "name": "Anton Dziatkovskii / Palo Alto AI Research Lab"
       }

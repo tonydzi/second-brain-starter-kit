@@ -1,6 +1,7 @@
 ---
 name: ask-debt
-description: "READ-ONLY замер «ДОЛГА АВТОНОМНОСТИ» по журналу одобрений 02 (approvals.db) — сколько я спросил Антона за окно, сколько из этого ПРОТУХЛО (никто не ответил), по каким классам (машинный шум / логин-2FA / UAC-физика / деньги… Триггеры: “/ask-debt“, “долг автономности“, “сколько я спрашиваю“, “замер асков“, “что протухло в 02“, “ложные аски“, “почему я столько спрашиваю“, “autonomy debt“, “ask debt“"
+description: "Read-only measurement of an agent's autonomy debt from its approvals log: how many times it asked the human for permission in a window, how many asks expired unanswered, and which classes they fall into (machine noise, login or 2FA, physical UAC, money). Use to find asks the agent should have decided itself and to cut needless interruptions. Triggers: /ask-debt, autonomy debt, how often do I ask, expired asks."
+license: MIT
 version: 1.0.0
 ---
 
@@ -78,3 +79,15 @@ python ~/.claude/scripts/ask_debt.py --days 30
 - Классификатор — регулярки по тексту, не LLM: аск с двумя блокерами попадёт в один класс (первый по приоритету). Цифры — оценка формы журнала, не приговор конкретному аску.
 - Замер по ЭТОЙ машине: у каждого узла свой `approvals.db`.
 - Два одновременных прогона не бьют файл снимков (tmp уникален по pid), но при совпадении момента один снимок может потеряться — на дельту это не влияет (снимки — история, не источник цифр).
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

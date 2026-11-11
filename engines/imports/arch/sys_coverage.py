@@ -14,7 +14,7 @@
 # ---------------------------------------------------------------------------
 """
 sys_coverage.py -- System Architect: COVERAGE AUDIT.
-Answers "is absolutely everything covered by the architecture?" with NUMBERS, not [человек].
+Answers "is absolutely everything covered by the architecture?" with NUMBERS, not hope.
 Measures, deterministically (0 tokens):
   1. Vault knowledge  -- % of notes connected (non-orphan)        [from orphan-scan]
   2. CC sessions      -- % of on-disk sessions imported to vault   [disk UUID files vs sessions.db]

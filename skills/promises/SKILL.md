@@ -1,6 +1,7 @@
 ---
 name: promises
-description: "КОНТРОЛЬ И КОЛЛЕКШН ОБЕЩАНИЙ: каждое обещание (их нам И наше им) фиксируется в реестре с датой и источником, напоминается в срок и закрывается с evidence. Триггеры: “/promises“, “/обещания“, «зафиксируй обещание», «кто нам что обещал», «что мы обещали», «просроченные обещания», «свод обещаний», «collect promises», «promise tracker»"
+description: "Track and collect promises: every promise, theirs to us and ours to them, goes into a registry with date and source, gets a reminder when due and is closed with evidence. Triggers: /promises, log this promise, who promised us what, what did we promise, overdue promises, promise tracker."
+license: MIT
 version: 1.0.0
 ---
 
@@ -63,3 +64,15 @@ grep -rl "promise" "$OBSIDIAN_VAULT/10-Tasks" --include="task-*.md" -i
 ## Связано
 `/comment-to-call` (шаг 5 — обещания из воронки) · `/fa` (Promised после звонка) ·
 `/triage` (обещания из лички) · Библия `reglament-kollekti-obeshchaniya-vsegda`.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

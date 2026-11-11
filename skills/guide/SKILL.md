@@ -1,6 +1,7 @@
 ---
 name: guide
-description: "Вечнозелёный ГАЙД по «формуле Юницкого» — обучающий лонгформ для не-технарей (Дзен-урок-сшивка, GitHub гайд-хаб, LJ), собранный из НАШЕЙ живой фактуры (флот, второй мозг, CRM, факапы с датами). Триггеры: “/guide“, “сделай гайд“, “собери урок“, “дзен-урок“, “гайд-хаб“, “оформи как Юницкий“, “evergreen guide“"
+description: "Write an evergreen teaching longform for non-technical readers built from your own real material (systems you run, dated failures, numbers), structured as a stitched lesson that can live as a blog post, a GitHub guide hub and a newsletter issue. Use when turning lived engineering experience into a durable how-to. Triggers: /guide, make a guide, build a lesson, evergreen guide."
+license: MIT
 version: 1.0.0
 ---
 
@@ -36,3 +37,15 @@ version: 1.0.0
 ## Шаг 4. Хвост
 - Гайд = вечнозелёный: ссылка на него добавляется в перелинковку будущих постов серии.
 - Заметка-копия в волт (§8.3), связать с [[project-vibe-teach]] и [[everything-becomes-content]].
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

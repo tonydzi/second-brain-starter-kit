@@ -1,6 +1,7 @@
 ---
 name: borrowed-audience
-description: "Добыть ВНЕШНИЕ ССЫЛКИ на наши репо через чужие курируемые поверхности — awesome-lists, каталоги тулов, вендорские showcase. Триггеры “/borrowed-audience“, “/ba“, “заёмная аудитория“, “куда положить наши репо“, “добудь внешние ссылки“, “подай в awesome-листы“, “найди курируемые списки“, “где нас разместить“, “borrowed audience“, “get external links“"
+description: "Get external links to your repos through other people's curated surfaces: awesome-lists, tool catalogs and vendor showcases. Measures each list's merge queue before submitting, so nothing goes into a dead queue. Triggers: /borrowed-audience, /ba, borrowed audience, get external links, submit to awesome lists."
+license: MIT
 version: 1.0.0
 ---
 
@@ -115,7 +116,7 @@ gh pr create --repo <upstream> --base main --head tonydzi:<ветка> --title .
 ## Шаг 6. СТОРОЖ
 `git push` ≠ ссылка добыта. Ссылка добыта только на мерже. Ставим одноразовую проверку через 3 дня:
 ```
-mcp__scheduled-tasks__create_scheduled_task, fireAt = +3 дня, 05:30 Лиссабона (ночное окно §4.6)
+mcp__scheduled-tasks__create_scheduled_task, fireAt = +3 дня, 05:30 локального времени (ночное окно §4.6)
 ```
 Промпт задачи: замерить каждый PR → разложить на смержен / ответил мейнтейнер / закрыт / тишина. **Ответил мейнтейнер = отвечаем САМИ и сразу** (§4.7, молчание в живом треде = провал). Тишина <14 дней — не пинговать, это спам.
 
@@ -134,3 +135,15 @@ mcp__scheduled-tasks__create_scheduled_task, fireAt = +3 дня, 05:30 Лисс�
 
 ## Анти-слоп гейт (anton 14.08)
 Любой ИИ-написанный текст наружу из этого скилла перед отправкой - финальный проход `/ai-slop` (ban-лист + ритм). Исключения ровно три: текст с плашкой Майкрофта (§3.3) · машиночитаемое (GitHub/техдока/dev-log/journey-machine) · текст, написанный Антоном руками. Канон: `reglament-posty-ot-lica-antona-tolko-cherez-ai-slop`.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

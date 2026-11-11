@@ -177,7 +177,7 @@ for month, msgs in sorted(by_month.items()):
 
 # ---- person files (top 5 by total message volume, excluding bots/Anton) ----
 EXCLUDE = {TRANSCRIPT_SENDER, "Deleted Account"}
-ANTON = {"Tony frm Palo Alto Ai Research lab"}
+ANTON = {"Alex frm Example Lab"}
 vol = Counter(r.get("sender") for r in recs if r.get("sender"))
 ranked = [(s, n) for s, n in vol.most_common()
           if s not in EXCLUDE and not (s or "").startswith("Tony")]

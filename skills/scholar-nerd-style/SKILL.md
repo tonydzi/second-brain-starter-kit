@@ -1,6 +1,7 @@
 ---
 name: scholar-nerd-style
-description: "СТИЛЬ УЧЁНОГО ЗАДРОТА — фирменный визуальный язык наших сайтов-документов: рукописный HTML в один файл, шрифт с… Триггеры “/scholar-nerd-style“, “/nerd“, “/задрот“, “стиль учёного задрота“, “стиль задрота“, “сделай в нашем стиле“, “как на scholar“, “как страница публикаций“, “сверстай страницу“, “новый сайт в нашем стиле“, “сайт лабы“, “проверь стиль страницы“, “nerd style“, “scholar style“"
+description: "Apply a scholarly 'nerd' visual style to single-file handwritten HTML document sites: publication-list look, restrained typography, no frameworks. Use when building or reviewing a lab site, a publications page or any new page that should match this house style. Triggers: /scholar-nerd-style, /nerd, nerd style, scholar style, build a page in our style, check page style."
+license: MIT
 version: 1.0.0
 ---
 
@@ -139,3 +140,15 @@ python scripts/_test_style_check.py
 - `references/page-template.html` — скелет страницы
 - `scripts/style_check.py` — гейт
 - `scripts/_test_style_check.py` — тест гейта
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

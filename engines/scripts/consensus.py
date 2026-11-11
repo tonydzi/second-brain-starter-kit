@@ -460,7 +460,7 @@ def _v2_classify(subject, details, tier, reversible, tripwire_hit):
 
 
 def _v2_shadow_observe(ev, subject, details, tier, reversible, tripwire_hit, cfg=None):
-    """Dark S2 sensor. Wrapped so a bug here can NEVER break a live propose (the whole [человек]
+    """Dark S2 sensor. Wrapped so a bug here can NEVER break a live propose (the whole raison
     d'etre of shadow-first: dark code in the live engine must fail silently, not brick it)."""
     try:
         cfg = cfg or _cfg()
@@ -721,7 +721,7 @@ def _bus(text):
 # genuinely CANNOT resolve (round-cap with no agreement / timeout on a tier>0 proposal / manual
 # escalate) and a human (ANY of Anton/Nina/Rita/[человек]) must answer NOW. Routine Tier-2 QQQ
 # approvals stay in chat 03 — keep this channel STRICTLY for deadlocks. Best-effort, never raises.
-POLICE_GROUP = -[id]
+POLICE_GROUP = 0
 
 
 def _police(text):
@@ -765,7 +765,7 @@ def _police(text):
 # Syncthing"): chat 03 IS the negotiation transport now, the file ledger is archive/anti-entropy.
 # Every mirrored event carries a second machine-readable line so any peer INGESTS it straight
 # from TG (minutes) instead of waiting for a flapping Syncthing batch (20-60 min per move).
-GROUP_03 = -[id]
+GROUP_03 = 0
 PAYLOAD_MARK = "⚙ CONSENSUS-EV "
 
 

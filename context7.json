@@ -1,0 +1,10 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Second Brain Starter Kit",
+  "description": "Claude Code as a second brain: 235 skills, a CRM engine, vault templates and the handover map, installable as a Claude Code plugin marketplace. Method, not data.",
+  "folders": ["skills", "docs", "bible"],
+  "rules": [
+    "Install: /plugin marketplace add tonydzi/second-brain-starter-kit then /plugin install second-brain-skills@second-brain.",
+    "Each skill is a SKILL.md with frontmatter; read it before enabling."
+  ]
+}

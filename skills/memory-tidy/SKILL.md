@@ -1,6 +1,7 @@
 ---
 name: memory-tidy
-description: "Привести в порядок всегда-загружаемый индекс памяти MEMORY.md на этой машине (macOS/Linux) — подрезать, унести закрытое в архив, сложить домены в хабы, вернуть выпавшие пины, накрыть сирот указателями. Триггеры “/memory-tidy“, “/mt“, “прибери память“, “прибери индекс“, “почисти MEMORY.md“, “память распухла“, “индекс памяти“, “сироты в памяти“, “tidy memory“"
+description: "Tidy an agent's always-loaded memory index (MEMORY.md) on macOS or Linux: trim long lines, move closed entries to an archive, fold domains into hub files, restore dropped pins and add pointers for orphan memory files. Use when the index is over budget or has orphans. Triggers: /memory-tidy, /mt, tidy memory."
+license: MIT
 version: 1.0.0
 ---
 
@@ -16,7 +17,7 @@ version: 1.0.0
 * сторож сказал RED (`memory_guard.py`);
 * индекс подошёл к мягкой черте (15 КБ / 110 строк);
 * руками — когда захотелось порядка;
-* ночью само: launchd `ai.paloalto.memory-tidy`, 01:10 и 05:40 по Лиссабону.
+* ночью само: launchd `ai.paloalto.memory-tidy`, 01:10 и 05:40 по локальному времени.
 
 ## Шаг 0 — ВЛАДЕНИЕ (пропустить = устроить sync-conflict)
 ```bash
@@ -98,7 +99,7 @@ python3 ~/.claude/scripts/memory_focus.py        # обязан 0 missing pins
 * **Красный, который всегда красный**, учит игнорировать красное. Тревога без достижимого зелёного —
   это баг тревоги.
 * **Строка-шапка тоже «entry».** Сторож меряет ЛЮБУЮ строку: длинный changelog в
-  `<!-- MEMORY.md vX.Y ... -->` в одиночку делает индекс RED (14.09, Маяк).
+  `<!-- MEMORY.md vX.Y ... -->` в одиночку делает индекс RED (14.09, Якорь).
 * **CRLF съедает символ бюджета и подделывает диф.** Сторож срезает только `\n`, поэтому на CRLF-индексе
   каждая строка считается на 1 длиннее (бюджет 149). И читать «универсальными» переводами строк, а
   писать голым `\n` = молча переписать ВЕСЬ файл: для синкаемых копий это фальшивый диф в 80 строк.
@@ -110,3 +111,15 @@ python3 ~/.claude/scripts/memory_focus.py        # обязан 0 missing pins
 ```bash
 python3 ~/.claude/scripts/_test_memory_tidy.py   # 11 проверок, ~1 с, без LLM
 ```
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

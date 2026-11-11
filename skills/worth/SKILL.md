@@ -1,6 +1,7 @@
 ---
 name: worth
-description: "- СКОЛЬКО ЧЕЛОВЕК СТОИТ НАШЕГО ВНИМАНИЯ: кто он (инвестор / инженер / студент / партнёр / комьюнити / шум / личное), какую пользу может дать НАМ в ближайшие 90 дней, какая у него температура, и какой… Триггеры: “/worth“, “/ценность“, “сколько стоит <кто>“, “кто такой <кто>“, “он нам полезен?“, “стоит ли отвечать <кому>“, “оцени человека“, “оцени лида“, “how valuable is <who>“, “score this person“"
+description: "Score how much attention a person deserves: classify them (investor, engineer, student, partner, community, noise, personal), estimate the value they can bring in the next 90 days, their temperature, and the next move. Triggers: /worth, how valuable is <who>, who is <who>, should I reply to <who>, score this person, score this lead."
+license: MIT
 permissions: [filesystem, shell]
 risk_level: local
 processes_untrusted_data: true
@@ -85,3 +86,15 @@ python ~/.claude/scripts/people_value.py batch --in очередь.json --out о
 ```bash
 python ~/.claude/scripts/people_value.py selftest
 ```
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

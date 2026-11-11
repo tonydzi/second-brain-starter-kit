@@ -1,6 +1,7 @@
 ---
 name: routine-opt
-description: "Аудит и УДЕШЕВЛЕНИЕ парка рутин узла: кто сколько жрёт за прогон, какой рычаг применить (модель · декомпозиция · частота · префикс · утиль) и как доказать экономию замером, а не… Триггеры: “/routine-opt“, “/ropt“, “аудит рутин“, “рутины дорого жрут“, “переведи рутины на sonnet“, “запускай рутины реже“, “оптимизируй рутины“, “почему фон съел больше меня“, “routine audit“, “cheaper routines“"
+description: "Audit and cut the cost of a machine's scheduled routines: measure tokens per run, pick a lever (cheaper model, split, lower frequency, shorter prefix, retire) and prove the saving with a before-and-after measurement. Use when background routines burn more than interactive work. Triggers: /routine-opt, /ropt, routine audit, cheaper routines."
+license: MIT
 version: 1.1.0
 ---
 
@@ -37,7 +38,7 @@ python ~/.claude/scripts/routine_cost_audit.py --days 7 --out ~/.claude/state/ro
 а чинить надо ту, у которой дорог ОДИН прогон. Прибор сам ставит вердикт-кандидат; он кандидат,
 а не приговор — решение за человеком.
 
-⚠️ Грабля, пойманная 14.09 (ZBOOKG8): строка `cron: once` + `enabled: false` = ОДНОРАЗОВЫЙ СИД
+⚠️ Грабля, пойманная 14.09 (LAPTOP-1): строка `cron: once` + `enabled: false` = ОДНОРАЗОВЫЙ СИД
 (переиспользованный слот `/slot`), а не рутина. Замер 06–13.09: все 13 «🔴 декомпозировать» были
 такими сидами (10.09 — 540M за день), а настоящие суточные рутины стоили 4–9M/прогон.
 Сиды не прореживаются и не декомпозируются — их цена = длина живой работы сида; рычаг там один:
@@ -153,7 +154,7 @@ python ~/.claude/scripts/routine_value_audit.py --app-tasks <опись зада
    у самого прибора. **Проверяй `--help` источника ПЕРЕД тем, как парсить его вывод.**
 2. **Классификация по форме адреса врёт.** Первая версия объявила «фаундером» ювелирный
    магазин и рассылку Substack: сортировала по «не no-reply@ → человек». Честный признак
-   даёт сверка с ДАННЫМИ (список компаний из `jobs.db`), а не форма строки.
+   даёт сверка с ДАННЫМИ (список компаний из `<jobs database>`), а не форма строки.
 3. **`no-reply@` — это «отвечать физически некому».** Держи для него отдельное ведро
    `event`: интервью/оффер будят модель, остальное — тихий шум. Иначе получишь 38
    «живых ответов» и нулевую экономию.
@@ -218,3 +219,15 @@ python ~/.claude/scripts/routine_cost_audit.py --days 7
 - не выключает рутины сам (увольнение = решение человека, §3.1);
 - не трогает модель там, где идёт авторский голос Антона;
 - не верит счётчику вызовов вместо счётчика пользы ([[counter-measures-the-call-not-the-use]]).
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

@@ -1,6 +1,7 @@
 ---
 name: deflate
-description: "«Меньше тепла и шума» на ЭТОМ узле — аудит фоновой нагрузки (задачи планировщика по запускам/час, автозапуск, держатели GPU, режим питания, топ CPU) → план кандидатов на выключение/растяжку → решение ПОСТРОЧНО С ОПЕРАТОРОМ → применение только одобренных строк… Триггеры: /deflate, «шумит вентилятор», «ноут греется», «что можно выключить», «потуши фон», «машина тормозит от фона», «deflate this node»"
+description: "Cut background heat and noise on this machine: audit scheduled tasks by runs per hour, autostart entries, GPU holders, power plan and top CPU, then propose disable or stretch candidates, decide line by line with the operator and apply only approved lines. Triggers: /deflate, fan is loud, laptop runs hot, what can I turn off, machine slow from background load."
+license: MIT
 version: 1.0.0
 ---
 
@@ -31,4 +32,16 @@ version: 1.0.0
 `python ~/.claude/scripts/node_deflate.py apply ~/.claude/_deflate/<HOST>-plan.json` → применяет только `ok=true`, пишет строку на каждое изменение в `~/.claude/change_ledger/<HOST>.jsonl`. Windows S4U-задачи требуют повышения: скрипт печатает точную команду для одного UAC. После: снова `audit` и сравнить запусков/час + температуры до→после. Результат = строка в доклад узла (03) и в память узла.
 
 ## Что мерить, чтобы не соврать
-До и после: запусков/час · CPU °C и обороты · dGPU °C без опроса nvidia-smi (карта спит = температура ≈ комнатная на EC-сенсоре). Замер ZBOOKG8 08.09: 136 → 62 → ~45 запусков/час, CPU 92 → 70 °C, dGPU 77 → 25 °C.
+До и после: запусков/час · CPU °C и обороты · dGPU °C без опроса nvidia-smi (карта спит = температура ≈ комнатная на EC-сенсоре). Замер LAPTOP-1 08.09: 136 → 62 → ~45 запусков/час, CPU 92 → 70 °C, dGPU 77 → 25 °C.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

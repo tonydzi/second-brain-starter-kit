@@ -1,0 +1,53 @@
+Third-party notice for the OSINT skills in this repository.
+
+Source: https://github.com/UseOSINT/Skills (commit 06243a5620b0), MIT License.
+Skills taken from it (each links to ../../ETHICS.md):
+  skills/dig-through-data-brokers
+  skills/find-anyone
+  skills/find-exposed-servers
+  skills/find-hidden-subdomains
+  skills/find-leaks-in-the-wild
+  skills/geolocate-from-pixels
+  skills/google-like-a-spy
+  skills/graph-the-network
+  skills/hunt-a-handle
+  skills/investigate-anything
+  skills/investigate-without-getting-made
+  skills/is-this-photo-real
+  skills/pattern-of-life-from-socials
+  skills/read-deleted-pages
+  skills/recon-a-domain-passively
+  skills/secrets-in-file-metadata
+  skills/secrets-in-git-history
+  skills/useosint
+  skills/what-an-email-reveals
+  skills/what-leaked-about-you
+  skills/where-was-this-taken
+  skills/who-owns-this-domain
+  skills/whose-number-is-this
+  skills/write-the-intel-brief
+  skills/x-ray-a-company
+
+Their licence, verbatim:
+
+MIT License
+
+Copyright (c) 2026 osint-skills contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

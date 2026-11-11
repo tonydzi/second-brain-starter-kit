@@ -59,7 +59,7 @@ version: 1.0.0
 
 **Да → сессия поднимается ТОЛЬКО на хабе `[машина флота]`, и человек печатает её руками,
 зайдя по AnyDesk.** ⛔ Ноут сотрудника — нельзя (спит ночью, крышка, перелогин → сессия умерла
-и про неё забыли). ⛔ Маяк по SSH — нельзя: процесс идёт на ТВОЕЙ машине при чужом диске, умрёт
+и про неё забыли). ⛔ Якорь по SSH — нельзя: процесс идёт на ТВОЕЙ машине при чужом диске, умрёт
 твой ноут — умрёт сессия. Автостарт не запрещён, но `taskId` = `auto-hub-*` и ставится на хабе.
 Не на хабе и правило сработало → **не поднимай тут**: положи задачу текстом в шину/03 на хаб.
 
@@ -94,7 +94,7 @@ create_scheduled_task(
     fireAt  = "<ТОЛЬКО из двери: `python ~/.claude/scripts/_shared/fireat_now.py --in 15`>",  # разовая
     notifyOnCompletion = true)   # ⛔ но НЕ из рутинной сессии, см. ниже
 ```
-⚠️ **`notifyOnCompletion` из сессии-рутины отбивается** (замер 13.09.2026, ZBOOKG8): «Can't
+⚠️ **`notifyOnCompletion` из сессии-рутины отбивается** (замер 13.09.2026, LAPTOP-1): «Can't
 subscribe a scheduled-task run session to completion notifications — it ends when the run does».
 Поднимаешь сессию ИЗ прогона scheduled-task — поле просто **опусти**, иначе весь вызов падает
 целиком и время `fireAt` успевает протухнуть, пока пересобираешь промпт. Из живой сессии
@@ -147,7 +147,7 @@ python ~/.claude/scripts/_shared/fireat_now.py --in 15      # -> 2026-09-10T10:3
   доказывает только старт, а не то, что человек её ВИДИТ и может в ней работать.
 - **`claude -p` / `--bg` / Agent-worktree записи приложения НЕ создают** → невидимы; гейт
   `blackbox_session_guard.py` их отбивает. Разрешены только на узлах без приложения
-  (Маяк/headless) с флагом `--headless-node`.
+  (Якорь/headless) с флагом `--headless-node`.
 
 ## Границы
 
@@ -170,7 +170,7 @@ python3 ~/.claude/scripts/_test_session_mode.py
 Перед `create_scheduled_task` — две проверки, обе дешёвые:
 
 1. **АККАУНТ УЗЛА.** Реестр рутин живёт ПЕР-ПРОФИЛЬ приложения: хаб `[машина флота]` = **BB Platinum**
-   (`[рабочий аккаунт]@`), [машина флота] = `dzyatkovskiy.a@`, [машина флота] = `dzyatkovskiy.a2@`. Посмотри аккаунт внизу
+   (`[рабочий аккаунт]@`), [машина флота] = `youraccount.a@`, [машина флота] = `youraccount.a2@`. Посмотри аккаунт внизу
    слева в окне приложения; не тот → сперва переключись. Рутина, созданная в чужом профиле, планировщику нужного
    аккаунта НЕ ВИДНА и не работает (замер 22.08: обе GIT-S7 ушли в профиль `a@` на хабе, а 226 хабовых рутин из
    него не видны). Папки `scheduled-tasks/<id>/` общие на профили, реестры — нет: `create` в правильном профиле
@@ -207,3 +207,15 @@ python3 ~/.claude/scripts/_test_session_mode.py
 
 `/chip` — кнопка остаётся у Антона. `/slot` — механика пула и история обхода.
 `/sessions` — что работает сейчас.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

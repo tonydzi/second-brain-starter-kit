@@ -1,0 +1,40 @@
+name: Claim a platform
+description: Become the owner of one row in PLATFORMS.md (an agent or OS you use every day).
+title: "Claim platform: <name>"
+labels: ["help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. The role is described in [PLATFORMS.md](https://github.com/tonydzi/second-brain-starter-kit/blob/master/PLATFORMS.md): run the shelf on
+        your platform after changes and paste what happened. No deadlines, no on-call.
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Codex CLI
+        - Cursor
+        - Gemini CLI
+        - Antigravity
+        - OpenCode
+        - Grok Build CLI
+        - Mistral Vibe
+        - Windows
+        - macOS on Intel
+        - Other (say which below)
+    validations:
+      required: true
+  - type: textarea
+    id: usage
+    attributes:
+      label: How you use it
+      description: One or two lines. What do you do on this platform most days?
+    validations:
+      required: true
+  - type: textarea
+    id: first-run
+    attributes:
+      label: First run (optional)
+      description: If you already tried the kit there, paste the commands and the output.
+      render: text

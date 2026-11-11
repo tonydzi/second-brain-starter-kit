@@ -1,7 +1,8 @@
 ---
 name: rep-reply
-description: "Найти ЖИВЫЕ чужие треды (GitHub issues/discussions) по темам, где у нас есть РЕАЛЬНЫЙ боевой опыт и артефакты, и ответить в них нашим опытом — прокачка репутации лаборатории и Mission-2 (заметность в LLM-экосистемах). Триггеры: “/rep-reply“, “/rep“, “ответь людям про наш опыт“, “кто пишет про наши темы“, “прокачай репутацию в тредах“, “найди треды под наш опыт“, “reply with our experience“"
-version: 1.7.0
+description: "Find live third-party GitHub issues and discussions on topics where you have real hands-on experience and artifacts, then reply with that experience to build reputation. Use when asked to answer people about your work, find threads matching your expertise, or reply with evidence from your own setup."
+version: 1.8.0
+license: MIT
 ---
 
 # /rep-reply — отвечаем людям нашим опытом
@@ -29,6 +30,47 @@ version: 1.7.0
 Пиши в лог `skip` со строкой «полка не спрошена: прибора нет на узле» и иди на Шаг 0-бис; развёртывание
 прибора — работа посылки/деплоя, а не охоты, иначе прогон съедает себя на инфраструктуре.
 
+⚠️⚠️ **«ПРИБОР ОТРАБОТАЛ, НО `targets_scanned: 0`» — ТОЖЕ НЕ «ПРОСЬБ НЕТ»** (замер 02.10.2026, хаб).
+Три разных состояния, которые выглядят одинаково пусто, и ровно одно из них означает «просьб нет»:
+1. **Упал.** `os.uname()` есть только на POSIX, на Windows-хабе прибор умирал `AttributeError`
+   ПОСЛЕ того, как матчи уже посчитаны и записаны в JSON (и `--verdict` умирал там же). Починено
+   `_node()`-хелпером, `shelf_match.py` коммит `12fe276ae`. Мораль: смотри не на пустой экран, а на
+   свежий файл `$OBSIDIAN_VAULT/_outreach/shelf_match/<дата>.json` — выход мог доехать без вердикта.
+2. **Отработал на пустом входе.** `load_targets()` выбрасывает КАЖДУЮ строку, где
+   `newcomer_merged_90d <= 0`. Замер того же дня: на хабе 400 core-строк в
+   `~/.claude/registry/github-universe/targets.json` и **0** с заполненным полем, при том что прогон
+   пира 01.10 просканировал 346 целей и дал 159 точных матчей. Это незаполненный реестр узла,
+   а не отсутствие просьб. Проверка одной строкой:
+   `python ~/.claude/scripts/github_targets.py --json --domain core --top 400 | python -c "import json,sys;d=json.load(sys.stdin);print(len(d),sum(1 for x in d if (x.get('newcomer_merged_90d') or 0)>0))"`
+3. **Реально пусто** — обе проверки выше прошли, матчей ноль.
+⭐ В состояниях 1–2 охота НЕ останавливается и инфраструктуру НЕ чинит: вольт синкается, поэтому
+берём **свежайший выход любого узла** из `_outreach/shelf_match/*.json` (≤2 суток) как вход Шага 0-тер
+и идём отбирать кандидатов. Замер 02.10: файл пира за 01.10 дал два из трёх ответов дня
+(`llama_index#23313`, `BerriAI/litellm#43992`). Вердикты `--verdict` при этом ставим как обычно.
+
+## ⛔ Шаг 0-кватер — СТОП-СИГНАЛ ХОЗЯИНА БЬЁТ ЖИВОЙ `mention` (замер 03.10.2026, GIT-S5 заход 36)
+
+Правило «живой ответ человека = приоритет №1, отвечаем same-day» НЕ различало две причины, по которым
+в треде кипит жизнь: нас позвали — или хозяин просит всех замолчать. Замер: `pydantic/pydantic-ai#8704`
+прислал живой `mention`, а мейнтейнер @dsfaccini в тот же час написал в треде дословно
+«bots: please refrain from replying to each other, we've got enough input here».
+
+ПЕРЕД ответом на ЛЮБОЙ `mention`/`comment` читай ПОСЛЕДНИЕ 2-3 коммента треда, а не только тот, где нас
+назвали:
+```
+gh api repos/<r>/issues/<n>/comments --jq '.[-3:][]|"[\(.user.login) \(.created_at[0:16])]\n\(.body[0:400])"'
+```
+Стоп-сигнал = просьба хозяина/мейнтейнера снизить шум, прекратить перекличку, «enough input», закрытие
+обсуждения, явный адресат «не вы». Нашёл → в тред НЕ пишем, строка в журнал «тред закрыт хозяином,
+цитата», и берём следующую цель. Молчание дороже касания: один ответ поверх такой просьбы стоит нам
+репутации во всём репо, а их у нас 69.
+
+⚠️ Не путать с обычным спором: «я не согласен» — это диалог, в него отвечаем. Стоп-сигнал — это просьба
+о ТИШИНЕ, а не возражение по существу.
+
+⚠️ Отдельно: тред, где наши комменты уже поставил ДРУГОЙ наш лейн в тот же день, тоже повод не писать
+третий раз — проверь `commenter:tonydzi` по дате, прежде чем считать мяч нашим.
+
 ## ⭐ Шаг 0-бис — САМЫЙ ЛЮДНЫЙ ЖИВОЙ ТРЕД ДОМЕНА ПЕРВЫМ (anton 15.09.2026, «делай правило, не жди реакции»)
 Первый ответ захода идёт НЕ в гнёзда ниже, а туда, где прямо сейчас больше всего живых людей спорят
 про нашу боль. Один веер, один bash-скрипт, слова домена по одному (длинная фраза даёт пусто):
@@ -41,15 +83,33 @@ version: 1.7.0
 полностью). Фильтр НЕ заменяет домен-суждение: реакции тянут вверх мега-треды мимо ниши (Proton, WSL, golang)
 — их отсекаем словами ниши, как раньше.
 
+⚠️⚠️ ВЕЕР ИДЁТ ДВУМЯ СОРТИРОВКАМИ, НЕ ОДНОЙ (замер GIT-S5 29.09). `--sort comments --limit N` внутри репо
+поднимает СТАРЫХ тяжеловесов и вытесняет сегодняшние живые треды совсем: в заходе 35 по `mem0ai/mem0`
+веер отдал `#5352` (51💬, обновлён 24.09), `#5245` и `#4956`, а `#7283` (17💬) и `#7452` (13💬) — ОБА
+обновлены в тот же день, оба репро-грейд — не попали в выдачу вовсе, потому что не влезли в топ-3 по
+числу комментов. Порог «≥8💬» отсекает их вторично: свежий тред физически не успевает накопить 50💬.
+Правило: тот же цикл по репо гоняется ДВАЖДЫ — `--sort comments` (людность) и `--sort updated`
+(свежесть, порог комментов опускаем до ≥5), выдачи складываются, дубли схлопываются по `#номер`.
+Людный старый тред и горячий сегодняшний — это два РАЗНЫХ кандидата, и второй обычно дешевле в ответе.
+
+⚠️ РОЙ ЖИВЁТ И ВНУТРИ КУРИРУЕМОЙ ВСЕЛЕННОЙ (тот же замер). Веер по целям `github_targets.py` вывел первым
+`pydantic/pydantic-ai#5685` «[aw] No-Op Runs» с 179💬 — из них **178 от `github-actions[bot]`**, один от
+`pydanty[bot]`, людей ноль. Проверку «≥5 разных авторов» нельзя пропускать на том основании, что репо
+пришло из курируемого списка: список курирует РЕПО, а не тред.
+
 Кандидат = **≥10 комментариев · ≥5 разных авторов · обновлён ≤14 дней · нашего голоса нет**
 (`gh api .../comments --jq '[.[].user.login]|unique'`). Ботские «control board» треды (сотни 💬 от 1–3
 авторов) — монолог, не дверь. Нашли → читаем тред целиком, ищем, чего в нём ещё НЕТ, и несём туда замер
 с датой и артефакт (эталон: `gastownhall/beads#5877`, 14.09 — 77💬, 15 авторов, 25 дней без нас; коммент +
 код в тот же день). Второй тред того же репо в тот же час — только с отдельной ценностью (§1.5).
 
-⚠️ `github_targets.py --check` на несканированном репо отвечает «домен=off, вне круга» — это значит
-«не сканировали», не «запрещено»; решение по описанию репо и словам домена (класс
-`domain-gate-off-for-unscanned-repo`). Канон: `reglament-samyy-lyudnyy-zhivoy-tred-domena-pervym`,
+⚠️ ПОЧИНЕНО 08.10: на несканированном репо `--check` больше НЕ врёт «домен=off». Теперь он
+отвечает `домен=unknown` («улик не хватает») и зови его так: `--check <owner/repo> --fetch
+--thread "<заголовок треда, который трогаем>"` — дверь сама добирает description + topics +
+README. ⛔ Решать «по описанию репо» руками больше не надо и нельзя: именно это 7 прогонов
+подряд отбивало честные мишени (классы `domain-gate-off-for-unscanned-repo`,
+`domain-gate-judges-repo-by-one-line-description`; семья
+`verdict-from-one-poor-field-unknown-merged-into-off`). Канон: `reglament-samyy-lyudnyy-zhivoy-tred-domena-pervym`,
 память [[loudest-live-thread-first]]. Пусто по всем словам → строка «людного треда нет» и дальше Шаг 1.
 
 ## Шаг 1 — ОХОТА (где искать)
@@ -97,7 +157,7 @@ bash-скриптом, а не 70 вызовами.
 | запланированная задача молча встала / «Skipped» без причины / lastRunAt врёт / как связать taskId с сессией | ⚠️ ПУТЬ И ФОРМАТ, обе грабли оплачены 21.09: стор лежит НЕ в `~/.claude`, а в `%APPDATA%\Claude\claude-code-sessions\*\*\scheduled-tasks.json` (macOS: `~/Library/Application Support/Claude/...`), и рядом появилось ВТОРОЕ дерево `local-agent-mode-sessions` — считать оба, иначе первый скан вернёт 0 сторов и это прочтётся как «скипов нет»; поле `at` внутри события = epoch **МИЛЛИСЕКУНДЫ**, разбор его как ISO-строки МОЛЧА даёт «0 за 24ч» при реальных 1939 (замер 21.09, поймано перед самой публикацией). В том же сторе лежит **`recordedSkips`** — taskId → [{at, reason}], причина КАЖДОГО отказа машиночитаемо: 13689 событий, за 24ч 5953 `global_limit` (потолок ВСЕЙ машины, не «эта задача ещё бежит») + 1539 `per_task_limit`; пропущенный fireAt ретраится с медианой 60.0с (512 событий за 98.5ч на одной задаче), при этом `lastRunAt`/`lastScheduledFor` остаются null, а `fireAt` пришпилен к пропущенному времени. Рядом `local_<uuid>.json` несёт `scheduledTaskId` + `cliSessionId` + `lastActivityAt` — это ПРОЩЕ, чем маркер в транскрипте (gist из #84196). ⚠️ Две ловушки, обе опубликованы: `sessionId` в индексе = app-side `local_<uuid>`, транскрипт назван по `cliSessionId`; и `lastActivityAt` НЕ сторожит живость — 02.09 10:24Z своя же живая сессия показала «тихо 7.0 мин» при дописываемом транскрипте 0.0 мин. Использован в anthropics/claude-code#91371 (02.09). Контрибьют-тест 02.09: 3/3 да |
 | Desktop-сайдбар не видит сессии CLI / индекс сессий застрял / «папка старая, значит мёртвая» | контроль-замер здоровой машины 02.09: level-1 папка ОДНА и её mtime на 9 дней старше (Windows двигает дату каталога только при добавлении/удалении записи В НЁМ), а level-2 писалась в ту же минуту; живой признак — mtime `local_*.json` (78 за сутки). Индекс НЕ зеркало транскриптов: 282 записи против 16539 `.jsonl`. Использован в anthropics/claude-code#91017 (02.09) |
 | backup mirror replays deletions / robocopy MIR data loss / recovery window | mass-delete gate + deletion quarantine (`_imports/backup/daily_backup_E_to_F.ps1`, 31 тест; кандидат /release-slice — отдать срезом без путей хаба и bus_send). Контрибьют-тест 21.08: (а) да — /MIR-footgun классический; (в) да — срезом; (б) gh search пусто, живой тред не найден → стучаться пока некуда, ждёт /issue-match |
-| orphan/dead-code detector lies across OS boundaries / cron-scheduler blindness / false-red watchdog | суд сирот 21.08: паттерн «вердикт „никто не зовёт" валиден только для окна вызывателей ТОЙ же ОС» + детерминированная сверка schtasks/hooks (sweep-final-[id].json, 124/178 ложных красных) + Breakage-класс orphan-detector-blind-to-windows-callers. Контрибьют-тест 21.08: (а) да — mixed-OS флоты классика; (в) да — паттерн без путей; (б) gh search пусто → ждёт /issue-match |
+| orphan/dead-code detector lies across OS boundaries / cron-scheduler blindness / false-red watchdog | суд сирот 21.08: паттерн «вердикт „никто не зовёт" валиден только для окна вызывателей ТОЙ же ОС» + детерминированная сверка schtasks/hooks (sweep-final-20260821.json, 124/178 ложных красных) + Breakage-класс orphan-detector-blind-to-windows-callers. Контрибьют-тест 21.08: (а) да — mixed-OS флоты классика; (в) да — паттерн без путей; (б) gh search пусто → ждёт /issue-match |
 | experiment/shadow rollout without harvest date / stale flags never reaped | жнец теней: harvest_watch.py (две даты у каждого пилота, exit 1 = созревшее, сторож не живёт в том, что сторожит) + рутина auto-hub-260821-shadow-harvest-daily. Контрибьют-тест 21.08: (а) да — stale-flag/эксперимент-без-финиша боль индустрии; (в) да; (б) gh search этими запросами пусто → ждёт /issue-match |
 | Windows CLI arg-limit убивает агентские рельсы молча («The command line is too long»: npm *.CMD → cmd.exe 8191, native → 32767) | транспорт-паттерн stdin / --prompt-file + красный self-test на раздутый argv (dr_headless_dispatch). Контрибьют-тест 21.08: (а) да — любой Windows-агентник с codex/gemini CLI; (в) да — паттерн без наших путей; (б) gh search не сделан → /issue-match до стука |
 | agent session looks alive but has taken no turn / green indicator over a dead loop / how to DETECT a silent stall | детектор возраста последнего `type:"assistant"` хода в `~/.claude/projects/*/*.jsonl` (замер 22.08 на хабе: 46 транскриптов за 6ч, 34 с ходом старше 60 мин, свежайший 0 = эталон) + честная оговорка, которой нет ни у кого: возраст САМ ПО СЕБЕ пере-стреливает, не хватает знаменателя (кто обязан двигаться), поэтому декларацию обязан отдавать рантайм; плюс «Stop-хук не сторожит петлю, которая не берёт ход» (§5.5) с нашим ложным зелёным 04.08. Использован в anthropics/claude-code#82546 (22.08). Контрибьют-тест 22.08: 3/3 да → кандидат /release-slice, дом = tonydzi/verified-ops-starter (четвёртая проверка рядом с output freshness) |
@@ -110,7 +170,7 @@ bash-скриптом, а не 70 вызовами.
 | scheduled task молча не бежит (battery defaults schtasks) | claude-desktop-watchdog (install_watchdog.ps1 battery-fix) · verified-ops-starter |
 | как ДОКАЗАТЬ что watchdog работает (live kill-test, watchdog-of-watchdog) | claude-desktop-watchdog (claude_desktop_livetest.ps1 + output_freshness слой) |
 | авторестарт не даёт приложению ДОобновиться (MSIX Register нужен ноль процессов; безоконный труп держит single-instance замок) | claude-desktop-watchdog v1.3 staged-corpse ветка (17.08) · память `desktop-staged-update-corpse` — кандидат на /release-slice, живых чужих тредов пока не найдено (4 запроса gh, поиск исправен) |
-| MSIX Status=Modified,NeedsRemediation / пакет флипает обратно после Repair / StateRepository rot | разбор 24.08 (хаб): скриптовый `Add-AppxPackage -Register` на здоровом пакете = 0x[id] → Modified (виндовая СВОЯ ремедиация чинит, наша ломает); мгновенный флип Ok→Modified после успешного Register = гниль StateRepository, лечится ТОЛЬКО Remove-AppxPackage + официальный Claude Setup.exe (подпись проверить; ставит тот же MSIX — не-MSIX сборки нет); паттерн «твой ночной авто-ремонт и есть болезнь» (лживый staged-детектор → грязный Register). Память appx-container-deadlock-not-file-lock. Контрибьют-тест 24.08: (а) да — Claude Desktop Windows юзеры массово ловят Modified/NeedsRemediation; (в) да — паттерн без наших путей; (б) ✅ СДЕЛАНО 24.08 вечером — лечилка раздана в 6 живых тредов (anthropics/claude-code#84333 #88138 #84851 #81992 #81180 + openai/codex#35347), все под вахтой pr_watch; дубли в остальные claude-code-треды класса НЕ шлём (перекрёстно связаны, 7-й коммент = веер) |
+| MSIX Status=Modified,NeedsRemediation / пакет флипает обратно после Repair / StateRepository rot | разбор 24.08 (хаб): скриптовый `Add-AppxPackage -Register` на здоровом пакете = 0x80070005 → Modified (виндовая СВОЯ ремедиация чинит, наша ломает); мгновенный флип Ok→Modified после успешного Register = гниль StateRepository, лечится ТОЛЬКО Remove-AppxPackage + официальный Claude Setup.exe (подпись проверить; ставит тот же MSIX — не-MSIX сборки нет); паттерн «твой ночной авто-ремонт и есть болезнь» (лживый staged-детектор → грязный Register). Память appx-container-deadlock-not-file-lock. Контрибьют-тест 24.08: (а) да — Claude Desktop Windows юзеры массово ловят Modified/NeedsRemediation; (в) да — паттерн без наших путей; (б) ✅ СДЕЛАНО 24.08 вечером — лечилка раздана в 6 живых тредов (anthropics/claude-code#84333 #88138 #84851 #81992 #81180 + openai/codex#35347), все под вахтой pr_watch; дубли в остальные claude-code-треды класса НЕ шлём (перекрёстно связаны, 7-й коммент = веер) |
 | AGENTS.md режется молча / `project_doc_max_bytes` / instruction budget 32 KiB | codex_mirror.py (версионное зеркало с гейтами + кап) · посылка codex-cap-handoff (config.toml=131072) — живые треды: openai/codex#37956, openai/codex#36371, open-mercato#4484, hermes-agent#50165 |
 | продолжить сессию Claude Code в Codex / cross-CLI handoff | handoff_to_codex.py + блок §C7 в AGENTS.md (агент сам читает `~/.codex/_handoff/CURRENT.md` первым) |
 | RAG citations / hallucinated sources | verbatim-citation-gate |
@@ -142,6 +202,25 @@ gh search issues --repo anthropics/claude-code "<тема>" --state open --sort 
   --json number,title,updatedAt,commentsCount \
   --template '{{range .}}#{{.number}} ({{timeago .updatedAt}}, {{.commentsCount}}c) {{.title}}{{"\n"}}{{end}}'
 ```
+
+## ⛔ Как ЧИТАТЬ тред перед ответом (замер 05.10.2026, GIT-S5 заход 37, `beads#5877`)
+
+⭐ **Кто написал последним и что именно — НИКОГДА не через отрицательный индекс в `--jq` с `--paginate`.**
+`gh api --paginate .../comments --jq '.[-1]'` применяет фильтр К КАЖДОЙ СТРАНИЦЕ и склеивает результаты:
+«последний коммент» приезжает по одному на страницу, и тело старого коммента встаёт под логином свежего
+автора. Ни одна команда не падает, вывод выглядит нормальным — и ответ уходит НЕ ТОМУ человеку
+(заход 37 поймал это за один шаг до публикации). Истина:
+```
+gh api --paginate repos/<r>/issues/<n>/comments --jq '.[]|{c:.created_at,u:.user.login,b:.body}' \
+  | python3 -c "import json,sys; rows=[json.loads(l) for l in sys.stdin if l.strip()]; rows.sort(key=lambda r:r['c']); [print('='*8, r['c'][:16], r['u'], r['b'][:1200]) for r in rows[-2:]]"
+```
+Распределение авторов (`.[]|.user.login | sort | uniq -c`) отрицательным индексом не страдает — там фильтр
+по всем элементам, и его можно гонять как раньше.
+
+⭐ Пара к этому же классу: **«мы уже ответили?» по чужому PR читается в `pulls/<N>/reviews`**, а не в
+`issues/<N>/comments` — наши ревью-объекты в комментах не видны, и прибор молча отвечает не на тот вопрос,
+который задали. Перед фразой «@X сказал Y» или «мы молчим N дней» — сверь логин и дату ТОЙ ЖЕ строки,
+из которой взял Y.
 
 ## Шаг 2 — ОТБОР (гейт качества, анти-спам; ВСЕ пункты обязательны)
 Отвечаем ТОЛЬКО если:
@@ -259,3 +338,15 @@ gh search issues --repo anthropics/claude-code "<тема>" --state open --sort 
 ## ⭐ Чёрный юмор обязателен (anton 10.09.2026, голосом)
 
 Любой текст, который этот скилл отправляет ЖИВОМУ человеку наружу, несёт чёрную самоиронию — ровный служебный тон = дефект, объяснять надо не шутку, а её отсутствие. Строку берёшь через `/mycroft-joke` (полка (д) банка + строки 56-62 под холодное касание), приёмка — `/taste-check` P36. ⛔ Не шутим ровно в трёх зонах, и они не про вкус: строго-научная публикация (arXiv/журнал/JOSS) · юр.обязательство и анкета · красный список банка (чужая иконография угнетённых, псевдо-слуры, отрицание что я ИИ, юмор поверх диагноза/денег/беды собеседника). Одна шутка на тред. Канон: CLAUDE.md §3.3 §Поправка 10.09 + [[dark-humor-default-everywhere-external]].
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

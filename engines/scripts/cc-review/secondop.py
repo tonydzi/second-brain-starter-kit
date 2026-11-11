@@ -60,7 +60,7 @@ BUS_SECONDOP = os.environ.get("SECONDOP_BUS") or os.path.join(
     os.environ.get("MACHINE_BUS", r"%VAULT%\[шина]"), "_secondop")
 # bus_ping (TG mirror) lives in a different dir per node -- try each known layout.
 SCRIPT_DIRS = [SCRIPTS, "$HOME/hub-scripts-fresh/scripts"]
-CHAT_04 = -[id]  # "04 AI-DUO Claude×Codex" -- human-visible mirror
+CHAT_04 = 0  # "04 AI-DUO Claude×Codex" -- human-visible mirror
 HOST = os.environ.get("COMPUTERNAME", socket.gethostname())
 STALE_MIN_DEFAULT = 15  # standby takes over when every other broker beat is older than this
 RITUAL_TIMEOUT = 90     # hard budget for a call made from inside a ritual (/tt): never hang the gate
@@ -222,7 +222,7 @@ def grok_prompt_text(role, context):
 
 
 def _grok_env():
-    """Subscription rail ONLY. A stray XAI_API_KEY in the environment would silently [человек] the paid
+    """Subscription rail ONLY. A stray XAI_API_KEY in the environment would silently bill the paid
     API and make our 'we stay on the subscription' claim false -- strip it for the child."""
     env = dict(os.environ)
     env.pop("XAI_API_KEY", None)
@@ -376,7 +376,7 @@ def run_point(point, task, context, timeout, post, conf, ritual="", engine="code
     print(header)
     print(reply)
     if ritual and rec.get("finding") is None:
-        # An unparseable move ("Looks good.\nACCEPT", prose, truncation) is NOT a clean [человек] of
+        # An unparseable move ("Looks good.\nACCEPT", prose, truncation) is NOT a clean bill of
         # health: the ritual must degrade to ⚠️, never read a green gate out of an unknown shape
         # (Grok T3-BREAK #2, 24.07). ok=True only means the vendor answered, not that it approved.
         print("⚠️ ФОРМА ВЕРДИКТА НЕ РАСПОЗНАНА (первое слово не ACCEPT/PROPOSE/COUNTER/VERIFY/BLOCK) "

@@ -19,7 +19,7 @@ youtube/yt_lib.py already normalizes — Gemini chats export via Google Takeout:
   takeout.google.com -> Deselect all -> "My Activity" -> Gemini Apps -> JSON.
 
 ONE normalized record schema, ONE source adapter (normalize_gemini). Everything
-downstream (SQLite dedup store, day-notes, MOC) is reused verbatim in [человек]
+downstream (SQLite dedup store, day-notes, MOC) is reused verbatim in spirit
 from the chatgpt/youtube importers so a non-engineer can reason about it.
 
 Design choices grounded in the export's real shape (verified against Google's

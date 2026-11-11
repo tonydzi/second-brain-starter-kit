@@ -46,7 +46,7 @@ GitHub 17.06.2026 дал мейнтейнерам лимит на число о�
 
 Колонки: поверхность · наш актив под неё · чьи руки · статус на 29.07 → следующий ход.
 
-> ⭐ **ПРИОРИТЕТЫ ПЕРЕСТАВЛЕНЫ 31.07.2026** по DR26-07-29-MACANTON-02-1537 (база 2 вендора: ChatGPT Web search + Grok; синтез `03-Insights/insight-DR-DR26-07-29-MACANTON-02-1537-guerrilla-github.md`). Номера в таблице ниже — ИНВЕНТАРЬ поверхностей, а не порядок работы. Порядок работы — вот:
+> ⭐ **ПРИОРИТЕТЫ ПЕРЕСТАВЛЕНЫ 31.07.2026** по DR26-07-29-MAC-1-02-1537 (база 2 вендора: ChatGPT Web search + Grok; синтез `03-Insights/insight-DR-DR26-07-29-MAC-1-02-1537-guerrilla-github.md`). Номера в таблице ниже — ИНВЕНТАРЬ поверхностей, а не порядок работы. Порядок работы — вот:
 >
 > **Ярус A — этим добываем входящий контакт:** #3 issues-исследования → #2 code review чужих PR → #8 бенчмарк → #6 maintainer-триаж → #10 security/race → #5 RFC → #1 PR **только по согласованию** → #7 док по живой боли.
 > **Ярус B — работают лишь при наличии дистрибуции:** #18 пакеты · #15/#16 Actions · #4 discussions · #11 example apps · #12 starter kits · #17 релизы · #20 profile README · #21 пины (последние два = конверсия, не привлечение).
@@ -175,3 +175,15 @@ github-audition-queue.md` -- разведка боли, которую умее�
 Репо не из выдачи → `--check owner/repo`: domain=off или «нет в списке» = НЕ ТРОГАТЬ, даже если issue красивая и хозяин живой. Исключение только по прямому слову Антона.
 Правила и own_pain: `~/.claude/registry/github-universe/domain.json` (0 LLM; тест `_test_github_targets_domain.py`).
 Метод (репро · красный тест · мутации · ревью объектом Review) не меняется — сужены только мишени.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

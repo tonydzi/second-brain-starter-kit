@@ -1,24 +1,91 @@
 ---
 name: contrib-watch
-description: "- СТОРОЖ ВХОДЯЩЕГО ФИДБЭКА: кто из посторонних инженеров пришёл к НАШИМ репозиториям, что написал, сколько часов ждёт… Триггеры: “/contrib-watch“, “/cw“, “кто нам написал“, “проверь входящий фидбэк“, “что там на гитхабе“, “есть ли новые контрибьюторы“, “кто пришёл“, “долги по PR“, “check inbound feedback“, “who contributed“, а также САМ в начале любой сессии, где речь про GitHub, флагман"
-version: 1.0.0
+description: "Watch incoming feedback from outside engineers on your open-source repos: comments, reviews, issues, mentions. Use when you need to find who replied to your pull requests or issues, triage human versus bot responses, and answer within a day with evidence."
+version: 1.2.0
+license: MIT
 ---
 
 # /contrib-watch — кто пришёл к нам сам, и почему мы обязаны ответить сегодня
 
 ## Закон
 **Молчание в живом треде = провал, а не осторожность** (CLAUDE.md §4.7). Ответ на GitHub я даю
-САМ, без «+» Антона и без гейта [коллега]. Мерж кода — по [[github-publish-autonomous]] + leak-scan.
+САМ, без «+» Антона и без гейта Наташи. Мерж кода — по [[github-publish-autonomous]] + leak-scan.
 
 **Порог: 24 часа.** Дольше — красное. Обоснование не теоретическое: 05.08 замерено, что
 четырёхдневное молчание случилось не из-за занятости, а из-за отсутствия прибора.
 
 ## Шаг 1 — снять картину (0 токенов)
+
+⚠️ ПЕРЕД ЛЮБЫМ СКАНОМ СВЕРЬ АККАУНТ ВЫЗОВОМ, А НЕ ЯРЛЫКОМ (замер 02.10.2026): `gh auth status`
+на этом узле печатает `Logged in to github.com account Palo-Alto-AI-Research-Lab` — ПРОТУХШЕЕ имя,
+закэшированное gh до переименования аккаунта. Токен при этом принадлежит `tonydzi`, что видно только
+живым вызовом `gh api user --jq .login`. Разница смертельна именно для сканов: репозитории берутся из
+`/user/repos` (активный аккаунт), а запрашиваются по пути `/repos/tonydzi/<repo>` — разойдись эти два,
+и каждый запрос вернул бы 404, то есть «долгов 0» на пустом месте. Ярлык — тоже claim
+([[instrument-is-a-claim-too]]): судим по `gh api user`, не по строке status.
+
 ```
 python ~/.claude/scripts/contrib_watch.py --html "$OBSIDIAN_VAULT/_Dashboards/Contrib-Inbox.html"
 ```
-Обходит все наши публичные репозитории, находит треды, где ПОСЛЕДНИМ говорил внешний человек,
-считает часы ожидания, отмечает 🆕 тех, кого не видели ни разу. Exit 3 = есть просрочка.
+Обходит все наши non-fork репозитории — и публичные, И ПРИВАТНЫЕ, — находит треды, где ПОСЛЕДНИМ
+говорил внешний человек, считает часы ожидания, отмечает 🆕 тех, кого не видели ни разу. Exit 3 = есть просрочка.
+
+⚠️ ПРИВАТНЫЕ СМОТРИМ ТОЖЕ (замер 24.09.2026, снят фильтр `not r["private"]`). Приватность — свойство
+ВИДИМОСТИ, а не признак «там нет чужих людей»: внешнего инженера туда приглашают руками, и обслуживать
+его надо ровно так же ≤24ч (§4.7). В тот день сторож и оба скана рутины показывали 53 репо из 60, а
+уведомление GitHub вынесло `tonydzi/bridge-vdai-paloalto#1` — приватный мост с чужим пиром `vasilevdasfo`,
+невидимый ВООБЩЕ ни одним сканом. Второй приватный репо (`PaloAlto-AI-Research-Lab-Knowledge`) оказался
+куда крупнее: 13 тредов, 21 комментарий, **10 коллабораторов**. Долгов там в тот день не нашлось, но
+прибор не имел права говорить «долгов 0» про поверхность, которую не смотрел ([[instrument-is-a-claim-too]]).
+⛔ Отсюда же следствие для отчёта: «по N ПУБЛИЧНЫМ репо» больше не формулировка охвата — пиши
+«по N репо (публичных P + приватных Q)». Тест охвата: `_test_contrib_watch_private.py` (красный доказан
+на самом фильтре: охват был `['pub']`).
+
+⚠️ И ЕЩЁ ОДНА СЛЕПАЯ ЗОНА ТОГО ЖЕ КЛАССА: человек, живущий ТОЛЬКО в приватном контуре, невидим обоим
+поисковым селекторам Шага 2-ноль. У `Kubalskiy` (форк приватного репо) `commenter:` и `involves:` дают
+по **0** — по правилу «ноль по одному селектору = этим селектором не видно» хоронить контакт нельзя и
+при нуле по ОБОИМ: они оба ходят по публичной поверхности. Третий вопрос — список коллабораторов
+приватных репо (`gh api /repos/tonydzi/<repo>/collaborators`).
+
+## Шаг 1-кватер — ТРЕТЬЯ поверхность комментариев: inline-ревью живут в ДРУГОЙ ручке
+⚠️ ЗАМЕР 29.09.2026 (Mac16, contrib-watch-daily): оба скана Шага 1 и Шаг 1-тер ходят по
+`/issues/comments` — это ленты треда. Построчные замечания ревьюера лежат в `/pulls/comments`
+и в НИХ НЕ ВХОДЯТ ВООБЩЕ. Инженер, оставивший пять `[important]` строк прямо в диффе и ни одной
+в ленте, для всех трёх сканов невидим. Заметка 27.09 упоминает «три скана», но снипета на третий
+нигде не было — прогон 29.09 писал его руками, и это ровно та боль, которую скилл обязан снимать.
+```
+python3 - <<'INNER'
+import json,subprocess
+def gh(p):
+    r=subprocess.run(["gh","api","--paginate","--slurp",p],capture_output=True,text=True)
+    if r.returncode!=0 or not r.stdout.strip(): return []
+    d=json.loads(r.stdout)
+    return d[0] if len(d)==1 and isinstance(d[0],dict) else [x for pg in d for x in (pg if isinstance(pg,list) else [pg])]
+repos=[r["name"] for r in gh("/user/repos?per_page=100&affiliation=owner") if not r["fork"]]
+hits=0
+for name in repos:
+    cs=gh(f"/repos/tonydzi/{name}/pulls/comments?per_page=100&sort=created&direction=desc")
+    if not isinstance(cs,list) or not cs: continue
+    th={}
+    for c in cs: th.setdefault(c["pull_request_url"].rsplit("/",1)[-1],[]).append(c)
+    for n,ch in th.items():
+        ch.sort(key=lambda c:c["created_at"]); last=ch[-1]; lg=last["user"]["login"]; ts=last["created_at"]
+        if lg.lower()!="tonydzi" and not lg.endswith("[bot]"):
+            print(f"  C-inline {name}#{n} last={lg} @ {ts}"); hits+=1
+print("inline-хитов:",hits)
+INNER
+```
+⚠️ Приватные репо НЕ исключаем (та же грабля 24.09, что в Шаге 1). Замер 29.09: репо с inline-
+комментариями оказалось 1 из 60, хитов 0 — скан дешёвый, но «дёшево» это не «не нужен»: цена
+пропуска здесь = молчание в треде, где человек разобрал наш дифф построчно.
+⛔ Ноль по этому скану закрывает ТОЛЬКО inline-поверхность; в отчёт Шага 4 охват пишется как
+«N репо × 4 скана», а не «всё проверено».
+<!-- Шаг 1-кватер добавлен 29.09.2026 · прогон contrib-watch-daily, Mac16 · сторож снипета:
+     `python3 ~/.claude/scripts/_test_contrib_watch_snippets.py` (охват расширен с файла рутины на
+     ОБА дома и с литерала <<'PY' на любой heredoc-маркер; красный доказан мутациями в --selftest).
+     Снипет прогнан ВЕРБАТИМ из этого файла: 60 репо, 1 репо с inline-комментариями, 0 хитов.
+     Assisted-by: Claude Code
+     Operator: robot:contrib-watch-daily -->
 
 ## Шаг 1-бис — «последним сказал чужой» ≠ долг: разговор мог уехать в PR
 Эвристика «последний говоривший в треде» ловит ДОЛГ и МИГРАЦИЮ одинаково, а это разные вещи.
@@ -42,14 +109,52 @@ gh api "/repos/tonydzi/<repo>/pulls/<PR>/reviews"   --paginate --jq '.[]|"\(.sta
 именно НАШ ответ в нём с датой позже. Смерженный молча PR без единого нашего слова — это долг
 (§4.7: молчание в живом треде = провал), и он идёт в Шаг 4 как обычное касание.
 
+## Шаг 1-тер — ЗЕРКАЛЬНОЕ слепое пятно: долг бывает и там, где последними говорили МЫ
+Оба скана Шага 1 спрашивают «кто сказал последним» и потому ловят ровно один вид долга — «нам
+написали, мы молчим». Второго вида они не видят ВООБЩЕ: **мы пообещали и не сделали**. В таком
+треде последняя строка наша, хит не возникает, прибор честно рапортует ноль — а человек ждёт.
+
+⚠️ ЗАМЕР 27.09.2026, чем это стоило: три скана (комменты вкл. закрытые, чужие открытые, inline-ревью)
+по 60 репо дали 0 долгов, и это была правда. Параллельно в `sqlite-graph-memory` PR#8 висело наше
+обещание 15.09 — «the triage invite waits for Anton's click, you'll see it arrive from GitHub» —
+данное человеку, который согласился («I would gladly accept») через час после предложения ещё 13.09.
+Приглашение не пришло бы НИКОГДА: `triage`/`maintain` существуют только на репо ОРГАНИЗАЦИИ, а
+`tonydzi` — `owner.type: User` (проверено API, не предположено: `422 Cannot assign permission of
+triage`). Человек ждал 12 дней и за это время прислал ещё два смерженных PR. Ни один скан его не видел.
+
+Поэтому на каждом прогоне — третий вопрос, дешёвый, по НАШИМ строкам за 30 дней:
+```
+gh api "/repos/tonydzi/<repo>/issues/comments?per_page=100" --paginate --jq \
+  '.[]|select(.user.login=="tonydzi")|select(.created_at > "'"$(date -v-30d +%F)"'")|
+   select(.body|test("(?i)\\binvite\\b|will send|\\bi.?ll\\b (send|open|give|add|file|ship)|waits for|arriving|coming shortly"))|
+   "\(.issue_url|split("/")|last) @ \(.created_at): \(.body[0:120])"'
+```
+⚠️ Границы слов обязательны: без `\\b` шаблон `i.ll open` ловит «st**ill open**» — замер 27.09, одно
+ложное попадание из трёх на первом же прогоне. Ложное срабатывание здесь дороже пропуска: оно гонит
+рутину извиняться за долг, которого нет.
+
+Каждое попадание = обещание с датой. Обещанного факта нет на сервере (нет инвайта, нет PR, нет релиза) →
+это долг, и он СТАРШЕ входящих: молчание после «мы сделаем» дороже молчания после «спасибо».
+⛔ Закрывать такой долг повторным обещанием запрещено. Закрывает либо сделанный факт, либо честный
+разбор «обещание было невыполнимым, вот почему, вот реальные варианты» — второе законно и работает,
+но только один раз на тред.
+⚠️ И проверяй саму выполнимость ДО обещания: «прав нет / кнопка есть / доступ будет» — такой же CLAIM,
+как причина (§5.4). Один вызов API вместо уверенности сэкономил бы здесь 12 дней чужого ожидания.
+
 ## Шаг 2-ноль — «наш он или нет» решается ДВУМЯ селекторами, а не одним
-⛔ Прежде чем сказать «этот новый логин не наш, карточку не завожу» (так закрыли [человек]-KUKLEVA и dudididjdje-tech 13.09) — спроси GitHub ОБОИМИ вопросами:
+⛔ Прежде чем сказать «этот новый логин не наш, карточку не завожу» (так закрыли GALINA-KUKLEVA и dudididjdje-tech 13.09) — спроси GitHub ОБОИМИ вопросами:
 ```
 gh api "search/issues?q=commenter:<login>+user:tonydzi" --jq '.total_count'   # он у нас ГОВОРИЛ
 gh api "search/issues?q=involves:<login>+user:tonydzi"  --jq '.total_count'   # он у нас АВТОР/упомянут
 ```
-⚠️ ЗАМЕР 21.09.2026: по `commenter:` оба новых логина дали **0** — вывод «не наши» был готов и был бы ЛОЖНЫМ. `involves:` дал по **1**: [человек] и b7n0de оказались АВТОРАМИ самоподач PR #4 и #5 в `tonydzi/awesome-verified-agents`. Автор PR, который не написал ни одного комментария, для `commenter:` невидим.
+⚠️ ЗАМЕР 21.09.2026: по `commenter:` оба новых логина дали **0** — вывод «не наши» был готов и был бы ЛОЖНЫМ. `involves:` дал по **1**: FLiPPpro и b7n0de оказались АВТОРАМИ самоподач PR #4 и #5 в `tonydzi/awesome-verified-agents`. Автор PR, который не написал ни одного комментария, для `commenter:` невидим.
 Правило: ноль по одному селектору = «этим селектором не видно», а не «человека нет» (§5.4, [[check-all-places-not-one]]). Хоронить контакт можно только когда молчат ОБА.
+
+⚠️ ЗАМЕР 08.10.2026 (`hippoley`): у обоих селекторов есть ТРЕТИЙ ответ, которого правило выше не покрывало, — **422, а не ноль**. `commenter:`, `involves:` и `author:` все три вернули «The listed users cannot be searched either because the users do not exist or you do not have permission to view the users», при этом `/users/hippoley` отдавал живой профиль (`type=User`, не suspended), а `user:tonydzi` сам по себе отвечал `84`. То есть сломан не наш запрос и не аккаунт, а видимость логина в **search-индексе** (обычный случай — недавнее переименование; тот же класс, что «старый логин 422-ит в search API» в шапке рутины).
+Разводи два исхода, они требуют разного:
+- **0 у обоих** → «молчат оба», контакт можно хоронить;
+- **422 у обоих** → прибор СЛЕП, вердикт о контакте запрещён вообще. Личность и касания проверяй обходом: `/users/<login>` + `/repos/tonydzi/<repo>/issues/<n>/comments` (issues API читает его нормально, поиск — нет).
+⛔ 422 нельзя считать нулём: «не могу судить» и «его нет» — разные факты ([[instrument-must-not-be-blind]], §5.4). Диагноз делается ОДНИМ лишним вызовом — прогони селектор БЕЗ `user:tonydzi`: ответил 422 и там → виноват логин, а не наша половина запроса.
 
 ## Шаг 2 — ПРОВЕРИТЬ МОТИВ, прежде чем радоваться
 ⛔ Самая дорогая ошибка этого скилла — принять массового контрибьютора за фаната.
@@ -165,7 +270,7 @@ CRM пополнен · заявленные цифры перепроверен
 ⚠️ если ответили, но не проверили мотив или не завели в CRM.
 
 ## Рутина
-Ночной прогон (окно 23:00-06:00 Лиссабон, §4.6) + дневной тик: сторож живёт ВНЕ сессии,
+Ночной прогон (окно 23:00-06:00 local time, §4.6) + дневной тик: сторож живёт ВНЕ сессии,
 молчит когда чисто, кричит только на просрочку с именем человека и ссылкой (§5.5).
 
 ## Счётчик
@@ -186,3 +291,24 @@ CRM пополнен · заявленные цифры перепроверен
 канон: `reglament-vhodyashchiy-fidbek-inzhenerov-otvechaem-v-sutki` ·
 память: [[github-inbound-watch]], [[github-communication-autonomous]], [[engineer-acquisition-enrichment-not-scraping]] ·
 соседи: `/consumer-hunt`, `/issue-match`, `/github-growth`, `/local-engineer-outreach`
+
+## ⭐ ПОПРАВКА 08.10.2026 — у детектора появился ИСПОЛНИТЕЛЬ: `contrib_reply.py`
+Приказ Антона 23:33 («на маке ставь рутину на ответы всем контрибьюторам»). Детектор по-прежнему только
+смотрит; ответ в тред даёт `python ~/.claude/scripts/contrib_reply.py` (ack ≤1 ч первой строкой «Mycroft,
+synthetic AI co-founder», что проверено машиной, срок человека 48 ч, подпись-CTA; однострочные PR в `awesome-*`
+с живыми ссылками мержит сам, код НИКОГДА). Расписание: Windows-задача «Claude Contrib Reply» (HP17, 3 ч),
+Mac — посылка `contrib-reply-20261008` (launchd `ai.paloalto.contrib-reply`). Журнал `~/.claude/contrib_reply_lane.jsonl`.
+Живая сессия по этому скиллу теперь отвечает ПО СУЩЕСТВУ там, где робот уже подтвердил приём; дубль-ack не писать.
+Память: [[contrib-reply-routine-born]], [[review-field-is-submittedat-not-createdat]] (счёт «без ответа» сверять с `contrib_watch.py --json`, у ревью поле `submittedAt`).
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

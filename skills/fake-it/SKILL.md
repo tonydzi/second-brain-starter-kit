@@ -1,6 +1,7 @@
 ---
 name: fake-it
-description: "СЛОЙ ПРОДАЖИ: усилить рамку артефакта до масштаба, который он на самом деле заслуживает, НЕ тронув ни одной цифры. Триггеры: '/fake-it', '/fi', 'приукрась', 'продай это', 'усиль рамку', 'сделай громче', 'подай красиво', 'sell it', а также САМ перед любым исходящим наружу (пост, питч, README, CV, PR-коммент, лендинг, заявка, DM лиду, Show HN, письмо в лабу) и перед показом Антону готового артефакта"
+description: "Sell layer: raise the framing of an artifact to the scale it actually deserves without touching a single number. Use before anything goes outbound (post, pitch, README, CV, PR comment, landing page, application, DM) or before showing a finished artifact. Triggers: /fake-it, /fi, sell it, make it louder, strengthen the frame."
+license: MIT
 version: 1.0.0
 ---
 
@@ -69,3 +70,15 @@ python ~/.claude/scripts/paragraph_lint.py <усиленный-файл>
 
 ## Дверь работает, если её зовут
 Вызывается САМ (без просьбы Антона) на каждом исходящем артефакте — это и есть «частенько использовать». Точки автовызова: `/taste-check` (P35), `/social-daily`, `/episode`, `/pack`, `/cv`, `/fa`, `/pr-reply`, `/apply`.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

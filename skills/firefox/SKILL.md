@@ -1,6 +1,7 @@
 ---
 name: firefox
-description: "БРАУЗЕР ПО УМОЛЧАНИЮ = FIREFOX (решение Антона 2026-07-30, канон decision-2026-07-16-browser-automation-layer). Триггеры: /firefox, /ff, «через firefox», «открой в фаерфоксе», «забери страницу», «сними куки», «нужен браузер», «зайди на сайт», «headless браузер», «какой браузер брать», «браузерная автоматизация», а также САМ перед любым действием, требующим браузера"
+description: "Default to Firefox for browser automation and decide when Chrome is truly required. Use before any task that needs a browser: fetching a page, grabbing cookies, headless runs, logging into a site. Includes a matrix of which tasks must stay on Chromium and why. Triggers: /firefox, /ff, via firefox, need a browser, headless browser, which browser to use, browser automation."
+license: MIT
 version: 1.0.0
 ---
 
@@ -90,7 +91,7 @@ python3 ~/.claude/scripts/rail_sweep.py orcid     # академические �
 | **Оживление bearer ChatGPT** (`token_heal`) | сессия читается с диска → петля замыкается без рук Антона (раньше звала человека каждые 5–9 дней) |
 | **Куки для API-клиентов** (notebooklm-py и любой, кто просит сессию) | ровно то, что ABE убил в Chrome |
 | **Экспорт/синк чатов** (gemini, takeout-pull, chatgpt-sync) | фоновые рутины, окно не нужно. ✅ ЗАМЕРЕНО 31.07 на [машина флота] с диска: gemini u/1, chatgpt a2, grok — все три отвечают 200 из headless-Firefox |
-| **Публичный веб без логина**: рендер JS-страниц, радары, проверка живости наших страниц, HTML→текст, скриншоты | наши аккаунты не участвуют → риска ноль. Дом — **Маяк** |
+| **Публичный веб без логина**: рендер JS-страниц, радары, проверка живости наших страниц, HTML→текст, скриншоты | наши аккаунты не участвуют → риска ноль. Дом — **Якорь** |
 | **Забор статьи/страницы по ссылке** (defuddle, gitbook-import) | чтение |
 | **Любая новая браузерная рутина** | пока не доказано обратное — Firefox |
 
@@ -118,7 +119,7 @@ python3 ~/.claude/scripts/rail_sweep.py orcid     # академические �
    ```
 3. ☐ **Обе идентичности — username И email.** Запись часто лежит под почтой, и на одном сайте их бывает несколько.
 
-**Замер 11.08 (хаб): 1901 сохранённая запись.** Кейс: `gitlab.star-alliance.io` не подставился на username `TonyD`, сессия объявила блок и дёрнула Антона — он выбрал запись **по email** руками, пароль был на месте. Запрос из п.2 закрывал вопрос за секунду и сразу показал бы `gitlab.star-alliance.io/users/sign_in | [рабочий аккаунт]@gmail.com`. Канон: `reglament-[человек]-chrome-na-vseh-mashinah-loginsya-cherez-nego` §«Три проверки», память [[one-chrome-account-all-machines]].
+**Замер 11.08 (хаб): 1901 сохранённая запись.** Кейс: `gitlab.example.io` не подставился на username `TonyD`, сессия объявила блок и дёрнула Антона — он выбрал запись **по email** руками, пароль был на месте. Запрос из п.2 закрывал вопрос за секунду и сразу показал бы `gitlab.example.io/users/sign_in | [рабочий аккаунт]@gmail.com`. Канон: `reglament-[человек]-chrome-na-vseh-mashinah-loginsya-cherez-nego` §«Три проверки», память [[one-chrome-account-all-machines]].
 
 ### Тест на развилке
 > «Это действие **от лица Антона** на площадке, где за роботов банят?»
@@ -143,7 +144,7 @@ python3 ~/.claude/scripts/rail_sweep.py orcid     # академические �
 
 ## §3. Как пользоваться (рецепты)
 
-Питон: `PY=$(grep ^PYTHON_EXE ~/.claude/machine.env | cut -d= -f2)` — значение пер-машинное, живёт в `~/.claude/machine.env` (⚠️ env-переменных в сессии может не быть, читать файл). На Маяке — `~/.venv-browser/bin/python`.
+Питон: `PY=$(grep ^PYTHON_EXE ~/.claude/machine.env | cut -d= -f2)` — значение пер-машинное, живёт в `~/.claude/machine.env` (⚠️ env-переменных в сессии может не быть, читать файл). На Якорье — `~/.venv-browser/bin/python`.
 
 ### Открыть страницу и забрать текст
 ```python
@@ -228,7 +229,7 @@ $PY ~/.claude/scripts/_shared/firefox_selenium.py --setup
 |---|---|---|
 | **Хаб** [машина флота] | 152.0.6, selenium 4.46 | главный дом для НАШИХ залогиненных аккаунтов — **резидентный IP** |
 | **[машина флота]** [машина флота] | 152.0.6, selenium 4.46, профиль AutoFF залогинен ✅ (с 31.07 GUI-Лиса живёт на нём же: `~/.claude/browser-profiles/autoff`, диск; сессии с диска: gemini u/1 ✅ · chatgpt a2 ✅ до 2026-10-29 · grok ✅ PremiumPlus · claude.ai кука на месте, selenium-проверку режет CF — грабля 15) | живая работа + локальные задачи |
-| **Маяк** [машина флота] | 153.0.1, geckodriver 0.37.1, venv `~/.venv-browser` | **только анонимный публичный веб** — дата-центровый IP, наши подписки сюда не носим |
+| **Якорь** [машина флота] | 153.0.1, geckodriver 0.37.1, venv `~/.venv-browser` | **только анонимный публичный веб** — дата-центровый IP, наши подписки сюда не носим |
 | HP17 · [машина флота] · машина [коллега] | не замерены | TASK разослан по шине |
 
 Эталонный md5 движка сверять на всех узлах — расхождение значит, что правка не доехала (⚠️ `claude-home` не везёт правки с пиров, доставлять напрямую).
@@ -288,3 +289,15 @@ python3 ~/.claude/scripts/_shared/browser_usage_log.py --report --days 14
 ⚠️ **Битый `continue=`** (`...identifier?continue=...&Email=...`) даёт Google **Error 400**, а не форму — бери голый `https://accounts.google.com/`, без своих query.
 ⚠️ **VPN в тулбаре** — Google злее к новым входам, попроси Антона снять до ввода.
 Пароль вводит Антон (робот пароли не набирает, §3.4). Проверка успеха = не глаз, а куки на диске: `has_rotating_session(autoff)` + `SID/__Secure-1PSID/__Secure-1PSIDTS` в копии `cookies.sqlite` ([[done-is-a-claim-recheck-twice]]).
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

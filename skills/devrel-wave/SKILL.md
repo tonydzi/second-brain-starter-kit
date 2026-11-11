@@ -97,8 +97,8 @@ PY
 
 ## Лестница касаний
 
-> ✅ **Основано на `DR26-07-27-MACANTON-01`** (Grok Heavy, 525 источников, 2026-07-27) —
-> выжимка `03-Insights/insight-DR-DR26-07-27-MACANTON-01-0018-*`.
+> ✅ **Основано на `DR26-07-27-MAC-1-01`** (Grok Heavy, 525 источников, 2026-07-27) —
+> выжимка `03-Insights/insight-DR-DR26-07-27-MAC-1-01-0018-*`.
 > ⚠️ Честно о качестве данных: почти все reply-rate — **proxy из B2B-продаж и рекрутинга**;
 > прямых замеров для «соло-технарь → DevRel топ-лаба» почти нет. Цифры ниже — ориентир, а не закон.
 
@@ -318,7 +318,19 @@ freshness-чека (шаг 2). Урок Alex Albert: список протуха
 ## Связанное
 `/outbound-gate` (гейт, вызывается шагом 4) · `/x-inbox-watch` (вахта ответов, парный) ·
 `/local-llm-wave` (та же миссия, но по репозиториям) · `/local-engineer-outreach` (воронка A, инженеры —
-другая аудитория, не путать) · `DR26-07-27-MACANTON-01` (тайминги) · память [[evals-fleet-reliability]].
+другая аудитория, не путать) · `DR26-07-27-MAC-1-01` (тайминги) · память [[evals-fleet-reliability]].
 
 ## Анти-слоп гейт (anton 14.08)
 Любой ИИ-написанный текст наружу из этого скилла перед отправкой - финальный проход `/ai-slop` (ban-лист + ритм). Исключения ровно три: текст с плашкой Майкрофта (§3.3) · машиночитаемое (GitHub/техдока/dev-log/journey-machine) · текст, написанный Антоном руками. Канон: `reglament-posty-ot-lica-antona-tolko-cherez-ai-slop`.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

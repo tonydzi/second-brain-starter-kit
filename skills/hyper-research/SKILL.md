@@ -1,6 +1,7 @@
 ---
 name: hyper-research
-description: "ГИПЕР-РЕСЁРЧ: один вопрос уходит в максимум НЕЗАВИСИМЫХ LLM разом (рельса = вендор#аккаунт: Claude x3 бака, ChatGPT x2, Gemini, Grok, GLM, Mistral), каждая в самом сильном режиме думания с ДОКАЗАТЕЛЬСТВОМ режима. Пол 3, кворум 4 — синтез сразу, опоздавших добирает суточный доборщик. Транспорт делегируется /dr-fanout. Триггеры: /hyper, гипер-ресёрч, прогони вопрос по максимуму LLM."
+description: "Send one research question to as many independent LLMs as possible at once, each in its strongest reasoning mode with proof of that mode, then synthesize. Floor of 3 models, quorum of 4; late answers are collected later. Use for high-stakes questions where one model's view is not enough. Triggers: /hyper, hyper research, ask every LLM, max fan-out research."
+license: MIT
 version: 1.0.0
 ---
 
@@ -111,3 +112,15 @@ python ~/.claude/scripts/dr_latecomer_sweep.py --apply    # добрать
 
 **Нужен Claude**: Шаг 2 в живом режиме опирается на Chrome-MCP. Ноги `cli` и `ff` работают у
 любого агента (§9.3-тер, пишем для любого агента).
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

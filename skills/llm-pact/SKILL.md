@@ -1,6 +1,7 @@
 ---
 name: llm-pact
-description: "Как двум LLM-агентам (Claude×Codex×любой) договориться и работать из одной папки: протокол реплик, каналы, роли, доказательства, будильник, анти-паттерны. Триггеры: /llm-pact, договорись с codex/grok/glm, подключи второго агента, правила пары, консенсус агентов, two-agent protocol. Соавторы: Claude+Codex (ACCEPT 1898543); из живого дня 16.09.2026 (7 дыр, 3 ревизии)."
+description: "Protocol for two LLM agents (Claude, Codex or any other) to agree and work from one shared folder: message format, channels, roles, evidence rules, wake-up alarm and anti-patterns. Triggers: /llm-pact, agree with codex, connect a second agent, pair rules, agent consensus, two-agent protocol."
+license: MIT
 consumer: "сессии Claude узла (двери /03, /secondop, онбординг пиров) · Codex через codex_skills_bridge · будущие пиры GLM/Grok (раздел «Подключение нового пира»)"
 ---
 
@@ -34,7 +35,7 @@ consumer: "сессии Claude узла (двери /03, /secondop, онборд
 | REQUEST / QUESTION | нужен ход соседа | точный вопрос + формат ответа | да |
 | ACK / STATUS / chat | квитанции и служебное | — | НЕТ (SLEEP) |
 - Потолок **3 раунда** на тему; тупик = `BLOCK` → tie-break АРБИТРА (третий
-  агент/узел, как Маяк в /03); человек — только если арбитр недоступен/не
+  агент/узел, как Якорь в /03); человек — только если арбитр недоступен/не
   справился либо тема Tier-2. Человека в СЕРЕДИНУ трубы не возвращаем. Свободный
   чат агентов без типов = антипаттерн (DR26-07-14: sycophant-петли — агенты
   бесконечно поддакивают друг другу).
@@ -162,3 +163,15 @@ tests: skill_desc_audit --check llm-pact = PASS · таблица verbs в Ша�
 сценарный контракт · link-audit указателей (agent-protocol.md, workclaim,
 selfheal, prior_art, codex_skills_bridge) = все существуют. После ACCEPT:
 bridge status PASS + по одному вызову скилла каждым агентом.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.

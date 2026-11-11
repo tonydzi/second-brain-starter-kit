@@ -1,6 +1,7 @@
 ---
 name: ai-slop
-description: "АНТИ-AI-SLOP ХУМАНИЗАТОР (Антон зовёт его AI_SLOPE) — берёт текст, написанный роботом, и переделывает в текст живого ОЧЕНЬ ЗАНЯТОГО человека: режет 50-70%, ломает ровный… Триггеры: “/ai-slop“, “/ai_slope“, “/aislope“, “/slop“, “слоп“, “очеловечь“, “убери нейрослог“, “убери нейрояз“, “анти-слоп“, “сделай короче и живее“, “перепиши как занятый человек“, “humanize“, “anti-slop“ (регистр не важен)"
+description: "Rewrite machine-written text so it reads like a busy human wrote it: cut 50-70%, break the even rhythm, drop AI-tell words and filler, keep facts and protected terms. Use before publishing any post, reply or email drafted by a model. Triggers: /ai-slop, /slop, humanize, anti-slop, make it shorter and alive."
+license: MIT
 version: 1.0.0
 ---
 
@@ -64,7 +65,7 @@ version: 1.0.0
 ```
 python3 ~/.claude/skills/ai-slop/evals/slop_detect.py --file <файл> [--long-form]
 ```
-`--long-form` для статьи/дев-лога: там заголовки и списки законны, без флага судья судит по правилам короткого поста. Живёт внутри скилла, поэтому работает на ЛЮБОМ узле; exit 0 = чисто, 1 = нашёл. Для TG-постов контент-фабрики на хабе есть второй, более строгий судья с тирами: `python [путь владельца] --file <файл> --tier tg-post`.
+`--long-form` для статьи/дев-лога: там заголовки и списки законны, без флага судья судит по правилам короткого поста. Живёт внутри скилла, поэтому работает на ЛЮБОМ узле; exit 0 = чисто, 1 = нашёл. Для TG-постов контент-фабрики есть второй, более строгий судья с тирами: `python3 ~/.claude/skills/ai-slop/scripts/slop_gate.py --file <файл> --tier tg-post`.
 
 ⚠️ Судья тоже claim: он мерит ТЕЛО, а не YAML-шапку заметки, и не считает нарушением ё/тире внутри кода, URL и путей. Ругается на цитату или имя собственное — это ложное срабатывание, фиксируй его словами в отчёте и НЕ ломай текст под метрику ([[text-detectors-overcount-use-ground-truth]]). Правила детектора и ban-лист выше обязаны совпадать; разошлись — это баг, регресс-сетка `evals/_test_slop_detect.py` (14 проверок) держит границу. Железное правило слоп-гейта действует и тут: живой пост Антона обязан проходить; если правило скилла режет живой текст Антона — чинить правило, не Антона.
 
@@ -118,4 +119,16 @@ python3 ~/.claude/skills/ai-slop/evals/slop_detect.py --file <файл> [--long-
 - Модель: голос Антона / качественный текст = Fable (§6.2); механическую чистку по ban-листу может делать и Sonnet.
 
 ## Провенанс
-DR26-07-30-MACANTON-01-1456 (fanout 4 вендора, запускал Антон 30.07 ~03:43-03:50; собраны ВСЕ 4, консенсус по ядру 4/4). Оригиналы: `_originals/deep-research/DR26-07-30-MACANTON-01-1456-antislop-humanizer-{chatgpt,gemini,grok,claudeai}.md`. Самый доказательный — claudeai (Kobak et al. Science Advances 2025: 379 excess-слов, delves x28; [человек] et al. 2023: детекторы ложно метят не-носителей в 61.3%; протект-лист из kjmagnan1s/anti-slop; точка в конце = резкость, Gunraj et al. 2016; EU AI Act ст. 50). Голос-в-Whisper = лучшее живое сырьё (диктовка даёт естественную парцелляцию — модель не возвращается к своему стилю). ТЗ Антона голосом — в шапке chatgpt-оригинала. Связано: [[tg-slop-markers-measured]], [[fake-it-courage-not-fake-numbers]], [[mycroft-voice-disclosure]], `spec-anti-slop-content-pipeline`, `Slop-Gate-Passport`.
+DR26-07-30-MAC-1-01-1456 (fanout 4 вендора, запускал Антон 30.07 ~03:43-03:50; собраны ВСЕ 4, консенсус по ядру 4/4). Оригиналы: `_originals/deep-research/DR26-07-30-MAC-1-01-1456-antislop-humanizer-{chatgpt,gemini,grok,claudeai}.md`. Самый доказательный — claudeai (Kobak et al. Science Advances 2025: 379 excess-слов, delves x28; [человек] et al. 2023: детекторы ложно метят не-носителей в 61.3%; протект-лист из kjmagnan1s/anti-slop; точка в конце = резкость, Gunraj et al. 2016; EU AI Act ст. 50). Голос-в-Whisper = лучшее живое сырьё (диктовка даёт естественную парцелляцию — модель не возвращается к своему стилю). ТЗ Антона голосом — в шапке chatgpt-оригинала. Связано: [[tg-slop-markers-measured]], [[fake-it-courage-not-fake-numbers]], [[mycroft-voice-disclosure]], `spec-anti-slop-content-pipeline`, `Slop-Gate-Passport`.
+
+<!--kit-footer-->
+
+---
+
+**Like this skill?** It is part of [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit): the second brain we built for ourselves and run every day at Palo Alto AI Research Lab. Install the whole set with `npx skills add tonydzi/second-brain-starter-kit`. Everything is open source and free, so take what you need.
+
+Flagships worth a look on their own: [secondop-panel](https://github.com/tonydzi/secondop-panel) (a second opinion from a panel of external models), [claude-memory-tidy](https://github.com/tonydzi/claude-memory-tidy) (stop your agent's memory from rotting), [telegram-mcp-kit](https://github.com/tonydzi/telegram-mcp-kit) (your own Telegram over MCP in about 15 minutes).
+
+Author: **Anton Dziatkovskii**, Palo Alto AI Research Lab. Telegram [@tonydzi](https://t.me/tonydzi) - WhatsApp [+1 341 222 9178](https://wa.me/13412229178) - X [@Tony_Stef_](https://x.com/Tony_Stef_)
+
+**Engineers: want to test-drive this setup?** Message me. I hand out free starter seeds to engineers who test and report back, and custom skill requests are welcome.
