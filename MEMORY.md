@@ -29,17 +29,18 @@ or any MCP client) at the same time.
 ## The layers
 
 Seven layers, from what the agent sees in every message to what it digs up only when asked.
-Layers 0 to 5 are what you install from this page. Layer 6 is how our lab extends it; it is
-described so you understand the design, and it is not shipped.
+Layers 0 to 5 are what you can set up from this page: layer 4 is software you install, layers 0 to 3
+are conventions you configure (step 6 below), and layer 5 is an optional hook you enable separately.
+Layer 6 is how our lab extends it; it is described so you understand the design, and it is not shipped.
 
 | # | Layer | What it holds | Who writes | How it is read | Where it lives |
 |---|---|---|---|---|---|
 | 0 | **Always-loaded instructions** | Rules of work: `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex, Cursor and others) | You, and the agent only with your OK | Loaded into every session automatically by the client | Your home folder and project folder |
-| 1 | **Auto memory index** | `MEMORY.md`: one line per remembered fact, plus one small file per fact with frontmatter (`name`, `description`, `type`) | The agent, during work | Loaded every session; Claude Code reads only the first 200 lines / 25 KB, so lines stay short | `~/.claude/projects/<project>/memory/` (Claude Code); any folder you point other agents to |
+| 1 | **Auto memory index** | `MEMORY.md`: one line per remembered fact, plus one small file per fact with frontmatter (`name`, `description`, `type`) | The agent, during work | Claude Code loads it every session (only the first 200 lines / 25 KB, so lines stay short); other agents read it only if their instruction file tells them to | `~/.claude/projects/<project>/memory/` (Claude Code); any folder you point other agents to |
 | 2 | **Curated vault** | Decisions, concepts, people, projects, protocols: one idea per note, frontmatter, `[[wikilinks]]`, index notes (MOCs) | You and the agent; notes marked `maintained_by: human` the agent only proposes changes to | Searched through layer 4; opened directly by path | Your notes folder |
 | 3 | **Verbatim originals** | Raw sources exactly as received: transcripts, exported chats, documents | Ingest step, write-once | Cited from vault notes as provenance; not edited | A subfolder such as `_originals/` |
 | 4 | **Retrieval index** | Chunks of layer 2 turned into vectors, plus the link graph read from the notes | `sgm-index` (re-run after notes change) | `sgm-ask` from the terminal, or the MCP tool `memory_recall` from the agent | A folder you choose: `BRAIN_INDEX_DIR` |
-| 5 | **Turn ledger and telemetry** | One SQLite row per agent turn (ask, files, commands, decisions) and the A/B log of every recall | The Stop hook writes the turn ledger, `sgm-ask --ab` writes the recall A/B log; neither uses LLM tokens | By you, with SQL, to measure whether memory helps. Recall never reads it | SQLite file next to the index |
+| 5 | **Turn ledger and telemetry** | One SQLite row per agent turn (ask, files, commands, decisions) and the A/B log of recalls run with `--ab` | The Stop hook writes the turn ledger, `sgm-ask --ab` writes the recall A/B log; neither uses LLM tokens | By you, with SQL, to measure whether memory helps. Recall never reads it | SQLite file next to the index |
 | 6 | **Lab-only extensions** (not shipped) | Hot 14-day full-text memory over sessions and messages, a people/project entity lane, fleet-wide session search | Our internal scripts | Our internal `recall` | Our machines |
 
 ### Layer 0: always-loaded instructions
@@ -126,9 +127,12 @@ happens, step by step:
 
 **Two runtime stacks for the same models**
 
-- `[lite]`: ONNX Runtime, no PyTorch, about 155 MB. The default choice. Measured on Windows on
-  13 November 2026: first index of 3 notes in 25 s including download, first recall in 14 s.
-- `[embeddings]`: PyTorch, about 0.9 to 2 GB. Pick it only if you want a GPU. An index built by
+- `[lite]`: ONNX Runtime, no PyTorch: about 155 MB of software, plus the e5 model files (about
+  1.1 GB) downloaded once into the Hugging Face cache on first use. The default choice. One dated
+  measurement, Windows 11, 13 November 2026, model already in the cache: index of 3 notes in 25 s,
+  first recall in 14 s. A cold machine adds the model download; times vary by machine and network.
+- `[embeddings]`: PyTorch, about 0.9 to 2 GB of software plus the model files. Pick it only if you
+  want a GPU. An index built by
   either stack is searched correctly by the other.
 
 **Failure policy**: if the graph hop fails, recall degrades to vector-only; if the index is missing,
@@ -150,7 +154,7 @@ cheap, fresh sources first and the deep index last:
 | Tier | Source | Typical time |
 |---|---|---|
 | 0 | Memory files and notes changed in the last 3 days | instant |
-| 1h | Hot memory: SQLite FTS5 over 14 days of agent sessions, chats, mail and calendar | under 1 s |
+| 1h | Hot memory (in shadow mode, still being evaluated): SQLite FTS5 over 14 days of agent sessions, chats, mail and calendar | under 1 s |
 | 1 | Recent sessions of this machine and of the other machines, verbatim | a few s |
 | 2 | Chat archive, raw not-yet-distilled notes | a few s |
 | 3 | Curated vault: layer 4 above (vector + graph, our index is ~28k notes / ~93k chunks) | 5 to 30 s |
@@ -182,7 +186,7 @@ Three routes. Pick the smallest that answers your need.
 | Route | You get | Needs |
 |---|---|---|
 | **A. Light** | Layers 0 to 3 as rules and templates in plain files, no search server installed | Claude Code or Codex. Follow [brain-lite START](https://github.com/tonydzi/brain-lite/blob/main/START.en.md) |
-| **B. Standard** (recommended) | Layers 0 to 5: the method from this kit plus local semantic and graph recall over MCP | Python 3.12 via `uv`, about 155 MB disk, 5 to 10 minutes |
+| **B. Standard** (recommended) | Layer 4 installed and connected over MCP, layers 0 to 3 configured by step 6, the kit's method; layer 5 optional | Python 3.12 via `uv`; about 155 MB of software plus about 1.1 GB of model files on first run |
 | **C. Existing setup** | Route B added to an agent that already has its own rules and projects, without replacing them | Same as B. Russian walkthrough: [docs/EXISTING-SETUP.ru.md](docs/EXISTING-SETUP.ru.md) |
 
 ### Route B, step by step
@@ -194,16 +198,18 @@ agent and let it run them with your approval at each step.
 [official instructions](https://docs.astral.sh/uv/getting-started/installation/). Check:
 `uvx --version`.
 
-**2. Create a test notes folder.** In the current directory, create a new folder named `notes`
+**2. Create a test notes folder.** In a new empty project directory, create a folder named `notes`
 with three made-up notes linked by `[[wikilinks]]`. Replace `./notes` with your real notes folder
-only after the acceptance test below passes.
+only after the acceptance test below passes. The index goes into a new `.sgm-index` folder next to
+it; if that name is already taken (for example by an index you use for other work), pick another
+free name and use it everywhere below.
 
 **3. Build the index.**
 
 macOS / Linux (bash or zsh):
 
 ```bash
-export BRAIN_INDEX_DIR="$HOME/.sgm-index"
+export BRAIN_INDEX_DIR="$PWD/.sgm-index"
 uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-index ./notes
 uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-ask --ab "What decision is recorded in my notes?"
 ```
@@ -211,7 +217,7 @@ uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-ask --ab "What d
 Windows PowerShell:
 
 ```powershell
-$env:BRAIN_INDEX_DIR = Join-Path $HOME '.sgm-index'
+$env:BRAIN_INDEX_DIR = Join-Path (Get-Location) '.sgm-index'
 uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-index ./notes
 uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-ask --ab 'What decision is recorded in my notes?'
 ```

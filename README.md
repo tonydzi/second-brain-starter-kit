@@ -48,7 +48,7 @@ or, inside Claude Code:
 ```
 
 Want the agent to remember across sessions? Memory is a separate, opt-in plugin in the same
-marketplace, because it downloads the embedding models on first start (about 155 MB with the `[lite]` stack):
+marketplace, because on first start it downloads the embedding runtime (about 155 MB with the `[lite]` stack) and the model files (about 1.1 GB):
 
 ```
 /plugin install second-brain-memory@second-brain

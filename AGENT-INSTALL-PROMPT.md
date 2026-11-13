@@ -18,8 +18,10 @@ careful agent will refuse it. This message avoids all of that on purpose:
 - Every command is **visible in the documentation**, pinned to a version, and comes from an official
   source (PyPI through `uv`, GitHub). There is no `curl | sh` and no hidden step.
 - Each change to your settings is **shown and approved** before it happens, with a backup first.
-- Nothing is sent anywhere, no account is created, no secret is touched.
-- It ends with a **test the agent cannot fake**: a new chat has to find what the old chat saved.
+- No uploads of your files, no account is created, no secret is touched. It says plainly that the
+  agent's own model provider sees the fragments it recalls, like any text in the chat.
+- It ends with a **fresh-chat test**: a new chat has to find what the old chat saved. That is much
+  harder to fake than a confident answer in the same chat, though no test is a guarantee.
 
 If your agent still hesitates, that is fine: let it read [MEMORY.md](MEMORY.md) and ask you
 questions. An agent that checks before it acts is the agent you want holding your memory.
@@ -45,7 +47,8 @@ What I want in the end:
 3. That index connected to you as an MCP server, one entry only, so you can call
    memory_recall from any new chat.
 4. A short "Memory" section in my instruction file (CLAUDE.md or AGENTS.md) with the
-   paths and the working rules from MEMORY.md, step 6.
+   paths and the working rules from MEMORY.md, step 6. Use a new .sgm-index folder next
+   to the notes; if one already exists, pick another free name instead of reusing it.
 
 How I would like you to work:
 - First look at what I already have: OS, agent and its version, Python/uv, existing notes,
@@ -58,7 +61,9 @@ How I would like you to work:
   run it or approve it.
 - Use only the pinned package version above. Do not download scripts from other places.
 - Do not put passwords, tokens or codes into notes, the index, git or this chat.
-- Do not send any data anywhere, create accounts or connect to anyone else's systems.
+- Do not upload my files anywhere, create accounts or connect to anyone else's systems.
+  Before you index my real notes, remind me that the fragments you recall will be part of
+  our conversation and so reach your model provider, and let me choose which folder to use.
 
 Test before using my real notes:
 1. Create a new folder named notes with three made-up notes linked with [[wikilinks]]:
@@ -100,7 +105,8 @@ Then:
 3. Этот индекс, подключённый к тебе как MCP-сервер, одной записью, чтобы в любом новом
    чате ты мог вызвать memory_recall.
 4. Короткий раздел «Память» в моём файле инструкций (CLAUDE.md или AGENTS.md) с путями
-   и правилами работы из MEMORY.ru.md, шаг 6.
+   и правилами работы из MEMORY.ru.md, шаг 6. Индекс клади в новую папку .sgm-index рядом
+   с заметками; если такая уже есть, выбери свободное имя, а не переиспользуй её.
 
 Как прошу работать:
 - Сначала посмотри, что у меня уже есть: ОС, агент и его версия, Python/uv, существующие
@@ -112,7 +118,9 @@ Then:
 - Если uv нет, покажи официальную команду установки с docs.astral.sh, запущу или одобрю я.
 - Используй только закреплённую версию пакета выше. Скрипты из других мест не скачивай.
 - Пароли, токены и коды не клади в заметки, индекс, git и этот чат.
-- Никуда не отправляй данные, не создавай аккаунты и не подключайся к чужим системам.
+- Не выгружай мои файлы никуда, не создавай аккаунты и не подключайся к чужим системам.
+  Перед индексацией моих настоящих заметок напомни, что найденные куски станут частью
+  нашего разговора и поэтому попадут к провайдеру твоей модели, и дай мне выбрать папку.
 
 Проверка до моих настоящих заметок:
 1. Создай новую папку notes и в ней три вымышленные заметки, связанные [[ссылками]]:
