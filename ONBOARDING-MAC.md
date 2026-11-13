@@ -38,6 +38,8 @@ sw_vers && uname -m && sysctl -n machdep.cpu.brand_string
 scutil --get ComputerName; whoami; df -h / | tail -1
 ```
 
+⛔ **`uname -m` показал `x86_64` (Intel)? Стоп: этот рунбук не для тебя.** На Intel `brew install` из шага 2 собирает из исходников часами и может упасть. Иди в [ONBOARDING-MAC-INTEL.md](ONBOARDING-MAC-INTEL.md).
+
 `uname -m` решает путь Homebrew: `arm64` → `/opt/homebrew`, `x86_64` → `/usr/local`.
 Перепутанный путь, самая частая тихая поломка на Маках: команда «есть», но лежит не там,
 где её потом ищет планировщик. Mac Studio всегда `arm64`, эта модель на Intel не выпускалась.
@@ -221,6 +223,7 @@ build-таймстампом (длинное число, не секрет), `pr
 ## Дальше
 
 Windows-версия этого рунбука, [ONBOARDING-WINDOWS.md](ONBOARDING-WINDOWS.md).
+Intel-версия (Homebrew без бутылок, вендорные бинарники, профиль оператора вместо значений по умолчанию, deny-by-default для claude-home): [ONBOARDING-MAC-INTEL.md](ONBOARDING-MAC-INTEL.md) + скрипт [tools/intel-mac/onboard-intel-mac.sh](tools/intel-mac/onboard-intel-mac.sh).
 Машина подключается к существующему флоту как доверенный семейный узел, 
 после шага 4 продолжай по [ONBOARDING-FAMILY.md](ONBOARDING-FAMILY.md).
 
