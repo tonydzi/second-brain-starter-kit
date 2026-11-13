@@ -1,19 +1,19 @@
 # Второй мозг для уже работающих Claude Code и Codex
 
-Редакция от 2 ноября 2026, слита в основную ветку. Команды ниже используют выпущенный пакет PyPI 0.3.5; установку на компьютере получателя проверяйте приёмкой из этого файла.
+Редакция от 13 ноября 2026. Как устроены все слои памяти: [MEMORY.ru.md](../MEMORY.ru.md). Команды ниже используют выпущенный пакет PyPI 0.3.8 в лёгкой сборке `[lite]` (без PyTorch, ~155 МБ); установку на компьютере получателя проверяйте приёмкой из этого файла.
 
 Если у вас уже есть агенты, проекты и свои правила, начните с одной папки заметок и одной полезной задачи. Ваши существующие правила и рабочая система остаются вашим источником истины. Этот набор добавляет метод и память.
 
 ## Что брать
 
-| Компонент | Назначение | Состояние на 1 ноября 2026 |
+| Компонент | Назначение | Состояние на 13 ноября 2026 |
 |---|---|---|
-| [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit) | Приёмы работы, шаблоны, проверки, read-only помощники | Релиз v0.10.1; ветка master содержит более позднюю проверку трёх помощников |
-| [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | Поиск по вашим markdown-заметкам, связям и источникам через MCP | GitHub-релиз v0.3.5; устанавливаемый пакет PyPI 0.3.5 |
-| [brain-lite](https://github.com/tonydzi/brain-lite/blob/main/START.md) | Лёгкий старт без поискового сервера | Релиз v1.1.2; подходит для первого опыта или отдельной пробной папки |
+| [second-brain-starter-kit](https://github.com/tonydzi/second-brain-starter-kit) | Приёмы работы, шаблоны, проверки, read-only помощники | Релиз v0.11.2 |
+| [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) | Поиск по вашим markdown-заметкам, связям и источникам через MCP | GitHub-релиз v0.3.8; устанавливаемый пакет PyPI 0.3.8 |
+| [brain-lite](https://github.com/tonydzi/brain-lite/blob/main/START.md) | Лёгкий старт без поискового сервера | Релиз v1.2.3; подходит для первого опыта или отдельной пробной папки |
 | [join-the-fleet](https://github.com/tonydzi/join-the-fleet) | Необязательный обмен улучшениями и регистрация | Не требуется для личной памяти |
 
-Это датированный снимок, а не обещание будущей версии. Перед обновлением сверяйте Releases и журнал изменений каждого проекта. GitHub-тег и версия устанавливаемого пакета могут различаться (так было с v0.3.4, которого нет на PyPI): на 2 ноября 2026 у памяти GitHub v0.3.5 и PyPI 0.3.5. Команды `uvx` ниже берут пакет из PyPI; не называйте версию установленной по одному GitHub-тегу.
+Это датированный снимок, а не обещание будущей версии. Перед обновлением сверяйте Releases и журнал изменений каждого проекта. GitHub-тег и версия устанавливаемого пакета могут различаться (так было с v0.3.4, которого нет на PyPI): на 13 ноября 2026 у памяти GitHub v0.3.8 и PyPI 0.3.8. Команды `uvx` ниже берут пакет из PyPI; не называйте версию установленной по одному GitHub-тегу.
 
 **Граница полноты.** `engines/` в starter-kit содержит исторические экспортированные скрипты. В частности, `engines/imports/brain_ask.py` не равен текущему внутреннему многоуровневому поиску лаборатории: его новые модули и зависимости не поставляются здесь целиком. Не заменяйте этот файл одиночной копией с другой машины. Для новой переносимой установки используйте самостоятельный `sqlite-graph-memory`. Наличие навыка, который упоминает внутренний инструмент, не доказывает наличие этого инструмента в пакете.
 
@@ -65,7 +65,7 @@ https://github.com/tonydzi/second-brain-starter-kit/blob/master/docs/EXISTING-SE
 
 ## Установка памяти
 
-Следуйте актуальному [README sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory#install-in-your-client). Нужны `uvx` и поддерживаемый Python; если их нет, сначала объясните владельцу установку зависимостей. Примеры ниже используют отдельную пробную папку `notes` в текущем каталоге. Для воспроизводимости и индексатор, и сервер закреплены на пакете 0.3.5, доступном в PyPI на дату инструкции. При обновлении меняйте версию согласованно и повторяйте приёмку.
+Следуйте актуальному [README sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory#install-in-your-client). Нужны `uvx` и поддерживаемый Python; если их нет, сначала объясните владельцу установку зависимостей. Примеры ниже используют отдельную пробную папку `notes` в текущем каталоге. Для воспроизводимости и индексатор, и сервер закреплены на пакете 0.3.8 в сборке `[lite]`, доступном в PyPI на дату инструкции; сборка `[embeddings]` (PyTorch, до 2 ГБ) нужна только для GPU. При обновлении меняйте версию согласованно и повторяйте приёмку.
 
 Сначала агент создаёт новую отдельную `notes/` и три вымышленные markdown-заметки, связанные `[[ссылками]]`, как описано в приёмке ниже. Если `notes/` или `.sgm-index` уже существуют, сначала выберите другое свободное имя и согласованно замените пути в командах. Не индексируйте непроверенную папку, символьные ссылки, junction или ссылки на внешние файлы. Только затем запускайте блок команд. Один индекс обновляет один процесс за раз.
 
@@ -73,18 +73,18 @@ macOS/Linux, в терминале:
 
 ```bash
 export BRAIN_INDEX_DIR="$PWD/.sgm-index"
-uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-index ./notes
-uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-ask --ab "What decision is recorded in the sample notes?"
-claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$BRAIN_INDEX_DIR" -- uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-mcp
+uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-index ./notes
+uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-ask --ab "What decision is recorded in the sample notes?"
+claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$BRAIN_INDEX_DIR" -- uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-mcp
 ```
 
 Windows PowerShell, в терминале:
 
 ```powershell
 $env:BRAIN_INDEX_DIR = Join-Path (Get-Location) '.sgm-index'
-uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-index ./notes
-uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-ask --ab 'What decision is recorded in the sample notes?'
-claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$env:BRAIN_INDEX_DIR" -- uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]==0.3.5' sgm-mcp
+uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-index ./notes
+uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-ask --ab 'What decision is recorded in the sample notes?'
+claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$env:BRAIN_INDEX_DIR" -- uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-mcp
 ```
 
 Последняя команда только для Claude Code: область `local` относится к текущему проекту. Новый проверочный чат открывайте **в этой же папке**, затем выполните `claude mcp list` и проверьте подключение. В среде только с Codex последнюю строку пропустите. Для Codex добавьте **одну** запись в существующий `~/.codex/config.toml` (или конфиг, указанный настройками вашего запуска), сохранив остальные настройки:
@@ -96,7 +96,7 @@ claude mcp add -s local sqlite-graph-memory -e "BRAIN_INDEX_DIR=$env:BRAIN_INDEX
 ```toml
 [mcp_servers.sqlite-graph-memory]
 command = "uvx"
-args = ["--python", "3.12", "--from", "sqlite-graph-memory[embeddings]==0.3.5", "sgm-mcp"]
+args = ["--python", "3.12", "--from", "sqlite-graph-memory[lite]==0.3.8", "sgm-mcp"]
 env = { BRAIN_INDEX_DIR = "/absolute/path/to/.sgm-index" }
 ```
 

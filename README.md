@@ -9,6 +9,8 @@ every day, stripped of personal data and cut down to a portable core: **the meth
 
 It follows [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) (April 2026): the agent reads and writes an Obsidian vault of linked markdown notes, steered by a schema file (`CLAUDE.md` / `AGENTS.md`), with one deliberate difference: notes marked `maintained_by: human` stay yours, and agents only propose changes to them. Independent project, not affiliated with or endorsed by him.
 
+**How the memory works, every layer, and how to install it:** [MEMORY.md](MEMORY.md) · a message to paste into your agent: [AGENT-INSTALL-PROMPT.md](AGENT-INSTALL-PROMPT.md).
+
 **Pick your door:**
 
 - **New to this?** Start with [the light onboarding guide](ONBOARDING-LITE.md). Download a folder,
@@ -46,7 +48,7 @@ or, inside Claude Code:
 ```
 
 Want the agent to remember across sessions? Memory is a separate, opt-in plugin in the same
-marketplace, because its embeddings stack downloads about 2 GB on first start:
+marketplace, because it downloads the embedding models on first start (about 155 MB with the `[lite]` stack):
 
 ```
 /plugin install second-brain-memory@second-brain
@@ -54,7 +56,9 @@ marketplace, because its embeddings stack downloads about 2 GB on first start:
 
 It registers the [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory) MCP
 server (`sgm-mcp`) and asks for one setting, the index folder (`BRAIN_INDEX_DIR`) you built with
-`uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]' sgm-index <your notes folder>`.
+`uvx --python 3.12 --from 'sqlite-graph-memory[lite]==0.3.8' sgm-index <your notes folder>`.
+How every memory layer works (instructions, auto memory, vault, originals, embeddings, graph hop,
+rerank) and a step-by-step install: [MEMORY.md](MEMORY.md).
 
 It is MIT, it costs nothing, and nothing here phones home. Take what you need, delete the rest,
 and open an issue if a skill breaks on your machine. Paths are documented in

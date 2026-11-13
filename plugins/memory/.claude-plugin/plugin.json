@@ -1,7 +1,7 @@
 {
   "name": "second-brain-memory",
-  "description": "Persistent memory for Claude Code over your own markdown notes: registers the sqlite-graph-memory MCP server (vector + wikilink-graph recall on plain SQLite). Separate from the skills plugin because the embeddings extra pulls about 2 GB of torch on first start.",
-  "version": "0.1.0",
+  "description": "Persistent memory for Claude Code over your own markdown notes: registers the sqlite-graph-memory MCP server (vector + wikilink-graph recall on plain SQLite). Separate from the skills plugin because it downloads the embedding models (about 155 MB with the [lite] ONNX stack) on first start. Layers and design: https://github.com/tonydzi/second-brain-starter-kit/blob/master/MEMORY.md",
+  "version": "0.2.0",
   "author": {
     "name": "Anton Dziatkovskii / Palo Alto AI Research Lab",
     "url": "https://github.com/tonydzi"
@@ -12,7 +12,7 @@
     "index_dir": {
       "type": "directory",
       "title": "Index directory",
-      "description": "The folder `sgm-index` wrote for your notes (BRAIN_INDEX_DIR). Build it once with: uvx --python 3.12 --from 'sqlite-graph-memory[embeddings]' sgm-index <your notes folder>",
+      "description": "The folder `sgm-index` wrote for your notes (BRAIN_INDEX_DIR). Build it once with: uvx --python 3.12 --from 'sqlite-graph-memory[lite]>=0.3.6,<0.4' sgm-index <your notes folder>",
       "required": true
     }
   },
@@ -23,7 +23,7 @@
         "--python",
         "3.12",
         "--with",
-        "sqlite-graph-memory[embeddings]>=0.3.1,<0.4",
+        "sqlite-graph-memory[lite]>=0.3.6,<0.4",
         "sqlite-graph-memory"
       ],
       "env": {

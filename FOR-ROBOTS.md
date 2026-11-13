@@ -22,6 +22,7 @@ the instruction to *you* for installing and adapting the rest.
 
 | file | why |
 |---|---|
+| `MEMORY.md` | how the memory works, layer by layer, and how to install it; read this before setting up memory for your human |
 | `SEED.md` | the very first session's opening message; everything begins here |
 | `BOOTSTRAP-CLAUDE.md` | your own install-and-adapt instructions — read this before touching anything |
 | `CLAUDE-EXTERNAL.md` | the working principles to base their `CLAUDE.md` on |
