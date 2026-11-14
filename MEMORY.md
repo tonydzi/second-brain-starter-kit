@@ -29,8 +29,9 @@ or any MCP client) at the same time.
 ## The layers
 
 Seven layers, from what the agent sees in every message to what it digs up only when asked.
-Layers 0 to 5 are what you can set up from this page: layer 4 is software you install, layers 0 to 3
-are conventions you configure (step 6 below), and layer 5 is an optional hook you enable separately.
+Layers 0 to 5 are what you can set up from this page: layer 4 is software you install, layers 1 to 3
+are conventions you follow from then on (step 6 below adds the memory rules to layer 0), and layer 5 is an
+optional hook you enable separately.
 Layer 6 is how our lab extends it; it is described so you understand the design, and it is not shipped.
 
 | # | Layer | What it holds | Who writes | How it is read | Where it lives |
@@ -186,7 +187,7 @@ Three routes. Pick the smallest that answers your need.
 | Route | You get | Needs |
 |---|---|---|
 | **A. Light** | Layers 0 to 3 as rules and templates in plain files, no search server installed | Claude Code or Codex. Follow [brain-lite START](https://github.com/tonydzi/brain-lite/blob/main/START.en.md) |
-| **B. Standard** (recommended) | Layer 4 installed and connected over MCP, layers 0 to 3 configured by step 6, the kit's method; layer 5 optional | Python 3.12 via `uv`; about 155 MB of software plus about 1.1 GB of model files on first run |
+| **B. Standard** (recommended) | Layer 4 installed and connected over MCP; layer 0 gets the memory rules (step 6); layers 1 to 3 are the method's conventions you follow from then on; layer 5 optional | Python 3.12 via `uv`; about 155 MB of software plus about 1.1 GB of model files on first run |
 | **C. Existing setup** | Route B added to an agent that already has its own rules and projects, without replacing them | Same as B. Russian walkthrough: [docs/EXISTING-SETUP.ru.md](docs/EXISTING-SETUP.ru.md) |
 
 ### Route B, step by step
