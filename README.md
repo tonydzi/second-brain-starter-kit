@@ -158,20 +158,26 @@ It follows [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy
 
 **Pick your door:**
 
-- **New to this?** Start with [the light onboarding guide](ONBOARDING-LITE.md). Download a folder,
-  open it in Claude Code or Codex, and try one useful task. No terminal, GitHub account, shared
-  vault, sync service, or background updater is needed; your work stays in a separate local folder.
+- **New to this?** Start with [Brain Lite in English](https://github.com/tonydzi/brain-lite/blob/main/START.en.md).
+  Open it in Claude Code or Codex with access to a local folder. Review the preflight output and
+  confirm the installation before trying one useful task in the separate `My-Work` folder.
+- **Already using Claude Code or Codex?** Keep your current project and settings. Follow the
+  [memory server's client instructions](https://github.com/tonydzi/sqlite-graph-memory#install-in-your-client)
+  or the [full guide in Russian](docs/EXISTING-SETUP.ru.md). Open a fresh chat in the same project
+  and ask it to find a saved decision, name the source file and quote the relevant passage.
 - **Already have an Obsidian vault?** Take the habits that keep it from rotting without the rest:
   the [concept template](templates/concept-note.md) with a `maintained_by: human` flag so agents
   never rewrite your notes, three [read-only subagents](docs/SUBAGENTS.md) that review and propose,
   and the [contract for unattended runs](docs/SCHEDULED-RUNS.md).
-- **Already running agents across machines?** Read [HANDOVER.md](HANDOVER.md): a snapshot of the
-  whole system and a map of our repos, written for you and your model.
+- **Using Claude and Codex on one computer?** Open both in the same project. Give Claude one
+  change to make. Ask Codex to inspect the diff and verify the relevant checks without editing.
+  Give the review findings to Claude to address before you accept the change.
+- **Already running agents across machines?** [HANDOVER.md](HANDOVER.md) maps the tools and
+  explains how the pieces fit together.
 
 ## Later: the full kit after your first useful task
 
-This is an optional next stage. First-time users should finish [the light route](ONBOARDING-LITE.md)
-before installing the full kit below.
+This is an optional next stage after your first useful task.
 
 A single skill is a trick. What makes an agent useful over months is the set of habits around it:
 a gate that refuses to say "done" without evidence, a retrospective that files what you learned
@@ -179,21 +185,23 @@ where the next session will actually find it, a registry of decisions you alread
 nobody re-pitches them, a handoff that survives a crash. Those only work together, which is why
 they ship as one kit rather than as 234 separate downloads.
 
-Install it whole and you get a working second brain on day one:
+Install the skills with the Agent Skills installer.
 
 ```bash
 npx skills add tonydzi/second-brain-starter-kit
 ```
 
-or, inside Claude Code:
+In Claude Code you can also use the marketplace.
 
 ```
 /plugin marketplace add tonydzi/second-brain-starter-kit
 /plugin install second-brain-skills@second-brain
 ```
 
-Want the agent to remember across sessions? Memory is a separate, opt-in plugin in the same
-marketplace, because on first start it downloads the embedding runtime (about 155 MB with the `[lite]` stack) and the model files (about 1.1 GB):
+The skills add working instructions. To search saved notes in a new session, connect the optional
+memory server separately: a separate, opt-in plugin in the same marketplace, or a manual server
+registration. On first start it downloads the embedding runtime (about 155 MB with the `[lite]` stack)
+and the model files (about 1.1 GB):
 
 ```
 /plugin install second-brain-memory@second-brain
@@ -205,11 +213,9 @@ server (`sgm-mcp`) and asks for one setting, the index folder (`BRAIN_INDEX_DIR`
 How every memory layer works (instructions, auto memory, vault, originals, embeddings, graph hop,
 rerank) and a step-by-step install: [MEMORY.md](MEMORY.md).
 
-It is MIT, it costs nothing, and nothing here phones home. Take what you need, delete the rest,
-and open an issue if a skill breaks on your machine. Paths are documented in
-[docs/PATHS.md](docs/PATHS.md).
-
-**Already running Claude Code or Codex?** Follow the [existing-setup guide in Russian](docs/EXISTING-SETUP.ru.md): preserve your settings, add local memory, and verify recall in a fresh chat. It also explains the boundary between the legacy engine snapshots and the standalone memory product.
+The notes and index stay on your machine. The agent receives matching excerpts and a cloud model
+can receive those excerpts. Use one memory server registration per client. If both clients use the
+same index, update it from one process at a time. See [docs/PATHS.md](docs/PATHS.md) for file paths.
 
 ## Onboarding a whole machine
 
