@@ -9,6 +9,17 @@ change ships as a release and the journal is written in the same commit as the r
 GitHub handle, in the entry of the release that ships it. An idea taken from a closed PR is credited
 the same way and carries a `Co-authored-by` trailer for its author. Rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## v0.11.3 - 2026-11-14
+
+- **One page for every memory layer, and a prompt you can hand to your agent.** The memory docs now
+  cover all four layers on one page, with an agent install prompt (`AGENT-INSTALL-PROMPT.md`) that
+  states what is available versus configured, the model download size and where a provider sees
+  your text. In the memory route, only layer 0 gets rules in step 6; layers 1-3 are conventions.
+- **Security:** a private id was redacted from published text.
+- Agent link counting now follows aliases and pins the average degree (#41).
+- Docs: 404 onboarding links and an old repo name fixed, Codex support stated, the relation to
+  Karpathy's LLM Wiki pattern named (#44).
+
 ## v0.11.2 - 2026-11-06
 
 - **Security:** private ids and a colleague's name were removed from published pages.
