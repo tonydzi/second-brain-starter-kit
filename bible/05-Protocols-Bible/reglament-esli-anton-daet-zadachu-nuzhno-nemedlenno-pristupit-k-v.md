@@ -5,7 +5,7 @@ stage: distilled
 source: telegram-assistants-ops
 origin: anton
 authored_by: human
-transcribed_by: "Оксана"
+transcribed_by: "[коллега]"
 posted_by: "Oksana Assistant"
 date_established: 2025-10-22
 theme: communications-protocol

@@ -193,7 +193,7 @@ summary: "Статическая навигация по своду реглам
 - [Если требуется получить от Антона срочную информацию, необходимо дозваниваться](../05-Protocols-Bible/reglament-esli-trebuetsya-poluchit-ot-antona-srochnuyu-informatsi.md) · 2026-03-25
 - [Исходящее от лица Антона — его голосом, без детского ELI5-пересказа](../05-Protocols-Bible/reglament-ishodyaschie-golosom-antona-bez-detskogo-eli5.md) · 2026-06-10
 - [Каждое утро мы должны прослушать и прочитать все сообщения, накопившиеся со](../05-Protocols-Bible/reglament-kazhdoe-utro-my-dolzhny-proslushat-i-prochitat-vse-soob.md) · 2025-04-10
-- Каждый день Оксана или [коллега] созваниваются с Денисом, проходят по задачам, · 2026-02-10
+- Каждый день [коллега] или [коллега] созваниваются с Денисом, проходят по задачам, · 2026-02-10
 - [Каждый раз, когда Антон дал какую-то задачу, нужно изучать её и решение через](../05-Protocols-Bible/reglament-kazhdyy-raz-kogda-anton-dal-kakuyu-to-zadachu-nuzhno-iz.md) · 2025-06-27
 - [Каждый раз, когда нужно пингануть лида (под сдачу Антона или для себя), всегда](../05-Protocols-Bible/reglament-kazhdyy-raz-kogda-nuzhno-pinganut-lida-pod-sdachu-anton.md) · 2025-04-11
 - [Каждый раз, когда пишем в личку, дублируем информацию в чатах.](../05-Protocols-Bible/reglament-kazhdyy-raz-kogda-pishem-v-lichku-dubliruem-informatsiy.md) · 2025-12-02

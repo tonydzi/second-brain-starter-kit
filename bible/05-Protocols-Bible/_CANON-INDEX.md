@@ -344,7 +344,7 @@ python3 tools/canon_index.py --check  # verify only; exit 1 = index is stale
 - `reglament-kak-pravilno-pisat-v-memory-md` — Как ПРАВИЛЬНО писать в MEMORY.md (always-loaded индекс памяти)
 - `reglament-kazhdoe-utro-my-dolzhny-proslushat-i-prochitat-vse-soob` — Каждое утро мы должны прослушать и прочитать все сообщения, накопившие
 - `reglament-kazhdyj-ping-novaya-pravdivaya-detal-ili-chestnyj-zahod` — Открывай НОВОЙ правдивой деталью; нет детали — честный нейтральный зах
-- `reglament-kazhdyy-den-oksana-ili-[человек]-sozvanivayutsya-s-den` — Каждый день Оксана или [коллега] созваниваются с Денисом, проходят по 
+- `reglament-kazhdyy-den-oksana-ili-[человек]-sozvanivayutsya-s-den` — Каждый день [коллега] или [коллега] созваниваются с Денисом, проходят по 
 - `reglament-kazhdyy-raz-kogda-nuzhno-pinganut-lida-pod-sdachu-anton` — Каждый раз, когда нужно пингануть лида (под сдачу Антона или для себя)
 - `reglament-kazhdyy-raz-kogda-pishem-v-lichku-dubliruem-informatsiy` — Каждый раз, когда пишем в личку, дублируем информацию в чатах.
 - `reglament-kazhdyy-sotrudnik-pri-vhode-na-smenu-pishet-v-chat-na-s` — Каждый сотрудник при входе на смену пишет в чат «на смену», затем — сп

@@ -743,7 +743,7 @@ active:
     test_or_proof: none
     established: 2026-02-10
     path: 05-Protocols-Bible/reglament-kazhdyy-den-oksana-ili-[человек]-sozvanivayutsya-s-den.md
-    title: "Каждый день Оксана или [коллега] созваниваются с Денисом, проходят по задачам,"
+    title: "Каждый день [коллега] или [коллега] созваниваются с Денисом, проходят по задачам,"
   - topic: "communications-protocol"
     canonical: reglament-kazhdyy-raz-kogda-nuzhno-pinganut-lida-pod-sdachu-anton
     status: active
