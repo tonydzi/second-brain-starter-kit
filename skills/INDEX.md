@@ -152,6 +152,7 @@ day; personal data in the examples is replaced with plausible fictional stand-in
 | [`/continue`](continue/SKILL.md) | Drive the current task to a verified result instead of stopping at a plausible report. Use when the user says /continue, keep going, not done yet, pus… |
 | [`/fundraise`](fundraise/SKILL.md) | - КАК ДЕЛАЕТСЯ ФАНДРЕЙЗИНГ - общий плейбук рейза по этапам 0-7 (подготовка и активы -> нарратив -> структура сделки -> пайплайн и momentum -> заголовк… |
 | [`/five-whys`](five-whys/SKILL.md) | Investigate the root cause of a recurring or systemic defect across a series of incidents, not a single one. Use on the third recurrence, or when… |
+| [`/cleanup-after-commit`](cleanup-after-commit/SKILL.md) | Remove merged temporary branches and stray worktrees after commits and PRs; deletes only what is provably merged, never unmerged work. |
 | [`/fake-it`](fake-it/SKILL.md) | Sell layer: raise the framing of an artifact to the scale it actually deserves without touching a single number. Use before anything goes outbound… |
 | [`/deflate`](deflate/SKILL.md) | Cut background heat and noise on this machine: audit scheduled tasks by runs per hour, autostart entries, GPU holders, power plan and top CPU, then… |
 | [`/link-rot`](link-rot/SKILL.md) | Sweep every external pointer to you (profiles, READMEs, bios, link pages) after a rename of a repo, org, domain, handle or account, and fix the dead… |
