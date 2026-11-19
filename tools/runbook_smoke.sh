@@ -16,7 +16,9 @@
 #   5 profile    скрипт онбординга без профиля и с профилем-образцом обязан отказаться стартовать (код 3)
 #   6 runbook    команды рунбука ДОСЛОВНО, строка за строкой, из корня клона в одноразовом HOME, до маркера
 #                «<!-- smoke:stop» (дальше сеть и руки оператора). Единственная подстановка: вместо «человек заполнил
-#                профиль» кладётся вымышленный профиль tests/fixtures/profile.smoke.env.
+#                профиль» кладётся вымышленный профиль tests/fixtures/profile.smoke.env. Если команда онбординга
+#                остановилась ТОЛЬКО на BAD [G-HANDS] (на машине нет того, что ставит человек: python.org Python 3.13,
+#                Xcode CLT), это SKIP с названной причиной, а не FAIL; любой другой BAD = FAIL.
 #   7 patches    закреплённые коммиты апстрима и набора патчей читаются из скрипта; git apply --check на них, строго
 #                без --3way (сеть или локальные зеркала --mirror-*)
 #   8 links      raw-, blob- и tree-ссылки на GitHub в документах: полный адрес (ветка И файл) обязан отвечать 200 (сеть);
@@ -115,7 +117,7 @@ else fail profile "нет $KIT/profile.example.env"; fi
 MARK='<!-- smoke:stop'
 g -q -F -e "$MARK" "$RUNBOOK" && pass runbook "маркер границы «${MARK}» есть" || fail runbook "в рунбуке нет маркера «${MARK}»: неизвестно, где кончаются команды без сети (выполняю только до первого вызова скрипта онбординга)"
 awk -v mark="$MARK" 'index($0, mark){exit} /^```bash[[:space:]]*$/{inb=1; next} /^```[[:space:]]*$/{inb=0; next} inb{print}' "$RUNBOOK" >"$TMP/cmds.txt"
-total=0; ran=0; stop=""
+total=0; ran=0; hands=0; stop=""
 while IFS= read -r line || [ -n "$line" ]; do
   [ -n "${line//[[:space:]]/}" ] || continue; case "$line" in '#'*) continue;; esac
   total=$((total+1))
@@ -125,13 +127,17 @@ while IFS= read -r line || [ -n "$line" ]; do
   ( cd "$C" && env -i HOME="$H" PATH=/usr/bin:/bin:/usr/sbin:/sbin LANG=en_US.UTF-8 /bin/zsh -f -c "$line" ) >"$TMP/cmd.out" 2>&1; rc=$?
   ran=$((ran+1))
   [ "$VERBOSE" = 1 ] && { printf '    $ %s\n' "$line"; sed 's/^/      /' "$TMP/cmd.out"; }
+  # Нет того, что ставит только человек (BAD [G-HANDS]: например python.org Python 3.13): это состояние машины, а не
+  # дефект рунбука. Честный SKIP (итог INCOMPLETE, код 4), и только если других BAD в выводе команды нет.
+  if [ "$rc" != 0 ] && printf '%s\n' "$line" | g -q -F 'onboard-intel-mac.sh' && g -q -F '  BAD  [G-HANDS]' "$TMP/cmd.out" && ! g -F '  BAD  [' "$TMP/cmd.out" | g -q -v -F '[G-HANDS]'; then
+    skp runbook "команда $total не проверена, сперва руки оператора: $(g -F '  BAD  [G-HANDS]' "$TMP/cmd.out" | sed 's/^  BAD  //' | tr '\n' ' ' | sed 's/ $//')"; hands=$((hands+1)); continue; fi
   if [ "$rc" != 0 ]; then fail runbook "команда $total упала с кодом $rc: ${line:0:100}"; printf '        %s\n' "$(g -v '^$' "$TMP/cmd.out" | tail -1 | sed "s#$TMP#<tmp>#g")"; stop=fail; break; fi
   # единственная подстановка: «человек заполнил профиль»
   if printf '%s\n' "$line" | g -q -F 'profile.example.env' && [ -f "$KIT/tests/fixtures/profile.smoke.env" ]; then
     dst="$(find "$H" -maxdepth 1 -name '*.env' -newer "$TMP/cmds.txt" | head -1)"; [ -n "$dst" ] && cp "$KIT/tests/fixtures/profile.smoke.env" "$dst"; fi
   if ! g -q -F -e "$MARK" "$RUNBOOK" && printf '%s\n' "$line" | g -q -F 'onboard-intel-mac.sh'; then break; fi
 done <"$TMP/cmds.txt"
-if [ -z "$stop" ]; then [ "$ran" -gt 0 ] && pass runbook "команд до границы: $total, выполнено дословно: $ran, все с кодом 0" || fail runbook "до границы нет ни одной команды: рунбук не проверен"; fi
+if [ -z "$stop" ]; then [ "$ran" -gt 0 ] && pass runbook "команд до границы: $total, выполнено дословно: $ran, с кодом 0: $((ran-hands)), ждут рук оператора (SKIP выше): $hands" || fail runbook "до границы нет ни одной команды: рунбук не проверен"; fi
 
 # ---------- 7 patches ----------
 val() { sed -n "s/^$1=\\([^ ;#]*\\).*/\\1/p" "$SCRIPT" | head -1; }

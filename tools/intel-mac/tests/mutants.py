@@ -28,6 +28,7 @@ M = [
  ("intel-guard", S, [('\nguard_intel\n', '\n:\n')], "kill", ["s_intel"], None),
  ("hash-vendor", S, [('  if [ "$got" != "$vendor" ]; then', '  if false; then')], "kill", ["s_hash_vendor"], None),
  ("hash-pin", S, [('  [ "$got" = "$pinned" ] || {', '  true || {')], "kill", ["s_hash_pin"], None),
+ ("hands-python", S, [('  [ -x "$PYFW" ] && ok "python.org Framework', '  true && ok "python.org Framework')], "kill", ["s_hands_python"], None),
  ("shared-gate", S, [('  [ "${SHARED_ACCOUNT_OK:-0}" = 1 ] && return 0', '  return 0')], "kill", ["s_shared", "s_park"], None),
  ("gh-account", S, [('  if [ "$who" = "$P_GITHUB_LOGIN" ]; then', '  if true; then')], "kill", ["s_gh_account"], None),
  ("tg-first", S, [('--label mcp || { say "  демон и рельсу без первой сессии не поднимаю"; return 1; }; fi', '--label mcp || true; fi'),

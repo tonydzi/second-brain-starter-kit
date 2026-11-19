@@ -8,6 +8,8 @@
 # Syncthing, файлы на диске. Гейт сработал = скрипт остановился и ничего лишнего не сделал.
 # Боевую машину не трогает: HOME одноразовый, сеть, launchctl, osascript, Syncthing REST, gh, claude, codex, uv и
 # интерпретатор venv заменены подставными командами в <HOME>/lab/opt/*; скрипт под проверкой при этом байт-в-байт боевой.
+# python.org Python 3.13 тоже подставной (<HOME>/lab/opt/pyfw/python3, передаётся скрипту через ONBOARD_PYFW): проба
+# не зависит от того, стоит ли настоящий Python на машине. Сценарий s_hands_python убирает его и ждёт BAD [G-HANDS].
 # Фазы claude и tailscale здесь НЕ гоняются: в них есть абсолютные пути (/usr/local/bin/brew, /Applications), которые
 # подставной командой не закрыть.
 #
@@ -133,6 +135,11 @@ EOF
 #!/bin/bash
 echo "syncthing v0.0.0-stub"
 EOF
+  stub "$N/opt/pyfw/python3" <<'EOF'
+#!/bin/bash
+# подставной python.org Python 3.13: фаза tools проверяет только наличие файла и печатает версию
+echo "Python 3.13.0-stub"
+EOF
   stub "$N/opt/uv/uv" <<'EOF'
 #!/bin/bash
 echo "uv $*" >>"$STUB_DIR/uv.log"; [ "$1" = --version ] && echo "uv 0.0.0-stub"; [ -f "$STUB_DIR/uv_fail" ] && exit 1; exit 0
@@ -181,6 +188,7 @@ kit() { # kit [ПЕРЕМЕННАЯ=значение ...] -- <аргументы
 $(legacy_env)
 EOF
   [ "${NOPROFILE:-0}" = 1 ] || envs+=("ONBOARD_PROFILE=$P")
+  envs+=("ONBOARD_PYFW=$N/opt/pyfw/python3")
   ( cd "${KIT_CWD:-$D}" && env -i HOME="$H" TMPDIR="$D/tmp/" PATH="$N/opt/coreutils/bin:/usr/bin:/bin:/usr/sbin:/sbin" LANG=en_US.UTF-8 STUB_DIR="$S" "${envs[@]}" /bin/bash "$SCRIPT" "$@" ) >"$OUT" 2>&1; RC=$?
   if [ -s "$S/network.log" ]; then err "скрипт пошёл в сеть: $(head -1 "$S/network.log")"; fi
 }
@@ -216,6 +224,10 @@ s_hash_vendor() { mk_home "$CUR"; node_fixture bad; kit -- tools; rc_is 1; out_h
   ls "$N/opt/dl/$NODE_ARCH.tar.gz.bad-"* >/dev/null 2>&1 && good "плохой файл отложен как .bad-<штамп>" || red "плохой файл не отложен"; }
 s_hash_pin() { mk_home "$CUR"; node_fixture good; kit -- tools; rc_is 1; out_has "[G-HASH-PIN]"
   [ ! -e "$N/opt/$NODE_ARCH" ] && good "архив не распакован" || red "архив РАСПАКОВАН при хэше, не равном закреплённому"; }
+# нет python.org Python 3.13 (его ставит только человек): фаза tools останавливается, дальше ни записи, ни квитанции
+s_hands_python() { mk_home "$CUR"; rm -f "$N/opt/pyfw/python3"; kit -- tools; rc_is 1; out_has "[G-HANDS] нет python.org Python 3.13"
+  out_no "[КВИТАНЦИЯ tools]"
+  [ ! -e "$H/.zprofile" ] && good "без Python фаза tools дальше не пошла: ~/.zprofile не тронут" || red "без Python фаза tools пошла дальше: ~/.zprofile записан"; }
 s_shared() { mk_home "$CUR"; kit -- github; rc_is 1; [ ! -e "$H/.gitconfig" ] && good "~/.gitconfig не создан" || red "~/.gitconfig создан без SHARED_ACCOUNT_OK"; }
 s_gh_account() { mk_home "$CUR"; echo someone-else >"$S/gh_login"; kit SHARED_ACCOUNT_OK=1 -- github; rc_is 1; out_has "[G-GH-ACCOUNT]"; }
 s_tg_first() { mk_home "$CUR"; tg_fixture patched; store_fixture; touch "$S/first_fail"; kit -- telegram; rc_is 1
@@ -325,7 +337,7 @@ b_telegram() { mk_home "$CUR"; tg_fixture patched; store_fixture; kit -- telegra
 b_syncthing() { mk_home "$CUR"; kit -- syncthing; rc_is 4; kit CLAUDE_HOME_WHITELIST_OK=1 -- syncthing; rc_is 0; }
 b_law() { mk_home "$CUR"; law_fixture; kit SHARED_ACCOUNT_OK=1 -- law; rc_is 0; }
 
-SCENARIOS="s_profile_missing s_profile_placeholder s_profile_tracked s_profile_keys s_intel s_hash_vendor s_hash_pin s_shared s_gh_account s_tg_first s_tg_rail s_tg_pin s_tg_conflict s_park s_stignore_write s_stignore_readback s_home_probe s_home_flag s_home_whitelist s_folder_path_accept s_folder_path_verify s_merge s_sync_dir s_hub_id s_bus_layout s_bus_separate s_bus_inside s_f3 s_vault_root s_memlink s_law_llm_skip s_verify_skip s_phase_stop s_single_exit s_no_gate_in_pipe s_gates_table s_key_argv s_post_fail s_pending s_pending_vault s_plist_write s_tools_stop s_syncthing_stop s_stignore_symlink s_zprofile_link s_gitconfig_link s_second_pass"
+SCENARIOS="s_profile_missing s_profile_placeholder s_profile_tracked s_profile_keys s_intel s_hash_vendor s_hash_pin s_hands_python s_shared s_gh_account s_tg_first s_tg_rail s_tg_pin s_tg_conflict s_park s_stignore_write s_stignore_readback s_home_probe s_home_flag s_home_whitelist s_folder_path_accept s_folder_path_verify s_merge s_sync_dir s_hub_id s_bus_layout s_bus_separate s_bus_inside s_f3 s_vault_root s_memlink s_law_llm_skip s_verify_skip s_phase_stop s_single_exit s_no_gate_in_pipe s_gates_table s_key_argv s_post_fail s_pending s_pending_vault s_plist_write s_tools_stop s_syncthing_stop s_stignore_symlink s_zprofile_link s_gitconfig_link s_second_pass"
 BASELINES="b_github b_tools b_telegram b_syncthing b_law"
 [ "$LIST" = 1 ] && { printf '%s\n' $BASELINES $SCENARIOS; exit 0; }   # список: ни одного временного каталога
 if [ -n "${KG_TMP:-}" ]; then TMPROOT="$KG_TMP"; mkdir -p "$TMPROOT" || exit 2

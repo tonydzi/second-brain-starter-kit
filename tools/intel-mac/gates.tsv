@@ -28,7 +28,7 @@ G-VERIFY-LLM	law verify	пропущенная проверка = SKIP и ито
 G-SECOND-PASS	verify	строка «19 повтор verify» зелёная только по записи прошлого зелёного verify в <NODE_DIR>/verify-history.log; флаг окружения не в счёт	SECOND_PASS=1 без журнала; журнал с записью	s_second_pass
 G-PHASE	поток	отказ фазы останавливает следующие фазы	первая из двух фаз отказывает	s_phase_stop
 G-EXIT	код	точка выхода одна; ни один гейт не стоит справа от «|» (подоболочка теряет счётчики); список гейтов равен скрипту; ключ REST не идёт аргументом процесса	статическая проверка текста скрипта и журнал подставного curl	s_single_exit s_no_gate_in_pipe s_gates_table s_key_argv
-G-HANDS	tools claude	нет того, что ставит только человек (Xcode CLT, Python с python.org, jq, Homebrew для cask): фаза не засчитана	-	- сценария нет: проверяются абсолютные системные пути, подставной командой их не закрыть
+G-HANDS	tools claude	нет того, что ставит только человек (Xcode CLT, Python с python.org, jq, Homebrew для cask): фаза не засчитана	убрать подставной Python 3.13 (ONBOARD_PYFW указывает на несуществующий файл); Xcode CLT, jq и Homebrew проверяются по абсолютным системным путям, сценария на них нет	s_hands_python
 G-ORDER	claude syncthing	фаза не начинается без результата предыдущей (нет npm, нет бинарника syncthing)	-	- сценария нет: фаза claude в песочнице не гоняется (абсолютный путь brew)
 G-LOGIN	claude github	вход не доказан словом «работает» или gh auth login завершился отказом	-	- сценария нет: фаза claude в песочнице не гоняется
 G-SIGNATURE	tailscale	Tailscale.app без подписи Developer ID Tailscale Inc. не копируется в /Applications	-	- сценария нет: фаза tailscale пишет в /Applications, в песочнице не гоняется

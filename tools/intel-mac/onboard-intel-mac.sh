@@ -22,6 +22,8 @@
 #   CLAUDE_HOME_WHITELIST_OK=1   заменить фильтр «не тянуть ничего» у claude-home на whitelist из профиля
 #                                (только после того, как оператор посмотрел, что объявляет хаб)
 #   VERIFY_LLM=0                 не звать claude -p и codex exec; такие проверки = ПРОПУЩЕН, итог не PASS
+# ONBOARD_PYFW=<файл> заменяет путь к python.org Python 3.13. Только для проб (tests/kill_gates.sh кладёт туда подставной
+# файл, чтобы проба не зависела от машины); оператору не нужен: настоящий Python ставится pkg с python.org.
 # Строка verify «19 повтор» зелёная только по записи прошлого зелёного verify в <NODE_DIR>/verify-history.log (флаг не в счёт).
 #
 # Коды выхода (точка выхода одна, функция finish):
@@ -60,7 +62,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 LA="$HOME/Library/LaunchAgents"
 STORE="$HOME/Library/Application Support/claude-tgbus"
 ST_CFG="$HOME/Library/Application Support/Syncthing/config.xml"; ST_URL=http://127.0.0.1:8384
-PYFW=/Library/Frameworks/Python.framework/Versions/3.13/bin/python3
+PYFW="${ONBOARD_PYFW:-/Library/Frameworks/Python.framework/Versions/3.13/bin/python3}"
 TS_APP=/Applications/Tailscale.app
 DRY=0; FAILS=0; SKIPS=0; ALL_FLOW=0; EXIT_FORCE=""; QUIET_FINISH=0; MYID=""
 PROFILE_KEYS="OPERATOR_NAME MACHINE_KEY NODE_DIR GIT_NAME GIT_EMAIL GITHUB_LOGIN HUB_DEVICE_ID HUB_NAME VAULT_ROOT VAULT_FOLDER_ID IMPORTS_DIR MEMORY_SHARE_SLUG CANON_CWD BUS_LAYOUT BUS_FOLDER_ID BUS_DIR CLAUDE_HOME_ALLOW TGBUS_ROOM LAUNCHD_PREFIX"
