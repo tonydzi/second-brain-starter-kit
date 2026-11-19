@@ -17,8 +17,8 @@
 #   6 runbook    команды рунбука ДОСЛОВНО, строка за строкой, из корня клона в одноразовом HOME, до маркера
 #                «<!-- smoke:stop» (дальше сеть и руки оператора). Единственная подстановка: вместо «человек заполнил
 #                профиль» кладётся вымышленный профиль tests/fixtures/profile.smoke.env. Если команда онбординга
-#                остановилась ТОЛЬКО на BAD [G-HANDS] (на машине нет того, что ставит человек: python.org Python 3.13,
-#                Xcode CLT), это SKIP с названной причиной, а не FAIL; любой другой BAD = FAIL.
+#                вышла с кодом 1, единственная строка BAD = «[G-HANDS] нет python.org Python 3.13» и smoke сам видит,
+#                что этого Python на машине нет, это SKIP с названной причиной, а не FAIL. Всё остальное = FAIL.
 #   7 patches    закреплённые коммиты апстрима и набора патчей читаются из скрипта; git apply --check на них, строго
 #                без --3way (сеть или локальные зеркала --mirror-*)
 #   8 links      raw-, blob- и tree-ссылки на GitHub в документах: полный адрес (ветка И файл) обязан отвечать 200 (сеть);
@@ -118,6 +118,7 @@ MARK='<!-- smoke:stop'
 g -q -F -e "$MARK" "$RUNBOOK" && pass runbook "маркер границы «${MARK}» есть" || fail runbook "в рунбуке нет маркера «${MARK}»: неизвестно, где кончаются команды без сети (выполняю только до первого вызова скрипта онбординга)"
 awk -v mark="$MARK" 'index($0, mark){exit} /^```bash[[:space:]]*$/{inb=1; next} /^```[[:space:]]*$/{inb=0; next} inb{print}' "$RUNBOOK" >"$TMP/cmds.txt"
 total=0; ran=0; hands=0; stop=""
+HOST_PY=/Library/Frameworks/Python.framework/Versions/3.13/bin/python3; HANDS_PY='  BAD  [G-HANDS] нет python.org Python 3.13'
 while IFS= read -r line || [ -n "$line" ]; do
   [ -n "${line//[[:space:]]/}" ] || continue; case "$line" in '#'*) continue;; esac
   total=$((total+1))
@@ -129,8 +130,9 @@ while IFS= read -r line || [ -n "$line" ]; do
   [ "$VERBOSE" = 1 ] && { printf '    $ %s\n' "$line"; sed 's/^/      /' "$TMP/cmd.out"; }
   # Нет того, что ставит только человек (BAD [G-HANDS]: например python.org Python 3.13): это состояние машины, а не
   # дефект рунбука. Честный SKIP (итог INCOMPLETE, код 4), и только если других BAD в выводе команды нет.
-  if [ "$rc" != 0 ] && printf '%s\n' "$line" | g -q -F 'onboard-intel-mac.sh' && g -q -F '  BAD  [G-HANDS]' "$TMP/cmd.out" && ! g -F '  BAD  [' "$TMP/cmd.out" | g -q -v -F '[G-HANDS]'; then
-    skp runbook "команда $total не проверена, сперва руки оператора: $(g -F '  BAD  [G-HANDS]' "$TMP/cmd.out" | sed 's/^  BAD  //' | tr '\n' ' ' | sed 's/ $//')"; hands=$((hands+1)); continue; fi
+  # SKIP узкий: код ровно 1, smoke САМ видит, что Python на машине нет, и единственная строка BAD именно про него.
+  if [ "$rc" = 1 ] && [ ! -x "$HOST_PY" ] && printf '%s\n' "$line" | g -q -F 'onboard-intel-mac.sh' && g -q -F "$HANDS_PY" "$TMP/cmd.out" && ! g -F '  BAD  [' "$TMP/cmd.out" | g -q -v -F "$HANDS_PY"; then
+    skp runbook "команда $total не проверена, сперва руки оператора: на машине нет $HOST_PY (python.org Python 3.13, пароль администратора)"; hands=$((hands+1)); continue; fi
   if [ "$rc" != 0 ]; then fail runbook "команда $total упала с кодом $rc: ${line:0:100}"; printf '        %s\n' "$(g -v '^$' "$TMP/cmd.out" | tail -1 | sed "s#$TMP#<tmp>#g")"; stop=fail; break; fi
   # единственная подстановка: «человек заполнил профиль»
   if printf '%s\n' "$line" | g -q -F 'profile.example.env' && [ -f "$KIT/tests/fixtures/profile.smoke.env" ]; then

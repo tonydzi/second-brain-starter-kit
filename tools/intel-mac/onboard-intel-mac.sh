@@ -223,7 +223,7 @@ phase_tools() {
   step G-STEP "каталоги $OPT" mkdir -p "$DL" "$OPT" || return 1
   local f0="$FAILS" a f t
   xcode-select -p >/dev/null 2>&1 && ok "Xcode CLT: $(xcode-select -p) (git, clang, make)" || bad G-HANDS "нет Xcode CLT: оператор запускает xcode-select --install (окно macOS, пароль)"
-  [ -x "$PYFW" ] && ok "python.org Framework: $("$PYFW" --version 2>&1)" || bad G-HANDS "нет python.org Python 3.13: оператор ставит pkg с python.org (пароль администратора)"
+  [ -x "$PYFW" ] && [ "$("$PYFW" --version 2>&1 | cut -d. -f1,2)" = "Python 3.13" ] && ok "python.org Framework: $("$PYFW" --version 2>&1)" || bad G-HANDS "нет python.org Python 3.13: оператор ставит pkg с python.org (пароль администратора)"
   [ -x /usr/bin/jq ] && ok "jq штатный" || bad G-HANDS "нет /usr/bin/jq: settings.json и REST-проверки без него не работают"
   [ -x /usr/local/bin/brew ] && ok "Homebrew /usr/local (только casks)" || warn "Homebrew нет: cask codex недоступен; установка Homebrew = пароль администратора, руки оператора"
   [ "$FAILS" = "$f0" ] || { say "  сперва руки оператора (строки BAD выше), бинарники не качаю: повтори фазу после"; return 1; }

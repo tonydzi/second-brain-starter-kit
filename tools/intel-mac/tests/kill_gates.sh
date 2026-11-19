@@ -227,7 +227,9 @@ s_hash_pin() { mk_home "$CUR"; node_fixture good; kit -- tools; rc_is 1; out_has
 # нет python.org Python 3.13 (его ставит только человек): фаза tools останавливается, дальше ни записи, ни квитанции
 s_hands_python() { mk_home "$CUR"; rm -f "$N/opt/pyfw/python3"; kit -- tools; rc_is 1; out_has "[G-HANDS] нет python.org Python 3.13"
   out_no "[КВИТАНЦИЯ tools]"
-  [ ! -e "$H/.zprofile" ] && good "без Python фаза tools дальше не пошла: ~/.zprofile не тронут" || red "без Python фаза tools пошла дальше: ~/.zprofile записан"; }
+  [ ! -e "$H/.zprofile" ] && good "без Python фаза tools дальше не пошла: ~/.zprofile не тронут" || red "без Python фаза tools пошла дальше: ~/.zprofile записан"
+  # исполняемый файл, который не Python 3.13, гейт тоже не принимает
+  printf '#!/bin/bash\necho "Python 3.12.9-stub"\n' >"$N/opt/pyfw/python3"; chmod +x "$N/opt/pyfw/python3"; kit -- tools; rc_is 1; out_has "[G-HANDS] нет python.org Python 3.13"; }
 s_shared() { mk_home "$CUR"; kit -- github; rc_is 1; [ ! -e "$H/.gitconfig" ] && good "~/.gitconfig не создан" || red "~/.gitconfig создан без SHARED_ACCOUNT_OK"; }
 s_gh_account() { mk_home "$CUR"; echo someone-else >"$S/gh_login"; kit SHARED_ACCOUNT_OK=1 -- github; rc_is 1; out_has "[G-GH-ACCOUNT]"; }
 s_tg_first() { mk_home "$CUR"; tg_fixture patched; store_fixture; touch "$S/first_fail"; kit -- telegram; rc_is 1
