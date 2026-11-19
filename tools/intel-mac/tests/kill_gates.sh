@@ -165,7 +165,7 @@ tg_fixture() { # tg_fixture <patched|unpatched>: клон telegram-mcp и наб
   printf '.venv/\n' >"$m/.gitignore"
   ( cd "$m" && git init -q . && $q add -A && $q commit -q -m base ) || exit 2
   printf 'def search_dialogs():\n    return []\n' >>"$m/telegram_mcp/tools/chats.py"; printf 'def get_new_messages_since():\n    return []\n' >>"$m/telegram_mcp/tools/messages.py"
-  ( cd "$m" && git diff >"$k/patches/0002-extra-tools-multiaccount.patch" ) || exit 2
+  ( cd "$m" && git diff >"$k/patches/0002-extra-tools-multiaccount.upstream-5960872.patch" ) || exit 2
   ( cd "$k" && git init -q . && $q add -A && $q commit -q -m kit ) || exit 2
   [ "$1" = patched ] || ( cd "$m" && git checkout -q -- . )
 }

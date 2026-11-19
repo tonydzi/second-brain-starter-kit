@@ -46,14 +46,14 @@ KNOWN_CU=e6d4fd2d852c9141a1c2a18a13d146a0cd7e45195f72293a4e4c044ec6ccca15
 KNOWN_ST=f4535e479472a1ae43d3e6ffc4bcfc7651179e948387c08f3696847d142b62c7
 KNOWN_GH=b245f24eb2bf5f75b426b4c26da3651a107f8d5b6f4fddfbfccc5679041378b3
 TS_TEAM=W5364U7YZB   # Developer ID Team Tailscale Inc. (публичный идентификатор подписи)
-# Telegram MCP: апстрим и набор патчей закреплены по коммитам. Пара ниже = состояние эталонного узла; на ней патч 0002
-# сейчас НЕ ложится чисто на messages.py (tools/runbook_smoke.sh, проверка patches): фаза telegram остановится на
-# G-TG-PATCH, пока владелец набора патчей не обновит патч под этот коммит или не назовёт другую пару.
+# Telegram MCP: апстрим и набор патчей закреплены по коммитам. Патч ниже = добавка 0002, пересобранная под этот коммит
+# апстрима (исходный 0002 рассчитан на старый a008ac2 и на messages.py здесь не ложится). Пара проверяется в
+# tools/runbook_smoke.sh, проверка patches: git apply --check без --3way. Меняешь один коммит = перепроверь пару.
 TGMCP_URL=https://github.com/chigwell/telegram-mcp.git
 TGMCP_SHA=596087228b8946c4d5b51d2c3abde4bb676bc64a
 TGKIT_URL=https://github.com/tonydzi/telegram-mcp-kit.git
-TGKIT_SHA=64ee1ec1aab9ba16c18b96d860b5a3a851aa69a6
-TGKIT_PATCH=patches/0002-extra-tools-multiaccount.patch
+TGKIT_SHA=6f10c4c6d24ad0c34630d7ada52240e29ae3cde7
+TGKIT_PATCH=patches/0002-extra-tools-multiaccount.upstream-5960872.patch
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 STAMP="$(date +%Y%m%d-%H%M%S)"
