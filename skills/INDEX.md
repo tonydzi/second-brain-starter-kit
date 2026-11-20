@@ -188,6 +188,9 @@ day; personal data in the examples is replaced with plausible fictional stand-in
 | [`/ledger`](ledger/SKILL.md) | Answer 'what happened on that day' instantly from a daily ledger that night robots assemble from free traces (git commits, session logs, vault writes,… |
 | [`/pack`](pack/SKILL.md) | Package a contribution (gist, script, fix or skill) as a product instead of a bare snippet: README with problem and result, install steps, a test,… |
 | [`/guide`](guide/SKILL.md) | Write an evergreen teaching longform for non-technical readers built from your own real material (systems you run, dated failures, numbers), structured… |
+| [`/ak47`](ak47/SKILL.md) | Pick the simplest and cheapest-in-tokens solution before building and before declaring done: five build-or-not questions, a token-cost ladder, a complication test and four pre-completion checks. |
+| [`/tab-sweep`](tab-sweep/SKILL.md) | Clean up browser tabs and windows that agents or people left open: close finished tabs, find tabs idle over 48 hours, keep anything in use, verify each close. |
+| [`/volunteer-at-conferences`](volunteer-at-conferences/SKILL.md) | Get into a conference for free by working shifts or winning a travel grant: track volunteer and grant windows, read real deadlines (including Anywhere-on-Earth), pick events by mission fit. |
 
 ## Raw imports, grooming in progress
 
