@@ -190,6 +190,7 @@ day; personal data in the examples is replaced with plausible fictional stand-in
 | [`/guide`](guide/SKILL.md) | Write an evergreen teaching longform for non-technical readers built from your own real material (systems you run, dated failures, numbers), structured… |
 | [`/ak47`](ak47/SKILL.md) | Pick the simplest and cheapest-in-tokens solution before building and before declaring done: five build-or-not questions, a token-cost ladder, a complication test and four pre-completion checks. |
 | [`/tab-sweep`](tab-sweep/SKILL.md) | Clean up browser tabs and windows that agents or people left open: close finished tabs, find tabs idle over 48 hours, keep anything in use, verify each close. |
+| [`/fix-windows-keyboard`](fix-windows-keyboard/SKILL.md) | Diagnose and reversibly fix a Windows keyboard where Shift, Caps Lock, Alt+Shift or layout switching stopped working: stuck modifiers, Sticky Keys, ctfmon, input hooks, OEM filter drivers. |
 | [`/volunteer-at-conferences`](volunteer-at-conferences/SKILL.md) | Get into a conference for free by working shifts or winning a travel grant: track volunteer and grant windows, read real deadlines (including Anywhere-on-Earth), pick events by mission fit. |
 
 ## Raw imports, grooming in progress
