@@ -186,15 +186,6 @@ active:
     established: 2026-05-30
     path: 05-Protocols-Bible/protocol-investor-lead-pipeline.md
     title: "Протокол обработки инвесторских лидов: очередь, CTA, фолоуап"
-  - topic: "stanford судья номинация"
-    canonical: protocol-judge-nomination-loop
-    status: active
-    supersedes: []
-    owner: mixed
-    test_or_proof: none
-    established: 2026-05-30
-    path: 05-Protocols-Bible/protocol-judge-nomination-loop.md
-    title: "Протокол петли номинации судьи Stanford"
   - topic: "kol воронка"
     canonical: protocol-kol-outreach-funnel
     status: active
@@ -303,24 +294,6 @@ active:
     established: 2026-07-06
     path: 05-Protocols-Bible/protocol-sku-ai-native-readiness-diagnostic.md
     title: "SKU #1 — AI-Native Readiness Diagnostic (продаваемый one-pager, Фаза 0)"
-  - topic: "stanford аффилиация нарратив"
-    canonical: protocol-stanford-affiliation-narrative
-    status: active
-    supersedes: []
-    owner: mixed
-    test_or_proof: none
-    established: 2026-05-30
-    path: 05-Protocols-Bible/protocol-stanford-affiliation-narrative.md
-    title: "Протокол нарратива Stanford / Silicon Valley LaunchPad"
-  - topic: "продажа трафика"
-    canonical: protocol-traffic-trading
-    status: active
-    supersedes: []
-    owner: mixed
-    test_or_proof: none
-    established: 2026-05-30
-    path: 05-Protocols-Bible/protocol-traffic-trading.md
-    title: "Торговля трафиком: продажа и закупка"
   - topic: "action item нужен owner срок метрика"
     canonical: reglament-action-item-trebuet-owner-srok-metriku
     status: active

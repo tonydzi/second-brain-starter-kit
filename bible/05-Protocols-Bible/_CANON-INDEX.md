@@ -54,7 +54,6 @@ python3 tools/canon_index.py --check  # verify only; exit 1 = index is stale
 | [[protocol-intro-process]] | интро процесс | mixed | 2026-05-30 | — |
 | [[protocol-investor-call-qualification]] | квалификация инвестора | mixed | 2026-05-30 | — |
 | [[protocol-investor-lead-pipeline]] | пайплайн инвесторов | mixed | 2026-05-30 | — |
-| [[protocol-judge-nomination-loop]] | stanford судья номинация | mixed | 2026-05-30 | — |
 | [[protocol-kol-outreach-funnel]] | kol воронка | mixed | 2026-05-30 | — |
 | [[protocol-kol-qualification-scoring]] | kol скоринг | mixed | 2026-05-30 | — |
 | [[protocol-lead-qualification-call]] | квалификация лида | mixed | 2026-05-30 | — |
@@ -67,8 +66,6 @@ python3 tools/canon_index.py --check  # verify only; exit 1 = index is stale
 | [[protocol-screen-share-intro-call]] | демонстрация экрана | mixed | 2026-05-30 | — |
 | [[protocol-second-third-call]] | второй звонок | mixed | 2026-05-30 | — |
 | [[protocol-sku-ai-native-readiness-diagnostic]] | ai-native readiness diagnostic | synthesis | 2026-07-06 | `skills/tt/SKILL.md` |
-| [[protocol-stanford-affiliation-narrative]] | stanford аффилиация нарратив | mixed | 2026-05-30 | — |
-| [[protocol-traffic-trading]] | продажа трафика | mixed | 2026-05-30 | — |
 | [[reglament-action-item-trebuet-owner-srok-metriku]] | action item нужен owner срок метрика | external | 2026-06-16 | `skills/retro/SKILL.md` |
 | [[reglament-algoritm-raboty-s-fb-1-proveryaem-lentu-laykaem-posty-p]] | social-media | mixed | 2024-04-13 | — |
 | [[reglament-anti-leak-na-vyhode]] | anti-leak на выходе | anton | 2026-06-22 | — |
@@ -283,7 +280,6 @@ python3 tools/canon_index.py --check  # verify only; exit 1 = index is stale
 - `protocol-intro-process` — Протокол создания интро-группы
 - `protocol-investor-call-qualification` — Протокол квалификации инвестора на звонке
 - `protocol-investor-lead-pipeline` — Протокол обработки инвесторских лидов: очередь, CTA, фолоуап
-- `protocol-judge-nomination-loop` — Протокол петли номинации судьи Stanford
 - `protocol-kol-outreach-funnel` — KOL Аутрич и воронка сотрудничества
 - `protocol-kol-qualification-scoring` — KOL Квалификация и скоринг
 - `protocol-lead-qualification-call` — Протокол квалификации лида на звонке
@@ -296,8 +292,6 @@ python3 tools/canon_index.py --check  # verify only; exit 1 = index is stale
 - `protocol-screen-share-intro-call` — Протокол демонстрации экрана на интро-звонке
 - `protocol-second-third-call` — Протокол второго и третьего звонков: прогрев и питч
 - `protocol-sku-ai-native-readiness-diagnostic` — SKU #1 — AI-Native Readiness Diagnostic (продаваемый one-pager, Фаза 0
-- `protocol-stanford-affiliation-narrative` — Протокол нарратива Stanford / Silicon Valley LaunchPad
-- `protocol-traffic-trading` — Торговля трафиком: продажа и закупка
 - `reglament-action-item-trebuet-owner-srok-metriku` — Action item без owner + срок + метрика — это НЕ задача (вернуть в набл
 - `reglament-algoritm-raboty-s-fb-1-proveryaem-lentu-laykaem-posty-p` — Алгоритм работы с FB: 1) проверяем ленту, лайкаем посты про крипту, фи
 - `reglament-anti-leak-na-vyhode` — Anti-leak на ВЫХОДЕ, не на сборе — приватный корпус читаем целиком, ба

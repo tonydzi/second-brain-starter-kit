@@ -286,7 +286,6 @@ summary: "Статическая навигация по своду реглам
 - [Протокол создания интро-группы](../05-Protocols-Bible/protocol-intro-process.md) · 2026-05-30
 - [Протокол квалификации инвестора на звонке](../05-Protocols-Bible/protocol-investor-call-qualification.md) · 2026-05-30
 - [Протокол обработки инвесторских лидов: очередь, CTA, фолоуап](../05-Protocols-Bible/protocol-investor-lead-pipeline.md) · 2026-05-30
-- [Протокол петли номинации судьи Stanford](../05-Protocols-Bible/protocol-judge-nomination-loop.md) · 2026-05-30
 - [KOL Аутрич и воронка сотрудничества](../05-Protocols-Bible/protocol-kol-outreach-funnel.md) · 2026-05-30
 - [KOL Квалификация и скоринг](../05-Protocols-Bible/protocol-kol-qualification-scoring.md) · 2026-05-30
 - [Протокол квалификации лида на звонке](../05-Protocols-Bible/protocol-lead-qualification-call.md) · 2026-05-30
@@ -298,8 +297,6 @@ summary: "Статическая навигация по своду реглам
 - [Reddit karma warm-up — u/Ok-Tip-1318 (безопасный прогрев)](../05-Protocols-Bible/protocol-reddit-karma-warmup-ok-tip-1318.md) · 2026-07-03
 - [Протокол демонстрации экрана на интро-звонке](../05-Protocols-Bible/protocol-screen-share-intro-call.md) · 2026-05-30
 - [Протокол второго и третьего звонков: прогрев и питч](../05-Protocols-Bible/protocol-second-third-call.md) · 2026-05-30
-- [Протокол нарратива Stanford / Silicon Valley LaunchPad](../05-Protocols-Bible/protocol-stanford-affiliation-narrative.md) · 2026-05-30
-- [Торговля трафиком: продажа и закупка](../05-Protocols-Bible/protocol-traffic-trading.md) · 2026-05-30
 - [Регламент: артефакты и Deep Research публикуются без купюр в лонгриды](../05-Protocols-Bible/reglament-artefakty-i-dr-bez-kupyur-v-longridah.md) · 2026-07-03
 - [Регламент: максимальная автономия — с жёстким карв-аутом на права доступа/секреты](../05-Protocols-Bible/reglament-avtonomiya-s-karvautom-na-prava-dostupa.md) · 2026-07-03
 - [Регламент: само-дебаг и прозрачность сбоев (Claude Code / любой агент / ассистент)](../05-Protocols-Bible/reglament-claude-code-self-debug-transparency.md) · 2026-06-21
